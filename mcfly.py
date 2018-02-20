@@ -171,7 +171,7 @@ class Command:
         self.parser = None
 
     def print_help(self):
-        pass
+        self.parser.print_help()
 
     def run(self, args):
         pass
@@ -184,9 +184,6 @@ class InitCommand(Command):
         self.parser = argparse.ArgumentParser("init")
         self.parser.add_argument("db_filename", nargs=1, help="Database file", default="trace.db")
         self.parser.add_argument("--force", action="count", help="Overwrite existing", default=False)
-
-    def print_help(self):
-        self.parser.print_help()
 
     def run(self, args):
         options = self.parser.parse_args(args)
@@ -204,7 +201,19 @@ class InitCommand(Command):
         cursor = connection.cursor()
         cursor.executescript(sqlite_script)
 
-commands = {x.name: x for x in [InitCommand()]}
+
+class IndexCommand(Command):
+
+    def __init__(self):
+        self.name = "index"
+        self.parser = argparse.ArgumentParser("index")
+
+    def run(self, args):
+        options = self.parser.parse_args(args)
+
+
+
+commands = {x.name: x for x in [InitCommand(), IndexCommand()]}
 
 
 def print_help():
