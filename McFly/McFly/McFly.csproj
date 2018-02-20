@@ -135,6 +135,7 @@
     <Compile Include="Debugger\IDebugSystemObjects2.cs" />
     <Compile Include="Debugger\IDebugSystemObjects3.cs" />
     <Compile Include="Debugger\Structs.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
