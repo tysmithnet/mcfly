@@ -23,5 +23,16 @@ namespace McFly.Server.Data
                 return databases;
             }
         }
+
+        public void CreateProject(string projectName)
+        {
+            using (var conn = new SqlConnection(DataAccess.ConnectionString))
+            {
+                conn.Open();
+                var command = conn.CreateCommand();
+                command.CommandText = $"CREATE DATABASE {projectName}";
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }

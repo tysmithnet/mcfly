@@ -22,5 +22,12 @@ namespace McFly.Server.Controllers
         {
             return new JsonResult(ProjectsAccess.GetDatabases());
         }
+
+        //[HttpPost]
+        //public ActionResult Post(string projectName)
+        //{
+        //    ProjectsAccess.CreateProject(projectName);
+        //    return Ok();
+        //}
     }
 }
