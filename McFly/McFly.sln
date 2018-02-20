@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly", "McFly\McFly.csproj", "{D7EB4C59-22EF-4020-9850-CBBF6A015F80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Server", "McFly.Server\McFly.Server.csproj", "{DAD5A687-E762-44CD-B49B-AAC648A07D03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,14 @@ Global
 		{D7EB4C59-22EF-4020-9850-CBBF6A015F80}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7EB4C59-22EF-4020-9850-CBBF6A015F80}.Release|x64.ActiveCfg = Release|x64
 		{D7EB4C59-22EF-4020-9850-CBBF6A015F80}.Release|x64.Build.0 = Release|x64
+		{DAD5A687-E762-44CD-B49B-AAC648A07D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD5A687-E762-44CD-B49B-AAC648A07D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD5A687-E762-44CD-B49B-AAC648A07D03}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DAD5A687-E762-44CD-B49B-AAC648A07D03}.Debug|x64.Build.0 = Debug|Any CPU
+		{DAD5A687-E762-44CD-B49B-AAC648A07D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD5A687-E762-44CD-B49B-AAC648A07D03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD5A687-E762-44CD-B49B-AAC648A07D03}.Release|x64.ActiveCfg = Release|Any CPU
+		{DAD5A687-E762-44CD-B49B-AAC648A07D03}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
