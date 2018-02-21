@@ -11,4 +11,10 @@ namespace McFly
     {   
         public string ProjectName { get; set; }
     }
+
+    public class StartOptions
+    {
+        [Option("serverdll", HelpText = "Location on disk of the McFly.Server.dll", Required = true)]
+        public string ServerDll { get; set; }
+    }
 }

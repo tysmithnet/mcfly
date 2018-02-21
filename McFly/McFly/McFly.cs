@@ -1,6 +1,7 @@
 ﻿using Microsoft.Diagnostics.Runtime.InteropLocal;
 using RGiesecke.DllExport;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -208,6 +209,30 @@ namespace wbext
             }
 
             return HRESULT.S_OK;
+        }
+
+        [DllExport]
+        public static HRESULT start(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
+        {
+            var argv = CommandLineToArgs(args);
+
+            Parser.Default.ParseArguments<StartOptions>(argv)
+                .WithParsed<StartOptions>(opts => Start(opts));
+
+            return HRESULT.S_OK;
+        }
+
+        private static void Start(StartOptions opts)
+        {
+            try
+            {
+                Process.Start($"dotnet {opts.ServerDll}");
+            }
+            catch (Exception e)
+            {
+                WriteLine($"Error starting server. Is your path correct? Message: {e.Message}");
+                return;
+            }   
         }
 
         [DllExport]
