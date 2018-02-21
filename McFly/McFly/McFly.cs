@@ -11,6 +11,8 @@ using System.Security.Policy;
 using System.Threading.Tasks;
 using CommandLine;
 using McFly;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace wbext
 {
@@ -209,6 +211,25 @@ namespace wbext
             }
 
             return HRESULT.S_OK;
+        }
+
+        [DllExport]
+        public static HRESULT config(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
+        {
+            var argv = CommandLineToArgs(args);
+
+            Parser.Default.ParseArguments<ConfigOptions>(argv)
+                .WithParsed<ConfigOptions>(opts => Config(opts));
+
+            return HRESULT.S_OK;
+        }
+
+        private static void Config(ConfigOptions opts)
+        {
+            string json = File.ReadAllText("mcfly.settings.json");
+            dynamic jsonObj = JsonConvert.DeserializeObject(json);
+            jsonObj[opts.Key] = opts.Value;
+            File.WriteAllText("mcfly.settings.json", JsonConvert.SerializeObject(jsonObj));
         }
 
         [DllExport]
