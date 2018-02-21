@@ -10,6 +10,6 @@ namespace McFly
     [Verb("start", HelpText = "Start the server")]
     public class InitOptions
     {
-        public string DatabaseFile { get; set; }
+        public string ConnectionString { get; set; }
     }
 }

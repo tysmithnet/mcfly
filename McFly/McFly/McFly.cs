@@ -6,6 +6,8 @@ using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
+using CommandLine;
+using McFly;
 
 namespace wbext
 {
@@ -207,7 +209,7 @@ namespace wbext
         }
 
         [DllExport]
-        public static HRESULT wb(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
+        public static HRESULT dostuff(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
             INIT_API();
             if (LastHR != HRESULT.S_OK)
@@ -222,13 +224,21 @@ namespace wbext
             //WriteDmlLine(writer.ToString());
 
             var argv = CommandLineToArgs(args);
-            if (argv.Length < 2)
+            if (argv.Length < 1)
             {
                 WriteLine($"Error: Invalid number of arguments");
                 return HRESULT.E_INVALIDARG;
             }
 
+            Parser.Default.ParseArguments<InitOptions>(argv)
+                .WithParsed<InitOptions>(opts => Init(opts));
+
             return HRESULT.S_OK;
+        }
+
+        private static void Init(InitOptions opts)
+        {
+                            
         }
 
         [DllImport("shell32.dll", SetLastError = true)]
@@ -257,9 +267,7 @@ namespace wbext
                 Marshal.FreeHGlobal(argv);
             }
         }
-
-
-
+                        
         private static string pFormat = String.Format(":x{0}", Marshal.SizeOf(IntPtr.Zero) * 2);
         public static string pointerFormat(string Message)
         {

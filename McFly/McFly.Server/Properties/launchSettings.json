@@ -17,7 +17,10 @@
       }
     },
     "McFly.Server": {
-      "commandName": "Project",
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
+      "commandLineArgs": "McFly.Server.dll",
+      "workingDirectory": "C:\\projects\\mcfly\\McFly\\McFly.Server\\bin\\Debug\\netcoreapp2.0",
       "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
