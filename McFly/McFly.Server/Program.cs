@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CommandLine;
+using McFly.Server.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +16,12 @@ namespace McFly.Server
     {
         public static void Main(string[] args)
         {
+            Parser.Default.ParseArguments(args)
+                .WithParsed<Options>(opts =>
+                {
+                    DataAccess.ConnectionString = opts.ConnectionString ??
+                                                  throw new ArgumentNullException("Connection string cannot be null");
+                });
             BuildWebHost(args).Run();
         }
 

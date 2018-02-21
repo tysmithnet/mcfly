@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using CommandLine;
 
 namespace McFly
-{
-    [Verb("start", HelpText = "Start the server")]
+{   
     public class InitOptions
-    {
-        public string ConnectionString { get; set; }
+    {   
+        public string ProjectName { get; set; }
     }
 }

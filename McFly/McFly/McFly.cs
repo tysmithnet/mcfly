@@ -3,9 +3,11 @@ using RGiesecke.DllExport;
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
+using System.Threading.Tasks;
 using CommandLine;
 using McFly;
 
@@ -209,7 +211,7 @@ namespace wbext
         }
 
         [DllExport]
-        public static HRESULT dostuff(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
+        public static HRESULT init(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
             INIT_API();
             if (LastHR != HRESULT.S_OK)
@@ -224,21 +226,18 @@ namespace wbext
             //WriteDmlLine(writer.ToString());
 
             var argv = CommandLineToArgs(args);
-            if (argv.Length < 1)
-            {
-                WriteLine($"Error: Invalid number of arguments");
-                return HRESULT.E_INVALIDARG;
-            }
-
+            
             Parser.Default.ParseArguments<InitOptions>(argv)
-                .WithParsed<InitOptions>(opts => Init(opts));
+                .WithParsed<InitOptions>(async opts => await Init(opts));
 
             return HRESULT.S_OK;
         }
 
-        private static void Init(InitOptions opts)
+        private static async Task Init(InitOptions opts)
         {
-                            
+            using (var httpClient = new HttpClient())
+            {                                          
+            }
         }
 
         [DllImport("shell32.dll", SetLastError = true)]

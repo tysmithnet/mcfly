@@ -19,10 +19,10 @@
     "McFly.Server": {
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
-      "commandLineArgs": "McFly.Server.dll",
+      "commandLineArgs": "McFly.Server.dll --connectionstring \"Data Source=SPECTRE;Integrated Security=True\"",
       "workingDirectory": "C:\\projects\\mcfly\\McFly\\McFly.Server\\bin\\Debug\\netcoreapp2.0",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
