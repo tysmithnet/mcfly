@@ -5,11 +5,11 @@ using System.Data.SqlClient;
 
 namespace McFly.Server.Data
 {
-    public class ProjectsAccess : IProjectsAccess
+    public class ProjectsAccess : DataAccess, IProjectsAccess
     {
         public IEnumerable<string> GetDatabases()
         {
-            using (var conn = new SqlConnection(DataAccess.ConnectionString))
+            using (var conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
                 var command = conn.CreateCommand();
@@ -26,7 +26,7 @@ namespace McFly.Server.Data
 
         public void CreateProject(string projectName)
         {
-            using (var conn = new SqlConnection(DataAccess.ConnectionString))
+            using (var conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
                 var command = conn.CreateCommand();

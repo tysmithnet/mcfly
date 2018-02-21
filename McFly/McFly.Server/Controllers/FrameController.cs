@@ -11,7 +11,7 @@ namespace McFly.Server.Controllers
     public class FrameController : Controller
     {
         [HttpPost]
-        public ActionResult Post(Frame frame)
+        public ActionResult Post(FrameDto frame)
         {
             return Ok();
         }

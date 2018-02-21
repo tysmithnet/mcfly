@@ -1,6 +1,6 @@
 ﻿namespace McFly.Server.Data
 {
-    public class Frame
+    public class FrameDto
     {                               
         public int KeyMajor { get; set; }
         public int KeyMinor { get; set; }
@@ -44,8 +44,6 @@
         public long? CodeAddress { get; set; }
         public string Module { get; set; }
         public string Function { get; set; }
-        public int? FunctionOffset { get; set; }
-
-
+        public int? FunctionOffset { get; set; }      
     }
 }
