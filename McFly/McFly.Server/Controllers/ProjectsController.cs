@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace McFly.Server.Controllers
 {
-    [Route("api/projects")]
+    [Route("api/project")]
     public class ProjectsController : Controller
     {
         protected IProjectsAccess ProjectsAccess { get; set; }

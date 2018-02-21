@@ -1,28 +1,9 @@
 ﻿/*  
-Represents an instant in time according to the Time Travel Debugging session  
-Frames are represented by the concat of the major frame and the minor frame. For example,  
-the trace might start at 35:0 which corresponds to key_major == 35 and key_minor == 0  
- */
-CREATE TABLE frame (
- /* The most significant part of the frame key, e.g. 401:58 => 401 */
- key_major INTEGER NOT NULL,
- /* The least significant part of the frame key, e.g. 401:58 => 58 */
- key_minor INTEGER NOT NULL,
- /* Optional name for the frame if one is appropriate */
- [NAME] VARCHAR(250),
- [description] TEXT,
- PRIMARY KEY (
-  key_major,
-  key_minor
-  )
- );
-
-/*  
 A process can have many threads in it, and so at any one instant in time there are potentially many
 threads running. This table captures the state of a particular thread at a particular instant in time.
 Note that the values here are the values BEFORE the instruction is executed.  
  */
-CREATE TABLE frame_thread (
+CREATE TABLE frame (
  /* Major part of the frame id */
  key_major INTEGER NOT NULL,
  /* Minor part of the frame id */
@@ -113,11 +94,244 @@ CREATE TABLE frame_thread (
   key_major,
   key_minor,
   thread_id
-  ),
- FOREIGN KEY (
-  key_major,
-  key_minor
-  ) REFERENCES frame(key_major, key_minor)
+  )
  );
 GO
 
+/*
+Upserts a frame
+If you pass null as any nullable value, the value already existing in the table will remain
+*/
+CREATE PROCEDURE pr_upsert_frame (
+ @key_major INTEGER,
+ @key_minor INTEGER,
+ @thread_id INTEGER,
+ @thread_index INTEGER = NULL,
+ @rax INTEGER = NULL,
+ @rbx INTEGER = NULL,
+ @rcx INTEGER = NULL,
+ @rdx INTEGER = NULL,
+ @rsi INTEGER = NULL,
+ @rdi INTEGER = NULL,
+ @rsp INTEGER = NULL,
+ @rbp INTEGER = NULL,
+ @rip INTEGER = NULL,
+ @efl INTEGER = NULL,
+ @cs INTEGER = NULL,
+ @ds INTEGER = NULL,
+ @es INTEGER = NULL,
+ @fs INTEGER = NULL,
+ @gs INTEGER = NULL,
+ @ss INTEGER = NULL,
+ @r8 INTEGER = NULL,
+ @r9 INTEGER = NULL,
+ @r10 INTEGER = NULL,
+ @r11 INTEGER = NULL,
+ @r12 INTEGER = NULL,
+ @r13 INTEGER = NULL,
+ @r14 INTEGER = NULL,
+ @r15 INTEGER = NULL,
+ @dr0 INTEGER = NULL,
+ @dr1 INTEGER = NULL,
+ @dr2 INTEGER = NULL,
+ @dr3 INTEGER = NULL,
+ @dr6 INTEGER = NULL,
+ @dr7 INTEGER = NULL,
+ @exfrom INTEGER = NULL,
+ @exto INTEGER = NULL,
+ @brfrom INTEGER = NULL,
+ @brto INTEGER = NULL,
+ @opcode_nmemonic TEXT = NULL,
+ @code_address INTEGER = NULL,
+ @module VARCHAR(250) = NULL,
+ @function VARCHAR(250) = NULL,
+ @function_offset INTEGER = NULL
+ )
+AS
+BEGIN
+ MERGE frame AS d
+ USING (
+  SELECT @key_major AS key_major,
+   @key_minor AS key_minor,
+   @thread_id AS thread_id,
+   @thread_index AS thread_index,
+   @rax AS rax,
+   @rbx AS rbx,
+   @rcx AS rcx,
+   @rdx AS rdx,
+   @rsi AS rsi,
+   @rdi AS rdi,
+   @rsp AS rsp,
+   @rbp AS rbp,
+   @rip AS rip,
+   @efl AS efl,
+   @cs AS cs,
+   @ds AS ds,
+   @es AS es,
+   @fs AS fs,
+   @gs AS gs,
+   @ss AS ss,
+   @r8 AS r8,
+   @r9 AS r9,
+   @r10 AS r10,
+   @r11 AS r11,
+   @r12 AS r12,
+   @r13 AS r13,
+   @r14 AS r14,
+   @r15 AS r15,
+   @dr0 AS dr0,
+   @dr1 AS dr1,
+   @dr2 AS dr2,
+   @dr3 AS dr3,
+   @dr6 AS dr6,
+   @dr7 AS dr7,
+   @exfrom AS exfrom,
+   @exto AS exto,
+   @brfrom AS brfrom,
+   @brto AS brto,
+   @opcode_nmemonic AS opcode_nmemonic,
+   @code_address AS code_address,
+   @module AS module,
+   @function AS [function],
+   @function_offset AS function_offset
+  ) AS s
+  ON s.key_major = d.key_major AND s.key_minor = d.key_minor AND s.thread_id = d.thread_id
+ WHEN NOT MATCHED BY TARGET
+  THEN
+   INSERT (
+    key_major,
+    key_minor,
+    thread_id,
+    thread_index,
+    rax,
+    rbx,
+    rcx,
+    rdx,
+    rsi,
+    rdi,
+    rsp,
+    rbp,
+    rip,
+    efl,
+    cs,
+    ds,
+    es,
+    fs,
+    gs,
+    ss,
+    r8,
+    r9,
+    r10,
+    r11,
+    r12,
+    r13,
+    r14,
+    r15,
+    dr0,
+    dr1,
+    dr2,
+    dr3,
+    dr6,
+    dr7,
+    exfrom,
+    exto,
+    brfrom,
+    brto,
+    opcode_nmemonic,
+    code_address,
+    module,
+    [function],
+    function_offset
+    )
+   VALUES (
+    @key_major,
+    @key_minor,
+    @thread_id,
+    @thread_index,
+    @rax,
+    @rbx,
+    @rcx,
+    @rdx,
+    @rsi,
+    @rdi,
+    @rsp,
+    @rbp,
+    @rip,
+    @efl,
+    @cs,
+    @ds,
+    @es,
+    @fs,
+    @gs,
+    @ss,
+    @r8,
+    @r9,
+    @r10,
+    @r11,
+    @r12,
+    @r13,
+    @r14,
+    @r15,
+    @dr0,
+    @dr1,
+    @dr2,
+    @dr3,
+    @dr6,
+    @dr7,
+    @exfrom,
+    @exto,
+    @brfrom,
+    @brto,
+    @opcode_nmemonic,
+    @code_address,
+    @module,
+    @function,
+    @function_offset
+    )
+ WHEN MATCHED
+  THEN
+   UPDATE
+   SET d.key_major = COALESCE(@key_major, s.key_major),
+    d.key_minor = COALESCE(@key_minor, s.key_minor),
+    d.thread_id = COALESCE(@thread_id, s.thread_id),
+    d.thread_index = COALESCE(@thread_index, s.thread_index),
+    d.rax = COALESCE(@rax, s.rax),
+    d.rbx = COALESCE(@rbx, s.rbx),
+    d.rcx = COALESCE(@rcx, s.rcx),
+    d.rdx = COALESCE(@rdx, s.rdx),
+    d.rsi = COALESCE(@rsi, s.rsi),
+    d.rdi = COALESCE(@rdi, s.rdi),
+    d.rsp = COALESCE(@rsp, s.rsp),
+    d.rbp = COALESCE(@rbp, s.rbp),
+    d.rip = COALESCE(@rip, s.rip),
+    d.efl = COALESCE(@efl, s.efl),
+    d.cs = COALESCE(@cs, s.cs),
+    d.ds = COALESCE(@ds, s.ds),
+    d.es = COALESCE(@es, s.es),
+    d.fs = COALESCE(@fs, s.fs),
+    d.gs = COALESCE(@gs, s.gs),
+    d.ss = COALESCE(@ss, s.ss),
+    d.r8 = COALESCE(@r8, s.r8),
+    d.r9 = COALESCE(@r9, s.r9),
+    d.r10 = COALESCE(@r10, s.r10),
+    d.r11 = COALESCE(@r11, s.r11),
+    d.r12 = COALESCE(@r12, s.r12),
+    d.r13 = COALESCE(@r13, s.r13),
+    d.r14 = COALESCE(@r14, s.r14),
+    d.r15 = COALESCE(@r15, s.r15),
+    d.dr0 = COALESCE(@dr0, s.dr0),
+    d.dr1 = COALESCE(@dr1, s.dr1),
+    d.dr2 = COALESCE(@dr2, s.dr2),
+    d.dr3 = COALESCE(@dr3, s.dr3),
+    d.dr6 = COALESCE(@dr6, s.dr6),
+    d.dr7 = COALESCE(@dr7, s.dr7),
+    d.exfrom = COALESCE(@exfrom, s.exfrom),
+    d.exto = COALESCE(@exto, s.exto),
+    d.brfrom = COALESCE(@brfrom, s.brfrom),
+    d.brto = COALESCE(@brto, s.brto),
+    d.opcode_nmemonic = COALESCE(@opcode_nmemonic, s.opcode_nmemonic),
+    d.code_address = COALESCE(@code_address, s.code_address),
+    d.module = COALESCE(@module, s.module),
+    d.[function] = COALESCE(@function, s.[function]),
+    d.function_offset = COALESCE(@function_offset, s.function_offset);
+END
