@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace McFly.Server.Data
@@ -7,6 +8,20 @@ namespace McFly.Server.Data
     public abstract class DataAccess
     {
         public static string ConnectionString { get; set; }
+
+        protected virtual SqlDataReader ExecuteStoredProcedureReader(string name, Dictionary<string, object> parameters)
+        {
+            using (var conn = new SqlConnection(ConnectionString))
+            using (var command = conn.CreateCommand())
+            {
+                command.CommandText = name;
+                foreach (var parameter in parameters)
+                {
+                    command.Parameters.AddWithValue(parameter.Key, parameter.Value);
+                }
+                return command.ExecuteReader();
+            }
+        }
     }
 
     public static class DataExtensions
