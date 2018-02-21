@@ -96,6 +96,31 @@ CREATE TABLE frame (
   thread_id
   )
  );
+
+/*
+A note is a human readable comment
+A single note can be applied to many frames, a single frame can have many notes
+*/
+CREATE TABLE note (
+ note_id INT PRIMARY KEY IDENTITY(1, 1),
+ content TEXT NOT NULL
+ );
+
+/*
+Linking table for frames and notes
+*/
+CREATE TABLE frame_note (
+ key_major INT,
+ key_minor INT,
+ thread_id INT,
+ note_id INT,
+ CONSTRAINT pk_frame_note PRIMARY KEY (
+  key_major,
+  key_minor,
+  thread_id,
+  note_id
+  )
+ );
 GO
 
 /*
@@ -335,3 +360,33 @@ BEGIN
     d.[function] = COALESCE(@function, s.[function]),
     d.function_offset = COALESCE(@function_offset, s.function_offset);
 END
+
+GO
+
+/*
+Add a note, and optionally assign it to a frame
+*/
+CREATE PROCEDURE pr_add_note (
+ @content TEXT,
+ @key_major INT = NULL,
+ @key_minor INT = NULL,
+ @thread_id INT = NULL
+ )
+AS
+BEGIN
+ INSERT INTO note (content)
+ VALUES (@content)
+
+ IF @key_major IS NOT NULL AND @key_minor IS NOT NULL AND @thread_id IS NOT NULL
+ BEGIN
+  INSERT INTO frame_note
+  VALUES (
+   @key_major,
+   @key_minor,
+   @thread_id,
+   @@IDENTITY
+   )
+ END
+END
+
+GO
