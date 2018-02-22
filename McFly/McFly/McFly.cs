@@ -112,8 +112,8 @@ namespace wbext
             {
                 string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                 var name = new AssemblyName(e.Name);
-                return Assembly.LoadFrom(Path.ChangeExtension(
-                    Path.Combine(directory, name.Name), ".dll"));
+                var path = Path.Combine(directory, $"{name.Name}.dll");
+                return Assembly.LoadFrom(path);
             };
 
             // Everything below is to enable the extension to be loaded from another
@@ -220,17 +220,30 @@ namespace wbext
             var argv = CommandLineToArgs(args);
 
             Parser.Default.ParseArguments<ConfigOptions>(argv)
-                .WithParsed<ConfigOptions>(opts => Config(opts));
+                .WithParsed<ConfigOptions>(opts =>
+                {
+                    Config(opts);
+                });
 
             return HRESULT.S_OK;
         }
 
         private static void Config(ConfigOptions opts)
         {
-            string json = File.ReadAllText("mcfly.settings.json");
+            string settingsFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            settingsFile = Path.Combine(settingsFile, "mcfly.settings.json");
+            string json = "{}";
+            try
+            {
+                json = File.ReadAllText(settingsFile);
+            }
+            catch (FileNotFoundException fne)
+            {
+                ; // don't care
+            }
             dynamic jsonObj = JsonConvert.DeserializeObject(json);
             jsonObj[opts.Key] = opts.Value;
-            File.WriteAllText("mcfly.settings.json", JsonConvert.SerializeObject(jsonObj));
+            File.WriteAllText(settingsFile, JsonConvert.SerializeObject(jsonObj));
         }
 
         [DllExport]
