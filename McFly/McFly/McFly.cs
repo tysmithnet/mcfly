@@ -1,6 +1,7 @@
 ﻿using Microsoft.Diagnostics.Runtime.InteropLocal;
 using RGiesecke.DllExport;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -39,7 +40,7 @@ namespace wbext
         private static IDebugControl6 control;
         private static IDebugClient5 client;
         private static HRESULT LastHR;
-
+        private static Dictionary<string, string> settings;
         internal delegate uint Ioctl(IG IoctlType, ref WDBGEXTS_CLR_DATA_INTERFACE lpvData, int cbSizeOfContext);
 
         private static HRESULT Int2HResult(int Result)
@@ -81,6 +82,16 @@ namespace wbext
 
         internal static void INIT_API()
         {
+            try
+            {
+                settings = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(GetSettingsFilePath()));
+            }
+            catch (Exception e)
+            {
+                WriteLine($"Unable to get settings: {e.Message}");
+                throw;
+            }
+
             LastHR = HRESULT.S_OK;
             if (client == null)
             {
@@ -228,10 +239,16 @@ namespace wbext
             return HRESULT.S_OK;
         }
 
-        private static void Config(ConfigOptions opts)
+        private static string GetSettingsFilePath()
         {
             string settingsFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             settingsFile = Path.Combine(settingsFile, "mcfly.settings.json");
+            return settingsFile;
+        }
+
+        private static void Config(ConfigOptions opts)
+        {
+            string settingsFile = GetSettingsFilePath();
             string json = "{}";
             try
             {
