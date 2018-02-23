@@ -32,6 +32,14 @@ namespace wbext
         E_UNEXPECTED = 0x8000FFFF
 
     }
+
+    public class Settings
+    {
+        public string ConnectionString { get; set; }
+        public string LauncherPath { get; set; }
+        public string ServerUrl { get; set; }
+    }
+
     public class WebBrowserExt
     {
         [DllImport("dbgeng.dll")]
@@ -40,7 +48,7 @@ namespace wbext
         private static IDebugControl6 control;
         private static IDebugClient5 client;
         private static HRESULT LastHR;
-        private static Dictionary<string, string> settings;
+        private static Settings settings;
         internal delegate uint Ioctl(IG IoctlType, ref WDBGEXTS_CLR_DATA_INTERFACE lpvData, int cbSizeOfContext);
 
         private static HRESULT Int2HResult(int Result)
@@ -84,11 +92,16 @@ namespace wbext
         {
             try
             {
-                settings = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(GetSettingsFilePath()));
+                settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(GetSettingsFilePath()));
+            }
+            catch (FileNotFoundException e)
+            {
+                settings = new Settings();
+                File.WriteAllText(GetSettingsFilePath(), JsonConvert.SerializeObject(settings));
             }
             catch (Exception e)
             {
-                WriteLine($"Unable to get settings: {e.Message}");
+                WriteLine($"Error: Unable to get settings: {e}");
                 throw;
             }
 
@@ -227,6 +240,7 @@ namespace wbext
         [DllExport]
         public static HRESULT config(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
+            INIT_API();
             // il merge
             var argv = CommandLineToArgs(args);
 
@@ -249,41 +263,51 @@ namespace wbext
         private static void Config(ConfigOptions opts)
         {
             string settingsFile = GetSettingsFilePath();
-            string json = "{}";
-            try
+            if (opts.ShouldList)
             {
-                json = File.ReadAllText(settingsFile);
+                WriteLine($"connection_string => {settings.ConnectionString}");
+                WriteLine($"server_url => {settings.ServerUrl}");
+                WriteLine($"launcher_path => {settings.LauncherPath}");
+                return;
             }
-            catch (FileNotFoundException fne)
+            if (opts.Key != null)
             {
-                ; // don't care
+                switch (opts.Key)
+                {
+                    case "connection_string":
+                        settings.ConnectionString = opts.Value;
+                        break;
+                    case "server_url":
+                        settings.ServerUrl = opts.Value;
+                        break;
+                    case "launcher_path":
+                        settings.LauncherPath = opts.Value;
+                        break;
+                }
+                File.WriteAllText(settingsFile, JsonConvert.SerializeObject(settings, Formatting.Indented));
             }
-            dynamic jsonObj = JsonConvert.DeserializeObject(json);
-            jsonObj[opts.Key] = opts.Value;
-            File.WriteAllText(settingsFile, JsonConvert.SerializeObject(jsonObj));
         }
 
         [DllExport]
         public static HRESULT start(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
-            var argv = CommandLineToArgs(args);
-
-            Parser.Default.ParseArguments<StartOptions>(argv)
-                .WithParsed<StartOptions>(opts => Start(opts));
+            INIT_API();                       
+                                                               
+            Start();
 
             return HRESULT.S_OK;
         }
 
-        private static void Start(StartOptions opts)
-        {
+        private static void Start()
+        {   
             try
             {
-                Process.Start($"dotnet {opts.ServerDll}");
+                Process.Start($"{settings.LauncherPath}", "--connectionstring {settings.ConnectionString}");
             }
             catch (Exception e)
             {
                 WriteLine($"Error starting server. Is your path correct? Message: {e.Message}");
-                return;
+                throw;
             }   
         }
 
@@ -313,7 +337,15 @@ namespace wbext
         private static async Task Init(InitOptions opts)
         {
             using (var httpClient = new HttpClient())
-            {                                          
+            {                                   
+                try
+                {
+
+                }
+                catch (Exception e)
+                {
+                    WriteLine($"Error: Unable to ");
+                }
             }
         }
 
@@ -391,7 +423,6 @@ namespace wbext
         public static void OutDml(string Message)
         {
             control.ControlledOutput(DEBUG_OUTCTL.ALL_CLIENTS | DEBUG_OUTCTL.DML, DEBUG_OUTPUT.NORMAL, Message);
-
         }
     }
 }

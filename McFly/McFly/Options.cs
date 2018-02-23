@@ -14,16 +14,19 @@ namespace McFly
 
     public class StartOptions
     {
-        [Option("serverdll", HelpText = "Location on disk of the McFly.Server.dll", Required = true)]
-        public string ServerDll { get; set; }
+        [Option('l', "launcher", HelpText = "Location on disk of launch.bat", Required = true)]
+        public string LauncherPath { get; set; }
     }
 
     public class ConfigOptions
     {
-        [Option('k', "key", HelpText = "Key for the config setting", Required = true)]
+        [Option('l', "list", HelpText = "List the current settings and their values", SetName = "list")]
+        public bool ShouldList { get; set; }
+
+        [Option('k', "key", HelpText = "Key for the config setting", SetName = "set")]
         public string Key { get; set; }
 
-        [Option('v', "value", HelpText = "Value for the config setting", Required = true)]
+        [Option('v', "value", HelpText = "Value for the config setting", SetName = "set")]
         public string Value { get; set; }
     }
 }

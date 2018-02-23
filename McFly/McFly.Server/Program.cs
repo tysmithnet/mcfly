@@ -15,9 +15,9 @@ namespace McFly.Server
     public class Program
     {
         public static void Main(string[] args)
-        {
-            Parser.Default.ParseArguments(args)
-                .WithParsed<Options>(opts =>
+        {                                   
+            Parser.Default.ParseArguments<Options>(args)
+                .WithParsed(opts =>
                 {
                     DataAccess.ConnectionString = opts.ConnectionString ??
                                                   throw new ArgumentNullException("Connection string cannot be null");
