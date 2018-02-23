@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
+using System.Text;
 using System.Threading.Tasks;
 using CommandLine;
 using McFly;
@@ -299,16 +300,28 @@ namespace wbext
         }
 
         private static void Start()
-        {   
+        {
             try
             {
-                Process.Start($"{settings.LauncherPath}", "--connectionstring {settings.ConnectionString}");
+                if (string.IsNullOrWhiteSpace(settings.LauncherPath))
+                {
+                    WriteLine(
+                        "You must set the launcher path in settings: !config -k launcher_path -v c:\\path\\to\\launch.bat");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(settings.ConnectionString))
+                {
+                    WriteLine(
+                        "You must set the connection string in settings: !config -k connection_string -v \"Data Source=Whatever;Integrated Security=true\"");
+                    return;
+                }
+                Process.Start($"{settings.LauncherPath}", $"--connectionstring \"{settings.ConnectionString}\"");
             }
             catch (Exception e)
             {
                 WriteLine($"Error starting server. Is your path correct? Message: {e.Message}");
                 throw;
-            }   
+            }
         }
 
         [DllExport]
@@ -317,34 +330,44 @@ namespace wbext
             INIT_API();
             if (LastHR != HRESULT.S_OK)
                 return LastHR;
-
-            //var webClient = new WebClient();
-            //var result = webClient.DownloadString(args);
-            //var document = new HtmlDocument();
-            //document.LoadHtml(result);
-            //var writer = new StringWriter();
-            //ConvertTo(args, document.DocumentNode, writer);
-            //WriteDmlLine(writer.ToString());
-
+                                               
             var argv = CommandLineToArgs(args);
             
             Parser.Default.ParseArguments<InitOptions>(argv)
-                .WithParsed<InitOptions>(async opts => await Init(opts));
+                .WithParsed(async opts => await Init(opts));
 
             return HRESULT.S_OK;
         }
 
         private static async Task Init(InitOptions opts)
         {
+            if (string.IsNullOrWhiteSpace(settings.ServerUrl))
+            {
+                WriteLine("You must set the server url in the settings: !config -k server_url -v http://localhost:5000");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(opts.ProjectName))
+            {
+                WriteLine("You must specify a project name: !init -n my_new_project");
+                return;
+            }
+
             using (var httpClient = new HttpClient())
             {                                   
                 try
                 {
-
-                }
+                    var httpContent = new FormUrlEncodedContent(new []
+                    {
+                        new KeyValuePair<string, string>("projectName", opts.ProjectName), 
+                    });
+                    var uri = new UriBuilder(settings.ServerUrl) {Path = "api/project"};
+                    await httpClient.PostAsync(uri.Uri, httpContent);
+                }                                               
                 catch (Exception e)
                 {
-                    WriteLine($"Error: Unable to ");
+                    WriteLine($"Error: Unable to create project: {e}");
+                    throw;
                 }
             }
         }
