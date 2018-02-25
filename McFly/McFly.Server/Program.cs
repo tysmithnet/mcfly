@@ -26,6 +26,18 @@ namespace McFly.Server
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context, builder) =>
+                {
+                    var env = context.HostingEnvironment;
+                    builder.AddJsonFile("appsettings.json", true, true)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
+                    builder.AddEnvironmentVariables();
+                })
+                .ConfigureLogging((context, builder)=>
+                {                             
+                    builder.AddConsole();
+                    builder.AddDebug();
+                })
                 .UseStartup<Startup>()
                 .Build();
     }

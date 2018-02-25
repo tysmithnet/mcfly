@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using McFly.Server.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace McFly.Server.Controllers
 {
@@ -11,10 +12,13 @@ namespace McFly.Server.Controllers
     public class ProjectsController : Controller
     {
         protected IProjectsAccess ProjectsAccess { get; set; }
+        private ILogger<ProjectsController> Logger { get; set; }      
 
-        public ProjectsController(IProjectsAccess projectsAccess)
+        public ProjectsController(ILogger<ProjectsController> logger, IProjectsAccess projectsAccess)
         {
+            Logger = logger ?? throw new ArgumentNullException(nameof(logger)); 
             ProjectsAccess = projectsAccess ?? throw new ArgumentNullException(nameof(projectsAccess));
+            Logger.LogInformation("ProjectsController created");
         }
 
         [HttpGet]

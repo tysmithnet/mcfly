@@ -4,15 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using McFly.Server.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace McFly.Server.Controllers
 {
     [Route("api/frame")]
     public class FrameController : Controller
     {
-        private IFrameAccess FrameAccess { get; set; }
+        protected IFrameAccess FrameAccess { get; set; }
+        private ILogger<FrameController> Logger { get; set; }
 
-        public FrameController(IFrameAccess frameAccess)
+        public FrameController(ILogger<FrameController> logger, IFrameAccess frameAccess)
         {                           
             FrameAccess = frameAccess;
         }
