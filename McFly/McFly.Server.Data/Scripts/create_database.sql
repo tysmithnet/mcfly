@@ -97,6 +97,8 @@ CREATE TABLE frame (
   )
  );
 
+GO
+
 /*
 A note is a human readable comment
 A single note can be applied to many frames, a single frame can have many notes
@@ -105,6 +107,8 @@ CREATE TABLE note (
  note_id INT PRIMARY KEY IDENTITY(1, 1),
  content TEXT NOT NULL
  );
+
+GO
 
 /*
 Linking table for frames and notes
@@ -121,6 +125,7 @@ CREATE TABLE frame_note (
   note_id
   )
  );
+
 GO
 
 /*
