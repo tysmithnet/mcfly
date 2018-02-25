@@ -139,9 +139,12 @@
     <Compile Include="Debugger\IDebugSystemObjects2.cs" />
     <Compile Include="Debugger\IDebugSystemObjects3.cs" />
     <Compile Include="Debugger\Structs.cs" />
+    <Compile Include="ExecuteWrapper.cs" />
+    <Compile Include="HRESULT.cs" />
     <Compile Include="McFly.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

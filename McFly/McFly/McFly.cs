@@ -9,7 +9,6 @@ using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
-using System.Text;
 using System.Threading.Tasks;
 using CommandLine;
 using McFly;
@@ -17,32 +16,9 @@ using Microsoft.Diagnostics.Runtime.Interop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace wbext
+namespace McFly
 {
-    public enum HRESULT : uint
-    {
-        S_OK = 0,
-        E_ABORT = 4,
-        E_ACCESSDENIED = 0x80070005,
-        E_FAIL = 0x80004005,
-        E_HANDLE = 0x80070006,
-        E_INVALIDARG = 0x80070057,
-        E_NOINTERFACE = 0x80004002,
-        E_NOTIMPL = 0x80004001,
-        E_OUTOFMEMORY = 0x8007000E,
-        E_POINTER = 0x80004003,
-        E_UNEXPECTED = 0x8000FFFF
-
-    }
-
-    public class Settings
-    {
-        public string ConnectionString { get; set; }
-        public string LauncherPath { get; set; }
-        public string ServerUrl { get; set; }        
-    }
-
-    public class WebBrowserExt
+    public class McFlyExtension
     {
         [DllImport("dbgeng.dll")]
         internal static extern uint DebugCreate(ref Guid InterfaceId, [MarshalAs(UnmanagedType.IUnknown)] out object Interface);
@@ -334,7 +310,7 @@ namespace wbext
         {
             INIT_API();
 
-            using (var ew = new ExecuteWrapper(WebBrowserExt.client))
+            using (var ew = new ExecuteWrapper(McFlyExtension.client))
             {
                 var res = ew.Execute(".echo hi");
                 WriteLine("res: " + res);
@@ -492,72 +468,5 @@ namespace wbext
         {
             control.ControlledOutput(DEBUG_OUTCTL.ALL_CLIENTS | DEBUG_OUTCTL.DML, DEBUG_OUTPUT.NORMAL, Message);
         }
-    }
-
-    public class ExecuteWrapper : IDebugOutputCallbacks, IDisposable
-    {
-        private bool _disposed = false; // To detect redundant calls
-        private IDebugOutputCallbacks _old;
-        private IDebugClient _client;
-        private IDebugControl _control;
-        private StringBuilder _builder = new StringBuilder();
-
-        public ExecuteWrapper(IDebugClient client)
-        {
-            _client = client;
-            _control = (IDebugControl)client;
-
-            int hr = client.GetOutputCallbacks(out _old);
-            Debug.Assert(hr == 0);
-
-            hr = client.SetOutputCallbacks(this);
-            Debug.Assert(hr == 0);
-        }
-
-        public string Execute(string cmd)
-        {
-            lock (_builder)
-                _builder.Clear();
-
-            int hr = _control.Execute(DEBUG_OUTCTL.THIS_CLIENT, cmd, DEBUG_EXECUTE.NOT_LOGGED);
-            Debug.Assert(hr == 0);
-            //todo:  Something with hr, it may be an error legitimately.
-
-            lock (_builder)
-                return _builder.ToString();
-        }
-
-        int IDebugOutputCallbacks.Output(DEBUG_OUTPUT mask, string text)
-        {
-            // TODO: Check mask and write to appropriate location.
-
-            lock (_builder)
-                _builder.Append(text);
-
-            return 0;
-        }
-
-        #region IDisposable Support
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                _client.SetOutputCallbacks(_old);
-                _disposed = true;
-            }
-        }
-
-        ~ExecuteWrapper()
-        {
-            Dispose(false);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
     }
 }
