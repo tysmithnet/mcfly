@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 #pragma warning disable 1591
 
-namespace Microsoft.Diagnostics.Runtime.InteropLocal
+namespace Microsoft.Diagnostics.Runtime.Interop
 {
     [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("e3acb9d7-7ec2-4f0c-a0da-e81e0cbbe628")]
     public interface IDebugClient5 : IDebugClient4
@@ -168,13 +168,13 @@ namespace Microsoft.Diagnostics.Runtime.InteropLocal
 
         [PreserveSig]
         new int GetOutputCallbacks(
-            [Out] out IntPtr Callbacks);
+            [Out] out IDebugOutputCallbacks Callbacks);
 
         /* We may have to pass a debugger engine conversion thunk back in so we can't specify a specific interface */
 
         [PreserveSig]
         new int SetOutputCallbacks(
-            [In] IntPtr Callbacks);
+            [In] IDebugOutputCallbacks Callbacks);
 
         [PreserveSig]
         new int GetOutputMask(
@@ -228,13 +228,13 @@ namespace Microsoft.Diagnostics.Runtime.InteropLocal
 
         [PreserveSig]
         new int GetEventCallbacks(
-            [Out] out IntPtr Callbacks);
+            [Out] out IDebugEventCallbacks Callbacks);
 
         /* We may have to pass a debugger engine conversion thunk back in so we can't specify a specific interface */
 
         [PreserveSig]
         new int SetEventCallbacks(
-            [In] IntPtr Callbacks);
+            [In] IDebugEventCallbacks Callbacks);
 
         [PreserveSig]
         new int FlushCallbacks();
@@ -393,13 +393,13 @@ namespace Microsoft.Diagnostics.Runtime.InteropLocal
 
         [PreserveSig]
         int GetOutputCallbacksWide(
-            [Out] out IntPtr Callbacks);
+            [Out] out IDebugOutputCallbacksWide Callbacks);
 
         /* We may have to pass a debugger engine conversion thunk back in so we can't specify a specific interface */
 
         [PreserveSig]
         int SetOutputCallbacksWide(
-            [In] IntPtr Callbacks);
+            [In] IDebugOutputCallbacks2 Callbacks);
 
         [PreserveSig]
         int GetOutputLinePrefixWide(
@@ -427,13 +427,13 @@ namespace Microsoft.Diagnostics.Runtime.InteropLocal
 
         [PreserveSig]
         int GetEventCallbacksWide(
-            [Out] out IntPtr Callbacks);
+            [Out] out IDebugEventCallbacksWide Callbacks);
 
         /* We may have to pass a debugger engine conversion thunk back in so we can't specify a specific interface */
 
         [PreserveSig]
         int SetEventCallbacksWide(
-            [In] IntPtr Callbacks);
+            [In] IDebugEventCallbacksWide Callbacks);
 
         [PreserveSig]
         int CreateProcess2(

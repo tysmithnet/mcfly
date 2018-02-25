@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Diagnostics.Runtime.Interop
 {
-    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("ca83c3de-5089-4cf8-93c8-d892387f2a5e")]
-    public interface IDebugClient4 : IDebugClient3
+    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("e3acb9d7-7ec2-4f0c-a0da-e81e0cbbe628")]
+    public interface IDebugClient6 : IDebugClient5
     {
         /* IDebugClient */
 
@@ -311,12 +311,12 @@ namespace Microsoft.Diagnostics.Runtime.Interop
         /* IDebugClient4 */
 
         [PreserveSig]
-        int OpenDumpFileWide(
+        new int OpenDumpFileWide(
             [In, MarshalAs(UnmanagedType.LPWStr)] string FileName,
             [In] UInt64 FileHandle);
 
         [PreserveSig]
-        int WriteDumpFileWide(
+        new int WriteDumpFileWide(
             [In, MarshalAs(UnmanagedType.LPWStr)] string DumpFile,
             [In] UInt64 FileHandle,
             [In] DEBUG_DUMP Qualifier,
@@ -324,17 +324,17 @@ namespace Microsoft.Diagnostics.Runtime.Interop
             [In, MarshalAs(UnmanagedType.LPWStr)] string Comment);
 
         [PreserveSig]
-        int AddDumpInformationFileWide(
+        new int AddDumpInformationFileWide(
             [In, MarshalAs(UnmanagedType.LPWStr)] string FileName,
             [In] UInt64 FileHandle,
             [In] DEBUG_DUMP_FILE Type);
 
         [PreserveSig]
-        int GetNumberDumpFiles(
+        new int GetNumberDumpFiles(
             [Out] out UInt32 Number);
 
         [PreserveSig]
-        int GetDumpFile(
+        new int GetDumpFile(
             [In] UInt32 Index,
             [Out, MarshalAs(UnmanagedType.LPStr)] StringBuilder Buffer,
             [In] Int32 BufferSize,
@@ -343,12 +343,189 @@ namespace Microsoft.Diagnostics.Runtime.Interop
             [Out] out UInt32 Type);
 
         [PreserveSig]
-        int GetDumpFileWide(
+        new int GetDumpFileWide(
             [In] UInt32 Index,
             [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
             [In] Int32 BufferSize,
             [Out] out UInt32 NameSize,
             [Out] out UInt64 Handle,
             [Out] out UInt32 Type);
+
+        /* IDebugClient5 */
+
+        [PreserveSig]
+        new int AttachKernelWide(
+            [In] DEBUG_ATTACH Flags,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string ConnectOptions);
+
+        [PreserveSig]
+        new int GetKernelConnectionOptionsWide(
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [In] Int32 BufferSize,
+            [Out] out UInt32 OptionsSize);
+
+        [PreserveSig]
+        new int SetKernelConnectionOptionsWide(
+            [In, MarshalAs(UnmanagedType.LPWStr)] string Options);
+
+        [PreserveSig]
+        new int StartProcessServerWide(
+            [In] DEBUG_CLASS Flags,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string Options,
+            [In] IntPtr Reserved);
+
+        [PreserveSig]
+        new int ConnectProcessServerWide(
+            [In, MarshalAs(UnmanagedType.LPWStr)] string RemoteOptions,
+            [Out] out UInt64 Server);
+
+        [PreserveSig]
+        new int StartServerWide(
+            [In, MarshalAs(UnmanagedType.LPWStr)] string Options);
+
+        [PreserveSig]
+        new int OutputServersWide(
+            [In] DEBUG_OUTCTL OutputControl,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string Machine,
+            [In] DEBUG_SERVERS Flags);
+
+        /* GetOutputCallbacks could a conversion thunk from the debugger engine so we can't specify a specific interface */
+
+        [PreserveSig]
+        new int GetOutputCallbacksWide(
+            [Out] out IDebugOutputCallbacksWide Callbacks);
+
+        /* We may have to pass a debugger engine conversion thunk back in so we can't specify a specific interface */
+
+        [PreserveSig]
+        new int SetOutputCallbacksWide(
+            [In] IDebugOutputCallbacks2 Callbacks);
+
+        [PreserveSig]
+        new int GetOutputLinePrefixWide(
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [In] Int32 BufferSize,
+            [Out] out UInt32 PrefixSize);
+
+        [PreserveSig]
+        new int SetOutputLinePrefixWide(
+            [In, MarshalAs(UnmanagedType.LPWStr)] string Prefix);
+
+        [PreserveSig]
+        new int GetIdentityWide(
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [In] Int32 BufferSize,
+            [Out] out UInt32 IdentitySize);
+
+        [PreserveSig]
+        new int OutputIdentityWide(
+            [In] DEBUG_OUTCTL OutputControl,
+            [In] UInt32 Flags,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string Machine);
+
+        /* GetEventCallbacks could a conversion thunk from the debugger engine so we can't specify a specific interface */
+
+        [PreserveSig]
+        new int GetEventCallbacksWide(
+            [Out] out IDebugEventCallbacksWide Callbacks);
+
+        /* We may have to pass a debugger engine conversion thunk back in so we can't specify a specific interface */
+
+        [PreserveSig]
+        new int SetEventCallbacksWide(
+            [In] IDebugEventCallbacksWide Callbacks);
+
+        [PreserveSig]
+        new int CreateProcess2(
+            [In] UInt64 Server,
+            [In, MarshalAs(UnmanagedType.LPStr)] string CommandLine,
+            [In] ref DEBUG_CREATE_PROCESS_OPTIONS OptionsBuffer,
+            [In] UInt32 OptionsBufferSize,
+            [In, MarshalAs(UnmanagedType.LPStr)] string InitialDirectory,
+            [In, MarshalAs(UnmanagedType.LPStr)] string Environment);
+
+        [PreserveSig]
+        new int CreateProcess2Wide(
+            [In] UInt64 Server,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string CommandLine,
+            [In] ref DEBUG_CREATE_PROCESS_OPTIONS OptionsBuffer,
+            [In] UInt32 OptionsBufferSize,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string InitialDirectory,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string Environment);
+
+        [PreserveSig]
+        new int CreateProcessAndAttach2(
+            [In] UInt64 Server,
+            [In, MarshalAs(UnmanagedType.LPStr)] string CommandLine,
+            [In] ref DEBUG_CREATE_PROCESS_OPTIONS OptionsBuffer,
+            [In] UInt32 OptionsBufferSize,
+            [In, MarshalAs(UnmanagedType.LPStr)] string InitialDirectory,
+            [In, MarshalAs(UnmanagedType.LPStr)] string Environment,
+            [In] UInt32 ProcessId,
+            [In] DEBUG_ATTACH AttachFlags);
+
+        [PreserveSig]
+        new int CreateProcessAndAttach2Wide(
+            [In] UInt64 Server,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string CommandLine,
+            [In] ref DEBUG_CREATE_PROCESS_OPTIONS OptionsBuffer,
+            [In] UInt32 OptionsBufferSize,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string InitialDirectory,
+            [In, MarshalAs(UnmanagedType.LPWStr)] string Environment,
+            [In] UInt32 ProcessId,
+            [In] DEBUG_ATTACH AttachFlags);
+
+        [PreserveSig]
+        new int PushOutputLinePrefix(
+            [In, MarshalAs(UnmanagedType.LPStr)] string NewPrefix,
+            [Out] out UInt64 Handle);
+
+        [PreserveSig]
+        new int PushOutputLinePrefixWide(
+            [In, MarshalAs(UnmanagedType.LPWStr)] string NewPrefix,
+            [Out] out UInt64 Handle);
+
+        [PreserveSig]
+        new int PopOutputLinePrefix(
+            [In] UInt64 Handle);
+
+        [PreserveSig]
+        new int GetNumberInputCallbacks(
+            [Out] out UInt32 Count);
+
+        [PreserveSig]
+        new int GetNumberOutputCallbacks(
+            [Out] out UInt32 Count);
+
+        [PreserveSig]
+        new int GetNumberEventCallbacks(
+            [In] DEBUG_EVENT Flags,
+            [Out] out UInt32 Count);
+
+        [PreserveSig]
+        new int GetQuitLockString(
+            [Out, MarshalAs(UnmanagedType.LPStr)] StringBuilder Buffer,
+            [In] Int32 BufferSize,
+            [Out] out UInt32 StringSize);
+
+        [PreserveSig]
+        new int SetQuitLockString(
+            [In, MarshalAs(UnmanagedType.LPStr)] string LockString);
+
+        [PreserveSig]
+        new int GetQuitLockStringWide(
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [In] Int32 BufferSize,
+            [Out] out UInt32 StringSize);
+
+        [PreserveSig]
+        new int SetQuitLockStringWide(
+            [In, MarshalAs(UnmanagedType.LPWStr)] string LockString);
+
+        /* IDebugClient6 */
+
+        [PreserveSig]
+        int SetEventContextCallbacks(
+            [In] IDebugEventContextCallbacks Callbacks);
     }
 }

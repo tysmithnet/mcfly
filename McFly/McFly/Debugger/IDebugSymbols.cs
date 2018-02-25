@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 #pragma warning disable 1591
 
-namespace Microsoft.Diagnostics.Runtime.InteropLocal
+namespace Microsoft.Diagnostics.Runtime.Interop
 {
     [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("8c31e98c-983a-48a5-9016-6fe5d667a950")]
     public interface IDebugSymbols
@@ -218,7 +218,7 @@ namespace Microsoft.Diagnostics.Runtime.InteropLocal
         [PreserveSig]
         int SetScope(
             [In] UInt64 InstructionOffset,
-            [In] DEBUG_STACK_FRAME ScopeFrame,
+            [In] ref DEBUG_STACK_FRAME ScopeFrame,
             [In] IntPtr ScopeContext,
             [In] UInt32 ScopeContextSize);
 

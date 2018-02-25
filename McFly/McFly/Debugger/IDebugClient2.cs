@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 #pragma warning disable 1591
 
-namespace Microsoft.Diagnostics.Runtime.InteropLocal
+namespace Microsoft.Diagnostics.Runtime.Interop
 {
     [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("edbed635-372e-4dab-bbfe-ed0d2f63be81")]
     public interface IDebugClient2 : IDebugClient
@@ -168,13 +168,13 @@ namespace Microsoft.Diagnostics.Runtime.InteropLocal
 
         [PreserveSig]
         new int GetOutputCallbacks(
-            [Out] out IntPtr Callbacks);
+            [Out] out IDebugOutputCallbacks Callbacks);
 
         /* We may have to pass a debugger engine conversion thunk back in so we can't specify a specific interface */
 
         [PreserveSig]
         new int SetOutputCallbacks(
-            [In] IntPtr Callbacks);
+            [In] IDebugOutputCallbacks Callbacks);
 
         [PreserveSig]
         new int GetOutputMask(
@@ -228,13 +228,13 @@ namespace Microsoft.Diagnostics.Runtime.InteropLocal
 
         [PreserveSig]
         new int GetEventCallbacks(
-            [Out] out IntPtr Callbacks);
+            [Out] out IDebugEventCallbacks Callbacks);
 
         /* We may have to pass a debugger engine conversion thunk back in so we can't specify a specific interface */
 
         [PreserveSig]
         new int SetEventCallbacks(
-            [In] IntPtr Callbacks);
+            [In] IDebugEventCallbacks Callbacks);
 
         [PreserveSig]
         new int FlushCallbacks();

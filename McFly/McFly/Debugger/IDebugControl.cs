@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 #pragma warning disable 1591
 
-namespace Microsoft.Diagnostics.Runtime.InteropLocal
+namespace Microsoft.Diagnostics.Runtime.Interop
 {
     [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("5182e668-105e-416e-ad92-24ef800424ba")]
     public interface IDebugControl
@@ -421,13 +421,13 @@ namespace Microsoft.Diagnostics.Runtime.InteropLocal
 
         [PreserveSig]
         int GetWindbgExtensionApis32(
-            [In, Out] ref WINDBG_EXTENSION_APIS32 Api);
+            [In, Out] ref WINDBG_EXTENSION_APIS Api);
 
         /* Must be In and Out as the nSize member has to be initialized */
 
         [PreserveSig]
         int GetWindbgExtensionApis64(
-            [In, Out] ref WINDBG_EXTENSION_APIS64 Api);
+            [In, Out] ref WINDBG_EXTENSION_APIS Api);
 
         /* Must be In and Out as the nSize member has to be initialized */
 

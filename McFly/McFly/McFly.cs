@@ -1,5 +1,4 @@
-﻿using Microsoft.Diagnostics.Runtime.InteropLocal;
-using RGiesecke.DllExport;
+﻿using RGiesecke.DllExport;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -14,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommandLine;
 using McFly;
+using Microsoft.Diagnostics.Runtime.Interop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -328,6 +328,21 @@ namespace wbext
             return HRESULT.S_OK;
         }
 
+
+        [DllExport]
+        public static HRESULT sayhi(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
+        {
+            INIT_API();
+
+            using (var ew = new ExecuteWrapper(WebBrowserExt.client))
+            {
+                var res = ew.Execute(".echo hi");
+                WriteLine("res: " + res);
+            }
+
+            return HRESULT.S_OK;
+        }
+
         private static void Start()
         {
             try
@@ -477,5 +492,72 @@ namespace wbext
         {
             control.ControlledOutput(DEBUG_OUTCTL.ALL_CLIENTS | DEBUG_OUTCTL.DML, DEBUG_OUTPUT.NORMAL, Message);
         }
+    }
+
+    public class ExecuteWrapper : IDebugOutputCallbacks, IDisposable
+    {
+        private bool _disposed = false; // To detect redundant calls
+        private IDebugOutputCallbacks _old;
+        private IDebugClient _client;
+        private IDebugControl _control;
+        private StringBuilder _builder = new StringBuilder();
+
+        public ExecuteWrapper(IDebugClient client)
+        {
+            _client = client;
+            _control = (IDebugControl)client;
+
+            int hr = client.GetOutputCallbacks(out _old);
+            Debug.Assert(hr == 0);
+
+            hr = client.SetOutputCallbacks(this);
+            Debug.Assert(hr == 0);
+        }
+
+        public string Execute(string cmd)
+        {
+            lock (_builder)
+                _builder.Clear();
+
+            int hr = _control.Execute(DEBUG_OUTCTL.THIS_CLIENT, cmd, DEBUG_EXECUTE.NOT_LOGGED);
+            Debug.Assert(hr == 0);
+            //todo:  Something with hr, it may be an error legitimately.
+
+            lock (_builder)
+                return _builder.ToString();
+        }
+
+        int IDebugOutputCallbacks.Output(DEBUG_OUTPUT mask, string text)
+        {
+            // TODO: Check mask and write to appropriate location.
+
+            lock (_builder)
+                _builder.Append(text);
+
+            return 0;
+        }
+
+        #region IDisposable Support
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                _client.SetOutputCallbacks(_old);
+                _disposed = true;
+            }
+        }
+
+        ~ExecuteWrapper()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

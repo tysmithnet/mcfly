@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 #pragma warning disable 1591
 
-namespace Microsoft.Diagnostics.Runtime.InteropLocal
+namespace Microsoft.Diagnostics.Runtime.Interop
 {
     [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("6a7ccc5f-fb5e-4dcc-b41c-6c20307bccc7")]
     public interface IDebugSymbolGroup2 : IDebugSymbolGroup
