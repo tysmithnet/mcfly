@@ -4,11 +4,19 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Logging;
 
 namespace McFly.Server.Data
 {
     public class ProjectsAccess : DataAccess, IProjectsAccess
     {
+        private ILogger<ProjectsAccess> Logger { get; set; }
+
+        public ProjectsAccess(ILogger<ProjectsAccess> logger)
+        {
+            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
         public IEnumerable<string> GetDatabases()
         {
             using (var conn = new SqlConnection(ConnectionString))
@@ -33,10 +41,24 @@ namespace McFly.Server.Data
             {
                 conn.Open();
                 createDbCommand.CommandText = $"CREATE DATABASE {projectName}";
-                createDbCommand.ExecuteNonQuery();
-
                 try
                 {
+                    createDbCommand.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    Logger.LogError($"Unable to create Database {projectName}: {e.Message}");
+                    throw;
+                }
+
+            }
+
+            var sqlBuilder = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName};
+            using (var conn = new SqlConnection(sqlBuilder.ToString()))
+            {                                       
+                try
+                { 
+                    conn.Open();
                     var initScript = File.ReadAllText("Scripts/create_database.sql");
                     IEnumerable<string> commandStrings = Regex.Split(initScript, @"^\s*GO\s*$",
                         RegexOptions.Multiline | RegexOptions.IgnoreCase);
