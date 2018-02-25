@@ -19,8 +19,7 @@ namespace McFly.Server
             Parser.Default.ParseArguments<Options>(args)
                 .WithParsed(opts =>
                 {
-                    DataAccess.ConnectionString = opts.ConnectionString ??
-                                                  throw new ArgumentNullException("Connection string cannot be null");
+                    DataAccess.ConnectionString = opts.ConnectionString;
                 });
             BuildWebHost(args).Run();
         }

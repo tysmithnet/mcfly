@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace McFly.Server.Data
 {
@@ -27,11 +29,37 @@ namespace McFly.Server.Data
         public void CreateProject(string projectName)
         {
             using (var conn = new SqlConnection(ConnectionString))
+            using (var createDbCommand = conn.CreateCommand())
             {
                 conn.Open();
-                var command = conn.CreateCommand();
-                command.CommandText = $"CREATE DATABASE {projectName}";
-                command.ExecuteNonQuery();
+                createDbCommand.CommandText = $"CREATE DATABASE {projectName}";
+                createDbCommand.ExecuteNonQuery();
+
+                try
+                {
+                    var initScript = File.ReadAllText("Scripts/create_database.sql");
+                    IEnumerable<string> commandStrings = Regex.Split(initScript, @"^\s*GO\s*$",
+                        RegexOptions.Multiline | RegexOptions.IgnoreCase);
+                    foreach (var commandString in commandStrings)
+                    {
+                        if (string.IsNullOrWhiteSpace(commandString))
+                            continue;
+                        using (var command = conn.CreateCommand())
+                        {
+                            command.CommandText = commandString;
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (SqlException e)
+                {
+                    using (var deleteCommand = conn.CreateCommand())
+                    {
+                        deleteCommand.CommandText = $"DROP DATABASE {projectName}";
+                        deleteCommand.ExecuteNonQuery();
+                        throw;
+                    }
+                }
             }
         }
     }

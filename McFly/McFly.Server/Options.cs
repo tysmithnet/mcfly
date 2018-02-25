@@ -8,7 +8,7 @@ namespace McFly.Server
 {
     public class Options
     {
-        [Option('c', "connectionstring", HelpText = "Connection string for the database to use", Required = true)]
+        [Option('c', "connectionstring", HelpText = "Connection string for the database to use")]
         public string ConnectionString { get; set; }
     }
 }

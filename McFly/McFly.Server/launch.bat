@@ -1,1 +1,1 @@
-dotnet %0\..\McFly.Server.dll %*
+dotnet McFly.Server.dll %*
