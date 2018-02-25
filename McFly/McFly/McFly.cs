@@ -2,6 +2,7 @@
 using RGiesecke.DllExport;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -38,7 +39,7 @@ namespace wbext
     {
         public string ConnectionString { get; set; }
         public string LauncherPath { get; set; }
-        public string ServerUrl { get; set; }
+        public string ServerUrl { get; set; }        
     }
 
     public class WebBrowserExt
@@ -237,7 +238,7 @@ namespace wbext
 
             return HRESULT.S_OK;
         }
-
+            
         [DllExport]
         public static HRESULT config(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
@@ -287,6 +288,34 @@ namespace wbext
                 }
                 File.WriteAllText(settingsFile, JsonConvert.SerializeObject(settings, Formatting.Indented));
             }
+        }
+
+        [DllExport]
+        public static HRESULT use(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
+        {
+            INIT_API();
+
+            Use(args);
+
+            return HRESULT.S_OK;
+        }
+
+        private static void Use(string projectName)
+        {
+            if (string.IsNullOrWhiteSpace(projectName))
+            {
+                WriteLine("Error: project name was not valid");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(settings.ConnectionString))
+            {
+                WriteLine("Error: Connection string is not configured yet");
+                return;
+            }
+            var sb = new SqlConnectionStringBuilder(settings.ConnectionString);
+            sb.InitialCatalog = projectName;
+            settings.ConnectionString = sb.ToString();
         }
 
         [DllExport]
@@ -370,6 +399,7 @@ namespace wbext
                     throw;
                 }
             }
+            Use(opts.ProjectName);
         }
 
         [DllImport("shell32.dll", SetLastError = true)]
