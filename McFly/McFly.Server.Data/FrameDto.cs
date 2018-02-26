@@ -1,4 +1,6 @@
-﻿namespace McFly.Server.Data
+﻿using McFly.Core;
+
+namespace McFly.Server.Data
 {
     public class FrameDto
     {                               

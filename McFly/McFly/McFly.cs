@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CommandLine;
 using McFly;
+using McFly.Core;
 using Microsoft.Diagnostics.Runtime.Interop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -124,10 +125,7 @@ namespace McFly
                 var path = Path.Combine(directory, $"{name.Name}.dll");
                 return Assembly.LoadFrom(path);
             };
-
-            // Everything below is to enable the extension to be loaded from another
-            //  folder that is not the same of the Debugger
-
+                                                              
             // Set up the AppDomainSetup
             AppDomainSetup setup = new AppDomainSetup();
             string assembly = System.Reflection.Assembly.GetExecutingAssembly().Location;
@@ -296,7 +294,7 @@ namespace McFly
             Parser.Default.ParseArguments<IndexOptions>(argv)
                 .WithParsed(options =>
                 {
-
+                    Index(options);
                 }).WithNotParsed(errors =>
                 {
                     WriteLine($"Error: Cannot parse index options:");
@@ -307,6 +305,84 @@ namespace McFly
                 });
 
             return HRESULT.S_OK;
+        }
+
+        private static void Index(IndexOptions options)
+        {
+            Position? endingPosition = null;
+            if(options.End != null)
+                endingPosition = Position.Parse(options.End);
+
+            SetupIndexBreakpoints(options);
+            using (var ew = new ExecuteWrapper(client))
+            {
+                bool endReached = false;
+                bool endOfTrace = false;
+                do
+                {
+                    var stop = ew.Execute("g");
+                    var positionMatch = Regex.Match(stop, "Time Travel Position: (?<pos>[a-fA-F0-9]+:[a-fA-F0-9]+)");
+                    endOfTrace = Regex.IsMatch(stop, "TTD: End of trace reached");
+                    
+                    if (!positionMatch.Success)
+                    {
+                        ; // todo: what to do here
+                    }
+                    var pos = Position.Parse(positionMatch.Groups["pos"].Value); // todo: catch?
+                    if (endingPosition.HasValue && pos >= endingPosition.Value)
+                    {
+                        
+                    }
+
+                } while (!endReached && !endOfTrace); 
+            }
+        }
+
+        private static void SetupIndexBreakpoints(IndexOptions options)
+        {
+            using (var ew = new ExecuteWrapper(client))
+            {
+                // clear breakpoints
+                ew.Execute("bc *"); // todo: save existing break points and restore
+
+                // set head at start
+                ew.Execute(options.Start != null ? $"!tt {options.Start}" : "!tt 0");
+
+                // set breakpoints
+                if (options.BreakpointMasks != null)
+                {
+                    foreach (var optionsBreakpointMask in options.BreakpointMasks)
+                    {
+                        ew.Execute($"bm {optionsBreakpointMask}");
+                    }
+                }
+
+                if (options.AccessBreakpoints != null)
+                {
+                    foreach (var accessBreakpoint in options.AccessBreakpoints)
+                    {
+                        // todo: move
+                        var match = Regex.Match(accessBreakpoint,
+                            @"^\s*(?<access>[rw][a-fA-F0-9]+):(?<address>[a-fA-F0-9]+)\s*$");
+                        if (!match.Success)
+                        {
+                            WriteLine($"Error: invalid access breakpoint: {accessBreakpoint}");
+                            continue;
+                        }
+
+                        ew.Execute($"ba {match.Groups["access"].Value} {match.Groups["address"].Value}");
+                    }
+                }
+
+                if (options.BreakpointMasks != null)
+                {
+                    foreach (var optionsBreakpointMask in options.BreakpointMasks)
+                    {
+                        // todo: validate
+                        ew.Execute($"bm {optionsBreakpointMask}");
+                    }
+                }
+            }
         }
 
         private static void Start()
