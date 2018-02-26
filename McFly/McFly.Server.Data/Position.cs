@@ -33,7 +33,7 @@ namespace McFly.Server.Data
                 _low = value;
             }
         }
-
+        
         public override string ToString()
         {
             return $"{High}:{Low}";

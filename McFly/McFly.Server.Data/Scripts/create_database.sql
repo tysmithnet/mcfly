@@ -1,4 +1,23 @@
-﻿/*  
+﻿/*
+Meta data about the trace
+*/
+CREATE TABLE trace_info (
+    lock CHAR(1) NOT NULL DEFAULT 'X',
+    /* High portion of the position, e.g. 1F0:2D => 1F0 */
+    start_pos_hi INTEGER NOT NULL,
+    /* Low portion of the position, e.g. 1F0:2D => 2D */
+    start_pos_lo INTEGER NOT NULL,
+    /* High portion of the position, e.g. 1F0:2D => 1F0 */
+    end_pos_hi INTEGER NOT NULL,
+    /* Low portion of the position, e.g. 1F0:2D => 2D */
+    end_pos_lo INTEGER NOT NULL,
+    constraint pk_trace_info PRIMARY KEY (Lock),
+    constraint ck_trace_info_lock CHECK (Lock='X')
+);
+
+GO
+
+/*  
 A process can have many threads in it, and so at any one instant in time there are potentially many
 threads running. This table captures the state of a particular thread at a particular instant in time.
 Note that the values here are the values BEFORE the instruction is executed.  

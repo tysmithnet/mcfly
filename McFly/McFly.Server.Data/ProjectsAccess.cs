@@ -49,8 +49,7 @@ namespace McFly.Server.Data
                 {
                     Logger.LogError($"Unable to create Database {projectName}: {e.Message}");
                     throw;
-                }
-
+                }   
             }
 
             var sqlBuilder = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName};
@@ -71,6 +70,13 @@ namespace McFly.Server.Data
                             command.CommandText = commandString;
                             command.ExecuteNonQuery();
                         }
+                    }
+
+                    using (var infoCommand = conn.CreateCommand())
+                    {
+                        infoCommand.CommandText =
+                            $"INSERT INTO trace_info (start_pos_hi, start_pos_lo, end_pos_hi, end_pos_lo) VALUES ({start.High}, {start.Low}, {start.High}, {start.Low})";
+                        infoCommand.ExecuteNonQuery();
                     }
                 }
                 catch (SqlException e)
