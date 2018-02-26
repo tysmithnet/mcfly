@@ -28,9 +28,7 @@ CREATE TABLE frame (
  /* Low portion of the position, e.g. 1F0:2D => 2D */
  pos_lo INTEGER NOT NULL,
  /* Thread id */
- thread_id INTEGER NOT NULL,
- /* Optional trace thread index */
- thread_index INTEGER,
+ thread_index INTEGER NOT NULL,  
  /* Value of rax */
  rax INTEGER,
  /* Value of rbx */
@@ -112,7 +110,7 @@ CREATE TABLE frame (
  PRIMARY KEY (
   pos_hi,
   pos_lo,
-  thread_id
+  thread_index
   )
  );
 
@@ -135,12 +133,12 @@ Linking table for frames and notes
 CREATE TABLE frame_note (
  pos_hi INT,
  pos_lo INT,
- thread_id INT,
+ thread_index INT,
  note_id INT,
  CONSTRAINT pk_frame_note PRIMARY KEY (
   pos_hi,
   pos_lo,
-  thread_id,
+  thread_index,
   note_id
   )
  );
@@ -154,8 +152,7 @@ If you pass null as any nullable value, the value already existing in the table 
 CREATE PROCEDURE pr_upsert_frame (
  @pos_hi INTEGER,
  @pos_lo INTEGER,
- @thread_id INTEGER,
- @thread_index INTEGER = NULL,
+ @thread_index INTEGER,
  @rax INTEGER = NULL,
  @rbx INTEGER = NULL,
  @rcx INTEGER = NULL,
@@ -202,7 +199,6 @@ BEGIN
  USING (
   SELECT @pos_hi AS pos_hi,
    @pos_lo AS pos_lo,
-   @thread_id AS thread_id,
    @thread_index AS thread_index,
    @rax AS rax,
    @rbx AS rbx,
@@ -244,13 +240,12 @@ BEGIN
    @function AS [function],
    @function_offset AS function_offset
   ) AS s
-  ON s.pos_hi = d.pos_hi AND s.pos_lo = d.pos_lo AND s.thread_id = d.thread_id
+  ON s.pos_hi = d.pos_hi AND s.pos_lo = d.pos_lo AND s.thread_index = d.thread_index
  WHEN NOT MATCHED BY TARGET
   THEN
    INSERT (
     pos_hi,
     pos_lo,
-    thread_id,
     thread_index,
     rax,
     rbx,
@@ -295,7 +290,6 @@ BEGIN
    VALUES (
     @pos_hi,
     @pos_lo,
-    @thread_id,
     @thread_index,
     @rax,
     @rbx,
@@ -342,7 +336,6 @@ BEGIN
    UPDATE
    SET d.pos_hi = COALESCE(@pos_hi, s.pos_hi),
     d.pos_lo = COALESCE(@pos_lo, s.pos_lo),
-    d.thread_id = COALESCE(@thread_id, s.thread_id),
     d.thread_index = COALESCE(@thread_index, s.thread_index),
     d.rax = COALESCE(@rax, s.rax),
     d.rbx = COALESCE(@rbx, s.rbx),
@@ -394,20 +387,20 @@ CREATE PROCEDURE pr_add_note (
  @content TEXT,
  @pos_hi INT = NULL,
  @pos_lo INT = NULL,
- @thread_id INT = NULL
+ @thread_index INT = NULL
  )
 AS
 BEGIN
  INSERT INTO note (content)
  VALUES (@content)
 
- IF @pos_hi IS NOT NULL AND @pos_lo IS NOT NULL AND @thread_id IS NOT NULL
+ IF @pos_hi IS NOT NULL AND @pos_lo IS NOT NULL AND @thread_index IS NOT NULL
  BEGIN
   INSERT INTO frame_note
   VALUES (
    @pos_hi,
    @pos_lo,
-   @thread_id,
+   @thread_index,
    @@IDENTITY
    )
  END

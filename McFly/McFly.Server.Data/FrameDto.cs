@@ -5,8 +5,7 @@ namespace McFly.Server.Data
     public class FrameDto
     {                               
         public Position Position { get; set; }
-        public int ThreadId { get; set; }
-        public int? ThreadIndex { get; set; }
+        public int ThreadIndex { get; set; }
         public long? Rax { get; set; }
         public long? Rbx { get; set; }
         public long? Rcx { get; set; }

@@ -317,7 +317,8 @@ namespace McFly
             using (var ew = new ExecuteWrapper(client))
             {
                 bool endReached = false;
-                bool endOfTrace = false;
+                bool endOfTrace;
+                // loop through all the set break points and record relevant values
                 do
                 {
                     var stop = ew.Execute("g");
@@ -331,8 +332,11 @@ namespace McFly
                     var pos = Position.Parse(positionMatch.Groups["pos"].Value); // todo: catch?
                     if (endingPosition.HasValue && pos >= endingPosition.Value)
                     {
-                        
-                    }
+                        endReached = true;
+                    }                     
+
+                    // figure out which threads need to be recorded
+
 
                 } while (!endReached && !endOfTrace); 
             }
