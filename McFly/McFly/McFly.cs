@@ -22,6 +22,7 @@ namespace McFly
      * todo: 32 and 64 bit
      * todo: .NET support
      * todo: add dump information table (first frame, last frame, etc)
+     * todo: help
      */
     public class McFlyExtension
     {
@@ -166,19 +167,18 @@ namespace McFly
             }
         }
 
-        private static bool showedHello = false;
+        private static bool showedIntro = false;
 
         [DllExport]
         public static void DebugExtensionNotify(uint Notify, ulong Argument)
         {
             if (Notify == 2) // I can write now
             {
-                if (!showedHello) // Just once
+                if (!showedIntro) // Just once
                 {
                     INIT_API();
-                    WriteDmlLine("<b>wbext</b> 1.0");
-                    WriteDmlLine("For help, type <link cmd=\"!help\">!help</link>");
-                    showedHello = true;
+                    WriteLine("When this baby hits 88 miles per hour... you're gonna see some serious shit.");
+                    showedIntro = true;
                 }
             }
         }
@@ -194,31 +194,6 @@ namespace McFly
             return HRESULT.S_OK;
         }
 
-        [DllExport]
-        public static HRESULT help(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string Args)
-        {
-            INIT_API();
-
-            if (String.IsNullOrWhiteSpace(Args))
-            {
-                WriteDmlLine("<link cmd=\"!help wb\">wb</link> - Displays a web page");
-            }
-            else
-            {
-                switch (Args.Trim().ToLower())
-                {
-                    case "wb":
-                        WriteLine("Displays a web page at the specified address");
-                        WriteLine("Syntax: wb <url>");
-                        break;
-                    default:
-                        WriteLine("Command '{0}' not found", Args);
-                        break;
-                }
-            }
-
-            return HRESULT.S_OK;
-        }
             
         [DllExport]
         public static HRESULT config(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
