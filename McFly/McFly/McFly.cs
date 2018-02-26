@@ -18,6 +18,11 @@ using Newtonsoft.Json.Linq;
 
 namespace McFly
 {
+    /*
+     * todo: 32 and 64 bit
+     * todo: .NET support
+     * todo: add dump information table (first frame, last frame, etc)
+     */
     public class McFlyExtension
     {
         [DllImport("dbgeng.dll")]
@@ -306,15 +311,24 @@ namespace McFly
 
 
         [DllExport]
-        public static HRESULT sayhi(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
+        public static HRESULT mfindex(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
             INIT_API();
 
-            using (var ew = new ExecuteWrapper(McFlyExtension.client))
-            {
-                var res = ew.Execute(".echo hi");
-                WriteLine("res: " + res);
-            }
+            var argv = CommandLineToArgs(args);
+
+            Parser.Default.ParseArguments<IndexOptions>(argv)
+                .WithParsed(options =>
+                {
+
+                }).WithNotParsed(errors =>
+                {
+                    WriteLine($"Error: Cannot parse index options:");
+                    foreach (var error in errors)
+                    {
+                        WriteLine(error.ToString());
+                    }
+                });
 
             return HRESULT.S_OK;
         }
