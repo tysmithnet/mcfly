@@ -10,8 +10,8 @@ namespace McFly.Server.Data
         {
             var parameters = new Dictionary<string, object>()
             {
-                ["@key_major"] = frame.KeyMajor,
-                ["@key_minor"] = frame.KeyMinor,
+                ["@key_major"] = frame.Position.High,
+                ["@key_minor"] = frame.Position.Low,
                 ["@thread_id"] = frame.ThreadId,
                 ["@thread_index"] = frame.ThreadIndex,
                 ["@rax"] = frame.Rax,

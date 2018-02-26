@@ -28,9 +28,9 @@ namespace McFly.Server.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(string projectName)
+        public ActionResult Post(string projectName, string startFrame, string endFrame)
         {
-            ProjectsAccess.CreateProject(projectName);
+            ProjectsAccess.CreateProject(projectName, Position.Parse(startFrame), Position.Parse(endFrame));
             return Ok();
         }
     }

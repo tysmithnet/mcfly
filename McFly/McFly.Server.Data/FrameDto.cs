@@ -2,8 +2,7 @@
 {
     public class FrameDto
     {                               
-        public int KeyMajor { get; set; }
-        public int KeyMinor { get; set; }
+        public Position Position { get; set; }
         public int ThreadId { get; set; }
         public int? ThreadIndex { get; set; }
         public long? Rax { get; set; }

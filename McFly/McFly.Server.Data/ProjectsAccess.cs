@@ -33,8 +33,8 @@ namespace McFly.Server.Data
                 return databases;
             }
         }
-
-        public void CreateProject(string projectName)
+                                                                                   
+        public void CreateProject(string projectName, Position start, Position end)
         {
             using (var conn = new SqlConnection(ConnectionString))
             using (var createDbCommand = conn.CreateCommand())

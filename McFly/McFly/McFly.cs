@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CommandLine;
 using McFly;
@@ -362,26 +363,79 @@ namespace McFly
                 return;
             }
 
-            using (var httpClient = new HttpClient())
-            {                                   
+            int startHi = 0;
+            int startLo = 0;
+            int endHi = 0;
+            int endLo = 0;
+
+            using (var ew = new ExecuteWrapper(client))
+            {
+                string start = ew.Execute("!tt 0");
+                var startMatch = Regex.Match(start, "Setting position: (?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+)");
+                if (!startMatch.Success)
+                {
+                    WriteLine($"Error: Could not find the starting position");
+                    return;
+                }
+
                 try
                 {
-                    var httpContent = new FormUrlEncodedContent(new []
+                    startHi = Convert.ToInt32(startMatch.Groups["hi"].Value);
+                    startLo = Convert.ToInt32(startMatch.Groups["lo"].Value);
+                }
+                catch (FormatException e)
+                {
+                    WriteLine($"Error: Could not convert found starting position values: {e.Message}");
+                    WriteLine($"What is the value of !tt 0   ?");
+                    return;
+                }
+
+
+                string end = ew.Execute("!tt 100");
+                var endMatch = Regex.Match(start, "Setting position: (?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+)");
+
+                if (!endMatch.Success)
+                {
+                    WriteLine($"Error: could not find the ending position");
+                    return;
+                }
+                try
+                {
+                    endHi = Convert.ToInt32(endMatch.Groups["hi"]);
+                    endLo = Convert.ToInt32(endMatch.Groups["lo"]);
+                }
+                catch (FormatException e)
+                {
+                    WriteLine($"Error: Could not convert found ending position values: {e.Message}");
+                    WriteLine($"What is the value of !tt 100   ?");
+                    return;
+                }   
+            }
+
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    var httpContent = new FormUrlEncodedContent(new[]
                     {
-                        new KeyValuePair<string, string>("projectName", opts.ProjectName), 
+                        new KeyValuePair<string, string>("projectName", opts.ProjectName),
+                        new KeyValuePair<string, string>("start", opts.StartFrame),
+                        new KeyValuePair<string, string>("end", opts.EndFrame),
                     });
-                    var uri = new UriBuilder(settings.ServerUrl) {Path = "api/project"};
+                    var uri = new UriBuilder(settings.ServerUrl) { Path = "api/project" };
                     await httpClient.PostAsync(uri.Uri, httpContent);
-                }                                               
+                }
                 catch (Exception e)
                 {
                     WriteLine($"Error: Unable to create project: {e}");
-                    throw;
+                    WriteLine("Did you run !start   ?");
+                    WriteLine("Can you access the swagger end point?");
+                    return;
                 }
             }
             Use(opts.ProjectName);
         }
-
+        
         [DllImport("shell32.dll", SetLastError = true)]
         static extern IntPtr CommandLineToArgvW(
             [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, out int pNumArgs);

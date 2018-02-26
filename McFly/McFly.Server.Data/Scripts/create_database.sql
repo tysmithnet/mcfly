@@ -4,10 +4,10 @@ threads running. This table captures the state of a particular thread at a parti
 Note that the values here are the values BEFORE the instruction is executed.  
  */
 CREATE TABLE frame (
- /* Major part of the frame id */
- key_major INTEGER NOT NULL,
- /* Minor part of the frame id */
- key_minor INTEGER NOT NULL,
+ /* High portion of the position, e.g. 1F0:2D => 1F0 */
+ pos_hi INTEGER NOT NULL,
+ /* Low portion of the position, e.g. 1F0:2D => 2D */
+ pos_lo INTEGER NOT NULL,
  /* Thread id */
  thread_id INTEGER NOT NULL,
  /* Optional trace thread index */
@@ -91,8 +91,8 @@ CREATE TABLE frame (
  /* Function offset for the current instruction */
  function_offset INTEGER,
  PRIMARY KEY (
-  key_major,
-  key_minor,
+  pos_hi,
+  pos_lo,
   thread_id
   )
  );
@@ -114,13 +114,13 @@ GO
 Linking table for frames and notes
 */
 CREATE TABLE frame_note (
- key_major INT,
- key_minor INT,
+ pos_hi INT,
+ pos_lo INT,
  thread_id INT,
  note_id INT,
  CONSTRAINT pk_frame_note PRIMARY KEY (
-  key_major,
-  key_minor,
+  pos_hi,
+  pos_lo,
   thread_id,
   note_id
   )
@@ -133,8 +133,8 @@ Upserts a frame
 If you pass null as any nullable value, the value already existing in the table will remain
 */
 CREATE PROCEDURE pr_upsert_frame (
- @key_major INTEGER,
- @key_minor INTEGER,
+ @pos_hi INTEGER,
+ @pos_lo INTEGER,
  @thread_id INTEGER,
  @thread_index INTEGER = NULL,
  @rax INTEGER = NULL,
@@ -181,8 +181,8 @@ AS
 BEGIN
  MERGE frame AS d
  USING (
-  SELECT @key_major AS key_major,
-   @key_minor AS key_minor,
+  SELECT @pos_hi AS pos_hi,
+   @pos_lo AS pos_lo,
    @thread_id AS thread_id,
    @thread_index AS thread_index,
    @rax AS rax,
@@ -225,12 +225,12 @@ BEGIN
    @function AS [function],
    @function_offset AS function_offset
   ) AS s
-  ON s.key_major = d.key_major AND s.key_minor = d.key_minor AND s.thread_id = d.thread_id
+  ON s.pos_hi = d.pos_hi AND s.pos_lo = d.pos_lo AND s.thread_id = d.thread_id
  WHEN NOT MATCHED BY TARGET
   THEN
    INSERT (
-    key_major,
-    key_minor,
+    pos_hi,
+    pos_lo,
     thread_id,
     thread_index,
     rax,
@@ -274,8 +274,8 @@ BEGIN
     function_offset
     )
    VALUES (
-    @key_major,
-    @key_minor,
+    @pos_hi,
+    @pos_lo,
     @thread_id,
     @thread_index,
     @rax,
@@ -321,8 +321,8 @@ BEGIN
  WHEN MATCHED
   THEN
    UPDATE
-   SET d.key_major = COALESCE(@key_major, s.key_major),
-    d.key_minor = COALESCE(@key_minor, s.key_minor),
+   SET d.pos_hi = COALESCE(@pos_hi, s.pos_hi),
+    d.pos_lo = COALESCE(@pos_lo, s.pos_lo),
     d.thread_id = COALESCE(@thread_id, s.thread_id),
     d.thread_index = COALESCE(@thread_index, s.thread_index),
     d.rax = COALESCE(@rax, s.rax),
@@ -373,8 +373,8 @@ Add a note, and optionally assign it to a frame
 */
 CREATE PROCEDURE pr_add_note (
  @content TEXT,
- @key_major INT = NULL,
- @key_minor INT = NULL,
+ @pos_hi INT = NULL,
+ @pos_lo INT = NULL,
  @thread_id INT = NULL
  )
 AS
@@ -382,12 +382,12 @@ BEGIN
  INSERT INTO note (content)
  VALUES (@content)
 
- IF @key_major IS NOT NULL AND @key_minor IS NOT NULL AND @thread_id IS NOT NULL
+ IF @pos_hi IS NOT NULL AND @pos_lo IS NOT NULL AND @thread_id IS NOT NULL
  BEGIN
   INSERT INTO frame_note
   VALUES (
-   @key_major,
-   @key_minor,
+   @pos_hi,
+   @pos_lo,
    @thread_id,
    @@IDENTITY
    )
