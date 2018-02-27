@@ -48,7 +48,7 @@ CREATE TABLE frame (
  /* Value of rip */
  rip BINARY(64),
  /* Value of efl */
- efl BINARY(64),
+ efl BINARY(32),
  /* Value of cs */
  cs BINARY(64),
  /* Value of ds */

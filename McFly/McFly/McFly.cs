@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CommandLine;
@@ -28,6 +29,7 @@ namespace McFly
      * todo: help
      * todo: add simd and floating point register tables 
      * todo: add the rest of the registers
+     * todo: add additional checks to sql
      */
     public class McFlyExtension
     {   
@@ -36,6 +38,7 @@ namespace McFly
 
         private static IDebugControl6 control;
         private static IDebugClient5 client;
+        private static IDebugRegisters2 registers;
         private static HRESULT LastHR;
         private static Settings settings;
         internal delegate uint Ioctl(IG IoctlType, ref WDBGEXTS_CLR_DATA_INTERFACE lpvData, int cbSizeOfContext);
@@ -102,6 +105,7 @@ namespace McFly
 
                     client = (IDebugClient5)CreateIDebugClient();
                     control = (IDebugControl6)client;
+                    registers = (IDebugRegisters2) client;
                 }
                 catch
                 {
@@ -316,6 +320,24 @@ namespace McFly
             if(options.End != null)
                 endingPosition = Position.Parse(options.End);
 
+            // how to get a registry value
+            
+            registers.GetNumberRegisters(out var unumReg);
+            for (uint i = 0; i < unumReg; i++)
+            {
+                DEBUG_VALUE value = new DEBUG_VALUE();
+                registers.GetValue(i, out value);
+                var sb = new StringBuilder(100);
+                uint size = 0;
+                DEBUG_REGISTER_DESCRIPTION registerDescription = new DEBUG_REGISTER_DESCRIPTION();
+                registers.GetDescriptionWide(i, sb, 100, out size,
+                    out registerDescription);
+                string name = sb.ToString();
+                ulong v = value.I64;
+                WriteLine($"[{name}]:{v}");
+                BitConverter.GetBytes(v);
+            }
+
             SetupIndexBreakpoints(options);
             using (var ew = new ExecuteWrapper(client))
             {
@@ -331,7 +353,8 @@ namespace McFly
                     
                     if (!positionMatch.Success)
                     {
-                        ; // todo: what to do here
+                        WriteLine("Error: Could not find time travel position");
+                        return;
                     }
                     var currentPosition = Position.Parse(positionMatch.Groups["pos"].Value); // todo: catch?
                     if (endingPosition.HasValue && currentPosition >= endingPosition.Value)
@@ -344,17 +367,30 @@ namespace McFly
                     var positionsRaw = ew.Execute("!positions");
                     var threadPositions = Regex.Matches(positionsRaw, "Thread ID=(?<tid>0x[a-fA-F0-9]+) - Position: (?<pos>[a-fA-F0-9]+:[a-fA-F0-9]+)")
                         .Cast<Match>().Select(x => (x.Groups["tid"].Value, x.Groups["pos"].Value));
-                    int idx = 0;
+                   
                     foreach (var threadPositionPair in threadPositions)
                     {
                         var threadPosition = Position.Parse(threadPositionPair.Item2);
                         if (threadPosition == currentPosition)
                         {
-                            // get the register values
-                            var registerText = ew.Execute($"~~[{threadPositionPair.Item1}] rMF");
-
-                        }
-                        idx++;
+                            // how to get a registry value
+                            uint numReg = 0;
+                            registers.GetNumberRegisters(out numReg);
+                            for (uint i = 0; i < numReg; i++)
+                            {
+                                DEBUG_VALUE value = new DEBUG_VALUE();
+                                registers.GetValue(i, out value);
+                                var sb = new StringBuilder(100);
+                                uint size = 0;
+                                DEBUG_REGISTER_DESCRIPTION registerDescription = new DEBUG_REGISTER_DESCRIPTION();
+                                registers.GetDescriptionWide(i, sb, 100, out size,
+                                    out registerDescription);
+                                string name = sb.ToString();
+                                ulong v = value.I64;
+                                BitConverter.GetBytes(v);
+                            }
+                            
+                        }      
                     }
 
                 } while (!endReached && !endOfTrace); 

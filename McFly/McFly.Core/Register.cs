@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace McFly
+﻿namespace McFly.Core
 {
     public abstract class Register
     {
@@ -21,8 +15,16 @@ namespace McFly
         public static Register Rbp { get; } = new RbpRegister();
         public static Register Rip { get; } = new RipRegister();
         public static Register Efl { get; } = new EflRegister();
+        public static Register R8 { get; } = new R8Register();
+        public static Register R9 { get; } = new R9Register();
+        public static Register R10 { get; } = new R10Register();
+        public static Register R11 { get; } = new R11Register();
+        public static Register R12 { get; } = new R12Register();
+        public static Register R13 { get; } = new R13Register();
+        public static Register R14 { get; } = new R14Register();
+        public static Register R15 { get; } = new R15Register();
 
-        public static Register[] UserRegisters64 = {Rax, Rbx, Rcx, Rdx, Rsi, Rdi, Rsp, Rbp, Rip, Efl};
+        public static Register[] CoreUserRegisters64 = {Rax, Rbx, Rcx, Rdx, Rsi, Rdi, Rsp, Rbp, Rip, Efl, R8, R9, R10, R11, R12, R13, R14, R15};
 
         protected class RaxRegister : Register
         {
@@ -82,6 +84,54 @@ namespace McFly
         {
             public override string Name { get; } = "efl";
             public override int NumBits { get; } = 32;
+        }
+
+        protected class R8Register : Register
+        {
+            public override string Name { get; } = "r8";
+            public override int NumBits { get; } = 64;
+        }
+
+        protected class R9Register : Register
+        {
+            public override string Name { get; } = "r9";
+            public override int NumBits { get; } = 64;
+        }
+
+        protected class R10Register : Register
+        {
+            public override string Name { get; } = "r10";
+            public override int NumBits { get; } = 64;
+        }
+
+        protected class R11Register : Register
+        {
+            public override string Name { get; } = "r11";
+            public override int NumBits { get; } = 64;
+        }
+
+        protected class R12Register : Register
+        {
+            public override string Name { get; } = "r12";
+            public override int NumBits { get; } = 64;
+        }
+
+        protected class R13Register : Register
+        {
+            public override string Name { get; } = "r13";
+            public override int NumBits { get; } = 64;
+        }
+
+        protected class R14Register : Register
+        {
+            public override string Name { get; } = "r14";
+            public override int NumBits { get; } = 64;
+        }
+
+        protected class R15Register : Register
+        {
+            public override string Name { get; } = "r15";
+            public override int NumBits { get; } = 64;
         }
     }
 }
