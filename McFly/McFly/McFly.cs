@@ -26,6 +26,7 @@ namespace McFly
      * todo: .NET support
      * todo: add dump information table (first frame, last frame, etc)
      * todo: help
+     * todo: add simd and floating point register tables 
      */
     public class McFlyExtension
     {

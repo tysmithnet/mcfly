@@ -30,73 +30,73 @@ CREATE TABLE frame (
  /* Thread id */
  thread_id INTEGER NOT NULL,  
  /* Value of rax */
- rax INTEGER,
+ rax BINARY(64),
  /* Value of rbx */
- rbx INTEGER,
+ rbx BINARY(64),
  /* Value of rcx */
- rcx INTEGER,
+ rcx BINARY(64),
  /* Value of rdx */
- rdx INTEGER,
+ rdx BINARY(64),
  /* Value of rsi */
- rsi INTEGER,
+ rsi BINARY(64),
  /* Value of rdi */
- rdi INTEGER,
+ rdi BINARY(64),
  /* Value of rsp */
- rsp INTEGER,
+ rsp BINARY(64),
  /* Value of rbp */
- rbp INTEGER,
+ rbp BINARY(64),
  /* Value of rip */
- rip INTEGER,
+ rip BINARY(64),
  /* Value of efl */
- efl INTEGER,
+ efl BINARY(64),
  /* Value of cs */
- cs INTEGER,
+ cs BINARY(64),
  /* Value of ds */
- ds INTEGER,
+ ds BINARY(64),
  /* Value of es */
- es INTEGER,
+ es BINARY(64),
  /* Value of fs */
- fs INTEGER,
+ fs BINARY(64),
  /* Value of gs */
- gs INTEGER,
+ gs BINARY(64),
  /* Value of ss */
- ss INTEGER,
+ ss BINARY(64),
  /* Value of r8 */
- r8 INTEGER,
+ r8 BINARY(64),
  /* Value of r9 */
- r9 INTEGER,
+ r9 BINARY(64),
  /* Value of r10 */
- r10 INTEGER,
+ r10 BINARY(64),
  /* Value of r11 */
- r11 INTEGER,
+ r11 BINARY(64),
  /* Value of r12 */
- r12 INTEGER,
+ r12 BINARY(64),
  /* Value of r13 */
- r13 INTEGER,
+ r13 BINARY(64),
  /* Value of r14 */
- r14 INTEGER,
+ r14 BINARY(64),
  /* Value of r15 */
- r15 INTEGER,
+ r15 BINARY(64),
  /* Value of dr0 */
- dr0 INTEGER,
+ dr0 BINARY(64),
  /* Value of dr1 */
- dr1 INTEGER,
+ dr1 BINARY(64),
  /* Value of dr2 */
- dr2 INTEGER,
+ dr2 BINARY(64),
  /* Value of dr3 */
- dr3 INTEGER,
+ dr3 BINARY(64),
  /* Value of dr6 */
- dr6 INTEGER,
+ dr6 BINARY(64),
  /* Value of dr7 */
- dr7 INTEGER,
+ dr7 BINARY(64),
  /* Value of exfrom */
- exfrom INTEGER,
+ exfrom BINARY(64),
  /* Value of exto */
- exto INTEGER,
+ exto BINARY(64),
  /* Value of brfrom */
- brfrom INTEGER,
+ brfrom BINARY(64),
  /* Value of brto */
- brto INTEGER,
+ brto BINARY(64),
  /* ret, call, mov, sub, etc */
  opcode_nmemonic TEXT,
  /* Address of the current instruction */
@@ -145,6 +145,22 @@ CREATE TABLE frame_note (
 
 GO
 
+CREATE TABLE frame_memory (
+    pos_hi INT NOT NULL,
+    pos_lo INT NOT NULL,
+    start_address INT NOT NULL,
+    end_address INT NOT NULL,
+    memory VARBINARY(max) NOT NULL,
+
+    CONSTRAINT fk_frame_memory_frame FOREIGN KEY (pos_hi, pos_lo) REFERENCES frame(pos_hi,pos_lo),
+    CONSTRAINT ck_frame_memory_address CHECK (
+		start_address <= end_address AND 
+		start_address >= 0 AND
+		LEN(memory) = end_address - start_address) 
+);
+
+GO
+
 /*
 Upserts a frame
 If you pass null as any nullable value, the value already existing in the table will remain
@@ -153,40 +169,40 @@ CREATE PROCEDURE pr_upsert_frame (
  @pos_hi INTEGER,
  @pos_lo INTEGER,
  @thread_id INTEGER,
- @rax INTEGER = NULL,
- @rbx INTEGER = NULL,
- @rcx INTEGER = NULL,
- @rdx INTEGER = NULL,
- @rsi INTEGER = NULL,
- @rdi INTEGER = NULL,
- @rsp INTEGER = NULL,
- @rbp INTEGER = NULL,
- @rip INTEGER = NULL,
- @efl INTEGER = NULL,
- @cs INTEGER = NULL,
- @ds INTEGER = NULL,
- @es INTEGER = NULL,
- @fs INTEGER = NULL,
- @gs INTEGER = NULL,
- @ss INTEGER = NULL,
- @r8 INTEGER = NULL,
- @r9 INTEGER = NULL,
- @r10 INTEGER = NULL,
- @r11 INTEGER = NULL,
- @r12 INTEGER = NULL,
- @r13 INTEGER = NULL,
- @r14 INTEGER = NULL,
- @r15 INTEGER = NULL,
- @dr0 INTEGER = NULL,
- @dr1 INTEGER = NULL,
- @dr2 INTEGER = NULL,
- @dr3 INTEGER = NULL,
- @dr6 INTEGER = NULL,
- @dr7 INTEGER = NULL,
- @exfrom INTEGER = NULL,
- @exto INTEGER = NULL,
- @brfrom INTEGER = NULL,
- @brto INTEGER = NULL,
+ @rax BINARY(64) = NULL,
+ @rbx BINARY(64) = NULL,
+ @rcx BINARY(64) = NULL,
+ @rdx BINARY(64) = NULL,
+ @rsi BINARY(64) = NULL,
+ @rdi BINARY(64) = NULL,
+ @rsp BINARY(64) = NULL,
+ @rbp BINARY(64) = NULL,
+ @rip BINARY(64) = NULL,
+ @efl BINARY(64) = NULL,
+ @cs BINARY(64) = NULL,
+ @ds BINARY(64) = NULL,
+ @es BINARY(64) = NULL,
+ @fs BINARY(64) = NULL,
+ @gs BINARY(64) = NULL,
+ @ss BINARY(64) = NULL,
+ @r8 BINARY(64) = NULL,
+ @r9 BINARY(64) = NULL,
+ @r10 BINARY(64) = NULL,
+ @r11 BINARY(64) = NULL,
+ @r12 BINARY(64) = NULL,
+ @r13 BINARY(64) = NULL,
+ @r14 BINARY(64) = NULL,
+ @r15 BINARY(64) = NULL,
+ @dr0 BINARY(64) = NULL,
+ @dr1 BINARY(64) = NULL,
+ @dr2 BINARY(64) = NULL,
+ @dr3 BINARY(64) = NULL,
+ @dr6 BINARY(64) = NULL,
+ @dr7 BINARY(64) = NULL,
+ @exfrom BINARY(64) = NULL,
+ @exto BINARY(64) = NULL,
+ @brfrom BINARY(64) = NULL,
+ @brto BINARY(64) = NULL,
  @opcode_nmemonic TEXT = NULL,
  @code_address INTEGER = NULL,
  @module VARCHAR(250) = NULL,
