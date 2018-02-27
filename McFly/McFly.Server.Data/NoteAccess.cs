@@ -26,14 +26,14 @@ namespace McFly.Server.Data
             }
         }
 
-        public void AddNote(string content, int keyMajor, int keyMinor, int threadIndex)
+        public void AddNote(string content, int keyMajor, int keyMinor, int threadId)
         {
             var parameters = new Dictionary<string, object>()
             {
                 ["@content"] = content,
                 ["@key_major"] = keyMajor,
                 ["@key_minor"] = keyMinor,
-                ["@thread_index"] = threadIndex,
+                ["@thread_id"] = threadId,
             };
             try
             {

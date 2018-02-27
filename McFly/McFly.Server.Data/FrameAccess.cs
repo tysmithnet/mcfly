@@ -12,7 +12,7 @@ namespace McFly.Server.Data
             {
                 ["@key_major"] = frame.Position.High,
                 ["@key_minor"] = frame.Position.Low,
-                ["@thread_index"] = frame.ThreadIndex,           
+                ["@thread_id"] = frame.ThreadId,           
                 ["@rax"] = frame.Rax,
                 ["@rbx"] = frame.Rbx,
                 ["@rcx"] = frame.Rcx,

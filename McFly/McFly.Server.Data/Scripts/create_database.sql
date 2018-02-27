@@ -28,7 +28,7 @@ CREATE TABLE frame (
  /* Low portion of the position, e.g. 1F0:2D => 2D */
  pos_lo INTEGER NOT NULL,
  /* Thread id */
- thread_index INTEGER NOT NULL,  
+ thread_id INTEGER NOT NULL,  
  /* Value of rax */
  rax INTEGER,
  /* Value of rbx */
@@ -110,7 +110,7 @@ CREATE TABLE frame (
  PRIMARY KEY (
   pos_hi,
   pos_lo,
-  thread_index
+  thread_id
   )
  );
 
@@ -133,12 +133,12 @@ Linking table for frames and notes
 CREATE TABLE frame_note (
  pos_hi INT,
  pos_lo INT,
- thread_index INT,
+ thread_id INT,
  note_id INT,
  CONSTRAINT pk_frame_note PRIMARY KEY (
   pos_hi,
   pos_lo,
-  thread_index,
+  thread_id,
   note_id
   )
  );
@@ -152,7 +152,7 @@ If you pass null as any nullable value, the value already existing in the table 
 CREATE PROCEDURE pr_upsert_frame (
  @pos_hi INTEGER,
  @pos_lo INTEGER,
- @thread_index INTEGER,
+ @thread_id INTEGER,
  @rax INTEGER = NULL,
  @rbx INTEGER = NULL,
  @rcx INTEGER = NULL,
@@ -199,7 +199,7 @@ BEGIN
  USING (
   SELECT @pos_hi AS pos_hi,
    @pos_lo AS pos_lo,
-   @thread_index AS thread_index,
+   @thread_id AS thread_id,
    @rax AS rax,
    @rbx AS rbx,
    @rcx AS rcx,
@@ -240,13 +240,13 @@ BEGIN
    @function AS [function],
    @function_offset AS function_offset
   ) AS s
-  ON s.pos_hi = d.pos_hi AND s.pos_lo = d.pos_lo AND s.thread_index = d.thread_index
+  ON s.pos_hi = d.pos_hi AND s.pos_lo = d.pos_lo AND s.thread_id = d.thread_id
  WHEN NOT MATCHED BY TARGET
   THEN
    INSERT (
     pos_hi,
     pos_lo,
-    thread_index,
+    thread_id,
     rax,
     rbx,
     rcx,
@@ -290,7 +290,7 @@ BEGIN
    VALUES (
     @pos_hi,
     @pos_lo,
-    @thread_index,
+    @thread_id,
     @rax,
     @rbx,
     @rcx,
@@ -336,7 +336,7 @@ BEGIN
    UPDATE
    SET d.pos_hi = COALESCE(@pos_hi, s.pos_hi),
     d.pos_lo = COALESCE(@pos_lo, s.pos_lo),
-    d.thread_index = COALESCE(@thread_index, s.thread_index),
+    d.thread_id = COALESCE(@thread_id, s.thread_id),
     d.rax = COALESCE(@rax, s.rax),
     d.rbx = COALESCE(@rbx, s.rbx),
     d.rcx = COALESCE(@rcx, s.rcx),
@@ -387,20 +387,20 @@ CREATE PROCEDURE pr_add_note (
  @content TEXT,
  @pos_hi INT = NULL,
  @pos_lo INT = NULL,
- @thread_index INT = NULL
+ @thread_id INT = NULL
  )
 AS
 BEGIN
  INSERT INTO note (content)
  VALUES (@content)
 
- IF @pos_hi IS NOT NULL AND @pos_lo IS NOT NULL AND @thread_index IS NOT NULL
+ IF @pos_hi IS NOT NULL AND @pos_lo IS NOT NULL AND @thread_id IS NOT NULL
  BEGIN
   INSERT INTO frame_note
   VALUES (
    @pos_hi,
    @pos_lo,
-   @thread_index,
+   @thread_id,
    @@IDENTITY
    )
  END

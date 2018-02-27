@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
@@ -329,14 +330,29 @@ namespace McFly
                     {
                         ; // todo: what to do here
                     }
-                    var pos = Position.Parse(positionMatch.Groups["pos"].Value); // todo: catch?
-                    if (endingPosition.HasValue && pos >= endingPosition.Value)
+                    var currentPosition = Position.Parse(positionMatch.Groups["pos"].Value); // todo: catch?
+                    if (endingPosition.HasValue && currentPosition >= endingPosition.Value)
                     {
                         endReached = true;
-                    }                     
+                    }
+
 
                     // figure out which threads need to be recorded
+                    var positionsRaw = ew.Execute("!positions");
+                    var threadPositions = Regex.Matches(positionsRaw, "Thread ID=(?<tid>0x[a-fA-F0-9]+) - Position: (?<pos>[a-fA-F0-9]+:[a-fA-F0-9]+)")
+                        .Cast<Match>().Select(x => (x.Groups["tid"].Value, x.Groups["pos"].Value));
+                    int idx = 0;
+                    foreach (var threadPositionPair in threadPositions)
+                    {
+                        var threadPosition = Position.Parse(threadPositionPair.Item2);
+                        if (threadPosition == currentPosition)
+                        {
+                            // get the register values
+                            var registerText = ew.Execute($"~~[{threadPositionPair.Item1}] rMF");
 
+                        }
+                        idx++;
+                    }
 
                 } while (!endReached && !endOfTrace); 
             }
