@@ -27,9 +27,10 @@ namespace McFly
      * todo: add dump information table (first frame, last frame, etc)
      * todo: help
      * todo: add simd and floating point register tables 
+     * todo: add the rest of the registers
      */
     public class McFlyExtension
-    {
+    {   
         [DllImport("dbgeng.dll")]
         internal static extern uint DebugCreate(ref Guid InterfaceId, [MarshalAs(UnmanagedType.IUnknown)] out object Interface);
 
@@ -320,6 +321,7 @@ namespace McFly
             {
                 bool endReached = false;
                 bool endOfTrace;
+                bool is32Bit = Regex.Match(ew.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length == 8;
                 // loop through all the set break points and record relevant values
                 do
                 {
