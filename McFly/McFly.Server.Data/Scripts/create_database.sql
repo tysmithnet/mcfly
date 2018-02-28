@@ -3,13 +3,9 @@ Meta data about the trace
 */
 CREATE TABLE trace_info (
     lock CHAR(1) NOT NULL DEFAULT 'X',
-    /* High portion of the position, e.g. 1F0:2D => 1F0 */
     start_pos_hi INTEGER NOT NULL,
-    /* Low portion of the position, e.g. 1F0:2D => 2D */
     start_pos_lo INTEGER NOT NULL,
-    /* High portion of the position, e.g. 1F0:2D => 1F0 */
     end_pos_hi INTEGER NOT NULL,
-    /* Low portion of the position, e.g. 1F0:2D => 2D */
     end_pos_lo INTEGER NOT NULL,
     constraint pk_trace_info PRIMARY KEY (Lock),
     constraint ck_trace_info_lock CHECK (Lock='X')
@@ -26,16 +22,16 @@ CREATE TABLE frame (
  pos_hi INTEGER NOT NULL,
  pos_lo INTEGER NOT NULL,
  thread_id INTEGER NOT NULL,  
- rax BINARY(64),
- rbx BINARY(64),
- rcx BINARY(64),
- rdx BINARY(64),
+ rax BIGINT,
+ rbx BIGINT,
+ rcx BIGINT,
+ rdx BIGINT,
  opcode_nmemonic TEXT,
  code_address INTEGER,
  module VARCHAR(250),
  [function] VARCHAR(250),
  function_offset INTEGER,
- PRIMARY KEY (
+ CONSTRAINT pk_frame PRIMARY KEY (
   pos_hi,
   pos_lo,
   thread_id
@@ -97,10 +93,10 @@ CREATE PROCEDURE pr_upsert_frame (
  @pos_hi INTEGER,
  @pos_lo INTEGER,
  @thread_id INTEGER,
- @rax BINARY(64) = NULL,
- @rbx BINARY(64) = NULL,
- @rcx BINARY(64) = NULL,
- @rdx BINARY(64) = NULL,
+ @rax BIGINT = NULL,
+ @rbx BIGINT = NULL,
+ @rcx BIGINT = NULL,
+ @rdx BIGINT = NULL,
  @opcode_nmemonic TEXT = NULL,
  @code_address INTEGER = NULL,
  @module VARCHAR(250) = NULL,
