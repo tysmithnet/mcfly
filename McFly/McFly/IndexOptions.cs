@@ -21,7 +21,7 @@ namespace McFly
         [Option("bm", HelpText = "Breakpoint masks", Required = false)]
         public IEnumerable<string> BreakpointMasks { get; set; }
 
-        [Option("br", HelpText = "Access breakpoints", Required = false)]
+        [Option("ba", HelpText = "Access breakpoints", Required = false)]
         public IEnumerable<string> AccessBreakpoints { get; set; }
 
         [Option("step", HelpText = "Number of instructions to record after a break", Required = false)]

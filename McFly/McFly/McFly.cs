@@ -313,78 +313,22 @@ namespace McFly
 
             return HRESULT.S_OK;
         }
-
+        
         private static void Index(IndexOptions options)
         {
-            Position? endingPosition = null;
-            if(options.End != null)
-                endingPosition = Position.Parse(options.End);
-
-            // how to get a registry value
             
-            registers.GetNumberRegisters(out var unumReg);
-            for (uint i = 0; i < unumReg; i++)
-            {
-                DEBUG_VALUE value = new DEBUG_VALUE();
-                registers.GetValue(i, out value);
-                var sb = new StringBuilder(100);
-                uint size = 0;
-                DEBUG_REGISTER_DESCRIPTION registerDescription = new DEBUG_REGISTER_DESCRIPTION();
-                registers.GetDescriptionWide(i, sb, 100, out size,
-                    out registerDescription);
-                string name = sb.ToString();
-                ulong v = value.I64;
-                WriteLine($"{i}:{name}");
-                BitConverter.GetBytes(v);
-            }
-
-            SetupIndexBreakpoints(options);
             using (var ew = new ExecuteWrapper(client))
             {
-                bool endReached = false;
-                bool endOfTrace;
-                bool is32Bit = Regex.Match(ew.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length == 8;
-                // loop through all the set break points and record relevant values
-                do
+                Position endingPosition;
+                if (options.End != null)
+                    endingPosition = Position.Parse(options.End);
+                else
                 {
-                    var stop = ew.Execute("g");
-                    var positionMatch = Regex.Match(stop, "Time Travel Position: (?<pos>[a-fA-F0-9]+:[a-fA-F0-9]+)");
-                    endOfTrace = Regex.IsMatch(stop, "TTD: End of trace reached");
-                    
-                    if (!positionMatch.Success)
-                    {
-                        WriteLine("Error: Could not find time travel position");
-                        return;
-                    }
-                    var currentPosition = Position.Parse(positionMatch.Groups["pos"].Value); // todo: catch?
-                    if (endingPosition.HasValue && currentPosition >= endingPosition.Value)
-                    {
-                        endReached = true;
-                    }
+                    string end = ew.Execute("!tt 100");
+                    var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
+                    endingPosition = Position.Parse(endMatch.Groups["pos"].Value);
+                }
 
-
-                    // figure out which threads need to be recorded
-                    var positionsRaw = ew.Execute("!positions");
-                    var threadPositions = Regex.Matches(positionsRaw, "Thread ID=(?<tid>0x[a-fA-F0-9]+) - Position: (?<pos>[a-fA-F0-9]+:[a-fA-F0-9]+)")
-                        .Cast<Match>().Select(x => (x.Groups["tid"].Value, x.Groups["pos"].Value));
-                   
-                    foreach (var threadPositionPair in threadPositions)
-                    {
-                        var threadPosition = Position.Parse(threadPositionPair.Item2);
-                        if (threadPosition == currentPosition)
-                        {
-                             
-                        }      
-                    }
-
-                } while (!endReached && !endOfTrace); 
-            }
-        }
-
-        private static void SetupIndexBreakpoints(IndexOptions options)
-        {
-            using (var ew = new ExecuteWrapper(client))
-            {
                 // clear breakpoints
                 ew.Execute("bc *"); // todo: save existing break points and restore
 
@@ -406,26 +350,62 @@ namespace McFly
                     {
                         // todo: move
                         var match = Regex.Match(accessBreakpoint,
-                            @"^\s*(?<access>[rw][a-fA-F0-9]+):(?<address>[a-fA-F0-9]+)\s*$");
+                            @"^\s*(?<access>[rw]{1,2})(?<length>[a-fA-F0-9]+):(?<address>[a-fA-F0-9]+)\s*$");
                         if (!match.Success)
                         {
                             WriteLine($"Error: invalid access breakpoint: {accessBreakpoint}");
                             continue;
                         }
 
-                        ew.Execute($"ba {match.Groups["access"].Value} {match.Groups["address"].Value}");
+                        foreach(var c in match.Groups["access"].Value)
+                            ew.Execute($"ba {c}{match.Groups["length"].Value} {match.Groups["address"].Value}");
                     }
-                }
+                }     
 
-                if (options.BreakpointMasks != null)
+                bool endReached = false;     
+                bool is64Bit = control.IsPointer64Bit() == 1;
+                // loop through all the set break points and record relevant values
+                do
                 {
-                    foreach (var optionsBreakpointMask in options.BreakpointMasks)
+                    ew.Execute("g");
+                    var records = GetPositions(ew).ToArray();
+                    var breakRecord = records.Single(x => x.IsThreadWithBreak);
+                    if (breakRecord.Position >= endingPosition)
                     {
-                        // todo: validate
-                        ew.Execute($"bm {optionsBreakpointMask}");
+                        endReached = true;
+                    }   
+                    
+                    // for all threads at the current position...
+                    foreach (var record in records)
+                    {                                                                   
+                        if (record.Position == breakRecord.Position)
+                        {
+                             WriteLine("breakpoint hit");
+                        }      
                     }
-                }
+
+                } while (!endReached); 
             }
+        }
+
+        private static IEnumerable<PositionsRecord> GetPositions(ExecuteWrapper ew)
+        {
+            var positionsText = ew.Execute("!positions");
+
+            var matches = Regex.Matches(positionsText,
+                "(?<cur>>)?Thread ID=0x(?<tid>[A-F0-9]+) - Position: (?<maj>[A-F0-9]+):(?<min>[A-F0-9]+)");
+
+            return matches.Cast<Match>().Select(x => new PositionsRecord
+            {
+                ThreadId = Convert.ToUInt32(x.Groups["tid"].Value, 16),
+                Position = new Position(Convert.ToUInt32(x.Groups["maj"].Value, 16), Convert.ToUInt32(x.Groups["min"].Value, 16)),
+                IsThreadWithBreak = x.Groups["cur"].Success
+            });
+        }
+
+        private static void SetupIndexBreakpoints(IndexOptions options)
+        {
+            
         }
 
         private static void Start()
@@ -630,6 +610,16 @@ namespace McFly
         {
             control.ControlledOutput(DEBUG_OUTCTL.ALL_CLIENTS | DEBUG_OUTCTL.DML, DEBUG_OUTPUT.NORMAL, Message);
         }
+    }
+
+    /// <summary>
+    /// One line of !positions
+    /// </summary>
+    public class PositionsRecord
+    {
+        public uint ThreadId { get; set; }
+        public Position Position { get; set; }
+        public bool IsThreadWithBreak { get; set; }
     }
 }
 

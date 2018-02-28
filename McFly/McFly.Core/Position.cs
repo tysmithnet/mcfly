@@ -1,40 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace McFly.Core
 {
+    [DebuggerDisplay("{_high}:{_low}")]
     public struct Position : IComparable<Position>, IEquatable<Position>
     {
-        private int _high;
-        private int _low;
+        private uint _high;
+        private uint _low;
 
-        public int High
+        public Position(uint high, uint low)
+        {
+            _high = high;
+            _low = low;
+        }
+
+        public uint High
         {
             get => _high;
             set
             {
-                if (value < 0)
+                if (value < _low)
                 {
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be positive");
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least Low");
                 }
                 _high = value;
             }
         }
 
-        public int Low
+        public uint Low
         {
             get => _low;
             set
             {
-                if (value < 0)
+                if (value > _high)
                 {
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be positive");
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least High");
                 }
                 _low = value;
             }
         }
-
+        
         public override string ToString()
         {
             return $"{High}:{Low}";
@@ -49,8 +57,8 @@ namespace McFly.Core
             }
             return new Position
             {
-                High = Convert.ToInt32(match.Groups["hi"]),
-                Low = Convert.ToInt32(match.Groups["lo"])
+                High = Convert.ToUInt32(match.Groups["hi"].Value, 16),
+                Low = Convert.ToUInt32(match.Groups["lo"].Value, 16)
             };
         }
 
