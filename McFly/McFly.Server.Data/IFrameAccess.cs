@@ -1,7 +1,9 @@
-﻿namespace McFly.Server.Data
+﻿using McFly.Core;
+
+namespace McFly.Server.Data
 {
     public interface IFrameAccess
     {
-        void UpsertFrame(FrameDto frame);
+        void UpsertFrame(Frame frame);
     }
 }

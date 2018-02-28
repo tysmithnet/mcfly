@@ -1,6 +1,6 @@
-﻿namespace McFly.Server.Data
+﻿namespace McFly.Core
 {
-    public class NoteDto
+    public class Note
     {
         public string Content { get; set; }
     }

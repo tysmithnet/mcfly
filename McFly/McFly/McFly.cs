@@ -366,19 +366,20 @@ namespace McFly
                 bool is64Bit = control.IsPointer64Bit() == 1;
                 // loop through all the set break points and record relevant values
                 DEBUG_STATUS status;
-                while(true)
+                var goStatuses = new[]
+                {
+                    DEBUG_STATUS.GO, DEBUG_STATUS.STEP_BRANCH, DEBUG_STATUS.STEP_INTO, DEBUG_STATUS.STEP_OVER,
+                    DEBUG_STATUS.REVERSE_STEP_BRANCH, DEBUG_STATUS.REVERSE_STEP_INTO, DEBUG_STATUS.REVERSE_GO,
+                    DEBUG_STATUS.REVERSE_STEP_OVER
+                };
+                while (true)
                 {
                     // equivalent of g
                     control.SetExecutionStatus(DEBUG_STATUS.GO);
                     while (true)
                     {
                         control.GetExecutionStatus(out status);
-                        if (new[]
-                        {
-                            DEBUG_STATUS.GO, DEBUG_STATUS.STEP_BRANCH, DEBUG_STATUS.STEP_INTO, DEBUG_STATUS.STEP_OVER,
-                            DEBUG_STATUS.REVERSE_STEP_BRANCH, DEBUG_STATUS.REVERSE_STEP_INTO, DEBUG_STATUS.REVERSE_GO,
-                            DEBUG_STATUS.REVERSE_STEP_OVER
-                        }.Contains(status))
+                        if (goStatuses.Contains(status))
                         {
                             control.WaitForEvent(DEBUG_WAIT.DEFAULT, uint.MaxValue);      // todo: make reasonable and add counter.. shouldn't wait more than 10s
                             continue;
@@ -403,6 +404,8 @@ namespace McFly
                         if (record.Position == breakRecord.Position)
                         {
                             // here we collect the data
+                            // get the register values
+
                         }      
                     }
 
