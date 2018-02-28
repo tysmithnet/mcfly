@@ -42,6 +42,27 @@ namespace McFly
         {
             // TODO: Check mask and write to appropriate location.
 
+            //switch (mask) {
+            //    case DEBUG_OUTPUT.DEBUGGEE:
+            //        Console.ForegroundColor = ConsoleColor.Gray;
+            //        break;
+            //    case DEBUG_OUTPUT.PROMPT:
+            //        Console.ForegroundColor = ConsoleColor.Magenta;
+            //        break;
+            //    case DEBUG_OUTPUT.ERROR:
+            //        Console.ForegroundColor = ConsoleColor.Red;
+            //        break;
+            //    case DEBUG_OUTPUT.EXTENSION_WARNING:
+            //    case DEBUG_OUTPUT.WARNING:
+            //        Console.ForegroundColor = ConsoleColor.Yellow;
+            //        break;
+            //    case DEBUG_OUTPUT.SYMBOLS:
+            //        Console.ForegroundColor = ConsoleColor.Cyan;
+            //        break;
+            //    default:
+            //        Console.ForegroundColor = ConsoleColor.White;
+            //        break;
+            //}        
             lock (_builder)
                 _builder.Append(text);
 

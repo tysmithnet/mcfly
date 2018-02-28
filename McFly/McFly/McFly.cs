@@ -365,26 +365,48 @@ namespace McFly
                 bool endReached = false;     
                 bool is64Bit = control.IsPointer64Bit() == 1;
                 // loop through all the set break points and record relevant values
-                do
+                DEBUG_STATUS status;
+                while(true)
                 {
-                    ew.Execute("g");
+                    // equivalent of g
+                    control.SetExecutionStatus(DEBUG_STATUS.GO);
+                    while (true)
+                    {
+                        control.GetExecutionStatus(out status);
+                        if (new[]
+                        {
+                            DEBUG_STATUS.GO, DEBUG_STATUS.STEP_BRANCH, DEBUG_STATUS.STEP_INTO, DEBUG_STATUS.STEP_OVER,
+                            DEBUG_STATUS.REVERSE_STEP_BRANCH, DEBUG_STATUS.REVERSE_STEP_INTO, DEBUG_STATUS.REVERSE_GO,
+                            DEBUG_STATUS.REVERSE_STEP_OVER
+                        }.Contains(status))
+                        {
+                            control.WaitForEvent(DEBUG_WAIT.DEFAULT, uint.MaxValue);      // todo: make reasonable and add counter.. shouldn't wait more than 10s
+                            continue;
+                        }
+                        
+                        if (status == DEBUG_STATUS.BREAK)
+                        {
+                            break;
+                        }
+                    }
+
                     var records = GetPositions(ew).ToArray();
                     var breakRecord = records.Single(x => x.IsThreadWithBreak);
                     if (breakRecord.Position >= endingPosition)
                     {
-                        endReached = true;
+                        break;
                     }   
                     
-                    // for all threads at the current position...
                     foreach (var record in records)
                     {                                                                   
+                        // all threads currently at the same breakpoint position
                         if (record.Position == breakRecord.Position)
                         {
-                             WriteLine("breakpoint hit");
+                            // here we collect the data
                         }      
                     }
 
-                } while (!endReached); 
+                } 
             }
         }
 
@@ -402,12 +424,7 @@ namespace McFly
                 IsThreadWithBreak = x.Groups["cur"].Success
             });
         }
-
-        private static void SetupIndexBreakpoints(IndexOptions options)
-        {
-            
-        }
-
+             
         private static void Start()
         {
             try
