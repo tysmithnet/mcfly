@@ -362,8 +362,8 @@ namespace McFly
                     }
                 }     
 
-                bool endReached = false;     
-                bool is64Bit = control.IsPointer64Bit() == 1;
+                bool endReached = false;
+                bool is32Bit = Regex.Match(ew.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length == 8;
                 // loop through all the set break points and record relevant values
                 DEBUG_STATUS status;
                 var goStatuses = new[]
@@ -405,7 +405,42 @@ namespace McFly
                         {
                             // here we collect the data
                             // get the register values
+                            if (is32Bit)
+                            {
+                                uint eax;
+                                registers.GetValue(9, out var debugValue);
+                                eax = debugValue.I32;
 
+                                uint ebx;
+                                registers.GetValue(6, out debugValue);
+                                ebx = debugValue.I32;
+
+                                uint ecx;
+                                registers.GetValue(8, out debugValue);
+                                ecx = debugValue.I32;
+
+                                uint edx;
+                                registers.GetValue(7, out debugValue);
+                                edx = debugValue.I32;
+                            }
+                            else
+                            {
+                                uint rax;
+                                registers.GetValue(0, out var debugValue);
+                                rax = debugValue.I32;
+
+                                uint rbx;
+                                registers.GetValue(3, out debugValue);
+                                rbx = debugValue.I32;
+
+                                uint rcx;
+                                registers.GetValue(1, out debugValue);
+                                rcx = debugValue.I32;
+
+                                uint rdx;
+                                registers.GetValue(2, out debugValue);
+                                rdx = debugValue.I32;
+                            }
                         }      
                     }
 
