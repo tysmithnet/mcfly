@@ -4,7 +4,7 @@ using System.Text;
 
 namespace McFly.Core
 {
-    public class RegisterSet
+    public class RegisterSet   
     {
         public ulong Rax { get; set; }
         public ulong Rbx { get; set; }

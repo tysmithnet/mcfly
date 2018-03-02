@@ -15,12 +15,8 @@ namespace McFly.Server
     public class Program
     {
         public static void Main(string[] args)
-        {                                   
-            Parser.Default.ParseArguments<Options>(args)
-                .WithParsed(opts =>
-                {
-                    DataAccess.ConnectionString = opts.ConnectionString;
-                });
+        {
+            DataAccess.ConnectionString = Environment.GetEnvironmentVariable("ConnectionString");
             BuildWebHost(args).Run();
         }
 

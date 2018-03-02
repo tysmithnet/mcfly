@@ -11,15 +11,12 @@ namespace McFly.Core
         private uint _high;
         private uint _low;
 
-        public Position(uint high, uint low, uint? threadId = null)
+        public Position(uint high, uint low)
         {
             _high = high;
             _low = low;
-            ThreadId = threadId;
         }
-
-        public uint? ThreadId { get; } // todo: make set?
-
+                
         public uint High
         {
             get => _high;
@@ -51,21 +48,19 @@ namespace McFly.Core
             if (ReferenceEquals(null, other)) return 1;
             var highComparison = _high.CompareTo(other._high);
             if (highComparison != 0) return highComparison;
-            var lowComparison = _low.CompareTo(other._low);
-            if (lowComparison != 0) return lowComparison;
-            return Nullable.Compare(ThreadId, other.ThreadId);
+            return _low.CompareTo(other._low);
         }
 
         public bool Equals(Position other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return _high == other._high && _low == other._low && ThreadId == other.ThreadId;
+            return _high == other._high && _low == other._low;
         }
 
         public override string ToString()
         {
-            return $"{High}:{Low}";
+            return $"{High:X}:{Low:X}";
         }
 
         public static Position Parse(string text)
@@ -74,7 +69,7 @@ namespace McFly.Core
             if (!match.Success)
                 throw new FormatException($"{nameof(text)} is not a valid format for Position.. must be like 1f0:df");
             return new Position(Convert.ToUInt32(match.Groups["hi"].Value, 16),
-                Convert.ToUInt32(match.Groups["lo"].Value, 16), null);
+                Convert.ToUInt32(match.Groups["lo"].Value, 16));
         }
 
         public override bool Equals(object obj)
@@ -90,8 +85,7 @@ namespace McFly.Core
             unchecked
             {
                 var hashCode = (int) _high;
-                hashCode = (hashCode * 397) ^ (int) _low;
-                hashCode = (hashCode * 397) ^ ThreadId.GetHashCode();
+                hashCode = (hashCode * 397) ^ (int) _low;            
                 return hashCode;
             }
         }
@@ -134,7 +128,7 @@ namespace McFly.Core
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x._high == y._high && x._low == y._low && x.ThreadId == y.ThreadId;
+                return x._high == y._high && x._low == y._low;
             }
 
             public int GetHashCode(Position obj)
@@ -143,7 +137,6 @@ namespace McFly.Core
                 {
                     var hashCode = (int) obj._high;
                     hashCode = (hashCode * 397) ^ (int) obj._low;
-                    hashCode = (hashCode * 397) ^ obj.ThreadId.GetHashCode();
                     return hashCode;
                 }
             }

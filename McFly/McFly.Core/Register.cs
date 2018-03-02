@@ -9,7 +9,6 @@
         public static Register Rbx { get; } = new RbxRegister();
         public static Register Rcx { get; } = new RcxRegister();
         public static Register Rdx { get; } = new RdxRegister();
-
         public static Register[] CoreUserRegisters64 = {Rax, Rbx, Rcx, Rdx};
 
         protected class RaxRegister : Register

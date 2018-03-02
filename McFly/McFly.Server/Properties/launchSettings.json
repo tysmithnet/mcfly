@@ -19,11 +19,12 @@
     "McFly.Server": {
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
-      "commandLineArgs": "McFly.Server.dll --connectionstring \"Data Source=localhost;Integrated Security=true\"",
-      "workingDirectory": "C:\\projects\\mcfly\\McFly\\McFly\\bin\\x64\\Debug\\Server",
+      "commandLineArgs": "McFly.Server.dll",
+      "workingDirectory": "C:\\projects\\mcfly\\McFly\\McFly.Server\\bin\\Debug\\netcoreapp2.0",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
+        "ConnectionString": "Data Source=localhost;Integrated Security=true",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:54524/"

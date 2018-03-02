@@ -39,6 +39,7 @@ namespace McFly
         private static IDebugControl6 control;
         private static IDebugClient5 client;
         private static IDebugRegisters2 registers;
+        private static IDebugSymbols5 symbols;          
         private static HRESULT LastHR;
         private static Settings settings;
         internal delegate uint Ioctl(IG IoctlType, ref WDBGEXTS_CLR_DATA_INTERFACE lpvData, int cbSizeOfContext);
@@ -106,6 +107,7 @@ namespace McFly
                     client = (IDebugClient5)CreateIDebugClient();
                     control = (IDebugControl6)client;
                     registers = (IDebugRegisters2) client;
+                    symbols = (IDebugSymbols5) client;        
                 }
                 catch
                 {
@@ -389,15 +391,15 @@ namespace McFly
                         {
                             break;
                         }
-                    }
-
+                    }      
                     var records = GetPositions(ew).ToArray();
                     var breakRecord = records.Single(x => x.IsThreadWithBreak);
                     if (breakRecord.Position >= endingPosition)
                     {
                         break;
-                    }   
-                    
+                    }
+
+                    var frames = new List<Frame>();
                     foreach (var record in records)
                     {                                                                   
                         // all threads currently at the same breakpoint position
@@ -422,28 +424,75 @@ namespace McFly
                                 uint edx;
                                 registers.GetValue(7, out debugValue);
                                 edx = debugValue.I32;
+
+                                var registerSet = new RegisterSet
+                                {
+                                    Rax = eax,
+                                    Rbx = ebx,
+                                    Rcx = ecx,
+                                    Rdx = edx
+                                };
                             }
                             else
                             {
-                                uint rax;
+                                ulong rax;
                                 registers.GetValue(0, out var debugValue);
-                                rax = debugValue.I32;
+                                rax = debugValue.I64;
 
-                                uint rbx;
+                                ulong rbx;
                                 registers.GetValue(3, out debugValue);
-                                rbx = debugValue.I32;
+                                rbx = debugValue.I64;
 
-                                uint rcx;
+                                ulong rcx;
                                 registers.GetValue(1, out debugValue);
-                                rcx = debugValue.I32;
+                                rcx = debugValue.I64;
 
-                                uint rdx;
+                                ulong rdx;
                                 registers.GetValue(2, out debugValue);
-                                rdx = debugValue.I32;
-                            }
+                                rdx = debugValue.I64;
+
+                                registers.GetValue(16, out debugValue);
+                                ulong rip = debugValue.I64;
+                                var registerSet = new RegisterSet
+                                {
+                                    Rax = rax,
+                                    Rbx = rbx,
+                                    Rcx = rcx,
+                                    Rdx = rdx
+                                };
+
+                                var stackTrace = ew.Execute("k");
+                                var stackFrames = Regex.Matches(stackTrace,
+                                        @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
+                                    .Cast<Match>().Select(m => new
+                                    {
+                                        StackPointer = Convert.ToUInt64(m.Groups["sp"].Value),
+                                        ReturnAddress = Convert.ToUInt64(m.Groups["ret"].Value),
+                                        Module = m.Groups["mod"].Value,
+                                        FunctionName = m.Groups["fun"].Value,
+                                        Offset = Convert.ToUInt32(m.Groups["off"].Value)
+                                    }).Select(x => new McFly.Core.StackFrame(x.StackPointer, x.ReturnAddress, x.Module,
+                                        x.FunctionName, x.Offset)).ToList();
+
+                                var eipRegister = is32Bit ? "eip" : "rip";
+                                var instructionText = ew.Execute($"u {eipRegister} L1");
+                                var match = Regex.Match(instructionText,
+                                    @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.*)?");
+
+                                var frame = new Frame
+                                {
+                                    Position = record.Position,
+                                    RegisterSet = registerSet,
+                                    ThreadId = record.ThreadId,
+                                    StackFrames = stackFrames,
+                                    OpcodeNmemonic = match.Groups["ins"].Value,
+                                    DisassemblyNote = match.Groups["extra"].Value
+                                };
+                                frames.Add(frame);
+                            }                                       
                         }      
                     }
-
+                    
                 } 
             }
         }
@@ -479,7 +528,15 @@ namespace McFly
                         "You must set the connection string in settings: !config -k connection_string -v \"Data Source=Whatever;Integrated Security=true\"");
                     return;
                 }
-                Process.Start($"{settings.LauncherPath}", $"--connectionstring \"{settings.ConnectionString}\"");
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = settings.LauncherPath,                                   
+                    CreateNoWindow = false,
+                    Environment = { {"ConnectionString", settings.ConnectionString}},
+                    UseShellExecute = false,     
+                };
+                var p = Process.Start(startInfo);
+
             }
             catch (Exception e)
             {
@@ -517,64 +574,41 @@ namespace McFly
                 return;
             }
 
-            int startHi = 0;
-            int startLo = 0;
-            int endHi = 0;
-            int endLo = 0;
 
+            string starting = null;
+            string ending = null;
             using (var ew = new ExecuteWrapper(client))
             {
                 string start = ew.Execute("!tt 0");
-                var startMatch = Regex.Match(start, "Setting position: (?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+)");
+                var startMatch = Regex.Match(start, "Setting position: (?<loc>[a-fA-F0-9]+:[a-fA-F0-9]+)");
                 if (!startMatch.Success)
                 {
                     WriteLine($"Error: Could not find the starting position");
                     return;
                 }
-
-                try
-                {
-                    startHi = Convert.ToInt32(startMatch.Groups["hi"].Value);
-                    startLo = Convert.ToInt32(startMatch.Groups["lo"].Value);
-                }
-                catch (FormatException e)
-                {
-                    WriteLine($"Error: Could not convert found starting position values: {e.Message}");
-                    WriteLine($"What is the value of !tt 0   ?");
-                    return;
-                }
+                starting = startMatch.Groups["loc"].Value;
 
 
                 string end = ew.Execute("!tt 100");
-                var endMatch = Regex.Match(start, "Setting position: (?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+)");
+                var endMatch = Regex.Match(end, "Setting position: (?<loc>[a-fA-F0-9]+:[a-fA-F0-9]+)");
 
                 if (!endMatch.Success)
                 {
                     WriteLine($"Error: could not find the ending position");
                     return;
                 }
-                try
-                {
-                    endHi = Convert.ToInt32(endMatch.Groups["hi"]);
-                    endLo = Convert.ToInt32(endMatch.Groups["lo"]);
-                }
-                catch (FormatException e)
-                {
-                    WriteLine($"Error: Could not convert found ending position values: {e.Message}");
-                    WriteLine($"What is the value of !tt 100   ?");
-                    return;
-                }   
+                ending = endMatch.Groups["loc"].Value;
             }
 
-            using (var httpClient = new HttpClient())
+            using (var httpClient = new HttpClient())         // todo: move to client
             {
                 try
-                {
+                {                           
                     var httpContent = new FormUrlEncodedContent(new[]
                     {
                         new KeyValuePair<string, string>("projectName", opts.ProjectName),
-                        new KeyValuePair<string, string>("start", opts.StartFrame),
-                        new KeyValuePair<string, string>("end", opts.EndFrame),
+                        new KeyValuePair<string, string>("startFrame", starting),
+                        new KeyValuePair<string, string>("endFrame", ending),     
                     });
                     var uri = new UriBuilder(settings.ServerUrl) { Path = "api/project" };
                     await httpClient.PostAsync(uri.Uri, httpContent);

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using McFly.Core;
 using Microsoft.Extensions.Logging;
@@ -59,8 +60,15 @@ namespace McFly.Server.Data
                 try
                 { 
                     conn.Open();
-                    var initScript = File.ReadAllText("Scripts/create_database.sql");
-                    IEnumerable<string> commandStrings = Regex.Split(initScript, @"^\s*GO\s*$",
+                    string initScript = null;
+                    using (var stream = Assembly.GetAssembly(typeof(ProjectsAccess))
+                        .GetManifestResourceStream("McFly.Server.Data.Scripts.create_database.sql"))
+                    using(var reader = new StreamReader(stream))
+                    {
+                        initScript = reader.ReadToEnd();
+                    }
+                                                                                     
+                    var commandStrings = Regex.Split(initScript, @"^\s*GO\s*$",
                         RegexOptions.Multiline | RegexOptions.IgnoreCase);
                     foreach (var commandString in commandStrings)
                     {
@@ -76,15 +84,19 @@ namespace McFly.Server.Data
                     using (var infoCommand = conn.CreateCommand())
                     {
                         infoCommand.CommandText =
-                            $"INSERT INTO trace_info (start_pos_hi, start_pos_lo, end_pos_hi, end_pos_lo) VALUES ({start.High}, {start.Low}, {start.High}, {start.Low})";
+                            $"INSERT INTO trace_info (start_pos_hi, start_pos_lo, end_pos_hi, end_pos_lo) VALUES ({start.High}, {start.Low}, {end.High}, {end.Low})";
                         infoCommand.ExecuteNonQuery();
                     }
                 }
                 catch (SqlException e)
                 {
+                    using(var singleUser = conn.CreateCommand())
                     using (var deleteCommand = conn.CreateCommand())
                     {
-                        deleteCommand.CommandText = $"DROP DATABASE {projectName}";
+                        singleUser.CommandText = $"ALTER DATABASE [{projectName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
+                        singleUser.ExecuteNonQuery();
+
+                        deleteCommand.CommandText = $"DROP DATABASE {projectName}"; // todo: close connections
                         deleteCommand.ExecuteNonQuery();
                         throw;
                     }

@@ -21,9 +21,12 @@ namespace McFly.Server.Controllers
         }
                                                
         [HttpPost]
-        public ActionResult Post(Frame frame)
+        public ActionResult Post(IEnumerable<Frame> frames)
         {
-            FrameAccess.UpsertFrame(frame);
+            foreach (var frame in frames)
+            {
+                FrameAccess.UpsertFrame(frame); // todo: make bulk upsert
+            }
             return Ok();
         }
     }

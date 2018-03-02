@@ -10,9 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Scripts\create_database.sql">
+    <EmbeddedResource Include="Scripts\create_database.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

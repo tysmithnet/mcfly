@@ -14,15 +14,12 @@ namespace McFly.Server.Data
                 ["@key_major"] = frame.Position.High,
                 ["@key_minor"] = frame.Position.Low,
                 ["@thread_id"] = frame.ThreadId,           
-                ["@rax"] = frame.Rax,
-                ["@rbx"] = frame.Rbx,
-                ["@rcx"] = frame.Rcx,
-                ["@rdx"] = frame.Rdx,
-                ["@opcode_nmemonic"] = frame.OpcodeNmemonic,
-                ["@code_address"] = frame.CodeAddress,
-                ["@module"] = frame.Module,
-                ["@function"] = frame.Function,
-                ["@function_offset"] = frame.FunctionOffset
+                ["@rax"] = frame.RegisterSet.Rax,
+                ["@rbx"] = frame.RegisterSet.Rbx,
+                ["@rcx"] = frame.RegisterSet.Rcx,
+                ["@rdx"] = frame.RegisterSet.Rdx,
+                ["@opcode_nmemonic"] = frame.OpcodeNmemonic
+                // todo: stack frames
             };
 
             try
