@@ -6,9 +6,9 @@ namespace McFly.Core
 {
     public class RegisterSet   
     {
-        public ulong Rax { get; set; }
-        public ulong Rbx { get; set; }
-        public ulong Rcx { get; set; }
-        public ulong Rdx { get; set; }
+        public long Rax { get; set; }
+        public long Rbx { get; set; }
+        public long Rcx { get; set; }
+        public long Rdx { get; set; }
     }
 }

@@ -234,6 +234,7 @@ namespace McFly
                 WriteLine($"connection_string => {settings.ConnectionString}");
                 WriteLine($"server_url => {settings.ServerUrl}");
                 WriteLine($"launcher_path => {settings.LauncherPath}");
+                WriteLine($"project => {settings.ProjectName}");
                 return;
             }
             if (opts.Key != null)
@@ -248,6 +249,9 @@ namespace McFly
                         break;
                     case "launcher_path":
                         settings.LauncherPath = opts.Value;
+                        break;
+                    case "project":
+                        settings.ProjectName = opts.Value;
                         break;
                 }
                 File.WriteAllText(settingsFile, JsonConvert.SerializeObject(settings, Formatting.Indented));
@@ -277,9 +281,7 @@ namespace McFly
                 WriteLine("Error: Connection string is not configured yet");
                 return;
             }
-            var sb = new SqlConnectionStringBuilder(settings.ConnectionString);
-            sb.InitialCatalog = projectName;
-            settings.ConnectionString = sb.ToString();
+            settings.ProjectName = projectName;
         }
 
         [DllExport]
@@ -301,9 +303,9 @@ namespace McFly
             var argv = CommandLineToArgs(args);
 
             Parser.Default.ParseArguments<IndexOptions>(argv)
-                .WithParsed(options =>
+                .WithParsed(async options =>
                 {
-                    Index(options);
+                    await Index(options);
                 }).WithNotParsed(errors =>
                 {
                     WriteLine($"Error: Cannot parse index options:");
@@ -316,9 +318,8 @@ namespace McFly
             return HRESULT.S_OK;
         }
         
-        private static void Index(IndexOptions options)
-        {
-            
+        private static async Task Index(IndexOptions options)
+        {              
             using (var ew = new ExecuteWrapper(client))
             {
                 Position endingPosition;
@@ -455,29 +456,31 @@ namespace McFly
                                 ulong rip = debugValue.I64;
                                 var registerSet = new RegisterSet
                                 {
-                                    Rax = rax,
-                                    Rbx = rbx,
-                                    Rcx = rcx,
-                                    Rdx = rdx
+                                    Rax = Convert.ToInt64(rax),
+                                    Rbx = Convert.ToInt64(rbx),
+                                    Rcx = Convert.ToInt64(rcx),
+                                    Rdx = Convert.ToInt64(rdx)
                                 };
 
                                 var stackTrace = ew.Execute("k");
-                                var stackFrames = Regex.Matches(stackTrace,
+
+                                var stackFrames = new List<McFly.Core.StackFrame>();
+                                foreach (var m in Regex.Matches(stackTrace,
                                         @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
-                                    .Cast<Match>().Select(m => new
-                                    {
-                                        StackPointer = Convert.ToUInt64(m.Groups["sp"].Value),
-                                        ReturnAddress = Convert.ToUInt64(m.Groups["ret"].Value),
-                                        Module = m.Groups["mod"].Value,
-                                        FunctionName = m.Groups["fun"].Value,
-                                        Offset = Convert.ToUInt32(m.Groups["off"].Value)
-                                    }).Select(x => new McFly.Core.StackFrame(x.StackPointer, x.ReturnAddress, x.Module,
-                                        x.FunctionName, x.Offset)).ToList();
+                                    .Cast<Match>())
+                                {
+                                    var stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16);
+                                    var returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16);      
+                                    var module = m.Groups["mod"].Value;
+                                    var functionName = m.Groups["fun"].Value;
+                                    var offset = Convert.ToUInt32(m.Groups["off"].Value, 16);
+                                    var stackFrame = new McFly.Core.StackFrame(stackPointer, returnAddress, module, functionName, offset);
+                                    stackFrames.Add(stackFrame);
+                                }
 
                                 var eipRegister = is32Bit ? "eip" : "rip";
                                 var instructionText = ew.Execute($"u {eipRegister} L1");
-                                var match = Regex.Match(instructionText,
-                                    @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.*)?");
+                                var match = Regex.Match(instructionText, @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.+)?");
 
                                 var frame = new Frame
                                 {
@@ -492,7 +495,10 @@ namespace McFly
                             }                                       
                         }      
                     }
-                    
+                    using (var serverClient = new ServerClient(new Uri(settings.ServerUrl)))
+                    {
+                        await serverClient.UpsertFrames(settings.ProjectName, frames);
+                    }
                 } 
             }
         }
@@ -506,8 +512,8 @@ namespace McFly
 
             return matches.Cast<Match>().Select(x => new PositionsRecord
             {
-                ThreadId = Convert.ToUInt32(x.Groups["tid"].Value, 16),
-                Position = new Position(Convert.ToUInt32(x.Groups["maj"].Value, 16), Convert.ToUInt32(x.Groups["min"].Value, 16)),
+                ThreadId = Convert.ToInt32(x.Groups["tid"].Value, 16),
+                Position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16), Convert.ToInt32(x.Groups["min"].Value, 16)),
                 IsThreadWithBreak = x.Groups["cur"].Success
             });
         }
@@ -706,7 +712,7 @@ namespace McFly
     /// </summary>
     public class PositionsRecord
     {
-        public uint ThreadId { get; set; }
+        public int ThreadId { get; set; }
         public Position Position { get; set; }
         public bool IsThreadWithBreak { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using McFly.Core;
 
@@ -7,24 +8,24 @@ namespace McFly.Server.Data
 {
     public class FrameAccess : DataAccess, IFrameAccess
     {
-        public void UpsertFrame(Frame frame)
+        public void UpsertFrame(string projectName, Frame frame)
         {
-            var parameters = new Dictionary<string, object>()
+            var parameters = new List<SqlParameter>
             {
-                ["@key_major"] = frame.Position.High,
-                ["@key_minor"] = frame.Position.Low,
-                ["@thread_id"] = frame.ThreadId,           
-                ["@rax"] = frame.RegisterSet.Rax,
-                ["@rbx"] = frame.RegisterSet.Rbx,
-                ["@rcx"] = frame.RegisterSet.Rcx,
-                ["@rdx"] = frame.RegisterSet.Rdx,
-                ["@opcode_nmemonic"] = frame.OpcodeNmemonic
-                // todo: stack frames
+                new SqlParameter("@pos_hi", SqlDbType.Int) {Value = frame.Position.High},
+                new SqlParameter("@pos_lo", SqlDbType.Int) {Value = frame.Position.Low},
+                new SqlParameter("@thread_id", SqlDbType.Int) {Value = frame.ThreadId},
+                new SqlParameter("@rax", SqlDbType.BigInt) {Value = frame.RegisterSet.Rax},
+                new SqlParameter("@rbx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rbx},
+                new SqlParameter("@rcx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rcx},
+                new SqlParameter("@rdx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rdx},
+                new SqlParameter("@opcode_nmemonic", SqlDbType.VarChar) {Value = frame.OpcodeNmemonic},
+                new SqlParameter("@disassembly_note", SqlDbType.VarChar) {Value = frame.DisassemblyNote}
             };
 
             try
             {
-                using (var reader = ExecuteStoredProcedureReader("pr_upsert_frame", parameters))
+                using (var reader = ExecuteStoredProcedureReader(projectName, "pr_upsert_frame", parameters))
                 {
                     ;
                 }

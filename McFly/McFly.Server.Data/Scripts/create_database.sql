@@ -36,7 +36,7 @@ CREATE TABLE frame_thread (
  rbx BIGINT,
  rcx BIGINT,
  rdx BIGINT,
- opcode_nmemonic TEXT,
+ opcode_nmemonic VARCHAR(20),
  CONSTRAINT pk_frame_thread PRIMARY KEY (
   pos_hi,
   pos_lo,
@@ -102,7 +102,8 @@ CREATE PROCEDURE pr_upsert_frame (
  @rbx BIGINT = NULL,
  @rcx BIGINT = NULL,
  @rdx BIGINT = NULL,
- @opcode_nmemonic TEXT = NULL
+ @opcode_nmemonic VARCHAR(20) = NULL,
+ @disassembly_note VARCHAR(250) = NULL
  )
 AS
 BEGIN

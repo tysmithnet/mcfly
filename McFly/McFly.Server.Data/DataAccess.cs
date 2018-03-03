@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -9,18 +10,27 @@ namespace McFly.Server.Data
     {
         public static string ConnectionString { get; set; }
 
-        protected virtual SqlDataReader ExecuteStoredProcedureReader(string name, Dictionary<string, object> parameters)
+        protected virtual SqlDataReader ExecuteStoredProcedureReader(string projectName, string procName, IEnumerable<SqlParameter> parameters)
         {
-            using (var conn = new SqlConnection(ConnectionString))
+            using (var conn = new SqlConnection(GetProjectConnectionString(projectName)))
             using (var command = conn.CreateCommand())
             {
-                command.CommandText = name;
-                foreach (var parameter in parameters)
+                conn.Open();
+                command.CommandText = procName;
+                command.CommandType = CommandType.StoredProcedure;
+                foreach (var sqlParameter in parameters)
                 {
-                    command.Parameters.AddWithValue(parameter.Key, parameter.Value);
+                    command.Parameters.Add(sqlParameter);
                 }
                 return command.ExecuteReader();
             }
+        }
+
+        protected string GetProjectConnectionString(string projectName)
+        {
+            var sb = new SqlConnectionStringBuilder(DataAccess.ConnectionString);
+            sb.InitialCatalog = projectName;
+            return sb.ToString();
         }
     }
 

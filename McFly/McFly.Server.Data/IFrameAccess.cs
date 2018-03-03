@@ -4,6 +4,6 @@ namespace McFly.Server.Data
 {
     public interface IFrameAccess
     {
-        void UpsertFrame(Frame frame);
+        void UpsertFrame(string projectName, Frame frame);
     }
 }

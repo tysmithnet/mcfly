@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace McFly.Server.Controllers
 {
-    [Route("api/frame")]
+    [Route("api/frame/{projectName}")]
     public class FrameController : Controller
     {
         protected IFrameAccess FrameAccess { get; set; }
@@ -21,11 +21,11 @@ namespace McFly.Server.Controllers
         }
                                                
         [HttpPost]
-        public ActionResult Post(IEnumerable<Frame> frames)
+        public ActionResult Post(string projectName, [FromBody]IEnumerable<Frame> frames)
         {
             foreach (var frame in frames)
             {
-                FrameAccess.UpsertFrame(frame); // todo: make bulk upsert
+                FrameAccess.UpsertFrame(projectName, frame); // todo: make bulk upsert
             }
             return Ok();
         }

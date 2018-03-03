@@ -8,16 +8,16 @@ namespace McFly.Core
     [DebuggerDisplay("{_high}:{_low}")]
     public class Position : IComparable<Position>, IEquatable<Position>
     {
-        private uint _high;
-        private uint _low;
+        private int _high;
+        private int _low;
 
-        public Position(uint high, uint low)
+        public Position(int high, int low)
         {
             _high = high;
             _low = low;
         }
                 
-        public uint High
+        public int High
         {
             get => _high;
             set
@@ -28,7 +28,7 @@ namespace McFly.Core
             }
         }
 
-        public uint Low
+        public int Low
         {
             get => _low;
             set
@@ -68,8 +68,8 @@ namespace McFly.Core
             var match = Regex.Match(text, @"^\s*(?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+\s*$)");
             if (!match.Success)
                 throw new FormatException($"{nameof(text)} is not a valid format for Position.. must be like 1f0:df");
-            return new Position(Convert.ToUInt32(match.Groups["hi"].Value, 16),
-                Convert.ToUInt32(match.Groups["lo"].Value, 16));
+            return new Position(Convert.ToInt32(match.Groups["hi"].Value, 16),
+                Convert.ToInt32(match.Groups["lo"].Value, 16));
         }
 
         public override bool Equals(object obj)
