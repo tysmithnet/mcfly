@@ -164,6 +164,7 @@
     <Compile Include="InitOptions.cs" />
     <Compile Include="McFly.cs" />
     <Compile Include="IndexOptions.cs" />
+    <Compile Include="PositionsRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerClient.cs" />
     <Compile Include="Settings.cs" />
