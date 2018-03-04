@@ -1,5 +1,18 @@
-﻿using System;
-using System.Collections;
+﻿// ***********************************************************************
+// Assembly         : McFly.Server.Data
+// Author           : @tsmithnet
+// Created          : 02-20-2018
+//
+// Last Modified By : @tsmithnet
+// Last Modified On : 03-03-2018
+// ***********************************************************************
+// <copyright file="ProjectsAccess.cs" company="McFly.Server.Data">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
@@ -10,32 +23,55 @@ using Microsoft.Extensions.Logging;
 
 namespace McFly.Server.Data
 {
+    /// <summary>
+    ///     Class ProjectsAccess.
+    /// </summary>
+    /// <seealso cref="McFly.Server.Data.DataAccess" />
+    /// <seealso cref="McFly.Server.Data.IProjectsAccess" />
     public class ProjectsAccess : DataAccess, IProjectsAccess
     {
-        private ILogger<ProjectsAccess> Logger { get; set; }
-
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ProjectsAccess" /> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <exception cref="ArgumentNullException">logger</exception>
         public ProjectsAccess(ILogger<ProjectsAccess> logger)
         {
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        /// <summary>
+        ///     Gets the logger.
+        /// </summary>
+        /// <value>The logger.</value>
+        private ILogger<ProjectsAccess> Logger { get; }
+
+        /// <summary>
+        ///     Gets the databases.
+        /// </summary>
+        /// <returns>IEnumerable&lt;System.String&gt;.</returns>
         public IEnumerable<string> GetDatabases()
         {
             using (var conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
                 var command = conn.CreateCommand();
-                command.CommandText = "SELECT NAME FROM sys.databases WHERE NAME NOT IN('master', 'tempdb', 'model', 'msdb')";
-                List<string> databases = new List<string>();
+                command.CommandText =
+                    "SELECT NAME FROM sys.databases WHERE NAME NOT IN('master', 'tempdb', 'model', 'msdb')";
+                var databases = new List<string>();
                 var reader = command.ExecuteReader();
                 while (reader.Read())
-                {
                     databases.Add(reader.GetFieldValue<string>(0));
-                }
                 return databases;
             }
         }
-                                                                                   
+
+        /// <summary>
+        ///     Creates the project.
+        /// </summary>
+        /// <param name="projectName">Name of the project.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="end">The end.</param>
         public void CreateProject(string projectName, Position start, Position end)
         {
             using (var conn = new SqlConnection(ConnectionString))
@@ -51,23 +87,23 @@ namespace McFly.Server.Data
                 {
                     Logger.LogError($"Unable to create Database {projectName}: {e.Message}");
                     throw;
-                }   
+                }
             }
 
             var sqlBuilder = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName};
             using (var conn = new SqlConnection(sqlBuilder.ToString()))
-            {                                       
+            {
                 try
-                { 
+                {
                     conn.Open();
                     string initScript = null;
                     using (var stream = Assembly.GetAssembly(typeof(ProjectsAccess))
                         .GetManifestResourceStream("McFly.Server.Data.Scripts.create_database.sql"))
-                    using(var reader = new StreamReader(stream))
+                    using (var reader = new StreamReader(stream))
                     {
                         initScript = reader.ReadToEnd();
                     }
-                                                                                     
+
                     var commandStrings = Regex.Split(initScript, @"^\s*GO\s*$",
                         RegexOptions.Multiline | RegexOptions.IgnoreCase);
                     foreach (var commandString in commandStrings)
@@ -90,10 +126,11 @@ namespace McFly.Server.Data
                 }
                 catch (SqlException e)
                 {
-                    using(var singleUser = conn.CreateCommand())
+                    using (var singleUser = conn.CreateCommand())
                     using (var deleteCommand = conn.CreateCommand())
                     {
-                        singleUser.CommandText = $"ALTER DATABASE [{projectName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
+                        singleUser.CommandText =
+                            $"ALTER DATABASE [{projectName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
                         singleUser.ExecuteNonQuery();
 
                         deleteCommand.CommandText = $"DROP DATABASE {projectName}"; // todo: close connections

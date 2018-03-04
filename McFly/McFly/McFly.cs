@@ -1,24 +1,35 @@
-﻿using RGiesecke.DllExport;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tsmithnet
+// Created          : 02-19-2018
+//
+// Last Modified By : @tsmithnet
+// Last Modified On : 03-03-2018
+// ***********************************************************************
+// <copyright file="McFly.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CommandLine;
-using McFly;
 using McFly.Core;
-using Microsoft.Diagnostics.Runtime.Interop;
+using McFly.Debugger;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using RGiesecke.DllExport;
+using StackFrame = McFly.Core.StackFrame;
 
 namespace McFly
 {
@@ -31,44 +42,104 @@ namespace McFly
      * todo: add the rest of the registers
      * todo: add additional checks to sql
      */
+    /// <summary>
+    ///     Class McFlyExtension.
+    /// </summary>
     public class McFlyExtension
-    {   
-        [DllImport("dbgeng.dll")]
-        internal static extern uint DebugCreate(ref Guid InterfaceId, [MarshalAs(UnmanagedType.IUnknown)] out object Interface);
-
+    {
+        /// <summary>
+        ///     The control
+        /// </summary>
         private static IDebugControl6 control;
-        private static IDebugClient5 client;
-        private static IDebugRegisters2 registers;
-        private static IDebugSymbols5 symbols;          
-        private static HRESULT LastHR;
-        private static Settings settings;
-        internal delegate uint Ioctl(IG IoctlType, ref WDBGEXTS_CLR_DATA_INTERFACE lpvData, int cbSizeOfContext);
 
+        /// <summary>
+        ///     The client
+        /// </summary>
+        private static IDebugClient5 client;
+
+        /// <summary>
+        ///     The registers
+        /// </summary>
+        private static IDebugRegisters2 registers;
+
+        /// <summary>
+        ///     The symbols
+        /// </summary>
+        private static IDebugSymbols5 symbols;
+
+        /// <summary>
+        ///     The last hr
+        /// </summary>
+        private static HRESULT LastHR;
+
+        /// <summary>
+        ///     The settings
+        /// </summary>
+        private static Settings settings;
+
+        /// <summary>
+        ///     The curr domain
+        /// </summary>
+        internal static AppDomain currDomain;
+
+        /// <summary>
+        ///     The showed intro
+        /// </summary>
+        private static bool showedIntro;
+
+        /// <summary>
+        ///     The p format
+        /// </summary>
+        private static readonly string pFormat = string.Format(":x{0}", Marshal.SizeOf(IntPtr.Zero) * 2);
+
+        /// <summary>
+        ///     Debugs the create.
+        /// </summary>
+        /// <param name="InterfaceId">The interface identifier.</param>
+        /// <param name="Interface">The interface.</param>
+        /// <returns>System.UInt32.</returns>
+        [DllImport("dbgeng.dll")]
+        internal static extern uint DebugCreate(ref Guid InterfaceId,
+            [MarshalAs(UnmanagedType.IUnknown)] out object Interface);
+
+        /// <summary>
+        ///     Int2s the h result.
+        /// </summary>
+        /// <param name="Result">The result.</param>
+        /// <returns>HRESULT.</returns>
         private static HRESULT Int2HResult(int Result)
         {
             // Convert to Uint
-            uint value = BitConverter.ToUInt32(BitConverter.GetBytes(Result), 0);
+            var value = BitConverter.ToUInt32(BitConverter.GetBytes(Result), 0);
 
             return Int2HResult(value);
         }
 
+        /// <summary>
+        ///     Int2s the h result.
+        /// </summary>
+        /// <param name="Result">The result.</param>
+        /// <returns>HRESULT.</returns>
         private static HRESULT Int2HResult(uint Result)
         {
-            HRESULT hr = HRESULT.E_UNEXPECTED;
+            var hr = HRESULT.E_UNEXPECTED;
             try
             {
-                hr = (HRESULT)Result;
-
+                hr = (HRESULT) Result;
             }
             catch
             {
-
             }
             return hr;
         }
+
+        /// <summary>
+        ///     Creates the i debug client.
+        /// </summary>
+        /// <returns>IDebugClient.</returns>
         private static IDebugClient CreateIDebugClient()
         {
-            Guid guid = new Guid("27fe5639-8407-4f47-8364-ee118fb08ac8");
+            var guid = new Guid("27fe5639-8407-4f47-8364-ee118fb08ac8");
             object obj;
             var hr = DebugCreate(ref guid, out obj);
             if (hr < 0)
@@ -77,10 +148,13 @@ namespace McFly
                 WriteLine("SourceFix: Unable to acquire client interface");
                 return null;
             }
-            IDebugClient client = (IDebugClient5)obj;
+            IDebugClient client = (IDebugClient5) obj;
             return client;
         }
 
+        /// <summary>
+        ///     Initializes the API.
+        /// </summary>
         internal static void INIT_API()
         {
             try
@@ -100,25 +174,25 @@ namespace McFly
 
             LastHR = HRESULT.S_OK;
             if (client == null)
-            {
                 try
                 {
-
-                    client = (IDebugClient5)CreateIDebugClient();
-                    control = (IDebugControl6)client;
+                    client = (IDebugClient5) CreateIDebugClient();
+                    control = (IDebugControl6) client;
                     registers = (IDebugRegisters2) client;
-                    symbols = (IDebugSymbols5) client;        
+                    symbols = (IDebugSymbols5) client;
                 }
                 catch
                 {
                     LastHR = HRESULT.E_UNEXPECTED;
                 }
-
-            }
         }
 
-        internal static AppDomain currDomain = null;
-
+        /// <summary>
+        ///     Debugs the extension initialize.
+        /// </summary>
+        /// <param name="Version">The version.</param>
+        /// <param name="Flags">The flags.</param>
+        /// <returns>HRESULT.</returns>
         [DllExport]
         public static HRESULT DebugExtensionInitialize(ref uint Version, ref uint Flags)
         {
@@ -129,22 +203,22 @@ namespace McFly
 
             ResolveEventHandler resolver = (o, e) =>
             {
-                string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                 var name = new AssemblyName(e.Name);
                 var path = Path.Combine(directory, $"{name.Name}.dll");
                 return Assembly.LoadFrom(path);
             };
-                                                              
+
             // Set up the AppDomainSetup
-            AppDomainSetup setup = new AppDomainSetup();
-            string assembly = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            var setup = new AppDomainSetup();
+            var assembly = Assembly.GetExecutingAssembly().Location;
             setup.ApplicationBase = assembly.Substring(0, assembly.LastIndexOf('\\') + 1);
 
             setup.ConfigurationFile = assembly + ".config";
 
             // Set up the Evidence
-            Evidence baseEvidence = AppDomain.CurrentDomain.Evidence;
-            Evidence evidence = new Evidence(baseEvidence);
+            var baseEvidence = AppDomain.CurrentDomain.Evidence;
+            var evidence = new Evidence(baseEvidence);
 
             currDomain = AppDomain.CreateDomain("wbext", AppDomain.CurrentDomain.Evidence, setup);
             currDomain.UnhandledException += CurrDomain_UnhandledException;
@@ -155,6 +229,11 @@ namespace McFly
             return HRESULT.S_OK;
         }
 
+        /// <summary>
+        ///     Handles the UnhandledException event of the CurrDomain control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="UnhandledExceptionEventArgs" /> instance containing the event data.</param>
         private static void CurrDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             INIT_API();
@@ -162,47 +241,53 @@ namespace McFly
             WriteLine("  This error is related to the extension itself not the target.");
             WriteLine("  The information on the exception is below:\n");
 
-            Exception ex = e.ExceptionObject as Exception;
+            var ex = e.ExceptionObject as Exception;
             while (ex != null)
             {
                 WriteLine("{0} - {1} at", ex.GetType().ToString(), ex.Message);
                 WriteLine("{0}", ex.StackTrace);
                 ex = ex.InnerException;
                 if (ex != null)
-                {
                     WriteLine("\n----- Inner Exception -----------");
-                }
             }
         }
 
-        private static bool showedIntro = false;
-
+        /// <summary>
+        ///     Debugs the extension notify.
+        /// </summary>
+        /// <param name="Notify">The notify.</param>
+        /// <param name="Argument">The argument.</param>
         [DllExport]
         public static void DebugExtensionNotify(uint Notify, ulong Argument)
         {
             if (Notify == 2) // I can write now
-            {
                 if (!showedIntro) // Just once
                 {
                     INIT_API();
                     WriteLine("When this baby hits 88 miles per hour... you're gonna see some serious shit.");
                     showedIntro = true;
                 }
-            }
         }
 
+        /// <summary>
+        ///     Debugs the extension uninitialize.
+        /// </summary>
+        /// <returns>HRESULT.</returns>
         [DllExport]
         public static HRESULT DebugExtensionUninitialize()
         {
             if (currDomain != null)
-            {
                 AppDomain.Unload(currDomain);
-            }
 
             return HRESULT.S_OK;
         }
 
-            
+        /// <summary>
+        ///     Configurations the specified client.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns>HRESULT.</returns>
         [DllExport]
         public static HRESULT config(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
@@ -211,24 +296,29 @@ namespace McFly
             var argv = CommandLineToArgs(args);
 
             Parser.Default.ParseArguments<ConfigOptions>(argv)
-                .WithParsed<ConfigOptions>(opts =>
-                {
-                    Config(opts);
-                });
+                .WithParsed(opts => { Config(opts); });
 
             return HRESULT.S_OK;
         }
 
+        /// <summary>
+        ///     Gets the settings file path.
+        /// </summary>
+        /// <returns>System.String.</returns>
         private static string GetSettingsFilePath()
         {
-            string settingsFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var settingsFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             settingsFile = Path.Combine(settingsFile, "mcfly.settings.json");
             return settingsFile;
         }
 
+        /// <summary>
+        ///     Configurations the specified opts.
+        /// </summary>
+        /// <param name="opts">The opts.</param>
         private static void Config(ConfigOptions opts)
         {
-            string settingsFile = GetSettingsFilePath();
+            var settingsFile = GetSettingsFilePath();
             if (opts.ShouldList)
             {
                 WriteLine($"connection_string => {settings.ConnectionString}");
@@ -258,6 +348,12 @@ namespace McFly
             }
         }
 
+        /// <summary>
+        ///     Uses the specified client.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns>HRESULT.</returns>
         [DllExport]
         public static HRESULT use(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
@@ -268,6 +364,10 @@ namespace McFly
             return HRESULT.S_OK;
         }
 
+        /// <summary>
+        ///     Uses the specified project name.
+        /// </summary>
+        /// <param name="projectName">Name of the project.</param>
         private static void Use(string projectName)
         {
             if (string.IsNullOrWhiteSpace(projectName))
@@ -284,17 +384,28 @@ namespace McFly
             settings.ProjectName = projectName;
         }
 
+        /// <summary>
+        ///     Starts the specified client.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns>HRESULT.</returns>
         [DllExport]
         public static HRESULT start(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
-            INIT_API();                       
-                                                               
+            INIT_API();
+
             Start();
 
             return HRESULT.S_OK;
         }
 
-
+        /// <summary>
+        ///     Mfindexes the specified client.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns>HRESULT.</returns>
         [DllExport]
         public static HRESULT mfindex(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
@@ -303,31 +414,33 @@ namespace McFly
             var argv = CommandLineToArgs(args);
 
             Parser.Default.ParseArguments<IndexOptions>(argv)
-                .WithParsed(async options =>
-                {
-                    await Index(options);
-                }).WithNotParsed(errors =>
+                .WithParsed(async options => { await Index(options); }).WithNotParsed(errors =>
                 {
                     WriteLine($"Error: Cannot parse index options:");
                     foreach (var error in errors)
-                    {
                         WriteLine(error.ToString());
-                    }
                 });
 
             return HRESULT.S_OK;
         }
-        
+
+        /// <summary>
+        ///     Indexes the specified options.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>Task.</returns>
         private static async Task Index(IndexOptions options)
-        {              
+        {
             using (var ew = new ExecuteWrapper(client))
             {
                 Position endingPosition;
                 if (options.End != null)
+                {
                     endingPosition = Position.Parse(options.End);
+                }
                 else
                 {
-                    string end = ew.Execute("!tt 100");
+                    var end = ew.Execute("!tt 100");
                     var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
                     endingPosition = Position.Parse(endMatch.Groups["pos"].Value);
                 }
@@ -340,15 +453,10 @@ namespace McFly
 
                 // set breakpoints
                 if (options.BreakpointMasks != null)
-                {
                     foreach (var optionsBreakpointMask in options.BreakpointMasks)
-                    {
                         ew.Execute($"bm {optionsBreakpointMask}");
-                    }
-                }
 
                 if (options.AccessBreakpoints != null)
-                {
                     foreach (var accessBreakpoint in options.AccessBreakpoints)
                     {
                         // todo: move
@@ -360,13 +468,13 @@ namespace McFly
                             continue;
                         }
 
-                        foreach(var c in match.Groups["access"].Value)
+                        foreach (var c in match.Groups["access"].Value)
                             ew.Execute($"ba {c}{match.Groups["length"].Value} {match.Groups["address"].Value}");
                     }
-                }     
 
-                bool endReached = false;
-                bool is32Bit = Regex.Match(ew.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length == 8;
+                var endReached = false;
+                var is32Bit =
+                    Regex.Match(ew.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length == 8;
                 // loop through all the set break points and record relevant values
                 DEBUG_STATUS status;
                 var goStatuses = new[]
@@ -384,25 +492,23 @@ namespace McFly
                         control.GetExecutionStatus(out status);
                         if (goStatuses.Contains(status))
                         {
-                            control.WaitForEvent(DEBUG_WAIT.DEFAULT, uint.MaxValue);      // todo: make reasonable and add counter.. shouldn't wait more than 10s
+                            control.WaitForEvent(DEBUG_WAIT.DEFAULT,
+                                uint.MaxValue); // todo: make reasonable and add counter.. shouldn't wait more than 10s
                             continue;
                         }
-                        
+
                         if (status == DEBUG_STATUS.BREAK)
-                        {
                             break;
-                        }
-                    }      
+                    }
                     var records = GetPositions(ew).ToArray();
                     var breakRecord = records.Single(x => x.IsThreadWithBreak);
                     if (breakRecord.Position >= endingPosition)
-                    {
                         break;
-                    }
 
                     var frames = new List<Frame>();
                     foreach (var record in records)
-                    {                                                                   
+                    {
+                        RegisterSet registerSet;
                         // all threads currently at the same breakpoint position
                         if (record.Position == breakRecord.Position)
                         {
@@ -426,7 +532,7 @@ namespace McFly
                                 registers.GetValue(7, out debugValue);
                                 edx = debugValue.I32;
 
-                                var registerSet = new RegisterSet
+                                registerSet = new RegisterSet
                                 {
                                     Rax = eax,
                                     Rbx = ebx,
@@ -453,56 +559,62 @@ namespace McFly
                                 rdx = debugValue.I64;
 
                                 registers.GetValue(16, out debugValue);
-                                ulong rip = debugValue.I64;
-                                var registerSet = new RegisterSet
+                                var rip = debugValue.I64;
+                                registerSet = new RegisterSet
                                 {
                                     Rax = Convert.ToInt64(rax),
                                     Rbx = Convert.ToInt64(rbx),
                                     Rcx = Convert.ToInt64(rcx),
                                     Rdx = Convert.ToInt64(rdx)
                                 };
+                            }
+                            var stackTrace = ew.Execute("k");
 
-                                var stackTrace = ew.Execute("k");
+                            var stackFrames = new List<StackFrame>();
+                            foreach (var m in Regex.Matches(stackTrace,
+                                    @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
+                                .Cast<Match>())
+                            {
+                                var stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16);
+                                var returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16);
+                                var module = m.Groups["mod"].Value;
+                                var functionName = m.Groups["fun"].Value;
+                                var offset = Convert.ToUInt32(m.Groups["off"].Value, 16);
+                                var stackFrame = new StackFrame(stackPointer, returnAddress, module, functionName,
+                                    offset);
+                                stackFrames.Add(stackFrame);
+                            }
 
-                                var stackFrames = new List<McFly.Core.StackFrame>();
-                                foreach (var m in Regex.Matches(stackTrace,
-                                        @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
-                                    .Cast<Match>())
-                                {
-                                    var stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16);
-                                    var returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16);      
-                                    var module = m.Groups["mod"].Value;
-                                    var functionName = m.Groups["fun"].Value;
-                                    var offset = Convert.ToUInt32(m.Groups["off"].Value, 16);
-                                    var stackFrame = new McFly.Core.StackFrame(stackPointer, returnAddress, module, functionName, offset);
-                                    stackFrames.Add(stackFrame);
-                                }
+                            var eipRegister = is32Bit ? "eip" : "rip";
+                            var instructionText = ew.Execute($"u {eipRegister} L1");
+                            var match = Regex.Match(instructionText,
+                                @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.+)?");
 
-                                var eipRegister = is32Bit ? "eip" : "rip";
-                                var instructionText = ew.Execute($"u {eipRegister} L1");
-                                var match = Regex.Match(instructionText, @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.+)?");
-
-                                var frame = new Frame
-                                {
-                                    Position = record.Position,
-                                    RegisterSet = registerSet,
-                                    ThreadId = record.ThreadId,
-                                    StackFrames = stackFrames,
-                                    OpcodeNmemonic = match.Groups["ins"].Value,
-                                    DisassemblyNote = match.Groups["extra"].Value
-                                };
-                                frames.Add(frame);
-                            }                                       
-                        }      
+                            var frame = new Frame
+                            {
+                                Position = record.Position,
+                                RegisterSet = registerSet,
+                                ThreadId = record.ThreadId,
+                                StackFrames = stackFrames,
+                                OpcodeNmemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
+                                DisassemblyNote = match.Groups["extra"].Success ? match.Groups["extra"].Value : null
+                            };
+                            frames.Add(frame);
+                        }
                     }
                     using (var serverClient = new ServerClient(new Uri(settings.ServerUrl)))
                     {
                         await serverClient.UpsertFrames(settings.ProjectName, frames);
                     }
-                } 
+                }
             }
         }
 
+        /// <summary>
+        ///     Gets the positions.
+        /// </summary>
+        /// <param name="ew">The ew.</param>
+        /// <returns>IEnumerable&lt;PositionsRecord&gt;.</returns>
         private static IEnumerable<PositionsRecord> GetPositions(ExecuteWrapper ew)
         {
             var positionsText = ew.Execute("!positions");
@@ -513,11 +625,15 @@ namespace McFly
             return matches.Cast<Match>().Select(x => new PositionsRecord
             {
                 ThreadId = Convert.ToInt32(x.Groups["tid"].Value, 16),
-                Position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16), Convert.ToInt32(x.Groups["min"].Value, 16)),
+                Position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
+                    Convert.ToInt32(x.Groups["min"].Value, 16)),
                 IsThreadWithBreak = x.Groups["cur"].Success
             });
         }
-             
+
+        /// <summary>
+        ///     Starts this instance.
+        /// </summary>
         private static void Start()
         {
             try
@@ -536,13 +652,12 @@ namespace McFly
                 }
                 var startInfo = new ProcessStartInfo
                 {
-                    FileName = settings.LauncherPath,                                   
+                    FileName = settings.LauncherPath,
                     CreateNoWindow = false,
-                    Environment = { {"ConnectionString", settings.ConnectionString}},
-                    UseShellExecute = false,     
+                    Environment = {{"ConnectionString", settings.ConnectionString}},
+                    UseShellExecute = false
                 };
                 var p = Process.Start(startInfo);
-
             }
             catch (Exception e)
             {
@@ -551,26 +666,38 @@ namespace McFly
             }
         }
 
+        /// <summary>
+        ///     Initializes the specified client.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns>HRESULT.</returns>
         [DllExport]
         public static HRESULT init(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
             INIT_API();
             if (LastHR != HRESULT.S_OK)
                 return LastHR;
-                                               
+
             var argv = CommandLineToArgs(args);
-            
+
             Parser.Default.ParseArguments<InitOptions>(argv)
                 .WithParsed(async opts => await Init(opts));
 
             return HRESULT.S_OK;
         }
 
+        /// <summary>
+        ///     Initializes the specified opts.
+        /// </summary>
+        /// <param name="opts">The opts.</param>
+        /// <returns>Task.</returns>
         private static async Task Init(InitOptions opts)
         {
             if (string.IsNullOrWhiteSpace(settings.ServerUrl))
             {
-                WriteLine("You must set the server url in the settings: !config -k server_url -v http://localhost:5000");
+                WriteLine(
+                    "You must set the server url in the settings: !config -k server_url -v http://localhost:5000");
                 return;
             }
 
@@ -580,12 +707,11 @@ namespace McFly
                 return;
             }
 
-
             string starting = null;
             string ending = null;
             using (var ew = new ExecuteWrapper(client))
             {
-                string start = ew.Execute("!tt 0");
+                var start = ew.Execute("!tt 0");
                 var startMatch = Regex.Match(start, "Setting position: (?<loc>[a-fA-F0-9]+:[a-fA-F0-9]+)");
                 if (!startMatch.Success)
                 {
@@ -594,8 +720,7 @@ namespace McFly
                 }
                 starting = startMatch.Groups["loc"].Value;
 
-
-                string end = ew.Execute("!tt 100");
+                var end = ew.Execute("!tt 100");
                 var endMatch = Regex.Match(end, "Setting position: (?<loc>[a-fA-F0-9]+:[a-fA-F0-9]+)");
 
                 if (!endMatch.Success)
@@ -606,17 +731,17 @@ namespace McFly
                 ending = endMatch.Groups["loc"].Value;
             }
 
-            using (var httpClient = new HttpClient())         // todo: move to client
+            using (var httpClient = new HttpClient()) // todo: move to client
             {
                 try
-                {                           
+                {
                     var httpContent = new FormUrlEncodedContent(new[]
                     {
                         new KeyValuePair<string, string>("projectName", opts.ProjectName),
                         new KeyValuePair<string, string>("startFrame", starting),
-                        new KeyValuePair<string, string>("endFrame", ending),     
+                        new KeyValuePair<string, string>("endFrame", ending)
                     });
-                    var uri = new UriBuilder(settings.ServerUrl) { Path = "api/project" };
+                    var uri = new UriBuilder(settings.ServerUrl) {Path = "api/project"};
                     await httpClient.PostAsync(uri.Uri, httpContent);
                 }
                 catch (Exception e)
@@ -629,17 +754,29 @@ namespace McFly
             }
             Use(opts.ProjectName);
         }
-        
+
+        /// <summary>
+        ///     Commands the line to argv w.
+        /// </summary>
+        /// <param name="lpCmdLine">The lp command line.</param>
+        /// <param name="pNumArgs">The p number arguments.</param>
+        /// <returns>IntPtr.</returns>
         [DllImport("shell32.dll", SetLastError = true)]
-        static extern IntPtr CommandLineToArgvW(
+        private static extern IntPtr CommandLineToArgvW(
             [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, out int pNumArgs);
 
+        /// <summary>
+        ///     Commands the line to arguments.
+        /// </summary>
+        /// <param name="commandLine">The command line.</param>
+        /// <returns>System.String[].</returns>
+        /// <exception cref="Win32Exception"></exception>
         public static string[] CommandLineToArgs(string commandLine)
         {
             int argc;
             var argv = CommandLineToArgvW(commandLine, out argc);
             if (argv == IntPtr.Zero)
-                throw new System.ComponentModel.Win32Exception();
+                throw new Win32Exception();
             try
             {
                 var args = new string[argc];
@@ -656,64 +793,120 @@ namespace McFly
                 Marshal.FreeHGlobal(argv);
             }
         }
-                        
-        private static string pFormat = String.Format(":x{0}", Marshal.SizeOf(IntPtr.Zero) * 2);
+
+        /// <summary>
+        ///     Pointers the format.
+        /// </summary>
+        /// <param name="Message">The message.</param>
+        /// <returns>System.String.</returns>
         public static string pointerFormat(string Message)
         {
             return Message.Replace(":%p", pFormat);
         }
 
+        /// <summary>
+        ///     Writes the specified message.
+        /// </summary>
+        /// <param name="Message">The message.</param>
+        /// <param name="Params">The parameters.</param>
         public static void Write(string Message, params object[] Params)
         {
             if (Params == null)
                 Out(Message);
             else
-                Out(String.Format(pointerFormat(Message), Params));
+                Out(string.Format(pointerFormat(Message), Params));
         }
 
+        /// <summary>
+        ///     Writes the line.
+        /// </summary>
+        /// <param name="Message">The message.</param>
+        /// <param name="Params">The parameters.</param>
         public static void WriteLine(string Message, params object[] Params)
         {
             if (Params == null)
                 Out(Message);
             else
-                Out(String.Format(pointerFormat(Message), Params));
+                Out(string.Format(pointerFormat(Message), Params));
             Out("\n");
         }
 
+        /// <summary>
+        ///     Writes the DML.
+        /// </summary>
+        /// <param name="Message">The message.</param>
+        /// <param name="Params">The parameters.</param>
         public static void WriteDml(string Message, params object[] Params)
         {
             if (Params == null)
                 OutDml(Message);
             else
-                OutDml(String.Format(pointerFormat(Message), Params));
+                OutDml(string.Format(pointerFormat(Message), Params));
         }
 
+        /// <summary>
+        ///     Writes the DML line.
+        /// </summary>
+        /// <param name="Message">The message.</param>
+        /// <param name="Params">The parameters.</param>
         public static void WriteDmlLine(string Message, params object[] Params)
         {
             if (Params == null)
                 OutDml(Message);
             else
-                OutDml(String.Format(pointerFormat(Message), Params));
+                OutDml(string.Format(pointerFormat(Message), Params));
             Out("\n");
         }
+
+        /// <summary>
+        ///     Outs the specified message.
+        /// </summary>
+        /// <param name="Message">The message.</param>
         public static void Out(string Message)
         {
             control.ControlledOutput(DEBUG_OUTCTL.ALL_CLIENTS, DEBUG_OUTPUT.NORMAL, Message);
         }
 
+        /// <summary>
+        ///     Outs the DML.
+        /// </summary>
+        /// <param name="Message">The message.</param>
         public static void OutDml(string Message)
         {
             control.ControlledOutput(DEBUG_OUTCTL.ALL_CLIENTS | DEBUG_OUTCTL.DML, DEBUG_OUTPUT.NORMAL, Message);
         }
+
+        /// <summary>
+        ///     Delegate Ioctl
+        /// </summary>
+        /// <param name="IoctlType">Type of the ioctl.</param>
+        /// <param name="lpvData">The LPV data.</param>
+        /// <param name="cbSizeOfContext">The cb size of context.</param>
+        /// <returns>System.UInt32.</returns>
+        internal delegate uint Ioctl(IG IoctlType, ref WDBGEXTS_CLR_DATA_INTERFACE lpvData, int cbSizeOfContext);
     }
 
     /// <summary>
-    /// One line of !positions
+    ///     One line of !positions
     /// </summary>
     public class PositionsRecord
     {
+        /// <summary>
+        ///     Gets or sets the thread identifier.
+        /// </summary>
+        /// <value>The thread identifier.</value>
         public int ThreadId { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the position.
+        /// </summary>
+        /// <value>The position.</value>
         public Position Position { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance is thread with break.
+        /// </summary>
+        /// <value><c>true</c> if this instance is thread with break; otherwise, <c>false</c>.</value>
         public bool IsThreadWithBreak { get; set; }
     }
 }
@@ -1257,5 +1450,3 @@ x86
 187:ymm7/2
 188:ymm7/3
 */
-
-

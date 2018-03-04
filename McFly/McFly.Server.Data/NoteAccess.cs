@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Text;
+﻿// ***********************************************************************
+// Assembly         : McFly.Server.Data
+// Author           : @tsmithnet
+// Created          : 02-20-2018
+//
+// Last Modified By : @tsmithnet
+// Last Modified On : 03-03-2018
+// ***********************************************************************
+// <copyright file="NoteAccess.cs" company="McFly.Server.Data">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 
 namespace McFly.Server.Data
 {
+    /// <summary>
+    ///     Class NoteAccess.
+    /// </summary>
+    /// <seealso cref="McFly.Server.Data.DataAccess" />
+    /// <seealso cref="McFly.Server.Data.INoteAccess" />
     public class NoteAccess : DataAccess, INoteAccess
     {
-        
     }
 }
