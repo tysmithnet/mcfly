@@ -17,7 +17,7 @@ namespace McFly
     /// <summary>
     ///     Class Settings.
     /// </summary>
-    public class Settings
+    public class Settings //: ISettings
     {
         /// <summary>
         ///     Gets or sets the connection string.

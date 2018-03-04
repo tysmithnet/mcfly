@@ -15,6 +15,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -92,8 +94,10 @@ namespace McFly
         /// </summary>
         private static readonly string pFormat = $":x{Marshal.SizeOf(IntPtr.Zero) * 2}";
 
+        private static CompositionContainer compositionContainer;
+
         /// <summary>
-        ///     Debugs the create.
+        ///     Create debugger interface
         /// </summary>
         /// <param name="InterfaceId">The interface identifier.</param>
         /// <param name="Interface">The interface.</param>
@@ -103,24 +107,24 @@ namespace McFly
             [MarshalAs(UnmanagedType.IUnknown)] out object Interface);
 
         /// <summary>
-        ///     Int2s the h result.
+        ///     Get the HRESULT code for the specified int
         /// </summary>
         /// <param name="Result">The result.</param>
         /// <returns>HRESULT.</returns>
-        private static HRESULT Int2HResult(int Result)
+        private static HRESULT ConvertIntToHResult(int Result)
         {
             // Convert to Uint
             var value = BitConverter.ToUInt32(BitConverter.GetBytes(Result), 0);
 
-            return Int2HResult(value);
+            return ConvertIntToHResult(value);
         }
 
         /// <summary>
-        ///     Int2s the h result.
+        ///     Get the HRESULT code for the specified int
         /// </summary>
         /// <param name="Result">The result.</param>
         /// <returns>HRESULT.</returns>
-        private static HRESULT Int2HResult(uint Result)
+        private static HRESULT ConvertIntToHResult(uint Result)
         {
             var hr = HRESULT.E_UNEXPECTED;
             try
@@ -144,7 +148,7 @@ namespace McFly
             var hr = DebugCreate(ref guid, out obj);
             if (hr < 0)
             {
-                LastHR = Int2HResult(hr);
+                LastHR = ConvertIntToHResult(hr);
                 WriteLine("SourceFix: Unable to acquire client interface");
                 return null;
             }
@@ -260,10 +264,14 @@ namespace McFly
         [DllExport]
         public static void DebugExtensionNotify(uint Notify, ulong Argument)
         {
-            if (Notify == 2) // I can write now
-                if (!showedIntro) // Just once
-                {
+            if (Notify == 2) 
+                if (!showedIntro)
+                {     
                     INIT_API();
+                    var typeCatalog = new TypeCatalog(new[] { typeof(IApp), typeof(App) });
+                    compositionContainer = new CompositionContainer(typeCatalog);
+                    var app = compositionContainer.GetExportedValue<IApp>();
+                    WriteLine($"{app?.Greeting ?? "NOT SET"}");
                     WriteLine("When this baby hits 88 miles per hour... you're gonna see some serious shit.");
                     showedIntro = true;
                 }
@@ -884,5 +892,17 @@ namespace McFly
         /// <param name="cbSizeOfContext">The cb size of context.</param>
         /// <returns>System.UInt32.</returns>
         internal delegate uint Ioctl(IG IoctlType, ref WDBGEXTS_CLR_DATA_INTERFACE lpvData, int cbSizeOfContext);
+    }
+
+    
+    public interface IApp
+    {
+        string Greeting { get; }
+    }
+
+    [Export(typeof(IApp))]
+    public class App : IApp
+    {
+        public string Greeting { get; } = "hi";
     }
 }
