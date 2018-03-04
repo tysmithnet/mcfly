@@ -12,12 +12,16 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Primitives;
+
 namespace McFly
 {
     /// <summary>
     ///     Class Settings.
     /// </summary>
-    public class Settings //: ISettings
+    [Export(typeof(Settings))]
+    public class Settings : ISettings
     {
         /// <summary>
         ///     Gets or sets the connection string.

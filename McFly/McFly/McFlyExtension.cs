@@ -268,10 +268,12 @@ namespace McFly
                 if (!showedIntro)
                 {     
                     INIT_API();
-                    var typeCatalog = new TypeCatalog(new[] { typeof(IApp), typeof(App) });
+                    var assembly = Assembly.GetExecutingAssembly();
+                    var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
+                    var typeCatalog = new TypeCatalog(types);
                     compositionContainer = new CompositionContainer(typeCatalog);
-                    var app = compositionContainer.GetExportedValue<IApp>();
-                    WriteLine($"{app?.Greeting ?? "NOT SET"}");
+                    var app = compositionContainer.GetExportedValue<McFlyApp>();
+
                     WriteLine("When this baby hits 88 miles per hour... you're gonna see some serious shit.");
                     showedIntro = true;
                 }
@@ -892,17 +894,5 @@ namespace McFly
         /// <param name="cbSizeOfContext">The cb size of context.</param>
         /// <returns>System.UInt32.</returns>
         internal delegate uint Ioctl(IG IoctlType, ref WDBGEXTS_CLR_DATA_INTERFACE lpvData, int cbSizeOfContext);
-    }
-
-    
-    public interface IApp
-    {
-        string Greeting { get; }
-    }
-
-    [Export(typeof(IApp))]
-    public class App : IApp
-    {
-        public string Greeting { get; } = "hi";
     }
 }

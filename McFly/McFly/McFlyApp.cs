@@ -1,212 +1,284 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.ComponentModel.Composition;
-//using System.Linq;
-//using System.Text.RegularExpressions;
-//using System.Threading.Tasks;
-//using CommandLine;
-//using McFly.Core;
-//using McFly.Debugger;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using CommandLine;
+using McFly.Core;
+using McFly.Debugger;
 
-//namespace McFly
-//{
-//    [Export]
-//    internal class McFlyApp
-//    {
-//    }
+namespace McFly
+{
+    [Export]
+    internal class McFlyApp : IInjectable
+    {
+    }
 
-//    public interface IMcFlyMethod
-//    {
-//        string Name { get; }
-//        Task Process(string[] args);
-//    }
-
-//    public interface ILog
-//    {
-//        void Verbose(string message);
-//        void Debug(string message);
-//        void Info(string messasge);
-//        void Error(string message);
-//        void Fatal(string message);
-//    }
-
-//    public interface IDbgEngProxy
-//    {
-//        string RunUntilBreak();
-//        string Execute(string command);
-//        RegisterSet GetRegisters(int threadId);
-//    }
-
-//    public interface ISettings
-//    {
+    public interface IInjectable
+    {
         
-//    }
+    }
 
-//    //[Export(typeof(IMcFlyMethod))]
-//    internal class Index : IMcFlyMethod
-//    {
-//        [Import]
-//        private ILog Log { get; set; }
+    public interface IMcFlyMethod : IInjectable
+    {
+        string Name { get; }
+        Task Process(string[] args);
+    }
 
-//        [Import]
-//        private IDbgEngProxy DbgEngProxy { get; set; }
-        
-//        [Import]
-//        private Settings Settings { get; set; }
+    public interface ILog : IInjectable
+    {
+        void Verbose(string message);
+        void Debug(string message);
+        void Info(string messasge);
+        void Error(string message);
+        void Error(Exception exception);
+        void Fatal(string message);
+        void Fatal(Exception exception);
+    }
 
-//        public string Name { get; } = "index";
+    public class DefaultLog : ILog, IDisposable
+    {
+        public void Dispose()
+        {
+            StreamWriter?.Dispose();
+        }
 
-//        public async Task Process(string[] args)
-//        {
-//            IndexOptions options = new IndexOptions();
-//            Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o =>
-//            {
-//                options = o;
-//            }).WithNotParsed(errors =>
-//            {
-//                Log.Error($"Error: Unable to parse arguments");
-//            });
+        private StreamWriter StreamWriter { get; set; }
 
-//            Position endingPosition;
-//            if (options.End != null)
-//            {
-//                endingPosition = Position.Parse(options.End);
-//            }
-//            else
-//            {
-//                var end = DbgEngProxy.Execute("!tt 100");
-//                var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
-//                endingPosition = Position.Parse(endMatch.Groups["pos"].Value);
-//            }
+        public DefaultLog()
+        {
+            var assemblyPath = Assembly.GetExecutingAssembly().Location;
+            var path = Path.Combine(assemblyPath, "mcfly.log");
+            var fs = File.Open(path, FileMode.Append);
+            var bs = new BufferedStream(fs);
+            StreamWriter = new StreamWriter(bs);
+        }
+            
+        public void Verbose(string message)
+        {
+            StreamWriter.WriteLine($"[v] {DateTime.Now} {message}");
+        }
 
-//            // clear breakpoints
-//            DbgEngProxy.Execute("bc *"); // todo: save existing break points and restore
+        public void Debug(string message)
+        {
+            StreamWriter.WriteLine($"[d] {DateTime.Now} {message}");
+        }
 
-//            // set head at start
-//            DbgEngProxy.Execute(options.Start != null ? $"!tt {options.Start}" : "!tt 0");
+        public void Info(string message)
+        {
+            StreamWriter.WriteLine($"[i] {DateTime.Now} {message}");
+        }
 
-//            // set breakpoints
-//            if (options.BreakpointMasks != null)
-//                foreach (var optionsBreakpointMask in options.BreakpointMasks)
-//                    DbgEngProxy.Execute($"bm {optionsBreakpointMask}");
+        public void Error(string message)
+        {
+            StreamWriter.WriteLine($"[e] {DateTime.Now} {message}");
+        }
 
-//            if (options.AccessBreakpoints != null)
-//                foreach (var accessBreakpoint in options.AccessBreakpoints)
-//                {
-//                    // todo: move
-//                    var match = Regex.Match(accessBreakpoint,
-//                        @"^\s*(?<access>[rw]{1,2})(?<length>[a-fA-F0-9]+):(?<address>[a-fA-F0-9]+)\s*$");
-//                    if (!match.Success)
-//                    {
-//                        Log.Error($"Error: invalid access breakpoint: {accessBreakpoint}");
-//                        continue;
-//                    }
+        public void Error(Exception exception)
+        {
+            StreamWriter.WriteLine($"[e] {DateTime.Now} {exception.Message}");
+            do
+            {
+                StreamWriter.WriteLine(exception.StackTrace);
+            } while ((exception = exception.InnerException) != null);
 
-//                    foreach (var c in match.Groups["access"].Value)
-//                        DbgEngProxy.Execute($"ba {c}{match.Groups["length"].Value} {match.Groups["address"].Value}");
-//                }
+        }
 
-//            var endReached = false;
-//            var is32Bit =
-//                Regex.Match(DbgEngProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length == 8;
-//            // loop through all the set break points and record relevant values
-//            DEBUG_STATUS status;
-//            var goStatuses = new[]
-//            {
-//                    DEBUG_STATUS.GO, DEBUG_STATUS.STEP_BRANCH, DEBUG_STATUS.STEP_INTO, DEBUG_STATUS.STEP_OVER,
-//                    DEBUG_STATUS.REVERSE_STEP_BRANCH, DEBUG_STATUS.REVERSE_STEP_INTO, DEBUG_STATUS.REVERSE_GO,
-//                    DEBUG_STATUS.REVERSE_STEP_OVER
-//                };
-//            while (true)
-//            {
-//                // equivalent of g
-//                //control.SetExecutionStatus(DEBUG_STATUS.GO);
-//                //while (true)
-//                //{
-//                //    control.GetExecutionStatus(out status);
-//                //    if (goStatuses.Contains(status))
-//                //    {
-//                //        control.WaitForEvent(DEBUG_WAIT.DEFAULT,
-//                //            uint.MaxValue); // todo: make reasonable and add counter.. shouldn't wait more than 10s
-//                //        continue;
-//                //    }
+        public void Fatal(string message)
+        {
+            StreamWriter.WriteLine($"[f] {DateTime.Now} {message}");
+        }
 
-//                //    if (status == DEBUG_STATUS.BREAK)
-//                //        break;
-//                //}
-//                DbgEngProxy.RunUntilBreak();
-//                var records = GetPositions().ToArray();
-//                var breakRecord = records.Single(x => x.IsThreadWithBreak);
-//                if (breakRecord.Position >= endingPosition)
-//                    break;
+        public void Fatal(Exception exception)
+        {
+            StreamWriter.WriteLine($"[f] {DateTime.Now} {exception.Message}");
+            do
+            {
+                StreamWriter.WriteLine(exception.StackTrace);
+            } while ((exception = exception.InnerException) != null);
+        }
+    }
 
-//                var frames = new List<Frame>();
-//                foreach (var record in records)
-//                {                                
-//                    // all threads currently at the same breakpoint position
-//                    if (record.Position == breakRecord.Position)
-//                    {
-//                        var registerSet = DbgEngProxy.GetRegisters(record.ThreadId);
-//                        var stackTrace = DbgEngProxy.Execute("k");
+    public interface IDbgEngProxy : IInjectable
+    {
+        string RunUntilBreak();
+        string Execute(string command);
+        RegisterSet GetRegisters(int threadId);
+    }
 
-//                        var stackFrames = new List<StackFrame>();
-//                        foreach (var m in Regex.Matches(stackTrace,
-//                                @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
-//                            .Cast<Match>())
-//                        {
-//                            var stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16);
-//                            var returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16);
-//                            var module = m.Groups["mod"].Value;
-//                            var functionName = m.Groups["fun"].Value;
-//                            var offset = Convert.ToUInt32(m.Groups["off"].Value, 16);
-//                            var stackFrame = new StackFrame(stackPointer, returnAddress, module, functionName,
-//                                offset);
-//                            stackFrames.Add(stackFrame);
-//                        }
+    public interface ISettings : IInjectable
+    {
 
-//                        var eipRegister = is32Bit ? "eip" : "rip";
-//                        var instructionText = DbgEngProxy.Execute($"u {eipRegister} L1");
-//                        var match = Regex.Match(instructionText,
-//                            @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.+)?");
+    }
 
-//                        var frame = new Frame
-//                        {
-//                            Position = record.Position,
-//                            RegisterSet = registerSet,
-//                            ThreadId = record.ThreadId,
-//                            StackFrames = stackFrames,
-//                            OpcodeNmemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
-//                            DisassemblyNote = match.Groups["extra"].Success ? match.Groups["extra"].Value : null
-//                        };
-//                        frames.Add(frame);
-//                    }
-//                }
-//                using (var serverClient = new ServerClient(new Uri(Settings.ServerUrl)))
-//                {
-//                    await serverClient.UpsertFrames(Settings.ProjectName, frames);
-//                }
-//            }
-//        }
+    //[Export(typeof(IMcFlyMethod))]
+    internal class Index : IMcFlyMethod
+    {
+        [Import]
+        private ILog Log { get; set; }
 
-//        /// <summary>
-//        ///     The positions of all threads at the current frame
-//        /// </summary>
-//        /// <param name="ew">The ew.</param>
-//        /// <returns>The positions of all threads at the current frame</returns>
-//        private IEnumerable<PositionsRecord> GetPositions()
-//        {
-//            var positionsText = DbgEngProxy.Execute("!positions");
+        [Import]
+        private IDbgEngProxy DbgEngProxy { get; set; }
 
-//            var matches = Regex.Matches(positionsText,
-//                "(?<cur>>)?Thread ID=0x(?<tid>[A-F0-9]+) - Position: (?<maj>[A-F0-9]+):(?<min>[A-F0-9]+)");
+        [Import]
+        private Settings Settings { get; set; }
 
-//            return matches.Cast<Match>().Select(x => new PositionsRecord
-//            {
-//                ThreadId = Convert.ToInt32(x.Groups["tid"].Value, 16),
-//                Position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
-//                    Convert.ToInt32(x.Groups["min"].Value, 16)),
-//                IsThreadWithBreak = x.Groups["cur"].Success
-//            });
-//        }
-//    }
-//}
+        public string Name { get; } = "index";
+
+        public async Task Process(string[] args)
+        {
+            IndexOptions options = new IndexOptions();
+            Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o =>
+            {
+                options = o;
+            }).WithNotParsed(errors =>
+            {
+                Log.Error($"Error: Unable to parse arguments");
+            });
+
+            Position endingPosition;
+            if (options.End != null)
+            {
+                endingPosition = Position.Parse(options.End);
+            }
+            else
+            {
+                var end = DbgEngProxy.Execute("!tt 100");
+                var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
+                endingPosition = Position.Parse(endMatch.Groups["pos"].Value);
+            }
+
+            // clear breakpoints
+            DbgEngProxy.Execute("bc *"); // todo: save existing break points and restore
+
+            // set head at start
+            DbgEngProxy.Execute(options.Start != null ? $"!tt {options.Start}" : "!tt 0");
+
+            // set breakpoints
+            if (options.BreakpointMasks != null)
+                foreach (var optionsBreakpointMask in options.BreakpointMasks)
+                    DbgEngProxy.Execute($"bm {optionsBreakpointMask}");
+
+            if (options.AccessBreakpoints != null)
+                foreach (var accessBreakpoint in options.AccessBreakpoints)
+                {
+                    // todo: move
+                    var match = Regex.Match(accessBreakpoint,
+                        @"^\s*(?<access>[rw]{1,2})(?<length>[a-fA-F0-9]+):(?<address>[a-fA-F0-9]+)\s*$");
+                    if (!match.Success)
+                    {
+                        Log.Error($"Error: invalid access breakpoint: {accessBreakpoint}");
+                        continue;
+                    }
+
+                    foreach (var c in match.Groups["access"].Value)
+                        DbgEngProxy.Execute($"ba {c}{match.Groups["length"].Value} {match.Groups["address"].Value}");
+                }
+
+            var endReached = false;
+            var is32Bit =
+                Regex.Match(DbgEngProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length == 8;
+            // loop through all the set break points and record relevant values
+            DEBUG_STATUS status;
+            var goStatuses = new[]
+            {
+                    DEBUG_STATUS.GO, DEBUG_STATUS.STEP_BRANCH, DEBUG_STATUS.STEP_INTO, DEBUG_STATUS.STEP_OVER,
+                    DEBUG_STATUS.REVERSE_STEP_BRANCH, DEBUG_STATUS.REVERSE_STEP_INTO, DEBUG_STATUS.REVERSE_GO,
+                    DEBUG_STATUS.REVERSE_STEP_OVER
+                };
+            while (true)
+            {
+                // equivalent of g
+                //control.SetExecutionStatus(DEBUG_STATUS.GO);
+                //while (true)
+                //{
+                //    control.GetExecutionStatus(out status);
+                //    if (goStatuses.Contains(status))
+                //    {
+                //        control.WaitForEvent(DEBUG_WAIT.DEFAULT,
+                //            uint.MaxValue); // todo: make reasonable and add counter.. shouldn't wait more than 10s
+                //        continue;
+                //    }
+
+                //    if (status == DEBUG_STATUS.BREAK)
+                //        break;
+                //}
+                DbgEngProxy.RunUntilBreak();
+                var records = GetPositions().ToArray();
+                var breakRecord = records.Single(x => x.IsThreadWithBreak);
+                if (breakRecord.Position >= endingPosition)
+                    break;
+
+                var frames = new List<Frame>();
+                foreach (var record in records)
+                {
+                    // all threads currently at the same breakpoint position
+                    if (record.Position == breakRecord.Position)
+                    {
+                        var registerSet = DbgEngProxy.GetRegisters(record.ThreadId);
+                        var stackTrace = DbgEngProxy.Execute("k");
+
+                        var stackFrames = new List<StackFrame>();
+                        foreach (var m in Regex.Matches(stackTrace,
+                                @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
+                            .Cast<Match>())
+                        {
+                            var stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16);
+                            var returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16);
+                            var module = m.Groups["mod"].Value;
+                            var functionName = m.Groups["fun"].Value;
+                            var offset = Convert.ToUInt32(m.Groups["off"].Value, 16);
+                            var stackFrame = new StackFrame(stackPointer, returnAddress, module, functionName,
+                                offset);
+                            stackFrames.Add(stackFrame);
+                        }
+
+                        var eipRegister = is32Bit ? "eip" : "rip";
+                        var instructionText = DbgEngProxy.Execute($"u {eipRegister} L1");
+                        var match = Regex.Match(instructionText,
+                            @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.+)?");
+
+                        var frame = new Frame
+                        {
+                            Position = record.Position,
+                            RegisterSet = registerSet,
+                            ThreadId = record.ThreadId,
+                            StackFrames = stackFrames,
+                            OpcodeNmemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
+                            DisassemblyNote = match.Groups["extra"].Success ? match.Groups["extra"].Value : null
+                        };
+                        frames.Add(frame);
+                    }
+                }
+                using (var serverClient = new ServerClient(new Uri(Settings.ServerUrl)))
+                {
+                    await serverClient.UpsertFrames(Settings.ProjectName, frames);
+                }
+            }
+        }
+
+        /// <summary>
+        ///     The positions of all threads at the current frame
+        /// </summary>
+        /// <param name="ew">The ew.</param>
+        /// <returns>The positions of all threads at the current frame</returns>
+        private IEnumerable<PositionsRecord> GetPositions()
+        {
+            var positionsText = DbgEngProxy.Execute("!positions");
+
+            var matches = Regex.Matches(positionsText,
+                "(?<cur>>)?Thread ID=0x(?<tid>[A-F0-9]+) - Position: (?<maj>[A-F0-9]+):(?<min>[A-F0-9]+)");
+
+            return matches.Cast<Match>().Select(x => new PositionsRecord
+            {
+                ThreadId = Convert.ToInt32(x.Groups["tid"].Value, 16),
+                Position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
+                    Convert.ToInt32(x.Groups["min"].Value, 16)),
+                IsThreadWithBreak = x.Groups["cur"].Success
+            });
+        }
+    }
+}
