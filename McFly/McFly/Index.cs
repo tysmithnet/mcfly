@@ -32,7 +32,8 @@ namespace McFly
                 options = o;
             }).WithNotParsed(errors =>
             {
-                Log.Error($"Error: Unable to parse arguments");
+                Log.Error($"Error: Unable to parse arguments"); // todo: add errors
+                    return;
             });
 
             Position endingPosition;
@@ -81,10 +82,10 @@ namespace McFly
             DEBUG_STATUS status;
             var goStatuses = new[]
             {
-                DEBUG_STATUS.GO, DEBUG_STATUS.STEP_BRANCH, DEBUG_STATUS.STEP_INTO, DEBUG_STATUS.STEP_OVER,
-                DEBUG_STATUS.REVERSE_STEP_BRANCH, DEBUG_STATUS.REVERSE_STEP_INTO, DEBUG_STATUS.REVERSE_GO,
-                DEBUG_STATUS.REVERSE_STEP_OVER
-            };
+                    DEBUG_STATUS.GO, DEBUG_STATUS.STEP_BRANCH, DEBUG_STATUS.STEP_INTO, DEBUG_STATUS.STEP_OVER,
+                    DEBUG_STATUS.REVERSE_STEP_BRANCH, DEBUG_STATUS.REVERSE_STEP_INTO, DEBUG_STATUS.REVERSE_GO,
+                    DEBUG_STATUS.REVERSE_STEP_OVER
+                };
             while (true)
             {
                 // equivalent of g
@@ -118,12 +119,12 @@ namespace McFly
 
                     var stackFrames = (from m in Regex.Matches(stackTrace, @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
                             .Cast<Match>()
-                        let stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16)
-                        let returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16)
-                        let module = m.Groups["mod"].Value
-                        let functionName = m.Groups["fun"].Value
-                        let offset = Convert.ToUInt32(m.Groups["off"].Value, 16)
-                        select new StackFrame(stackPointer, returnAddress, module, functionName, offset)).ToList();
+                                       let stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16)
+                                       let returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16)
+                                       let module = m.Groups["mod"].Value
+                                       let functionName = m.Groups["fun"].Value
+                                       let offset = Convert.ToUInt32(m.Groups["off"].Value, 16)
+                                       select new StackFrame(stackPointer, returnAddress, module, functionName, offset)).ToList();
 
                     var eipRegister = is32Bit ? "eip" : "rip";
                     var instructionText = DbgEngProxy.Execute($"u {eipRegister} L1");
@@ -167,6 +168,6 @@ namespace McFly
                     Convert.ToInt32(x.Groups["min"].Value, 16)),
                 IsThreadWithBreak = x.Groups["cur"].Success
             });
-        }
+        }    
     }
 }

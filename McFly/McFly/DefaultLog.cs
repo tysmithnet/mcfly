@@ -15,11 +15,9 @@ namespace McFly
 
         private StreamWriter StreamWriter { get; set; }
 
-        public DefaultLog()
-        {
-            var assemblyPath = Assembly.GetExecutingAssembly().Location;
-            var path = Path.Combine(assemblyPath, "mcfly.log");
-            var fs = File.Open(path, FileMode.Append);
+        public DefaultLog(string filePath)
+        {   
+            var fs = File.Open(filePath, FileMode.Append);
             var bs = new BufferedStream(fs);
             StreamWriter = new StreamWriter(bs);
         }

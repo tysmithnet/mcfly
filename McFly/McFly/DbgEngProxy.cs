@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Primitives;
 using System.Linq;
 using System.Text.RegularExpressions;
 using McFly.Core;
@@ -7,14 +9,15 @@ using McFly.Debugger;
 
 namespace McFly
 {
+    [Export(typeof(IDbgEngProxy))]
     public class DbgEngProxy : IDbgEngProxy, IDisposable
     {
-        private IDebugControl5 Control { get; set; }
+        private IDebugControl6 Control { get; set; }
         private IDebugClient5 Client { get; set; }
         private ExecuteWrapper ExecuteWrapper { get; set; }
         private IDebugRegisters2 Registers { get; set; }
         private bool Is32Bit;
-        public DbgEngProxy(IDebugControl5 control, IDebugClient5 client, IDebugRegisters2 registers)
+        public DbgEngProxy(IDebugControl6 control, IDebugClient5 client, IDebugRegisters2 registers)
         {
             Control = control;
             Client = client;

@@ -95,6 +95,7 @@ namespace McFly
         private static readonly string pFormat = $":x{Marshal.SizeOf(IntPtr.Zero) * 2}";
 
         private static CompositionContainer compositionContainer;
+        private static McFlyApp app;
 
         /// <summary>
         ///     Create debugger interface
@@ -163,7 +164,7 @@ namespace McFly
         {
             try
             {
-                settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(GetSettingsFilePath()));
+                settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(GetSettingsFilePath())); // todo: change
             }
             catch (FileNotFoundException e)
             {
@@ -272,12 +273,40 @@ namespace McFly
                     var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
                     var typeCatalog = new TypeCatalog(types);
                     compositionContainer = new CompositionContainer(typeCatalog);
-                    var app = compositionContainer.GetExportedValue<McFlyApp>();
-
+                    var dbgEng = new DbgEngProxy(control, client, registers);
+                    string path = Path.Combine(Path.GetDirectoryName(assembly.Location), "mcfly.log");
+                    var log = new DefaultLog(path);
+                    compositionContainer.ComposeExportedValue<IDbgEngProxy>(dbgEng);
+                    compositionContainer.ComposeExportedValue<ILog>(log);
+                    
 
                     WriteLine("When this baby hits 88 miles per hour... you're gonna see some serious shit.");
                     showedIntro = true;
                 }
+        }
+
+        [DllExport]
+        public static HRESULT mf(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
+        {
+            // il merge
+            var argv = CommandLineToArgs(args);
+
+            if (args.Length == 0)
+            {
+                WriteLine("Enter a command, run !mf help to get the help text");
+                return HRESULT.S_OK;
+            }
+
+            var first = app.McFlyMethods.FirstOrDefault(x => x.Name == argv[0]);
+            if (first == null)
+            {
+                WriteLine($"Unrecognized command: {argv[0]}, run !mf help to get the help text");
+                return HRESULT.S_OK;
+            }
+
+            first.Process(argv.Skip(1).ToArray());
+
+            return HRESULT.S_OK;
         }
 
         /// <summary>
