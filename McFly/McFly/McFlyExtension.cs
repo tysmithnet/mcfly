@@ -274,6 +274,7 @@ namespace McFly
                     compositionContainer = new CompositionContainer(typeCatalog);
                     var app = compositionContainer.GetExportedValue<McFlyApp>();
 
+
                     WriteLine("When this baby hits 88 miles per hour... you're gonna see some serious shit.");
                     showedIntro = true;
                 }

@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigOptions.cs" />
+    <Compile Include="DbgEngProxy.cs" />
     <Compile Include="Debugger\Enums.cs" />
     <Compile Include="Debugger\IDebugAdvanced.cs" />
     <Compile Include="Debugger\IDebugAdvanced2.cs" />
@@ -174,9 +175,16 @@
     <Compile Include="Debugger\IDebugSystemObjects2.cs" />
     <Compile Include="Debugger\IDebugSystemObjects3.cs" />
     <Compile Include="Debugger\Structs.cs" />
+    <Compile Include="DefaultLog.cs" />
     <Compile Include="ExecuteWrapper.cs" />
     <Compile Include="HRESULT.cs" />
+    <Compile Include="IDbgEngProxy.cs" />
+    <Compile Include="IInjectable.cs" />
+    <Compile Include="ILog.cs" />
+    <Compile Include="IMcFlyMethod.cs" />
+    <Compile Include="Index.cs" />
     <Compile Include="InitOptions.cs" />
+    <Compile Include="ISettings.cs" />
     <Compile Include="McFlyApp.cs" />
     <Compile Include="McFlyExtension.cs" />
     <Compile Include="IndexOptions.cs" />
