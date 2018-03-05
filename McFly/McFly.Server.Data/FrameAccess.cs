@@ -38,10 +38,10 @@ namespace McFly.Server.Data
                 new SqlParameter("@pos_hi", SqlDbType.Int) {Value = frame.Position.High},
                 new SqlParameter("@pos_lo", SqlDbType.Int) {Value = frame.Position.Low},
                 new SqlParameter("@thread_id", SqlDbType.Int) {Value = frame.ThreadId},
-                new SqlParameter("@rax", SqlDbType.BigInt) {Value = frame.RegisterSet.Rax},
-                new SqlParameter("@rbx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rbx},
-                new SqlParameter("@rcx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rcx},
-                new SqlParameter("@rdx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rdx},
+                new SqlParameter("@rax", SqlDbType.BigInt) {Value = frame.RegisterSet.Rax.ToLong()},
+                new SqlParameter("@rbx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rbx.ToLong()},
+                new SqlParameter("@rcx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rcx.ToLong()},
+                new SqlParameter("@rdx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rdx.ToLong()},
                 new SqlParameter("@opcode_nmemonic", SqlDbType.VarChar) {Value = frame.OpcodeNmemonic},
                 new SqlParameter("@disassembly_note", SqlDbType.VarChar) {Value = frame.DisassemblyNote}
             };

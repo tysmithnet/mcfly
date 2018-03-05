@@ -572,10 +572,10 @@ namespace McFly
                                 var rip = debugValue.I64;
                                 registerSet = new RegisterSet
                                 {
-                                    Rax = Convert.ToInt64(rax),
-                                    Rbx = Convert.ToInt64(rbx),
-                                    Rcx = Convert.ToInt64(rcx),
-                                    Rdx = Convert.ToInt64(rdx)
+                                    Rax = Convert.ToUInt64(rax),
+                                    Rbx = Convert.ToUInt64(rbx),
+                                    Rcx = Convert.ToUInt64(rcx),
+                                    Rdx = Convert.ToUInt64(rdx)
                                 };
                             }
                             var stackTrace = ew.Execute("k");

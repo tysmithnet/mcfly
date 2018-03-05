@@ -12,6 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
+
 namespace McFly.Core
 {
     /// <summary>
@@ -19,29 +21,74 @@ namespace McFly.Core
     /// </summary>
     public class RegisterSet
     {
-        /// <summary>
-        ///     Gets or sets the rax.
-        /// </summary>
-        /// <value>The rax.</value>
-        public long Rax { get; set; }
+        private ulong _rax;
+        private ulong _rbx;
+        private ulong _rcx;
+        private ulong _rdx;
 
         /// <summary>
-        ///     Gets or sets the RBX.
+        ///     Gets or sets the rax register
         /// </summary>
-        /// <value>The RBX.</value>
-        public long Rbx { get; set; }
+        /// <value>The rax register</value>
+        public ulong Rax
+        {
+            get => _rax;
+            set => _rax = value;
+        }
 
         /// <summary>
-        ///     Gets or sets the RCX.
+        ///     Gets or sets the rbx register
         /// </summary>
-        /// <value>The RCX.</value>
-        public long Rcx { get; set; }
+        /// <value>The rbx register</value>
+        public ulong Rbx
+        {
+            get => _rbx;
+            set => _rbx = value;
+        }
 
         /// <summary>
-        ///     Gets or sets the RDX.
+        ///     Gets or sets the rcx register
         /// </summary>
-        /// <value>The RDX.</value>
-        public long Rdx { get; set; }
+        /// <value>The rcx register</value>
+        public ulong Rcx
+        {
+            get => _rcx;
+            set => _rcx = value;
+        }
+
+        /// <summary>
+        ///     Gets or sets the rdx register
+        /// </summary>
+        /// <value>the rdx register</value>
+        public ulong Rdx
+        {
+            get => _rdx;
+            set => _rdx = value;
+        }
+
+        public uint Eax
+        {
+            get => _rax.Lo32();
+            set => _rax.Lo32(value);
+        }
+
+        public uint Ebx
+        {
+            get => _rbx.Lo32();
+            set => _rbx.Lo32(value);
+        }
+
+        public uint Ecx
+        {
+            get => _rcx.Lo32();
+            set => _rcx.Lo32(value);
+        }
+
+        public uint Edx
+        {
+            get => _rdx.Lo32();
+            set => _rdx.Lo32(value);
+        }
     }
 }
 

@@ -59,34 +59,8 @@ namespace McFly.Server.Data
         /// <returns>System.String.</returns>
         protected string GetProjectConnectionString(string projectName)
         {
-            var sb = new SqlConnectionStringBuilder(ConnectionString);
-            sb.InitialCatalog = projectName;
+            var sb = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName};
             return sb.ToString();
-        }
-    }
-
-    /// <summary>
-    ///     Class DataExtensions.
-    /// </summary>
-    public static class DataExtensions
-    {
-        /// <summary>
-        ///     To the tuple.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <returns>System.Int32.</returns>
-        /// <exception cref="ArgumentException">
-        /// </exception>
-        public static (int, int) ToTuple(this string key)
-        {
-            var split = key?.Split(':');
-            if (split?.Length != 2 || !int.TryParse(split[0], out var major) || !int.TryParse(split[1], out var minor))
-                throw new ArgumentException($"Invalid key: {key}");
-            if (major < 0)
-                throw new ArgumentException($"Invalid key, major is negative: {key}");
-            if (minor < 0)
-                throw new ArgumentException($"Invalid key, minor is negative: {key}");
-            return (major, minor);
         }
     }
 }

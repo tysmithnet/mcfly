@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.Collections.Generic;
 
 namespace McFly.Core
@@ -21,6 +22,8 @@ namespace McFly.Core
     /// </summary>
     public class Frame
     {
+        private int _threadId;
+
         /// <summary>
         ///     Gets or sets the position.
         /// </summary>
@@ -31,7 +34,16 @@ namespace McFly.Core
         ///     Gets or sets the thread identifier.
         /// </summary>
         /// <value>The thread identifier.</value>
-        public int ThreadId { get; set; }
+        public int ThreadId
+        {
+            get => _threadId;
+            set
+            {
+                if(value < 0)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
+                _threadId = value;
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the register set.

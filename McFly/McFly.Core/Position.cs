@@ -58,6 +58,8 @@ namespace McFly.Core
             get => _high;
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
                 if (value < _low)
                     throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least Low");
                 _high = value;
@@ -74,6 +76,8 @@ namespace McFly.Core
             get => _low;
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
                 if (value > _high)
                     throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least High");
                 _low = value;
