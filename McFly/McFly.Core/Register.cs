@@ -12,6 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Collections.Generic;
+
 namespace McFly.Core
 {
     /// <summary>
@@ -19,10 +21,7 @@ namespace McFly.Core
     /// </summary>
     public abstract class Register
     {
-        /// <summary>
-        ///     The core user registers64
-        /// </summary>
-        public static Register[] CoreUserRegisters64 = {Rax, Rbx, Rcx, Rdx};
+        public static IReadOnlyCollection<Register> AllRegisters64 { get; } = new[] { Rax, Rbx, Rcx, Rdx };
 
         /// <summary>
         ///     Gets the name.
@@ -35,7 +34,7 @@ namespace McFly.Core
         /// </summary>
         /// <value>The number bits.</value>
         public abstract int NumBits { get; }
-
+        
         /// <summary>
         ///     Gets the rax.
         /// </summary>
@@ -59,6 +58,7 @@ namespace McFly.Core
         /// </summary>
         /// <value>The RDX.</value>
         public static Register Rdx { get; } = new RdxRegister();
+        public static IReadOnlyCollection<Register> CoreUserRegisters64 { get; } = new[] { Rax, Rbx, Rcx, Rdx };
 
         /// <summary>
         ///     Class RaxRegister.

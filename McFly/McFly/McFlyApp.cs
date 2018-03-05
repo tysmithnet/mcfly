@@ -106,7 +106,7 @@ namespace McFly
     {
         void RunUntilBreak();
         string Execute(string command);
-        RegisterSet GetRegisters(int threadId);
+        RegisterSet GetRegisters(int threadId, IEnumerable<Register> registers);
     }
 
     public class DbgEngProxy : IDbgEngProxy, IDisposable
@@ -158,10 +158,22 @@ namespace McFly
             return ExecuteWrapper.Execute(command);
         }
 
-        public RegisterSet GetRegisters(int threadId)
+        public RegisterSet GetRegisters(int threadId, IEnumerable<Register> registers)
         {
-            string registers = Execute($"~~[{threadId:X}] r");
-            return null; // todo: fix
+            var list = registers.ToList();
+            if(list.Count == 0)
+                return new RegisterSet();
+            var registerSet = new RegisterSet();
+            string registerNames = string.Join(",", list.Select(x => x.Name));
+            string registerText = Execute($"~~[{threadId:X}] r {registerNames}");
+            foreach (var register in list)
+            {
+                int numChars = register.NumBits / 2;
+                var match = Regex.Match(registerText, $"{register.Name}=(?<val>[a-fA-F0-9]{{{numChars}}})");
+                var val = match.Groups["val"].Value;
+                registerSet.Process(register.Name, val, 16);
+            }
+            return registerSet;
         }
     }
 
@@ -272,42 +284,34 @@ namespace McFly
                 foreach (var record in records)
                 {
                     // all threads currently at the same breakpoint position
-                    if (record.Position == breakRecord.Position)
+                    if (record.Position != breakRecord.Position) continue;
+                    var registerSet = DbgEngProxy.GetRegisters(record.ThreadId, Register.CoreUserRegisters64);
+                    var stackTrace = DbgEngProxy.Execute("k");
+
+                    var stackFrames = (from m in Regex.Matches(stackTrace, @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
+                            .Cast<Match>()
+                        let stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16)
+                        let returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16)
+                        let module = m.Groups["mod"].Value
+                        let functionName = m.Groups["fun"].Value
+                        let offset = Convert.ToUInt32(m.Groups["off"].Value, 16)
+                        select new StackFrame(stackPointer, returnAddress, module, functionName, offset)).ToList();
+
+                    var eipRegister = is32Bit ? "eip" : "rip";
+                    var instructionText = DbgEngProxy.Execute($"u {eipRegister} L1");
+                    var match = Regex.Match(instructionText,
+                        @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.+)?");
+
+                    var frame = new Frame
                     {
-                        var registerSet = DbgEngProxy.GetRegisters(record.ThreadId);
-                        var stackTrace = DbgEngProxy.Execute("k");
-
-                        var stackFrames = new List<StackFrame>();
-                        foreach (var m in Regex.Matches(stackTrace,
-                                @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
-                            .Cast<Match>())
-                        {
-                            var stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16);
-                            var returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16);
-                            var module = m.Groups["mod"].Value;
-                            var functionName = m.Groups["fun"].Value;
-                            var offset = Convert.ToUInt32(m.Groups["off"].Value, 16);
-                            var stackFrame = new StackFrame(stackPointer, returnAddress, module, functionName,
-                                offset);
-                            stackFrames.Add(stackFrame);
-                        }
-
-                        var eipRegister = is32Bit ? "eip" : "rip";
-                        var instructionText = DbgEngProxy.Execute($"u {eipRegister} L1");
-                        var match = Regex.Match(instructionText,
-                            @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.+)?");
-
-                        var frame = new Frame
-                        {
-                            Position = record.Position,
-                            RegisterSet = registerSet,
-                            ThreadId = record.ThreadId,
-                            StackFrames = stackFrames,
-                            OpcodeNmemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
-                            DisassemblyNote = match.Groups["extra"].Success ? match.Groups["extra"].Value : null
-                        };
-                        frames.Add(frame);
-                    }
+                        Position = record.Position,
+                        RegisterSet = registerSet,
+                        ThreadId = record.ThreadId,
+                        StackFrames = stackFrames,
+                        OpcodeNmemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
+                        DisassemblyNote = match.Groups["extra"].Success ? match.Groups["extra"].Value : null
+                    };
+                    frames.Add(frame);
                 }
                 using (var serverClient = new ServerClient(new Uri(Settings.ServerUrl)))
                 {

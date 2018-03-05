@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.Linq;
 
 namespace McFly.Core
 {
@@ -25,6 +26,29 @@ namespace McFly.Core
         private ulong _rbx;
         private ulong _rcx;
         private ulong _rdx;
+
+        public void Process(string register, string input, int radix)
+        {
+            var first = Register.AllRegisters64.SingleOrDefault(x => x.Name == register);
+            if (first != null)
+            {
+                switch (first.Name)
+                {
+                    case "rax":
+                        _rax = Convert.ToUInt64(input, radix);
+                        break;
+                    case "rbx":
+                        _rbx = Convert.ToUInt64(input, radix);
+                        break;
+                    case "rcx":
+                        _rcx = Convert.ToUInt64(input, radix);
+                        break;
+                    case "rdx":
+                        _rdx = Convert.ToUInt64(input, radix);
+                        break;
+                }
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the rax register
