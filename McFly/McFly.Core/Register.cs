@@ -21,8 +21,13 @@ namespace McFly.Core
     /// </summary>
     public abstract class Register
     {
-        public static IReadOnlyCollection<Register> AllRegisters64 { get; } = new[] { Rax, Rbx, Rcx, Rdx };
-
+        public static IReadOnlyCollection<Register> AllRegisters64 { get; }
+        static Register()
+        {
+            AllRegisters64 = new[] { Rax, Rbx, Rcx, Rdx };
+            CoreUserRegisters64 = new[] { Rax, Rbx, Rcx, Rdx };
+        }
+                            
         /// <summary>
         ///     Gets the name.
         /// </summary>
@@ -58,7 +63,7 @@ namespace McFly.Core
         /// </summary>
         /// <value>The RDX.</value>
         public static Register Rdx { get; } = new RdxRegister();
-        public static IReadOnlyCollection<Register> CoreUserRegisters64 { get; } = new[] { Rax, Rbx, Rcx, Rdx };
+        public static IReadOnlyCollection<Register> CoreUserRegisters64 { get; } 
 
         /// <summary>
         ///     Class RaxRegister.

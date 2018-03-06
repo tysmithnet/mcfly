@@ -278,7 +278,7 @@ namespace McFly
                     var log = new DefaultLog(path);
                     compositionContainer.ComposeExportedValue<IDbgEngProxy>(dbgEng);
                     compositionContainer.ComposeExportedValue<ILog>(log);
-                    
+                    app = compositionContainer.GetExportedValue<McFlyApp>();
 
                     WriteLine("When this baby hits 88 miles per hour... you're gonna see some serious shit.");
                     showedIntro = true;
@@ -291,7 +291,7 @@ namespace McFly
             // il merge
             var argv = CommandLineToArgs(args);
 
-            if (args.Length == 0)
+            if (argv.Length == 0)
             {
                 WriteLine("Enter a command, run !mf help to get the help text");
                 return HRESULT.S_OK;

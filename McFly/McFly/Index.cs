@@ -79,30 +79,8 @@ namespace McFly
             var is32Bit =
                 Regex.Match(DbgEngProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length == 8;
             // loop through all the set break points and record relevant values
-            DEBUG_STATUS status;
-            var goStatuses = new[]
-            {
-                    DEBUG_STATUS.GO, DEBUG_STATUS.STEP_BRANCH, DEBUG_STATUS.STEP_INTO, DEBUG_STATUS.STEP_OVER,
-                    DEBUG_STATUS.REVERSE_STEP_BRANCH, DEBUG_STATUS.REVERSE_STEP_INTO, DEBUG_STATUS.REVERSE_GO,
-                    DEBUG_STATUS.REVERSE_STEP_OVER
-                };
             while (true)
-            {
-                // equivalent of g
-                //control.SetExecutionStatus(DEBUG_STATUS.GO);
-                //while (true)
-                //{
-                //    control.GetExecutionStatus(out status);
-                //    if (goStatuses.Contains(status))
-                //    {
-                //        control.WaitForEvent(DEBUG_WAIT.DEFAULT,
-                //            uint.MaxValue); // todo: make reasonable and add counter.. shouldn't wait more than 10s
-                //        continue;
-                //    }
-
-                //    if (status == DEBUG_STATUS.BREAK)
-                //        break;
-                //}
+            {     
                 DbgEngProxy.RunUntilBreak();
                 var records = GetPositions().ToArray();
                 var breakRecord = records.Single(x => x.IsThreadWithBreak);

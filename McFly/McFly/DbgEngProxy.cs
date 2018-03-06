@@ -72,7 +72,7 @@ namespace McFly
             string registerText = Execute($"~~[{threadId:X}] r {registerNames}");
             foreach (var register in list)
             {
-                int numChars = register.NumBits / 2;
+                int numChars = Is32Bit ? 8 : 16;
                 var match = Regex.Match(registerText, $"{register.Name}=(?<val>[a-fA-F0-9]{{{numChars}}})");
                 var val = match.Groups["val"].Value;
                 registerSet.Process(register.Name, val, 16);
