@@ -105,6 +105,8 @@ namespace McFly
         /// </summary>
         private static McFlyApp app;
 
+        private static ILog log;
+
         /// <summary>
         ///     Create debugger interface
         /// </summary>
@@ -169,7 +171,7 @@ namespace McFly
         ///     Initializes the API.
         /// </summary>
         /// <param name="log">The log.</param>
-        internal static void InitApi(DefaultLog log = null)
+        internal static void InitApi(ILog log = null)
         {
             LastHR = HRESULT.S_OK;
             if (client != null) return;
@@ -267,7 +269,7 @@ namespace McFly
                 {
                     var assembly = Assembly.GetExecutingAssembly();
                     var path = Path.Combine(Path.GetDirectoryName(assembly.Location), "mcfly.log");
-                    var log = new DefaultLog(path);
+                    log = new DefaultLog(path);
                     InitApi(log);
                     var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
                     var typeCatalog = new TypeCatalog(types);
@@ -369,6 +371,8 @@ namespace McFly
         [DllExport]
         public static HRESULT DebugExtensionUninitialize()
         {
+            if(log != null)
+                  log.Dispose();
             if (currDomain != null)
                 AppDomain.Unload(currDomain);
 
@@ -412,21 +416,6 @@ namespace McFly
 
         }
 
-        /// <summary>
-        ///     Starts the specified client.
-        /// </summary>
-        /// <param name="client">The client.</param>
-        /// <param name="args">The arguments.</param>
-        /// <returns>HRESULT.</returns>
-        [DllExport]
-        public static HRESULT start(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
-        {
-            InitApi();
-
-            Start();
-
-            return HRESULT.S_OK;
-        }
 
         /// <summary>
         ///     Mfindexes the specified client.
@@ -659,40 +648,6 @@ namespace McFly
             });
         }
 
-        /// <summary>
-        ///     Starts this instance.
-        /// </summary>
-        private static void Start()
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(settings.LauncherPath))
-                {
-                    WriteLine(
-                        "You must set the launcher path in settings: !config -k launcher_path -v c:\\path\\to\\launch.bat");
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(settings.ConnectionString))
-                {
-                    WriteLine(
-                        "You must set the connection string in settings: !config -k connection_string -v \"Data Source=Whatever;Integrated Security=true\"");
-                    return;
-                }
-                var startInfo = new ProcessStartInfo
-                {
-                    FileName = settings.LauncherPath,
-                    CreateNoWindow = false,
-                    Environment = {{"ConnectionString", settings.ConnectionString}},
-                    UseShellExecute = false
-                };
-                var p = Process.Start(startInfo);
-            }
-            catch (Exception e)
-            {
-                WriteLine($"Error starting server. Is your path correct? Message: {e.Message}");
-                throw;
-            }
-        }
 
         /// <summary>
         ///     Initializes the specified client.

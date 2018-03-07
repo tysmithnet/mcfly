@@ -19,5 +19,6 @@ namespace McFly
     /// </summary>
     public class StartOptions
     {
+        // todo: add optional overrides
     }
 }

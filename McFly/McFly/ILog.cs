@@ -20,7 +20,7 @@ namespace McFly
     ///     Interface ILog
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
-    public interface ILog : IInjectable
+    public interface ILog : IDisposable, IInjectable
     {
         /// <summary>
         ///     Verboses the specified message.
