@@ -1,47 +1,101 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : McFly.Core
+// Author           : @tsmithnet
+// Created          : 02-25-2018
+//
+// Last Modified By : @tsmithnet
+// Last Modified On : 03-03-2018
+// ***********************************************************************
+// <copyright file="Position.cs" company="McFly.Core">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace McFly.Core
 {
+    /// <summary>
+    ///     Class Position.
+    /// </summary>
+    /// <seealso cref="System.IComparable{McFly.Core.Position}" />
+    /// <seealso cref="System.IEquatable{McFly.Core.Position}" />
     [DebuggerDisplay("{_high}:{_low}")]
     public class Position : IComparable<Position>, IEquatable<Position>
     {
+        /// <summary>
+        ///     The high
+        /// </summary>
         private int _high;
+
+        /// <summary>
+        ///     The low
+        /// </summary>
         private int _low;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Position" /> class.
+        /// </summary>
+        /// <param name="high">The high.</param>
+        /// <param name="low">The low.</param>
         public Position(int high, int low)
         {
             _high = high;
             _low = low;
         }
-                
+
+        /// <summary>
+        ///     Gets or sets the high.
+        /// </summary>
+        /// <value>The high.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public int High
         {
             get => _high;
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
                 if (value < _low)
                     throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least Low");
                 _high = value;
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the low.
+        /// </summary>
+        /// <value>The low.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public int Low
         {
             get => _low;
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
                 if (value > _high)
                     throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least High");
                 _low = value;
             }
         }
 
+        /// <summary>
+        ///     Gets the high low thread identifier comparer.
+        /// </summary>
+        /// <value>The high low thread identifier comparer.</value>
         public static IEqualityComparer<Position> HighLowThreadIdComparer { get; } =
             new HighLowThreadIdEqualityComparer();
 
+        /// <summary>
+        ///     Compares to.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns>System.Int32.</returns>
         public int CompareTo(Position other)
         {
             if (ReferenceEquals(this, other)) return 0;
@@ -51,6 +105,14 @@ namespace McFly.Core
             return _low.CompareTo(other._low);
         }
 
+        /// <summary>
+        ///     Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>
+        ///     true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise,
+        ///     false.
+        /// </returns>
         public bool Equals(Position other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -58,11 +120,21 @@ namespace McFly.Core
             return _high == other._high && _low == other._low;
         }
 
+        /// <summary>
+        ///     Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
             return $"{High:X}:{Low:X}";
         }
 
+        /// <summary>
+        ///     Parses the specified text.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <returns>Position.</returns>
+        /// <exception cref="FormatException">text</exception>
         public static Position Parse(string text)
         {
             var match = Regex.Match(text, @"^\s*(?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+\s*$)");
@@ -72,6 +144,11 @@ namespace McFly.Core
                 Convert.ToInt32(match.Groups["lo"].Value, 16));
         }
 
+        /// <summary>
+        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -80,48 +157,98 @@ namespace McFly.Core
             return Equals((Position) obj);
         }
 
+        /// <summary>
+        ///     Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         public override int GetHashCode()
         {
             unchecked
             {
-                var hashCode = (int) _high;
-                hashCode = (hashCode * 397) ^ (int) _low;            
+                var hashCode = _high;
+                hashCode = (hashCode * 397) ^ _low;
                 return hashCode;
             }
         }
 
+        /// <summary>
+        ///     Implements the == operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
         public static bool operator ==(Position left, Position right)
         {
             return left.Equals(right);
         }
 
+        /// <summary>
+        ///     Implements the != operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
         public static bool operator !=(Position left, Position right)
         {
             return !(left == right);
         }
 
+        /// <summary>
+        ///     Implements the &lt; operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
         public static bool operator <(Position left, Position right)
         {
             return left.CompareTo(right) < 0;
         }
 
+        /// <summary>
+        ///     Implements the &gt; operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
         public static bool operator >(Position left, Position right)
         {
             return left.CompareTo(right) > 0;
         }
 
+        /// <summary>
+        ///     Implements the &lt;= operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
         public static bool operator <=(Position left, Position right)
         {
             return left.CompareTo(right) <= 0;
         }
 
+        /// <summary>
+        ///     Implements the &gt;= operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
         public static bool operator >=(Position left, Position right)
         {
             return left.CompareTo(right) >= 0;
         }
 
+        /// <summary>
+        ///     Class HighLowThreadIdEqualityComparer. This class cannot be inherited.
+        /// </summary>
+        /// <seealso cref="System.Collections.Generic.IEqualityComparer{McFly.Core.Position}" />
         private sealed class HighLowThreadIdEqualityComparer : IEqualityComparer<Position>
         {
+            /// <summary>
+            ///     Determines whether the specified objects are equal.
+            /// </summary>
+            /// <param name="x">The first object of type T to compare.</param>
+            /// <param name="y">The second object of type T to compare.</param>
+            /// <returns>true if the specified objects are equal; otherwise, false.</returns>
             public bool Equals(Position x, Position y)
             {
                 if (ReferenceEquals(x, y)) return true;
@@ -131,12 +258,17 @@ namespace McFly.Core
                 return x._high == y._high && x._low == y._low;
             }
 
+            /// <summary>
+            ///     Returns a hash code for this instance.
+            /// </summary>
+            /// <param name="obj">The <see cref="T:System.Object"></see> for which a hash code is to be returned.</param>
+            /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
             public int GetHashCode(Position obj)
             {
                 unchecked
                 {
-                    var hashCode = (int) obj._high;
-                    hashCode = (hashCode * 397) ^ (int) obj._low;
+                    var hashCode = obj._high;
+                    hashCode = (hashCode * 397) ^ obj._low;
                     return hashCode;
                 }
             }

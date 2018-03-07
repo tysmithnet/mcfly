@@ -1,37 +1,69 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tsmithnet
+// Created          : 03-03-2018
+//
+// Last Modified By : @tsmithnet
+// Last Modified On : 03-03-2018
+// ***********************************************************************
+// <copyright file="IDebugOutputCallbacks2.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 
-using System;
 using System.Runtime.InteropServices;
 
 #pragma warning disable 1591
 
-namespace Microsoft.Diagnostics.Runtime.Interop
+namespace McFly.Debugger
 {
-    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("67721fe9-56d2-4a44-a325-2b65513ce6eb")]
+    /// <summary>
+    ///     Interface IDebugOutputCallbacks2
+    /// </summary>
+    /// <seealso cref="McFly.Debugger.IDebugOutputCallbacks" />
+    [ComImport]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("67721fe9-56d2-4a44-a325-2b65513ce6eb")]
     public interface IDebugOutputCallbacks2 : IDebugOutputCallbacks
     {
         /* IDebugOutputCallbacks */
 
         /// <summary>
-        ///    This method is not used.
+        ///     This method is not used.
         /// </summary>
+        /// <param name="Mask">The mask.</param>
+        /// <param name="Text">The text.</param>
+        /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int Output(
             [In] DEBUG_OUTPUT Mask,
-            [In, MarshalAs(UnmanagedType.LPStr)] string Text);
+            [In] [MarshalAs(UnmanagedType.LPStr)] string Text);
 
         /* IDebugOutputCallbacks2 */
 
+        /// <summary>
+        ///     Gets the interest mask.
+        /// </summary>
+        /// <param name="Mask">The mask.</param>
+        /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetInterestMask(
             [Out] out DEBUG_OUTCBI Mask);
 
+        /// <summary>
+        ///     Output2s the specified which.
+        /// </summary>
+        /// <param name="Which">The which.</param>
+        /// <param name="Flags">The flags.</param>
+        /// <param name="Arg">The argument.</param>
+        /// <param name="Text">The text.</param>
+        /// <returns>System.Int32.</returns>
         [PreserveSig]
         int Output2(
             [In] DEBUG_OUTCB Which,
             [In] DEBUG_OUTCBF Flags,
-            [In] UInt64 Arg,
-            [In, MarshalAs(UnmanagedType.LPWStr)] string Text);
+            [In] ulong Arg,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string Text);
     }
 }
