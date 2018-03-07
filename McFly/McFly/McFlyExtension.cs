@@ -300,7 +300,7 @@ namespace McFly
             return HRESULT.S_OK;
         }
 
-        public static void PopulateSettings()
+        internal static void PopulateSettings()
         {   
             var assemblyPath = Assembly.GetExecutingAssembly().Location;
             assemblyPath = Path.GetDirectoryName(assemblyPath);

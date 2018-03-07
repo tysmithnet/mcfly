@@ -21,6 +21,7 @@ namespace McFly
     ///     Class Settings.
     /// </summary>
     [Export(typeof(ISettings))]
+    [Export(typeof(Settings))]
     public class Settings : ISettings
     {
         /// <summary>
