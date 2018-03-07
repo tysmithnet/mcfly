@@ -161,21 +161,25 @@ namespace McFly
         /// <summary>
         ///     Initializes the API.
         /// </summary>
-        internal static void INIT_API()
+        /// <param name="log"></param>
+        internal static void InitApi(DefaultLog log = null)
         {
             LastHR = HRESULT.S_OK;
-            if (client == null)
-                try
-                {
-                    client = (IDebugClient5) CreateIDebugClient();
-                    control = (IDebugControl6) client;
-                    registers = (IDebugRegisters2) client;
-                    symbols = (IDebugSymbols5) client;
-                }
-                catch
-                {
-                    LastHR = HRESULT.E_UNEXPECTED;
-                }
+            if (client != null) return;
+            try
+            {
+                log?.Debug("Client did not exist. Creating a new client and associated interfaces.");
+                client = (IDebugClient5) CreateIDebugClient();
+                control = (IDebugControl6) client;
+                registers = (IDebugRegisters2) client;
+                symbols = (IDebugSymbols5) client;
+            }
+            catch(Exception e)
+            {
+                log?.Fatal("Unable to create debug client. Are you missing DLLs?");
+                log?.Fatal(e);
+                LastHR = HRESULT.E_UNEXPECTED;
+            }
         }
 
         /// <summary>
@@ -227,7 +231,7 @@ namespace McFly
         /// <param name="e">The <see cref="UnhandledExceptionEventArgs" /> instance containing the event data.</param>
         private static void CurrDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            INIT_API();
+            InitApi();
             WriteLine("SourceExt: An unhandled exception happened on the extension");
             WriteLine("  This error is related to the extension itself not the target.");
             WriteLine("  The information on the exception is below:\n");
@@ -254,15 +258,15 @@ namespace McFly
             if (Notify == 2)
                 if (!showedIntro)
                 {
-                    INIT_API();
                     var assembly = Assembly.GetExecutingAssembly();
-                    var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
-                    var typeCatalog = new TypeCatalog(types);
-                    WriteLine(string.Join(", ", types.Select(x => x.FullName)));
-                    compositionContainer = new CompositionContainer(typeCatalog);
-                    var dbgEng = new DbgEngProxy(control, client, registers);
                     var path = Path.Combine(Path.GetDirectoryName(assembly.Location), "mcfly.log");
                     var log = new DefaultLog(path);
+                    InitApi(log);                    
+                    var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
+                    var typeCatalog = new TypeCatalog(types);
+                    compositionContainer = new CompositionContainer(typeCatalog);
+                    var dbgEng = new DbgEngProxy(control, client, registers);
+                    
                     compositionContainer.ComposeExportedValue<IDbgEngProxy>(dbgEng);
                     compositionContainer.ComposeExportedValue<ILog>(log);
                     PopulateSettings();              
@@ -370,7 +374,7 @@ namespace McFly
         [DllExport]
         public static HRESULT config(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
-            INIT_API();
+            InitApi();
             // il merge
             var argv = CommandLineToArgs(args);
 
@@ -436,7 +440,7 @@ namespace McFly
         [DllExport]
         public static HRESULT use(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
-            INIT_API();
+            InitApi();
 
             Use(args);
 
@@ -472,7 +476,7 @@ namespace McFly
         [DllExport]
         public static HRESULT start(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
-            INIT_API();
+            InitApi();
 
             Start();
 
@@ -488,7 +492,7 @@ namespace McFly
         [DllExport]
         public static HRESULT mfindex(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
-            INIT_API();
+            InitApi();
 
             var argv = CommandLineToArgs(args);
 
@@ -754,7 +758,7 @@ namespace McFly
         [DllExport]
         public static HRESULT init(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
-            INIT_API();
+            InitApi();
             if (LastHR != HRESULT.S_OK)
                 return LastHR;
 
