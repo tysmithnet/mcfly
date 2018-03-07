@@ -30,6 +30,7 @@ using CommandLine;
 using McFly.Core;
 using McFly.Debugger;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RGiesecke.DllExport;
 using StackFrame = McFly.Core.StackFrame;
 
@@ -162,21 +163,6 @@ namespace McFly
         /// </summary>
         internal static void INIT_API()
         {
-            try
-            {
-                settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(GetSettingsFilePath())); // todo: change
-            }
-            catch (FileNotFoundException e)
-            {
-                settings = new Settings();
-                File.WriteAllText(GetSettingsFilePath(), JsonConvert.SerializeObject(settings));
-            }
-            catch (Exception e)
-            {
-                WriteLine($"Error: Unable to get settings: {e}");
-                throw;
-            }
-
             LastHR = HRESULT.S_OK;
             if (client == null)
                 try
@@ -265,21 +251,22 @@ namespace McFly
         [DllExport]
         public static void DebugExtensionNotify(uint Notify, ulong Argument)
         {
-            if (Notify == 2) 
+            if (Notify == 2)
                 if (!showedIntro)
-                {     
+                {
                     INIT_API();
                     var assembly = Assembly.GetExecutingAssembly();
                     var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
                     var typeCatalog = new TypeCatalog(types);
+                    WriteLine(string.Join(", ", types.Select(x => x.FullName)));
                     compositionContainer = new CompositionContainer(typeCatalog);
                     var dbgEng = new DbgEngProxy(control, client, registers);
-                    string path = Path.Combine(Path.GetDirectoryName(assembly.Location), "mcfly.log");
+                    var path = Path.Combine(Path.GetDirectoryName(assembly.Location), "mcfly.log");
                     var log = new DefaultLog(path);
                     compositionContainer.ComposeExportedValue<IDbgEngProxy>(dbgEng);
                     compositionContainer.ComposeExportedValue<ILog>(log);
+                    PopulateSettings();              
                     app = compositionContainer.GetExportedValue<McFlyApp>();
-
                     WriteLine("When this baby hits 88 miles per hour... you're gonna see some serious shit.");
                     showedIntro = true;
                 }
@@ -307,6 +294,58 @@ namespace McFly
             first.Process(argv.Skip(1).ToArray());
 
             return HRESULT.S_OK;
+        }
+
+        public static void PopulateSettings()
+        {   
+            var assemblyPath = Assembly.GetExecutingAssembly().Location;
+            assemblyPath = Path.GetDirectoryName(assemblyPath);
+            var settingsInstances = compositionContainer.GetExportedValues<ISettings>().ToArray();
+            WriteLine(string.Join(", ", settingsInstances.Select(x => x.GetType().ToString())));
+            var filePath = Path.Combine(assemblyPath, "mcfly.config");
+            string json = null;
+            try
+            {
+                json = File.ReadAllText(filePath);
+            }
+            catch (FileNotFoundException)
+            {
+                WriteLine("Settings file could not be fe found. Creating one now.");
+                File.WriteAllText(filePath,
+                    JsonConvert.SerializeObject(settingsInstances.AsEnumerable(), Formatting.Indented,
+                        new SettingsJsonConverter()));
+                return;
+            }   
+            catch (Exception)
+            {
+                WriteLine("There was a problem opening the settings file. Is it locked?");
+                return;
+            }
+
+            var rootObject = JObject.Parse(json);
+
+            var list = new List<string>();
+            foreach (var prop in rootObject)
+            {
+                // {
+                //     "McFly.IndexOptions": { ... } 
+                //     ...
+                // }
+                var settingsInstance =
+                    settingsInstances.SingleOrDefault(x => x.GetType().AssemblyQualifiedName == prop.Key);
+                if (settingsInstance != null)
+                {
+                    var settingsObject = prop.Value as JObject;
+                    JsonConvert.PopulateObject(settingsObject.ToString(), settingsInstance);
+                }
+                else
+                {
+                    list.Add(prop.Key);
+                }
+            }
+            if (list.Any())
+                File.WriteAllText(filePath,
+                    JsonConvert.SerializeObject(settingsInstances, Formatting.Indented, new SettingsJsonConverter()));
         }
 
         /// <summary>
