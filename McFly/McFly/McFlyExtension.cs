@@ -351,7 +351,7 @@ namespace McFly
                 //     ...
                 // }
                 var settingsInstance =
-                    settingsInstances.SingleOrDefault(x => x.GetType().AssemblyQualifiedName == prop.Key);
+                    settingsInstances.SingleOrDefault(x => x.GetType().FullName == prop.Key);
                 if (settingsInstance == null) continue;
                 var settingsObject = prop.Value as JObject;
                 JsonConvert.PopulateObject(settingsObject.ToString(), settingsInstance);
@@ -373,72 +373,6 @@ namespace McFly
                 AppDomain.Unload(currDomain);
 
             return HRESULT.S_OK;
-        }
-
-        /// <summary>
-        ///     Configurations the specified client.
-        /// </summary>
-        /// <param name="client">The client.</param>
-        /// <param name="args">The arguments.</param>
-        /// <returns>HRESULT.</returns>
-        [DllExport]
-        public static HRESULT config(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
-        {
-            InitApi();
-            // il merge
-            var argv = CommandLineToArgs(args);
-
-            Parser.Default.ParseArguments<ConfigOptions>(argv)
-                .WithParsed(opts => { Config(opts); });
-
-            return HRESULT.S_OK;
-        }
-
-        /// <summary>
-        ///     Gets the settings file path.
-        /// </summary>
-        /// <returns>System.String.</returns>
-        private static string GetSettingsFilePath()
-        {
-            var settingsFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            settingsFile = Path.Combine(settingsFile, "mcfly.settings.json");
-            return settingsFile;
-        }
-
-        /// <summary>
-        ///     Configurations the specified opts.
-        /// </summary>
-        /// <param name="opts">The opts.</param>
-        private static void Config(ConfigOptions opts)
-        {
-            var settingsFile = GetSettingsFilePath();
-            if (opts.ShouldList)
-            {
-                WriteLine($"connection_string => {settings.ConnectionString}");
-                WriteLine($"server_url => {settings.ServerUrl}");
-                WriteLine($"launcher_path => {settings.LauncherPath}");
-                WriteLine($"project => {settings.ProjectName}");
-                return;
-            }
-            if (opts.Key != null)
-            {
-                switch (opts.Key)
-                {
-                    case "connection_string":
-                        settings.ConnectionString = opts.Value;
-                        break;
-                    case "server_url":
-                        settings.ServerUrl = opts.Value;
-                        break;
-                    case "launcher_path":
-                        settings.LauncherPath = opts.Value;
-                        break;
-                    case "project":
-                        settings.ProjectName = opts.Value;
-                        break;
-                }
-                File.WriteAllText(settingsFile, JsonConvert.SerializeObject(settings, Formatting.Indented));
-            }
         }
 
         /// <summary>
@@ -475,6 +409,7 @@ namespace McFly
                 return;
             }
             settings.ProjectName = projectName;
+
         }
 
         /// <summary>
