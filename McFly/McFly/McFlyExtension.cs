@@ -305,7 +305,6 @@ namespace McFly
             var assemblyPath = Assembly.GetExecutingAssembly().Location;
             assemblyPath = Path.GetDirectoryName(assemblyPath);
             var settingsInstances = compositionContainer.GetExportedValues<ISettings>().ToArray();
-            WriteLine(string.Join(", ", settingsInstances.Select(x => x.GetType().ToString())));
             var filePath = Path.Combine(assemblyPath, "mcfly.config");
             string json = null;
             try
@@ -327,8 +326,8 @@ namespace McFly
             }
 
             var rootObject = JObject.Parse(json);
-
-            var list = new List<string>();
+                                                  
+            int numProcessed = 0;
             foreach (var prop in rootObject)
             {
                 // {
@@ -337,17 +336,12 @@ namespace McFly
                 // }
                 var settingsInstance =
                     settingsInstances.SingleOrDefault(x => x.GetType().AssemblyQualifiedName == prop.Key);
-                if (settingsInstance != null)
-                {
-                    var settingsObject = prop.Value as JObject;
-                    JsonConvert.PopulateObject(settingsObject.ToString(), settingsInstance);
-                }
-                else
-                {
-                    list.Add(prop.Key);
-                }
+                if (settingsInstance == null) continue;
+                var settingsObject = prop.Value as JObject;
+                JsonConvert.PopulateObject(settingsObject.ToString(), settingsInstance);
+                numProcessed++;
             }
-            if (list.Any())
+            if (settingsInstances.Count() != numProcessed)
                 File.WriteAllText(filePath,
                     JsonConvert.SerializeObject(settingsInstances, Formatting.Indented, new SettingsJsonConverter()));
         }
