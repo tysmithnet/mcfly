@@ -1,4 +1,18 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : master
+// Created          : 03-04-2018
+//
+// Last Modified By : master
+// Last Modified On : 03-06-2018
+// ***********************************************************************
+// <copyright file="IndexMethod.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -6,34 +20,54 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CommandLine;
 using McFly.Core;
-using McFly.Debugger;
 
 namespace McFly
 {
+    /// <summary>
+    ///     Class IndexMethod.
+    /// </summary>
+    /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
     internal class IndexMethod : IMcFlyMethod
     {
+        /// <summary>
+        ///     Gets or sets the log.
+        /// </summary>
+        /// <value>The log.</value>
         [Import]
         private ILog Log { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the debug eng proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
         [Import]
         private IDbgEngProxy DbgEngProxy { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the settings.
+        /// </summary>
+        /// <value>The settings.</value>
         [Import]
         private Settings Settings { get; set; }
 
+        /// <summary>
+        ///     Gets the name.
+        /// </summary>
+        /// <value>The name.</value>
         public string Name { get; } = "index";
 
+        /// <summary>
+        ///     Processes the specified arguments.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>Task.</returns>
         public async Task Process(string[] args)
         {
-            IndexOptions options = new IndexOptions();
-            Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o =>
-            {
-                options = o;
-            }).WithNotParsed(errors =>
+            var options = new IndexOptions();
+            Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o => { options = o; }).WithNotParsed(errors =>
             {
                 Log.Error($"Error: Unable to parse arguments"); // todo: add errors
-                    return;
             });
 
             Position endingPosition;
@@ -77,10 +111,11 @@ namespace McFly
 
             var endReached = false;
             var is32Bit =
-                Regex.Match(DbgEngProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length == 8;
+                Regex.Match(DbgEngProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length ==
+                8;
             // loop through all the set break points and record relevant values
             while (true)
-            {     
+            {
                 DbgEngProxy.RunUntilBreak();
                 var records = GetPositions().ToArray();
                 var breakRecord = records.Single(x => x.IsThreadWithBreak);
@@ -95,14 +130,15 @@ namespace McFly
                     var registerSet = DbgEngProxy.GetRegisters(record.ThreadId, Register.CoreUserRegisters64);
                     var stackTrace = DbgEngProxy.Execute("k");
 
-                    var stackFrames = (from m in Regex.Matches(stackTrace, @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
+                    var stackFrames = (from m in Regex.Matches(stackTrace,
+                                @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
                             .Cast<Match>()
-                                       let stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16)
-                                       let returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16)
-                                       let module = m.Groups["mod"].Value
-                                       let functionName = m.Groups["fun"].Value
-                                       let offset = Convert.ToUInt32(m.Groups["off"].Value, 16)
-                                       select new StackFrame(stackPointer, returnAddress, module, functionName, offset)).ToList();
+                        let stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16)
+                        let returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16)
+                        let module = m.Groups["mod"].Value
+                        let functionName = m.Groups["fun"].Value
+                        let offset = Convert.ToUInt32(m.Groups["off"].Value, 16)
+                        select new StackFrame(stackPointer, returnAddress, module, functionName, offset)).ToList();
 
                     var eipRegister = is32Bit ? "eip" : "rip";
                     var instructionText = DbgEngProxy.Execute($"u {eipRegister} L1");
@@ -130,7 +166,6 @@ namespace McFly
         /// <summary>
         ///     The positions of all threads at the current frame
         /// </summary>
-        /// <param name="ew">The ew.</param>
         /// <returns>The positions of all threads at the current frame</returns>
         private IEnumerable<PositionsRecord> GetPositions()
         {
@@ -146,6 +181,6 @@ namespace McFly
                     Convert.ToInt32(x.Groups["min"].Value, 16)),
                 IsThreadWithBreak = x.Groups["cur"].Success
             });
-        }    
+        }
     }
 }

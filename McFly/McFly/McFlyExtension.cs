@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-06-2018
 // ***********************************************************************
 // <copyright file="McFly.cs" company="">
 //     Copyright ©  2018
@@ -95,7 +95,14 @@ namespace McFly
         /// </summary>
         private static readonly string pFormat = $":x{Marshal.SizeOf(IntPtr.Zero) * 2}";
 
+        /// <summary>
+        ///     The composition container
+        /// </summary>
         private static CompositionContainer compositionContainer;
+
+        /// <summary>
+        ///     The application
+        /// </summary>
         private static McFlyApp app;
 
         /// <summary>
@@ -161,7 +168,7 @@ namespace McFly
         /// <summary>
         ///     Initializes the API.
         /// </summary>
-        /// <param name="log"></param>
+        /// <param name="log">The log.</param>
         internal static void InitApi(DefaultLog log = null)
         {
             LastHR = HRESULT.S_OK;
@@ -174,7 +181,7 @@ namespace McFly
                 registers = (IDebugRegisters2) client;
                 symbols = (IDebugSymbols5) client;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 log?.Fatal("Unable to create debug client. Are you missing DLLs?");
                 log?.Fatal(e);
@@ -261,21 +268,27 @@ namespace McFly
                     var assembly = Assembly.GetExecutingAssembly();
                     var path = Path.Combine(Path.GetDirectoryName(assembly.Location), "mcfly.log");
                     var log = new DefaultLog(path);
-                    InitApi(log);                    
+                    InitApi(log);
                     var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
                     var typeCatalog = new TypeCatalog(types);
                     compositionContainer = new CompositionContainer(typeCatalog);
                     var dbgEng = new DbgEngProxy(control, client, registers);
-                    
+
                     compositionContainer.ComposeExportedValue<IDbgEngProxy>(dbgEng);
                     compositionContainer.ComposeExportedValue<ILog>(log);
-                    PopulateSettings();              
+                    PopulateSettings();
                     app = compositionContainer.GetExportedValue<McFlyApp>();
                     WriteLine("When this baby hits 88 miles per hour... you're gonna see some serious shit.");
                     showedIntro = true;
                 }
         }
 
+        /// <summary>
+        ///     Mfs the specified client.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns>HRESULT.</returns>
         [DllExport]
         public static HRESULT mf(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
@@ -300,8 +313,11 @@ namespace McFly
             return HRESULT.S_OK;
         }
 
+        /// <summary>
+        ///     Populates the settings.
+        /// </summary>
         internal static void PopulateSettings()
-        {   
+        {
             var assemblyPath = Assembly.GetExecutingAssembly().Location;
             assemblyPath = Path.GetDirectoryName(assemblyPath);
             var settingsInstances = compositionContainer.GetExportedValues<ISettings>().ToArray();
@@ -318,7 +334,7 @@ namespace McFly
                     JsonConvert.SerializeObject(settingsInstances.AsEnumerable(), Formatting.Indented,
                         new SettingsJsonConverter()));
                 return;
-            }   
+            }
             catch (Exception)
             {
                 WriteLine("There was a problem opening the settings file. Is it locked?");
@@ -326,8 +342,8 @@ namespace McFly
             }
 
             var rootObject = JObject.Parse(json);
-                                                  
-            int numProcessed = 0;
+
+            var numProcessed = 0;
             foreach (var prop in rootObject)
             {
                 // {
