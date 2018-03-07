@@ -183,7 +183,7 @@
     <Compile Include="IInjectable.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IMcFlyMethod.cs" />
-    <Compile Include="Index.cs" />
+    <Compile Include="IndexMethod.cs" />
     <Compile Include="InitOptions.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="McFlyApp.cs" />

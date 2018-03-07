@@ -11,7 +11,7 @@ using McFly.Debugger;
 namespace McFly
 {
     [Export(typeof(IMcFlyMethod))]
-    internal class Index : IMcFlyMethod
+    internal class IndexMethod : IMcFlyMethod
     {
         [Import]
         private ILog Log { get; set; }
