@@ -621,7 +621,7 @@ namespace McFly
                     }
                     using (var serverClient = new ServerClient(new Uri(settings.ServerUrl)))
                     {
-                        await serverClient.UpsertFrames(settings.ProjectName, frames);
+                        serverClient.UpsertFrames(settings.ProjectName, frames);
                     }
                 }
             }

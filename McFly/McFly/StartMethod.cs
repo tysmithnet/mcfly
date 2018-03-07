@@ -24,7 +24,7 @@ namespace McFly
 
         public string Name { get; } = "start";
         
-        public async Task Process(string[] args)
+        public void Process(string[] args)
         {
             if (string.IsNullOrWhiteSpace(Settings.LauncherPath))
             {   

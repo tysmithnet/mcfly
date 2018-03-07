@@ -62,7 +62,7 @@ namespace McFly
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
-        public async Task Process(string[] args)
+        public void Process(string[] args)
         {
             var options = new IndexOptions();
             Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o => { options = o; }).WithNotParsed(errors =>
@@ -158,7 +158,7 @@ namespace McFly
                 }
                 using (var serverClient = new ServerClient(new Uri(Settings.ServerUrl)))
                 {
-                    await serverClient.UpsertFrames(Settings.ProjectName, frames);
+                    serverClient.UpsertFrames(Settings.ProjectName, frames);
                 }
             }
         }

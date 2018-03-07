@@ -36,7 +36,7 @@ namespace McFly
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
-        public async Task Process(string[] args)
+        public void Process(string[] args)
         {
             Parser.Default.ParseArguments<ReloadOptions>(args).WithParsed(r => { McFlyExtension.PopulateSettings(); });
         }

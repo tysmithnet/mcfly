@@ -64,14 +64,14 @@ namespace McFly
         /// <param name="projectName">Name of the project.</param>
         /// <param name="frames">The frames.</param>
         /// <returns>Task.</returns>
-        public async Task UpsertFrames(string projectName, IEnumerable<Frame> frames)
+        public void UpsertFrames(string projectName, IEnumerable<Frame> frames)
         {
             var ub = new UriBuilder(_serverAddress) {Path = $"api/frame/{projectName}"};
             var json = JsonConvert.SerializeObject(frames);
             var bytes = Encoding.UTF8.GetBytes(json);
             var content = new ByteArrayContent(bytes);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            await _httpClient.PostAsync(ub.Uri, content);
+            _httpClient.PostAsync(ub.Uri, content).GetAwaiter().GetResult();
         }
     }
 }
