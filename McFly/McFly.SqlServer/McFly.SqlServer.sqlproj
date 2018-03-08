@@ -74,4 +74,8 @@
   <ItemGroup>
     <RefactorLog Include="McFly.SqlServer.refactorlog" />
   </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)McFly.SqlServer_Create.sql" "$(SolutionDir)McFly\bin\x64\Debug\create.sql"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)McFly.SqlServer_Create.sql" "$(SolutionDir)McFly\bin\x86\Debug\create.sql"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

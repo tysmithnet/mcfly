@@ -98,7 +98,7 @@ namespace McFly.Server.Data
                     conn.Open();
                     string initScript = null;
                     using (var stream = Assembly.GetAssembly(typeof(ProjectsAccess))
-                        .GetManifestResourceStream("McFly.Server.Data.Scripts.create_database.sql"))
+                        .GetManifestResourceStream("create.sql"))
                     using (var reader = new StreamReader(stream))
                     {
                         initScript = reader.ReadToEnd();
