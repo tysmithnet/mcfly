@@ -38,7 +38,7 @@ namespace McFly
             {
                 var type = settings.GetType();
                 var settingsValue = JObject.FromObject(settings);
-                writer.WritePropertyName(type.AssemblyQualifiedName);
+                writer.WritePropertyName(type.FullName);
                 writer.WriteToken(new JTokenReader(settingsValue));
             }
             writer.WriteEndObject();

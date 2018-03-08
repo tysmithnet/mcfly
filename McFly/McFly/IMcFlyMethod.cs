@@ -33,6 +33,6 @@ namespace McFly
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
-        Task Process(string[] args);
+        void Process(string[] args);
     }
 }

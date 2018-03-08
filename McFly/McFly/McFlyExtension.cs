@@ -105,6 +105,8 @@ namespace McFly
         /// </summary>
         private static McFlyApp app;
 
+        private static ILog log;
+
         /// <summary>
         ///     Create debugger interface
         /// </summary>
@@ -169,7 +171,7 @@ namespace McFly
         ///     Initializes the API.
         /// </summary>
         /// <param name="log">The log.</param>
-        internal static void InitApi(DefaultLog log = null)
+        internal static void InitApi(ILog log = null)
         {
             LastHR = HRESULT.S_OK;
             if (client != null) return;
@@ -267,7 +269,7 @@ namespace McFly
                 {
                     var assembly = Assembly.GetExecutingAssembly();
                     var path = Path.Combine(Path.GetDirectoryName(assembly.Location), "mcfly.log");
-                    var log = new DefaultLog(path);
+                    log = new DefaultLog(path);
                     InitApi(log);
                     var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
                     var typeCatalog = new TypeCatalog(types);
@@ -351,7 +353,7 @@ namespace McFly
                 //     ...
                 // }
                 var settingsInstance =
-                    settingsInstances.SingleOrDefault(x => x.GetType().AssemblyQualifiedName == prop.Key);
+                    settingsInstances.SingleOrDefault(x => x.GetType().FullName == prop.Key);
                 if (settingsInstance == null) continue;
                 var settingsObject = prop.Value as JObject;
                 JsonConvert.PopulateObject(settingsObject.ToString(), settingsInstance);
@@ -369,76 +371,12 @@ namespace McFly
         [DllExport]
         public static HRESULT DebugExtensionUninitialize()
         {
+            if(log != null)
+                  log.Dispose();
             if (currDomain != null)
                 AppDomain.Unload(currDomain);
 
             return HRESULT.S_OK;
-        }
-
-        /// <summary>
-        ///     Configurations the specified client.
-        /// </summary>
-        /// <param name="client">The client.</param>
-        /// <param name="args">The arguments.</param>
-        /// <returns>HRESULT.</returns>
-        [DllExport]
-        public static HRESULT config(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
-        {
-            InitApi();
-            // il merge
-            var argv = CommandLineToArgs(args);
-
-            Parser.Default.ParseArguments<ConfigOptions>(argv)
-                .WithParsed(opts => { Config(opts); });
-
-            return HRESULT.S_OK;
-        }
-
-        /// <summary>
-        ///     Gets the settings file path.
-        /// </summary>
-        /// <returns>System.String.</returns>
-        private static string GetSettingsFilePath()
-        {
-            var settingsFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            settingsFile = Path.Combine(settingsFile, "mcfly.settings.json");
-            return settingsFile;
-        }
-
-        /// <summary>
-        ///     Configurations the specified opts.
-        /// </summary>
-        /// <param name="opts">The opts.</param>
-        private static void Config(ConfigOptions opts)
-        {
-            var settingsFile = GetSettingsFilePath();
-            if (opts.ShouldList)
-            {
-                WriteLine($"connection_string => {settings.ConnectionString}");
-                WriteLine($"server_url => {settings.ServerUrl}");
-                WriteLine($"launcher_path => {settings.LauncherPath}");
-                WriteLine($"project => {settings.ProjectName}");
-                return;
-            }
-            if (opts.Key != null)
-            {
-                switch (opts.Key)
-                {
-                    case "connection_string":
-                        settings.ConnectionString = opts.Value;
-                        break;
-                    case "server_url":
-                        settings.ServerUrl = opts.Value;
-                        break;
-                    case "launcher_path":
-                        settings.LauncherPath = opts.Value;
-                        break;
-                    case "project":
-                        settings.ProjectName = opts.Value;
-                        break;
-                }
-                File.WriteAllText(settingsFile, JsonConvert.SerializeObject(settings, Formatting.Indented));
-            }
         }
 
         /// <summary>
@@ -475,23 +413,9 @@ namespace McFly
                 return;
             }
             settings.ProjectName = projectName;
+
         }
 
-        /// <summary>
-        ///     Starts the specified client.
-        /// </summary>
-        /// <param name="client">The client.</param>
-        /// <param name="args">The arguments.</param>
-        /// <returns>HRESULT.</returns>
-        [DllExport]
-        public static HRESULT start(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
-        {
-            InitApi();
-
-            Start();
-
-            return HRESULT.S_OK;
-        }
 
         /// <summary>
         ///     Mfindexes the specified client.
@@ -689,7 +613,7 @@ namespace McFly
                                 RegisterSet = registerSet,
                                 ThreadId = record.ThreadId,
                                 StackFrames = stackFrames,
-                                OpcodeNmemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
+                                OpcodeMnemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
                                 DisassemblyNote = match.Groups["extra"].Success ? match.Groups["extra"].Value : null
                             };
                             frames.Add(frame);
@@ -697,7 +621,7 @@ namespace McFly
                     }
                     using (var serverClient = new ServerClient(new Uri(settings.ServerUrl)))
                     {
-                        await serverClient.UpsertFrames(settings.ProjectName, frames);
+                        serverClient.UpsertFrames(settings.ProjectName, frames);
                     }
                 }
             }
@@ -724,40 +648,6 @@ namespace McFly
             });
         }
 
-        /// <summary>
-        ///     Starts this instance.
-        /// </summary>
-        private static void Start()
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(settings.LauncherPath))
-                {
-                    WriteLine(
-                        "You must set the launcher path in settings: !config -k launcher_path -v c:\\path\\to\\launch.bat");
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(settings.ConnectionString))
-                {
-                    WriteLine(
-                        "You must set the connection string in settings: !config -k connection_string -v \"Data Source=Whatever;Integrated Security=true\"");
-                    return;
-                }
-                var startInfo = new ProcessStartInfo
-                {
-                    FileName = settings.LauncherPath,
-                    CreateNoWindow = false,
-                    Environment = {{"ConnectionString", settings.ConnectionString}},
-                    UseShellExecute = false
-                };
-                var p = Process.Start(startInfo);
-            }
-            catch (Exception e)
-            {
-                WriteLine($"Error starting server. Is your path correct? Message: {e.Message}");
-                throw;
-            }
-        }
 
         /// <summary>
         ///     Initializes the specified client.

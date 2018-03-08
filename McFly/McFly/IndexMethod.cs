@@ -62,7 +62,7 @@ namespace McFly
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
-        public async Task Process(string[] args)
+        public void Process(string[] args)
         {
             var options = new IndexOptions();
             Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o => { options = o; }).WithNotParsed(errors =>
@@ -151,14 +151,14 @@ namespace McFly
                         RegisterSet = registerSet,
                         ThreadId = record.ThreadId,
                         StackFrames = stackFrames,
-                        OpcodeNmemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
+                        OpcodeMnemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
                         DisassemblyNote = match.Groups["extra"].Success ? match.Groups["extra"].Value : null
                     };
                     frames.Add(frame);
                 }
                 using (var serverClient = new ServerClient(new Uri(Settings.ServerUrl)))
                 {
-                    await serverClient.UpsertFrames(Settings.ProjectName, frames);
+                    serverClient.UpsertFrames(Settings.ProjectName, frames);
                 }
             }
         }

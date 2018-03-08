@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Collections.Generic;
 using McFly.Core;
 
 namespace McFly.Server.Data
@@ -26,6 +27,6 @@ namespace McFly.Server.Data
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="frame">The frame.</param>
-        void UpsertFrame(string projectName, Frame frame);
+        void UpsertFrames(string projectName, IEnumerable<Frame> frames);
     }
 }

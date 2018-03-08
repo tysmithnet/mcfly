@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="b6a848bb-c4e0-4471-989e-c6bce427ecee" ChangeDateTime="03/08/2018 06:14:41">
+    <Property Name="ElementName" Value="[dbo].[frame].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[frame]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="pos_hi" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c13645e4-0a32-46a8-ae1d-1890fadb58d3" ChangeDateTime="03/08/2018 07:05:21">
+    <Property Name="ElementName" Value="[dbo].[trace_info].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[trace_info]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Lock" />
+  </Operation>
+</Operations>

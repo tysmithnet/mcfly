@@ -131,7 +131,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigOptions.cs" />
     <Compile Include="DbgEngProxy.cs" />
     <Compile Include="Debugger\Enums.cs" />
     <Compile Include="Debugger\IDebugAdvanced.cs" />
@@ -195,6 +194,7 @@
     <Compile Include="SettingsMethod.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsJsonConverter.cs" />
+    <Compile Include="StartMethod.cs" />
     <Compile Include="StartOptions.cs" />
   </ItemGroup>
   <ItemGroup>
