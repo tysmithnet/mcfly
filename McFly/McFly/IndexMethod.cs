@@ -151,7 +151,7 @@ namespace McFly
                         RegisterSet = registerSet,
                         ThreadId = record.ThreadId,
                         StackFrames = stackFrames,
-                        OpcodeNmemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
+                        OpcodeMnemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
                         DisassemblyNote = match.Groups["extra"].Success ? match.Groups["extra"].Value : null
                     };
                     frames.Add(frame);

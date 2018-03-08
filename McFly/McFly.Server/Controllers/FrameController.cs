@@ -57,9 +57,8 @@ namespace McFly.Server.Controllers
         /// <returns>ActionResult.</returns>
         [HttpPost]
         public ActionResult Post(string projectName, [FromBody] IEnumerable<Frame> frames)
-        {
-            foreach (var frame in frames)
-                FrameAccess.UpsertFrame(projectName, frame); // todo: make bulk upsert
+        {                                   
+            FrameAccess.UpsertFrames(projectName, frames);
             return Ok();
         }
     }

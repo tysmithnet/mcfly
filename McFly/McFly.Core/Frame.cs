@@ -55,7 +55,7 @@ namespace McFly.Core
         ///     Gets or sets the opcode nmemonic.
         /// </summary>
         /// <value>The opcode nmemonic.</value>
-        public string OpcodeNmemonic { get; set; }
+        public string OpcodeMnemonic { get; set; }
 
         /// <summary>
         ///     Gets or sets the stack frames.

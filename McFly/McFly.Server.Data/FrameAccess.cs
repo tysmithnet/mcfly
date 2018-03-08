@@ -31,24 +31,13 @@ namespace McFly.Server.Data
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="frame">The frame.</param>
-        public void UpsertFrame(string projectName, Frame frame)
+        public void UpsertFrames(string projectName, IEnumerable<Frame> frames)
         {
-            var parameters = new List<SqlParameter>
-            {
-                new SqlParameter("@pos_hi", SqlDbType.Int) {Value = frame.Position.High},
-                new SqlParameter("@pos_lo", SqlDbType.Int) {Value = frame.Position.Low},
-                new SqlParameter("@thread_id", SqlDbType.Int) {Value = frame.ThreadId},
-                new SqlParameter("@rax", SqlDbType.BigInt) {Value = frame.RegisterSet.Rax.ToLong()},
-                new SqlParameter("@rbx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rbx.ToLong()},
-                new SqlParameter("@rcx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rcx.ToLong()},
-                new SqlParameter("@rdx", SqlDbType.BigInt) {Value = frame.RegisterSet.Rdx.ToLong()},
-                new SqlParameter("@opcode_nmemonic", SqlDbType.VarChar) {Value = frame.OpcodeNmemonic},
-                new SqlParameter("@disassembly_note", SqlDbType.VarChar) {Value = frame.DisassemblyNote}
-            };
-
+            
             try
             {
-                using (var reader = ExecuteStoredProcedureReader(projectName, "pr_upsert_frame", parameters))
+                var parameter = new SqlParameter("@frames", SqlDbType.Structured) {Value = ConvertToTableType(frames)};
+                using (var reader = ExecuteStoredProcedureReader(projectName, "pr_upsert_frames", new []{parameter}))
                 {
                     ;
                 }
@@ -57,6 +46,36 @@ namespace McFly.Server.Data
             {
                 throw;
             }
+        }
+
+        private DataTable ConvertToTableType(IEnumerable<Frame> frames)
+        {
+            var dataTable = new DataTable("tt_frame");
+            dataTable.Columns.Add("@pos_hi", typeof(int));
+            dataTable.Columns.Add("@pos_lo", typeof(int));
+            dataTable.Columns.Add("@thread_id", typeof(int));
+            dataTable.Columns.Add("@rax", typeof(long));
+            dataTable.Columns.Add("@rbx", typeof(long));
+            dataTable.Columns.Add("@rcx", typeof(long));
+            dataTable.Columns.Add("@rdx", typeof(long));
+            dataTable.Columns.Add("@opcode_mnemonic", typeof(string));
+            dataTable.Columns.Add("@disassembly_note", typeof(string));
+            
+            foreach (var frame in frames)
+            {
+                dataTable.Rows.Add(
+                    frame.Position.High,
+                    frame.Position.Low,
+                    frame.ThreadId,
+                    frame.RegisterSet.Rax,
+                    frame.RegisterSet.Rbx,
+                    frame.RegisterSet.Rcx,
+                    frame.RegisterSet.Rdx,
+                    frame.OpcodeMnemonic,
+                    frame.DisassemblyNote);
+            }
+
+            return dataTable;
         }
     }
 }
