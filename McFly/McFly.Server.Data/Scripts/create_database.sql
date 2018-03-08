@@ -1,4 +1,17 @@
-﻿/*
+﻿CREATE TYPE tt_frame AS TABLE
+(
+     pos_hi INTEGER NOT NULL,
+     pos_lo INTEGER NOT NULL,
+     thread_id INTEGER NOT NULL,
+     rax BIGINT,
+     rbx BIGINT,
+     rcx BIGINT,
+     rdx BIGINT,
+     opcode_nmemonic VARCHAR(20)
+);
+GO
+
+/*
 Meta data about the trace
 */
 CREATE TABLE trace_info (
@@ -12,23 +25,12 @@ CREATE TABLE trace_info (
  );
 GO
 
-CREATE TABLE frame (
- pos_hi INTEGER NOT NULL,
- pos_lo INTEGER NOT NULL,
- CONSTRAINT pk_frame PRIMARY KEY (
-  pos_hi,
-  pos_lo
-  ),
- CONSTRAINT ch_frame_address CHECK (pos_hi >= 0 AND pos_lo >= 0)
- )
-GO
-
 /*  
 A process can have many threads in it, and so at any one instant in time there are potentially many
 threads running. This table captures the state of a particular thread at a particular instant in time.
 Note that the values here are the values BEFORE the instruction is executed.  
  */
-CREATE TABLE frame_thread (
+CREATE TABLE frame (
  pos_hi INTEGER NOT NULL,
  pos_lo INTEGER NOT NULL,
  thread_id INTEGER NOT NULL,
@@ -104,6 +106,76 @@ CREATE PROCEDURE pr_upsert_frame (
  @rdx BIGINT = NULL,
  @opcode_nmemonic VARCHAR(20) = NULL,
  @disassembly_note VARCHAR(250) = NULL
+ )
+AS
+BEGIN
+ IF NOT EXISTS (
+   SELECT 1
+   FROM frame
+   WHERE pos_hi = @pos_hi AND pos_lo = @pos_lo
+   )
+ BEGIN
+  INSERT INTO frame
+  VALUES (
+   @pos_hi,
+   @pos_lo
+   )
+ END
+
+ MERGE frame_thread AS d
+ USING (
+  SELECT @pos_hi AS pos_hi,
+   @pos_lo AS pos_lo,
+   @thread_id AS thread_id,
+   @rax AS rax,
+   @rbx AS rbx,
+   @rcx AS rcx,
+   @rdx AS rdx,
+   @opcode_nmemonic AS opcode_nmemonic
+  ) AS s
+  ON s.pos_hi = d.pos_hi AND s.pos_lo = d.pos_lo AND s.thread_id = d.thread_id
+ WHEN NOT MATCHED BY TARGET
+  THEN
+   INSERT (
+    pos_hi,
+    pos_lo,
+    thread_id,
+    rax,
+    rbx,
+    rcx,
+    rdx,
+    opcode_nmemonic
+    )
+   VALUES (
+    @pos_hi,
+    @pos_lo,
+    @thread_id,
+    @rax,
+    @rbx,
+    @rcx,
+    @rdx,
+    @opcode_nmemonic
+    )
+ WHEN MATCHED
+  THEN
+   UPDATE
+   SET d.pos_hi = COALESCE(@pos_hi, s.pos_hi),
+    d.pos_lo = COALESCE(@pos_lo, s.pos_lo),
+    d.thread_id = COALESCE(@thread_id, s.thread_id),
+    d.rax = COALESCE(@rax, s.rax),
+    d.rbx = COALESCE(@rbx, s.rbx),
+    d.rcx = COALESCE(@rcx, s.rcx),
+    d.rdx = COALESCE(@rdx, s.rdx),
+    d.opcode_nmemonic = COALESCE(@opcode_nmemonic, s.opcode_nmemonic);
+END
+GO
+
+/*
+Upserts a frame
+If you pass null as any nullable value, the value already existing in the table will remain
+*/
+CREATE PROCEDURE pr_upsert_frames (
+    @frames tt_frame
  )
 AS
 BEGIN
