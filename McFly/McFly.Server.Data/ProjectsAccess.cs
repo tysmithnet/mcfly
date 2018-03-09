@@ -96,16 +96,21 @@ namespace McFly.Server.Data
                 try
                 {
                     conn.Open();
+                    string dirName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    string fileName = Path.Combine(dirName, "create.sql");
                     string initScript = null;
-                    using (var stream = Assembly.GetAssembly(typeof(ProjectsAccess))
-                        .GetManifestResourceStream("create.sql"))
+                    using (var stream = File.OpenRead(fileName))
                     using (var reader = new StreamReader(stream))
                     {
                         initScript = reader.ReadToEnd();
                     }
 
+                    initScript = Regex.Replace(initScript, @":setvar DatabaseName ""McFly\.SqlServer""",
+                        $@":setvar DatabaseName ""{projectName}""");
+
                     var commandStrings = Regex.Split(initScript, @"^\s*GO\s*$",
                         RegexOptions.Multiline | RegexOptions.IgnoreCase);
+
                     foreach (var commandString in commandStrings)
                     {
                         if (string.IsNullOrWhiteSpace(commandString))
