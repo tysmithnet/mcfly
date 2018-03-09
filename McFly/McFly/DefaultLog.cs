@@ -37,6 +37,8 @@ namespace McFly
             StreamWriter = new StreamWriter(bs);
         }
 
+        // todo: refactor this
+
         /// <summary>
         ///     Gets or sets the stream writer.
         /// </summary>
