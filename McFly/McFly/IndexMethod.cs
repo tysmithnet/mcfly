@@ -29,26 +29,28 @@ namespace McFly
     [Export(typeof(IMcFlyMethod))]
     internal class IndexMethod : IMcFlyMethod
     {
+        private bool? _is32Bit;
+
         /// <summary>
         ///     Gets or sets the log.
         /// </summary>
         /// <value>The log.</value>
         [Import]
-        private ILog Log { get; set; }
+        protected internal ILog Log { get; set; }
 
         /// <summary>
         ///     Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        private IDbgEngProxy DbgEngProxy { get; set; }
+        protected internal IDbgEngProxy DbgEngProxy { get; set; }
 
         /// <summary>
         ///     Gets or sets the settings.
         /// </summary>
         /// <value>The settings.</value>
         [Import]
-        private Settings Settings { get; set; }
+        protected internal Settings Settings { get; set; }
 
         /// <summary>
         ///     Gets the name.
@@ -76,12 +78,18 @@ namespace McFly
             HitBreakpoints(endingPosition);
         }
 
+        protected internal bool Is32Bit()
+        {                         
+            if (!_is32Bit.HasValue)    
+                _is32Bit = Regex.Match(DbgEngProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length ==
+                8;
+            return _is32Bit.Value;
+        }
+
         private void HitBreakpoints(Position endingPosition)
         {
             var endReached = false;
-            var is32Bit =
-                Regex.Match(DbgEngProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length ==
-                8;
+            
             // loop through all the set break points and record relevant values
             while (true)
             {
@@ -92,7 +100,7 @@ namespace McFly
                 if (breakRecord.Position >= endingPosition)
                     break;
 
-                var frames = CreateFramesForUpsert(records, breakRecord, is32Bit);
+                var frames = CreateFramesForUpsert(records, breakRecord, Is32Bit());
                 UpsertFrames(frames);
             }
         }
