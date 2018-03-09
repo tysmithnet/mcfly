@@ -44,6 +44,10 @@ namespace McFly.Core
         /// <param name="low">The low.</param>
         public Position(int high, int low)
         {
+            if(high < 0)
+                throw new ArgumentOutOfRangeException($"{nameof(high)} must be a non negative integer");
+            if(low < 0)
+                throw new ArgumentOutOfRangeException($"{nameof(low)} must be a non negative integer");
             _high = high;
             _low = low;
         }
@@ -59,9 +63,7 @@ namespace McFly.Core
             set
             {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
-                if (value < _low)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least Low");
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");     
                 _high = value;
             }
         }
@@ -77,9 +79,7 @@ namespace McFly.Core
             set
             {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
-                if (value > _high)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least High");
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");      
                 _low = value;
             }
         }
@@ -89,7 +89,7 @@ namespace McFly.Core
         /// </summary>
         /// <value>The high low thread identifier comparer.</value>
         public static IEqualityComparer<Position> HighLowThreadIdComparer { get; } =
-            new HighLowThreadIdEqualityComparer();
+            new HighLowEqualityComparer();
 
         /// <summary>
         ///     Compares to.
@@ -254,7 +254,7 @@ namespace McFly.Core
         ///     Class HighLowThreadIdEqualityComparer. This class cannot be inherited.
         /// </summary>
         /// <seealso cref="System.Collections.Generic.IEqualityComparer{McFly.Core.Position}" />
-        private sealed class HighLowThreadIdEqualityComparer : IEqualityComparer<Position>
+        internal sealed class HighLowEqualityComparer : IEqualityComparer<Position>
         {
             /// <summary>
             ///     Determines whether the specified objects are equal.
@@ -264,11 +264,7 @@ namespace McFly.Core
             /// <returns>true if the specified objects are equal; otherwise, false.</returns>
             public bool Equals(Position x, Position y)
             {
-                if (ReferenceEquals(x, y)) return true;
-                if (ReferenceEquals(x, null)) return false;
-                if (ReferenceEquals(y, null)) return false;
-                if (x.GetType() != y.GetType()) return false;
-                return x._high == y._high && x._low == y._low;
+                return x.Equals(y);
             }
 
             /// <summary>
@@ -278,12 +274,7 @@ namespace McFly.Core
             /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
             public int GetHashCode(Position obj)
             {
-                unchecked
-                {
-                    var hashCode = obj._high;
-                    hashCode = (hashCode * 397) ^ obj._low;
-                    return hashCode;
-                }
+                return obj.GetHashCode();
             }
         }
     }
