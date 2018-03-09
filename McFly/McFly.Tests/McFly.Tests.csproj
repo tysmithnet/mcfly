@@ -82,6 +82,10 @@
     <Analyzer Include="..\packages\xunit.analyzers.0.7.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
+      <Project>{CC761536-98F6-4562-977A-4857094CAEF9}</Project>
+      <Name>McFly.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\McFly\McFly.csproj">
       <Project>{d7eb4c59-22ef-4020-9850-cbbf6a015f80}</Project>
       <Name>McFly</Name>

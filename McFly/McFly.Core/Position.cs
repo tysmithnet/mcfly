@@ -144,6 +144,19 @@ namespace McFly.Core
                 Convert.ToInt32(match.Groups["lo"].Value, 16));
         }
 
+        public static bool TryParse(string text, out Position outVar)
+        {
+            var match = Regex.Match(text, @"^\s*(?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+\s*$)");
+            if (!match.Success)
+            {
+                outVar = null;
+                return false;
+            }
+            outVar =  new Position(Convert.ToInt32(match.Groups["hi"].Value, 16),
+                Convert.ToInt32(match.Groups["lo"].Value, 16));
+            return true;
+        }
+
         /// <summary>
         ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
         /// </summary>

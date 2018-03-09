@@ -67,15 +67,26 @@ namespace McFly
         {
             // todo: handle help
             var options = new IndexOptions();
-            Position endingPosition;
+            
             Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o => { options = o; }).WithNotParsed(errors =>
             {
                 Log.Error($"Error: Unable to parse arguments"); // todo: add errors
             });
 
-            endingPosition = GetEndingPosition(options);
-            SetBreakpoints(options);
-            HitBreakpoints(endingPosition);
+            Position startingPosition = GetStartingPosition(options);
+            Position endingPosition = GetEndingPosition(options);
+            SetBreakpoints(options);                  
+            DbgEngProxy.Execute(options.Start != null ? $"!tt {options.Start}" : "!tt 0");
+            ProcessInternal(startingPosition, endingPosition);
+        }
+
+        protected internal static Position GetStartingPosition(IndexOptions options)
+        {
+            if(options == null || options.Start == null)
+                return new Position(0, 0);
+            if (!Position.TryParse(options.Start, out var startingPosition))
+                startingPosition = new Position(0, 0);
+            return startingPosition;
         }
 
         protected internal bool Is32Bit()
@@ -86,15 +97,13 @@ namespace McFly
             return _is32Bit.Value;
         }
 
-        private void HitBreakpoints(Position endingPosition)
+        private void ProcessInternal(Position startingPosition, Position endingPosition)
         {
-            var endReached = false;
-            
+            DbgEngProxy.Execute($"!tt {startingPosition}");
             // loop through all the set break points and record relevant values
             while (true)
             {
                 DbgEngProxy.RunUntilBreak();
-
                 var records = GetPositions().ToArray();
                 var breakRecord = records.Single(x => x.IsThreadWithBreak);
                 if (breakRecord.Position >= endingPosition)
@@ -164,7 +173,6 @@ namespace McFly
             DbgEngProxy.Execute("bc *"); // todo: save existing break points and restore
 
             // set head at start
-            DbgEngProxy.Execute(options.Start != null ? $"!tt {options.Start}" : "!tt 0");
 
             // set breakpoints
             if (options.BreakpointMasks != null)
