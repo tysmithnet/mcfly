@@ -18,6 +18,7 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -48,6 +49,7 @@ namespace McFly
     /// <summary>
     ///     Class McFlyExtension.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class McFlyExtension
     {
         /// <summary>

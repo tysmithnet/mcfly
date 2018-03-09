@@ -29,10 +29,13 @@ namespace McFly.Core
 
         public void Process(string register, string input, int radix)
         {
-            var first = Register.AllRegisters64.SingleOrDefault(x => x.Name == register);
+            register = register ?? throw new ArgumentNullException(nameof(register));
+            input = input ?? throw new ArgumentNullException(nameof(input));
+
+            var first = Register.AllRegisters64.FirstOrDefault(x => x.Name == register);
             if (first != null)
             {
-                switch (first.Name)
+                switch (first.Name.ToLower())
                 {
                     case "rax":
                         _rax = Convert.ToUInt64(input, radix);
@@ -46,6 +49,8 @@ namespace McFly.Core
                     case "rdx":
                         _rdx = Convert.ToUInt64(input, radix);
                         break;
+                    default:
+                        throw new ArgumentOutOfRangeException($"{nameof(register)} is not a valid register");
                 }
             }
         }
