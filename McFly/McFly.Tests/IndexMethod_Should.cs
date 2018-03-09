@@ -60,5 +60,30 @@ namespace McFly.Tests
             invalidStartPosition.Should().Be(new Position(0, 0),
                 "Any invalid input should result in a default position of 0:0");
         }
+
+        [Fact]
+        public void Get_Thread_Positions_Correctly()
+        {
+            // arrange
+            var indexMethod = new IndexMethod();
+            var builder = new DbgEngProxyBuilder();
+            builder.WithExecuteResult("!positions", @">Thread ID=0x7590 - Position: 168CC:0
+ Thread ID=0x12A0 - Position: 211F5:0
+ Thread ID=0x6CDC - Position: 21D59:0");
+            indexMethod.DbgEngProxy = builder.Build();
+            var expected = new[]
+            {
+                new PositionsRecord(0x7590, new Position(0x168CC, 0), true),
+                new PositionsRecord(0x12A0, new Position(0x211F5, 0), false),
+                new PositionsRecord(0x6CDC, new Position(0x21D59, 0), false),
+            };
+
+            // act
+            var actual = indexMethod.GetPositions();
+
+            // assert
+            actual.SequenceEqual(expected).Should()
+                .BeTrue("This is the pattern: >Thread ID=0x7590 - Position: 168CC:0");
+        }
     }
 }

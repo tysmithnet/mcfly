@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using McFly.Core;
@@ -28,6 +29,7 @@ namespace McFly
     /// <seealso cref="McFly.IDbgEngProxy" />
     /// <seealso cref="System.IDisposable" />
     [Export(typeof(IDbgEngProxy))]
+    [ExcludeFromCodeCoverage]
     public class DbgEngProxy : IDbgEngProxy, IDisposable
     {
         /// <summary>

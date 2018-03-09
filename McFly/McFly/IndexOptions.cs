@@ -62,6 +62,6 @@ namespace McFly
         /// </summary>
         /// <value>The step.</value>
         [Option("step", HelpText = "Number of instructions to record after a break", Required = false)]
-        public int Step { get; set; }
+        public int Step { get; set; }                                                            
     }
 }

@@ -66,18 +66,19 @@ namespace McFly
         public void Process(string[] args)
         {
             // todo: handle help
-            var options = new IndexOptions();
+            IndexOptions options;
             
-            Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o => { options = o; }).WithNotParsed(errors =>
+            Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o =>
+            {
+                options = o;
+                Position startingPosition = GetStartingPosition(options);
+                Position endingPosition = GetEndingPosition(options);
+                SetBreakpoints(options);
+                ProcessInternal(startingPosition, endingPosition);
+            }).WithNotParsed(errors =>
             {
                 Log.Error($"Error: Unable to parse arguments"); // todo: add errors
-            });
-
-            Position startingPosition = GetStartingPosition(options);
-            Position endingPosition = GetEndingPosition(options);
-            SetBreakpoints(options);                  
-            DbgEngProxy.Execute(options.Start != null ? $"!tt {options.Start}" : "!tt 0");
-            ProcessInternal(startingPosition, endingPosition);
+            });                                                   
         }
 
         protected internal static Position GetStartingPosition(IndexOptions options)
@@ -97,7 +98,7 @@ namespace McFly
             return _is32Bit.Value;
         }
 
-        private void ProcessInternal(Position startingPosition, Position endingPosition)
+        protected internal void ProcessInternal(Position startingPosition, Position endingPosition)
         {
             DbgEngProxy.Execute($"!tt {startingPosition}");
             // loop through all the set break points and record relevant values
@@ -114,7 +115,7 @@ namespace McFly
             }
         }
 
-        private List<Frame> CreateFramesForUpsert(PositionsRecord[] records, PositionsRecord breakRecord, bool is32Bit)
+        protected internal List<Frame> CreateFramesForUpsert(PositionsRecord[] records, PositionsRecord breakRecord, bool is32Bit)
         {
             var frames = (from record in records
                 where record.Position == breakRecord.Position
@@ -125,7 +126,7 @@ namespace McFly
             return frames;
         }
 
-        private void UpsertFrames(List<Frame> frames)
+        protected internal void UpsertFrames(List<Frame> frames)
         {
             using (var serverClient = new ServerClient(new Uri(Settings.ServerUrl)))
             {
@@ -133,7 +134,7 @@ namespace McFly
             }
         }
 
-        private Frame CreateFrame(bool is32Bit, PositionsRecord record, RegisterSet registerSet,
+        protected internal Frame CreateFrame(bool is32Bit, PositionsRecord record, RegisterSet registerSet,
             List<StackFrame> stackFrames)
         {
             var eipRegister = is32Bit ? "eip" : "rip";
@@ -153,7 +154,7 @@ namespace McFly
             return frame;
         }
 
-        private static List<StackFrame> GetStackFrames(string stackTrace)
+        protected internal static List<StackFrame> GetStackFrames(string stackTrace)
         {
             var stackFrames = (from m in Regex.Matches(stackTrace,
                         @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
@@ -167,7 +168,7 @@ namespace McFly
             return stackFrames;
         }
 
-        private void SetBreakpoints(IndexOptions options)
+        protected internal void SetBreakpoints(IndexOptions options)
         {
 // clear breakpoints
             DbgEngProxy.Execute("bc *"); // todo: save existing break points and restore
@@ -196,7 +197,7 @@ namespace McFly
                 }
         }
 
-        private Position GetEndingPosition(IndexOptions options)
+        protected internal Position GetEndingPosition(IndexOptions options)
         {
             Position endingPosition;
             if (options.End != null)
@@ -216,19 +217,21 @@ namespace McFly
         ///     The positions of all threads at the current frame
         /// </summary>
         /// <returns>The positions of all threads at the current frame</returns>
-        private IEnumerable<PositionsRecord> GetPositions()
+        protected internal IEnumerable<PositionsRecord> GetPositions()
         {
             var positionsText = DbgEngProxy.Execute("!positions");
 
             var matches = Regex.Matches(positionsText,
                 "(?<cur>>)?Thread ID=0x(?<tid>[A-F0-9]+) - Position: (?<maj>[A-F0-9]+):(?<min>[A-F0-9]+)");
 
-            return matches.Cast<Match>().Select(x => new PositionsRecord
+            return matches.Cast<Match>().Select(x =>
             {
-                ThreadId = Convert.ToInt32(x.Groups["tid"].Value, 16),
-                Position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
-                    Convert.ToInt32(x.Groups["min"].Value, 16)),
-                IsThreadWithBreak = x.Groups["cur"].Success
+                var threadId = Convert.ToInt32(x.Groups["tid"].Value, 16);
+                var position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
+                    Convert.ToInt32(x.Groups["min"].Value, 16));
+                var isThreadWithBreak = x.Groups["cur"].Success;
+                var item = new PositionsRecord(threadId, position, isThreadWithBreak);
+                return item;
             });
         }
     }

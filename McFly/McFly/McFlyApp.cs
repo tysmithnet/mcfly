@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 
 namespace McFly
 {
@@ -21,6 +22,7 @@ namespace McFly
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     [Export]
+    [ExcludeFromCodeCoverage]
     internal class McFlyApp : IInjectable
     {
         /// <summary>

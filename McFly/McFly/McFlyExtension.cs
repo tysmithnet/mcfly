@@ -641,12 +641,14 @@ namespace McFly
             var matches = Regex.Matches(positionsText,
                 "(?<cur>>)?Thread ID=0x(?<tid>[A-F0-9]+) - Position: (?<maj>[A-F0-9]+):(?<min>[A-F0-9]+)");
 
-            return matches.Cast<Match>().Select(x => new PositionsRecord
+            return matches.Cast<Match>().Select(x =>
             {
-                ThreadId = Convert.ToInt32(x.Groups["tid"].Value, 16),
-                Position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
-                    Convert.ToInt32(x.Groups["min"].Value, 16)),
-                IsThreadWithBreak = x.Groups["cur"].Success
+                var threadId = Convert.ToInt32(x.Groups["tid"].Value, 16);
+                var position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
+                    Convert.ToInt32(x.Groups["min"].Value, 16));
+                var isThreadWithBreak = x.Groups["cur"].Success;
+                var item = new PositionsRecord(threadId, position, isThreadWithBreak);
+                return item;
             });
         }
 
