@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Core", "McFly.Core\Mc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Server.Data", "McFly.Server.Data\McFly.Server.Data.csproj", "{B57AA3E4-323B-4969-8F78-CD8EF96BD302}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2DCEBBB5-D209-4F60-B1E6-74F6BA1FD913}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{FE35C142-4CD6-4249-A34A-BAACDE54B444}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -120,6 +124,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DAD5A687-E762-44CD-B49B-AAC648A07D03} = {FE35C142-4CD6-4249-A34A-BAACDE54B444}
+		{881E71B1-607C-4DB8-9316-D9C1089990A0} = {FE35C142-4CD6-4249-A34A-BAACDE54B444}
+		{E717183C-A632-4B2E-A712-C26DACEC8CEB} = {2DCEBBB5-D209-4F60-B1E6-74F6BA1FD913}
+		{83E7C87B-C06E-49B0-A389-14C89E0D137F} = {2DCEBBB5-D209-4F60-B1E6-74F6BA1FD913}
+		{B57AA3E4-323B-4969-8F78-CD8EF96BD302} = {FE35C142-4CD6-4249-A34A-BAACDE54B444}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4975AD4B-1EDB-4156-84B5-3335487BF604}
