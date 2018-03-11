@@ -4,7 +4,7 @@
 // Created          : 02-25-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-09-2018
 // ***********************************************************************
 // <copyright file="Position.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -42,11 +42,16 @@ namespace McFly.Core
         /// </summary>
         /// <param name="high">The high.</param>
         /// <param name="low">The low.</param>
+        /// <exception cref="System.ArgumentOutOfRangeException">
+        ///     high
+        ///     or
+        ///     low
+        /// </exception>
         public Position(int high, int low)
         {
-            if(high < 0)
+            if (high < 0)
                 throw new ArgumentOutOfRangeException($"{nameof(high)} must be a non negative integer");
-            if(low < 0)
+            if (low < 0)
                 throw new ArgumentOutOfRangeException($"{nameof(low)} must be a non negative integer");
             _high = high;
             _low = low;
@@ -56,6 +61,7 @@ namespace McFly.Core
         ///     Gets or sets the high.
         /// </summary>
         /// <value>The high.</value>
+        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
         /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public int High
         {
@@ -63,7 +69,7 @@ namespace McFly.Core
             set
             {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");     
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
                 _high = value;
             }
         }
@@ -72,6 +78,7 @@ namespace McFly.Core
         ///     Gets or sets the low.
         /// </summary>
         /// <value>The low.</value>
+        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
         /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public int Low
         {
@@ -79,7 +86,7 @@ namespace McFly.Core
             set
             {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");      
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
                 _low = value;
             }
         }
@@ -134,6 +141,7 @@ namespace McFly.Core
         /// </summary>
         /// <param name="text">The text.</param>
         /// <returns>Position.</returns>
+        /// <exception cref="System.FormatException">text</exception>
         /// <exception cref="FormatException">text</exception>
         public static Position Parse(string text)
         {
@@ -144,6 +152,12 @@ namespace McFly.Core
                 Convert.ToInt32(match.Groups["lo"].Value, 16));
         }
 
+        /// <summary>
+        ///     Tries the parse.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="outVar">The out variable.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool TryParse(string text, out Position outVar)
         {
             var match = Regex.Match(text, @"^\s*(?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+\s*$)");
@@ -152,7 +166,7 @@ namespace McFly.Core
                 outVar = null;
                 return false;
             }
-            outVar =  new Position(Convert.ToInt32(match.Groups["hi"].Value, 16),
+            outVar = new Position(Convert.ToInt32(match.Groups["hi"].Value, 16),
                 Convert.ToInt32(match.Groups["lo"].Value, 16));
             return true;
         }

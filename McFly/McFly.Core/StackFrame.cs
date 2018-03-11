@@ -4,7 +4,7 @@
 // Created          : 03-01-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-09-2018
 // ***********************************************************************
 // <copyright file="StackFrame.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -66,19 +66,35 @@ namespace McFly.Core
         /// <value>The offset.</value>
         public uint Offset { get; set; }
 
+        /// <summary>
+        ///     Equalses the specified other.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         protected bool Equals(StackFrame other)
         {
-            return StackPointer == other.StackPointer && ReturnAddress == other.ReturnAddress && string.Equals(Module, other.Module) && string.Equals(FunctionName, other.FunctionName) && Offset == other.Offset;
+            return StackPointer == other.StackPointer && ReturnAddress == other.ReturnAddress &&
+                   string.Equals(Module, other.Module) && string.Equals(FunctionName, other.FunctionName) &&
+                   Offset == other.Offset;
         }
 
+        /// <summary>
+        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((StackFrame) obj);
         }
 
+        /// <summary>
+        ///     Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         public override int GetHashCode()
         {
             unchecked
@@ -92,11 +108,23 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Implements the == operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
         public static bool operator ==(StackFrame left, StackFrame right)
         {
             return Equals(left, right);
         }
 
+        /// <summary>
+        ///     Implements the != operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
         public static bool operator !=(StackFrame left, StackFrame right)
         {
             return !Equals(left, right);

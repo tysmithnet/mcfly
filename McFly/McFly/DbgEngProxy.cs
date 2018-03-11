@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : master
-// Last Modified On : 03-05-2018
+// Last Modified On : 03-10-2018
 // ***********************************************************************
 // <copyright file="DbgEngProxy.cs" company="">
 //     Copyright ©  2018
@@ -140,6 +140,10 @@ namespace McFly
             return registerSet;
         }
 
+        /// <summary>
+        ///     Gets the starting position of the trace. Many times this is 35:0
+        /// </summary>
+        /// <returns>Position.</returns>
         public Position GetStartingPosition()
         {
             var end = Execute("!tt 0"); // todo: get from trace_info
@@ -147,12 +151,16 @@ namespace McFly
             return Position.Parse(endMatch.Groups["pos"].Value);
         }
 
+        /// <summary>
+        ///     Gets the ending position
+        /// </summary>
+        /// <returns>Position.</returns>
         public Position GetEndingPosition()
         {
             var end = Execute("!tt 100"); // todo: get from trace_info
             var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
             return Position.Parse(endMatch.Groups["pos"].Value);
-        }                            
+        }
 
         /// <summary>
         ///     Disposes this instance.

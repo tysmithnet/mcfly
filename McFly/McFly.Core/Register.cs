@@ -4,7 +4,7 @@
 // Created          : 02-27-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-08-2018
 // ***********************************************************************
 // <copyright file="Register.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -21,13 +21,21 @@ namespace McFly.Core
     /// </summary>
     public abstract class Register
     {
-        public static IReadOnlyCollection<Register> AllRegisters64 { get; }
+        /// <summary>
+        ///     Initializes static members of the <see cref="Register" /> class.
+        /// </summary>
         static Register()
         {
-            AllRegisters64 = new[] { Rax, Rbx, Rcx, Rdx };
-            CoreUserRegisters64 = new[] { Rax, Rbx, Rcx, Rdx };
+            AllRegisters64 = new[] {Rax, Rbx, Rcx, Rdx};
+            CoreUserRegisters64 = new[] {Rax, Rbx, Rcx, Rdx};
         }
-                            
+
+        /// <summary>
+        ///     Gets all registers64.
+        /// </summary>
+        /// <value>All registers64.</value>
+        public static IReadOnlyCollection<Register> AllRegisters64 { get; }
+
         /// <summary>
         ///     Gets the name.
         /// </summary>
@@ -39,7 +47,7 @@ namespace McFly.Core
         /// </summary>
         /// <value>The number bits.</value>
         public abstract int NumBits { get; }
-        
+
         /// <summary>
         ///     Gets the rax.
         /// </summary>
@@ -63,7 +71,12 @@ namespace McFly.Core
         /// </summary>
         /// <value>The RDX.</value>
         public static Register Rdx { get; } = new RdxRegister();
-        public static IReadOnlyCollection<Register> CoreUserRegisters64 { get; } 
+
+        /// <summary>
+        ///     Gets the core user registers64.
+        /// </summary>
+        /// <value>The core user registers64.</value>
+        public static IReadOnlyCollection<Register> CoreUserRegisters64 { get; }
 
         /// <summary>
         ///     Class RaxRegister.

@@ -4,7 +4,7 @@
 // Created          : 03-06-2018
 //
 // Last Modified By : master
-// Last Modified On : 03-06-2018
+// Last Modified On : 03-08-2018
 // ***********************************************************************
 // <copyright file="SettingsJsonConverter.cs" company="">
 //     Copyright ©  2018
@@ -56,6 +56,7 @@ namespace McFly
         /// <param name="hasExistingValue">The existing value has a value.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         /// <exception cref="NotImplementedException"></exception>
         public override IEnumerable<ISettings> ReadJson(JsonReader reader, Type objectType,
             IEnumerable<ISettings> existingValue, bool hasExistingValue,

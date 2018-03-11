@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : master
-// Last Modified On : 03-06-2018
+// Last Modified On : 03-11-2018
 // ***********************************************************************
 // <copyright file="IndexMethod.cs" company="">
 //     Copyright ©  2018
@@ -29,6 +29,9 @@ namespace McFly
     [Export(typeof(IMcFlyMethod))]
     internal class IndexMethod : IMcFlyMethod
     {
+        /// <summary>
+        ///     The is32 bit
+        /// </summary>
         private bool? _is32Bit;
 
         /// <summary>
@@ -67,20 +70,25 @@ namespace McFly
         {
             // todo: handle help
             IndexOptions options;
-            
+
             Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o =>
             {
                 options = o;
-                Position startingPosition = GetStartingPosition(options);
-                Position endingPosition = GetEndingPosition(options);
+                var startingPosition = GetStartingPosition(options);
+                var endingPosition = GetEndingPosition(options);
                 SetBreakpoints(options);
                 ProcessInternal(startingPosition, endingPosition);
             }).WithNotParsed(errors =>
             {
                 Log.Error($"Error: Unable to parse arguments"); // todo: add errors
-            });                                                   
+            });
         }
 
+        /// <summary>
+        ///     Gets the starting position.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>Position.</returns>
         protected internal Position GetStartingPosition(IndexOptions options)
         {
             if (options == null || options.Start == null)
@@ -90,14 +98,24 @@ namespace McFly
             return startingPosition;
         }
 
+        /// <summary>
+        ///     Is32s the bit.
+        /// </summary>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         protected internal bool Is32Bit()
-        {                         
-            if (!_is32Bit.HasValue)    
-                _is32Bit = Regex.Match(DbgEngProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value.Length ==
-                8;
+        {
+            if (!_is32Bit.HasValue)
+                _is32Bit = Regex.Match(DbgEngProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value
+                               .Length ==
+                           8;
             return _is32Bit.Value;
         }
 
+        /// <summary>
+        ///     Processes the internal.
+        /// </summary>
+        /// <param name="startingPosition">The starting position.</param>
+        /// <param name="endingPosition">The ending position.</param>
         protected internal void ProcessInternal(Position startingPosition, Position endingPosition)
         {
             DbgEngProxy.Execute($"!tt {startingPosition}");
@@ -115,7 +133,15 @@ namespace McFly
             }
         }
 
-        protected internal List<Frame> CreateFramesForUpsert(PositionsRecord[] records, PositionsRecord breakRecord, bool is32Bit)
+        /// <summary>
+        ///     Creates the frames for upsert.
+        /// </summary>
+        /// <param name="records">The records.</param>
+        /// <param name="breakRecord">The break record.</param>
+        /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
+        /// <returns>List&lt;Frame&gt;.</returns>
+        protected internal List<Frame> CreateFramesForUpsert(PositionsRecord[] records, PositionsRecord breakRecord,
+            bool is32Bit)
         {
             var frames = (from record in records
                 where record.Position == breakRecord.Position
@@ -126,6 +152,10 @@ namespace McFly
             return frames;
         }
 
+        /// <summary>
+        ///     Upserts the frames.
+        /// </summary>
+        /// <param name="frames">The frames.</param>
         protected internal void UpsertFrames(List<Frame> frames)
         {
             using (var serverClient = new ServerClient(new Uri(Settings.ServerUrl)))
@@ -134,6 +164,14 @@ namespace McFly
             }
         }
 
+        /// <summary>
+        ///     Creates the frame.
+        /// </summary>
+        /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
+        /// <param name="record">The record.</param>
+        /// <param name="registerSet">The register set.</param>
+        /// <param name="stackFrames">The stack frames.</param>
+        /// <returns>Frame.</returns>
         protected internal Frame CreateFrame(bool is32Bit, PositionsRecord record, RegisterSet registerSet,
             List<StackFrame> stackFrames)
         {
@@ -152,6 +190,11 @@ namespace McFly
             return frame;
         }
 
+        /// <summary>
+        ///     Gets the current disassembly line.
+        /// </summary>
+        /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
+        /// <returns>DisassemblyLine.</returns>
         protected internal DisassemblyLine GetCurrentDisassemblyLine(bool is32Bit)
         {
             var eipRegister = is32Bit ? "eip" : "rip";
@@ -161,23 +204,31 @@ namespace McFly
             var ip = match.Groups["ip"].Success ? Convert.ToUInt64(match.Groups["ip"].Value.Replace("`", ""), 16) : 0;
             byte[] opcode = null;
             if (match.Groups["opcode"].Success)
-            {
-                 opcode = StringToByteArray(match.Groups["opcode"].Value);
-            }
+                opcode = StringToByteArray(match.Groups["opcode"].Value);
             var instruction = match.Groups["ins"].Success ? match.Groups["ins"].Value : "";
             var note = match.Groups["extra"].Success ? match.Groups["extra"].Value : "";
             return new DisassemblyLine(ip, opcode, instruction, note);
         }
 
-        public static byte[] StringToByteArray(String hex)
+        /// <summary>
+        ///     Strings to byte array.
+        /// </summary>
+        /// <param name="hex">The hexadecimal.</param>
+        /// <returns>System.Byte[].</returns>
+        public static byte[] StringToByteArray(string hex)
         {
-            int NumberChars = hex.Length;
-            byte[] bytes = new byte[NumberChars / 2];
-            for (int i = 0; i < NumberChars; i += 2)
+            var NumberChars = hex.Length;
+            var bytes = new byte[NumberChars / 2];
+            for (var i = 0; i < NumberChars; i += 2)
                 bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
             return bytes;
         }
 
+        /// <summary>
+        ///     Gets the stack frames.
+        /// </summary>
+        /// <param name="stackTrace">The stack trace.</param>
+        /// <returns>List&lt;StackFrame&gt;.</returns>
         protected internal static List<StackFrame> GetStackFrames(string stackTrace)
         {
             var stackFrames = (from m in Regex.Matches(stackTrace,
@@ -192,6 +243,10 @@ namespace McFly
             return stackFrames;
         }
 
+        /// <summary>
+        ///     Sets the breakpoints.
+        /// </summary>
+        /// <param name="options">The options.</param>
         protected internal void SetBreakpoints(IndexOptions options)
         {
 // clear breakpoints
@@ -221,17 +276,18 @@ namespace McFly
                 }
         }
 
+        /// <summary>
+        ///     Gets the ending position.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>Position.</returns>
         protected internal Position GetEndingPosition(IndexOptions options)
         {
             Position endingPosition;
             if (options.End != null)
-            {
                 endingPosition = Position.Parse(options.End);
-            }
             else
-            {
                 endingPosition = DbgEngProxy.GetEndingPosition();
-            }
             return endingPosition;
         }
 

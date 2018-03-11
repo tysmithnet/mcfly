@@ -13,7 +13,6 @@
 // ***********************************************************************
 
 using System.ComponentModel.Composition;
-using System.Threading.Tasks;
 using CommandLine;
 
 namespace McFly

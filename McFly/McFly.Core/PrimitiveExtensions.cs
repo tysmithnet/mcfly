@@ -12,8 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-
 namespace McFly.Core
 {
     /// <summary>

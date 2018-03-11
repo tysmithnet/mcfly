@@ -39,7 +39,7 @@ namespace McFly.Core
             get => _threadId;
             set
             {
-                if(value < 0)
+                if (value < 0)
                     throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
                 _threadId = value;
             }
@@ -69,6 +69,10 @@ namespace McFly.Core
         /// <value>The disassembly note.</value>
         public string DisassemblyNote { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the op code.
+        /// </summary>
+        /// <value>The op code.</value>
         public byte[] OpCode { get; set; }
     }
 }

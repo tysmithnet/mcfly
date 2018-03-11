@@ -12,8 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Threading.Tasks;
-
 namespace McFly
 {
     /// <summary>

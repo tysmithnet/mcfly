@@ -4,7 +4,7 @@
 // Created          : 02-25-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-06-2018
 // ***********************************************************************
 // <copyright file="Settings.cs" company="">
 //     Copyright ©  2018
@@ -13,13 +13,13 @@
 // ***********************************************************************
 
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Primitives;
 
 namespace McFly
 {
     /// <summary>
     ///     Class Settings.
     /// </summary>
+    /// <seealso cref="McFly.ISettings" />
     [Export(typeof(ISettings))]
     [Export(typeof(Settings))]
     public class Settings : ISettings

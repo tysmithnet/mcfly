@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-06-2018
+// Last Modified On : 03-09-2018
 // ***********************************************************************
 // <copyright file="McFly.cs" company="">
 //     Copyright ©  2018
@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -33,7 +32,6 @@ using McFly.Debugger;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RGiesecke.DllExport;
-using StackFrame = McFly.Core.StackFrame;
 
 namespace McFly
 {
@@ -107,6 +105,9 @@ namespace McFly
         /// </summary>
         private static McFlyApp app;
 
+        /// <summary>
+        ///     The log
+        /// </summary>
         private static ILog log;
 
         /// <summary>
@@ -279,7 +280,7 @@ namespace McFly
                     var dbgEng = new DbgEngProxy(control, client, registers);
 
                     compositionContainer.ComposeExportedValue<IDbgEngProxy>(dbgEng);
-                    compositionContainer.ComposeExportedValue<ILog>(log);
+                    compositionContainer.ComposeExportedValue(log);
                     PopulateSettings();
                     app = compositionContainer.GetExportedValue<McFlyApp>();
                     WriteLine("When this baby hits 88 miles per hour... you're gonna see some serious shit.");
@@ -373,8 +374,8 @@ namespace McFly
         [DllExport]
         public static HRESULT DebugExtensionUninitialize()
         {
-            if(log != null)
-                  log.Dispose();
+            if (log != null)
+                log.Dispose();
             if (currDomain != null)
                 AppDomain.Unload(currDomain);
 
@@ -415,9 +416,7 @@ namespace McFly
                 return;
             }
             settings.ProjectName = projectName;
-
         }
-
 
         /// <summary>
         ///     Mfindexes the specified client.
@@ -651,7 +650,6 @@ namespace McFly
                 return item;
             });
         }
-
 
         /// <summary>
         ///     Initializes the specified client.
