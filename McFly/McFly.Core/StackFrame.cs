@@ -65,5 +65,41 @@ namespace McFly.Core
         /// </summary>
         /// <value>The offset.</value>
         public uint Offset { get; set; }
+
+        protected bool Equals(StackFrame other)
+        {
+            return StackPointer == other.StackPointer && ReturnAddress == other.ReturnAddress && string.Equals(Module, other.Module) && string.Equals(FunctionName, other.FunctionName) && Offset == other.Offset;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((StackFrame) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = StackPointer.GetHashCode();
+                hashCode = (hashCode * 397) ^ ReturnAddress.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Module != null ? Module.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (FunctionName != null ? FunctionName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (int) Offset;
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(StackFrame left, StackFrame right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(StackFrame left, StackFrame right)
+        {
+            return !Equals(left, right);
+        }
     }
 }

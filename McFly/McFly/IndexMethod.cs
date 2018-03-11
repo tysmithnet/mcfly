@@ -157,13 +157,13 @@ namespace McFly
         protected internal static List<StackFrame> GetStackFrames(string stackTrace)
         {
             var stackFrames = (from m in Regex.Matches(stackTrace,
-                        @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>.*)\+(?<off>[a-fA-F0-9x]+)?")
+                        @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>[^+]+)\+?(?<off>[a-fA-F0-9x]+)?")
                     .Cast<Match>()
                 let stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16)
                 let returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16)
                 let module = m.Groups["mod"].Value
                 let functionName = m.Groups["fun"].Value
-                let offset = Convert.ToUInt32(m.Groups["off"].Value, 16)
+                let offset = m.Groups["off"].Success ? Convert.ToUInt32(m.Groups["off"].Value, 16) : 0
                 select new StackFrame(stackPointer, returnAddress, module, functionName, offset)).ToList();
             return stackFrames;
         }
