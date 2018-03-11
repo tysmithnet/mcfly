@@ -12,6 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using McFly.Core;
+
 namespace McFly.Server.Data
 {
     /// <summary>
@@ -19,5 +21,12 @@ namespace McFly.Server.Data
     /// </summary>
     public interface INoteAccess
     {
+        /// <summary>
+        ///     Adds a note to a thread position
+        /// </summary>
+        /// <param name="position">The position.</param>
+        /// <param name="threadId">The thread identifier.</param>
+        /// <param name="text">The text.</param>
+        void AddNote(Position position, int threadId, string text);
     }
 }

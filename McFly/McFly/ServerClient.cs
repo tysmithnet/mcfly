@@ -73,5 +73,19 @@ namespace McFly
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             _httpClient.PostAsync(ub.Uri, content).GetAwaiter().GetResult();
         }
+
+        public void AddNote(string projectName, Position position, int threadId, string text)
+        {
+            var ub = new UriBuilder(_serverAddress) { Path = $"api/frame/{projectName}" };
+            var content = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("projectName", projectName),
+                new KeyValuePair<string, string>("position", position.ToString()),
+                new KeyValuePair<string, string>("threadId", threadId.ToString()),
+                new KeyValuePair<string, string>("text", text),
+            });
+
+            _httpClient.PostAsync(ub.Uri, content).GetAwaiter().GetResult();
+        }
     }
 }

@@ -12,6 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using McFly.Core;
+
 namespace McFly.Server.Data
 {
     /// <summary>
@@ -21,5 +23,9 @@ namespace McFly.Server.Data
     /// <seealso cref="McFly.Server.Data.INoteAccess" />
     public class NoteAccess : DataAccess, INoteAccess
     {
+        public void AddNote(Position position, int threadId, string text)
+        {
+            
+        }
     }
 }
