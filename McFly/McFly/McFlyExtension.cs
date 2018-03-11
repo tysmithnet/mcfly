@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-06-2018
+// Last Modified On : 03-09-2018
 // ***********************************************************************
 // <copyright file="McFly.cs" company="">
 //     Copyright ©  2018
@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -32,7 +32,6 @@ using McFly.Debugger;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RGiesecke.DllExport;
-using StackFrame = McFly.Core.StackFrame;
 
 namespace McFly
 {
@@ -48,6 +47,7 @@ namespace McFly
     /// <summary>
     ///     Class McFlyExtension.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class McFlyExtension
     {
         /// <summary>
@@ -105,6 +105,9 @@ namespace McFly
         /// </summary>
         private static McFlyApp app;
 
+        /// <summary>
+        ///     The log
+        /// </summary>
         private static ILog log;
 
         /// <summary>
@@ -277,7 +280,7 @@ namespace McFly
                     var dbgEng = new DbgEngProxy(control, client, registers);
 
                     compositionContainer.ComposeExportedValue<IDbgEngProxy>(dbgEng);
-                    compositionContainer.ComposeExportedValue<ILog>(log);
+                    compositionContainer.ComposeExportedValue(log);
                     PopulateSettings();
                     app = compositionContainer.GetExportedValue<McFlyApp>();
                     WriteLine("When this baby hits 88 miles per hour... you're gonna see some serious shit.");
@@ -371,8 +374,8 @@ namespace McFly
         [DllExport]
         public static HRESULT DebugExtensionUninitialize()
         {
-            if(log != null)
-                  log.Dispose();
+            if (log != null)
+                log.Dispose();
             if (currDomain != null)
                 AppDomain.Unload(currDomain);
 
@@ -413,9 +416,7 @@ namespace McFly
                 return;
             }
             settings.ProjectName = projectName;
-
         }
-
 
         /// <summary>
         ///     Mfindexes the specified client.
@@ -639,15 +640,16 @@ namespace McFly
             var matches = Regex.Matches(positionsText,
                 "(?<cur>>)?Thread ID=0x(?<tid>[A-F0-9]+) - Position: (?<maj>[A-F0-9]+):(?<min>[A-F0-9]+)");
 
-            return matches.Cast<Match>().Select(x => new PositionsRecord
+            return matches.Cast<Match>().Select(x =>
             {
-                ThreadId = Convert.ToInt32(x.Groups["tid"].Value, 16),
-                Position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
-                    Convert.ToInt32(x.Groups["min"].Value, 16)),
-                IsThreadWithBreak = x.Groups["cur"].Success
+                var threadId = Convert.ToInt32(x.Groups["tid"].Value, 16);
+                var position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
+                    Convert.ToInt32(x.Groups["min"].Value, 16));
+                var isThreadWithBreak = x.Groups["cur"].Success;
+                var item = new PositionsRecord(threadId, position, isThreadWithBreak);
+                return item;
             });
         }
-
 
         /// <summary>
         ///     Initializes the specified client.

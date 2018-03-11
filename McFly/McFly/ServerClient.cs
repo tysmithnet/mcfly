@@ -4,7 +4,7 @@
 // Created          : 03-02-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-08-2018
 // ***********************************************************************
 // <copyright file="ServerClient.cs" company="">
 //     Copyright ©  2018
@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 using McFly.Core;
 using Newtonsoft.Json;
 
@@ -43,6 +42,7 @@ namespace McFly
         ///     Initializes a new instance of the <see cref="ServerClient" /> class.
         /// </summary>
         /// <param name="serverAddress">The server address.</param>
+        /// <exception cref="System.ArgumentNullException">serverAddress</exception>
         /// <exception cref="ArgumentNullException">serverAddress</exception>
         public ServerClient(Uri serverAddress)
         {

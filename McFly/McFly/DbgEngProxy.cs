@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : master
-// Last Modified On : 03-05-2018
+// Last Modified On : 03-10-2018
 // ***********************************************************************
 // <copyright file="DbgEngProxy.cs" company="">
 //     Copyright ©  2018
@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using McFly.Core;
@@ -28,6 +29,7 @@ namespace McFly
     /// <seealso cref="McFly.IDbgEngProxy" />
     /// <seealso cref="System.IDisposable" />
     [Export(typeof(IDbgEngProxy))]
+    [ExcludeFromCodeCoverage]
     public class DbgEngProxy : IDbgEngProxy, IDisposable
     {
         /// <summary>
@@ -136,6 +138,28 @@ namespace McFly
                 registerSet.Process(register.Name, val, 16);
             }
             return registerSet;
+        }
+
+        /// <summary>
+        ///     Gets the starting position of the trace. Many times this is 35:0
+        /// </summary>
+        /// <returns>Position.</returns>
+        public Position GetStartingPosition()
+        {
+            var end = Execute("!tt 0"); // todo: get from trace_info
+            var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
+            return Position.Parse(endMatch.Groups["pos"].Value);
+        }
+
+        /// <summary>
+        ///     Gets the ending position
+        /// </summary>
+        /// <returns>Position.</returns>
+        public Position GetEndingPosition()
+        {
+            var end = Execute("!tt 100"); // todo: get from trace_info
+            var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
+            return Position.Parse(endMatch.Groups["pos"].Value);
         }
 
         /// <summary>

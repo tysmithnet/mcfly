@@ -4,7 +4,7 @@
 // Created          : 02-28-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-09-2018
 // ***********************************************************************
 // <copyright file="RegisterSet.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -22,33 +22,25 @@ namespace McFly.Core
     /// </summary>
     public class RegisterSet
     {
+        /// <summary>
+        ///     The rax
+        /// </summary>
         private ulong _rax;
-        private ulong _rbx;
-        private ulong _rcx;
-        private ulong _rdx;
 
-        public void Process(string register, string input, int radix)
-        {
-            var first = Register.AllRegisters64.SingleOrDefault(x => x.Name == register);
-            if (first != null)
-            {
-                switch (first.Name)
-                {
-                    case "rax":
-                        _rax = Convert.ToUInt64(input, radix);
-                        break;
-                    case "rbx":
-                        _rbx = Convert.ToUInt64(input, radix);
-                        break;
-                    case "rcx":
-                        _rcx = Convert.ToUInt64(input, radix);
-                        break;
-                    case "rdx":
-                        _rdx = Convert.ToUInt64(input, radix);
-                        break;
-                }
-            }
-        }
+        /// <summary>
+        ///     The RBX
+        /// </summary>
+        private ulong _rbx;
+
+        /// <summary>
+        ///     The RCX
+        /// </summary>
+        private ulong _rcx;
+
+        /// <summary>
+        ///     The RDX
+        /// </summary>
+        private ulong _rdx;
 
         /// <summary>
         ///     Gets or sets the rax register
@@ -90,32 +82,85 @@ namespace McFly.Core
             set => _rdx = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the eax.
+        /// </summary>
+        /// <value>The eax.</value>
         public uint Eax
         {
             get => _rax.Lo32();
             set => _rax.Lo32(value);
         }
 
+        /// <summary>
+        ///     Gets or sets the ebx.
+        /// </summary>
+        /// <value>The ebx.</value>
         public uint Ebx
         {
             get => _rbx.Lo32();
             set => _rbx.Lo32(value);
         }
 
+        /// <summary>
+        ///     Gets or sets the ecx.
+        /// </summary>
+        /// <value>The ecx.</value>
         public uint Ecx
         {
             get => _rcx.Lo32();
             set => _rcx.Lo32(value);
         }
 
+        /// <summary>
+        ///     Gets or sets the edx.
+        /// </summary>
+        /// <value>The edx.</value>
         public uint Edx
         {
             get => _rdx.Lo32();
             set => _rdx.Lo32(value);
         }
+
+        /// <summary>
+        ///     Processes the specified register.
+        /// </summary>
+        /// <param name="register">The register.</param>
+        /// <param name="input">The input.</param>
+        /// <param name="radix">The radix.</param>
+        /// <exception cref="System.ArgumentNullException">
+        ///     register
+        ///     or
+        ///     input
+        /// </exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">register</exception>
+        public void Process(string register, string input, int radix)
+        {
+            register = register ?? throw new ArgumentNullException(nameof(register));
+            input = input ?? throw new ArgumentNullException(nameof(input));
+
+            var first = Register.AllRegisters64.FirstOrDefault(x => x.Name == register);
+            if (first != null)
+                switch (first.Name.ToLower())
+                {
+                    case "rax":
+                        _rax = Convert.ToUInt64(input, radix);
+                        break;
+                    case "rbx":
+                        _rbx = Convert.ToUInt64(input, radix);
+                        break;
+                    case "rcx":
+                        _rcx = Convert.ToUInt64(input, radix);
+                        break;
+                    case "rdx":
+                        _rdx = Convert.ToUInt64(input, radix);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException($"{nameof(register)} is not a valid register");
+                }
+        }
     }
 }
-
 
 /*
 64 bit

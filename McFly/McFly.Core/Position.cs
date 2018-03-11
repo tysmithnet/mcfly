@@ -4,7 +4,7 @@
 // Created          : 02-25-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-09-2018
 // ***********************************************************************
 // <copyright file="Position.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -42,8 +42,17 @@ namespace McFly.Core
         /// </summary>
         /// <param name="high">The high.</param>
         /// <param name="low">The low.</param>
+        /// <exception cref="System.ArgumentOutOfRangeException">
+        ///     high
+        ///     or
+        ///     low
+        /// </exception>
         public Position(int high, int low)
         {
+            if (high < 0)
+                throw new ArgumentOutOfRangeException($"{nameof(high)} must be a non negative integer");
+            if (low < 0)
+                throw new ArgumentOutOfRangeException($"{nameof(low)} must be a non negative integer");
             _high = high;
             _low = low;
         }
@@ -52,6 +61,7 @@ namespace McFly.Core
         ///     Gets or sets the high.
         /// </summary>
         /// <value>The high.</value>
+        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
         /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public int High
         {
@@ -60,8 +70,6 @@ namespace McFly.Core
             {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
-                if (value < _low)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least Low");
                 _high = value;
             }
         }
@@ -70,6 +78,7 @@ namespace McFly.Core
         ///     Gets or sets the low.
         /// </summary>
         /// <value>The low.</value>
+        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
         /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public int Low
         {
@@ -78,8 +87,6 @@ namespace McFly.Core
             {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
-                if (value > _high)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least High");
                 _low = value;
             }
         }
@@ -89,7 +96,7 @@ namespace McFly.Core
         /// </summary>
         /// <value>The high low thread identifier comparer.</value>
         public static IEqualityComparer<Position> HighLowThreadIdComparer { get; } =
-            new HighLowThreadIdEqualityComparer();
+            new HighLowEqualityComparer();
 
         /// <summary>
         ///     Compares to.
@@ -134,6 +141,7 @@ namespace McFly.Core
         /// </summary>
         /// <param name="text">The text.</param>
         /// <returns>Position.</returns>
+        /// <exception cref="System.FormatException">text</exception>
         /// <exception cref="FormatException">text</exception>
         public static Position Parse(string text)
         {
@@ -142,6 +150,25 @@ namespace McFly.Core
                 throw new FormatException($"{nameof(text)} is not a valid format for Position.. must be like 1f0:df");
             return new Position(Convert.ToInt32(match.Groups["hi"].Value, 16),
                 Convert.ToInt32(match.Groups["lo"].Value, 16));
+        }
+
+        /// <summary>
+        ///     Tries the parse.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="outVar">The out variable.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool TryParse(string text, out Position outVar)
+        {
+            var match = Regex.Match(text, @"^\s*(?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+\s*$)");
+            if (!match.Success)
+            {
+                outVar = null;
+                return false;
+            }
+            outVar = new Position(Convert.ToInt32(match.Groups["hi"].Value, 16),
+                Convert.ToInt32(match.Groups["lo"].Value, 16));
+            return true;
         }
 
         /// <summary>
@@ -241,7 +268,7 @@ namespace McFly.Core
         ///     Class HighLowThreadIdEqualityComparer. This class cannot be inherited.
         /// </summary>
         /// <seealso cref="System.Collections.Generic.IEqualityComparer{McFly.Core.Position}" />
-        private sealed class HighLowThreadIdEqualityComparer : IEqualityComparer<Position>
+        internal sealed class HighLowEqualityComparer : IEqualityComparer<Position>
         {
             /// <summary>
             ///     Determines whether the specified objects are equal.
@@ -251,11 +278,7 @@ namespace McFly.Core
             /// <returns>true if the specified objects are equal; otherwise, false.</returns>
             public bool Equals(Position x, Position y)
             {
-                if (ReferenceEquals(x, y)) return true;
-                if (ReferenceEquals(x, null)) return false;
-                if (ReferenceEquals(y, null)) return false;
-                if (x.GetType() != y.GetType()) return false;
-                return x._high == y._high && x._low == y._low;
+                return x.Equals(y);
             }
 
             /// <summary>
@@ -265,12 +288,7 @@ namespace McFly.Core
             /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
             public int GetHashCode(Position obj)
             {
-                unchecked
-                {
-                    var hashCode = obj._high;
-                    hashCode = (hashCode * 397) ^ obj._low;
-                    return hashCode;
-                }
+                return obj.GetHashCode();
             }
         }
     }

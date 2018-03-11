@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\McFly.Core\McFly.Core.csproj" />
     <ProjectReference Include="..\McFly.Server.Data\McFly.Server.Data.csproj" />
   </ItemGroup>
 

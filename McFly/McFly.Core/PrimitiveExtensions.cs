@@ -12,8 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-
 namespace McFly.Core
 {
     /// <summary>
@@ -21,26 +19,6 @@ namespace McFly.Core
     /// </summary>
     public static class PrimitiveExtensions
     {
-        /// <summary>
-        ///     To the tuple.
-        /// </summary>
-        /// <param name="positionText">The key.</param>
-        /// <returns>System.Int32.</returns>
-        /// <exception cref="System.ArgumentException">
-        /// </exception>
-        /// <exception cref="ArgumentException"></exception>
-        public static (int, int) ToTuple(this string positionText)
-        {
-            var split = positionText?.Split(':');
-            if (split?.Length != 2 || !int.TryParse(split[0], out var major) || !int.TryParse(split[1], out var minor))
-                throw new ArgumentException($"Invalid key: {positionText}");
-            if (major < 0)
-                throw new ArgumentException($"Invalid key, major is negative: {positionText}");
-            if (minor < 0)
-                throw new ArgumentException($"Invalid key, minor is negative: {positionText}");
-            return (major, minor);
-        }
-
         /// <summary>
         ///     Interprets the value as a long
         /// </summary>

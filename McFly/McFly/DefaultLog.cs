@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : master
-// Last Modified On : 03-06-2018
+// Last Modified On : 03-08-2018
 // ***********************************************************************
 // <copyright file="DefaultLog.cs" company="">
 //     Copyright ©  2018
@@ -36,6 +36,8 @@ namespace McFly
             var bs = new BufferedStream(fs);
             StreamWriter = new StreamWriter(bs);
         }
+
+        // todo: refactor this
 
         /// <summary>
         ///     Gets or sets the stream writer.

@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C938475F-2E8C-4DFB-8102-6FC0A7101E95}</ProjectGuid>
+    <ProjectGuid>{E717183C-A632-4B2E-A712-C26DACEC8CEB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>McFly.Tests</RootNamespace>
-    <AssemblyName>McFly.Tests</AssemblyName>
+    <RootNamespace>McFly.Core.Tests</RootNamespace>
+    <AssemblyName>McFly.Core.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -71,25 +71,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbgEngProxyFactory.cs" />
-    <Compile Include="IndexMethod_Should.cs" />
+    <Compile Include="Frame_Should.cs" />
+    <Compile Include="Position_Should.cs" />
+    <Compile Include="PrimitiveExtensions_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterSet_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\xunit.analyzers.0.7.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
-      <Project>{83e7c87b-c06e-49b0-a389-14c89e0d137f}</Project>
+      <Project>{83E7C87B-C06E-49B0-A389-14C89E0D137F}</Project>
       <Name>McFly.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\McFly\McFly.csproj">
-      <Project>{d7eb4c59-22ef-4020-9850-cbbf6a015f80}</Project>
-      <Name>McFly</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\xunit.analyzers.0.7.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -100,9 +98,4 @@
     <Error Condition="!Exists('..\packages\xunit.core.2.3.1\build\xunit.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.3.1\build\xunit.core.targets'))" />
   </Target>
   <Import Project="..\packages\xunit.core.2.3.1\build\xunit.core.targets" Condition="Exists('..\packages\xunit.core.2.3.1\build\xunit.core.targets')" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy /S /Y "$(TargetDir)*.*" "$(SolutionDir)McFly\bin\x86\Debug\"
-xcopy /S /Y "$(TargetDir)*.*" "$(SolutionDir)McFly\bin\x64\Debug\"
-</PostBuildEvent>
-  </PropertyGroup>
 </Project>
