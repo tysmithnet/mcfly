@@ -58,6 +58,7 @@ namespace McFly.Server.Data
             dataTable.Columns.Add("@rbx", typeof(long));
             dataTable.Columns.Add("@rcx", typeof(long));
             dataTable.Columns.Add("@rdx", typeof(long));
+            dataTable.Columns.Add("@opcode", typeof(byte[]));
             dataTable.Columns.Add("@opcode_mnemonic", typeof(string));
             dataTable.Columns.Add("@disassembly_note", typeof(string));
             
@@ -71,6 +72,7 @@ namespace McFly.Server.Data
                     frame.RegisterSet.Rbx,
                     frame.RegisterSet.Rcx,
                     frame.RegisterSet.Rdx,
+                    frame.OpCode,
                     frame.OpcodeMnemonic,
                     frame.DisassemblyNote);
             }

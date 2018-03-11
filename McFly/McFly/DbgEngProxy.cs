@@ -140,6 +140,20 @@ namespace McFly
             return registerSet;
         }
 
+        public Position GetStartingPosition()
+        {
+            var end = Execute("!tt 0"); // todo: get from trace_info
+            var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
+            return Position.Parse(endMatch.Groups["pos"].Value);
+        }
+
+        public Position GetEndingPosition()
+        {
+            var end = Execute("!tt 100"); // todo: get from trace_info
+            var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
+            return Position.Parse(endMatch.Groups["pos"].Value);
+        }                            
+
         /// <summary>
         ///     Disposes this instance.
         /// </summary>

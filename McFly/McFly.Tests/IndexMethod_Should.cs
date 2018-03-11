@@ -103,5 +103,29 @@ namespace McFly.Tests
             // assert
             IndexMethod.GetStackFrames(stackTrace).Should().Equal(expected);
         }
+
+        [Fact]
+        public void Create_Frame_Correctly()
+        {
+            // arrange
+            var builder = new DbgEngProxyBuilder();
+            builder.WithExecuteResult("u rip L1", "00007ffa`51315543 6645898632010000 mov     word ptr [r14+132h],r8w");
+            var indexMethod = new IndexMethod {DbgEngProxy = builder.Build()};
+
+            // act
+            var frame = indexMethod.CreateFrame(false, new PositionsRecord(1, new Position(0, 0), true),
+                new RegisterSet(), new List<StackFrame>());
+
+            // assert
+        }
+
+        [Fact]
+        public void Get_Current_Instruction_Disassembly()
+        {
+             var builder = new DbgEngProxyBuilder();
+            builder.WithExecuteResult("u rip L1",
+                "00007ffa`51315543 6645898632010000 mov     word ptr [r14+132h],r8w ds:00000000`1e042252=00c2");
+
+        }
     }
 }

@@ -68,5 +68,7 @@ namespace McFly.Core
         /// </summary>
         /// <value>The disassembly note.</value>
         public string DisassemblyNote { get; set; }
+
+        public byte[] OpCode { get; set; }
     }
 }

@@ -81,10 +81,10 @@ namespace McFly
             });                                                   
         }
 
-        protected internal static Position GetStartingPosition(IndexOptions options)
+        protected internal Position GetStartingPosition(IndexOptions options)
         {
-            if(options == null || options.Start == null)
-                return new Position(0, 0);
+            if (options == null || options.Start == null)
+                return DbgEngProxy.GetStartingPosition();
             if (!Position.TryParse(options.Start, out var startingPosition))
                 startingPosition = new Position(0, 0);
             return startingPosition;
@@ -137,10 +137,7 @@ namespace McFly
         protected internal Frame CreateFrame(bool is32Bit, PositionsRecord record, RegisterSet registerSet,
             List<StackFrame> stackFrames)
         {
-            var eipRegister = is32Bit ? "eip" : "rip";
-            var instructionText = DbgEngProxy.Execute($"u {eipRegister} L1");
-            var match = Regex.Match(instructionText,
-                @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.+)?");
+            var disassemblyLine = GetCurrentDisassemblyLine(is32Bit);
 
             var frame = new Frame
             {
@@ -148,10 +145,19 @@ namespace McFly
                 RegisterSet = registerSet,
                 ThreadId = record.ThreadId,
                 StackFrames = stackFrames,
-                OpcodeMnemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
-                DisassemblyNote = match.Groups["extra"].Success ? match.Groups["extra"].Value : null
+                OpCode = disassemblyLine.OpCode,
+                OpcodeMnemonic = disassemblyLine.OpCodeMnemonic,
+                DisassemblyNote = disassemblyLine.DisassemblyNote
             };
             return frame;
+        }
+
+        protected internal DisassemblyLine GetCurrentDisassemblyLine(bool is32Bit)
+        {
+            var eipRegister = is32Bit ? "eip" : "rip";
+            var instructionText = DbgEngProxy.Execute($"u {eipRegister} L1");
+            var match = Regex.Match(instructionText,
+                @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.+)?");
         }
 
         protected internal static List<StackFrame> GetStackFrames(string stackTrace)
@@ -206,9 +212,7 @@ namespace McFly
             }
             else
             {
-                var end = DbgEngProxy.Execute("!tt 100"); // todo: get from trace_info
-                var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
-                endingPosition = Position.Parse(endMatch.Groups["pos"].Value);
+                endingPosition = DbgEngProxy.GetEndingPosition();
             }
             return endingPosition;
         }
