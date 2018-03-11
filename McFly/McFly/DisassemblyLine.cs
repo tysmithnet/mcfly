@@ -8,14 +8,14 @@ namespace McFly
 {
     internal class DisassemblyLine
     {
-        public ulong InstructionPointer { get; }
+        public ulong InstructionAddress { get; }
         public byte[] OpCode { get; }
         public string OpCodeMnemonic { get;  }
         public string DisassemblyNote { get;}
 
-        public DisassemblyLine(ulong instructionPointer, byte[] opCode, string opCodeMnemonic, string disassemblyNote)
+        public DisassemblyLine(ulong instructionAddress, byte[] opCode, string opCodeMnemonic, string disassemblyNote)
         {
-            InstructionPointer = instructionPointer;
+            InstructionAddress = instructionAddress;
             OpCode = opCode ?? throw new ArgumentNullException(nameof(opCode));
             OpCodeMnemonic = opCodeMnemonic ?? throw new ArgumentNullException(nameof(opCodeMnemonic));
             DisassemblyNote = disassemblyNote ?? throw new ArgumentNullException(nameof(disassemblyNote));

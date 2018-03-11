@@ -157,7 +157,25 @@ namespace McFly
             var eipRegister = is32Bit ? "eip" : "rip";
             var instructionText = DbgEngProxy.Execute($"u {eipRegister} L1");
             var match = Regex.Match(instructionText,
-                @"(?<sp>[a-fA-F0-9`]+)\s+[a-fA-F0-9]+\s+(?<ins>\w+)\s+(?<extra>.+)?");
+                @"(?<ip>[a-fA-F0-9`]+)\s+(?<opcode>[a-fA-F0-9]+)\s+(?<ins>\w+)\s+(?<extra>.+)?");
+            var ip = match.Groups["ip"].Success ? Convert.ToUInt64(match.Groups["ip"].Value.Replace("`", ""), 16) : 0;
+            byte[] opcode = null;
+            if (match.Groups["opcode"].Success)
+            {
+                 opcode = StringToByteArray(match.Groups["opcode"].Value);
+            }
+            var instruction = match.Groups["ins"].Success ? match.Groups["ins"].Value : "";
+            var note = match.Groups["extra"].Success ? match.Groups["extra"].Value : "";
+            return new DisassemblyLine(ip, opcode, instruction, note);
+        }
+
+        public static byte[] StringToByteArray(String hex)
+        {
+            int NumberChars = hex.Length;
+            byte[] bytes = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
         }
 
         protected internal static List<StackFrame> GetStackFrames(string stackTrace)
