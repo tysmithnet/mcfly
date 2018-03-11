@@ -70,6 +70,8 @@
     <Build Include="Types\Table Types\tt_frame.sql" />
     <Build Include="Stored Procedures\pr_upsert_frames.sql" />
     <Build Include="Tables\trace_info.sql" />
+    <Build Include="Stored Procedures\pr_add_note.sql" />
+    <Build Include="Tables\stackframe.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="McFly.SqlServer.refactorlog" />
