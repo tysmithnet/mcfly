@@ -83,13 +83,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
-      <Project>{83e7c87b-c06e-49b0-a389-14c89e0d137f}</Project>
+      <Project>{5a99b435-0b3e-4b19-b954-8b0624af27d4}</Project>
       <Name>McFly.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\McFly\McFly.csproj">
       <Project>{d7eb4c59-22ef-4020-9850-cbbf6a015f80}</Project>
       <Name>McFly</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

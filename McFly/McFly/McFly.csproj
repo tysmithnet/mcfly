@@ -212,7 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
-      <Project>{83E7C87B-C06E-49B0-A389-14C89E0D137F}</Project>
+      <Project>{5a99b435-0b3e-4b19-b954-8b0624af27d4}</Project>
       <Name>McFly.Core</Name>
     </ProjectReference>
   </ItemGroup>

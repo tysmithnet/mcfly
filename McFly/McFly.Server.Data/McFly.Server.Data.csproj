@@ -68,13 +68,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
-      <Project>{83e7c87b-c06e-49b0-a389-14c89e0d137f}</Project>
-      <Name>McFly.Core</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
+      <Project>{5a99b435-0b3e-4b19-b954-8b0624af27d4}</Project>
+      <Name>McFly.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
