@@ -77,15 +77,6 @@
   <ItemGroup>
     <RefactorLog Include="McFly.SqlServer.refactorlog" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\McFly.Server.Data\McFly.Server.Data.csproj">
-      <Name>McFly.Server.Data</Name>
-      <Project>{b57aa3e4-323b-4969-8f78-cd8ef96bd302}</Project>
-      <Private>True</Private>
-      <IsModelAware>True</IsModelAware>
-      <GenerateSqlClrDdl>True</GenerateSqlClrDdl>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)McFly.SqlServer_Create.sql" "$(SolutionDir)McFly\bin\x64\Debug\create.sql"
 echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)McFly.SqlServer_Create.sql" "$(SolutionDir)McFly\bin\x86\Debug\create.sql"</PostBuildEvent>
