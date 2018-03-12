@@ -8,7 +8,9 @@
     [rcx] BIGINT NULL, 
     [rdx] BIGINT NULL, 
     [opcode_mnemonic] VARCHAR(32) NULL, 
-    [disassembly_note] VARCHAR(256) NULL
+    [disassembly_note] VARCHAR(256) NULL,
+
+    PRIMARY KEY (pos_hi, pos_lo, thread_id)
 );
 
 GO

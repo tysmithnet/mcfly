@@ -14,4 +14,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Lock" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="6c6fc6ca-96fa-4c19-b54e-d1a067c72124" ChangeDateTime="03/11/2018 23:36:57">
+    <Property Name="ElementName" Value="[dbo].[stackframe].[function]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[stackframe]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="function_name" />
+  </Operation>
 </Operations>

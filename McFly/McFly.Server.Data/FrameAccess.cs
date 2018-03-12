@@ -37,8 +37,10 @@ namespace McFly.Server.Data
             
             try
             {
-                var parameter = new SqlParameter("@frames", SqlDbType.Structured) {Value = ConvertToTableType(frames)};
-                using (var reader = ExecuteStoredProcedureReader(projectName, "pr_upsert_frames", new []{parameter}))
+                var tableTypes = ConvertToTableType(frames);
+                var framesParam = new SqlParameter("@frames", SqlDbType.Structured) {Value = tableTypes.Frames};
+                var stackFrameParams = new SqlParameter("@stackframes", SqlDbType.Structured) { Value = tableTypes.StackFrames };
+                using (var reader = ExecuteStoredProcedureReader(projectName, "pr_upsert_frames", new []{framesParam, stackFrameParams}))
                 {
                     ;
                 }
@@ -49,23 +51,34 @@ namespace McFly.Server.Data
             }
         }
 
-        private DataTable ConvertToTableType(IEnumerable<Frame> frames)
+        private FrameDto ConvertToTableType(IEnumerable<Frame> frames)
         {
-            var dataTable = new DataTable("tt_frame");
-            dataTable.Columns.Add("@pos_hi", typeof(int));
-            dataTable.Columns.Add("@pos_lo", typeof(int));
-            dataTable.Columns.Add("@thread_id", typeof(int));
-            dataTable.Columns.Add("@rax", typeof(long));
-            dataTable.Columns.Add("@rbx", typeof(long));
-            dataTable.Columns.Add("@rcx", typeof(long));
-            dataTable.Columns.Add("@rdx", typeof(long));
-            dataTable.Columns.Add("@opcode", typeof(byte[]));
-            dataTable.Columns.Add("@opcode_mnemonic", typeof(string));
-            dataTable.Columns.Add("@disassembly_note", typeof(string));
+            var frameTable = new DataTable("tt_frame");
+            frameTable.Columns.Add("@pos_hi", typeof(int));
+            frameTable.Columns.Add("@pos_lo", typeof(int));
+            frameTable.Columns.Add("@thread_id", typeof(int));
+            frameTable.Columns.Add("@rax", typeof(long));
+            frameTable.Columns.Add("@rbx", typeof(long));
+            frameTable.Columns.Add("@rcx", typeof(long));
+            frameTable.Columns.Add("@rdx", typeof(long));
+            frameTable.Columns.Add("@opcode", typeof(byte[]));
+            frameTable.Columns.Add("@opcode_mnemonic", typeof(string));
+            frameTable.Columns.Add("@disassembly_note", typeof(string));
             
+            var stackFrameTable = new DataTable("tt_stackframe");
+            stackFrameTable.Columns.Add("@pos_hi", typeof(int));
+            stackFrameTable.Columns.Add("@pos_lo", typeof(int));
+            stackFrameTable.Columns.Add("@thread_id", typeof(int));
+            stackFrameTable.Columns.Add("@depth", typeof(int));
+            stackFrameTable.Columns.Add("@stack_pointer", typeof(long));
+            stackFrameTable.Columns.Add("@return_address", typeof(long));
+            stackFrameTable.Columns.Add("@module", typeof(string));
+            stackFrameTable.Columns.Add("@function", typeof(string));
+            stackFrameTable.Columns.Add("@offset", typeof(long));
+
             foreach (var frame in frames)
             {
-                dataTable.Rows.Add(
+                frameTable.Rows.Add(
                     frame.Position.High,
                     frame.Position.Low,
                     frame.ThreadId,
@@ -76,9 +89,33 @@ namespace McFly.Server.Data
                     frame.OpCode,
                     frame.OpcodeMnemonic,
                     frame.DisassemblyNote);
+
+                for (var index = 0; index < frame.StackFrames.Count; index++)
+                {
+                    var stackFrame = frame.StackFrames[index];
+                    stackFrameTable.Rows.Add(
+                        frame.Position.High,
+                        frame.Position.Low,
+                        frame.ThreadId,
+                        index,
+                        stackFrame.Module,
+                        stackFrame.FunctionName,
+                        stackFrame.Offset
+                    );
+                }
             }
 
-            return dataTable;
+            return new FrameDto
+            {
+                Frames = frameTable,
+                StackFrames = stackFrameTable
+            };
         }
     }
+
+    internal class FrameDto
+    {
+        public DataTable Frames { get; set; }
+        public DataTable StackFrames { get; set; }
+    }                                           
 }

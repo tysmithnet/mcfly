@@ -1,5 +1,5 @@
-﻿CREATE TABLE [dbo].[stackframe]
-( 
+﻿CREATE TYPE [dbo].[tt_stackframe] AS TABLE
+(
     [pos_hi] INT NOT NULL, 
     [pos_lo] INT NOT NULL,
     [thread_id] INT NOT NULL, 
@@ -10,6 +10,7 @@
     [function_name] VARCHAR(512) NULL, 
     [offset] BIGINT NULL,
 
-    CONSTRAINT PK_stackframe PRIMARY KEY (pos_hi, pos_lo, thread_id, depth)
-       
-)
+    PRIMARY KEY (pos_hi, pos_lo, thread_id, depth)
+);
+
+GO

@@ -72,6 +72,7 @@
     <Build Include="Tables\trace_info.sql" />
     <Build Include="Stored Procedures\pr_add_note.sql" />
     <Build Include="Tables\stackframe.sql" />
+    <Build Include="Types\Table Types\tt_stackframe.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="McFly.SqlServer.refactorlog" />
