@@ -162,6 +162,16 @@ namespace McFly
             return Position.Parse(endMatch.Groups["pos"].Value);
         }
 
+        public void Write(string message)
+        {
+            Control.ControlledOutput(DEBUG_OUTCTL.ALL_CLIENTS, DEBUG_OUTPUT.NORMAL, message);
+        }
+
+        public void WriteLine(string line)
+        {
+            Write($"{line}\n");
+        }
+
         /// <summary>
         ///     Disposes this instance.
         /// </summary>

@@ -87,5 +87,19 @@ namespace McFly
 
             _httpClient.PostAsync(ub.Uri, content).GetAwaiter().GetResult();
         }
+
+        public void InitializeProject(string projectName, Position start, Position end)
+        {
+            var ub = new UriBuilder(_serverAddress) { Path = $"api/project" };
+            var content = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("projectName", projectName),
+                new KeyValuePair<string, string>("position", position.ToString()),
+                new KeyValuePair<string, string>("threadId", threadId.ToString()),
+                new KeyValuePair<string, string>("text", text),
+            });
+
+            _httpClient.PostAsync(ub.Uri, content).GetAwaiter().GetResult();
+        }
     }
 }

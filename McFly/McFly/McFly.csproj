@@ -191,6 +191,7 @@
     <Compile Include="ILog.cs" />
     <Compile Include="IMcFlyMethod.cs" />
     <Compile Include="IndexMethod.cs" />
+    <Compile Include="InitMethod.cs" />
     <Compile Include="InitOptions.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="McFlyApp.cs" />

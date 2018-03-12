@@ -54,5 +54,17 @@ namespace McFly
         /// </summary>
         /// <returns>Position.</returns>
         Position GetEndingPosition();
+
+        /// <summary>
+        ///     Writes the line to output
+        /// </summary>                          
+        /// <param name="message"></param>
+        void Write(string message);
+
+        /// <summary>
+        ///     Writes the line to output
+        /// </summary>
+        /// <param name="line">The line.</param>
+        void WriteLine(string line);
     }
 }

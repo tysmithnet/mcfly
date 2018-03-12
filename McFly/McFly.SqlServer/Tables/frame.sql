@@ -14,5 +14,5 @@
     CONSTRAINT [CK_frame_pos_hi] CHECK (pos_hi >= 0),
     CONSTRAINT [CK_frame_pos_lo] CHECK (pos_lo >= 0),
     CONSTRAINT [CK_frame_thread_id] CHECK (thread_id >= 0), 
-    CONSTRAINT [PK_frame] PRIMARY KEY ([pos_hi], [thread_id], [pos_lo]),
+    CONSTRAINT [PK_frame] PRIMARY KEY ([pos_hi], [pos_lo], [thread_id])
 )
