@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
+using System.Web.Http.Results;
+using System.Web.Mvc;
+using McFly.Core;
 
 namespace McFly.Server.Controllers
 {
@@ -14,8 +11,7 @@ namespace McFly.Server.Controllers
         [HttpPost]
         public ActionResult Post(string projectName, Position position, int threadId, string text)
         {
-            
-            return Ok();
+            return Content("OK");
         }
     }
 }

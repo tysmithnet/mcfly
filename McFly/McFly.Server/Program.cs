@@ -13,11 +13,9 @@
 // ***********************************************************************
 
 using System;
+using System.Net.Http;
 using McFly.Server.Data;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Microsoft.Owin.Hosting;
 
 namespace McFly.Server
 {
@@ -32,8 +30,22 @@ namespace McFly.Server
         /// <param name="args">The arguments.</param>
         public static void Main(string[] args)
         {
-            DataAccess.ConnectionString = Environment.GetEnvironmentVariable("ConnectionString");
-            BuildWebHost(args).Run();
+            DataAccess.ConnectionString = //Environment.GetEnvironmentVariable("ConnectionString");
+                "Data Source=localhost;Integrated Security=true";
+            string baseAddress = "http://localhost:5000/";
+
+            // Start OWIN host 
+            using (WebApp.Start<Startup>(url: baseAddress))
+            {
+                // Create HttpCient and make a request to api/values 
+                HttpClient client = new HttpClient();
+
+                var response = client.GetAsync(baseAddress + "api/values").Result;
+
+                Console.WriteLine(response);
+                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+                Console.ReadLine();
+            }
         }
 
         /// <summary>
@@ -41,23 +53,25 @@ namespace McFly.Server
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>IWebHost.</returns>
-        public static IWebHost BuildWebHost(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((context, builder) =>
-                {
-                    var env = context.HostingEnvironment;
-                    builder.AddJsonFile("appsettings.json", true, true)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
-                    builder.AddEnvironmentVariables();
-                })
-                .ConfigureLogging((context, builder) =>
-                {
-                    builder.AddConsole();
-                    builder.AddDebug();
-                })
-                .UseStartup<Startup>()
-                .Build();
-        }
+        //public static IWebHost BuildWebHost(string[] args)
+        //{
+            //return WebHost.CreateDefaultBuilder(args)
+            //    .ConfigureAppConfiguration((context, builder) =>
+            //    {
+            //        var env = context.HostingEnvironment;
+            //        builder.AddJsonFile("appsettings.json", true, true)
+            //            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
+            //        builder.AddEnvironmentVariables();
+            //    })
+            //    .ConfigureLogging((context, builder) =>
+            //    {
+            //        builder.AddConsole();
+            //        builder.AddDebug();
+            //    })
+            //    .UseStartup<Startup>()
+            //    .Build();
+        //}
+
+
     }
 }

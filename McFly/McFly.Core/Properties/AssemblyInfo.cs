@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("McFly.Core.Tests")]
+[assembly: AssemblyTitle("McFly.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("McFly.Core.Tests")]
+[assembly: AssemblyProduct("McFly.Core")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("44faa6c1-d134-4905-a32a-b1cd0e544e77")]
+[assembly: Guid("3243a211-cf4f-4296-bd68-2d4dd5406542")]
 
 // Version information for an assembly consists of the following four values:
 //

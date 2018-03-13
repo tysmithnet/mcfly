@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E717183C-A632-4B2E-A712-C26DACEC8CEB}</ProjectGuid>
+    <ProjectGuid>{44FAA6C1-D134-4905-A32A-B1CD0E544E77}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>McFly.Core.Tests</RootNamespace>
@@ -78,19 +78,16 @@
     <Compile Include="RegisterSet_Should.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
+      <Project>{3243a211-cf4f-4296-bd68-2d4dd5406542}</Project>
+      <Name>McFly.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.7.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
-      <Project>{5a99b435-0b3e-4b19-b954-8b0624af27d4}</Project>
-      <Name>McFly.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -83,7 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
-      <Project>{5a99b435-0b3e-4b19-b954-8b0624af27d4}</Project>
+      <Project>{3243a211-cf4f-4296-bd68-2d4dd5406542}</Project>
       <Name>McFly.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\McFly\McFly.csproj">

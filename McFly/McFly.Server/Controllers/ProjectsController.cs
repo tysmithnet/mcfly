@@ -13,9 +13,9 @@
 // ***********************************************************************
 
 using System;
+using System.Web.Mvc;
 using McFly.Core;
 using McFly.Server.Data;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace McFly.Server.Controllers
@@ -63,7 +63,7 @@ namespace McFly.Server.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            return new JsonResult(ProjectsAccess.GetDatabases());
+            return Json(ProjectsAccess.GetDatabases(), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace McFly.Server.Controllers
         public ActionResult Post(string projectName, string startingPosition, string endingPosition)
         {
             ProjectsAccess.CreateProject(projectName, Position.Parse(startingPosition), Position.Parse(endingPosition));
-            return Ok();
+            return Content("OK");
         }
     }
 }
