@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using Owin;
+using Swashbuckle.Application;
 
 namespace McFly.Server
 {
@@ -17,7 +18,13 @@ namespace McFly.Server
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.EnableSwagger(c =>
+            {
+                c.SingleApiVersion("v1", "McFly API");
+            }).EnableSwaggerUi();
+
             appBuilder.UseWebApi(config);
+            
         }
     }
 }

@@ -13,6 +13,9 @@
 // ***********************************************************************
 
 using System;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using McFly.Core;
 using McFly.Server.Data;
@@ -23,9 +26,9 @@ namespace McFly.Server.Controllers
     /// <summary>
     ///     Class ProjectsController.
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
-    [Route("api/project")]
-    public class ProjectsController : Controller
+    /// <seealso cref="Controller" />
+    [System.Web.Mvc.Route("api/project")]
+    public class ProjectsController : ApiController
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ProjectsController" /> class.
@@ -60,10 +63,10 @@ namespace McFly.Server.Controllers
         ///     Gets this instance.
         /// </summary>
         /// <returns>JsonResult.</returns>
-        [HttpGet]
-        public JsonResult Get()
+        [System.Web.Mvc.HttpGet]
+        public JsonResult<string> Get()
         {
-            return Json(ProjectsAccess.GetDatabases(), JsonRequestBehavior.AllowGet);
+            return Json("t");
         }
 
         /// <summary>
@@ -73,11 +76,11 @@ namespace McFly.Server.Controllers
         /// <param name="startingPosition">The start frame.</param>
         /// <param name="endingPosition">The end frame.</param>
         /// <returns>ActionResult.</returns>
-        [HttpPost]
-        public ActionResult Post(string projectName, string startingPosition, string endingPosition)
+        [System.Web.Mvc.HttpPost]
+        public IHttpActionResult Post(string projectName, string startingPosition, string endingPosition)
         {
             ProjectsAccess.CreateProject(projectName, Position.Parse(startingPosition), Position.Parse(endingPosition));
-            return Content("OK");
+            return Ok();
         }
     }
 }
