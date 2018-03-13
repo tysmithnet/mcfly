@@ -1,17 +1,15 @@
-﻿using System;
-using System.Web.Http.Results;
-using System.Web.Mvc;
+﻿using System.Web.Http;
 using McFly.Core;
 
 namespace McFly.Server.Controllers
 {
     [Route("api/note")]
-    public class NoteController : Controller
+    public class NoteController : ApiController
     {
         [HttpPost]
-        public ActionResult Post(string projectName, Position position, int threadId, string text)
+        public IHttpActionResult Post(string projectName, Position position, int threadId, string text)
         {
-            return Content("OK");
+            return Ok();
         }
     }
 }

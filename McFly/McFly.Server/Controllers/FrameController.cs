@@ -14,7 +14,6 @@
 
 using System.Collections.Generic;
 using System.Web.Http;
-using System.Web.Mvc;
 using McFly.Core;
 using McFly.Server.Data;
 using Microsoft.Extensions.Logging;
@@ -25,8 +24,8 @@ namespace McFly.Server.Controllers
     ///     Class FrameController.
     /// </summary>
     /// <seealso cref="System.Web.Mvc.Controller" />
-    [System.Web.Http.Route("api/frame/{projectName}")]
-    public class FrameController : Controller
+    [Route("api/frame/{projectName}")]
+    public class FrameController : ApiController
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="FrameController" /> class.
@@ -56,11 +55,11 @@ namespace McFly.Server.Controllers
         /// <param name="projectName">Name of the project.</param>
         /// <param name="frames">The frames.</param>
         /// <returns>ActionResult.</returns>
-        [System.Web.Http.HttpPost]
-        public ActionResult Post(string projectName, [FromBody] IEnumerable<Frame> frames)
-        {                                   
+        [HttpPost]
+        public IHttpActionResult Post(string projectName, [FromBody] IEnumerable<Frame> frames)
+        {
             FrameAccess.UpsertFrames(projectName, frames);
-            return Content("OK");
+            return Ok();
         }
     }
 }
