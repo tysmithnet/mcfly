@@ -1,4 +1,6 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Dependencies;
+using System.Web.Mvc;
 using Owin;
 using Swashbuckle.Application;
 
@@ -22,9 +24,8 @@ namespace McFly.Server
             {
                 c.SingleApiVersion("v1", "McFly API");
             }).EnableSwaggerUi();
-
-            appBuilder.UseWebApi(config);
             
+            appBuilder.UseWebApi(config);
         }
     }
 }

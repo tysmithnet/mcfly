@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 using System.Reflection;
+using Common.Logging;
 using McFly.Core;
 using Microsoft.Extensions.Logging;
 using Microsoft.SqlServer.Dac;
@@ -30,21 +31,8 @@ namespace McFly.Server.Data
     /// <seealso cref="McFly.Server.Data.IProjectsAccess" />
     public class ProjectsAccess : DataAccess, IProjectsAccess
     {
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ProjectsAccess" /> class.
-        /// </summary>
-        /// <param name="logger">The logger.</param>
-        /// <exception cref="ArgumentNullException">logger</exception>
-        public ProjectsAccess(ILogger<ProjectsAccess> logger)
-        {
-            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
-
-        /// <summary>
-        ///     Gets the logger.
-        /// </summary>
-        /// <value>The logger.</value>
-        private ILogger<ProjectsAccess> Logger { get; }
+        private ILog Log { get; set; } = LogManager.GetLogger<ProjectsAccess>();
+          
 
         /// <summary>
         ///     Gets the databases.

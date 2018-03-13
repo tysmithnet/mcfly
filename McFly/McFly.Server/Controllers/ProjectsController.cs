@@ -40,11 +40,8 @@ namespace McFly.Server.Controllers
         ///     or
         ///     projectsAccess
         /// </exception>
-        public ProjectsController(ILogger<ProjectsController> logger, IProjectsAccess projectsAccess)
+        public ProjectsController(IProjectsAccess projectsAccess)
         {
-            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            ProjectsAccess = projectsAccess ?? throw new ArgumentNullException(nameof(projectsAccess));
-            Logger.LogInformation("ProjectsController created");
         }
 
         /// <summary>
@@ -52,12 +49,6 @@ namespace McFly.Server.Controllers
         /// </summary>
         /// <value>The projects access.</value>
         protected IProjectsAccess ProjectsAccess { get; set; }
-
-        /// <summary>
-        ///     Gets the logger.
-        /// </summary>
-        /// <value>The logger.</value>
-        private ILogger<ProjectsController> Logger { get; }
 
         /// <summary>
         ///     Gets this instance.
