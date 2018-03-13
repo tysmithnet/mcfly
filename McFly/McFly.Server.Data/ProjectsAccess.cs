@@ -14,12 +14,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.Data.SqlClient;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using McFly.Core;
 using Microsoft.Extensions.Logging;
+using Microsoft.SqlServer.Dac;
 
 namespace McFly.Server.Data
 {
@@ -74,76 +76,78 @@ namespace McFly.Server.Data
         /// <param name="end">The end.</param>
         public void CreateProject(string projectName, Position start, Position end)
         {
-            using (var conn = new SqlConnection(ConnectionString))
-            using (var createDbCommand = conn.CreateCommand())
-            {
-                conn.Open();
-                createDbCommand.CommandText = $"CREATE DATABASE {projectName}";
-                try
-                {
-                    createDbCommand.ExecuteNonQuery();
-                }
-                catch (SqlException e)
-                {
-                    Logger.LogError($"Unable to create Database {projectName}: {e.Message}");
-                    throw;
-                }
-            }
+            string executingAssembly = Assembly.GetExecutingAssembly().Location;
+            string dacPacFileName = Path.Combine(Path.GetDirectoryName(executingAssembly), "McFly.SqlServer.dacpac");
+            var dacPac = DacPackage.Load(dacPacFileName);
+            var sb = new SqlConnectionStringBuilder();
+            var sb2 = new SqlConnectionStringBuilder(ConnectionString);
+            sb.DataSource = sb2.DataSource;
+            sb.IntegratedSecurity = true;
+            var dbServices = new DacServices(sb.ToString());
+            dbServices.Deploy(dacPac, projectName);
 
-            var sqlBuilder = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName};
-            using (var conn = new SqlConnection(sqlBuilder.ToString()))
-            {
-                try
-                {
-                    conn.Open();
-                    string dirName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                    string fileName = Path.Combine(dirName, "create.sql");
-                    string initScript = null;
-                    using (var stream = File.OpenRead(fileName))
-                    using (var reader = new StreamReader(stream))
-                    {
-                        initScript = reader.ReadToEnd();
-                    }
+            //using (var conn = new SqlConnection(ConnectionString))
+            //using (var createDbCommand = conn.CreateCommand())
+            //{
+            //    conn.Open();
+            //    createDbCommand.CommandText = $"CREATE DATABASE {projectName}";
+            //    try
+            //    {
+            //        createDbCommand.ExecuteNonQuery();
+            //    }
+            //    catch (SqlException e)
+            //    {
+            //        Logger.LogError($"Unable to create Database {projectName}: {e.Message}");
+            //        throw;
+            //    }
+            //}
 
-                    initScript = Regex.Replace(initScript, @":setvar DatabaseName ""McFly\.SqlServer""",
-                        $@":setvar DatabaseName ""{projectName}""");
+            //var sqlBuilder = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName};
+            //using (var conn = new SqlConnection(sqlBuilder.ToString()))
+            //{
+            //    try
+            //    {
+            //        conn.Open();
+            //        string dirName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //        string fileName = Path.Combine(dirName, "create.sql");
+            //        string initScript = null;
+            //        using (var stream = File.OpenRead(fileName))
+            //        using (var reader = new StreamReader(stream))
+            //        {
+            //            initScript = reader.ReadToEnd();
+            //        }
 
-                    var commandStrings = Regex.Split(initScript, @"^\s*GO\s*$",
-                        RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            //        initScript = Regex.Replace(initScript, @":setvar DatabaseName ""McFly\.SqlServer""",
+            //            $@":setvar DatabaseName ""{projectName}""");
 
-                    foreach (var commandString in commandStrings)
-                    {
-                        if (string.IsNullOrWhiteSpace(commandString))
-                            continue;
-                        using (var command = conn.CreateCommand())
-                        {
-                            command.CommandText = commandString;
-                            command.ExecuteNonQuery();
-                        }
-                    }
+            //        using (var createCommand = conn.CreateCommand())
+            //        {
+            //            createCommand.CommandText = initScript;
+            //            createCommand.ExecuteNonQuery();
+            //        }
 
-                    using (var infoCommand = conn.CreateCommand())
-                    {
-                        infoCommand.CommandText =
-                            $"INSERT INTO trace_info (start_pos_hi, start_pos_lo, end_pos_hi, end_pos_lo) VALUES ({start.High}, {start.Low}, {end.High}, {end.Low})";
-                        infoCommand.ExecuteNonQuery();
-                    }
-                }
-                catch (SqlException e)
-                {
-                    using (var singleUser = conn.CreateCommand())
-                    using (var deleteCommand = conn.CreateCommand())
-                    {
-                        singleUser.CommandText =
-                            $"ALTER DATABASE [{projectName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
-                        singleUser.ExecuteNonQuery();
+            //        using (var infoCommand = conn.CreateCommand())
+            //        {
+            //            infoCommand.CommandText =
+            //                $"INSERT INTO trace_info (start_pos_hi, start_pos_lo, end_pos_hi, end_pos_lo) VALUES ({start.High}, {start.Low}, {end.High}, {end.Low})";
+            //            infoCommand.ExecuteNonQuery();
+            //        }
+            //    }
+            //    catch (SqlException e)
+            //    {
+            //        using (var singleUser = conn.CreateCommand())
+            //        using (var deleteCommand = conn.CreateCommand())
+            //        {
+            //            singleUser.CommandText =
+            //                $"ALTER DATABASE [{projectName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
+            //            singleUser.ExecuteNonQuery();
 
-                        deleteCommand.CommandText = $"DROP DATABASE {projectName}"; // todo: close connections
-                        deleteCommand.ExecuteNonQuery();
-                        throw;
-                    }
-                }
-            }
+            //            deleteCommand.CommandText = $"DROP DATABASE {projectName}"; // todo: close connections
+            //            deleteCommand.ExecuteNonQuery();
+            //            throw;
+            //        }
+            //    }
+            //}
         }
     }
 }

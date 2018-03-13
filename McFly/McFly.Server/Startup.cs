@@ -50,7 +50,10 @@ namespace McFly.Server
             services.AddTransient<IProjectsAccess, ProjectsAccess>();
             services.AddMvc();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "My API", Version = "v1"}); });
-
+            services.ConfigureSwaggerGen(options =>
+            {
+                options.CustomSchemaIds(x => x.FullName);
+            });
             services.AddTransient<IFrameAccess, FrameAccess>();
         }
 

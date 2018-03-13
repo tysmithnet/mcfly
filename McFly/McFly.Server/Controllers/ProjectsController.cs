@@ -70,13 +70,13 @@ namespace McFly.Server.Controllers
         ///     Posts the specified project name.
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
-        /// <param name="startFrame">The start frame.</param>
-        /// <param name="endFrame">The end frame.</param>
+        /// <param name="startingPosition">The start frame.</param>
+        /// <param name="endingPosition">The end frame.</param>
         /// <returns>ActionResult.</returns>
         [HttpPost]
-        public ActionResult Post(string projectName, string startFrame, string endFrame)
+        public ActionResult Post(string projectName, string startingPosition, string endingPosition)
         {
-            ProjectsAccess.CreateProject(projectName, Position.Parse(startFrame), Position.Parse(endFrame));
+            ProjectsAccess.CreateProject(projectName, Position.Parse(startingPosition), Position.Parse(endingPosition));
             return Ok();
         }
     }
