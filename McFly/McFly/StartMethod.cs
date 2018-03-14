@@ -59,20 +59,20 @@ namespace McFly
         /// <returns>Task.</returns>
         public void Process(string[] args)
         {
-            if (string.IsNullOrWhiteSpace(Settings.LauncherPath))
+            if (string.IsNullOrWhiteSpace(Settings.ServerExePath))
             {
                 Log.Error("Start called but no launcher path was set. Check the settings file.");
                 return;
             }
-            if (!File.Exists(Settings.LauncherPath))
+            if (!File.Exists(Settings.ServerExePath))
             {
-                Log.Error($"Start called but could not find file: {Settings.LauncherPath}");
+                Log.Error($"Start called but could not find file: {Settings.ServerExePath}");
                 return;
             }
 
             var startInfo = new ProcessStartInfo
             {
-                FileName = Settings.LauncherPath,
+                FileName = Settings.ServerExePath,
                 CreateNoWindow = false,
                 Environment = {{"ConnectionString", Settings.ConnectionString}},
                 UseShellExecute = false

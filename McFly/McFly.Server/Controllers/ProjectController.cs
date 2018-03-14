@@ -14,6 +14,7 @@
 
 using System.ComponentModel.Composition;
 using System.Web.Http;
+using System.Web.Mvc;
 using System.Web.Http.Results;
 using McFly.Core;
 using McFly.Server.Data;
@@ -24,9 +25,9 @@ namespace McFly.Server.Controllers
     ///     Class ProjectsController.
     /// </summary>
     /// <seealso cref="Controller" />
-    [Route("api/project")]
-    [Export(typeof(ProjectsController))]
-    public class ProjectsController : ApiController
+    [Export(typeof(ProjectController))]
+    [Route("api/projects")]
+    public class ProjectController : ApiController
     {
         [Import]
         private IProjectsAccess ProjectsAccess { get; set; }
@@ -35,7 +36,7 @@ namespace McFly.Server.Controllers
         ///     Gets this instance.
         /// </summary>
         /// <returns>JsonResult.</returns>
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         public JsonResult<string> Get()
         {
             return Json("t");

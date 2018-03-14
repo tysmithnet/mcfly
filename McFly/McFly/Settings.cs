@@ -34,7 +34,7 @@ namespace McFly
         ///     Gets or sets the launcher path.
         /// </summary>
         /// <value>The launcher path.</value>
-        public string LauncherPath { get; set; }
+        public string ServerExePath { get; set; }
 
         /// <summary>
         ///     Gets or sets the server URL.
