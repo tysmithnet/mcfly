@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Data.SqlClient;
 using System.IO;
 using System.Reflection;
@@ -29,6 +30,8 @@ namespace McFly.Server.Data
     /// </summary>
     /// <seealso cref="McFly.Server.Data.DataAccess" />
     /// <seealso cref="McFly.Server.Data.IProjectsAccess" />
+    [Export(typeof(IProjectsAccess))]
+    [Export(typeof(ProjectsAccess))]
     public class ProjectsAccess : DataAccess, IProjectsAccess
     {
         private ILog Log { get; set; } = LogManager.GetLogger<ProjectsAccess>();

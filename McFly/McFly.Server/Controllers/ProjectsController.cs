@@ -12,14 +12,11 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Net.Http;
+using System.ComponentModel.Composition;
 using System.Web.Http;
 using System.Web.Http.Results;
-using System.Web.Mvc;
 using McFly.Core;
 using McFly.Server.Data;
-using Microsoft.Extensions.Logging;
 
 namespace McFly.Server.Controllers
 {
@@ -27,28 +24,12 @@ namespace McFly.Server.Controllers
     ///     Class ProjectsController.
     /// </summary>
     /// <seealso cref="Controller" />
-    [System.Web.Mvc.Route("api/project")]
+    [Route("api/project")]
+    [Export(typeof(ProjectsController))]
     public class ProjectsController : ApiController
     {
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ProjectsController" /> class.
-        /// </summary>
-        /// <param name="logger">The logger.</param>
-        /// <param name="projectsAccess">The projects access.</param>
-        /// <exception cref="ArgumentNullException">
-        ///     logger
-        ///     or
-        ///     projectsAccess
-        /// </exception>
-        public ProjectsController(IProjectsAccess projectsAccess)
-        {
-        }
-
-        /// <summary>
-        ///     Gets or sets the projects access.
-        /// </summary>
-        /// <value>The projects access.</value>
-        protected IProjectsAccess ProjectsAccess { get; set; }
+        [Import]
+        private IProjectsAccess ProjectsAccess { get; set; }
 
         /// <summary>
         ///     Gets this instance.
@@ -67,7 +48,7 @@ namespace McFly.Server.Controllers
         /// <param name="startingPosition">The start frame.</param>
         /// <param name="endingPosition">The end frame.</param>
         /// <returns>ActionResult.</returns>
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         public IHttpActionResult Post(string projectName, string startingPosition, string endingPosition)
         {
             ProjectsAccess.CreateProject(projectName, Position.Parse(startingPosition), Position.Parse(endingPosition));

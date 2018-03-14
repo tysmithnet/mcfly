@@ -10,7 +10,6 @@ AS
     WHEN MATCHED THEN
         UPDATE 
             SET T.rax = COALESCE(S.rax, T.rax),
-            T.rax = COALESCE(S.rax, T.rax),
             T.rbx = COALESCE(S.rbx, T.rbx),
             T.rcx = COALESCE(S.rcx, T.rcx),
             T.rdx = COALESCE(S.rdx, T.rdx),

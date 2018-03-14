@@ -1,6 +1,9 @@
-﻿using System.Web.Http;
-using System.Web.Http.Dependencies;
-using System.Web.Mvc;
+﻿using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Web.Http;
 using Owin;
 using Swashbuckle.Application;
 
@@ -13,18 +16,26 @@ namespace McFly.Server
         public void Configuration(IAppBuilder appBuilder)
         {
             // Configure Web API for self-host. 
-            HttpConfiguration config = new HttpConfiguration();
+            var config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                "DefaultApi",
+                "api/{controller}/{id}",
+                new {id = RouteParameter.Optional}
             );
 
-            config.EnableSwagger(c =>
-            {
-                c.SingleApiVersion("v1", "McFly API");
-            }).EnableSwaggerUi();
-            
+            var executingAssemblyFile = Assembly.GetExecutingAssembly().Location;
+            var executingDirectory = Path.GetDirectoryName(executingAssemblyFile);
+            var mcFlyAssemblies = Directory.EnumerateFiles(executingDirectory, "McFly*.dll", SearchOption.AllDirectories);
+            var assemblies = mcFlyAssemblies.Select(Assembly.LoadFile).Select(a => new AssemblyCatalog(a));
+            var executingAssembly = Assembly.GetExecutingAssembly();
+            var executingAssemblyCatalog = new AssemblyCatalog(executingAssembly);
+            var aggregateCatalog = new AggregateCatalog(assemblies.Concat(new [] {executingAssemblyCatalog}));
+            var compositionContainer = new CompositionContainer(aggregateCatalog);
+
+            var mefDependencyResolver = new MefDependencyResolver(compositionContainer, config.DependencyResolver);
+            config.DependencyResolver = mefDependencyResolver;
+            config.EnableSwagger(c => { c.SingleApiVersion("v1", "McFly API"); }).EnableSwaggerUi();
+
             appBuilder.UseWebApi(config);
         }
     }

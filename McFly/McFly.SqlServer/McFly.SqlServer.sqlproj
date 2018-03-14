@@ -37,7 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>
+    </OutputPath>
     <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <DebugSymbols>true</DebugSymbols>
@@ -78,7 +79,7 @@
     <RefactorLog Include="McFly.SqlServer.refactorlog" />
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.*" "$(SolutionDir)McFly.Server\bin\Debug\netcoreapp2.0\"
+    <PostBuildEvent>echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.*" "$(SolutionDir)McFly.Server\bin\Debug\"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>
