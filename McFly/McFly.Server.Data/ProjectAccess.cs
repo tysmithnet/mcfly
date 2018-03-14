@@ -65,15 +65,45 @@ namespace McFly.Server.Data
         /// <param name="end">The end.</param>
         public void CreateProject(string projectName, Position start, Position end)
         {
+            string dacPacFileName;
+
             var executingAssembly = Assembly.GetExecutingAssembly().Location;
-            var dacPacFileName = Path.Combine(Path.GetDirectoryName(executingAssembly), "McFly.SqlServer.dacpac");
-            var dacPac = DacPackage.Load(dacPacFileName);
-            var sb = new SqlConnectionStringBuilder();
-            var sb2 = new SqlConnectionStringBuilder(ConnectionString);
-            sb.DataSource = sb2.DataSource;
-            sb.IntegratedSecurity = true;
-            var dbServices = new DacServices(sb.ToString());
-            dbServices.Deploy(dacPac, projectName);
+            DacPackage dacPac;
+            try
+            {
+                dacPacFileName = Path.Combine(Path.GetDirectoryName(executingAssembly), "McFly.SqlServer.dacpac");
+                dacPac = DacPackage.Load(dacPacFileName);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Failed opening dacpac.. is the file name correct?: {e.GetType()} - {e.Message}");
+                throw;
+            }
+
+            DacServices dbServices;
+            try
+            {
+                var sb = new SqlConnectionStringBuilder();
+                var sb2 = new SqlConnectionStringBuilder(ConnectionString);
+                sb.DataSource = sb2.DataSource;
+                sb.IntegratedSecurity = true;
+                dbServices = new DacServices(sb.ToString());
+            }
+            catch (Exception e) 
+            {
+                Log.Error($"Failed creating DAC Services.. is your connection correct?: {e.GetType()} - {e.Message}");
+                throw;
+            }
+
+            try
+            {
+                dbServices.Deploy(dacPac, projectName, false, new DacDeployOptions(){});
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Failed deploying dacpac.. do you have errors in your scripts? Do you have permission?: {e.GetType()} - {e.Message}");
+                throw;
+            }
 
             //using (var conn = new SqlConnection(ConnectionString))
             //using (var createDbCommand = conn.CreateCommand())
