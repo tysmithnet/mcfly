@@ -167,6 +167,7 @@
   <ItemGroup>
     <Compile Include="DataAccess.cs" />
     <Compile Include="FrameAccess.cs" />
+    <Compile Include="FrameDto.cs" />
     <Compile Include="IFrameAccess.cs" />
     <Compile Include="INoteAccess.cs" />
     <Compile Include="IProjectsAccess.cs" />

@@ -13,6 +13,8 @@
 // ***********************************************************************
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Primitives;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -25,6 +27,8 @@ namespace McFly.Server.Data
     /// </summary>
     /// <seealso cref="McFly.Server.Data.DataAccess" />
     /// <seealso cref="McFly.Server.Data.IFrameAccess" />
+    [Export(typeof(IFrameAccess))]
+    [Export(typeof(FrameAccess))]
     public class FrameAccess : DataAccess, IFrameAccess
     {
         /// <summary>
@@ -112,10 +116,4 @@ namespace McFly.Server.Data
             };
         }
     }
-
-    internal class FrameDto
-    {
-        public DataTable Frames { get; set; }
-        public DataTable StackFrames { get; set; }
-    }                                           
 }

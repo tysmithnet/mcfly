@@ -65,13 +65,11 @@ namespace McFly.Server.Data
         /// <param name="end">The end.</param>
         public void CreateProject(string projectName, Position start, Position end)
         {
-            string dacPacFileName;
-
             var executingAssembly = Assembly.GetExecutingAssembly().Location;
             DacPackage dacPac;
             try
             {
-                dacPacFileName = Path.Combine(Path.GetDirectoryName(executingAssembly), "McFly.SqlServer.dacpac");
+                var dacPacFileName = Path.Combine(Path.GetDirectoryName(executingAssembly), "McFly.SqlServer.dacpac");
                 dacPac = DacPackage.Load(dacPacFileName);
             }
             catch (Exception e)
@@ -104,69 +102,8 @@ namespace McFly.Server.Data
                 Log.Error($"Failed deploying dacpac.. do you have errors in your scripts? Do you have permission?: {e.GetType()} - {e.Message}");
                 throw;
             }
-
-            //using (var conn = new SqlConnection(ConnectionString))
-            //using (var createDbCommand = conn.CreateCommand())
-            //{
-            //    conn.Open();
-            //    createDbCommand.CommandText = $"CREATE DATABASE {projectName}";
-            //    try
-            //    {
-            //        createDbCommand.ExecuteNonQuery();
-            //    }
-            //    catch (SqlException e)
-            //    {
-            //        Logger.LogError($"Unable to create Database {projectName}: {e.Message}");
-            //        throw;
-            //    }
-            //}
-
-            //var sqlBuilder = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName};
-            //using (var conn = new SqlConnection(sqlBuilder.ToString()))
-            //{
-            //    try
-            //    {
-            //        conn.Open();
-            //        string dirName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            //        string fileName = Path.Combine(dirName, "create.sql");
-            //        string initScript = null;
-            //        using (var stream = File.OpenRead(fileName))
-            //        using (var reader = new StreamReader(stream))
-            //        {
-            //            initScript = reader.ReadToEnd();
-            //        }
-
-            //        initScript = Regex.Replace(initScript, @":setvar DatabaseName ""McFly\.SqlServer""",
-            //            $@":setvar DatabaseName ""{projectName}""");
-
-            //        using (var createCommand = conn.CreateCommand())
-            //        {
-            //            createCommand.CommandText = initScript;
-            //            createCommand.ExecuteNonQuery();
-            //        }
-
-            //        using (var infoCommand = conn.CreateCommand())
-            //        {
-            //            infoCommand.CommandText =
-            //                $"INSERT INTO trace_info (start_pos_hi, start_pos_lo, end_pos_hi, end_pos_lo) VALUES ({start.High}, {start.Low}, {end.High}, {end.Low})";
-            //            infoCommand.ExecuteNonQuery();
-            //        }
-            //    }
-            //    catch (SqlException e)
-            //    {
-            //        using (var singleUser = conn.CreateCommand())
-            //        using (var deleteCommand = conn.CreateCommand())
-            //        {
-            //            singleUser.CommandText =
-            //                $"ALTER DATABASE [{projectName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
-            //            singleUser.ExecuteNonQuery();
-
-            //            deleteCommand.CommandText = $"DROP DATABASE {projectName}"; // todo: close connections
-            //            deleteCommand.ExecuteNonQuery();
-            //            throw;
-            //        }
-            //    }
-            //}
+           
+            // todo: try to delete database after fail
         }
     }
 }
