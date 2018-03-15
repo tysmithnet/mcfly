@@ -50,5 +50,14 @@ namespace McFly.Core.Tests
             throws.Should().Throw<ArgumentNullException>("Register cannot be null");
             throws2.Should().Throw<FormatException>("hello is not a valid hex string");
         }
+
+        [Fact]
+        public void Have_Correct_Register_Num_Bits()
+        {
+            Register.Rax.NumBits.Should().Be(64);
+            Register.Rbx.NumBits.Should().Be(64);
+            Register.Rcx.NumBits.Should().Be(64);
+            Register.Rdx.NumBits.Should().Be(64);
+        }
     }
 }
