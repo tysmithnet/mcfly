@@ -20,8 +20,6 @@ using System.IO;
 using System.Reflection;
 using Common.Logging;
 using McFly.Core;
-using Microsoft.Extensions.Logging;
-using Microsoft.SqlServer.Dac;
 
 namespace McFly.Server.Data
 {

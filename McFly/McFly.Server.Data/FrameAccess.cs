@@ -17,7 +17,6 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Primitives;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using McFly.Core;
 
 namespace McFly.Server.Data
