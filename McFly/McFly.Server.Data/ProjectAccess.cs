@@ -17,7 +17,9 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Common.Logging;
 using McFly.Core;
 
@@ -32,8 +34,7 @@ namespace McFly.Server.Data
     [Export(typeof(ProjectsAccess))]
     public class ProjectsAccess : DataAccess, IProjectsAccess
     {
-        private ILog Log { get; set; } = LogManager.GetLogger<ProjectsAccess>();
-          
+        private ILog Log { get; } = LogManager.GetLogger<ProjectsAccess>();
 
         /// <summary>
         ///     Gets the databases.
@@ -63,8 +64,6 @@ namespace McFly.Server.Data
         /// <param name="end">The end.</param>
         public void CreateProject(string projectName, Position start, Position end)
         {
-
-
             var executingAssembly = Assembly.GetExecutingAssembly().Location;
 
             string scriptFileName;
@@ -76,6 +75,64 @@ namespace McFly.Server.Data
             {
                 Log.Error($"Failed opening dacpac.. is the file name correct?: {e.GetType()} - {e.Message}");
                 throw;
+            }
+
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string initScript = null;
+                    using (var stream = File.OpenRead(scriptFileName))
+                    using (var reader = new StreamReader(stream))
+                    {
+                        initScript = reader.ReadToEnd();
+                    }
+
+                    initScript = Regex.Replace(initScript, @":setvar DatabaseName ""McFly\.SqlServer""",
+                        $@":setvar DatabaseName ""{projectName}""");
+
+                    var variableDefinitions = Regex.Matches(initScript, @":setvar (?<name>\w+) ""(?<val>.*)""");
+
+                    foreach (Match match in variableDefinitions)
+                    {
+                        initScript = initScript.Replace($@"$({match.Groups["name"].Value})", match.Groups["val"].Value);
+                    }
+
+                    initScript = Regex.Replace(initScript, @":.*", "");
+
+                    var batches = Regex.Split(initScript, @"\s*GO\s*", RegexOptions.IgnoreCase).Where(x => !string.IsNullOrWhiteSpace(x));
+
+                    foreach (var batch in batches)
+                    {
+                        using (var createCommand = conn.CreateCommand())
+                        {
+                            createCommand.CommandText = batch;  // todo: error handling
+                            createCommand.ExecuteNonQuery();
+                        }
+                    }
+
+                    using (var infoCommand = conn.CreateCommand())
+                    {
+                        infoCommand.CommandText =
+                            $"INSERT INTO trace_info (start_pos_hi, start_pos_lo, end_pos_hi, end_pos_lo) VALUES ({start.High}, {start.Low}, {end.High}, {end.Low})";
+                        infoCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (SqlException e)
+                {
+                    using (var singleUser = conn.CreateCommand())
+                    using (var deleteCommand = conn.CreateCommand())
+                    {
+                        singleUser.CommandText =
+                            $"ALTER DATABASE [{projectName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
+                        singleUser.ExecuteNonQuery();
+
+                        deleteCommand.CommandText = $"DROP DATABASE {projectName}"; // todo: close connections
+                        deleteCommand.ExecuteNonQuery();
+                        throw;
+                    }
+                }
             }
         }
     }
