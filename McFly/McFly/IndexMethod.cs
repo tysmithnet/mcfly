@@ -55,6 +55,9 @@ namespace McFly
         [Import]
         protected internal Settings Settings { get; set; }
 
+        [Import]
+        protected internal IServerClient ServerClient { get; set; }
+
         /// <summary>
         ///     Gets the name.
         /// </summary>
@@ -158,10 +161,7 @@ namespace McFly
         /// <param name="frames">The frames.</param>
         protected internal void UpsertFrames(List<Frame> frames)
         {
-            using (var serverClient = new ServerClient(new Uri(Settings.ServerUrl)))
-            {
-                serverClient.UpsertFrames(Settings.ProjectName, frames);
-            }
+            ServerClient.UpsertFrames(frames);
         }
 
         /// <summary>

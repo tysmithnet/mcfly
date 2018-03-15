@@ -620,10 +620,13 @@ namespace McFly
                             frames.Add(frame);
                         }
                     }
-                    using (var serverClient = new ServerClient(new Uri(settings.ServerUrl)))
+
+                    using (var client = new ServerClient())
                     {
-                        serverClient.UpsertFrames(settings.ProjectName, frames);
+                        client.Settings = settings;
+                        client.UpsertFrames(frames);
                     }
+
                 }
             }
         }

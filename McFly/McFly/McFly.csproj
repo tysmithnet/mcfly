@@ -194,6 +194,7 @@
     <Compile Include="IndexMethod.cs" />
     <Compile Include="InitMethod.cs" />
     <Compile Include="InitOptions.cs" />
+    <Compile Include="IServerClient.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="McFlyApp.cs" />
     <Compile Include="McFlyExtension.cs" />

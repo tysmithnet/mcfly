@@ -29,5 +29,11 @@ namespace McFly.Tests
             _mock.Setup(proxy => proxy.GetStartingPosition()).Returns(position);
             return this;
         }
+
+        public DbgEngProxyBuilder WithEndingPosition(Position position)
+        {
+            _mock.Setup(proxy => proxy.GetEndingPosition()).Returns(position);
+            return this;
+        }
     }
 }

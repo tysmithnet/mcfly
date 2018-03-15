@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition;
 using CommandLine;
 
 namespace McFly
@@ -13,23 +8,24 @@ namespace McFly
     internal class InitMethod : IMcFlyMethod
     {
         [Import]
-        private IDbgEngProxy DbgEngProxy { get; set; }
+        protected internal IDbgEngProxy DbgEngProxy { get; set; }
 
         [Import]
-        private Settings Settings { get; set; }
+        protected internal Settings Settings { get; set; }
+
+        [Import]
+        protected internal IServerClient ServerClient { get; set; }
 
         public string Name { get; } = "init";
+
         public void Process(string[] args)
         {
             Parser.Default.ParseArguments<InitOptions>(args)
-                .WithParsed<InitOptions>(options =>
+                .WithParsed(options =>
                 {
-                    using (var client = new ServerClient(new Uri(Settings.ServerUrl)))
-                    {
-                        var start = DbgEngProxy.GetStartingPosition();
-                        var end = DbgEngProxy.GetEndingPosition();
-                        client.InitializeProject(options.ProjectName, start, end);
-                    }
+                    var start = DbgEngProxy.GetStartingPosition();
+                    var end = DbgEngProxy.GetEndingPosition();
+                    ServerClient.InitializeProject(options.ProjectName, start, end);
                 });
         }
     }

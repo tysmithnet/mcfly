@@ -39,7 +39,9 @@ namespace McFly.Core.Tests
             // act
             // assert
             position.Equals(new Position(0xabc, 0x123)).Should().BeTrue("Positions use hex");
-            position.Equals(new Position(0xabc, 0x123)).Should().BeTrue("Positions use hex and case doesn't matter");
+            position2.Equals(new Position(0xabc, 0x123)).Should().BeTrue("Positions use hex and case doesn't matter");
+            position.High.Should().Be(0xabc, "The high portion is everything before the :");
+            position.Low.Should().Be(0x123, "The low portion is everything after the :");
             throws.Should().Throw<FormatException>("Input should be in the form xxx:xxx");
         }
 

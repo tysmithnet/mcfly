@@ -23,10 +23,6 @@ namespace McFly
             Parser.Default.ParseArguments<AddNoteOptions>(args)
                 .WithParsed<AddNoteOptions>(options =>
             {
-                using (var client = new ServerClient(new Uri(Settings.ServerUrl)))
-                {
-                    // todo: make call
-                }
             });
         }
     }

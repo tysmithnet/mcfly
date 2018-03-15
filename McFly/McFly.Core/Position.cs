@@ -49,12 +49,8 @@ namespace McFly.Core
         /// </exception>
         public Position(int high, int low)
         {
-            if (high < 0)
-                throw new ArgumentOutOfRangeException($"{nameof(high)} must be a non negative integer");
-            if (low < 0)
-                throw new ArgumentOutOfRangeException($"{nameof(low)} must be a non negative integer");
-            _high = high;
-            _low = low;
+            High = high;
+            Low = low;
         }
 
         /// <summary>
