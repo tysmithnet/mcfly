@@ -35,5 +35,12 @@ namespace McFly.Core.Tests
             ulong.MaxValue.ToLong().Should().Be((long) -1, "All F's is -1 in 2's compliment");
             long.MaxValue.ToULong().Should().Be(ulong.MaxValue / 2, "long.MaxValue will be ulong.MaxValue >> 1");
         }
+
+        [Fact]
+        public void Convert_Between_UInt_And_Int()
+        {
+            uint.MaxValue.ToInt().Should().Be((int) -1, "All F's is -1 in 2's compliment");
+            int.MaxValue.ToUInt().Should().Be(uint.MaxValue / 2, "int.MaxValue will be uint.MaxValue >> 1");
+        }
     }
 }

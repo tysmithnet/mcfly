@@ -80,5 +80,15 @@ namespace McFly.Core
         {
             return ((ulongValue >> 32) << 32) | lo32;
         }
+
+        public static uint ToUInt(this int intValue)
+        {
+            return unchecked ((uint) intValue);
+        }
+
+        public static int ToInt(this uint uintValue)
+        {
+            return unchecked((int)uintValue);
+        }
     }
 }

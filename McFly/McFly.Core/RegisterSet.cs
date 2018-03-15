@@ -22,6 +22,10 @@ namespace McFly.Core
     /// </summary>
     public class RegisterSet
     {
+        public void Clear()
+        {
+            _rax = _rbx = _rcx = _rdx = 0;
+        }
         /// <summary>
         ///     The rax
         /// </summary>
@@ -89,7 +93,7 @@ namespace McFly.Core
         public uint Eax
         {
             get => _rax.Lo32();
-            set => _rax.Lo32(value);
+            set => _rax = _rax.Lo32(value);
         }
 
         /// <summary>
@@ -99,7 +103,7 @@ namespace McFly.Core
         public uint Ebx
         {
             get => _rbx.Lo32();
-            set => _rbx.Lo32(value);
+            set => _rbx = _rbx.Lo32(value);
         }
 
         /// <summary>
@@ -109,7 +113,7 @@ namespace McFly.Core
         public uint Ecx
         {
             get => _rcx.Lo32();
-            set => _rcx.Lo32(value);
+            set => _rcx = _rcx.Lo32(value);
         }
 
         /// <summary>
@@ -119,7 +123,7 @@ namespace McFly.Core
         public uint Edx
         {
             get => _rdx.Lo32();
-            set => _rdx.Lo32(value);
+            set => _rdx = _rdx.Lo32(value);
         }
 
         /// <summary>
@@ -134,30 +138,42 @@ namespace McFly.Core
         ///     input
         /// </exception>
         /// <exception cref="System.ArgumentOutOfRangeException">register</exception>
-        public void Process(string register, string input, int radix)
+        public void Process(string register, string input, int radix = 16)
         {
             register = register ?? throw new ArgumentNullException(nameof(register));
             input = input ?? throw new ArgumentNullException(nameof(input));
 
-            var first = Register.AllRegisters64.FirstOrDefault(x => x.Name == register);
-            if (first != null)
-                switch (first.Name.ToLower())
-                {
-                    case "rax":
-                        _rax = Convert.ToUInt64(input, radix);
-                        break;
-                    case "rbx":
-                        _rbx = Convert.ToUInt64(input, radix);
-                        break;
-                    case "rcx":
-                        _rcx = Convert.ToUInt64(input, radix);
-                        break;
-                    case "rdx":
-                        _rdx = Convert.ToUInt64(input, radix);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException($"{nameof(register)} is not a valid register");
-                }
+            var first = Register.AllRegisters.FirstOrDefault(x => x.Name.Equals(register, StringComparison.OrdinalIgnoreCase));
+            if (first == null) return;
+            switch (first.Name.ToLower())
+            {
+                case "rax":
+                    _rax = Convert.ToUInt64(input, radix);
+                    break;
+                case "rbx":
+                    _rbx = Convert.ToUInt64(input, radix);
+                    break;
+                case "rcx":
+                    _rcx = Convert.ToUInt64(input, radix);
+                    break;
+                case "rdx":
+                    _rdx = Convert.ToUInt64(input, radix);
+                    break;
+                case "eax":
+                    _rax = _rax.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    break;
+                case "ebx":
+                    _rbx = _rbx.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    break;
+                case "ecx":
+                    _rcx = _rcx.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    break;
+                case "edx":
+                    _rdx = _rdx.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException($"{nameof(register)} is not a valid register");
+            }
         }
     }
 }
