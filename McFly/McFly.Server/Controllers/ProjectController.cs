@@ -26,7 +26,8 @@ namespace McFly.Server.Controllers
     /// </summary>
     /// <seealso cref="Controller" />
     [Export(typeof(ProjectController))]
-    [Route("api/projects")]
+    [Route("api/project")]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ProjectController : ApiController
     {
         [Import]
@@ -50,10 +51,20 @@ namespace McFly.Server.Controllers
         /// <param name="endingPosition">The end frame.</param>
         /// <returns>ActionResult.</returns>
         [HttpPost]
-        public IHttpActionResult Post(string projectName, string startingPosition, string endingPosition)
+        public IHttpActionResult Post([FromBody]NewProjectRequestDto request)
         {
-            ProjectsAccess.CreateProject(projectName, Position.Parse(startingPosition), Position.Parse(endingPosition));
+            // todo: mcfly to web
+            ProjectsAccess.CreateProject(request.ProjectName, Position.Parse(request.StartingPosition), Position.Parse(request.EndingPosition));
             return Ok();
         }
+
+
+    }
+
+    public class NewProjectRequestDto
+    {
+        public string ProjectName { get; set; }
+        public string StartingPosition { get; set; }
+        public string EndingPosition { get; set; }
     }
 }
