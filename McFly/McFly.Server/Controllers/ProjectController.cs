@@ -12,11 +12,14 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Results;
 using McFly.Core;
 using McFly.Server.Data;
+using Newtonsoft.Json;
 
 namespace McFly.Server.Controllers
 {
@@ -30,16 +33,17 @@ namespace McFly.Server.Controllers
     public class ProjectController : ApiController
     {
         [Import]
-        private IProjectsAccess ProjectsAccess { get; set; }
+        protected internal IProjectsAccess ProjectsAccess { get; set; }
 
         /// <summary>
         ///     Gets this instance.
         /// </summary>
         /// <returns>JsonResult.</returns>
         [HttpGet]
-        public JsonResult<string> Get()
+        public JsonResult<IEnumerable<string>> Get()
         {
-            return Json("t");
+            var j = Json(ProjectsAccess.GetDatabases());
+            return j;
         }
 
         /// <summary>
@@ -52,18 +56,8 @@ namespace McFly.Server.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody]NewProjectRequestDto request)
         {
-            // todo: mcfly to web
             ProjectsAccess.CreateProject(request.ProjectName, Position.Parse(request.StartingPosition), Position.Parse(request.EndingPosition));
             return Ok();
         }
-
-
-    }
-
-    public class NewProjectRequestDto
-    {
-        public string ProjectName { get; set; }
-        public string StartingPosition { get; set; }
-        public string EndingPosition { get; set; }
     }
 }
