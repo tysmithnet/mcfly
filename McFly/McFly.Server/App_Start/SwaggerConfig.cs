@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Http;
 using WebActivatorEx;
 using McFly.Server;
@@ -7,6 +8,7 @@ using Swashbuckle.Application;
 
 namespace McFly.Server
 {
+    [ExcludeFromCodeCoverage]
     public class SwaggerConfig
     {
         public static void Register()

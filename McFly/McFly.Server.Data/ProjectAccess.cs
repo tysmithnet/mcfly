@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Data.SqlClient;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -32,6 +33,7 @@ namespace McFly.Server.Data
     /// <seealso cref="McFly.Server.Data.IProjectsAccess" />
     [Export(typeof(IProjectsAccess))]
     [Export(typeof(ProjectsAccess))]
+    [ExcludeFromCodeCoverage]
     public class ProjectsAccess : DataAccess, IProjectsAccess
     {
         private ILog Log { get; } = LogManager.GetLogger<ProjectsAccess>();
@@ -43,9 +45,9 @@ namespace McFly.Server.Data
         public IEnumerable<string> GetDatabases()
         {
             using (var conn = new SqlConnection(ConnectionString))
+            using (var command = conn.CreateCommand())
             {
                 conn.Open();
-                var command = conn.CreateCommand();
                 command.CommandText =
                     "SELECT NAME FROM sys.databases WHERE NAME NOT IN('master', 'tempdb', 'model', 'msdb')";
                 var databases = new List<string>();

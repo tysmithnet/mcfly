@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition.Hosting;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -8,6 +9,7 @@ using Swashbuckle.Application;
 
 namespace McFly.Server
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public void Configuration(IAppBuilder appBuilder)
