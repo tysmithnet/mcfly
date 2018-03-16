@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using McFly.Core;
 using Moq;
 
@@ -22,6 +23,11 @@ namespace McFly.Tests
         public IDbgEngProxy Build()
         {
             return _mock.Object;
+        }
+
+        public DbgEngProxyBuilder WithFrames(IEnumerable<Frame> frames)
+        {
+            return this;
         }
 
         public DbgEngProxyBuilder WithStartingPosition(Position position)

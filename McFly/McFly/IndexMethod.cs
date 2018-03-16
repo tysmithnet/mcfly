@@ -126,12 +126,12 @@ namespace McFly
             while (true)
             {
                 DbgEngProxy.RunUntilBreak();
-                var records = GetPositions().ToArray();
-                var breakRecord = records.Single(x => x.IsThreadWithBreak);
+                var positionsRecords = GetPositions().ToArray();
+                var breakRecord = positionsRecords.Single(x => x.IsThreadWithBreak);
                 if (breakRecord.Position >= endingPosition)
                     break;
 
-                var frames = CreateFramesForUpsert(records, breakRecord, Is32Bit());
+                var frames = CreateFramesForUpsert(positionsRecords, breakRecord, Is32Bit());
                 UpsertFrames(frames);
             }
         }
@@ -139,19 +139,19 @@ namespace McFly
         /// <summary>
         ///     Creates the frames for upsert.
         /// </summary>
-        /// <param name="records">The records.</param>
+        /// <param name="positionRecords">The records.</param>
         /// <param name="breakRecord">The break record.</param>
         /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
         /// <returns>List&lt;Frame&gt;.</returns>
-        protected internal List<Frame> CreateFramesForUpsert(PositionsRecord[] records, PositionsRecord breakRecord,
+        protected internal List<Frame> CreateFramesForUpsert(PositionsRecord[] positionRecords, PositionsRecord breakRecord,
             bool is32Bit)
         {
-            var frames = (from record in records
-                where record.Position == breakRecord.Position
-                let registerSet = DbgEngProxy.GetRegisters(record.ThreadId, Register.CoreUserRegisters64)
+            var frames = (from positionRecord in positionRecords
+                where positionRecord.Position == breakRecord.Position
+                let registerSet = DbgEngProxy.GetRegisters(positionRecord.ThreadId, Register.CoreUserRegisters64)
                 let stackTrace = DbgEngProxy.Execute("k")
                 let stackFrames = GetStackFrames(stackTrace)
-                select CreateFrame(is32Bit, record, registerSet, stackFrames)).ToList();
+                select CreateFrame(is32Bit, positionRecord, registerSet, stackFrames)).ToList();
             return frames;
         }
 
@@ -249,7 +249,7 @@ namespace McFly
         /// <param name="options">The options.</param>
         protected internal void SetBreakpoints(IndexOptions options)
         {
-// clear breakpoints
+            // clear breakpoints
             DbgEngProxy.Execute("bc *"); // todo: save existing break points and restore
 
             // set head at start

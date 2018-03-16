@@ -135,5 +135,25 @@ namespace McFly.Tests
             invalidStartPosition.Should().Be(new Position(0, 0),
                 "Any invalid input should result in a default position of 0:0");
         }
+
+        [Fact]
+        public void Identify_Correct_Ending_Position()
+        {
+            var options = new IndexOptions
+            {
+                End = "1:0"
+            };
+
+            var indexMethod = new IndexMethod();
+            var builder = new DbgEngProxyBuilder();
+            builder.WithEndingPosition(new Position(0, 0));
+            indexMethod.DbgEngProxy = builder.Build();
+
+            var position = indexMethod.GetEndingPosition(options);
+            var position2 = indexMethod.GetEndingPosition(new IndexOptions());
+
+            position.Should().Be(new Position(1, 0));
+            position2.Should().Be(new Position(0, 0));
+        }
     }
 }
