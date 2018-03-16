@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using McFly.Core;
+using McFly.Server.Headers;
 
 namespace McFly.Server.Controllers
 {
@@ -7,7 +8,7 @@ namespace McFly.Server.Controllers
     public class NoteController : ApiController
     {
         [HttpPost]
-        public IHttpActionResult Post(string projectName, Position position, int threadId, string text)
+        public IHttpActionResult Post([FromProjectNameHeader]string projectName, Position position, int threadId, string text)
         {
             return Ok();
         }
