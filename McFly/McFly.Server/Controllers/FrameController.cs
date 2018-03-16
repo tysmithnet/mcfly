@@ -13,7 +13,9 @@
 // ***********************************************************************
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Web.Http;
+using Common.Logging;
 using McFly.Core;
 using McFly.Server.Data;
 using McFly.Server.Headers;
@@ -26,29 +28,22 @@ namespace McFly.Server.Controllers
     /// </summary>
     /// <seealso cref="System.Web.Mvc.Controller" />
     [Route("api/frame/")]
+    [Export]
     public class FrameController : ApiController
     {
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="FrameController" /> class.
-        /// </summary>
-        /// <param name="logger">The logger.</param>
-        /// <param name="frameAccess">The frame access.</param>
-        public FrameController(ILogger<FrameController> logger, IFrameAccess frameAccess)
-        {
-            FrameAccess = frameAccess;
-        }
 
         /// <summary>
         ///     Gets or sets the frame access.
         /// </summary>
         /// <value>The frame access.</value>
-        protected IFrameAccess FrameAccess { get; set; }
+        [Import]
+        protected internal IFrameAccess FrameAccess { get; set; }
 
         /// <summary>
         ///     Gets or sets the logger.
         /// </summary>
         /// <value>The logger.</value>
-        private ILogger<FrameController> Logger { get; set; }
+        private ILog Log = LogManager.GetLogger<FrameController>();
 
         /// <summary>
         ///     Posts the specified project name.
