@@ -94,27 +94,5 @@ namespace McFly
                 return hashCode;
             }
         }
-
-        /// <summary>
-        ///     Implements the == operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator ==(PositionsRecord left, PositionsRecord right)
-        {
-            return Equals(left, right);
-        }
-
-        /// <summary>
-        ///     Implements the != operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator !=(PositionsRecord left, PositionsRecord right)
-        {
-            return !Equals(left, right);
-        }
     }
 }
