@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web.Http;
+using McFly.Server.Headers;
 using Owin;
 using Swashbuckle.Application;
 
@@ -29,7 +30,11 @@ namespace McFly.Server
 
             var mefDependencyResolver = new MefDependencyResolver(compositionContainer, config.DependencyResolver);
             config.DependencyResolver = mefDependencyResolver;
-            config.EnableSwagger(c => { c.SingleApiVersion("v1", "McFly API"); }).EnableSwaggerUi();
+            config.EnableSwagger(c =>
+            {
+                c.SingleApiVersion("v1", "McFly API");
+                c.OperationFilter(() => new FromHeaderAttributeOperationFilter());
+            }).EnableSwaggerUi();
 
             appBuilder.UseWebApi(config);
         }
