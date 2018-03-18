@@ -83,8 +83,8 @@ namespace McFly
         void SetWriteAccessBreakpoint(int length, ulong address);
         void ClearBreakpoints();
         IEnumerable<PositionsRecord> GetPositions();
-        Frame GetFrame();
-        Frame GetFrame(int threadId);
+        Frame GetCurrentFrame();
+        Frame GetCurrentFrame(int threadId);
         Position GetCurrentPosition();
         Position GetCurrentPosition(int threadId);
     }

@@ -148,7 +148,7 @@ namespace McFly
             PositionsRecord breakRecord)
         {
             var frames = positionRecords.Where(positionRecord => positionRecord.Position == breakRecord.Position)
-                .Select(positionRecord => DbgEngProxy.GetFrame(positionRecord.ThreadId)).ToList();
+                .Select(positionRecord => DbgEngProxy.GetCurrentFrame(positionRecord.ThreadId)).ToList();
             return frames;
         }
 

@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
@@ -57,7 +58,9 @@ namespace McFly
                     .Length == 8;
         }
 
-        public IDebugSystemObjects SystemObjects { get; set; }
+
+
+        private IDebugSystemObjects SystemObjects { get; set; }
 
         /// <summary>
         ///     Gets or sets the control.
@@ -234,6 +237,7 @@ namespace McFly
 
         public void SetCurrentPosition(Position startingPosition)
         {
+            Execute($"!tt {startingPosition}");
         }
 
         public void SetBreakpointByMask(string breakpointMask)
@@ -258,23 +262,12 @@ namespace McFly
 
         public IEnumerable<PositionsRecord> GetPositions()
         {
-            var positionsText = Execute("!positions");
-
-            var matches = Regex.Matches(positionsText,
-                "(?<cur>>)?Thread ID=0x(?<tid>[A-F0-9]+) - Position: (?<maj>[A-F0-9]+):(?<min>[A-F0-9]+)");
-
-            return matches.Cast<Match>().Select(x =>
-            {
-                var threadId = Convert.ToInt32(x.Groups["tid"].Value, 16);
-                var position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
-                    Convert.ToInt32(x.Groups["min"].Value, 16));
-                var isThreadWithBreak = x.Groups["cur"].Success;
-                var item = new PositionsRecord(threadId, position, isThreadWithBreak);
-                return item;
-            });
+            
         }
 
-        public Frame GetFrame()
+        
+
+        public Frame GetCurrentFrame()
         {
             return new Frame
             {
@@ -285,7 +278,7 @@ namespace McFly
             };
         }
 
-        public Frame GetFrame(int threadId)
+        public Frame GetCurrentFrame(int threadId)
         {
             return new Frame
             {
@@ -346,6 +339,79 @@ namespace McFly
             var command = $"~~[{threadId:X}] k";
             var raw = Execute(command);
             return ExtractStackFrames(raw);
+        }
+    }
+
+    public interface ITimeTravelFacade
+    {
+        void SetPosition(Position position);
+        Position GetCurrentPosition();
+        Position GetCurrentPosition(int threadId);
+        PositionsResult Positions();
+    }
+
+    public class PositionsResult : IEnumerable<PositionsRecord>
+    {
+        private IEnumerable<PositionsRecord> PositionsRecords { get; set; }
+
+        public PositionsResult(IEnumerable<PositionsRecord> positionsRecords)
+        {
+            PositionsRecords = positionsRecords?.ToList() ?? throw new ArgumentNullException(nameof(positionsRecords));
+        }
+
+        public IEnumerator<PositionsRecord> GetEnumerator()
+        {
+            return PositionsRecords.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
+
+    [Export(typeof(ITimeTravelFacade))]
+    public class TimeTravelFacade : ITimeTravelFacade
+    {
+        [Import]
+        protected internal IDbgEngProxy DbgEngProxy { get; set; }  
+
+        public void SetPosition(Position position)
+        {
+            DbgEngProxy.Execute($"!tt {position}");
+        }
+
+        public Position GetCurrentPosition()
+        {
+            return Positions().Single(x => x.IsThreadWithBreak).Position;
+        }
+
+        public Position GetCurrentPosition(int threadId)
+        {
+            return Positions().Single(x => x.ThreadId == threadId).Position;
+        }
+
+        public PositionsResult Positions()
+        {
+            var positionsText = DbgEngProxy.Execute("!positions");
+            var records = ParsePositionsCommandText(positionsText);
+            return new PositionsResult(records);
+        }
+
+        private static IEnumerable<PositionsRecord> ParsePositionsCommandText(string positionsText)
+        {
+            var matches = Regex.Matches(positionsText,
+                "(?<cur>>)?Thread ID=0x(?<tid>[A-F0-9]+) - Position: (?<maj>[A-F0-9]+):(?<min>[A-F0-9]+)");
+
+            return matches.Cast<Match>().Select(x =>
+            {
+                var threadId = Convert.ToInt32(x.Groups["tid"].Value, 16);
+                var position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
+                    Convert.ToInt32(x.Groups["min"].Value, 16));
+                var isThreadWithBreak = x.Groups["cur"].Success;
+                var item = new PositionsRecord(threadId, position, isThreadWithBreak);
+                return item;
+            });
         }
     }
 }
