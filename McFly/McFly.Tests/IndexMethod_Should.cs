@@ -2,6 +2,7 @@
 using System.Linq;
 using FluentAssertions;
 using McFly.Core;
+using Moq;
 using Xunit;
 
 namespace McFly.Tests
@@ -9,20 +10,30 @@ namespace McFly.Tests
     public class IndexMethod_Should
     {
         [Fact]
-        public void Create_Frames_From_Position_Records_Correctly()
+        public void Set_Breakpoints_If_They_Are_Provided_In_The_Options()
         {
             // arrange
-            var positions = new[]
-            {
-                new PositionsRecord(1, new Position(0, 0), true),
-                new PositionsRecord(2, new Position(1, 0), false),
-                new PositionsRecord(3, new Position(2, 0), false)
-            };
             var indexMethod = new IndexMethod();
+            var indexOptions = new IndexOptions()
+            {
+                AccessBreakpoints = new []{"r8:100", "w10:200", "rw10:300"},
+                BreakpointMasks = new[] {"kernel32!createprocess*", "user32!*", "mycustommod!myfancyfunction"}
+            };
+            var builder = new DbgEngProxyBuilder();
+            indexMethod.DbgEngProxy = builder.Build();
 
             // act
-
+            indexMethod.SetBreakpoints(indexOptions);
+            
             // assert
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("kernel32!createprocess*"), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("user32!*"), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("mycustommod!myfancyfunction"), Times.Once);
+
+            builder.Mock.Verify(proxy => proxy.SetReadAccessBreakpoint(0x8, 0x100), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetReadAccessBreakpoint(0x10, 0x300), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x10, 0x200), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x10, 0x300), Times.Once);
         }
 
         [Fact]

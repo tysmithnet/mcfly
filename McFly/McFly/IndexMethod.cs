@@ -123,7 +123,6 @@ namespace McFly
         protected internal void ProcessInternal(Position startingPosition, Position endingPosition)
         {
             DbgEngProxy.SetCurrentPosition(startingPosition);
-            DbgEngProxy.Execute($"!tt {startingPosition}");
             // loop through all the set break points and record relevant values
             while (true)
             {
@@ -229,13 +228,11 @@ namespace McFly
         /// <param name="options">The options.</param>
         protected internal void SetBreakpoints(IndexOptions options)
         {
-            // clear breakpoints
-            DbgEngProxy.Execute("bc *"); // todo: save existing break points and restore
-                                
-            // set breakpoints
+            DbgEngProxy.ClearBreakpoints();
+                           
             if (options.BreakpointMasks != null)
                 foreach (var optionsBreakpointMask in options.BreakpointMasks)
-                    DbgEngProxy.Execute($"bm {optionsBreakpointMask}");
+                    DbgEngProxy.SetBreakpointByMask(optionsBreakpointMask);
 
             if (options.AccessBreakpoints == null) return;
             foreach (var accessBreakpoint in options.AccessBreakpoints)
@@ -250,7 +247,19 @@ namespace McFly
                 }
 
                 foreach (var c in match.Groups["access"].Value)
-                    DbgEngProxy.Execute($"ba {c}{match.Groups["length"].Value} {match.Groups["address"].Value}");
+                {
+                    int length = Convert.ToInt32(match.Groups["length"].Value, 16); // todo: allow for decimal/hex
+                    ulong address = Convert.ToUInt64(match.Groups["address"].Value, 16);
+                    switch (c)
+                    {
+                        case 'r':
+                            DbgEngProxy.SetReadAccessBreakpoint(length, address);
+                            break;
+                        case 'w':
+                            DbgEngProxy.SetWriteAccessBreakpoint(length, address);
+                            break;
+                    }
+                }
             }
         }
 

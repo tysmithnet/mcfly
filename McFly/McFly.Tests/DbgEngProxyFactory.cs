@@ -7,28 +7,23 @@ namespace McFly.Tests
 {     
     public class DbgEngProxyBuilder
     {
-        private Mock<IDbgEngProxy> _mock;
-
-        public DbgEngProxyBuilder()
-        {
-            _mock = new Mock<IDbgEngProxy>();
-        }
-
+        public Mock<IDbgEngProxy> Mock = new Mock<IDbgEngProxy>();
+                                                                
         public DbgEngProxyBuilder WithExecuteResult(string result)
         {
-            _mock.Setup(proxy => proxy.Execute(It.IsAny<string>())).Returns(result);
+            Mock.Setup(proxy => proxy.Execute(It.IsAny<string>())).Returns(result);
             return this;
         }
 
         public DbgEngProxyBuilder WithExecuteResult(string command, string result)
         {
-            _mock.Setup(proxy => proxy.Execute(command)).Returns(result);
+            Mock.Setup(proxy => proxy.Execute(command)).Returns(result);
             return this;
         }
 
         public IDbgEngProxy Build()
         {
-            return _mock.Object;
+            return Mock.Object;
         }
 
         public DbgEngProxyBuilder WithFrames(IEnumerable<Frame> frames)
@@ -39,13 +34,13 @@ namespace McFly.Tests
 
         public DbgEngProxyBuilder WithStartingPosition(Position position)
         {
-            _mock.Setup(proxy => proxy.GetStartingPosition()).Returns(position);
+            Mock.Setup(proxy => proxy.GetStartingPosition()).Returns(position);
             return this;
         }
 
         public DbgEngProxyBuilder WithEndingPosition(Position position)
         {
-            _mock.Setup(proxy => proxy.GetEndingPosition()).Returns(position);
+            Mock.Setup(proxy => proxy.GetEndingPosition()).Returns(position);
             return this;
         }
     }

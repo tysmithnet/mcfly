@@ -237,6 +237,26 @@ namespace McFly
             
         }
 
+        public void SetBreakpointByMask(string breakpointMask)
+        {
+            Execute($"bm {breakpointMask}");
+        }
+
+        public void SetReadAccessBreakpoint(int length, ulong address)
+        {
+            Execute($"ba r{length} {address}");
+        }
+
+        public void SetWriteAccessBreakpoint(int length, ulong address)
+        {
+            Execute($"ba w{length} {address}");
+        }
+
+        public void ClearBreakpoints()
+        {
+            Execute($"bc *");
+        }
+
         private static IEnumerable<StackFrame> ExtractStackFrames(string stackTrace)
         {
             var stackFrames = (from m in Regex.Matches(stackTrace,

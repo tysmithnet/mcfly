@@ -75,5 +75,9 @@ namespace McFly
 
         IEnumerable<DisassemblyLine> GetDisassemblyLines(int threadId, int numInstructions);
         void SetCurrentPosition(Position startingPosition);
+        void SetBreakpointByMask(string breakpointMask);
+        void SetReadAccessBreakpoint(int length, ulong address);
+        void SetWriteAccessBreakpoint(int length, ulong address);
+        void ClearBreakpoints();
     }
 }
