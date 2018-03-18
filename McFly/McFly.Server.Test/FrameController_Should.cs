@@ -16,10 +16,8 @@ namespace McFly.Server.Test
         public void Upsert_Frame_On_Post()
         {
             // arrange
-            var frames = new[]
+            var frames = new Frame[]
             {
-                new Frame(){DisassemblyNote = "hi"},
-                new Frame(){DisassemblyNote = "world"}, 
             };
             var frameController = new FrameController();
             var builder = new FrameAccessBuilder();

@@ -90,9 +90,9 @@ namespace McFly.Server.Data
                     frame.RegisterSet.Rbx,
                     frame.RegisterSet.Rcx,
                     frame.RegisterSet.Rdx,
-                    frame.OpCode,
-                    frame.OpcodeMnemonic,
-                    frame.DisassemblyNote);
+                    frame.DisassemblyLine.OpCode,
+                    frame.DisassemblyLine.OpCodeMnemonic,
+                    frame.DisassemblyLine.DisassemblyNote);
 
                 for (var index = 0; index < frame.StackTrace.NumFrames; index++)
                 {

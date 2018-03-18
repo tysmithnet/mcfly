@@ -55,31 +55,6 @@ namespace McFly.Tests
         }
 
         [Fact]
-        public void Get_Thread_Positions_Correctly()
-        {
-            // arrange
-            var indexMethod = new IndexMethod();
-            var builder = new DbgEngProxyBuilder();
-            builder.WithExecuteResult("!positions", @">Thread ID=0x7590 - Position: 168CC:0
- Thread ID=0x12A0 - Position: 211F5:0
- Thread ID=0x6CDC - Position: 21D59:0");
-            indexMethod.DbgEngProxy = builder.Build();
-            var expected = new[]
-            {
-                new PositionsRecord(0x7590, new Position(0x168CC, 0), true),
-                new PositionsRecord(0x12A0, new Position(0x211F5, 0), false),
-                new PositionsRecord(0x6CDC, new Position(0x21D59, 0), false)
-            };
-
-            // act
-            var actual = indexMethod.GetPositions();
-
-            // assert
-            actual.SequenceEqual(expected).Should()
-                .BeTrue("This is the pattern: >Thread ID=0x7590 - Position: 168CC:0");
-        }
-
-        [Fact]
         public void Identify_32_And_64_Bit_Arch()
         {
             // Arrange
@@ -99,26 +74,6 @@ namespace McFly.Tests
 
             // Assert
             is32.Should().BeFalse("00000000003b9000 is 16 characters and thus 64bit");
-        }
-
-        [Fact]
-        public void Identify_Correct_Ending_Position()
-        {
-            var options = new IndexOptions
-            {
-                End = "1:0"
-            };
-
-            var indexMethod = new IndexMethod();
-            var builder = new DbgEngProxyBuilder();
-            builder.WithEndingPosition(new Position(0, 0));
-            indexMethod.DbgEngProxy = builder.Build();
-
-            var position = indexMethod.GetEndingPosition(options);
-            var position2 = indexMethod.GetEndingPosition(new IndexOptions());
-
-            position.Should().Be(new Position(1, 0));
-            position2.Should().Be(new Position(0, 0));
         }
 
         [Fact]

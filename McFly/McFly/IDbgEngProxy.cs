@@ -41,7 +41,9 @@ namespace McFly
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="registers">The registers.</param>
         /// <returns>RegisterSet.</returns>
-        RegisterSet GetRegisters(int threadId, IEnumerable<Register> registers); // todo: add overload without thread id
+        RegisterSet GetCurrentRegisterSet(int threadId, IEnumerable<Register> registers); 
+        RegisterSet GetCurrentRegisterSet(IEnumerable<Register> registers); 
+
 
         /// <summary>
         ///     Gets the starting position of the trace. Many times this is 35:0
@@ -67,17 +69,23 @@ namespace McFly
         /// <param name="line">The line.</param>
         void WriteLine(string line);
 
-        StackTrace GetStackTrace();
+        StackTrace GetCurrentStackTrace();
 
-        StackTrace GetStackTrace(int threadId);
+        StackTrace GetCurrentStackTrace(int threadId);
 
         int GetCurrentThreadId();
 
+        IEnumerable<DisassemblyLine> GetDisassemblyLines(int numInstructions);
         IEnumerable<DisassemblyLine> GetDisassemblyLines(int threadId, int numInstructions);
         void SetCurrentPosition(Position startingPosition);
         void SetBreakpointByMask(string breakpointMask);
         void SetReadAccessBreakpoint(int length, ulong address);
         void SetWriteAccessBreakpoint(int length, ulong address);
         void ClearBreakpoints();
+        IEnumerable<PositionsRecord> GetPositions();
+        Frame GetFrame();
+        Frame GetFrame(int threadId);
+        Position GetCurrentPosition();
+        Position GetCurrentPosition(int threadId);
     }
 }

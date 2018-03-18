@@ -51,24 +51,8 @@ namespace McFly.Core
         /// <value>The register set.</value>
         public RegisterSet RegisterSet { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the opcode nmemonic.
-        /// </summary>
-        /// <value>The opcode nmemonic.</value>
-        public string OpcodeMnemonic { get; set; }
-
         public StackTrace StackTrace { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the disassembly note.
-        /// </summary>
-        /// <value>The disassembly note.</value>
-        public string DisassemblyNote { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the op code.
-        /// </summary>
-        /// <value>The op code.</value>
-        public byte[] OpCode { get; set; }
+        public DisassemblyLine DisassemblyLine { get; set; }
     }
 }

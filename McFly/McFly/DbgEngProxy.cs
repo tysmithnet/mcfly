@@ -44,7 +44,8 @@ namespace McFly
         /// <param name="client">The client.</param>
         /// <param name="registers">The registers.</param>
         /// <param name="systemObjects"></param>
-        public DbgEngProxy(IDebugControl6 control, IDebugClient5 client, IDebugRegisters2 registers, IDebugSystemObjects systemObjects)
+        public DbgEngProxy(IDebugControl6 control, IDebugClient5 client, IDebugRegisters2 registers,
+            IDebugSystemObjects systemObjects)
         {
             Control = control;
             Client = client;
@@ -101,7 +102,7 @@ namespace McFly
                 if (goStatuses.Contains(status))
                 {
                     Control.WaitForEvent(DEBUG_WAIT.DEFAULT,
-                        UInt32.MaxValue); // todo: make reasonable and add counter.. shouldn't wait more than 10s
+                        uint.MaxValue); // todo: make reasonable and add counter.. shouldn't wait more than 10s
                     continue;
                 }
 
@@ -126,13 +127,13 @@ namespace McFly
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="registers">The registers.</param>
         /// <returns>RegisterSet.</returns>
-        public RegisterSet GetRegisters(int threadId, IEnumerable<Register> registers)
+        public RegisterSet GetCurrentRegisterSet(int threadId, IEnumerable<Register> registers)
         {
             var list = registers.ToList();
             if (list.Count == 0)
                 return new RegisterSet();
             var registerSet = new RegisterSet();
-            var registerNames = String.Join(",", list.Select(x => x.Name));
+            var registerNames = string.Join(",", list.Select(x => x.Name));
             var registerText = Execute($"~~[{threadId:X}] r {registerNames}");
             foreach (var register in list)
             {
@@ -142,6 +143,11 @@ namespace McFly
                 registerSet.Process(register.Name, val, 16);
             }
             return registerSet;
+        }
+
+        public RegisterSet GetCurrentRegisterSet(IEnumerable<Register> registers)
+        {
+            return GetCurrentRegisterSet(GetCurrentThreadId(), registers);
         }
 
         /// <summary>
@@ -176,14 +182,14 @@ namespace McFly
             Write($"{line}\n");
         }
 
-        public StackTrace GetStackTrace()
+        public StackTrace GetCurrentStackTrace()
         {
             var stackTrace = Execute("k");
             var frames = ExtractStackFrames(stackTrace);
             return new StackTrace(GetCurrentThreadId(), frames);
         }
 
-        public StackTrace GetStackTrace(int threadId)
+        public StackTrace GetCurrentStackTrace(int threadId)
         {
             var frames = GetStackFrames(threadId);
             return new StackTrace(threadId, frames);
@@ -192,26 +198,18 @@ namespace McFly
         public int GetCurrentThreadId()
         {
             SystemObjects.GetCurrentThreadId(out var threadId);
-            return Convert.ToInt32(threadId);                   
+            return Convert.ToInt32(threadId);
         }
 
-        /// <summary>
-        ///     Strings to byte array.
-        /// </summary>
-        /// <param name="hex">The hexadecimal.</param>
-        /// <returns>System.Byte[].</returns>
-        public static byte[] StringToByteArray(string hex)
+        public IEnumerable<DisassemblyLine> GetDisassemblyLines(int numInstructions)
         {
-            var NumberChars = hex.Length;
-            var bytes = new byte[NumberChars / 2];
-            for (var i = 0; i < NumberChars; i += 2)
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-            return bytes;
+            var threadId = GetCurrentThreadId();
+            return GetDisassemblyLines(threadId, numInstructions);
         }
 
         public IEnumerable<DisassemblyLine> GetDisassemblyLines(int threadId, int numInstructions)
         {
-            if(numInstructions <= 0)
+            if (numInstructions <= 0)
                 throw new ArgumentOutOfRangeException("Number of instructions must be > 0");
             var ipRegister = Is32Bit ? "eip" : "rip";
             var instructionText = Execute($"u {ipRegister} L{numInstructions}");
@@ -220,13 +218,15 @@ namespace McFly
             var list = new List<DisassemblyLine>();
             foreach (var match in matches.Cast<Match>())
             {
-                var ip = match.Groups["ip"].Success ? Convert.ToUInt64(match.Groups["ip"].Value.Replace("`", ""), 16) : 0;
+                var ip = match.Groups["ip"].Success
+                    ? Convert.ToUInt64(match.Groups["ip"].Value.Replace("`", ""), 16)
+                    : 0;
                 byte[] opcode = null;
                 if (match.Groups["opcode"].Success)
                     opcode = StringToByteArray(match.Groups["opcode"].Value);
                 var instruction = match.Groups["ins"].Success ? match.Groups["ins"].Value : "";
                 var note = match.Groups["extra"].Success ? match.Groups["extra"].Value : "";
-                var newLine = new DisassemblyLine(ip, opcode, instruction, note); 
+                var newLine = new DisassemblyLine(ip, opcode, instruction, note);
                 list.Add(newLine);
             }
             return list;
@@ -234,7 +234,6 @@ namespace McFly
 
         public void SetCurrentPosition(Position startingPosition)
         {
-            
         }
 
         public void SetBreakpointByMask(string breakpointMask)
@@ -257,6 +256,77 @@ namespace McFly
             Execute($"bc *");
         }
 
+        public IEnumerable<PositionsRecord> GetPositions()
+        {
+            var positionsText = Execute("!positions");
+
+            var matches = Regex.Matches(positionsText,
+                "(?<cur>>)?Thread ID=0x(?<tid>[A-F0-9]+) - Position: (?<maj>[A-F0-9]+):(?<min>[A-F0-9]+)");
+
+            return matches.Cast<Match>().Select(x =>
+            {
+                var threadId = Convert.ToInt32(x.Groups["tid"].Value, 16);
+                var position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
+                    Convert.ToInt32(x.Groups["min"].Value, 16));
+                var isThreadWithBreak = x.Groups["cur"].Success;
+                var item = new PositionsRecord(threadId, position, isThreadWithBreak);
+                return item;
+            });
+        }
+
+        public Frame GetFrame()
+        {
+            return new Frame
+            {
+                Position = GetCurrentPosition(),
+                StackTrace = GetCurrentStackTrace(),
+                RegisterSet = GetCurrentRegisterSet(GetCurrentThreadId(), Register.AllRegisters64),
+                DisassemblyLine = GetDisassemblyLines(1).Single()
+            };
+        }
+
+        public Frame GetFrame(int threadId)
+        {
+            return new Frame
+            {
+                Position = GetCurrentPosition(threadId),
+                StackTrace = GetCurrentStackTrace(threadId),
+                DisassemblyLine = GetDisassemblyLines(threadId, 1).Single()
+            };
+        }
+
+        public Position GetCurrentPosition()
+        {
+            return GetPositions().Single(x => x.IsThreadWithBreak).Position;
+        }
+
+        public Position GetCurrentPosition(int threadId)
+        {
+            return GetPositions().Single(x => x.ThreadId == threadId).Position;
+        }
+
+        /// <summary>
+        ///     Disposes this instance.
+        /// </summary>
+        public void Dispose()
+        {
+            ExecuteWrapper?.Dispose();
+        }
+
+        /// <summary>
+        ///     Strings to byte array.
+        /// </summary>
+        /// <param name="hex">The hexadecimal.</param>
+        /// <returns>System.Byte[].</returns>
+        public static byte[] StringToByteArray(string hex)
+        {
+            var NumberChars = hex.Length;
+            var bytes = new byte[NumberChars / 2];
+            for (var i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
+        }
+
         private static IEnumerable<StackFrame> ExtractStackFrames(string stackTrace)
         {
             var stackFrames = (from m in Regex.Matches(stackTrace,
@@ -276,16 +346,6 @@ namespace McFly
             var command = $"~~[{threadId:X}] k";
             var raw = Execute(command);
             return ExtractStackFrames(raw);
-        }
-
-
-
-        /// <summary>
-        ///     Disposes this instance.
-        /// </summary>
-        public void Dispose()
-        {
-            ExecuteWrapper?.Dispose();
         }
     }
 }

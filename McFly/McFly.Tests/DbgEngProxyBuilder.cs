@@ -26,12 +26,6 @@ namespace McFly.Tests
             return Mock.Object;
         }
 
-        public DbgEngProxyBuilder WithFrames(IEnumerable<Frame> frames)
-        {
-
-            return this;
-        }
-
         public DbgEngProxyBuilder WithStartingPosition(Position position)
         {
             Mock.Setup(proxy => proxy.GetStartingPosition()).Returns(position);
