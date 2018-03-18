@@ -14,6 +14,12 @@ namespace McFly.Tests
             _mock = new Mock<IDbgEngProxy>();
         }
 
+        public DbgEngProxyBuilder WithExecuteResult(string result)
+        {
+            _mock.Setup(proxy => proxy.Execute(It.IsAny<string>())).Returns(result);
+            return this;
+        }
+
         public DbgEngProxyBuilder WithExecuteResult(string command, string result)
         {
             _mock.Setup(proxy => proxy.Execute(command)).Returns(result);
@@ -27,6 +33,7 @@ namespace McFly.Tests
 
         public DbgEngProxyBuilder WithFrames(IEnumerable<Frame> frames)
         {
+
             return this;
         }
 

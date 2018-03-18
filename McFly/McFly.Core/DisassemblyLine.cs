@@ -19,7 +19,7 @@ namespace McFly
     /// <summary>
     ///     Class DisassemblyLine.
     /// </summary>
-    internal class DisassemblyLine
+    public class DisassemblyLine
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="DisassemblyLine" /> class.

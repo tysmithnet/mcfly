@@ -9,38 +9,20 @@ namespace McFly.Tests
     public class IndexMethod_Should
     {
         [Fact]
-        public void Create_Frame_Correctly()
+        public void Create_Frames_From_Position_Records_Correctly()
         {
             // arrange
-            var builder = new DbgEngProxyBuilder();
-            builder.WithExecuteResult("u rip L1", "00007ffa`51315543 6645898632010000 mov     word ptr [r14+132h],r8w");
-            var indexMethod = new IndexMethod {DbgEngProxy = builder.Build()};
+            var positions = new[]
+            {
+                new PositionsRecord(1, new Position(0, 0), true),
+                new PositionsRecord(2, new Position(1, 0), false),
+                new PositionsRecord(3, new Position(2, 0), false)
+            };
+            var indexMethod = new IndexMethod();
 
             // act
-            var frame = indexMethod.CreateFrame(false, new PositionsRecord(1, new Position(0, 0), true),
-                new RegisterSet(), new List<StackFrame>());
 
             // assert
-        }
-
-        [Fact]
-        public void Get_Current_Instruction_Disassembly()
-        {
-            var builder = new DbgEngProxyBuilder();
-            builder.WithExecuteResult("u rip L1",
-                @"KERNEL32!GetTimeFormatWWorker+0xc43:
-00007ffa`51315543 6645898632010000 mov     word ptr [r14+132h],r8w");
-            var indexMethod = new IndexMethod();
-            indexMethod.DbgEngProxy = builder.Build();
-
-            var line = indexMethod.GetCurrentDisassemblyLine(false);
-
-            line.InstructionAddress.Should().Be(0x7ffa51315543, "The first ulong is the instruction address");
-            line.OpCode.Should().Equal(new byte[] {0x66, 0x45, 0x89, 0x86, 0x32, 0x01, 0x00, 0x00},
-                "The op code follows the instruction address and varies in length");
-            line.OpCodeMnemonic.Should().Be("mov", "The opcode mnemonic follows the opcode");
-            line.DisassemblyNote.Should().Be("word ptr [r14+132h],r8w", "The disassembly note is last");
-
         }
 
         [Fact]
@@ -109,34 +91,6 @@ namespace McFly.Tests
         }
 
         [Fact]
-        public void Identify_Correct_Starting_Position()
-        {
-            // Arrange                             
-            var options = new IndexOptions
-            {
-                Start = "35:1"
-            };
-            var invalidStartOptions = new IndexOptions
-            {
-                Start = "hello there"
-            };
-            var indexMethod = new IndexMethod();
-            var builder = new DbgEngProxyBuilder();
-            builder.WithStartingPosition(new Position(0x35, 0));
-            indexMethod.DbgEngProxy = builder.Build();
-
-            // Act
-            var startingPosition = indexMethod.GetStartingPosition(options);
-            var invalidStartPosition = indexMethod.GetStartingPosition(invalidStartOptions);
-
-            // Assert
-            startingPosition.Should().Be(new Position(0x35, 1),
-                "35:1 means that the high portion is 35 and the low portion is 1");              
-            invalidStartPosition.Should().Be(new Position(0, 0),
-                "Any invalid input should result in a default position of 0:0");
-        }
-
-        [Fact]
         public void Identify_Correct_Ending_Position()
         {
             var options = new IndexOptions
@@ -154,6 +108,38 @@ namespace McFly.Tests
 
             position.Should().Be(new Position(1, 0));
             position2.Should().Be(new Position(0, 0));
+        }
+
+        [Fact]
+        public void Identify_Correct_Starting_Position()
+        {
+            // Arrange                             
+            var options = new IndexOptions
+            {
+                Start = "35:1"
+            };
+            var invalidStartOptions = new IndexOptions
+            {
+                Start = "hello there"
+            };
+
+            var indexMethod = new IndexMethod();
+            var builder = new DbgEngProxyBuilder();
+            builder.WithStartingPosition(new Position(0x35, 0));
+            indexMethod.DbgEngProxy = builder.Build();
+            var nullStartingPosition = indexMethod.GetStartingPosition(null);
+
+            // Act
+            var startingPosition = indexMethod.GetStartingPosition(options);
+            var invalidStartPosition = indexMethod.GetStartingPosition(invalidStartOptions);
+
+            // Assert
+            startingPosition.Should().Be(new Position(0x35, 1),
+                "35:1 means that the high portion is 35 and the low portion is 1");
+            invalidStartPosition.Should().Be(new Position(0, 0),
+                "Any invalid input should result in a default position of 0:0");
+            nullStartingPosition.Should().Be(new Position(0x35, 0),
+                "No starting position in the options means use the proxy's value");
         }
     }
 }

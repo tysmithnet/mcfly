@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using CommandLine;
@@ -121,6 +122,7 @@ namespace McFly
         /// <param name="endingPosition">The ending position.</param>
         protected internal void ProcessInternal(Position startingPosition, Position endingPosition)
         {
+            DbgEngProxy.SetCurrentPosition(startingPosition);
             DbgEngProxy.Execute($"!tt {startingPosition}");
             // loop through all the set break points and record relevant values
             while (true)
@@ -149,9 +151,8 @@ namespace McFly
             var frames = (from positionRecord in positionRecords
                 where positionRecord.Position == breakRecord.Position
                 let registerSet = DbgEngProxy.GetRegisters(positionRecord.ThreadId, Register.CoreUserRegisters64)
-                let stackTrace = DbgEngProxy.Execute("k")
-                let stackFrames = GetStackFrames(stackTrace)
-                select CreateFrame(is32Bit, positionRecord, registerSet, stackFrames)).ToList();
+                let stackTrace = DbgEngProxy.GetStackTrace()
+                select CreateFrame(positionRecord, registerSet, stackTrace)).ToList();
             return frames;
         }
 
@@ -159,6 +160,7 @@ namespace McFly
         ///     Upserts the frames.
         /// </summary>
         /// <param name="frames">The frames.</param>
+        [ExcludeFromCodeCoverage] // pass through
         protected internal void UpsertFrames(List<Frame> frames)
         {
             ServerClient.UpsertFrames(frames);
@@ -172,17 +174,17 @@ namespace McFly
         /// <param name="registerSet">The register set.</param>
         /// <param name="stackFrames">The stack frames.</param>
         /// <returns>Frame.</returns>
-        protected internal Frame CreateFrame(bool is32Bit, PositionsRecord record, RegisterSet registerSet,
-            List<StackFrame> stackFrames)
+        protected internal Frame CreateFrame(PositionsRecord record, RegisterSet registerSet,
+            StackTrace stackTrace)
         {
-            var disassemblyLine = GetCurrentDisassemblyLine(is32Bit);
+            var disassemblyLine = GetCurrentDisassemblyLine();
 
             var frame = new Frame
             {
                 Position = record.Position,
                 RegisterSet = registerSet,
                 ThreadId = record.ThreadId,
-                StackFrames = stackFrames,
+                StackTrace = stackTrace,
                 OpCode = disassemblyLine.OpCode,
                 OpcodeMnemonic = disassemblyLine.OpCodeMnemonic,
                 DisassemblyNote = disassemblyLine.DisassemblyNote
@@ -195,34 +197,12 @@ namespace McFly
         /// </summary>
         /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
         /// <returns>DisassemblyLine.</returns>
-        protected internal DisassemblyLine GetCurrentDisassemblyLine(bool is32Bit)
+        [ExcludeFromCodeCoverage]
+        protected internal DisassemblyLine GetCurrentDisassemblyLine()
         {
-            var eipRegister = is32Bit ? "eip" : "rip";
-            var instructionText = DbgEngProxy.Execute($"u {eipRegister} L1");
-            var match = Regex.Match(instructionText,
-                @"(?<ip>[a-fA-F0-9`]+)\s+(?<opcode>[a-fA-F0-9]+)\s+(?<ins>\w+)\s+(?<extra>.+)?");
-            var ip = match.Groups["ip"].Success ? Convert.ToUInt64(match.Groups["ip"].Value.Replace("`", ""), 16) : 0;
-            byte[] opcode = null;
-            if (match.Groups["opcode"].Success)
-                opcode = StringToByteArray(match.Groups["opcode"].Value);
-            var instruction = match.Groups["ins"].Success ? match.Groups["ins"].Value : "";
-            var note = match.Groups["extra"].Success ? match.Groups["extra"].Value : "";
-            return new DisassemblyLine(ip, opcode, instruction, note);
+            return DbgEngProxy.GetDisassemblyLines(DbgEngProxy.GetCurrentThreadId(), 1).Single();
         }
 
-        /// <summary>
-        ///     Strings to byte array.
-        /// </summary>
-        /// <param name="hex">The hexadecimal.</param>
-        /// <returns>System.Byte[].</returns>
-        public static byte[] StringToByteArray(string hex)
-        {
-            var NumberChars = hex.Length;
-            var bytes = new byte[NumberChars / 2];
-            for (var i = 0; i < NumberChars; i += 2)
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-            return bytes;
-        }
 
         /// <summary>
         ///     Gets the stack frames.
@@ -251,29 +231,32 @@ namespace McFly
         {
             // clear breakpoints
             DbgEngProxy.Execute("bc *"); // todo: save existing break points and restore
-
-            // set head at start
-
+                                
             // set breakpoints
             if (options.BreakpointMasks != null)
                 foreach (var optionsBreakpointMask in options.BreakpointMasks)
                     DbgEngProxy.Execute($"bm {optionsBreakpointMask}");
 
-            if (options.AccessBreakpoints != null)
-                foreach (var accessBreakpoint in options.AccessBreakpoints)
+            if (options.AccessBreakpoints == null) return;
+            foreach (var accessBreakpoint in options.AccessBreakpoints)
+            {
+                // todo: move
+                var match = Regex.Match(accessBreakpoint,
+                    @"^\s*(?<access>[rw]{1,2})(?<length>[a-fA-F0-9]+):(?<address>[a-fA-F0-9]+)\s*$");
+                if (!match.Success)
                 {
-                    // todo: move
-                    var match = Regex.Match(accessBreakpoint,
-                        @"^\s*(?<access>[rw]{1,2})(?<length>[a-fA-F0-9]+):(?<address>[a-fA-F0-9]+)\s*$");
-                    if (!match.Success)
-                    {
-                        Log.Error($"Error: invalid access breakpoint: {accessBreakpoint}");
-                        continue;
-                    }
-
-                    foreach (var c in match.Groups["access"].Value)
-                        DbgEngProxy.Execute($"ba {c}{match.Groups["length"].Value} {match.Groups["address"].Value}");
+                    Log.Error($"Error: invalid access breakpoint: {accessBreakpoint}");
+                    continue;
                 }
+
+                foreach (var c in match.Groups["access"].Value)
+                    DbgEngProxy.Execute($"ba {c}{match.Groups["length"].Value} {match.Groups["address"].Value}");
+            }
+        }
+
+        protected void SetBreakpointByMask(string mask)
+        {
+            
         }
 
         /// <summary>

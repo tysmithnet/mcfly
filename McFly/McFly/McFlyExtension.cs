@@ -65,6 +65,8 @@ namespace McFly
         /// </summary>
         private static IDebugRegisters2 registers;
 
+        private static IDebugSystemObjects systemObjects;
+
         /// <summary>
         ///     The symbols
         /// </summary>
@@ -185,6 +187,7 @@ namespace McFly
                 control = (IDebugControl6) client;
                 registers = (IDebugRegisters2) client;
                 symbols = (IDebugSymbols5) client;
+                systemObjects = (IDebugSystemObjects) client;
             }
             catch (Exception e)
             {
@@ -277,7 +280,7 @@ namespace McFly
                     var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
                     var typeCatalog = new TypeCatalog(types);
                     compositionContainer = new CompositionContainer(typeCatalog);
-                    var dbgEng = new DbgEngProxy(control, client, registers);
+                    var dbgEng = new DbgEngProxy(control, client, registers, systemObjects);
 
                     compositionContainer.ComposeExportedValue<IDbgEngProxy>(dbgEng);
                     compositionContainer.ComposeExportedValue(log);
@@ -613,7 +616,7 @@ namespace McFly
                                 Position = record.Position,
                                 RegisterSet = registerSet,
                                 ThreadId = record.ThreadId,
-                                StackFrames = stackFrames,
+                                StackTrace = new StackTrace(record.ThreadId, stackFrames),
                                 OpcodeMnemonic = match.Groups["ins"].Success ? match.Groups["ins"].Value : null,
                                 DisassemblyNote = match.Groups["extra"].Success ? match.Groups["extra"].Value : null
                             };
@@ -626,7 +629,6 @@ namespace McFly
                         client.Settings = settings;
                         client.UpsertFrames(frames);
                     }
-
                 }
             }
         }

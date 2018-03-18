@@ -184,7 +184,6 @@
     <Compile Include="Debugger\IDebugSystemObjects3.cs" />
     <Compile Include="Debugger\Structs.cs" />
     <Compile Include="DefaultLog.cs" />
-    <Compile Include="DisassemblyLine.cs" />
     <Compile Include="ExecuteWrapper.cs" />
     <Compile Include="HRESULT.cs" />
     <Compile Include="IDbgEngProxy.cs" />

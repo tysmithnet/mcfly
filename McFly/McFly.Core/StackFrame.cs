@@ -16,6 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace McFly.Core
 {
+    // todo: lock down class
     /// <summary>
     ///     Class StackFrame.
     /// </summary>

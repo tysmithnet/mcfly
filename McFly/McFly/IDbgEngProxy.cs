@@ -21,7 +21,7 @@ namespace McFly
     ///     Interface IDbgEngProxy
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
-    public interface IDbgEngProxy : IInjectable
+    public interface IDbgEngProxy : IInjectable    // todo: break up interface
     {
         /// <summary>
         ///     Runs the until break.
@@ -41,7 +41,7 @@ namespace McFly
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="registers">The registers.</param>
         /// <returns>RegisterSet.</returns>
-        RegisterSet GetRegisters(int threadId, IEnumerable<Register> registers);
+        RegisterSet GetRegisters(int threadId, IEnumerable<Register> registers); // todo: add overload without thread id
 
         /// <summary>
         ///     Gets the starting position of the trace. Many times this is 35:0
@@ -66,5 +66,14 @@ namespace McFly
         /// </summary>
         /// <param name="line">The line.</param>
         void WriteLine(string line);
+
+        StackTrace GetStackTrace();
+
+        StackTrace GetStackTrace(int threadId);
+
+        int GetCurrentThreadId();
+
+        IEnumerable<DisassemblyLine> GetDisassemblyLines(int threadId, int numInstructions);
+        void SetCurrentPosition(Position startingPosition);
     }
 }

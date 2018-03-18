@@ -57,11 +57,7 @@ namespace McFly.Core
         /// <value>The opcode nmemonic.</value>
         public string OpcodeMnemonic { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the stack frames.
-        /// </summary>
-        /// <value>The stack frames.</value>
-        public IList<StackFrame> StackFrames { get; set; }
+        public StackTrace StackTrace { get; set; }
 
         /// <summary>
         ///     Gets or sets the disassembly note.

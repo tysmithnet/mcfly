@@ -17,6 +17,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Primitives;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using McFly.Core;
 
 namespace McFly.Server.Data
@@ -93,9 +94,9 @@ namespace McFly.Server.Data
                     frame.OpcodeMnemonic,
                     frame.DisassemblyNote);
 
-                for (var index = 0; index < frame.StackFrames.Count; index++)
+                for (var index = 0; index < frame.StackTrace.NumFrames; index++)
                 {
-                    var stackFrame = frame.StackFrames[index];
+                    var stackFrame = frame.StackTrace.StackFrames.ElementAt(index);
                     stackFrameTable.Rows.Add(
                         frame.Position.High,
                         frame.Position.Low,
