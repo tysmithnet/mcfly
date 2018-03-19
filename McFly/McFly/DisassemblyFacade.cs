@@ -9,7 +9,7 @@ namespace McFly
     internal class DisassemblyFacade : IDisassemblyFacade
     {
         [Import]
-        private IDbgEngProxy DbgEngProxy { get; set; }
+        protected internal IDbgEngProxy DbgEngProxy { get; set; }
 
         public IEnumerable<DisassemblyLine> GetDisassemblyLines(int numInstructions)
         {
@@ -22,7 +22,7 @@ namespace McFly
             if (numInstructions <= 0)
                 throw new ArgumentOutOfRangeException("Number of instructions must be > 0");
             var ipRegister = DbgEngProxy.Is32Bit ? "eip" : "rip";
-            var instructionText = DbgEngProxy.Execute($"u {ipRegister} L{numInstructions}");
+            var instructionText = DbgEngProxy.Execute($"u {ipRegister} L{numInstructions:X}");
             var matches = Regex.Matches(instructionText,
                 @"(?<ip>[a-fA-F0-9`]+)\s+(?<opcode>[a-fA-F0-9]+)\s+(?<ins>\w+)\s+(?<extra>.+)?");
             var list = new List<DisassemblyLine>();

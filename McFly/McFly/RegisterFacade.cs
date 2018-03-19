@@ -10,8 +10,7 @@ namespace McFly
     {
         [Import]
         public IDbgEngProxy DbgEngProxy { get; set; }
-
-
+        
         /// <summary>
         ///     Gets the registers.
         /// </summary>

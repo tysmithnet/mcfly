@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.Linq;
 
 namespace McFly
 {
@@ -39,8 +40,8 @@ namespace McFly
         {
             InstructionAddress = instructionAddress;
             OpCode = opCode ?? throw new ArgumentNullException(nameof(opCode));
-            OpCodeMnemonic = opCodeMnemonic ?? throw new ArgumentNullException(nameof(opCodeMnemonic));
-            DisassemblyNote = disassemblyNote ?? throw new ArgumentNullException(nameof(disassemblyNote));
+            OpCodeMnemonic = opCodeMnemonic?.Trim() ?? throw new ArgumentNullException(nameof(opCodeMnemonic));
+            DisassemblyNote = disassemblyNote?.Trim() ?? throw new ArgumentNullException(nameof(disassemblyNote));
         }
 
         /// <summary>
@@ -66,5 +67,34 @@ namespace McFly
         /// </summary>
         /// <value>The disassembly note.</value>
         public string DisassemblyNote { get; }
+
+        protected bool Equals(DisassemblyLine other)
+        {
+            bool inst = InstructionAddress == other.InstructionAddress;
+            bool seq = OpCode.SequenceEqual(other.OpCode);
+            bool mnem = OpCodeMnemonic == other.OpCodeMnemonic;
+            bool note = DisassemblyNote == other.DisassemblyNote;
+            return inst && seq && mnem && note;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((DisassemblyLine) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = InstructionAddress.GetHashCode();
+                hashCode = (hashCode * 397) ^ (OpCode != null ? OpCode.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (OpCodeMnemonic != null ? OpCodeMnemonic.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (DisassemblyNote != null ? DisassemblyNote.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 }

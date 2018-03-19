@@ -76,9 +76,12 @@ namespace McFly.Core
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         protected bool Equals(StackFrame other)
         {
-            return StackPointer == other.StackPointer && ReturnAddress == other.ReturnAddress &&
-                   string.Equals(Module, other.Module) && string.Equals(FunctionName, other.FunctionName) &&
-                   Offset == other.Offset;
+            var sp = StackPointer == other.StackPointer;
+            var ret = ReturnAddress == other.ReturnAddress;
+            var mod = string.Equals(Module, other.Module);
+            var fun = string.Equals(FunctionName, other.FunctionName);
+            var off = Offset == other.Offset;
+            return sp && ret && mod && fun && off;
         }
 
         /// <summary>

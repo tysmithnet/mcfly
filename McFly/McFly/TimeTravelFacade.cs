@@ -57,17 +57,25 @@ namespace McFly
 
         public Position GetEndingPosition()
         {
-            throw new NotImplementedException();
+            var end = DbgEngProxy.Execute("!tt 100"); // todo: get from trace_info
+            var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
+            return Position.Parse(endMatch.Groups["pos"].Value);
         }
 
         public Frame GetCurrentFrame()
         {
+            var position = GetCurrentPosition();
+            var currentStack = StackFacade.GetCurrentStackTrace();
+            var registers = RegisterFacade.GetCurrentRegisterSet(Register.AllRegisters64);
+            var disassembly = DisassemblyFacade.GetDisassemblyLines(1).Single();
+            
             return new Frame
             {
-                Position = GetCurrentPosition(),
-                StackTrace = StackFacade.GetCurrentStackTrace(),
-                RegisterSet = RegisterFacade.GetCurrentRegisterSet(Register.AllRegisters64),
-                DisassemblyLine = DisassemblyFacade.GetDisassemblyLines(1).Single()
+                Position = position,
+                StackTrace = currentStack,
+                RegisterSet = registers,
+                DisassemblyLine = disassembly,
+                ThreadId = DbgEngProxy.GetCurrentThreadId()
             };
         }
 
@@ -77,7 +85,9 @@ namespace McFly
             {
                 Position = GetCurrentPosition(threadId),
                 StackTrace = StackFacade.GetCurrentStackTrace(threadId),
-                DisassemblyLine = DisassemblyFacade.GetDisassemblyLines(threadId, 1).Single()
+                RegisterSet = RegisterFacade.GetCurrentRegisterSet(threadId, Register.AllRegisters64),
+                DisassemblyLine = DisassemblyFacade.GetDisassemblyLines(threadId, 1).Single(),
+                ThreadId = threadId
             };
         }
 

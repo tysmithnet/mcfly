@@ -11,7 +11,7 @@ namespace McFly
     public class StackFacade : IStackFacade
     {
         [Import]
-        private IDbgEngProxy DbgEngProxy { get; set; }
+        protected internal IDbgEngProxy DbgEngProxy { get; set; }
 
         public StackTrace GetCurrentStackTrace()
         {
