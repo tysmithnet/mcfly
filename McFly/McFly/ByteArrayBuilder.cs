@@ -25,10 +25,10 @@ namespace McFly
             if(byteString.Length % 2 == 1)
                 throw new FormatException($"{nameof(hex)} must have an even number of hexademical characters");
 
-            var numberChars = hex.Length;
+            var numberChars = byteString.Length;
             var bytes = new byte[numberChars / 2];
             for (var i = 0; i < numberChars; i += 2)
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+                bytes[i / 2] = Convert.ToByte(byteString.Substring(i, 2), 16);
             return bytes;
         }
 
