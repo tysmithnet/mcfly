@@ -19,8 +19,8 @@ namespace McFly.Tests
                 AccessBreakpoints = new []{"r8:100", "w10:200", "rw10:300"},
                 BreakpointMasks = new[] {"kernel32!createprocess*", "user32!*", "mycustommod!myfancyfunction"}
             };
-            var builder = new DbgEngProxyBuilder();
-            indexMethod.DbgEngProxy = builder.Build();
+            var builder = new BreakpointFacadeBuilder();
+            indexMethod.BreakpointFacade = builder.Build();
 
             // act
             indexMethod.SetBreakpoints(indexOptions);
@@ -90,9 +90,9 @@ namespace McFly.Tests
             };
 
             var indexMethod = new IndexMethod();
-            var builder = new DbgEngProxyBuilder();
-            builder.WithStartingPosition(new Position(0x35, 0));
-            indexMethod.DbgEngProxy = builder.Build();
+            var builder = new TimeTravelFacadeBuilder();
+            builder.WithGetStartingPosition(new Position(0x35, 0));
+            indexMethod.TimeTravelFacade = builder.Build();
             var nullStartingPosition = indexMethod.GetStartingPosition(null);
 
             // Act

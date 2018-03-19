@@ -33,7 +33,5 @@ namespace McFly
         {
             DbgEngProxy.Execute($"bc *");
         }
-
-
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using McFly.Core;
 using Moq;
 
 namespace McFly.Tests
-{     
-    public class DbgEngProxyBuilder
+{
+    internal class DbgEngProxyBuilder
     {
         public Mock<IDbgEngProxy> Mock = new Mock<IDbgEngProxy>();
                                                                 
@@ -26,5 +25,4 @@ namespace McFly.Tests
             return Mock.Object;
         }        
     }
-
 }

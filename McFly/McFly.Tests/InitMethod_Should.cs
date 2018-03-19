@@ -13,17 +13,16 @@ namespace McFly.Tests
             var args = new[] {"-n", "test"};
             var initMethod = new InitMethod();
             var clientBuilder = new ServerClientBuilder();
-            var dbgEngProxyBuilder = new DbgEngProxyBuilder();
-            dbgEngProxyBuilder
-                .WithStartingPosition(new Position(0, 0))
-                .WithEndingPosition(new Position(1, 0));
+            var builder = new TimeTravelFacadeBuilder();
+            builder.WithGetStartingPosition(new Position(0, 0)).WithGetEndingPosition(new Position(1, 0));
 
-            initMethod.DbgEngProxy = dbgEngProxyBuilder.Build();
+            initMethod.TimeTravelFacade = builder.Build();
             initMethod.ServerClient = clientBuilder.Build();
             initMethod.Settings = new Settings
             {
                 ServerUrl = "http://localhost:5000",
             };
+
             // act
             initMethod.Process(args);
 

@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using McFly.Core;
 using Moq;
 
 namespace McFly.Tests
 {
-    internal class ServerClientBuilder
+    internal class BreakpointFacadeBuilder
     {
-        public Mock<IServerClient> Mock = new Mock<IServerClient>();
-        
-        public IServerClient Build()
+        public Mock<IBreakpointFacade> Mock = new Mock<IBreakpointFacade>();
+
+        public IBreakpointFacade Build()
         {
             return Mock.Object;
         }
