@@ -80,6 +80,7 @@
     <Compile Include="ServerClientBuilder.cs" />
     <Compile Include="StackFacadeBuilder.cs" />
     <Compile Include="TimeTravelFacadeBuilder.cs" />
+    <Compile Include="TimeTravelFacade_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
