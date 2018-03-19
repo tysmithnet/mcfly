@@ -77,6 +77,8 @@
     <Compile Include="DisassemblyFacade_Should.cs" />
     <Compile Include="IndexMethod_Should.cs" />
     <Compile Include="InitMethod_Should.cs" />
+    <Compile Include="PositionsRecord_Should.cs" />
+    <Compile Include="PositionsResult_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterFacadeBuilder.cs" />
     <Compile Include="RegisterFacade_Should.cs" />
