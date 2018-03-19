@@ -16,6 +16,9 @@ namespace McFly
         [Import]
         protected internal IServerClient ServerClient { get; set; }
 
+        [Import]
+        protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
+
         public string Name { get; } = "init";
 
         public void Process(string[] args)
@@ -23,8 +26,8 @@ namespace McFly
             Parser.Default.ParseArguments<InitOptions>(args)
                 .WithParsed(options =>
                 {
-                    var start = DbgEngProxy.GetStartingPosition();
-                    var end = DbgEngProxy.GetEndingPosition();
+                    var start = TimeTravelFacade.GetStartingPosition();
+                    var end = TimeTravelFacade.GetEndingPosition();
                     ServerClient.InitializeProject(options.ProjectName, start, end);
                 });
         }

@@ -49,6 +49,15 @@ namespace McFly
         [Import]
         protected internal IDbgEngProxy DbgEngProxy { get; set; }
 
+        [Import]
+        protected internal IBreakpointFacade BreakpointFacade { get; set; }
+
+        [Import]
+        protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
+
+        [Import]
+        protected internal IFrameFacade FrameFacade { get; set; }
+
         /// <summary>
         ///     Gets or sets the settings.
         /// </summary>
@@ -79,7 +88,7 @@ namespace McFly
             {
                 options = o;
                 var startingPosition = GetStartingPosition(options);
-                var endingPosition = DbgEngProxy.GetEndingPosition();
+                var endingPosition = GetEndingPosition(options);
                 SetBreakpoints(options);
                 ProcessInternal(startingPosition, endingPosition);
             }).WithNotParsed(errors =>
@@ -96,10 +105,24 @@ namespace McFly
         protected internal Position GetStartingPosition(IndexOptions options)
         {
             if (options == null || options.Start == null)
-                return DbgEngProxy.GetStartingPosition();
+                return TimeTravelFacade.GetStartingPosition();
             if (!Position.TryParse(options.Start, out var startingPosition))
                 startingPosition = new Position(0, 0);
             return startingPosition;
+        }
+
+        /// <summary>
+        ///     Gets the starting position.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>Position.</returns>
+        protected internal Position GetEndingPosition(IndexOptions options)
+        {
+            if (options == null || options.Start == null)
+                return TimeTravelFacade.GetEndingPosition();
+            if (!Position.TryParse(options.End, out var endingPosition))
+                endingPosition = TimeTravelFacade.GetEndingPosition();
+            return endingPosition;
         }
 
         /// <summary>
@@ -122,17 +145,17 @@ namespace McFly
         /// <param name="endingPosition">The ending position.</param>
         protected internal void ProcessInternal(Position startingPosition, Position endingPosition)
         {
-            DbgEngProxy.SetCurrentPosition(startingPosition);
+            TimeTravelFacade.SetPosition(startingPosition);
             // loop through all the set break points and record relevant values
-            while (true)
+            while (true)                                  // todo: have better abstraction... while(!DbgEngProxy.RunTo(endingPosition))
             {
                 DbgEngProxy.RunUntilBreak();
-                var positionsRecords = DbgEngProxy.GetPositions().ToArray();
-                var breakRecord = positionsRecords.Single(x => x.IsThreadWithBreak);
+                var positions = TimeTravelFacade.Positions();
+                var breakRecord = positions.CurrentThread;
                 if (breakRecord.Position >= endingPosition)
                     break;
 
-                var frames = CreateFramesForUpsert(positionsRecords, breakRecord);
+                var frames = CreateFramesForUpsert(positions, breakRecord);
                 UpsertFrames(frames);
             }
         }
@@ -144,11 +167,11 @@ namespace McFly
         /// <param name="breakRecord">The break record.</param>
         /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
         /// <returns>List&lt;Frame&gt;.</returns>
-        protected internal List<Frame> CreateFramesForUpsert(PositionsRecord[] positionRecords,
+        protected internal List<Frame> CreateFramesForUpsert(PositionsResult positions,
             PositionsRecord breakRecord)
         {
-            var frames = positionRecords.Where(positionRecord => positionRecord.Position == breakRecord.Position)
-                .Select(positionRecord => DbgEngProxy.GetCurrentFrame(positionRecord.ThreadId)).ToList();
+            var frames = positions.Where(positionRecord => positionRecord.Position == breakRecord.Position)
+                .Select(positionRecord => FrameFacade.GetCurrentFrame(positionRecord.ThreadId)).ToList();
             return frames;
         }
 
@@ -187,11 +210,11 @@ namespace McFly
         /// <param name="options">The options.</param>
         protected internal void SetBreakpoints(IndexOptions options)
         {
-            DbgEngProxy.ClearBreakpoints();
+            BreakpointFacade.ClearBreakpoints();
 
             if (options.BreakpointMasks != null)
                 foreach (var optionsBreakpointMask in options.BreakpointMasks)
-                    DbgEngProxy.SetBreakpointByMask(optionsBreakpointMask);
+                    BreakpointFacade.SetBreakpointByMask(optionsBreakpointMask);
 
             if (options.AccessBreakpoints == null) return;
             foreach (var accessBreakpoint in options.AccessBreakpoints)
@@ -212,10 +235,10 @@ namespace McFly
                     switch (c)
                     {
                         case 'r':
-                            DbgEngProxy.SetReadAccessBreakpoint(length, address);
+                            BreakpointFacade.SetReadAccessBreakpoint(length, address);
                             break;
                         case 'w':
-                            DbgEngProxy.SetWriteAccessBreakpoint(length, address);
+                            BreakpointFacade.SetWriteAccessBreakpoint(length, address);
                             break;
                     }
                 }

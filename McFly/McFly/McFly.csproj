@@ -139,6 +139,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BreakpointFacade.cs" />
+    <Compile Include="ByteArrayBuilder.cs" />
     <Compile Include="DbgEngProxy.cs" />
     <Compile Include="Debugger\Enums.cs" />
     <Compile Include="Debugger\IDebugAdvanced.cs" />
@@ -184,29 +186,40 @@
     <Compile Include="Debugger\IDebugSystemObjects3.cs" />
     <Compile Include="Debugger\Structs.cs" />
     <Compile Include="DefaultLog.cs" />
+    <Compile Include="DisassemblyFacade.cs" />
     <Compile Include="ExecuteWrapper.cs" />
     <Compile Include="HRESULT.cs" />
+    <Compile Include="IBreakpointFacade.cs" />
     <Compile Include="IDbgEngProxy.cs" />
+    <Compile Include="IDisassemblyFacade.cs" />
+    <Compile Include="IFrameFacade.cs" />
     <Compile Include="IInjectable.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IMcFlyMethod.cs" />
     <Compile Include="IndexMethod.cs" />
     <Compile Include="InitMethod.cs" />
     <Compile Include="InitOptions.cs" />
+    <Compile Include="IRegisterFacade.cs" />
     <Compile Include="IServerClient.cs" />
     <Compile Include="ISettings.cs" />
+    <Compile Include="IStackFacade.cs" />
+    <Compile Include="ITimeTravelFacade.cs" />
     <Compile Include="McFlyApp.cs" />
     <Compile Include="McFlyExtension.cs" />
     <Compile Include="IndexOptions.cs" />
     <Compile Include="NoteMethod.cs" />
     <Compile Include="PositionsRecord.cs" />
+    <Compile Include="PositionsResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterFacade.cs" />
     <Compile Include="ServerClient.cs" />
     <Compile Include="SettingsMethod.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SettingsJsonConverter.cs" />
+    <Compile Include="StackFacade.cs" />
     <Compile Include="StartMethod.cs" />
     <Compile Include="StartOptions.cs" />
+    <Compile Include="TimeTravelFacade.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

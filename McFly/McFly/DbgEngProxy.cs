@@ -13,8 +13,6 @@
 // ***********************************************************************
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -33,10 +31,6 @@ namespace McFly
     [ExcludeFromCodeCoverage]
     public class DbgEngProxy : IDbgEngProxy, IDisposable
     {
-        /// <summary>
-        ///     The is32 bit
-        /// </summary>
-        private readonly bool Is32Bit;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbgEngProxy" /> class.
@@ -57,8 +51,6 @@ namespace McFly
                 Regex.Match(ExecuteWrapper.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value
                     .Length == 8;
         }
-
-
 
         private IDebugSystemObjects SystemObjects { get; set; }
 
@@ -125,46 +117,6 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the registers.
-        /// </summary>
-        /// <param name="threadId">The thread identifier.</param>
-        /// <param name="registers">The registers.</param>
-        /// <returns>RegisterSet.</returns>
-        public RegisterSet GetCurrentRegisterSet(int threadId, IEnumerable<Register> registers)
-        {
-            var list = registers.ToList();
-            if (list.Count == 0)
-                return new RegisterSet();
-            var registerSet = new RegisterSet();
-            var registerNames = string.Join(",", list.Select(x => x.Name));
-            var registerText = Execute($"~~[{threadId:X}] r {registerNames}");
-            foreach (var register in list)
-            {
-                var numChars = Is32Bit ? 8 : 16;
-                var match = Regex.Match(registerText, $"{register.Name}=(?<val>[a-fA-F0-9]{{{numChars}}})");
-                var val = match.Groups["val"].Value;
-                registerSet.Process(register.Name, val, 16);
-            }
-            return registerSet;
-        }
-
-        public RegisterSet GetCurrentRegisterSet(IEnumerable<Register> registers)
-        {
-            return GetCurrentRegisterSet(GetCurrentThreadId(), registers);
-        }
-
-        /// <summary>
-        ///     Gets the starting position of the trace. Many times this is 35:0
-        /// </summary>
-        /// <returns>Position.</returns>
-        public Position GetStartingPosition()
-        {
-            var end = Execute("!tt 0"); // todo: get from trace_info
-            var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
-            return Position.Parse(endMatch.Groups["pos"].Value);
-        }
-
-        /// <summary>
         ///     Gets the ending position
         /// </summary>
         /// <returns>Position.</returns>
@@ -184,119 +136,18 @@ namespace McFly
         {
             Write($"{line}\n");
         }
-
-        public StackTrace GetCurrentStackTrace()
-        {
-            var stackTrace = Execute("k");
-            var frames = ExtractStackFrames(stackTrace);
-            return new StackTrace(GetCurrentThreadId(), frames);
-        }
-
-        public StackTrace GetCurrentStackTrace(int threadId)
-        {
-            var frames = GetStackFrames(threadId);
-            return new StackTrace(threadId, frames);
-        }
-
         public int GetCurrentThreadId()
         {
             SystemObjects.GetCurrentThreadId(out var threadId);
             return Convert.ToInt32(threadId);
         }
 
-        public IEnumerable<DisassemblyLine> GetDisassemblyLines(int numInstructions)
+        public void SwitchToThread(int threadId)
         {
-            var threadId = GetCurrentThreadId();
-            return GetDisassemblyLines(threadId, numInstructions);
+            SystemObjects.SetCurrentThreadId(threadId.ToUInt());
         }
 
-        public IEnumerable<DisassemblyLine> GetDisassemblyLines(int threadId, int numInstructions)
-        {
-            if (numInstructions <= 0)
-                throw new ArgumentOutOfRangeException("Number of instructions must be > 0");
-            var ipRegister = Is32Bit ? "eip" : "rip";
-            var instructionText = Execute($"u {ipRegister} L{numInstructions}");
-            var matches = Regex.Matches(instructionText,
-                @"(?<ip>[a-fA-F0-9`]+)\s+(?<opcode>[a-fA-F0-9]+)\s+(?<ins>\w+)\s+(?<extra>.+)?");
-            var list = new List<DisassemblyLine>();
-            foreach (var match in matches.Cast<Match>())
-            {
-                var ip = match.Groups["ip"].Success
-                    ? Convert.ToUInt64(match.Groups["ip"].Value.Replace("`", ""), 16)
-                    : 0;
-                byte[] opcode = null;
-                if (match.Groups["opcode"].Success)
-                    opcode = StringToByteArray(match.Groups["opcode"].Value);
-                var instruction = match.Groups["ins"].Success ? match.Groups["ins"].Value : "";
-                var note = match.Groups["extra"].Success ? match.Groups["extra"].Value : "";
-                var newLine = new DisassemblyLine(ip, opcode, instruction, note);
-                list.Add(newLine);
-            }
-            return list;
-        }
-
-        public void SetCurrentPosition(Position startingPosition)
-        {
-            Execute($"!tt {startingPosition}");
-        }
-
-        public void SetBreakpointByMask(string breakpointMask)
-        {
-            Execute($"bm {breakpointMask}");
-        }
-
-        public void SetReadAccessBreakpoint(int length, ulong address)
-        {
-            Execute($"ba r{length} {address}");
-        }
-
-        public void SetWriteAccessBreakpoint(int length, ulong address)
-        {
-            Execute($"ba w{length} {address}");
-        }
-
-        public void ClearBreakpoints()
-        {
-            Execute($"bc *");
-        }
-
-        public IEnumerable<PositionsRecord> GetPositions()
-        {
-            
-        }
-
-        
-
-        public Frame GetCurrentFrame()
-        {
-            return new Frame
-            {
-                Position = GetCurrentPosition(),
-                StackTrace = GetCurrentStackTrace(),
-                RegisterSet = GetCurrentRegisterSet(GetCurrentThreadId(), Register.AllRegisters64),
-                DisassemblyLine = GetDisassemblyLines(1).Single()
-            };
-        }
-
-        public Frame GetCurrentFrame(int threadId)
-        {
-            return new Frame
-            {
-                Position = GetCurrentPosition(threadId),
-                StackTrace = GetCurrentStackTrace(threadId),
-                DisassemblyLine = GetDisassemblyLines(threadId, 1).Single()
-            };
-        }
-
-        public Position GetCurrentPosition()
-        {
-            return GetPositions().Single(x => x.IsThreadWithBreak).Position;
-        }
-
-        public Position GetCurrentPosition(int threadId)
-        {
-            return GetPositions().Single(x => x.ThreadId == threadId).Position;
-        }
+        public bool Is32Bit { get; }
 
         /// <summary>
         ///     Disposes this instance.
@@ -304,114 +155,6 @@ namespace McFly
         public void Dispose()
         {
             ExecuteWrapper?.Dispose();
-        }
-
-        /// <summary>
-        ///     Strings to byte array.
-        /// </summary>
-        /// <param name="hex">The hexadecimal.</param>
-        /// <returns>System.Byte[].</returns>
-        public static byte[] StringToByteArray(string hex)
-        {
-            var NumberChars = hex.Length;
-            var bytes = new byte[NumberChars / 2];
-            for (var i = 0; i < NumberChars; i += 2)
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-            return bytes;
-        }
-
-        private static IEnumerable<StackFrame> ExtractStackFrames(string stackTrace)
-        {
-            var stackFrames = (from m in Regex.Matches(stackTrace,
-                        @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>[^+]+)\+?(?<off>[a-fA-F0-9x]+)?")
-                    .Cast<Match>()
-                let stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16)
-                let returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16)
-                let module = m.Groups["mod"].Value
-                let functionName = m.Groups["fun"].Value
-                let offset = m.Groups["off"].Success ? Convert.ToUInt32(m.Groups["off"].Value, 16) : 0
-                select new StackFrame(stackPointer, returnAddress, module, functionName, offset)).ToList();
-            return stackFrames;
-        }
-
-        public IEnumerable<StackFrame> GetStackFrames(int threadId)
-        {
-            var command = $"~~[{threadId:X}] k";
-            var raw = Execute(command);
-            return ExtractStackFrames(raw);
-        }
-    }
-
-    public interface ITimeTravelFacade
-    {
-        void SetPosition(Position position);
-        Position GetCurrentPosition();
-        Position GetCurrentPosition(int threadId);
-        PositionsResult Positions();
-    }
-
-    public class PositionsResult : IEnumerable<PositionsRecord>
-    {
-        private IEnumerable<PositionsRecord> PositionsRecords { get; set; }
-
-        public PositionsResult(IEnumerable<PositionsRecord> positionsRecords)
-        {
-            PositionsRecords = positionsRecords?.ToList() ?? throw new ArgumentNullException(nameof(positionsRecords));
-        }
-
-        public IEnumerator<PositionsRecord> GetEnumerator()
-        {
-            return PositionsRecords.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-    }
-
-    [Export(typeof(ITimeTravelFacade))]
-    public class TimeTravelFacade : ITimeTravelFacade
-    {
-        [Import]
-        protected internal IDbgEngProxy DbgEngProxy { get; set; }  
-
-        public void SetPosition(Position position)
-        {
-            DbgEngProxy.Execute($"!tt {position}");
-        }
-
-        public Position GetCurrentPosition()
-        {
-            return Positions().Single(x => x.IsThreadWithBreak).Position;
-        }
-
-        public Position GetCurrentPosition(int threadId)
-        {
-            return Positions().Single(x => x.ThreadId == threadId).Position;
-        }
-
-        public PositionsResult Positions()
-        {
-            var positionsText = DbgEngProxy.Execute("!positions");
-            var records = ParsePositionsCommandText(positionsText);
-            return new PositionsResult(records);
-        }
-
-        private static IEnumerable<PositionsRecord> ParsePositionsCommandText(string positionsText)
-        {
-            var matches = Regex.Matches(positionsText,
-                "(?<cur>>)?Thread ID=0x(?<tid>[A-F0-9]+) - Position: (?<maj>[A-F0-9]+):(?<min>[A-F0-9]+)");
-
-            return matches.Cast<Match>().Select(x =>
-            {
-                var threadId = Convert.ToInt32(x.Groups["tid"].Value, 16);
-                var position = new Position(Convert.ToInt32(x.Groups["maj"].Value, 16),
-                    Convert.ToInt32(x.Groups["min"].Value, 16));
-                var isThreadWithBreak = x.Groups["cur"].Success;
-                var item = new PositionsRecord(threadId, position, isThreadWithBreak);
-                return item;
-            });
-        }
+        }    
     }
 }

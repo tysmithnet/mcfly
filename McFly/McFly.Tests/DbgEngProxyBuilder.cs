@@ -24,18 +24,7 @@ namespace McFly.Tests
         public IDbgEngProxy Build()
         {
             return Mock.Object;
-        }
-
-        public DbgEngProxyBuilder WithStartingPosition(Position position)
-        {
-            Mock.Setup(proxy => proxy.GetStartingPosition()).Returns(position);
-            return this;
-        }
-
-        public DbgEngProxyBuilder WithEndingPosition(Position position)
-        {
-            Mock.Setup(proxy => proxy.GetEndingPosition()).Returns(position);
-            return this;
-        }
+        }        
     }
+
 }
