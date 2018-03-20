@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace McFly
@@ -77,6 +78,7 @@ namespace McFly
             return inst && seq && mnem && note;
         }
 
+        [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -85,12 +87,13 @@ namespace McFly
             return Equals((DisassemblyLine) obj);
         }
 
+        [ExcludeFromCodeCoverage]
         public override int GetHashCode()
         {
             unchecked
             {
                 var hashCode = InstructionAddress.GetHashCode();
-                hashCode = (hashCode * 397) ^ (OpCode != null ? OpCode.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (OpCode != null ? OpCode.Aggregate((b, b1) => (byte)(b ^ b1)) : 0);
                 hashCode = (hashCode * 397) ^ (OpCodeMnemonic != null ? OpCodeMnemonic.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (DisassemblyNote != null ? DisassemblyNote.GetHashCode() : 0);
                 return hashCode;
