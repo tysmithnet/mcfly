@@ -26,6 +26,42 @@ namespace McFly.Core
         {
             _rax = _rbx = _rcx = _rdx = 0;
         }
+
+        protected bool Equals(RegisterSet other)
+        {
+            return _rax == other._rax && _rbx == other._rbx && _rcx == other._rcx && _rdx == other._rdx;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((RegisterSet) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = _rax.GetHashCode();
+                hashCode = (hashCode * 397) ^ _rbx.GetHashCode();
+                hashCode = (hashCode * 397) ^ _rcx.GetHashCode();
+                hashCode = (hashCode * 397) ^ _rdx.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(RegisterSet left, RegisterSet right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(RegisterSet left, RegisterSet right)
+        {
+            return !Equals(left, right);
+        }
+
         /// <summary>
         ///     The rax
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Xunit;
 
 namespace McFly.Tests
@@ -27,6 +28,18 @@ namespace McFly.Tests
             
             // assert
             lines.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void Not_Allow_Negative_Values()
+        {
+            // arrange
+            var facade = new DisassemblyFacade();
+            Action shouldThrow = () => facade.GetDisassemblyLines(1, -1);
+            
+            // act
+            // assert
+            shouldThrow.Should().Throw<ArgumentOutOfRangeException>();
         }
     }
 }
