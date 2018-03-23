@@ -20,8 +20,45 @@ namespace McFly.Core
     /// <summary>
     ///     Class Frame.
     /// </summary>
-    public class Frame
+    public class Frame : IComparable<Frame>, IComparable
     {
+        public int CompareTo(Frame other)
+        {
+            if (ReferenceEquals(this, other)) return 0;
+            if (ReferenceEquals(null, other)) return 1;
+            var positionComparison = Comparer<Position>.Default.Compare(Position, other.Position);
+            if (positionComparison != 0) return positionComparison;
+            return _threadId.CompareTo(other._threadId);
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return 1;
+            if (ReferenceEquals(this, obj)) return 0;
+            if (!(obj is Frame)) throw new ArgumentException($"Object must be of type {nameof(Frame)}");
+            return CompareTo((Frame) obj);
+        }
+
+        public static bool operator <(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) < 0;
+        }
+
+        public static bool operator >(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) > 0;
+        }
+
+        public static bool operator <=(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) <= 0;
+        }
+
+        public static bool operator >=(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) >= 0;
+        }
+
         private int _threadId;
 
         /// <summary>

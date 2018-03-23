@@ -8,7 +8,7 @@ using McFly.Core;
 namespace McFly
 {
     [Export(typeof(ITimeTravelFacade))]
-    public class TimeTravelFacade : ITimeTravelFacade, IFrameFacade
+    public class TimeTravelFacade : ITimeTravelFacade
     {
         [Import]
         protected internal IDbgEngProxy DbgEngProxy { get; set; }  
@@ -29,7 +29,7 @@ namespace McFly
 
         public Position GetCurrentPosition()
         {
-            return Positions().Single(x => x.IsThreadWithBreak).Position;
+            return Positions().Single(x => x.IsCurrentThread).Position;
         }
 
         public Position GetCurrentPosition(int threadId)

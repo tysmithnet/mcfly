@@ -25,7 +25,7 @@ namespace McFly.Core
     /// <seealso cref="System.IComparable{McFly.Core.Position}" />
     /// <seealso cref="System.IEquatable{McFly.Core.Position}" />
     [DebuggerDisplay("{_high}:{_low}")]
-    public class Position : IComparable<Position>, IEquatable<Position>
+    public class Position : IComparable<Position>, IEquatable<Position>, IComparable
     {
         /// <summary>
         ///     The high
@@ -93,6 +93,14 @@ namespace McFly.Core
         /// <value>The high low thread identifier comparer.</value>
         public static IEqualityComparer<Position> HighLowThreadIdComparer { get; } =
             new HighLowEqualityComparer();
+
+        public int CompareTo(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return 1;
+            if (ReferenceEquals(this, obj)) return 0;
+            if (!(obj is Position)) throw new ArgumentException($"Object must be of type {nameof(Position)}");
+            return CompareTo((Position) obj);
+        }
 
         /// <summary>
         ///     Compares to.
@@ -202,7 +210,7 @@ namespace McFly.Core
         /// <returns>The result of the operator.</returns>
         public static bool operator ==(Position left, Position right)
         {
-            return left.Equals(right);
+            return left?.Equals(right) ?? right == null;
         }
 
         /// <summary>
@@ -274,7 +282,7 @@ namespace McFly.Core
             /// <returns>true if the specified objects are equal; otherwise, false.</returns>
             public bool Equals(Position x, Position y)
             {
-                return x.Equals(y);
+                return x?.Equals(y) ?? y == null;
             }
 
             /// <summary>

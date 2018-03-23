@@ -17,13 +17,13 @@ namespace McFly
         {
             var stackTrace = DbgEngProxy.Execute("k");
             var frames = ExtractStackFrames(stackTrace);
-            return new StackTrace(DbgEngProxy.GetCurrentThreadId(), frames);
+            return new StackTrace(frames);
         }
 
         public StackTrace GetCurrentStackTrace(int threadId)
         {
             var frames = GetStackFrames(threadId);
-            return new StackTrace(threadId, frames);
+            return new StackTrace(frames);
         }
 
         public IEnumerable<StackFrame> GetStackFrames(int threadId)

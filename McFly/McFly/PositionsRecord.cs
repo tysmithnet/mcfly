@@ -28,13 +28,13 @@ namespace McFly
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="position">The position.</param>
-        /// <param name="isThreadWithBreak">if set to <c>true</c> [is thread with break].</param>
+        /// <param name="isCurrentThread">if set to <c>true</c> [is thread with break].</param>
         /// <exception cref="System.ArgumentNullException">position</exception>
-        public PositionsRecord(int threadId, Position position, bool isThreadWithBreak)
+        public PositionsRecord(int threadId, Position position, bool isCurrentThread)
         {
             ThreadId = threadId;
             Position = position ?? throw new ArgumentNullException(nameof(position));
-            IsThreadWithBreak = isThreadWithBreak;
+            IsCurrentThread = isCurrentThread;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace McFly
         ///     Gets or sets a value indicating whether this instance is thread with break.
         /// </summary>
         /// <value><c>true</c> if this instance is thread with break; otherwise, <c>false</c>.</value>
-        public bool IsThreadWithBreak { get; internal set; }
+        public bool IsCurrentThread { get; internal set; }
 
         /// <summary>
         ///     Equalses the specified other.
@@ -63,7 +63,7 @@ namespace McFly
         private bool Equals(PositionsRecord other)
         {
             return ThreadId == other.ThreadId && Position.Equals(other.Position) &&
-                   IsThreadWithBreak == other.IsThreadWithBreak;
+                   IsCurrentThread == other.IsCurrentThread;
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace McFly
             {
                 var hashCode = ThreadId;
                 hashCode = (hashCode * 397) ^ Position.GetHashCode();
-                hashCode = (hashCode * 397) ^ IsThreadWithBreak.GetHashCode();
+                hashCode = (hashCode * 397) ^ IsCurrentThread.GetHashCode();
                 return hashCode;
             }
         }

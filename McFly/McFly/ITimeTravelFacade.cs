@@ -4,6 +4,8 @@ namespace McFly
 {
     public interface ITimeTravelFacade
     {
+        Frame GetCurrentFrame();
+        Frame GetCurrentFrame(int threadId);
         void SetPosition(Position position);
         Position GetCurrentPosition();
         Position GetCurrentPosition(int threadId);

@@ -9,24 +9,18 @@ namespace McFly.Core
 {
     public class StackTrace
     {
-        public int ThreadId { get; }
-        public IEnumerable<StackFrame> StackFrames { get; }
-        public int NumFrames { get; }
+        public IEnumerable<StackFrame> StackFrames { get; internal set; }
+        public int NumFrames { get; internal set; }
 
-        public StackTrace(int threadId, IEnumerable<StackFrame> stackFrames)
+        public StackTrace(IEnumerable<StackFrame> stackFrames)
         {
-            if(threadId < 0)
-                throw new ArgumentOutOfRangeException($"Thread id cannot be negative");
-            ThreadId = threadId;
             StackFrames = stackFrames?.ToList() ?? throw new ArgumentNullException(nameof(stackFrames));
             NumFrames = StackFrames.Count();
         }
 
         protected bool Equals(StackTrace other)
         {
-            bool tid = ThreadId == other.ThreadId;
-            var frames = StackFrames.SequenceEqual(other.StackFrames);
-            return tid && frames;
+        return StackFrames.SequenceEqual(other.StackFrames);
         }
 
         public override bool Equals(object obj)
@@ -42,7 +36,7 @@ namespace McFly.Core
         {
             unchecked
             {
-                var hashCode = ThreadId;
+                int hashCode = 455627;
                 hashCode = (hashCode * 397) ^ (StackFrames != null ? StackFrames.Select(x => x.GetHashCode()).Aggregate((l, r) => l.GetHashCode() ^ r.GetHashCode()): 0);
                 hashCode = (hashCode * 397) ^ NumFrames;
                 return hashCode;

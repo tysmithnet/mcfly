@@ -116,7 +116,7 @@ ntdll!NtTerminateProcess+0x12:
             engBuilder.With32Bit(false);
             engBuilder.WithThreadId(0x7590);
             var stackBuilder = new StackFacadeBuilder();
-            var stackTrace = new StackTrace(1, new List<StackFrame>());
+            var stackTrace = new StackTrace(new List<StackFrame>());
             stackBuilder.WithGetCurrentStackTrace(stackTrace);
 
             var registerSet = new RegisterSet();
@@ -161,7 +161,7 @@ ntdll!NtTerminateProcess+0x12:
             engBuilder.With32Bit(false);
             engBuilder.WithThreadId(0x6CDC);
             var stackBuilder = new StackFacadeBuilder();
-            var stackTrace = new StackTrace(1, new List<StackFrame>());
+            var stackTrace = new StackTrace(new List<StackFrame>());
             stackBuilder.WithGetCurrentStackTrace(0x6CDC, stackTrace);
 
             var registerSet = new RegisterSet();

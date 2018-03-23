@@ -15,7 +15,7 @@ namespace McFly
             PositionsRecords = positionsRecords?.ToList() ?? throw new ArgumentNullException(nameof(positionsRecords));
         }
 
-        public PositionsRecord CurrentThread => PositionsRecords.Single(x => x.IsThreadWithBreak);
+        public PositionsRecord CurrentThread => PositionsRecords.Single(x => x.IsCurrentThread);
 
         public IEnumerator<PositionsRecord> GetEnumerator()
         {

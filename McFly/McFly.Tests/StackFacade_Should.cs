@@ -28,13 +28,13 @@ namespace McFly.Tests
             var stackTrace2 = stackFacade.GetCurrentStackTrace(0x7590);
 
             // assert
-            stackTrace.Should().Be(new StackTrace(0x7590, new[]
+            stackTrace.Should().Be(new StackTrace(new[]
             {
                 new StackFrame(0x000000000014d180, 0x00007ffa513150ed, "KERNEL32", "GetTimeFormatWWorker", 0xc43),
                 new StackFrame(0x000000000014d1d0, 0x00007ffa513138e6, "KERNEL32", "GetTimeFormatWWorker", 0x7ed),
                 new StackFrame(0x000000000014ff90, 0x0000000000000000, "ntdll", "RtlUserThreadStart", 0x21),
             }));
-            stackTrace2.Should().Be(new StackTrace(0x7590, new[]
+            stackTrace2.Should().Be(new StackTrace(new[]
             {
                 new StackFrame(0x000000000014d180, 0x00007ffa513150ed, "KERNEL32", "GetTimeFormatWWorker", 0xc43),
                 new StackFrame(0x000000000014d1d0, 0x00007ffa513138e6, "KERNEL32", "GetTimeFormatWWorker", 0x7ed),

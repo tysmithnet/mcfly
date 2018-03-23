@@ -54,10 +54,7 @@ namespace McFly
 
         [Import]
         protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
-
-        [Import]
-        protected internal IFrameFacade FrameFacade { get; set; }
-
+        
         /// <summary>
         ///     Gets or sets the settings.
         /// </summary>
@@ -147,17 +144,21 @@ namespace McFly
         {
             TimeTravelFacade.SetPosition(startingPosition);
             // loop through all the set break points and record relevant values
+            List<Frame> frames = new List<Frame>();
+            Position last = null;
             while (true)                                  // todo: have better abstraction... while(!DbgEngProxy.RunTo(endingPosition))
             {
                 DbgEngProxy.RunUntilBreak();
                 var positions = TimeTravelFacade.Positions();
                 var breakRecord = positions.CurrentThread;
-                if (breakRecord.Position >= endingPosition)
+                if (last == breakRecord.Position)
                     break;
 
-                var frames = CreateFramesForUpsert(positions, breakRecord);
-                UpsertFrames(frames);
+                var newFrames = CreateFramesForUpsert(positions, breakRecord);
+                frames.AddRange(newFrames);
+                last = breakRecord.Position;
             }
+            ServerClient.UpsertFrames(frames);
         }
 
         /// <summary>
@@ -171,20 +172,10 @@ namespace McFly
             PositionsRecord breakRecord)
         {
             var frames = positions.Where(positionRecord => positionRecord.Position == breakRecord.Position)
-                .Select(positionRecord => FrameFacade.GetCurrentFrame(positionRecord.ThreadId)).ToList();
+                .Select(positionRecord => TimeTravelFacade.GetCurrentFrame(positionRecord.ThreadId)).ToList();
             return frames;
         }
-
-        /// <summary>
-        ///     Upserts the frames.
-        /// </summary>
-        /// <param name="frames">The frames.</param>
-        [ExcludeFromCodeCoverage] // pass through
-        protected internal void UpsertFrames(List<Frame> frames)
-        {
-            ServerClient.UpsertFrames(frames);
-        }
-
+        
         /// <summary>
         ///     Gets the stack frames.
         /// </summary>

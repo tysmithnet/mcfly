@@ -192,7 +192,6 @@
     <Compile Include="IBreakpointFacade.cs" />
     <Compile Include="IDbgEngProxy.cs" />
     <Compile Include="IDisassemblyFacade.cs" />
-    <Compile Include="IFrameFacade.cs" />
     <Compile Include="IInjectable.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IMcFlyMethod.cs" />
