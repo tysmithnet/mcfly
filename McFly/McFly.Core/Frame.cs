@@ -20,7 +20,7 @@ namespace McFly.Core
     /// <summary>
     ///     Class Frame.
     /// </summary>
-    public class Frame : IComparable<Frame>, IComparable
+    public class Frame : IComparable<Frame>, IComparable, IEquatable<Frame>
     {
         public int CompareTo(Frame other)
         {
@@ -57,6 +57,44 @@ namespace McFly.Core
         public static bool operator >=(Frame left, Frame right)
         {
             return Comparer<Frame>.Default.Compare(left, right) >= 0;
+        }
+
+        public bool Equals(Frame other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return _threadId == other._threadId && Equals(Position, other.Position) && Equals(RegisterSet, other.RegisterSet) && Equals(StackTrace, other.StackTrace) && Equals(DisassemblyLine, other.DisassemblyLine);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Frame) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = _threadId;
+                hashCode = (hashCode * 397) ^ (Position != null ? Position.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (RegisterSet != null ? RegisterSet.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (StackTrace != null ? StackTrace.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (DisassemblyLine != null ? DisassemblyLine.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(Frame left, Frame right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Frame left, Frame right)
+        {
+            return !Equals(left, right);
         }
 
         private int _threadId;
