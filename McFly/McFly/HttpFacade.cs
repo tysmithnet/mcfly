@@ -29,30 +29,23 @@ namespace McFly
     /// <seealso cref="McFly.IHttpFacade" />
     /// <seealso cref="System.IDisposable" />
     [Export(typeof(IHttpFacade))]
-    public class HttpFacade : IHttpFacade, IDisposable
+    public class HttpFacade : IHttpFacade
     {
-        /// <summary>
-        ///     The client
-        /// </summary>
-        private readonly HttpClient _client = new HttpClient();
-
-        /// <summary>
-        ///     Disposes this instance.
-        /// </summary>
-        public void Dispose()
-        {
-            _client?.Dispose();
-        }
-
         /// <summary>
         ///     Posts the asynchronous.
         /// </summary>
         /// <param name="resourceUri">The resource URI.</param>
         /// <param name="formContent">Content of the form.</param>
+        /// <param name="requestHeaders">The request headers.</param>
         /// <returns>Task&lt;HttpResponseMessage&gt;.</returns>
-        public Task<HttpResponseMessage> PostAsync(Uri resourceUri, Dictionary<string, string> formContent)
+        public Task<HttpResponseMessage> PostAsync(Uri resourceUri, Dictionary<string, string> formContent,
+            HttpHeaders requestHeaders)
         {
-            return _client.PostAsync(resourceUri, new FormUrlEncodedContent(formContent));
+            using (var client = new HttpClient())
+            {
+                SetHeaders(requestHeaders, client);
+                return client.PostAsync(resourceUri, new FormUrlEncodedContent(formContent));
+            }
         }
 
         /// <summary>
@@ -60,25 +53,52 @@ namespace McFly
         /// </summary>
         /// <param name="resourceUri">The resource URI.</param>
         /// <param name="content">The content.</param>
+        /// <param name="requestHeaders">The request headers.</param>
         /// <returns>Task&lt;HttpResponseMessage&gt;.</returns>
-        public Task<HttpResponseMessage> PostAsync(Uri resourceUri, byte[] content)
+        public Task<HttpResponseMessage> PostAsync(Uri resourceUri, byte[] content, HttpHeaders requestHeaders)
         {
-            return _client.PostAsync(resourceUri, new ByteArrayContent(content));
+            using (var client = new HttpClient())
+            {
+                SetHeaders(requestHeaders, client);
+                return client.PostAsync(resourceUri, new ByteArrayContent(content));
+            }
         }
 
         /// <summary>
-        ///     Posts the json asynchronous.
+        ///     Sends a post request to a URI with the provided conent a json
         /// </summary>
         /// <param name="resourceUri">The resource URI.</param>
         /// <param name="content">The content.</param>
+        /// <param name="requestHeaders">The request headers.</param>
         /// <returns>Task&lt;HttpResponseMessage&gt;.</returns>
-        public Task<HttpResponseMessage> PostJsonAsync(Uri resourceUri, object content)
+        public Task<HttpResponseMessage> PostJsonAsync(Uri resourceUri, object content,
+            HttpHeaders requestHeaders)
         {
-            var json = JsonConvert.SerializeObject(content);
-            var bytes = Encoding.UTF8.GetBytes(json);
-            var c = new ByteArrayContent(bytes);
-            c.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            return _client.PostAsync(resourceUri, c);
+            using (var client = new HttpClient())
+            {
+                var json = JsonConvert.SerializeObject(content);
+                var bytes = Encoding.UTF8.GetBytes(json);
+                var c = new ByteArrayContent(bytes);
+                c.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                return client.PostAsync(resourceUri, c);
+            }
+        }
+
+        /// <summary>
+        ///     Sets the headers.
+        /// </summary>
+        /// <param name="requestHeaders">The request headers.</param>
+        /// <param name="client">The client.</param>
+        /// <exception cref="ArgumentNullException">client</exception>
+        private static void SetHeaders(HttpHeaders requestHeaders, HttpClient client)
+        {
+            if (requestHeaders == null)
+                return;
+            if (client == null)
+                throw new ArgumentNullException(nameof(client));
+            client.DefaultRequestHeaders.Clear();
+            foreach (var httpRequestHeader in requestHeaders)
+                client.DefaultRequestHeaders.Add(httpRequestHeader.Key, httpRequestHeader.Value);
         }
     }
 }

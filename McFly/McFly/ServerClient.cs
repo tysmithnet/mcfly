@@ -48,8 +48,12 @@ namespace McFly
         /// <returns>Task.</returns>
         public void UpsertFrames(IEnumerable<Frame> frames)
         {
-            var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/frame/{Settings.ProjectName}"};
-            HttpFacade.PostJsonAsync(ub.Uri, frames).GetAwaiter().GetResult();
+            var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/frame"};
+            var headers = new HttpHeaders()
+            {
+                ["X-Project-Name"] = Settings.ProjectName
+            };
+            HttpFacade.PostJsonAsync(ub.Uri, frames, headers).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -70,7 +74,7 @@ namespace McFly
                 ["text"] = text
             };
 
-            HttpFacade.PostAsync(ub.Uri, d).GetAwaiter().GetResult();
+            HttpFacade.PostAsync(ub.Uri, d, null).GetAwaiter().GetResult();
         }
 
         public void InitializeProject(string projectName, Position start, Position end)
@@ -83,7 +87,7 @@ namespace McFly
                 ["endingPosition"] = end.ToString()
             };
 
-            HttpFacade.PostAsync(ub.Uri, d).GetAwaiter().GetResult();
+            HttpFacade.PostAsync(ub.Uri, d, null).GetAwaiter().GetResult();
         }
     }
 }

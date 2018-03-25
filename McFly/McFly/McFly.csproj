@@ -148,6 +148,7 @@
     <Compile Include="ExecuteWrapper.cs" />
     <Compile Include="Debugger\HRESULT.cs" />
     <Compile Include="HttpFacade.cs" />
+    <Compile Include="HttpHeaders.cs" />
     <Compile Include="IBreakpointFacade.cs" />
     <Compile Include="IDebugEngineProxy.cs" />
     <Compile Include="IDisassemblyFacade.cs" />

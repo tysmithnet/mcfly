@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using McFly.Core;
 using Moq;
 using Xunit;
@@ -37,7 +38,7 @@ namespace McFly.Tests
             // assert
             httpBuilder.Mock.Verify(
                 facade => facade.PostAsync(new Uri("https://some.server.net/api/note/testing"),
-                    It.Is<Dictionary<string, string>>(e => e.Count == expected.Count && !e.Except(expected).Any())),
+                    It.Is<Dictionary<string, string>>(e => e.Count == expected.Count && !e.Except(expected).Any()), null),
                 Times.Once);
         }
 
@@ -66,7 +67,7 @@ namespace McFly.Tests
             // assert
             httpBuilder.Mock.Verify(
                 facade => facade.PostAsync(new Uri("https://some.server.net/api/project"),
-                    It.Is<Dictionary<string, string>>(e => e.Count == expected.Count && !e.Except(expected).Any())),
+                    It.Is<Dictionary<string, string>>(e => e.Count == expected.Count && !e.Except(expected).Any()), null),
                 Times.Once);
         }
 
@@ -83,13 +84,17 @@ namespace McFly.Tests
             };
             var serverClient = new ServerClient {HttpFacade = httpBuilder.Build(), Settings = settings};
             var frames = MockFrames.SingleThreaded0;
+            var headers = new HttpHeaders()
+            {   
+                ["X-Project-Name"] = "testing"
+            };
 
             // act
             serverClient.UpsertFrames(frames);
 
             // assert
-            httpBuilder.Mock.Verify(facade => facade.PostJsonAsync(new Uri("https://some.server.net/api/frame/testing"),
-                It.Is<IEnumerable<Frame>>(e => e.SequenceEqual(frames))), Times.Once);
+            httpBuilder.Mock.Verify(facade => facade.PostJsonAsync(new Uri("https://some.server.net/api/frame"),
+                It.Is<IEnumerable<Frame>>(e => e.SequenceEqual(frames)), headers), Times.Once);
         }
     }
 }
