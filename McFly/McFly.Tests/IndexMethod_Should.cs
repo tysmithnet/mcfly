@@ -10,33 +10,6 @@ namespace McFly.Tests
     public class IndexMethod_Should
     {
         [Fact]
-        public void Set_Breakpoints_If_They_Are_Provided_In_The_Options()
-        {
-            // arrange
-            var indexMethod = new IndexMethod();
-            var indexOptions = new IndexOptions()
-            {
-                AccessBreakpoints = new []{"r8:100", "w10:200", "rw10:300"},
-                BreakpointMasks = new[] {"kernel32!createprocess*", "user32!*", "mycustommod!myfancyfunction"}
-            };
-            var builder = new BreakpointFacadeBuilder();
-            indexMethod.BreakpointFacade = builder.Build();
-
-            // act
-            indexMethod.SetBreakpoints(indexOptions);
-            
-            // assert
-            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("kernel32!createprocess*"), Times.Once);
-            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("user32!*"), Times.Once);
-            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("mycustommod!myfancyfunction"), Times.Once);
-
-            builder.Mock.Verify(proxy => proxy.SetReadAccessBreakpoint(0x8, 0x100), Times.Once);
-            builder.Mock.Verify(proxy => proxy.SetReadAccessBreakpoint(0x10, 0x300), Times.Once);
-            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x10, 0x200), Times.Once);
-            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x10, 0x300), Times.Once);
-        }
-
-        [Fact]
         public void Get_Stack_Frames_Correctly()
         {
             // arrange
@@ -77,30 +50,6 @@ namespace McFly.Tests
         }
 
         [Fact]
-        public void Identify_Correct_Starting_Position()
-        {
-            // Arrange                             
-            var options = new IndexOptions
-            {
-                Start = "35:1"
-            };                                      
-
-            var dbg = new DbgEngProxyBuilder();
-            var indexMethod = new IndexMethod();
-            indexMethod.DbgEngProxy = dbg.Build();
-            var builder = new TimeTravelFacadeBuilder(dbg);
-            builder.WithGetStartingPosition(new Position(0x35, 0));
-            indexMethod.TimeTravelFacade = builder.Build();                     
-
-            // Act
-            var startingPosition = indexMethod.GetStartingPosition(options);                 
-
-            // Assert
-            startingPosition.Should().Be(new Position(0x35, 1),
-                "35:1 means that the high portion is 35 and the low portion is 1");   
-        }
-
-        [Fact]
         public void Identify_Correct_Ending_Position()
         {
             // Arrange                             
@@ -125,17 +74,68 @@ namespace McFly.Tests
         }
 
         [Fact]
+        public void Identify_Correct_Starting_Position()
+        {
+            // Arrange                             
+            var options = new IndexOptions
+            {
+                Start = "35:1"
+            };
+
+            var dbg = new DbgEngProxyBuilder();
+            var indexMethod = new IndexMethod();
+            indexMethod.DbgEngProxy = dbg.Build();
+            var builder = new TimeTravelFacadeBuilder(dbg);
+            builder.WithGetStartingPosition(new Position(0x35, 0));
+            indexMethod.TimeTravelFacade = builder.Build();
+
+            // Act
+            var startingPosition = indexMethod.GetStartingPosition(options);
+
+            // Assert
+            startingPosition.Should().Be(new Position(0x35, 1),
+                "35:1 means that the high portion is 35 and the low portion is 1");
+        }
+
+        [Fact]
+        public void Set_Breakpoints_If_They_Are_Provided_In_The_Options()
+        {
+            // arrange
+            var indexMethod = new IndexMethod();
+            var indexOptions = new IndexOptions
+            {
+                AccessBreakpoints = new[] {"r8:100", "w10:200", "rw10:300"},
+                BreakpointMasks = new[] {"kernel32!createprocess*", "user32!*", "mycustommod!myfancyfunction"}
+            };
+            var builder = new BreakpointFacadeBuilder();
+            indexMethod.BreakpointFacade = builder.Build();
+
+            // act
+            indexMethod.SetBreakpoints(indexOptions);
+
+            // assert
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("kernel32!createprocess*"), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("user32!*"), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("mycustommod!myfancyfunction"), Times.Once);
+
+            builder.Mock.Verify(proxy => proxy.SetReadAccessBreakpoint(0x8, 0x100), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetReadAccessBreakpoint(0x10, 0x300), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x10, 0x200), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x10, 0x300), Times.Once);
+        }
+
+        [Fact]
         public void Upsert_Frames_From_Breaks()
         {
             var dbg = new DbgEngProxyBuilder();
             var tt = new TimeTravelFacadeBuilder(dbg);
             var sc = new ServerClientBuilder();
-            
+
             dbg.WithRunUntilBreak();
-            int count = 0;
+            var count = 0;
             dbg.SetRunUntilBreakCallback(() =>
             {
-                if(count++ > 0)
+                if (count++ > 0)
                     tt.AdvanceToNextPosition();
             });
             var dbgEngProxy = dbg.Build();
@@ -144,10 +144,7 @@ namespace McFly.Tests
 
             dbg.CurrentThreadId = MockFrames.SingleThreaded0.First().ThreadId;
             tt.WithFrames(MockFrames.SingleThreaded0);
-            sc.WithUpsertFrames(() =>
-            {
-
-            });
+            sc.WithUpsertFrames(() => { });
 
             var indexMethod = new IndexMethod
             {
@@ -156,10 +153,10 @@ namespace McFly.Tests
                 ServerClient = serverClient
             };
 
-            indexMethod.ProcessInternal(new Position(0,0), MockFrames.SingleThreaded0.Max(x => x.Position));
-            sc.Mock.Verify(client => client.UpsertFrames(It.Is<IEnumerable<Frame>>(frames => frames.SequenceEqual(MockFrames.SingleThreaded0))));
-        }        
+            indexMethod.ProcessInternal(new Position(0, 0), MockFrames.SingleThreaded0.Max(x => x.Position));
+            sc.Mock.Verify(client =>
+                client.UpsertFrames(
+                    It.Is<IEnumerable<Frame>>(frames => frames.SequenceEqual(MockFrames.SingleThreaded0))));
+        }
     }
 }
-
-

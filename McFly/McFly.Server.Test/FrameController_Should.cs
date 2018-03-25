@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using McFly.Core;
 using McFly.Server.Controllers;
 using Moq;
@@ -27,7 +24,9 @@ namespace McFly.Server.Test
             frameController.Post("testing", frames);
 
             // assert
-            builder.Mock.Verify(access => access.UpsertFrames("testing", It.Is<IEnumerable<Frame>>(e => e.SequenceEqual(frames))), Times.Once);
+            builder.Mock.Verify(
+                access => access.UpsertFrames("testing", It.Is<IEnumerable<Frame>>(e => e.SequenceEqual(frames))),
+                Times.Once);
         }
     }
 }

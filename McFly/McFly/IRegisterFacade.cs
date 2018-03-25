@@ -1,8 +1,25 @@
-﻿using System.Collections.Generic;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tysmithnet
+// Created          : 03-18-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-18-2018
+// ***********************************************************************
+// <copyright file="IRegisterFacade.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System.Collections.Generic;
 using McFly.Core;
 
 namespace McFly
 {
+    /// <summary>
+    ///     Interface IRegisterFacade
+    /// </summary>
     public interface IRegisterFacade
     {
         /// <summary>
@@ -12,6 +29,12 @@ namespace McFly
         /// <param name="registers">The registers.</param>
         /// <returns>RegisterSet.</returns>
         RegisterSet GetCurrentRegisterSet(int threadId, IEnumerable<Register> registers);
+
+        /// <summary>
+        ///     Gets the current register set.
+        /// </summary>
+        /// <param name="registers">The registers.</param>
+        /// <returns>RegisterSet.</returns>
         RegisterSet GetCurrentRegisterSet(IEnumerable<Register> registers);
     }
 }

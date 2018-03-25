@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-18-2018
 // ***********************************************************************
 // <copyright file="FrameAccess.cs" company="McFly.Server.Data">
 //     Copyright (c) . All rights reserved.
@@ -14,7 +14,6 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Primitives;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -35,16 +34,17 @@ namespace McFly.Server.Data
         ///     Upserts the frame.
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
-        /// <param name="frame">The frame.</param>
+        /// <param name="frames">The frames.</param>
         public void UpsertFrames(string projectName, IEnumerable<Frame> frames)
         {
-            
             try
             {
                 var tableTypes = ConvertToTableType(frames);
                 var framesParam = new SqlParameter("@frames", SqlDbType.Structured) {Value = tableTypes.Frames};
-                var stackFrameParams = new SqlParameter("@stackframes", SqlDbType.Structured) { Value = tableTypes.StackFrames };
-                using (var reader = ExecuteStoredProcedureReader(projectName, "pr_upsert_frames", new []{framesParam, stackFrameParams}))
+                var stackFrameParams =
+                    new SqlParameter("@stackframes", SqlDbType.Structured) {Value = tableTypes.StackFrames};
+                using (var reader = ExecuteStoredProcedureReader(projectName, "pr_upsert_frames",
+                    new[] {framesParam, stackFrameParams}))
                 {
                     ;
                 }
@@ -55,6 +55,11 @@ namespace McFly.Server.Data
             }
         }
 
+        /// <summary>
+        ///     Converts the type of to table.
+        /// </summary>
+        /// <param name="frames">The frames.</param>
+        /// <returns>FrameDto.</returns>
         private FrameDto ConvertToTableType(IEnumerable<Frame> frames)
         {
             var frameTable = new DataTable("tt_frame");
@@ -68,7 +73,7 @@ namespace McFly.Server.Data
             frameTable.Columns.Add("@opcode", typeof(byte[]));
             frameTable.Columns.Add("@opcode_mnemonic", typeof(string));
             frameTable.Columns.Add("@disassembly_note", typeof(string));
-            
+
             var stackFrameTable = new DataTable("tt_stackframe");
             stackFrameTable.Columns.Add("@pos_hi", typeof(int));
             stackFrameTable.Columns.Add("@pos_lo", typeof(int));

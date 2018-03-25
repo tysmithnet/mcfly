@@ -4,7 +4,7 @@
 // Created          : 03-02-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-08-2018
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="ServerClient.cs" company="">
 //     Copyright ©  2018
@@ -22,20 +22,28 @@ namespace McFly
     /// <summary>
     ///     Class ServerClient.
     /// </summary>
+    /// <seealso cref="McFly.IServerClient" />
     /// <seealso cref="System.IDisposable" />
     [Export(typeof(IServerClient))]
     public class ServerClient : IServerClient
     {
+        /// <summary>
+        ///     Gets or sets the HTTP facade.
+        /// </summary>
+        /// <value>The HTTP facade.</value>
         [Import]
         protected internal IHttpFacade HttpFacade { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the settings.
+        /// </summary>
+        /// <value>The settings.</value>
         [Import]
         protected internal Settings Settings { get; set; }
 
         /// <summary>
         ///     Upserts the frames.
         /// </summary>
-        /// <param name="projectName">Name of the project.</param>
         /// <param name="frames">The frames.</param>
         /// <returns>Task.</returns>
         public void UpsertFrames(IEnumerable<Frame> frames)
@@ -44,6 +52,12 @@ namespace McFly
             HttpFacade.PostJsonAsync(ub.Uri, frames).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        ///     Adds the note.
+        /// </summary>
+        /// <param name="position">The position.</param>
+        /// <param name="threadId">The thread identifier.</param>
+        /// <param name="text">The text.</param>
         public void AddNote(Position position, int threadId, string text)
         {
             var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/note/{Settings.ProjectName}"};

@@ -4,7 +4,7 @@
 // Created          : 03-03-2018
 //
 // Last Modified By : master
-// Last Modified On : 03-09-2018
+// Last Modified On : 03-22-2018
 // ***********************************************************************
 // <copyright file="PositionsRecord.cs" company="">
 //     Copyright ©  2018
@@ -29,6 +29,7 @@ namespace McFly
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="position">The position.</param>
         /// <param name="isCurrentThread">if set to <c>true</c> [is thread with break].</param>
+        /// <exception cref="ArgumentNullException">position</exception>
         /// <exception cref="System.ArgumentNullException">position</exception>
         public PositionsRecord(int threadId, Position position, bool isCurrentThread)
         {

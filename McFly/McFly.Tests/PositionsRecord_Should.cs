@@ -1,5 +1,4 @@
-﻿using System.Security.Policy;
-using FluentAssertions;
+﻿using FluentAssertions;
 using McFly.Core;
 using Xunit;
 
@@ -11,7 +10,7 @@ namespace McFly.Tests
         public void Exhibit_Value_Equality()
         {
             // arrange
-            var left = new PositionsRecord(1, new Position(0,0), true);
+            var left = new PositionsRecord(1, new Position(0, 0), true);
             var right = new PositionsRecord(1, new Position(0, 0), true);
 
             // act 

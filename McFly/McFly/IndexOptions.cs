@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-18-2018
 // ***********************************************************************
 // <copyright file="IndexOptions.cs" company="">
 //     Copyright ©  2018
@@ -14,7 +14,6 @@
 
 using System.Collections.Generic;
 using CommandLine;
-using CommandLine.Text;
 
 namespace McFly
 {
@@ -48,7 +47,9 @@ namespace McFly
         ///     Gets or sets the breakpoint masks.
         /// </summary>
         /// <value>The breakpoint masks.</value>
-        [Option("bm", HelpText = "Breakpoint masks, e.g. -bm kerne32!createprocess* user32!* mycustommodule!myfancyfunction", Required = false)]
+        [Option("bm",
+            HelpText = "Breakpoint masks, e.g. -bm kerne32!createprocess* user32!* mycustommodule!myfancyfunction",
+            Required = false)]
         public IEnumerable<string> BreakpointMasks { get; set; }
 
         /// <summary>

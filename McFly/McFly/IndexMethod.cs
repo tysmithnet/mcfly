@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : master
-// Last Modified On : 03-11-2018
+// Last Modified On : 03-23-2018
 // ***********************************************************************
 // <copyright file="IndexMethod.cs" company="">
 //     Copyright ©  2018
@@ -49,12 +49,20 @@ namespace McFly
         [Import]
         protected internal IDbgEngProxy DbgEngProxy { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the breakpoint facade.
+        /// </summary>
+        /// <value>The breakpoint facade.</value>
         [Import]
         protected internal IBreakpointFacade BreakpointFacade { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the time travel facade.
+        /// </summary>
+        /// <value>The time travel facade.</value>
         [Import]
         protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
-        
+
         /// <summary>
         ///     Gets or sets the settings.
         /// </summary>
@@ -62,6 +70,10 @@ namespace McFly
         [Import]
         protected internal Settings Settings { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the server client.
+        /// </summary>
+        /// <value>The server client.</value>
         [Import]
         protected internal IServerClient ServerClient { get; set; }
 
@@ -100,6 +112,7 @@ namespace McFly
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>Position.</returns>
+        /// <exception cref="FormatException"></exception>
         protected internal Position GetStartingPosition(IndexOptions options)
         {
             if (options == null || options.Start == null)
@@ -114,6 +127,7 @@ namespace McFly
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>Position.</returns>
+        /// <exception cref="FormatException"></exception>
         protected internal Position GetEndingPosition(IndexOptions options)
         {
             if (options == null || options.End == null)
@@ -145,9 +159,9 @@ namespace McFly
         {
             TimeTravelFacade.SetPosition(startingPosition);
             // loop through all the set break points and record relevant values
-            List<Frame> frames = new List<Frame>();
+            var frames = new List<Frame>();
             Position last = null;
-            while (true)                                  // todo: have better abstraction... while(!DbgEngProxy.RunTo(endingPosition))
+            while (true) // todo: have better abstraction... while(!DbgEngProxy.RunTo(endingPosition))
             {
                 DbgEngProxy.RunUntilBreak();
                 var positions = TimeTravelFacade.Positions();
@@ -165,9 +179,8 @@ namespace McFly
         /// <summary>
         ///     Creates the frames for upsert.
         /// </summary>
-        /// <param name="positionRecords">The records.</param>
+        /// <param name="positions">The positions.</param>
         /// <param name="breakRecord">The break record.</param>
-        /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
         /// <returns>List&lt;Frame&gt;.</returns>
         protected internal List<Frame> CreateFramesForUpsert(PositionsResult positions,
             PositionsRecord breakRecord)
@@ -176,7 +189,7 @@ namespace McFly
                 .Select(positionRecord => TimeTravelFacade.GetCurrentFrame(positionRecord.ThreadId)).ToList();
             return frames;
         }
-        
+
         /// <summary>
         ///     Gets the stack frames.
         /// </summary>

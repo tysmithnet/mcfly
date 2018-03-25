@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-09-2018
+// Last Modified On : 03-18-2018
 // ***********************************************************************
 // <copyright file="McFly.cs" company="">
 //     Copyright ©  2018
@@ -13,21 +13,15 @@
 // ***********************************************************************
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using CommandLine;
-using McFly.Core;
 using McFly.Debugger;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -65,6 +59,9 @@ namespace McFly
         /// </summary>
         private static IDebugRegisters2 registers;
 
+        /// <summary>
+        ///     The system objects
+        /// </summary>
         private static IDebugSystemObjects systemObjects;
 
         /// <summary>

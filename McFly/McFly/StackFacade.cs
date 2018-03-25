@@ -1,4 +1,18 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tysmithnet
+// Created          : 03-18-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-20-2018
+// ***********************************************************************
+// <copyright file="StackFacade.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -7,12 +21,24 @@ using McFly.Core;
 
 namespace McFly
 {
+    /// <summary>
+    ///     Class StackFacade.
+    /// </summary>
+    /// <seealso cref="McFly.IStackFacade" />
     [Export(typeof(IStackFacade))]
     public class StackFacade : IStackFacade
     {
+        /// <summary>
+        ///     Gets or sets the debug eng proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
         [Import]
         protected internal IDbgEngProxy DbgEngProxy { get; set; }
 
+        /// <summary>
+        ///     Gets the current stack trace.
+        /// </summary>
+        /// <returns>StackTrace.</returns>
         public StackTrace GetCurrentStackTrace()
         {
             var stackTrace = DbgEngProxy.Execute("k");
@@ -20,12 +46,22 @@ namespace McFly
             return new StackTrace(frames);
         }
 
+        /// <summary>
+        ///     Gets the current stack trace.
+        /// </summary>
+        /// <param name="threadId">The thread identifier.</param>
+        /// <returns>StackTrace.</returns>
         public StackTrace GetCurrentStackTrace(int threadId)
         {
             var frames = GetStackFrames(threadId);
             return new StackTrace(frames);
         }
 
+        /// <summary>
+        ///     Gets the stack frames.
+        /// </summary>
+        /// <param name="threadId">The thread identifier.</param>
+        /// <returns>IEnumerable&lt;StackFrame&gt;.</returns>
         public IEnumerable<StackFrame> GetStackFrames(int threadId)
         {
             var command = $"~~[{threadId:X}] k";
@@ -33,6 +69,11 @@ namespace McFly
             return ExtractStackFrames(raw);
         }
 
+        /// <summary>
+        ///     Extracts the stack frames.
+        /// </summary>
+        /// <param name="stackTrace">The stack trace.</param>
+        /// <returns>IEnumerable&lt;StackFrame&gt;.</returns>
         private static IEnumerable<StackFrame> ExtractStackFrames(string stackTrace)
         {
             var stackFrames = (from m in Regex.Matches(stackTrace,

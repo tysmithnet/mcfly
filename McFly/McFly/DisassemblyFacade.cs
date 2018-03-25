@@ -1,4 +1,18 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tysmithnet
+// Created          : 03-18-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-19-2018
+// ***********************************************************************
+// <copyright file="DisassemblyFacade.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -6,17 +20,37 @@ using System.Text.RegularExpressions;
 
 namespace McFly
 {
+    /// <summary>
+    ///     Class DisassemblyFacade.
+    /// </summary>
+    /// <seealso cref="McFly.IDisassemblyFacade" />
     internal class DisassemblyFacade : IDisassemblyFacade
     {
+        /// <summary>
+        ///     Gets or sets the debug eng proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
         [Import]
         protected internal IDbgEngProxy DbgEngProxy { get; set; }
 
+        /// <summary>
+        ///     Gets the disassembly lines.
+        /// </summary>
+        /// <param name="numInstructions">The number instructions.</param>
+        /// <returns>IEnumerable&lt;DisassemblyLine&gt;.</returns>
         public IEnumerable<DisassemblyLine> GetDisassemblyLines(int numInstructions)
         {
             var threadId = DbgEngProxy.GetCurrentThreadId();
             return GetDisassemblyLines(threadId, numInstructions);
         }
 
+        /// <summary>
+        ///     Gets the disassembly lines.
+        /// </summary>
+        /// <param name="threadId">The thread identifier.</param>
+        /// <param name="numInstructions">The number instructions.</param>
+        /// <returns>IEnumerable&lt;DisassemblyLine&gt;.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Number of instructions must be > 0</exception>
         public IEnumerable<DisassemblyLine> GetDisassemblyLines(int threadId, int numInstructions)
         {
             if (numInstructions <= 0)

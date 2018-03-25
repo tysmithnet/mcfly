@@ -1,4 +1,18 @@
-﻿using System.ComponentModel.Composition.Hosting;
+﻿// ***********************************************************************
+// Assembly         : McFly.Server
+// Author           : @tysmithnet
+// Created          : 03-12-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-16-2018
+// ***********************************************************************
+// <copyright file="Startup.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -10,9 +24,16 @@ using Swashbuckle.Application;
 
 namespace McFly.Server
 {
+    /// <summary>
+    ///     Class Startup.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class Startup
     {
+        /// <summary>
+        ///     Configurations the specified application builder.
+        /// </summary>
+        /// <param name="appBuilder">The application builder.</param>
         public void Configuration(IAppBuilder appBuilder)
         {
             var config = new HttpConfiguration();

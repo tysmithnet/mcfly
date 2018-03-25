@@ -4,7 +4,7 @@
 // Created          : 03-06-2018
 //
 // Last Modified By : master
-// Last Modified On : 03-06-2018
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="SettingsMethod.cs" company="">
 //     Copyright ©  2018
@@ -27,16 +27,24 @@ namespace McFly
     public class SettingsMethod : IMcFlyMethod
     {
         /// <summary>
+        ///     Gets or sets all settings.
+        /// </summary>
+        /// <value>All settings.</value>
+        [ImportMany]
+        public ISettings[] AllSettings { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the debug eng proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
+        [Import]
+        public IDbgEngProxy DbgEngProxy { get; set; }
+
+        /// <summary>
         ///     Gets the name.
         /// </summary>
         /// <value>The name.</value>
         public string Name { get; } = "settings";
-
-        [ImportMany]
-        public ISettings[] AllSettings { get; set; }
-
-        [Import]
-        public IDbgEngProxy DbgEngProxy { get; set; }
 
         /// <summary>
         ///     Processes the specified arguments.
@@ -47,14 +55,11 @@ namespace McFly
         public void Process(string[] args)
         {
             Parser.Default.ParseArguments<ReloadOptions, ListOptions>(args)
-                .WithParsed<ReloadOptions>(r =>
-                {
-                    McFlyExtension.PopulateSettings();
-                })
+                .WithParsed<ReloadOptions>(r => { McFlyExtension.PopulateSettings(); })
                 .WithParsed<ListOptions>(l =>
                 {
                     foreach (var settings in AllSettings)
-                    {            
+                    {
                         DbgEngProxy.WriteLine(settings.GetType().FullName);
                         DbgEngProxy.WriteLine(JsonConvert.SerializeObject(settings, Formatting.Indented));
                     }
@@ -70,9 +75,11 @@ namespace McFly
     {
     }
 
+    /// <summary>
+    ///     Class ListOptions.
+    /// </summary>
     [Verb("list", HelpText = "List the current settings and their values")]
     public class ListOptions
     {
-        
     }
 }

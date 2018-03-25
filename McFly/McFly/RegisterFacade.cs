@@ -1,4 +1,18 @@
-﻿using System.Collections.Generic;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tysmithnet
+// Created          : 03-18-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-19-2018
+// ***********************************************************************
+// <copyright file="RegisterFacade.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -6,11 +20,19 @@ using McFly.Core;
 
 namespace McFly
 {
-    class RegisterFacade : IRegisterFacade
+    /// <summary>
+    ///     Class RegisterFacade.
+    /// </summary>
+    /// <seealso cref="McFly.IRegisterFacade" />
+    internal class RegisterFacade : IRegisterFacade
     {
+        /// <summary>
+        ///     Gets or sets the debug eng proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
         [Import]
         public IDbgEngProxy DbgEngProxy { get; set; }
-        
+
         /// <summary>
         ///     Gets the registers.
         /// </summary>
@@ -35,6 +57,11 @@ namespace McFly
             return registerSet;
         }
 
+        /// <summary>
+        ///     Gets the current register set.
+        /// </summary>
+        /// <param name="registers">The registers.</param>
+        /// <returns>RegisterSet.</returns>
         public RegisterSet GetCurrentRegisterSet(IEnumerable<Register> registers)
         {
             return GetCurrentRegisterSet(DbgEngProxy.GetCurrentThreadId(), registers);

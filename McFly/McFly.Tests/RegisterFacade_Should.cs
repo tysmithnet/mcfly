@@ -18,7 +18,6 @@ namespace McFly.Tests
             builder.WithThreadId(1);
             facade.DbgEngProxy = builder.Build();
 
-
             // act
             var registerSet = facade.GetCurrentRegisterSet(Register.AllRegisters64);
             var emptySet = facade.GetCurrentRegisterSet(new Register[0]);

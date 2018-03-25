@@ -88,7 +88,7 @@ namespace McFly.Core
 
         public static int ToInt(this uint uintValue)
         {
-            return unchecked((int)uintValue);
+            return unchecked((int) uintValue);
         }
     }
 }

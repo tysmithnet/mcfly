@@ -15,6 +15,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// The Core namespace.
+/// </summary>
 namespace McFly.Core
 {
     /// <summary>

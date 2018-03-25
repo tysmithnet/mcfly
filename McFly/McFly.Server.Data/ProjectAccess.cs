@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-15-2018
 // ***********************************************************************
 // <copyright file="ProjectsAccess.cs" company="McFly.Server.Data">
 //     Copyright (c) . All rights reserved.
@@ -36,6 +36,10 @@ namespace McFly.Server.Data
     [ExcludeFromCodeCoverage]
     public class ProjectsAccess : DataAccess, IProjectsAccess
     {
+        /// <summary>
+        ///     Gets the log.
+        /// </summary>
+        /// <value>The log.</value>
         private ILog Log { get; } = LogManager.GetLogger<ProjectsAccess>();
 
         /// <summary>
@@ -97,22 +101,19 @@ namespace McFly.Server.Data
                     var variableDefinitions = Regex.Matches(initScript, @":setvar (?<name>\w+) ""(?<val>.*)""");
 
                     foreach (Match match in variableDefinitions)
-                    {
                         initScript = initScript.Replace($@"$({match.Groups["name"].Value})", match.Groups["val"].Value);
-                    }
 
                     initScript = Regex.Replace(initScript, @":.*", "");
 
-                    var batches = Regex.Split(initScript, @"\s*GO\s*", RegexOptions.IgnoreCase).Where(x => !string.IsNullOrWhiteSpace(x));
+                    var batches = Regex.Split(initScript, @"\s*GO\s*", RegexOptions.IgnoreCase)
+                        .Where(x => !string.IsNullOrWhiteSpace(x));
 
                     foreach (var batch in batches)
-                    {
                         using (var createCommand = conn.CreateCommand())
                         {
-                            createCommand.CommandText = batch;  // todo: error handling
+                            createCommand.CommandText = batch; // todo: error handling
                             createCommand.ExecuteNonQuery();
                         }
-                    }
 
                     using (var infoCommand = conn.CreateCommand())
                     {

@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : master
-// Last Modified On : 03-10-2018
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="DbgEngProxy.cs" company="">
 //     Copyright ©  2018
@@ -31,14 +31,13 @@ namespace McFly
     [ExcludeFromCodeCoverage]
     public class DbgEngProxy : IDbgEngProxy, IDisposable
     {
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbgEngProxy" /> class.
         /// </summary>
         /// <param name="control">The control.</param>
         /// <param name="client">The client.</param>
         /// <param name="registers">The registers.</param>
-        /// <param name="systemObjects"></param>
+        /// <param name="systemObjects">The system objects.</param>
         public DbgEngProxy(IDebugControl6 control, IDebugClient5 client, IDebugRegisters2 registers,
             IDebugSystemObjects systemObjects)
         {
@@ -52,7 +51,11 @@ namespace McFly
                     .Length == 8;
         }
 
-        private IDebugSystemObjects SystemObjects { get; set; }
+        /// <summary>
+        ///     Gets or sets the system objects.
+        /// </summary>
+        /// <value>The system objects.</value>
+        private IDebugSystemObjects SystemObjects { get; }
 
         /// <summary>
         ///     Gets or sets the control.
@@ -104,7 +107,6 @@ namespace McFly
                 if (status == DEBUG_STATUS.BREAK)
                     break;
             }
-            
         }
 
         /// <summary>
@@ -118,6 +120,57 @@ namespace McFly
         }
 
         /// <summary>
+        ///     Writes the line to output
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public void Write(string message)
+        {
+            Control.ControlledOutput(DEBUG_OUTCTL.ALL_CLIENTS, DEBUG_OUTPUT.NORMAL, message);
+        }
+
+        /// <summary>
+        ///     Writes the line to output
+        /// </summary>
+        /// <param name="line">The line.</param>
+        public void WriteLine(string line)
+        {
+            Write($"{line}\n");
+        }
+
+        /// <summary>
+        ///     Gets the current thread identifier.
+        /// </summary>
+        /// <returns>System.Int32.</returns>
+        public int GetCurrentThreadId()
+        {
+            SystemObjects.GetCurrentThreadId(out var threadId);
+            return Convert.ToInt32(threadId);
+        }
+
+        /// <summary>
+        ///     Switches to thread.
+        /// </summary>
+        /// <param name="threadId">The thread identifier.</param>
+        public void SwitchToThread(int threadId)
+        {
+            SystemObjects.SetCurrentThreadId(threadId.ToUInt());
+        }
+
+        /// <summary>
+        ///     Gets a value indicating whether [is32 bit].
+        /// </summary>
+        /// <value><c>true</c> if [is32 bit]; otherwise, <c>false</c>.</value>
+        public bool Is32Bit { get; }
+
+        /// <summary>
+        ///     Disposes this instance.
+        /// </summary>
+        public void Dispose()
+        {
+            ExecuteWrapper?.Dispose();
+        }
+
+        /// <summary>
         ///     Gets the ending position
         /// </summary>
         /// <returns>Position.</returns>
@@ -127,35 +180,5 @@ namespace McFly
             var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
             return Position.Parse(endMatch.Groups["pos"].Value);
         }
-
-        public void Write(string message)
-        {
-            Control.ControlledOutput(DEBUG_OUTCTL.ALL_CLIENTS, DEBUG_OUTPUT.NORMAL, message);
-        }
-
-        public void WriteLine(string line)
-        {
-            Write($"{line}\n");
-        }
-        public int GetCurrentThreadId()
-        {
-            SystemObjects.GetCurrentThreadId(out var threadId);
-            return Convert.ToInt32(threadId);
-        }
-
-        public void SwitchToThread(int threadId)
-        {
-            SystemObjects.SetCurrentThreadId(threadId.ToUInt());
-        }
-
-        public bool Is32Bit { get; }
-       
-        /// <summary>
-        ///     Disposes this instance.
-        /// </summary>
-        public void Dispose()
-        {
-            ExecuteWrapper?.Dispose();
-        }    
     }
 }

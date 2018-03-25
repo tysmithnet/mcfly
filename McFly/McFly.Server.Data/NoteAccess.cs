@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-12-2018
 // ***********************************************************************
 // <copyright file="NoteAccess.cs" company="McFly.Server.Data">
 //     Copyright (c) . All rights reserved.
@@ -23,9 +23,14 @@ namespace McFly.Server.Data
     /// <seealso cref="McFly.Server.Data.INoteAccess" />
     public class NoteAccess : DataAccess, INoteAccess
     {
+        /// <summary>
+        ///     Adds a note to a thread position
+        /// </summary>
+        /// <param name="position">The position.</param>
+        /// <param name="threadId">The thread identifier.</param>
+        /// <param name="text">The text.</param>
         public void AddNote(Position position, int threadId, string text)
         {
-            
         }
     }
 }

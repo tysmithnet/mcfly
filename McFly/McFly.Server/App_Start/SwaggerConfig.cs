@@ -1,3 +1,16 @@
+// ***********************************************************************
+// Assembly         : McFly.Server
+// Author           : @tysmithnet
+// Created          : 03-15-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-15-2018
+// ***********************************************************************
+// <copyright file="SwaggerConfig.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System.Diagnostics.CodeAnalysis;
 using System.Web.Http;
 using WebActivatorEx;
@@ -8,9 +21,15 @@ using Swashbuckle.Application;
 
 namespace McFly.Server
 {
+    /// <summary>
+    /// Class SwaggerConfig.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class SwaggerConfig
     {
+        /// <summary>
+        /// Registers this instance.
+        /// </summary>
         public static void Register()
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;

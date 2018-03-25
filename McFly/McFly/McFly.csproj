@@ -147,7 +147,7 @@
     <Compile Include="DefaultLog.cs" />
     <Compile Include="DisassemblyFacade.cs" />
     <Compile Include="ExecuteWrapper.cs" />
-    <Compile Include="HRESULT.cs" />
+    <Compile Include="Debugger\HRESULT.cs" />
     <Compile Include="HttpFacade.cs" />
     <Compile Include="IBreakpointFacade.cs" />
     <Compile Include="IDbgEngProxy.cs" />

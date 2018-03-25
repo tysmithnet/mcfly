@@ -6,7 +6,7 @@ namespace McFly.Server.Test
 {
     public class ProjectAccessBuilder
     {
-        internal Mock<IProjectsAccess> Mock { get; set; }= new Mock<IProjectsAccess>();
+        internal Mock<IProjectsAccess> Mock { get; set; } = new Mock<IProjectsAccess>();
 
         public ProjectAccessBuilder WhenGetDatabases(IEnumerable<string> databases)
         {

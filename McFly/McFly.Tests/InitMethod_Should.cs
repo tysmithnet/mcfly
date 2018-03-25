@@ -21,7 +21,7 @@ namespace McFly.Tests
             initMethod.ServerClient = clientBuilder.Build();
             initMethod.Settings = new Settings
             {
-                ServerUrl = "http://localhost:5000",
+                ServerUrl = "http://localhost:5000"
             };
 
             // act

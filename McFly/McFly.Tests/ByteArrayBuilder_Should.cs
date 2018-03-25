@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 
@@ -39,7 +35,6 @@ namespace McFly.Tests
             // assert
             badInput.Should().Throw<FormatException>("Only hex characters and x are allowed");
             wrongLength.Should().Throw<FormatException>("Bytes must all come in pairs");
-
         }
     }
 }

@@ -17,15 +17,17 @@ namespace McFly.Tests
 00007ffa`5131554b 498d8630010000  lea     rax,[r14+130h]
 ");
             var facade = new DisassemblyFacade {DbgEngProxy = builder.Build()};
-            var expected = new []
-            {   
-                new DisassemblyLine(0x00007ffa51315543, ByteArrayBuilder.StringToByteArray("6645898632010000"), "mov", "word ptr [r14+132h],r8w"),
-                new DisassemblyLine(0x00007ffa5131554b, ByteArrayBuilder.StringToByteArray("498d8630010000"), "lea", "rax,[r14+130h]"),
+            var expected = new[]
+            {
+                new DisassemblyLine(0x00007ffa51315543, ByteArrayBuilder.StringToByteArray("6645898632010000"), "mov",
+                    "word ptr [r14+132h],r8w"),
+                new DisassemblyLine(0x00007ffa5131554b, ByteArrayBuilder.StringToByteArray("498d8630010000"), "lea",
+                    "rax,[r14+130h]")
             };
 
             // act
             var lines = facade.GetDisassemblyLines(2);
-            
+
             // assert
             lines.Should().Equal(expected);
         }
@@ -36,7 +38,7 @@ namespace McFly.Tests
             // arrange
             var facade = new DisassemblyFacade();
             Action shouldThrow = () => facade.GetDisassemblyLines(1, -1);
-            
+
             // act
             // assert
             shouldThrow.Should().Throw<ArgumentOutOfRangeException>();

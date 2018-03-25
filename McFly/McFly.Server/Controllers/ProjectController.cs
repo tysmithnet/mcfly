@@ -4,7 +4,7 @@
 // Created          : 03-03-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-16-2018
 // ***********************************************************************
 // <copyright file="ProjectsController.cs" company="McFly.Server">
 //     Copyright (c) . All rights reserved.
@@ -14,24 +14,27 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Text;
 using System.Web.Http;
 using System.Web.Http.Results;
 using McFly.Core;
 using McFly.Server.Data;
-using Newtonsoft.Json;
 
 namespace McFly.Server.Controllers
 {
     /// <summary>
     ///     Class ProjectsController.
     /// </summary>
+    /// <seealso cref="System.Web.Http.ApiController" />
     /// <seealso cref="Controller" />
     [Export(typeof(ProjectController))]
     [Route("api/project")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ProjectController : ApiController
     {
+        /// <summary>
+        ///     Gets or sets the projects access.
+        /// </summary>
+        /// <value>The projects access.</value>
         [Import]
         protected internal IProjectsAccess ProjectsAccess { get; set; }
 
@@ -49,14 +52,13 @@ namespace McFly.Server.Controllers
         /// <summary>
         ///     Posts the specified project name.
         /// </summary>
-        /// <param name="projectName">Name of the project.</param>
-        /// <param name="startingPosition">The start frame.</param>
-        /// <param name="endingPosition">The end frame.</param>
+        /// <param name="request">The request.</param>
         /// <returns>ActionResult.</returns>
         [HttpPost]
-        public IHttpActionResult Post([FromBody]NewProjectRequestDto request)
+        public IHttpActionResult Post([FromBody] NewProjectRequestDto request)
         {
-            ProjectsAccess.CreateProject(request.ProjectName, Position.Parse(request.StartingPosition), Position.Parse(request.EndingPosition));
+            ProjectsAccess.CreateProject(request.ProjectName, Position.Parse(request.StartingPosition),
+                Position.Parse(request.EndingPosition));
             return Ok();
         }
     }

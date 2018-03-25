@@ -11,7 +11,8 @@ namespace McFly.Core.Tests
         [InlineData("rbx", "10", 10, 10, "Base 10 means the input is interpretted as dec chars")]
         [InlineData("rcx", "10", 8, 8, "Base 8 means the input is interpretted as oct chars")]
         [InlineData("rdx", "10", 2, 2, "Base 2 means the input is interpretted as bin chars")]
-        public void Process_64_Bit_Register_Input_Correctly(string register, string input, int radix, ulong expected, string because)
+        public void Process_64_Bit_Register_Input_Correctly(string register, string input, int radix, ulong expected,
+            string because)
         {
             // arrange
             var registerSet = new RegisterSet();
@@ -38,12 +39,24 @@ namespace McFly.Core.Tests
         }
 
         [Fact]
+        public void Have_Correct_Register_Num_Bits()
+        {
+            // arrange
+            // act
+            // assert
+            Register.Rax.NumBits.Should().Be(64);
+            Register.Rbx.NumBits.Should().Be(64);
+            Register.Rcx.NumBits.Should().Be(64);
+            Register.Rdx.NumBits.Should().Be(64);
+        }
+
+        [Fact]
         public void Process_32_Bit_Register_Input_Correctly()
         {
             // arrange
             var registerSet = new RegisterSet();
-            uint ones32 = 0xffffffff;
-            uint half = 0x00000000ffffffff;
+            var ones32 = 0xffffffff;
+            var half = 0x00000000ffffffff;
 
             // act
             // assert
@@ -73,8 +86,8 @@ namespace McFly.Core.Tests
         {
             // arrange
             var reg = new RegisterSet();
-            
-            uint low32Before = 0x89abcdef;
+
+            var low32Before = 0x89abcdef;
             uint high32Before = 0x01234567;
             ulong before = 0x0123456789abcdef;
             ulong after = 0x0123456700000000;
@@ -110,20 +123,11 @@ namespace McFly.Core.Tests
             var registerSet = new RegisterSet();
             Action throws = () => registerSet.Process(null, "0", 16);
             Action throws2 = () => registerSet.Process("rax", "hello", 16);
-            
+
             // act
             // assert
             throws.Should().Throw<ArgumentNullException>("Register cannot be null");
             throws2.Should().Throw<FormatException>("hello is not a valid hex string");
-        }
-
-        [Fact]
-        public void Have_Correct_Register_Num_Bits()
-        {
-            Register.Rax.NumBits.Should().Be(64);
-            Register.Rbx.NumBits.Should().Be(64);
-            Register.Rcx.NumBits.Should().Be(64);
-            Register.Rdx.NumBits.Should().Be(64);
         }
     }
 }

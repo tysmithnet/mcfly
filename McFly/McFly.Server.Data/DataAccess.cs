@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-12-2018
 // ***********************************************************************
 // <copyright file="DataAccess.cs" company="McFly.Server.Data">
 //     Copyright (c) . All rights reserved.
@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;

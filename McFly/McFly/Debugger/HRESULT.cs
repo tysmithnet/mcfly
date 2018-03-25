@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace McFly
+namespace McFly.Debugger
 {
     /// <summary>
     ///     Enum HRESULT

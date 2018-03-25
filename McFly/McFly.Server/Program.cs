@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-15-2018
 // ***********************************************************************
 // <copyright file="Program.cs" company="McFly.Server">
 //     Copyright (c) . All rights reserved.
@@ -14,11 +14,8 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Net.Http;
-using System.Web.Http;
 using McFly.Server.Data;
 using Microsoft.Owin.Hosting;
-using Swashbuckle.Application;
 
 namespace McFly.Server
 {
@@ -36,13 +33,13 @@ namespace McFly.Server
         {
             DataAccess.ConnectionString = //Environment.GetEnvironmentVariable("ConnectionString");
                 "Data Source=localhost;Integrated Security=true";
-            string baseAddress = "http://localhost:5000/";
+            var baseAddress = "http://localhost:5000/";
 
             // Start OWIN host 
-            using (WebApp.Start<Startup>(url: baseAddress))
+            using (WebApp.Start<Startup>(baseAddress))
             {
                 // Create HttpCient and make a request to api/values 
-                
+
                 Console.ReadLine();
             }
         }

@@ -4,7 +4,7 @@
 // Created          : 02-28-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-09-2018
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="RegisterSet.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -22,46 +22,6 @@ namespace McFly.Core
     /// </summary>
     public class RegisterSet
     {
-        public void Clear()
-        {
-            _rax = _rbx = _rcx = _rdx = 0;
-        }
-
-        protected bool Equals(RegisterSet other)
-        {
-            return _rax == other._rax && _rbx == other._rbx && _rcx == other._rcx && _rdx == other._rdx;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((RegisterSet) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = _rax.GetHashCode();
-                hashCode = (hashCode * 397) ^ _rbx.GetHashCode();
-                hashCode = (hashCode * 397) ^ _rcx.GetHashCode();
-                hashCode = (hashCode * 397) ^ _rdx.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        public static bool operator ==(RegisterSet left, RegisterSet right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(RegisterSet left, RegisterSet right)
-        {
-            return !Equals(left, right);
-        }
-
         /// <summary>
         ///     The rax
         /// </summary>
@@ -163,11 +123,86 @@ namespace McFly.Core
         }
 
         /// <summary>
+        ///     Clears this instance.
+        /// </summary>
+        public void Clear()
+        {
+            _rax = _rbx = _rcx = _rdx = 0;
+        }
+
+        /// <summary>
+        ///     Equalses the specified other.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        protected bool Equals(RegisterSet other)
+        {
+            return _rax == other._rax && _rbx == other._rbx && _rcx == other._rcx && _rdx == other._rdx;
+        }
+
+        /// <summary>
+        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((RegisterSet) obj);
+        }
+
+        /// <summary>
+        ///     Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = _rax.GetHashCode();
+                hashCode = (hashCode * 397) ^ _rbx.GetHashCode();
+                hashCode = (hashCode * 397) ^ _rcx.GetHashCode();
+                hashCode = (hashCode * 397) ^ _rdx.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        /// <summary>
+        ///     Implements the == operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator ==(RegisterSet left, RegisterSet right)
+        {
+            return Equals(left, right);
+        }
+
+        /// <summary>
+        ///     Implements the != operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator !=(RegisterSet left, RegisterSet right)
+        {
+            return !Equals(left, right);
+        }
+
+        /// <summary>
         ///     Processes the specified register.
         /// </summary>
         /// <param name="register">The register.</param>
         /// <param name="input">The input.</param>
         /// <param name="radix">The radix.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     register
+        ///     or
+        ///     input
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">register</exception>
         /// <exception cref="System.ArgumentNullException">
         ///     register
         ///     or
@@ -179,7 +214,8 @@ namespace McFly.Core
             register = register ?? throw new ArgumentNullException(nameof(register));
             input = input ?? throw new ArgumentNullException(nameof(input));
 
-            var first = Register.AllRegisters.FirstOrDefault(x => x.Name.Equals(register, StringComparison.OrdinalIgnoreCase));
+            var first = Register.AllRegisters.FirstOrDefault(x =>
+                x.Name.Equals(register, StringComparison.OrdinalIgnoreCase));
             if (first == null) return;
             switch (first.Name.ToLower())
             {

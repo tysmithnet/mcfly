@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-12-2018
 // ***********************************************************************
 // <copyright file="IFrameAccess.cs" company="McFly.Server.Data">
 //     Copyright (c) . All rights reserved.
@@ -26,7 +26,7 @@ namespace McFly.Server.Data
         ///     Upserts the frame.
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
-        /// <param name="frame">The frame.</param>
+        /// <param name="frames">The frames.</param>
         void UpsertFrames(string projectName, IEnumerable<Frame> frames);
     }
 }
