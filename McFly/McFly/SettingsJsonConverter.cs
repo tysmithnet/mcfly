@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -23,6 +24,7 @@ namespace McFly
     ///     Class SettingsJsonConverter.
     /// </summary>
     /// <seealso cref="Newtonsoft.Json.JsonConverter{System.Collections.Generic.IEnumerable{McFly.ISettings}}" />
+    [ExcludeFromCodeCoverage]
     internal class SettingsJsonConverter : JsonConverter<IEnumerable<ISettings>>
     {
         /// <summary>

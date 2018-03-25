@@ -46,7 +46,7 @@ namespace McFly
 
         public void AddNote(Position position, int threadId, string text)
         {
-            var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/frame/{Settings.ProjectName}"};
+            var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/note/{Settings.ProjectName}"};
 
             var d = new Dictionary<string, string>
             {

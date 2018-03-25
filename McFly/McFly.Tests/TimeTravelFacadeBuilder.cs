@@ -108,6 +108,12 @@ namespace McFly.Tests
             return this;
         }
 
+        public HttpFacadeBuilder WithPostJsonAsync(HttpResponseMessage result)
+        {
+            Mock.Setup(facade => facade.PostJsonAsync(It.IsAny<Uri>(), It.IsAny<object>())).Returns(Task.FromResult(result));
+            return this;
+        }
+
         public IHttpFacade Build()
         {
             return Mock.Object;

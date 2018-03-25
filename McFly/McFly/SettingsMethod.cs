@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using CommandLine;
 using Newtonsoft.Json;
 
@@ -42,6 +43,7 @@ namespace McFly
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
+        [ExcludeFromCodeCoverage]
         public void Process(string[] args)
         {
             Parser.Default.ParseArguments<ReloadOptions, ListOptions>(args)
