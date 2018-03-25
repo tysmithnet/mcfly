@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Server", "McFly.Serve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Server.Test", "McFly.Server.Test\McFly.Server.Test.csproj", "{58CF9D9E-9B6D-4F70-8512-1CE2E5302298}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{92D6D3BD-CD00-4934-AD70-2FBD4097DCF0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "McFly.Samples.Console.HelloWorld", "McFly.Samples.Console.HelloWorld\McFly.Samples.Console.HelloWorld.vcxproj", "{656DC886-8AC7-4AED-896A-E9E105EF5BD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +133,16 @@ Global
 		{58CF9D9E-9B6D-4F70-8512-1CE2E5302298}.Release|x64.Build.0 = Release|Any CPU
 		{58CF9D9E-9B6D-4F70-8512-1CE2E5302298}.Release|x86.ActiveCfg = Release|Any CPU
 		{58CF9D9E-9B6D-4F70-8512-1CE2E5302298}.Release|x86.Build.0 = Release|Any CPU
+		{656DC886-8AC7-4AED-896A-E9E105EF5BD7}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{656DC886-8AC7-4AED-896A-E9E105EF5BD7}.Debug|x64.ActiveCfg = Debug|x64
+		{656DC886-8AC7-4AED-896A-E9E105EF5BD7}.Debug|x64.Build.0 = Debug|x64
+		{656DC886-8AC7-4AED-896A-E9E105EF5BD7}.Debug|x86.ActiveCfg = Debug|Win32
+		{656DC886-8AC7-4AED-896A-E9E105EF5BD7}.Debug|x86.Build.0 = Debug|Win32
+		{656DC886-8AC7-4AED-896A-E9E105EF5BD7}.Release|Any CPU.ActiveCfg = Release|Win32
+		{656DC886-8AC7-4AED-896A-E9E105EF5BD7}.Release|x64.ActiveCfg = Release|x64
+		{656DC886-8AC7-4AED-896A-E9E105EF5BD7}.Release|x64.Build.0 = Release|x64
+		{656DC886-8AC7-4AED-896A-E9E105EF5BD7}.Release|x86.ActiveCfg = Release|Win32
+		{656DC886-8AC7-4AED-896A-E9E105EF5BD7}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +154,7 @@ Global
 		{DFDEC1CA-5A5C-4FC6-8C7B-11C777C396DC} = {FE35C142-4CD6-4249-A34A-BAACDE54B444}
 		{EFF4A343-5729-4705-BCC5-F4531C54A672} = {FE35C142-4CD6-4249-A34A-BAACDE54B444}
 		{58CF9D9E-9B6D-4F70-8512-1CE2E5302298} = {FE35C142-4CD6-4249-A34A-BAACDE54B444}
+		{656DC886-8AC7-4AED-896A-E9E105EF5BD7} = {92D6D3BD-CD00-4934-AD70-2FBD4097DCF0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4975AD4B-1EDB-4156-84B5-3335487BF604}
