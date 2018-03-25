@@ -76,6 +76,7 @@ namespace McFly
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
+        [ExcludeFromCodeCoverage]
         public void Process(string[] args)
         {
             // todo: handle help
@@ -104,7 +105,7 @@ namespace McFly
             if (options == null || options.Start == null)
                 return TimeTravelFacade.GetStartingPosition();
             if (!Position.TryParse(options.Start, out var startingPosition))
-                startingPosition = new Position(0, 0);
+                throw new FormatException($"Invalid position passed to Start option: {options.Start}");
             return startingPosition;
         }
 
@@ -115,10 +116,10 @@ namespace McFly
         /// <returns>Position.</returns>
         protected internal Position GetEndingPosition(IndexOptions options)
         {
-            if (options == null || options.Start == null)
+            if (options == null || options.End == null)
                 return TimeTravelFacade.GetEndingPosition();
             if (!Position.TryParse(options.End, out var endingPosition))
-                endingPosition = TimeTravelFacade.GetEndingPosition();
+                throw new FormatException($"Invalid position passed to End option: {options.End}");
             return endingPosition;
         }
 

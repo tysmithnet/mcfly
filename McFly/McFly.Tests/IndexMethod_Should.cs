@@ -83,31 +83,45 @@ namespace McFly.Tests
             var options = new IndexOptions
             {
                 Start = "35:1"
-            };
-            var invalidStartOptions = new IndexOptions
-            {
-                Start = "hello there"
-            };
+            };                                      
 
             var dbg = new DbgEngProxyBuilder();
             var indexMethod = new IndexMethod();
             indexMethod.DbgEngProxy = dbg.Build();
             var builder = new TimeTravelFacadeBuilder(dbg);
             builder.WithGetStartingPosition(new Position(0x35, 0));
-            indexMethod.TimeTravelFacade = builder.Build();
-            var nullStartingPosition = indexMethod.GetStartingPosition(null);
+            indexMethod.TimeTravelFacade = builder.Build();                     
 
             // Act
-            var startingPosition = indexMethod.GetStartingPosition(options);
-            var invalidStartPosition = indexMethod.GetStartingPosition(invalidStartOptions);
+            var startingPosition = indexMethod.GetStartingPosition(options);                 
 
             // Assert
             startingPosition.Should().Be(new Position(0x35, 1),
+                "35:1 means that the high portion is 35 and the low portion is 1");   
+        }
+
+        [Fact]
+        public void Identify_Correct_Ending_Position()
+        {
+            // Arrange                             
+            var options = new IndexOptions
+            {
+                End = "35:1"
+            };
+
+            var dbg = new DbgEngProxyBuilder();
+            var indexMethod = new IndexMethod();
+            indexMethod.DbgEngProxy = dbg.Build();
+            var builder = new TimeTravelFacadeBuilder(dbg);
+            builder.WithGetEndingPosition(new Position(0x35, 5));
+            indexMethod.TimeTravelFacade = builder.Build();
+
+            // Act
+            var endingPosition = indexMethod.GetEndingPosition(options);
+
+            // Assert
+            endingPosition.Should().Be(new Position(0x35, 1),
                 "35:1 means that the high portion is 35 and the low portion is 1");
-            invalidStartPosition.Should().Be(new Position(0, 0),
-                "Any invalid input should result in a default position of 0:0");
-            nullStartingPosition.Should().Be(new Position(0x35, 0),
-                "No starting position in the options means use the proxy's value");
         }
 
         [Fact]

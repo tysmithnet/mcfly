@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using McFly.Core;
 using Moq;
 using MoreLinq;
@@ -90,6 +92,23 @@ namespace McFly.Tests
         }
 
         public ITimeTravelFacade Build()
+        {
+            return Mock.Object;
+        }
+    }
+
+    internal class HttpFacadeBuilder
+    {
+        public Mock<IHttpFacade> Mock = new Mock<IHttpFacade>();
+
+        public HttpFacadeBuilder WithPostAsync(HttpResponseMessage result)
+        {
+            Mock.Setup(facade => facade.PostAsync(It.IsAny<Uri>(), It.IsAny<byte[]>())).Returns(Task.FromResult(result));
+            Mock.Setup(facade => facade.PostAsync(It.IsAny<Uri>(), It.IsAny<Dictionary<string,string>>())).Returns(Task.FromResult(result));
+            return this;
+        }
+
+        public IHttpFacade Build()
         {
             return Mock.Object;
         }

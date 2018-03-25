@@ -189,9 +189,11 @@
     <Compile Include="DisassemblyFacade.cs" />
     <Compile Include="ExecuteWrapper.cs" />
     <Compile Include="HRESULT.cs" />
+    <Compile Include="HttpFacade.cs" />
     <Compile Include="IBreakpointFacade.cs" />
     <Compile Include="IDbgEngProxy.cs" />
     <Compile Include="IDisassemblyFacade.cs" />
+    <Compile Include="IHttpFacade.cs" />
     <Compile Include="IInjectable.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IMcFlyMethod.cs" />
