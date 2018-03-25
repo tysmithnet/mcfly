@@ -149,13 +149,7 @@ namespace McFly
         }
 
         public bool Is32Bit { get; }
-        public event EventHandler<BreakpointHitEventArgs> BreakpointHit;
-
-        protected virtual void OnBreakpointHit(BreakpointHitEventArgs args)
-        {
-            BreakpointHit?.Invoke(this, args);
-        }
-
+       
         /// <summary>
         ///     Disposes this instance.
         /// </summary>

@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BreakpointFacade.cs" />
+    <Compile Include="BreakpointHitEventArgs.cs" />
     <Compile Include="ByteArrayBuilder.cs" />
     <Compile Include="DbgEngProxy.cs" />
     <Compile Include="Debugger\Enums.cs" />

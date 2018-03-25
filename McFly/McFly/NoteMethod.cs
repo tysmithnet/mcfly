@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using CommandLine;
 
 namespace McFly
 {
+    [ExcludeFromCodeCoverage]
     internal class NoteMethod : IMcFlyMethod
     {
         public string Name { get; } = "note";

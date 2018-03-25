@@ -14,6 +14,7 @@
 
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace McFly
@@ -57,6 +58,7 @@ namespace McFly
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
+        [ExcludeFromCodeCoverage]
         public void Process(string[] args)
         {
             if (string.IsNullOrWhiteSpace(Settings.ServerExePath))
