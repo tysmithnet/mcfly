@@ -31,7 +31,7 @@ namespace McFly
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        public IDbgEngProxy DbgEngProxy { get; set; }
+        public IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
         ///     Gets the registers.
@@ -46,10 +46,10 @@ namespace McFly
                 return new RegisterSet();
             var registerSet = new RegisterSet();
             var registerNames = string.Join(",", list.Select(x => x.Name));
-            var registerText = DbgEngProxy.Execute($"~~[{threadId:X}] r {registerNames}");
+            var registerText = DebugEngineProxy.Execute(threadId, $"r {registerNames}");
             foreach (var register in list)
             {
-                var numChars = DbgEngProxy.Is32Bit ? 8 : 16;
+                var numChars = DebugEngineProxy.Is32Bit ? 8 : 16;
                 var match = Regex.Match(registerText, $"{register.Name}=(?<val>[a-fA-F0-9]{{{numChars}}})");
                 var val = match.Groups["val"].Value;
                 registerSet.Process(register.Name, val, 16);
@@ -64,7 +64,7 @@ namespace McFly
         /// <returns>RegisterSet.</returns>
         public RegisterSet GetCurrentRegisterSet(IEnumerable<Register> registers)
         {
-            return GetCurrentRegisterSet(DbgEngProxy.GetCurrentThreadId(), registers);
+            return GetCurrentRegisterSet(DebugEngineProxy.GetCurrentThreadId(), registers);
         }
     }
 }

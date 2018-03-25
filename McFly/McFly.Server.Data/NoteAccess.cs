@@ -17,7 +17,7 @@ using McFly.Core;
 namespace McFly.Server.Data
 {
     /// <summary>
-    ///     Class NoteAccess.
+    ///     INoteAccess implementation that uses SQL Server
     /// </summary>
     /// <seealso cref="McFly.Server.Data.DataAccess" />
     /// <seealso cref="McFly.Server.Data.INoteAccess" />

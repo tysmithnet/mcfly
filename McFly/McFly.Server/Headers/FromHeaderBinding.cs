@@ -26,7 +26,7 @@ using System.Web.Http.Metadata;
 namespace McFly.Server.Headers
 {
     /// <summary>
-    ///     Class FromHeaderBinding.
+    ///     Binding for the from header attribute
     /// </summary>
     /// <seealso cref="System.Web.Http.Controllers.HttpParameterBinding" />
     public class FromHeaderBinding : HttpParameterBinding

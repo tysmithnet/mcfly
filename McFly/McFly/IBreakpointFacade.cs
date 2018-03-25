@@ -15,7 +15,7 @@
 namespace McFly
 {
     /// <summary>
-    ///     Interface IBreakpointFacade
+    ///     Facade over managing breakpoints
     /// </summary>
     public interface IBreakpointFacade
     {

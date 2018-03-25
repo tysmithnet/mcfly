@@ -18,7 +18,7 @@ namespace McFly
     ///     Interface IDbgEngProxy
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
-    public interface IDbgEngProxy : IInjectable
+    public interface IDebugEngineProxy : IInjectable
     {
         /// <summary>
         ///     Gets a value indicating whether [is32 bit].
@@ -61,5 +61,13 @@ namespace McFly
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         void SwitchToThread(int threadId);
+
+        /// <summary>
+        /// Executes a command on the specified thread id
+        /// </summary>
+        /// <param name="threadId">The thread identifier.</param>
+        /// <param name="command">The v.</param>
+        /// <returns>System.String.</returns>
+        string Execute(int threadId, string command);
     }
 }

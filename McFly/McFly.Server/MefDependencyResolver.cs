@@ -21,7 +21,7 @@ using System.Web.Http.Dependencies;
 namespace McFly.Server
 {
     /// <summary>
-    ///     Class MefDependencyResolver.
+    ///     Dependency resolver that uses MEF as its container functionality
     /// </summary>
     /// <seealso cref="System.Web.Http.Dependencies.IDependencyResolver" />
     public class MefDependencyResolver : IDependencyResolver

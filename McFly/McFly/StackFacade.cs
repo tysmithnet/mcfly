@@ -33,7 +33,7 @@ namespace McFly
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        protected internal IDbgEngProxy DbgEngProxy { get; set; }
+        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
         ///     Gets the current stack trace.
@@ -41,7 +41,7 @@ namespace McFly
         /// <returns>StackTrace.</returns>
         public StackTrace GetCurrentStackTrace()
         {
-            var stackTrace = DbgEngProxy.Execute("k");
+            var stackTrace = DebugEngineProxy.Execute("k");
             var frames = ExtractStackFrames(stackTrace);
             return new StackTrace(frames);
         }
@@ -64,8 +64,8 @@ namespace McFly
         /// <returns>IEnumerable&lt;StackFrame&gt;.</returns>
         public IEnumerable<StackFrame> GetStackFrames(int threadId)
         {
-            var command = $"~~[{threadId:X}] k";
-            var raw = DbgEngProxy.Execute(command);
+            var command = $"k";
+            var raw = DebugEngineProxy.Execute(threadId, command);
             return ExtractStackFrames(raw);
         }
 

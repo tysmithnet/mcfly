@@ -277,9 +277,9 @@ namespace McFly
                     var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
                     var typeCatalog = new TypeCatalog(types);
                     compositionContainer = new CompositionContainer(typeCatalog);
-                    var dbgEng = new DbgEngProxy(control, client, registers, systemObjects);
+                    var dbgEng = new DebugEngineProxy(control, client, registers, systemObjects);
 
-                    compositionContainer.ComposeExportedValue<IDbgEngProxy>(dbgEng);
+                    compositionContainer.ComposeExportedValue<IDebugEngineProxy>(dbgEng);
                     compositionContainer.ComposeExportedValue(log);
                     PopulateSettings();
                     app = compositionContainer.GetExportedValue<McFlyApp>();

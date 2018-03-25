@@ -19,7 +19,7 @@ using System.Text.RegularExpressions;
 namespace McFly
 {
     /// <summary>
-    ///     Class ByteArrayBuilder.
+    ///     Builder object for byte arrays
     /// </summary>
     public class ByteArrayBuilder
     {
@@ -68,7 +68,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Builds this instance.
+        ///     Builds a new array based on this builders internal representation.
         /// </summary>
         /// <returns>System.Byte[].</returns>
         public byte[] Build()

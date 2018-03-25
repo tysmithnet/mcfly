@@ -31,7 +31,7 @@ namespace McFly.Tests
         public void Identify_32_And_64_Bit_Arch()
         {
             // Arrange
-            var builder = new DbgEngProxyBuilder();
+            var builder = new DebugEngineProxyBuilder();
             builder.WithExecuteResult("!peb", @"PEB at 00000000003b9000
     InheritedAddressSpace:    No
     ReadImageFileExecOptions: No
@@ -42,7 +42,7 @@ namespace McFly.Tests
 
             // Act
             var indexMethod = new IndexMethod();
-            indexMethod.DbgEngProxy = builder.Build();
+            indexMethod.DebugEngineProxy = builder.Build();
             var is32 = indexMethod.Is32Bit();
 
             // Assert
@@ -58,9 +58,9 @@ namespace McFly.Tests
                 End = "35:1"
             };
 
-            var dbg = new DbgEngProxyBuilder();
+            var dbg = new DebugEngineProxyBuilder();
             var indexMethod = new IndexMethod();
-            indexMethod.DbgEngProxy = dbg.Build();
+            indexMethod.DebugEngineProxy = dbg.Build();
             var builder = new TimeTravelFacadeBuilder(dbg);
             builder.WithGetEndingPosition(new Position(0x35, 5));
             indexMethod.TimeTravelFacade = builder.Build();
@@ -82,9 +82,9 @@ namespace McFly.Tests
                 Start = "35:1"
             };
 
-            var dbg = new DbgEngProxyBuilder();
+            var dbg = new DebugEngineProxyBuilder();
             var indexMethod = new IndexMethod();
-            indexMethod.DbgEngProxy = dbg.Build();
+            indexMethod.DebugEngineProxy = dbg.Build();
             var builder = new TimeTravelFacadeBuilder(dbg);
             builder.WithGetStartingPosition(new Position(0x35, 0));
             indexMethod.TimeTravelFacade = builder.Build();
@@ -127,7 +127,7 @@ namespace McFly.Tests
         [Fact]
         public void Upsert_Frames_From_Breaks()
         {
-            var dbg = new DbgEngProxyBuilder();
+            var dbg = new DebugEngineProxyBuilder();
             var tt = new TimeTravelFacadeBuilder(dbg);
             var sc = new ServerClientBuilder();
 
@@ -148,7 +148,7 @@ namespace McFly.Tests
 
             var indexMethod = new IndexMethod
             {
-                DbgEngProxy = dbgEngProxy,
+                DebugEngineProxy = dbgEngProxy,
                 TimeTravelFacade = timeTravelFacade,
                 ServerClient = serverClient
             };

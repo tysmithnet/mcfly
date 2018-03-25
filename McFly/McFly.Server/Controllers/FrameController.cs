@@ -23,7 +23,7 @@ using McFly.Server.Headers;
 namespace McFly.Server.Controllers
 {
     /// <summary>
-    ///     Class FrameController.
+    ///    Represents the business logic behind the frame api
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     /// <seealso cref="System.Web.Mvc.Controller" />
@@ -45,7 +45,7 @@ namespace McFly.Server.Controllers
         protected internal IFrameAccess FrameAccess { get; set; }
 
         /// <summary>
-        ///     Posts the specified project name.
+        ///     Adds frames to a project's collection
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="frames">The frames.</param>

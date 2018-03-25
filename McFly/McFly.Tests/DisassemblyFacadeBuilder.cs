@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System.Collections.Generic;
+using McFly.Core;
 using Moq;
 
 namespace McFly.Tests

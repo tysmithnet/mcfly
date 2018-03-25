@@ -4,7 +4,7 @@
 // Created          : 02-27-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-08-2018
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="Register.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -15,13 +15,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-/// <summary>
-/// The Core namespace.
-/// </summary>
 namespace McFly.Core
 {
     /// <summary>
-    ///     Class Register.
+    ///     Typesafe Enum for Registers in the CPU
     /// </summary>
     public abstract class Register
     {
@@ -36,18 +33,26 @@ namespace McFly.Core
             CoreUserRegisters64 = new[] {Rax, Rbx, Rcx, Rdx};
         }
 
+        /// <summary>
+        ///     Gets all 32 bit registers.
+        /// </summary>
+        /// <value>All registers32.</value>
         public static Register[] AllRegisters32 { get; }
 
+        /// <summary>
+        ///     Gets all registers.
+        /// </summary>
+        /// <value>All registers.</value>
         public static Register[] AllRegisters { get; }
 
         /// <summary>
-        ///     Gets the name.
+        ///     Gets the name of the regiser, e.g. rip, rax, edi.
         /// </summary>
         /// <value>The name.</value>
         public abstract string Name { get; }
 
         /// <summary>
-        ///     Gets the number bits.
+        ///     Gets the number bits for the register, e.g. 32, 64.
         /// </summary>
         /// <value>The number bits.</value>
         public abstract int NumBits { get; }
@@ -111,13 +116,13 @@ namespace McFly.Core
         #region Common Register Groupings
 
         /// <summary>
-        ///     Gets all registers64.
+        ///     Gets all 64 bit registers.
         /// </summary>
         /// <value>All registers64.</value>
         public static IReadOnlyCollection<Register> AllRegisters64 { get; }
 
         /// <summary>
-        ///     Gets the core user registers64.
+        ///     Gets the core user 64 bit registers.
         /// </summary>
         /// <value>The core user registers64.</value>
         public static IReadOnlyCollection<Register> CoreUserRegisters64 { get; }

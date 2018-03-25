@@ -18,7 +18,7 @@ using System.Collections.Generic;
 namespace McFly.Core
 {
     /// <summary>
-    ///     Class Frame.
+    ///     Represents an instance in time for a thread in the trace file
     /// </summary>
     /// <seealso cref="System.IComparable{McFly.Core.Frame}" />
     /// <seealso cref="System.IComparable" />
@@ -31,7 +31,7 @@ namespace McFly.Core
         private int _threadId;
 
         /// <summary>
-        ///     Gets or sets the position.
+        ///     Gets or sets the position for this frame in the context of the trace
         /// </summary>
         /// <value>The position.</value>
         public Position Position { get; set; }

@@ -22,7 +22,7 @@ using Swashbuckle.Application;
 namespace McFly.Server
 {
     /// <summary>
-    /// Class SwaggerConfig.
+    /// Represents the Swagger configuration
     /// </summary>
     [ExcludeFromCodeCoverage]
     public class SwaggerConfig

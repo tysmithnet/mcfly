@@ -14,7 +14,7 @@ namespace McFly.Core.Tests
             var left2 = new Position(0, 0);
             var right = new Position(123, 456);
             var right2 = new Position(123, 457);
-            var comp = Position.HighLowThreadIdComparer;
+            var comp = Position.HighLowComparer;
 
             // act
             // assert

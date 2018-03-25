@@ -19,7 +19,7 @@ using Swashbuckle.Swagger;
 namespace McFly.Server.Headers
 {
     /// <summary>
-    ///     Class FromHeaderAttributeOperationFilter.
+    ///     Operation filter for the from header attribute
     /// </summary>
     /// <seealso cref="Swashbuckle.Swagger.IOperationFilter" />
     public class FromHeaderAttributeOperationFilter : IOperationFilter

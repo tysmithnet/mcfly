@@ -18,7 +18,7 @@ using System.Linq;
 namespace McFly.Core
 {
     /// <summary>
-    ///     Class RegisterSet.
+    ///     Represents the collection of all register values at a particular instance in time for a specific thread
     /// </summary>
     public class RegisterSet
     {
@@ -192,7 +192,8 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Processes the specified register.
+        ///     Interprets the arguments as changes to the register set
+        ///     e.g. Process("rax", "16", 10) will set the value of the rax register to 16
         /// </summary>
         /// <param name="register">The register.</param>
         /// <param name="input">The input.</param>

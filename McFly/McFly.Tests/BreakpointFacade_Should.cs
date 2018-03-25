@@ -12,9 +12,9 @@ namespace McFly.Tests
         {
             // arrange
             var facade = new BreakpointFacade();
-            var builder = new DbgEngProxyBuilder();
+            var builder = new DebugEngineProxyBuilder();
             builder.WithExecuteResult("");
-            facade.DbgEngProxy = builder.Build();
+            facade.DebugEngineProxy = builder.Build();
 
             // act
             facade.ClearBreakpoints();
@@ -28,9 +28,9 @@ namespace McFly.Tests
         {
             // arrange
             var facade = new BreakpointFacade();
-            var builder = new DbgEngProxyBuilder();
+            var builder = new DebugEngineProxyBuilder();
             builder.WithExecuteResult("");
-            facade.DbgEngProxy = builder.Build();
+            facade.DebugEngineProxy = builder.Build();
             Action shouldThrow = () => facade.SetReadAccessBreakpoint(10, 0x100);
             Action shouldThrow2 = () => facade.SetWriteAccessBreakpoint(10, 0x100);
 
@@ -45,8 +45,8 @@ namespace McFly.Tests
         {
             // arrange
             var facade = new BreakpointFacade();
-            var builder = new DbgEngProxyBuilder();
-            facade.DbgEngProxy = builder.Build();
+            var builder = new DebugEngineProxyBuilder();
+            facade.DebugEngineProxy = builder.Build();
 
             // act
             facade.SetBreakpointByMask("kernel32!createprocess*");
@@ -60,9 +60,9 @@ namespace McFly.Tests
         {
             // arrange
             var facade = new BreakpointFacade();
-            var builder = new DbgEngProxyBuilder();
+            var builder = new DebugEngineProxyBuilder();
             builder.WithExecuteResult("");
-            facade.DbgEngProxy = builder.Build();
+            facade.DebugEngineProxy = builder.Build();
 
             // act
             facade.SetReadAccessBreakpoint(8, 0x100);
@@ -76,9 +76,9 @@ namespace McFly.Tests
         {
             // arrange
             var facade = new BreakpointFacade();
-            var builder = new DbgEngProxyBuilder();
+            var builder = new DebugEngineProxyBuilder();
             builder.WithExecuteResult("");
-            facade.DbgEngProxy = builder.Build();
+            facade.DebugEngineProxy = builder.Build();
 
             // act
             facade.SetWriteAccessBreakpoint(8, 0x100);

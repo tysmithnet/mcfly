@@ -17,7 +17,7 @@ using System.Data;
 namespace McFly.Server.Data
 {
     /// <summary>
-    ///     Class FrameDto.
+    ///     A dto for frame access
     /// </summary>
     internal class FrameDto
     {

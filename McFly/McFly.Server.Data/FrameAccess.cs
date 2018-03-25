@@ -22,7 +22,7 @@ using McFly.Core;
 namespace McFly.Server.Data
 {
     /// <summary>
-    ///     Class FrameAccess.
+    ///     Represents the data access logic for the frame domain
     /// </summary>
     /// <seealso cref="McFly.Server.Data.DataAccess" />
     /// <seealso cref="McFly.Server.Data.IFrameAccess" />

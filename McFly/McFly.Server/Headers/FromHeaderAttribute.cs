@@ -18,7 +18,7 @@ using System.Web.Http.Controllers;
 namespace McFly.Server.Headers
 {
     /// <summary>
-    ///     Class FromHeaderAttribute.
+    ///     Attribute indicating that a particular parameter can be found in the header
     /// </summary>
     /// <seealso cref="System.Web.Http.ParameterBindingAttribute" />
     public abstract class FromHeaderAttribute : ParameterBindingAttribute

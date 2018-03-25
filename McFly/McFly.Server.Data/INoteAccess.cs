@@ -17,7 +17,7 @@ using McFly.Core;
 namespace McFly.Server.Data
 {
     /// <summary>
-    ///     Interface INoteAccess
+    ///     Represents an object that is capable for managing the data access for the note domain
     /// </summary>
     public interface INoteAccess
     {

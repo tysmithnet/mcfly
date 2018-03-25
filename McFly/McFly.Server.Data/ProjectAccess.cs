@@ -27,7 +27,7 @@ using McFly.Core;
 namespace McFly.Server.Data
 {
     /// <summary>
-    ///     Class ProjectsAccess.
+    ///     IProjectsAccess implementation that uses SqlServer
     /// </summary>
     /// <seealso cref="McFly.Server.Data.DataAccess" />
     /// <seealso cref="McFly.Server.Data.IProjectsAccess" />

@@ -19,12 +19,12 @@ using System.Data.SqlClient;
 namespace McFly.Server.Data
 {
     /// <summary>
-    ///     Class DataAccess.
+    ///     Represents the common data access logic for the application
     /// </summary>
     public abstract class DataAccess
     {
         /// <summary>
-        ///     Gets or sets the connection string.
+        ///     Gets or sets the connection string to the data store
         /// </summary>
         /// <value>The connection string.</value>
         public static string ConnectionString { get; set; }

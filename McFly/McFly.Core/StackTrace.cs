@@ -20,7 +20,7 @@ using System.Linq;
 namespace McFly.Core
 {
     /// <summary>
-    ///     Class StackTrace.
+    ///     Represents the state of a threads stack at an instance in time during the trace.
     /// </summary>
     public class StackTrace
     {

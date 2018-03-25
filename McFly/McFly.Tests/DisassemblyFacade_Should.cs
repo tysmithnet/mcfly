@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAssertions;
+using McFly.Core;
 using Xunit;
 
 namespace McFly.Tests
@@ -10,13 +11,13 @@ namespace McFly.Tests
         public void Disassemble_The_Correct_Number_Of_Instructions()
         {
             // arrange
-            var builder = new DbgEngProxyBuilder();
+            var builder = new DebugEngineProxyBuilder();
             builder.With32Bit(false);
             builder.WithExecuteResult("u rip L2", @"KERNEL32!GetTimeFormatWWorker+0xc43:
 00007ffa`51315543 6645898632010000 mov     word ptr [r14+132h],r8w
 00007ffa`5131554b 498d8630010000  lea     rax,[r14+130h]
 ");
-            var facade = new DisassemblyFacade {DbgEngProxy = builder.Build()};
+            var facade = new DisassemblyFacade {DebugEngineProxy = builder.Build()};
             var expected = new[]
             {
                 new DisassemblyLine(0x00007ffa51315543, ByteArrayBuilder.StringToByteArray("6645898632010000"), "mov",

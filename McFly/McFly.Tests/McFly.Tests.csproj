@@ -77,7 +77,7 @@
     <Compile Include="BreakpointFacadeBuilder.cs" />
     <Compile Include="BreakpointFacade_Should.cs" />
     <Compile Include="ByteArrayBuilder_Should.cs" />
-    <Compile Include="DbgEngProxyBuilder.cs" />
+    <Compile Include="DebugEngineProxyBuilder.cs" />
     <Compile Include="DisassemblyFacadeBuilder.cs" />
     <Compile Include="DisassemblyFacade_Should.cs" />
     <Compile Include="IndexMethod_Should.cs" />

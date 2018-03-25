@@ -12,7 +12,7 @@ namespace McFly.Tests
         public void Get_The_Correct_Current_Position()
         {
             // arrange
-            var builder = new DbgEngProxyBuilder();
+            var builder = new DebugEngineProxyBuilder();
             builder.WithExecuteResult("!positions",
                 @">Thread ID=0x7590 - Position: 35:0
  Thread ID=0x12A0 - Position: 246A:0
@@ -22,7 +22,7 @@ namespace McFly.Tests
  Thread ID=0x60B4 - Position: 2414F:0
  Thread ID=0x1F54 - Position: 241DE:0
 ");
-            var facade = new TimeTravelFacade {DbgEngProxy = builder.Build()};
+            var facade = new TimeTravelFacade {DebugEngineProxy = builder.Build()};
 
             // act
             var position = facade.GetCurrentPosition();
@@ -37,7 +37,7 @@ namespace McFly.Tests
         public void Get_The_Current_Frame_By_Thread_Id_Correctly()
         {
             // arrange
-            var engBuilder = new DbgEngProxyBuilder();
+            var engBuilder = new DebugEngineProxyBuilder();
             engBuilder.WithExecuteResult("!positions", @">Thread ID=0x7590 - Position: 168CC:0
  Thread ID=0x12A0 - Position: 211F5:0
  Thread ID=0x6CDC - Position: 21D59:0
@@ -62,7 +62,7 @@ namespace McFly.Tests
             disBuilder.WithGetDisassemblyLines(0x6CDC, 1, new[] {disassemblyLine});
             var facade = new TimeTravelFacade
             {
-                DbgEngProxy = engBuilder.Build(),
+                DebugEngineProxy = engBuilder.Build(),
                 StackFacade = stackBuilder.Build(),
                 RegisterFacade = registerBuilder.Build(),
                 DisassemblyFacade = disBuilder.Build()
@@ -83,7 +83,7 @@ namespace McFly.Tests
         public void Get_The_Current_Frame_Correctly()
         {
             // arrange
-            var engBuilder = new DbgEngProxyBuilder();
+            var engBuilder = new DebugEngineProxyBuilder();
             engBuilder.WithExecuteResult("!positions", @">Thread ID=0x7590 - Position: 168CC:0
  Thread ID=0x12A0 - Position: 211F5:0
  Thread ID=0x6CDC - Position: 21D59:0
@@ -108,7 +108,7 @@ namespace McFly.Tests
             disBuilder.WithGetDisassemblyLines(1, new[] {disassemblyLine});
             var facade = new TimeTravelFacade
             {
-                DbgEngProxy = engBuilder.Build(),
+                DebugEngineProxy = engBuilder.Build(),
                 StackFacade = stackBuilder.Build(),
                 RegisterFacade = registerBuilder.Build(),
                 DisassemblyFacade = disBuilder.Build()
@@ -129,7 +129,7 @@ namespace McFly.Tests
         public void Get_The_Ending_Position()
         {
             // arrange
-            var builder = new DbgEngProxyBuilder();
+            var builder = new DebugEngineProxyBuilder();
             builder.WithExecuteResult("!tt 100",
                 @"Setting position to the end of the trace
 Setting position: 2D164:0
@@ -146,7 +146,7 @@ ModLoad: 00007ffa`33e40000 00007ffa`33ed8000   C:\WINDOWS\System32\TextInputFram
 Time Travel Position: 2D164:0
 ntdll!NtTerminateProcess+0x12:
 00007ffa`523603f2 0f05            syscall");
-            var facade = new TimeTravelFacade {DbgEngProxy = builder.Build()};
+            var facade = new TimeTravelFacade {DebugEngineProxy = builder.Build()};
 
             // act
             var position = facade.GetEndingPosition();
@@ -159,7 +159,7 @@ ntdll!NtTerminateProcess+0x12:
         public void Get_The_Starting_Position()
         {
             // arrange
-            var builder = new DbgEngProxyBuilder();
+            var builder = new DebugEngineProxyBuilder();
             builder.WithExecuteResult("!tt 0",
                 @"Setting position to the beginning of the trace
 Setting position: 35:0
@@ -167,7 +167,7 @@ Setting position: 35:0
 Time Travel Position: 35:0
 ntdll!NtSetInformationWorkerFactory+0x14:
 00007ffa`52363104 c3              ret");
-            var facade = new TimeTravelFacade {DbgEngProxy = builder.Build()};
+            var facade = new TimeTravelFacade {DebugEngineProxy = builder.Build()};
 
             // act
             var position = facade.GetStartingPosition();
@@ -182,8 +182,8 @@ ntdll!NtSetInformationWorkerFactory+0x14:
             // arrange
             var facade = new TimeTravelFacade();
             var position = new Position(0, 0);
-            var builder = new DbgEngProxyBuilder();
-            facade.DbgEngProxy = builder.Build();
+            var builder = new DebugEngineProxyBuilder();
+            facade.DebugEngineProxy = builder.Build();
 
             // act
             facade.SetPosition(position);

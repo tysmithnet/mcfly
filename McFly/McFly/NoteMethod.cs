@@ -37,7 +37,7 @@ namespace McFly
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        public IDbgEngProxy DbgEngProxy { get; set; }
+        public IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
         ///     Gets the name.

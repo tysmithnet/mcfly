@@ -33,7 +33,7 @@ namespace McFly
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        protected internal IDbgEngProxy DbgEngProxy { get; set; }
+        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
         ///     Gets or sets the stack facade.
@@ -62,7 +62,7 @@ namespace McFly
         /// <param name="position">The position.</param>
         public void SetPosition(Position position)
         {
-            DbgEngProxy.Execute($"!tt {position}");
+            DebugEngineProxy.Execute($"!tt {position}");
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace McFly
         /// <returns>PositionsResult.</returns>
         public PositionsResult Positions()
         {
-            var positionsText = DbgEngProxy.Execute("!positions");
+            var positionsText = DebugEngineProxy.Execute("!positions");
             var records = ParsePositionsCommandText(positionsText);
             return new PositionsResult(records);
         }
@@ -101,7 +101,7 @@ namespace McFly
         /// <returns>Position.</returns>
         public Position GetStartingPosition()
         {
-            var end = DbgEngProxy.Execute("!tt 0"); // todo: get from trace_info
+            var end = DebugEngineProxy.Execute("!tt 0"); // todo: get from trace_info
             var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
             return Position.Parse(endMatch.Groups["pos"].Value);
         }
@@ -112,7 +112,7 @@ namespace McFly
         /// <returns>Position.</returns>
         public Position GetEndingPosition()
         {
-            var end = DbgEngProxy.Execute("!tt 100"); // todo: get from trace_info
+            var end = DebugEngineProxy.Execute("!tt 100"); // todo: get from trace_info
             var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
             return Position.Parse(endMatch.Groups["pos"].Value);
         }
@@ -134,7 +134,7 @@ namespace McFly
                 StackTrace = currentStack,
                 RegisterSet = registers,
                 DisassemblyLine = disassembly,
-                ThreadId = DbgEngProxy.GetCurrentThreadId()
+                ThreadId = DebugEngineProxy.GetCurrentThreadId()
             };
         }
 

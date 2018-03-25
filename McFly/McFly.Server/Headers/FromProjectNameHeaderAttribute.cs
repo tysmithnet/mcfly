@@ -15,7 +15,7 @@
 namespace McFly.Server.Headers
 {
     /// <summary>
-    ///     Class FromProjectNameHeaderAttribute.
+    ///     Convenience attribute that indicates the project name is in the header under the key "X-Project-Name"
     /// </summary>
     /// <seealso cref="McFly.Server.Headers.FromHeaderAttribute" />
     public class FromProjectNameHeaderAttribute : FromHeaderAttribute

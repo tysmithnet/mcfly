@@ -18,7 +18,7 @@ using McFly.Core;
 namespace McFly.Server.Data
 {
     /// <summary>
-    ///     Interface IFrameAccess
+    ///     Represents an object that is capable of managing the data access for the frame domain
     /// </summary>
     public interface IFrameAccess
     {

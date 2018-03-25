@@ -30,7 +30,7 @@ namespace McFly
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        protected internal IDbgEngProxy DbgEngProxy { get; set; }
+        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
         ///     Gets or sets the settings.

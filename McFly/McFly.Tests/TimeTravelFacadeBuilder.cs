@@ -31,7 +31,7 @@ namespace McFly.Tests
         /// <summary>
         ///     The debug eng proxy builder
         /// </summary>
-        private readonly DbgEngProxyBuilder _dbgEngProxyBuilder;
+        private readonly DebugEngineProxyBuilder _debugEngineProxyBuilder;
 
         /// <summary>
         ///     The frames
@@ -51,10 +51,10 @@ namespace McFly.Tests
         /// <summary>
         ///     Initializes a new instance of the <see cref="TimeTravelFacadeBuilder" /> class.
         /// </summary>
-        /// <param name="dbgEngProxyBuilder">The debug eng proxy builder.</param>
-        public TimeTravelFacadeBuilder(DbgEngProxyBuilder dbgEngProxyBuilder)
+        /// <param name="debugEngineProxyBuilder">The debug eng proxy builder.</param>
+        public TimeTravelFacadeBuilder(DebugEngineProxyBuilder debugEngineProxyBuilder)
         {
-            _dbgEngProxyBuilder = dbgEngProxyBuilder;
+            _debugEngineProxyBuilder = debugEngineProxyBuilder;
             Mock.Setup(facade => facade.GetCurrentFrame(It.IsAny<int>())).Returns((int i) =>
             {
                 return _frames.Single(x => x.Position == _currentPosition && x.ThreadId == i);
@@ -152,7 +152,7 @@ namespace McFly.Tests
         /// </exception>
         public PositionsResult Positions()
         {
-            var thread = _dbgEngProxyBuilder.CurrentThreadId;
+            var thread = _debugEngineProxyBuilder.CurrentThreadId;
             var positions = _frames.Where(x => x.Position == _currentPosition)
                 .Select(x => new PositionsRecord(x.ThreadId, x.Position, thread == x.ThreadId)).ToList();
             if (positions.Count(x => x.IsCurrentThread) != 1)

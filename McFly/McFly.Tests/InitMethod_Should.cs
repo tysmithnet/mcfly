@@ -13,7 +13,7 @@ namespace McFly.Tests
             var args = new[] {"-n", "test"};
             var initMethod = new InitMethod();
             var clientBuilder = new ServerClientBuilder();
-            var dbg = new DbgEngProxyBuilder();
+            var dbg = new DebugEngineProxyBuilder();
             var builder = new TimeTravelFacadeBuilder(dbg);
             builder.WithGetStartingPosition(new Position(0, 0)).WithGetEndingPosition(new Position(1, 0));
 

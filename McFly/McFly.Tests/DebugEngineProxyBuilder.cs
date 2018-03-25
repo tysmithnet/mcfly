@@ -20,7 +20,7 @@ namespace McFly.Tests
     /// <summary>
     ///     Class DbgEngProxyBuilder.
     /// </summary>
-    internal class DbgEngProxyBuilder
+    internal class DebugEngineProxyBuilder
     {
         /// <summary>
         ///     The thread identifier
@@ -30,12 +30,12 @@ namespace McFly.Tests
         /// <summary>
         ///     The mock
         /// </summary>
-        public Mock<IDbgEngProxy> Mock = new Mock<IDbgEngProxy>();
+        public Mock<IDebugEngineProxy> Mock = new Mock<IDebugEngineProxy>();
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DbgEngProxyBuilder" /> class.
+        ///     Initializes a new instance of the <see cref="DebugEngineProxyBuilder" /> class.
         /// </summary>
-        public DbgEngProxyBuilder()
+        public DebugEngineProxyBuilder()
         {
             Mock.SetupAllProperties();
         }
@@ -55,9 +55,10 @@ namespace McFly.Tests
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>DbgEngProxyBuilder.</returns>
-        public DbgEngProxyBuilder WithExecuteResult(string result)
+        public DebugEngineProxyBuilder WithExecuteResult(string result)
         {
             Mock.Setup(proxy => proxy.Execute(It.IsAny<string>())).Returns(result);
+            Mock.Setup(proxy => proxy.Execute(It.IsAny<int>(), It.IsAny<string>())).Returns(result);
             return this;
         }
 
@@ -66,7 +67,7 @@ namespace McFly.Tests
         /// </summary>
         /// <param name="result">if set to <c>true</c> [result].</param>
         /// <returns>DbgEngProxyBuilder.</returns>
-        public DbgEngProxyBuilder With32Bit(bool result)
+        public DebugEngineProxyBuilder With32Bit(bool result)
         {
             Mock.Setup(proxy => proxy.Is32Bit).Returns(result);
             return this;
@@ -78,9 +79,10 @@ namespace McFly.Tests
         /// <param name="command">The command.</param>
         /// <param name="result">The result.</param>
         /// <returns>DbgEngProxyBuilder.</returns>
-        public DbgEngProxyBuilder WithExecuteResult(string command, string result)
+        public DebugEngineProxyBuilder WithExecuteResult(string command, string result)
         {
             Mock.Setup(proxy => proxy.Execute(command)).Returns(result);
+            Mock.Setup(proxy => proxy.Execute(It.IsAny<int>(), command)).Returns(result);
             return this;
         }
 
@@ -88,7 +90,7 @@ namespace McFly.Tests
         ///     Builds this instance.
         /// </summary>
         /// <returns>IDbgEngProxy.</returns>
-        public IDbgEngProxy Build()
+        public IDebugEngineProxy Build()
         {
             return Mock.Object;
         }
@@ -98,7 +100,7 @@ namespace McFly.Tests
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>DbgEngProxyBuilder.</returns>
-        public DbgEngProxyBuilder WithThreadId(int threadId)
+        public DebugEngineProxyBuilder WithThreadId(int threadId)
         {
             Mock.Setup(proxy => proxy.GetCurrentThreadId()).Returns(threadId);
             return this;
@@ -108,7 +110,7 @@ namespace McFly.Tests
         ///     Withes the run until break.
         /// </summary>
         /// <returns>DbgEngProxyBuilder.</returns>
-        public DbgEngProxyBuilder WithRunUntilBreak()
+        public DebugEngineProxyBuilder WithRunUntilBreak()
         {
             Mock.Setup(proxy => proxy.RunUntilBreak());
             return this;
@@ -119,7 +121,7 @@ namespace McFly.Tests
         /// </summary>
         /// <param name="callback">The callback.</param>
         /// <returns>DbgEngProxyBuilder.</returns>
-        public DbgEngProxyBuilder SetRunUntilBreakCallback(Action callback)
+        public DebugEngineProxyBuilder SetRunUntilBreakCallback(Action callback)
         {
             Mock.Setup(proxy => proxy.RunUntilBreak()).Callback(callback);
             return this;

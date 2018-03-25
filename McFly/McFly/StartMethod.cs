@@ -44,8 +44,8 @@ namespace McFly
         ///     Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
-        [Import(typeof(IDbgEngProxy))]
-        private IDbgEngProxy DbgEngProxy { get; set; }
+        [Import(typeof(IDebugEngineProxy))]
+        private IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
         ///     Gets the name.

@@ -98,9 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BreakpointFacade.cs" />
-    <Compile Include="BreakpointHitEventArgs.cs" />
     <Compile Include="ByteArrayBuilder.cs" />
-    <Compile Include="DbgEngProxy.cs" />
+    <Compile Include="DebugEngineProxy.cs" />
     <Compile Include="Debugger\Enums.cs" />
     <Compile Include="Debugger\IDebugAdvanced.cs" />
     <Compile Include="Debugger\IDebugAdvanced2.cs" />
@@ -150,7 +149,7 @@
     <Compile Include="Debugger\HRESULT.cs" />
     <Compile Include="HttpFacade.cs" />
     <Compile Include="IBreakpointFacade.cs" />
-    <Compile Include="IDbgEngProxy.cs" />
+    <Compile Include="IDebugEngineProxy.cs" />
     <Compile Include="IDisassemblyFacade.cs" />
     <Compile Include="IHttpFacade.cs" />
     <Compile Include="IInjectable.cs" />

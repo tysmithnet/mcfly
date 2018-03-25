@@ -4,7 +4,7 @@
 // Created          : 02-25-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-09-2018
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="Position.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -22,18 +22,19 @@ namespace McFly.Core
     /// <summary>
     ///     Class Position.
     /// </summary>
+    /// <seealso cref="System.IComparable" />
     /// <seealso cref="System.IComparable{McFly.Core.Position}" />
     /// <seealso cref="System.IEquatable{McFly.Core.Position}" />
-    [DebuggerDisplay("{_high}:{_low}")]
+    [DebuggerDisplay("{_high:X}:{_low:X}")]
     public class Position : IComparable<Position>, IEquatable<Position>, IComparable
     {
         /// <summary>
-        ///     The high
+        ///     The high portion of the position, e.g. abc:123 =&gt; abc
         /// </summary>
         private int _high;
 
         /// <summary>
-        ///     The low
+        ///     The low portion of the position, e.g. abc:123 =&gt; 123
         /// </summary>
         private int _low;
 
@@ -54,11 +55,11 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Gets or sets the high.
+        ///     Gets or sets the high portion.
         /// </summary>
-        /// <value>The high.</value>
-        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
+        /// <value>The high portion.</value>
         /// <exception cref="ArgumentOutOfRangeException">value</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
         public int High
         {
             get => _high;
@@ -71,11 +72,11 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Gets or sets the low.
+        ///     Gets or sets the low portion.
         /// </summary>
-        /// <value>The low.</value>
-        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
+        /// <value>The low portion.</value>
         /// <exception cref="ArgumentOutOfRangeException">value</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
         public int Low
         {
             get => _low;
@@ -88,12 +89,18 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Gets the high low thread identifier comparer.
+        ///     Gets a comparator that first compares the high portions and then the low portions only if the high are equal
         /// </summary>
         /// <value>The high low thread identifier comparer.</value>
-        public static IEqualityComparer<Position> HighLowThreadIdComparer { get; } =
+        public static IEqualityComparer<Position> HighLowComparer { get; } =
             new HighLowEqualityComparer();
 
+        /// <summary>
+        ///     Compares to.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="ArgumentException">Position</exception>
         public int CompareTo(object obj)
         {
             if (ReferenceEquals(null, obj)) return 1;
@@ -141,12 +148,12 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Parses the specified text.
+        ///     Parses the specified text into a new Position instance.
         /// </summary>
         /// <param name="text">The text.</param>
         /// <returns>Position.</returns>
-        /// <exception cref="System.FormatException">text</exception>
         /// <exception cref="FormatException">text</exception>
+        /// <exception cref="System.FormatException">text</exception>
         public static Position Parse(string text)
         {
             var match = Regex.Match(text, @"^\s*(?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+\s*$)");

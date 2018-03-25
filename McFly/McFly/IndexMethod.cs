@@ -47,7 +47,7 @@ namespace McFly
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        protected internal IDbgEngProxy DbgEngProxy { get; set; }
+        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
         ///     Gets or sets the breakpoint facade.
@@ -144,7 +144,7 @@ namespace McFly
         protected internal bool Is32Bit()
         {
             if (!_is32Bit.HasValue)
-                _is32Bit = Regex.Match(DbgEngProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value
+                _is32Bit = Regex.Match(DebugEngineProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value
                                .Length ==
                            8;
             return _is32Bit.Value;
@@ -163,7 +163,7 @@ namespace McFly
             Position last = null;
             while (true) // todo: have better abstraction... while(!DbgEngProxy.RunTo(endingPosition))
             {
-                DbgEngProxy.RunUntilBreak();
+                DebugEngineProxy.RunUntilBreak();
                 var positions = TimeTravelFacade.Positions();
                 var breakRecord = positions.CurrentThread;
                 if (last == breakRecord.Position)

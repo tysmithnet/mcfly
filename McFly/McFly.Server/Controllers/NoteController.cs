@@ -19,14 +19,14 @@ using McFly.Server.Headers;
 namespace McFly.Server.Controllers
 {
     /// <summary>
-    ///     Class NoteController.
+    ///     Represents the business logic for the note api
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     [Route("api/note")]
     public class NoteController : ApiController
     {
         /// <summary>
-        ///     Posts the specified project name.
+        ///     Adds a note to a project at a specified position for a thread
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="position">The position.</param>

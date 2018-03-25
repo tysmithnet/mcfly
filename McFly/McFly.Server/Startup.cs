@@ -25,7 +25,7 @@ using Swashbuckle.Application;
 namespace McFly.Server
 {
     /// <summary>
-    ///     Class Startup.
+    ///     Represents the start up logic for the application
     /// </summary>
     [ExcludeFromCodeCoverage]
     public class Startup
@@ -39,6 +39,7 @@ namespace McFly.Server
             var config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
 
+            // todo: extract
             var executingAssemblyFile = Assembly.GetExecutingAssembly().Location;
             var executingDirectory = Path.GetDirectoryName(executingAssemblyFile);
             var mcFlyAssemblies =

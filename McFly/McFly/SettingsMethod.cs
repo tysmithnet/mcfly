@@ -38,7 +38,7 @@ namespace McFly
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        public IDbgEngProxy DbgEngProxy { get; set; }
+        public IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
         ///     Gets the name.
@@ -60,8 +60,8 @@ namespace McFly
                 {
                     foreach (var settings in AllSettings)
                     {
-                        DbgEngProxy.WriteLine(settings.GetType().FullName);
-                        DbgEngProxy.WriteLine(JsonConvert.SerializeObject(settings, Formatting.Indented));
+                        DebugEngineProxy.WriteLine(settings.GetType().FullName);
+                        DebugEngineProxy.WriteLine(JsonConvert.SerializeObject(settings, Formatting.Indented));
                     }
                 });
         }

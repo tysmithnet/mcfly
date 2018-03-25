@@ -20,7 +20,7 @@ using Microsoft.Owin.Hosting;
 namespace McFly.Server
 {
     /// <summary>
-    ///     Class Program.
+    ///     Entry point into the application
     /// </summary>
     [ExcludeFromCodeCoverage]
     public class Program

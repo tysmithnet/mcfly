@@ -18,7 +18,7 @@ using McFly.Core;
 namespace McFly.Server.Data
 {
     /// <summary>
-    ///     Interface IProjectsAccess
+    ///     Represents an object is capable of handing the data access to the project domain
     /// </summary>
     public interface IProjectsAccess
     {

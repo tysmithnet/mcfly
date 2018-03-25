@@ -15,7 +15,7 @@
 namespace McFly.Server.Controllers
 {
     /// <summary>
-    ///     Class NewProjectRequestDto.
+    ///     Request dto for new projects
     /// </summary>
     public class NewProjectRequestDto
     {

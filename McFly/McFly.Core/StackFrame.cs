@@ -18,7 +18,7 @@ namespace McFly.Core
 {
     // todo: lock down class
     /// <summary>
-    ///     Class StackFrame.
+    ///     Represents a single stack frame in a specific threads stack at a single instant in time during the trace
     /// </summary>
     public class StackFrame
     {
@@ -70,10 +70,10 @@ namespace McFly.Core
         public uint Offset { get; set; }
 
         /// <summary>
-        ///     Equalses the specified other.
+        ///     Is this instance equal to another stack frame
         /// </summary>
         /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if both are equal, <c>false</c> otherwise.</returns>
         protected bool Equals(StackFrame other)
         {
             var sp = StackPointer == other.StackPointer;

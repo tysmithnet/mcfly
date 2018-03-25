@@ -22,7 +22,7 @@ using McFly.Server.Data;
 namespace McFly.Server.Controllers
 {
     /// <summary>
-    ///     Class ProjectsController.
+    ///     Represents the business logic for the project api
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     /// <seealso cref="Controller" />
@@ -50,7 +50,7 @@ namespace McFly.Server.Controllers
         }
 
         /// <summary>
-        ///     Posts the specified project name.
+        ///     Creates a new project
         /// </summary>
         /// <param name="request">The request.</param>
         /// <returns>ActionResult.</returns>

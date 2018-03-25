@@ -19,23 +19,23 @@ using System.Linq;
 namespace McFly
 {
     /// <summary>
-    ///     Class BreakpointFacade.
+    ///     Default breakpoint facade implementation
     /// </summary>
     /// <seealso cref="McFly.IBreakpointFacade" />
     [Export(typeof(IBreakpointFacade))]
     public class BreakpointFacade : IBreakpointFacade
     {
         /// <summary>
-        ///     The valid lengths
+        ///     The valid lengths for data access breakpoints
         /// </summary>
-        private static readonly int[] ValidLengths = {1, 2, 4, 8};
+        private static readonly int[] ValidDataAccessLength = {1, 2, 4, 8};
 
         /// <summary>
-        ///     Gets or sets the debug eng proxy.
+        ///     Gets or sets the debug engine proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        public IDbgEngProxy DbgEngProxy { get; set; }
+        public IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
         ///     Sets the breakpoint by mask.
@@ -43,7 +43,7 @@ namespace McFly
         /// <param name="breakpointMask">The breakpoint mask.</param>
         public void SetBreakpointByMask(string breakpointMask)
         {
-            DbgEngProxy.Execute($"bm {breakpointMask}");
+            DebugEngineProxy.Execute($"bm {breakpointMask}");
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace McFly
         public void SetReadAccessBreakpoint(int length, ulong address)
         {
             ValidateLength(length);
-            DbgEngProxy.Execute($"ba r{length} {address:X}");
+            DebugEngineProxy.Execute($"ba r{length} {address:X}");
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace McFly
         public void SetWriteAccessBreakpoint(int length, ulong address)
         {
             ValidateLength(length);
-            DbgEngProxy.Execute($"ba w{length} {address:X}");
+            DebugEngineProxy.Execute($"ba w{length} {address:X}");
         }
 
         /// <summary>
@@ -73,17 +73,17 @@ namespace McFly
         /// </summary>
         public void ClearBreakpoints()
         {
-            DbgEngProxy.Execute($"bc *");
+            DebugEngineProxy.Execute($"bc *");
         }
 
         /// <summary>
-        ///     Validates the length.
+        ///     Validates the length of the requested data access breakpoint
         /// </summary>
         /// <param name="length">The length.</param>
         /// <exception cref="ArgumentOutOfRangeException">Access breakpoints can only have lengths of 1, 2, 4, or 8 bytes</exception>
         private static void ValidateLength(int length)
         {
-            if (!ValidLengths.Contains(length))
+            if (!ValidDataAccessLength.Contains(length))
                 throw new ArgumentOutOfRangeException(
                     "Access breakpoints can only have lengths of 1, 2, 4, or 8 bytes");
         }

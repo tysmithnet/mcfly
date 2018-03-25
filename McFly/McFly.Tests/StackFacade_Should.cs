@@ -10,7 +10,7 @@ namespace McFly.Tests
         public void Get_The_Current_StackTrace_Correctly()
         {
             // arrange
-            var builder = new DbgEngProxyBuilder();
+            var builder = new DebugEngineProxyBuilder();
             builder.WithExecuteResult("k", @"Child-SP          RetAddr           Call Site
 00000000`0014d180 00007ffa`513150ed KERNEL32!GetTimeFormatWWorker+0xc43
 00000000`0014d1d0 00007ffa`513138e6 KERNEL32!GetTimeFormatWWorker+0x7ed
@@ -21,7 +21,7 @@ namespace McFly.Tests
 00000000`0014ff90 00000000`00000000 ntdll!RtlUserThreadStart+0x21");
 
             builder.WithThreadId(0x7590);
-            var stackFacade = new StackFacade {DbgEngProxy = builder.Build()};
+            var stackFacade = new StackFacade {DebugEngineProxy = builder.Build()};
 
             // act
             var stackTrace = stackFacade.GetCurrentStackTrace();
