@@ -15,20 +15,15 @@ namespace McFly
         [Import]
         protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
-        public HelpInfo HelpInfo { get; } = new HelpInfo
-        (
-            "help", "Get help and find commands", new Dictionary<string, string>
-            {
-                ["-c, --command command"] = "Get help on a specific command",
-                ["-s, --search searchterm"] = "Search for commands that match the given term"
-            },
-            new Dictionary<string, string>
-            {
-                ["!mf help"] = "Get listing of commands",
-                ["!mf help -c index"] = "Get help for the index command",
-                ["!mf help -s breakpoint"] = "Find commands that match \"breakpoint\""
-            },
-            null);
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+            .SetName("help")
+            .SetDescription("Get help and find commands")
+            .AddSwitch("-c, --command command", "Get help on a specific command")
+            .AddSwitch("-s, --search searchterm", "Search for commands that match the given term")
+            .AddExample("!mf help", "Get listing of commands")
+            .AddExample("!mf help -c index", "Get help for the index command")
+            .AddExample("!mf help -s breakpoint", "Find commands that match \"breakpoint\"")
+            .Build();
 
         public void Process(string[] args)
         {

@@ -53,10 +53,10 @@ namespace McFly
         [Import]
         protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
 
-        public HelpInfo HelpInfo { get; } = new HelpInfo
-        (
-            "init", "Create a new project using the loaded trace file", null,null,null
-        );
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+            .SetName("init")
+            .SetDescription("Create a new project using the loaded trace file")
+            .Build();
 
         /// <summary>
         ///     Processes the specified arguments.

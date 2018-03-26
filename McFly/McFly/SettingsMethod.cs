@@ -40,10 +40,10 @@ namespace McFly
         [Import]
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
-        public HelpInfo HelpInfo { get; } = new HelpInfo
-        (
-             "settings", "Manage application settings", null, null, null
-        );
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+            .SetName("settings")
+            .SetDescription("Manage application settings")
+            .Build();
 
         /// <summary>
         ///     Processes the specified arguments.

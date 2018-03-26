@@ -47,7 +47,10 @@ namespace McFly
         [Import(typeof(IDebugEngineProxy))]
         private IDebugEngineProxy DebugEngineProxy { get; set; }
 
-        public HelpInfo HelpInfo { get; } 
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+            .SetName("start")
+            .SetDescription("Start the local server")
+            .Build();
 
         /// <summary>
         ///     Processes the specified arguments.

@@ -39,10 +39,10 @@ namespace McFly
         [Import]
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
-        public HelpInfo HelpInfo { get; } = new HelpInfo
-        (
-            "note", "Take notes on the trace", null, null, null
-        );
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+            .SetName("note")
+            .SetDescription("Take notes on the trace")
+            .Build();
 
         /// <summary>
         ///     Processes the specified arguments.

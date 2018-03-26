@@ -76,11 +76,11 @@ namespace McFly
         /// <value>The server client.</value>
         [Import]
         protected internal IServerClient ServerClient { get; set; }
-
-        public HelpInfo HelpInfo { get; } = new HelpInfo
-        (
-            "index", "Record the state of registers, memory, etc for further analysis", null, null, null
-        );
+                     
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+            .SetName("index")
+            .SetDescription("Record the state of registers, memory, etc for further analysis")
+            .Build();
 
         /// <summary>
         ///     Processes the specified arguments.
