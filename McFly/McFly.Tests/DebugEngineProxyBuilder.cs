@@ -126,5 +126,11 @@ namespace McFly.Tests
             Mock.Setup(proxy => proxy.RunUntilBreak()).Callback(callback);
             return this;
         }
+
+        public DebugEngineProxyBuilder WithWriteLine(Action<string> action)
+        {
+            Mock.Setup(proxy => proxy.WriteLine(It.IsAny<string>())).Callback(action);
+            return this;
+        }
     }
 }

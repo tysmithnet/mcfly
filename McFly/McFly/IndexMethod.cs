@@ -77,11 +77,11 @@ namespace McFly
         [Import]
         protected internal IServerClient ServerClient { get; set; }
 
-        /// <summary>
-        ///     Gets the name.
-        /// </summary>
-        /// <value>The name.</value>
-        public string Name { get; } = "index";
+        public HelpInfo HelpInfo { get; } = new HelpInfo
+        {
+            Name = "index",
+            Description = "Record the state of registers, memory, etc for further analysis"
+        };
 
         /// <summary>
         ///     Processes the specified arguments.

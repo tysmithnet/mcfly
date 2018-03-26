@@ -39,11 +39,11 @@ namespace McFly
         [Import]
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
-        /// <summary>
-        ///     Gets the name.
-        /// </summary>
-        /// <value>The name.</value>
-        public string Name { get; } = "note";
+        public HelpInfo HelpInfo { get; } = new HelpInfo
+        {
+            Name = "note",
+            Description = "Take notes on the trace"
+        };
 
         /// <summary>
         ///     Processes the specified arguments.

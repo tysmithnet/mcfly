@@ -47,11 +47,7 @@ namespace McFly
         [Import(typeof(IDebugEngineProxy))]
         private IDebugEngineProxy DebugEngineProxy { get; set; }
 
-        /// <summary>
-        ///     Gets the name.
-        /// </summary>
-        /// <value>The name.</value>
-        public string Name { get; } = "start";
+        public HelpInfo HelpInfo { get; }
 
         /// <summary>
         ///     Processes the specified arguments.

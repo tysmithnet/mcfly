@@ -306,7 +306,7 @@ namespace McFly
                 return HRESULT.S_OK;
             }
 
-            var first = app.McFlyMethods.FirstOrDefault(x => x.Name == argv[0]);
+            var first = app.McFlyMethods.FirstOrDefault(x => x.HelpInfo.Name == argv[0]);
             if (first == null)
             {
                 WriteLine($"Unrecognized command: {argv[0]}, run !mf help to get the help text");

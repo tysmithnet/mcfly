@@ -148,6 +148,7 @@
     <Compile Include="DisassemblyFacade.cs" />
     <Compile Include="ExecuteWrapper.cs" />
     <Compile Include="Debugger\HRESULT.cs" />
+    <Compile Include="HelpMethod.cs" />
     <Compile Include="HttpFacade.cs" />
     <Compile Include="HttpHeaders.cs" />
     <Compile Include="IBreakpointFacade.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="IInjectable.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IMcFlyMethod.cs" />
+    <Compile Include="HelpInfo.cs" />
     <Compile Include="IndexMethod.cs" />
     <Compile Include="InitMethod.cs" />
     <Compile Include="InitOptions.cs" />
