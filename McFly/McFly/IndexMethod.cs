@@ -81,9 +81,19 @@ namespace McFly
         ///     Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
-        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()                             // todo: add thread specifier
             .SetName("index")
             .SetDescription("Record the state of registers, memory, etc for further analysis")
+            .AddSwitch("-m, --memory range[ range]", "Memory ranges to index")
+            .AddSwitch("-s, --start pos", "Lowest frame to index during the run")
+            .AddSwitch("-e, --end pos", "Highest possible frame to index during the run")
+            .AddSwitch("--bm mask[ mask]", "Breakpoint masks of the form mod!func, wildcards supported")
+            .AddSwitch("--ba spec[ spec]", "Memory access breakpoints")
+            .AddSwitch("--step n", "Number of positions to record after a break") // todo: should allow for +/- around break
+            .AddExample("!mf index --bm user32!*", "Record all function calls in user32")
+            .AddExample("!mf index --ba rw8:abc123", "Record all read/writes to abc123:abc12b")
+            .AddExample("!mf index --ba rw8:abc123 --step 3", "Record all read/writes to abc123:abc12b and 3 positions after")
+            .AddExample("!mf index -s 35:0 -e 35:f", "Index every position from 35:0 to 35:f")
             .Build();
 
         /// <summary>
