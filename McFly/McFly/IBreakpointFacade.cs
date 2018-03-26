@@ -17,7 +17,7 @@ namespace McFly
     /// <summary>
     ///     Facade over managing breakpoints
     /// </summary>
-    public interface IBreakpointFacade
+    public interface IBreakpointFacade : IInjectable
     {
         /// <summary>
         ///     Sets the breakpoint by mask.

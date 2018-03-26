@@ -25,6 +25,7 @@ namespace McFly
     /// Default implementation of the disassembly facade
     /// </summary>
     /// <seealso cref="McFly.IDisassemblyFacade" />
+    [Export(typeof(IDisassemblyFacade))]
     internal class DisassemblyFacade : IDisassemblyFacade
     {
         /// <summary>

@@ -20,7 +20,7 @@ namespace McFly
     /// <summary>
     ///     Interface IDisassemblyFacade
     /// </summary>
-    public interface IDisassemblyFacade
+    public interface IDisassemblyFacade : IInjectable
     {
         /// <summary>
         ///     Gets the disassembly lines.

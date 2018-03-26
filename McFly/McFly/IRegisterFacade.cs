@@ -20,7 +20,7 @@ namespace McFly
     /// <summary>
     ///     Interface IRegisterFacade
     /// </summary>
-    public interface IRegisterFacade
+    public interface IRegisterFacade : IInjectable
     {
         /// <summary>
         ///     Gets the registers.

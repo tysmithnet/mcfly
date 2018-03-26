@@ -24,7 +24,8 @@ namespace McFly
     ///     Class RegisterFacade.
     /// </summary>
     /// <seealso cref="McFly.IRegisterFacade" />
-    internal class RegisterFacade : IRegisterFacade
+    [Export(typeof(IRegisterFacade))]
+    public class RegisterFacade : IRegisterFacade
     {
         /// <summary>
         ///     Gets or sets the debug eng proxy.

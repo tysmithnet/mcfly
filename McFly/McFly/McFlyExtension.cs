@@ -275,10 +275,13 @@ namespace McFly
                     log = new DefaultLog(path);
                     InitApi(log);
                     var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
+                    log.Debug($"Injectable types: {string.Join(", ", types.Select(x => x.FullName))}");
                     var typeCatalog = new TypeCatalog(types);
                     compositionContainer = new CompositionContainer(typeCatalog);
+                    log.Debug("Creating debug engine proxy");
                     var dbgEng = new DebugEngineProxy(control, client, registers, systemObjects);
 
+                    log.Debug("Composing debug engine");
                     compositionContainer.ComposeExportedValue<IDebugEngineProxy>(dbgEng);
                     compositionContainer.ComposeExportedValue(log);
                     PopulateSettings();

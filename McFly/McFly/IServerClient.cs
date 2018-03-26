@@ -20,7 +20,7 @@ namespace McFly
     /// <summary>
     ///     Interface IServerClient
     /// </summary>
-    public interface IServerClient
+    public interface IServerClient : IInjectable
     {
         /// <summary>
         ///     Adds the note.

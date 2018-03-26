@@ -19,7 +19,7 @@ namespace McFly
     /// <summary>
     ///     Interface IStackFacade
     /// </summary>
-    public interface IStackFacade
+    public interface IStackFacade : IInjectable
     {
         /// <summary>
         ///     Gets the current stack trace.

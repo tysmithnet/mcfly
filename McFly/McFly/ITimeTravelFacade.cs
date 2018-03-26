@@ -19,7 +19,7 @@ namespace McFly
     /// <summary>
     ///     Interface ITimeTravelFacade
     /// </summary>
-    public interface ITimeTravelFacade
+    public interface ITimeTravelFacade : IInjectable
     {
         /// <summary>
         ///     Gets the current frame.

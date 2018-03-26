@@ -22,7 +22,7 @@ namespace McFly
     /// <summary>
     ///     Interface IHttpFacade
     /// </summary>
-    public interface IHttpFacade
+    public interface IHttpFacade : IInjectable
     {
         /// <summary>
         ///     Posts the asynchronous.
