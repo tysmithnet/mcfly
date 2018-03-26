@@ -43,6 +43,14 @@ namespace McFly
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
             .SetName("settings")
             .SetDescription("Manage application settings")
+            .AddSubcommand(new HelpInfoBuilder()
+                .SetName("list")
+                .SetDescription("List the current settings and their values")
+                .Build())
+            .AddSubcommand(new HelpInfoBuilder()
+                .SetName("reload")
+                .SetDescription("Reload the settings from the settings file")
+                .Build())
             .Build();
 
         /// <summary>

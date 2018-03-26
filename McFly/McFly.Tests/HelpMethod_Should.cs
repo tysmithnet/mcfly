@@ -56,13 +56,15 @@ Examples:
                 new IndexMethod(),
                 new InitMethod(),
                 new HelpMethod(),
-                new SettingsMethod()
+                new SettingsMethod(),
+                new StartMethod(), 
             };
-            var expected = @"4 Available commands:
+            var expected = @"5 Available commands:
 index                    Record the state of registers, memory, etc for further analysis
 init                     Create a new project using the loaded trace file
 help                     Get help and find commands
 settings                 Manage application settings
+start                    Start the local server
 
 Get extended help:
 !mf help command
