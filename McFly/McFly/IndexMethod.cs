@@ -78,10 +78,9 @@ namespace McFly
         protected internal IServerClient ServerClient { get; set; }
 
         public HelpInfo HelpInfo { get; } = new HelpInfo
-        {
-            Name = "index",
-            Description = "Record the state of registers, memory, etc for further analysis"
-        };
+        (
+            "index", "Record the state of registers, memory, etc for further analysis", null, null, null
+        );
 
         /// <summary>
         ///     Processes the specified arguments.
@@ -144,7 +143,8 @@ namespace McFly
         protected internal bool Is32Bit()
         {
             if (!_is32Bit.HasValue)
-                _is32Bit = Regex.Match(DebugEngineProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value
+                _is32Bit = Regex.Match(DebugEngineProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"]
+                               .Value
                                .Length ==
                            8;
             return _is32Bit.Value;

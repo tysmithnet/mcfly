@@ -5,6 +5,7 @@ using System.Text;
 
 namespace McFly
 {
+    [Export(typeof(IMcFlyMethod))]
     public class HelpMethod : IMcFlyMethod // todo: rename to command
     {
         [ImportMany]
@@ -14,21 +15,19 @@ namespace McFly
         protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
         public HelpInfo HelpInfo { get; } = new HelpInfo
-        {
-            Name = "help",
-            Description = "Get help and find commands",
-            Switches = new Dictionary<string, string>
+        (
+            "help", "Get help and find commands", new Dictionary<string, string>
             {
                 ["-c, --command command"] = "Get help on a specific command",
                 ["-s, --search searchterm"] = "Search for commands that match the given term"
             },
-            Examples = new Dictionary<string, string>
+            new Dictionary<string, string>
             {
                 ["!mf help"] = "Get listing of commands",
                 ["!mf help -c index"] = "Get help for the index command",
                 ["!mf help -s breakpoint"] = "Find commands that match \"breakpoint\""
-            }
-        };
+            },
+            null);
 
         public void Process(string[] args)
         {
@@ -54,13 +53,13 @@ namespace McFly
                 .AppendLine(help.Description)
                 .AppendLine();
 
-            if (help?.Switches?.Any() == true)
+            if (help.Switches.Any() == true)
             {
                 sb.AppendLine("Switches:");
                 foreach (var keyValuePair in help.Switches)
                     sb.AppendLine($"\t{keyValuePair.Key.PadRight(32)} {keyValuePair.Value}");
             }
-            if (help?.Subcommands?.Any() == true)
+            if (help.Subcommands.Any() == true)
             {
                 sb
                     .AppendLine()
@@ -71,7 +70,7 @@ namespace McFly
                     sb.AppendLine($"\t{joint.PadRight(32)} {helpSubcommand.Description}");
                 }
             }
-            if (help?.Examples?.Any() == true)
+            if (help.Examples.Any() == true)
             {
                 sb
                     .AppendLine()

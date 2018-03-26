@@ -54,10 +54,9 @@ namespace McFly
         protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
 
         public HelpInfo HelpInfo { get; } = new HelpInfo
-        {
-            Name = "init",
-            Description = "Create a new project using the loaded trace file"
-        };
+        (
+            "init", "Create a new project using the loaded trace file", null,null,null
+        );
 
         /// <summary>
         ///     Processes the specified arguments.

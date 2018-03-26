@@ -41,10 +41,9 @@ namespace McFly
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
         public HelpInfo HelpInfo { get; } = new HelpInfo
-        {
-             Name = "settings",
-             Description = "Manage application settings"
-        };
+        (
+             "settings", "Manage application settings", null, null, null
+        );
 
         /// <summary>
         ///     Processes the specified arguments.

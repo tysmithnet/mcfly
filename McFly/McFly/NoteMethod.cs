@@ -40,10 +40,9 @@ namespace McFly
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
         public HelpInfo HelpInfo { get; } = new HelpInfo
-        {
-            Name = "note",
-            Description = "Take notes on the trace"
-        };
+        (
+            "note", "Take notes on the trace", null, null, null
+        );
 
         /// <summary>
         ///     Processes the specified arguments.
