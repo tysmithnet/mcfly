@@ -60,6 +60,7 @@ namespace McFly
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
             .SetName("init")
             .SetDescription("Create a new project using the loaded trace file")
+            .AddSwitch("-n, --name projectname", "Name of the project to create")
             .Build();
 
         /// <summary>
