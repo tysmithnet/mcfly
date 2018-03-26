@@ -8,6 +8,6 @@ namespace McFly
         public string Description { get; set; }
         public Dictionary<string, string> Switches { get; set; }
         public Dictionary<string, string> Examples { get; set; }
-        public HelpInfo[] Verbs { get; set; }
+        public HelpInfo[] Subcommands { get; set; }
     }
 }
