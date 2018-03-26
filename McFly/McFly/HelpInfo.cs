@@ -5,6 +5,11 @@ namespace McFly
 {
     public class HelpInfo
     {
+        internal HelpInfo()
+        {
+            
+        }
+
         public HelpInfo(string name, string description, Dictionary<string, string> switches,
             Dictionary<string, string> examples, HelpInfo[] subcommands)
         {
@@ -15,10 +20,10 @@ namespace McFly
             Subcommands = subcommands ?? new HelpInfo[0];
         }
 
-        public string Name { get; }
-        public string Description { get; }
-        public Dictionary<string, string> Switches { get; }
-        public Dictionary<string, string> Examples { get; }
-        public HelpInfo[] Subcommands { get; }
+        public string Name { get; internal set; }
+        public string Description { get; internal set; }
+        public Dictionary<string, string> Switches { get; internal set; }
+        public Dictionary<string, string> Examples { get; internal set; }
+        public HelpInfo[] Subcommands { get; internal set; }
     }
 }

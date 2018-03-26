@@ -148,6 +148,7 @@
     <Compile Include="DisassemblyFacade.cs" />
     <Compile Include="ExecuteWrapper.cs" />
     <Compile Include="Debugger\HRESULT.cs" />
+    <Compile Include="HelpInfoBuilder.cs" />
     <Compile Include="HelpMethod.cs" />
     <Compile Include="HttpFacade.cs" />
     <Compile Include="HttpHeaders.cs" />
