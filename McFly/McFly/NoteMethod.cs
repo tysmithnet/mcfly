@@ -4,7 +4,7 @@
 // Created          : 03-11-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 03-25-2018
 // ***********************************************************************
 // <copyright file="NoteMethod.cs" company="">
 //     Copyright ©  2018
@@ -39,6 +39,10 @@ namespace McFly
         [Import]
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
+        /// <summary>
+        ///     Gets the help information.
+        /// </summary>
+        /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
             .SetName("note")
             .SetDescription("Take notes on the trace")

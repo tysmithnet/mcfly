@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : McFly.Core
-// Author           : master
+// Author           : @tysmithnet
 // Created          : 03-04-2018
 //
-// Last Modified By : master
+// Last Modified By : @tysmithnet
 // Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="PrimitiveExtensions.cs" company="McFly.Core">

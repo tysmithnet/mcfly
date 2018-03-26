@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : master
+// Author           : @tysmithnet
 // Created          : 03-03-2018
 //
-// Last Modified By : master
-// Last Modified On : 03-11-2018
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="McFlyApp.cs" company="">
 //     Copyright ©  2018

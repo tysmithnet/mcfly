@@ -1,4 +1,18 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tysmithnet
+// Created          : 03-24-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-24-2018
+// ***********************************************************************
+// <copyright file="HttpHeaders.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 

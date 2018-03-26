@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : master
+// Author           : @tysmithnet
 // Created          : 03-04-2018
 //
-// Last Modified By : master
+// Last Modified By : @tysmithnet
 // Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="IDbgEngProxy.cs" company="">
@@ -63,7 +63,7 @@ namespace McFly
         void SwitchToThread(int threadId);
 
         /// <summary>
-        /// Executes a command on the specified thread id
+        ///     Executes a command on the specified thread id
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="command">The v.</param>

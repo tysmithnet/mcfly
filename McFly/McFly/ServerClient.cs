@@ -49,7 +49,7 @@ namespace McFly
         public void UpsertFrames(IEnumerable<Frame> frames)
         {
             var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/frame"};
-            var headers = new HttpHeaders()
+            var headers = new HttpHeaders
             {
                 ["X-Project-Name"] = Settings.ProjectName
             };

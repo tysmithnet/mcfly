@@ -4,7 +4,7 @@
 // Created          : 03-11-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-18-2018
+// Last Modified On : 03-25-2018
 // ***********************************************************************
 // <copyright file="InitMethod.cs" company="">
 //     Copyright ©  2018
@@ -53,6 +53,10 @@ namespace McFly
         [Import]
         protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
 
+        /// <summary>
+        ///     Gets the help information.
+        /// </summary>
+        /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
             .SetName("init")
             .SetDescription("Create a new project using the loaded trace file")

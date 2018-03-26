@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : master
+// Author           : @tysmithnet
 // Created          : 03-04-2018
 //
-// Last Modified By : master
-// Last Modified On : 03-23-2018
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-25-2018
 // ***********************************************************************
 // <copyright file="IndexMethod.cs" company="">
 //     Copyright ©  2018
@@ -76,7 +76,11 @@ namespace McFly
         /// <value>The server client.</value>
         [Import]
         protected internal IServerClient ServerClient { get; set; }
-                     
+
+        /// <summary>
+        ///     Gets the help information.
+        /// </summary>
+        /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
             .SetName("index")
             .SetDescription("Record the state of registers, memory, etc for further analysis")

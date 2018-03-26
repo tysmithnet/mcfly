@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : master
+// Author           : @tysmithnet
 // Created          : 03-04-2018
 //
-// Last Modified By : master
-// Last Modified On : 03-24-2018
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-25-2018
 // ***********************************************************************
 // <copyright file="IMcFlyMethod.cs" company="">
 //     Copyright ©  2018
@@ -20,8 +20,12 @@ namespace McFly
     /// <seealso cref="McFly.IInjectable" />
     public interface IMcFlyMethod : IInjectable
     {
+        /// <summary>
+        ///     Gets the help information.
+        /// </summary>
+        /// <value>The help information.</value>
         HelpInfo HelpInfo { get; }
-        
+
         /// <summary>
         ///     Processes the specified arguments.
         /// </summary>

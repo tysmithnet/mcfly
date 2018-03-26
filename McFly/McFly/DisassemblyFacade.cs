@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 03-25-2018
 // ***********************************************************************
 // <copyright file="DisassemblyFacade.cs" company="">
 //     Copyright ©  2018
@@ -22,21 +22,21 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    /// Default implementation of the disassembly facade
+    ///     Default implementation of the disassembly facade
     /// </summary>
     /// <seealso cref="McFly.IDisassemblyFacade" />
     [Export(typeof(IDisassemblyFacade))]
     internal class DisassemblyFacade : IDisassemblyFacade
     {
         /// <summary>
-        /// Gets or sets the debug engine proxy.
+        ///     Gets or sets the debug engine proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
         protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        /// Di
+        ///     Di
         /// </summary>
         /// <param name="numInstructions">The number instructions.</param>
         /// <returns>IEnumerable&lt;DisassemblyLine&gt;.</returns>
@@ -47,7 +47,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the disassembly lines.
+        ///     Gets the disassembly lines.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="numInstructions">The number instructions.</param>

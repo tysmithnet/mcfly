@@ -4,7 +4,7 @@
 // Created          : 03-23-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 03-25-2018
 // ***********************************************************************
 // <copyright file="IHttpFacade.cs" company="">
 //     Copyright ©  2018
@@ -22,6 +22,7 @@ namespace McFly
     /// <summary>
     ///     Interface IHttpFacade
     /// </summary>
+    /// <seealso cref="McFly.IInjectable" />
     public interface IHttpFacade : IInjectable
     {
         /// <summary>

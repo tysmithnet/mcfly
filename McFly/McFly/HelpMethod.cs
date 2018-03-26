@@ -1,20 +1,48 @@
-﻿using System.Collections.Generic;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tysmithnet
+// Created          : 03-24-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-25-2018
+// ***********************************************************************
+// <copyright file="HelpMethod.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 
 namespace McFly
 {
+    /// <summary>
+    ///     Class HelpMethod.
+    /// </summary>
+    /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
     public class HelpMethod : IMcFlyMethod // todo: rename to command
     {
+        /// <summary>
+        ///     Gets or sets the methods.
+        /// </summary>
+        /// <value>The methods.</value>
         [ImportMany]
         protected internal IMcFlyMethod[] Methods { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the debug engine proxy.
+        /// </summary>
+        /// <value>The debug engine proxy.</value>
         [Import]
         protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
+        /// <summary>
+        ///     Gets the help information.
+        /// </summary>
+        /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
             .SetName("help")
             .SetDescription("Get help and find commands")
@@ -25,6 +53,11 @@ namespace McFly
             .AddExample("!mf help -s breakpoint", "Find commands that match \"breakpoint\"")
             .Build();
 
+        /// <summary>
+        ///     Processes the specified arguments.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>Task.</returns>
         public void Process(string[] args)
         {
             if (IsEmptyArgs(args))
@@ -40,6 +73,11 @@ namespace McFly
             }
         }
 
+        /// <summary>
+        ///     Gets the command help.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <returns>System.String.</returns>
         private string GetCommandHelp(string command)
         {
             var help = Methods.Single(x => x.HelpInfo.Name == command).HelpInfo;
@@ -49,13 +87,13 @@ namespace McFly
                 .AppendLine(help.Description)
                 .AppendLine();
 
-            if (help.Switches.Any() == true)
+            if (help.Switches.Any())
             {
                 sb.AppendLine("Switches:");
                 foreach (var keyValuePair in help.Switches)
                     sb.AppendLine($"\t{keyValuePair.Key.PadRight(32)} {keyValuePair.Value}");
             }
-            if (help.Subcommands.Any() == true)
+            if (help.Subcommands.Any())
             {
                 sb
                     .AppendLine()
@@ -66,7 +104,7 @@ namespace McFly
                     sb.AppendLine($"\t{joint.PadRight(32)} {helpSubcommand.Description}");
                 }
             }
-            if (help.Examples.Any() == true)
+            if (help.Examples.Any())
             {
                 sb
                     .AppendLine()
@@ -82,11 +120,20 @@ namespace McFly
             return sb.ToString();
         }
 
+        /// <summary>
+        ///     Determines whether [is single command] [the specified arguments].
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns><c>true</c> if [is single command] [the specified arguments]; otherwise, <c>false</c>.</returns>
         private bool IsSingleCommand(string[] args)
         {
             return args.Length == 1 && Methods.Select(x => x.HelpInfo.Name).Contains(args[0]);
         }
 
+        /// <summary>
+        ///     Gets the command listing.
+        /// </summary>
+        /// <returns>System.String.</returns>
         private string GetCommandListing()
         {
             var sb = new StringBuilder();
@@ -104,6 +151,11 @@ namespace McFly
             return sb.ToString();
         }
 
+        /// <summary>
+        ///     Determines whether [is empty arguments] [the specified arguments].
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns><c>true</c> if [is empty arguments] [the specified arguments]; otherwise, <c>false</c>.</returns>
         private bool IsEmptyArgs(string[] args)
         {
             return args == null || !args.Any() || args.All(string.IsNullOrWhiteSpace);

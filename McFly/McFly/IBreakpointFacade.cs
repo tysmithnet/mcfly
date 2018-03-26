@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-18-2018
+// Last Modified On : 03-25-2018
 // ***********************************************************************
 // <copyright file="IBreakpointFacade.cs" company="">
 //     Copyright ©  2018
@@ -17,6 +17,7 @@ namespace McFly
     /// <summary>
     ///     Facade over managing breakpoints
     /// </summary>
+    /// <seealso cref="McFly.IInjectable" />
     public interface IBreakpointFacade : IInjectable
     {
         /// <summary>

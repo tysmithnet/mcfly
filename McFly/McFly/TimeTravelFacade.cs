@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-22-2018
+// Last Modified On : 03-25-2018
 // ***********************************************************************
 // <copyright file="TimeTravelFacade.cs" company="">
 //     Copyright ©  2018
@@ -22,7 +22,7 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    ///     Class TimeTravelFacade.
+    ///     Default implementation of the time travel facade
     /// </summary>
     /// <seealso cref="McFly.ITimeTravelFacade" />
     [Export(typeof(ITimeTravelFacade))]

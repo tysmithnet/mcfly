@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : master
+// Author           : @tysmithnet
 // Created          : 03-06-2018
 //
-// Last Modified By : master
+// Last Modified By : @tysmithnet
 // Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="SettingsJsonConverter.cs" company="">
