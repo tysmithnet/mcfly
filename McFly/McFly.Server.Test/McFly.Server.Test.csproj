@@ -102,6 +102,10 @@
       <Project>{3243A211-CF4F-4296-BD68-2D4DD5406542}</Project>
       <Name>McFly.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\McFly.Server.Contract\McFly.Server.Contract.csproj">
+      <Project>{BCFFB741-26F9-4D12-A152-04CF601D373E}</Project>
+      <Name>McFly.Server.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\McFly.Server.Data\McFly.Server.Data.csproj">
       <Project>{DFDEC1CA-5A5C-4FC6-8C7B-11C777C396DC}</Project>
       <Name>McFly.Server.Data</Name>

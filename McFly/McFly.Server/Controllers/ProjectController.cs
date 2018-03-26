@@ -17,6 +17,7 @@ using System.ComponentModel.Composition;
 using System.Web.Http;
 using System.Web.Http.Results;
 using McFly.Core;
+using McFly.Server.Contract;
 using McFly.Server.Data;
 
 namespace McFly.Server.Controllers
@@ -55,7 +56,7 @@ namespace McFly.Server.Controllers
         /// <param name="request">The request.</param>
         /// <returns>ActionResult.</returns>
         [HttpPost]
-        public IHttpActionResult Post([FromBody] NewProjectRequestDto request)
+        public IHttpActionResult Post([FromBody] NewProjectRequest request)
         {
             ProjectsAccess.CreateProject(request.ProjectName, Position.Parse(request.StartingPosition),
                 Position.Parse(request.EndingPosition));

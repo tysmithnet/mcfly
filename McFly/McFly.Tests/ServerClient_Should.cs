@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using McFly.Core;
+using McFly.Server.Contract;
 using Moq;
 using Xunit;
 
@@ -54,21 +55,13 @@ namespace McFly.Tests
                 ProjectName = "testing"
             };
             var serverClient = new ServerClient {HttpFacade = httpBuilder.Build(), Settings = settings};
-            var expected = new Dictionary<string, string>
-            {
-                ["projectName"] = "testing",
-                ["startingPosition"] = "35:0",
-                ["endingPosition"] = "1000:0"
-            };
+            var expected = new NewProjectRequest("testing", "35:0", "1000:0");
 
             // act
             serverClient.InitializeProject("testing", new Position(0x35, 0), new Position(0x1000, 0));
 
             // assert
-            httpBuilder.Mock.Verify(
-                facade => facade.PostAsync(new Uri("https://some.server.net/api/project"),
-                    It.Is<Dictionary<string, string>>(e => e.Count == expected.Count && !e.Except(expected).Any()), null),
-                Times.Once);
+            httpBuilder.Mock.Verify(f => f.PostJsonAsync(new Uri("https://some.server.net/api/project"), expected, null), Times.Once);
         }
 
         [Fact]

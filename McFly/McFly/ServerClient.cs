@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using McFly.Core;
+using McFly.Server.Contract;
 
 namespace McFly
 {
@@ -80,14 +81,8 @@ namespace McFly
         public void InitializeProject(string projectName, Position start, Position end)
         {
             var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/project"};
-            var d = new Dictionary<string, string>
-            {
-                ["projectName"] = projectName,
-                ["startingPosition"] = start.ToString(),
-                ["endingPosition"] = end.ToString()
-            };
-
-            HttpFacade.PostAsync(ub.Uri, d, null).GetAwaiter().GetResult();
+            var request = new NewProjectRequest(projectName, start.ToString(), end.ToString());
+            HttpFacade.PostJsonAsync(ub.Uri, request, null).GetAwaiter().GetResult();
         }
     }
 }

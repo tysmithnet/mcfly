@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using McFly.Core;
+using McFly.Server.Contract;
 using McFly.Server.Controllers;
 using Moq;
 using Xunit;
@@ -15,12 +16,7 @@ namespace McFly.Server.Test
             var builder = new ProjectAccessBuilder();
             var controller = new ProjectController();
             controller.ProjectsAccess = builder.Build();
-            var request = new NewProjectRequestDto
-            {
-                ProjectName = "testing",
-                StartingPosition = "0:0",
-                EndingPosition = "1:1"
-            };
+            var request = new NewProjectRequest("testing", "0:0", "1:1");
 
             // act
             var actionResult = controller.Post(request);
