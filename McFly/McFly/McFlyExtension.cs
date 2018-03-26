@@ -321,15 +321,20 @@ namespace McFly
             return HRESULT.S_OK;
         }
 
+        internal static string GetLogPath()
+        {
+            var assemblyPath = Assembly.GetExecutingAssembly().Location;
+            assemblyPath = Path.GetDirectoryName(assemblyPath);
+            return Path.Combine(assemblyPath, "mcfly.config");
+        }
+
         /// <summary>
         ///     Populates the settings.
         /// </summary>
         internal static void PopulateSettings()
         {
-            var assemblyPath = Assembly.GetExecutingAssembly().Location;
-            assemblyPath = Path.GetDirectoryName(assemblyPath);
             var settingsInstances = compositionContainer.GetExportedValues<ISettings>().ToArray();
-            var filePath = Path.Combine(assemblyPath, "mcfly.config");
+            var filePath = GetLogPath();
             string json = null;
             try
             {

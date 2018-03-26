@@ -65,7 +65,7 @@ namespace McFly
         [ExcludeFromCodeCoverage]
         public void Process(string[] args)
         {
-            Parser.Default.ParseArguments<ReloadOptions, ListOptions>(args)
+            Parser.Default.ParseArguments<ReloadOptions, ListOptions, OpenOptions>(args)
                 .WithParsed<ReloadOptions>(r => { McFlyExtension.PopulateSettings(); })
                 .WithParsed<ListOptions>(l =>
                 {
@@ -74,6 +74,10 @@ namespace McFly
                         DebugEngineProxy.WriteLine(settings.GetType().FullName);
                         DebugEngineProxy.WriteLine(JsonConvert.SerializeObject(settings, Formatting.Indented));
                     }
+                })
+                .WithParsed<OpenOptions>(o =>
+                {
+                    var p = System.Diagnostics.Process.Start(McFlyExtension.GetLogPath());
                 });
         }
     }
@@ -81,7 +85,7 @@ namespace McFly
     /// <summary>
     ///     Class ReloadOptions.
     /// </summary>
-    [Verb("reload", HelpText = "Reload the settings from the settings file")]
+    [Verb("reload")]
     public class ReloadOptions
     {
     }
@@ -89,8 +93,13 @@ namespace McFly
     /// <summary>
     ///     Class ListOptions.
     /// </summary>
-    [Verb("list", HelpText = "List the current settings and their values")]
+    [Verb("list")]
     public class ListOptions
+    {
+    }
+
+    [Verb("open")]
+    public class OpenOptions
     {
     }
 }
