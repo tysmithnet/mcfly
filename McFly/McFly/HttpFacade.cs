@@ -31,6 +31,8 @@ namespace McFly
     [Export(typeof(IHttpFacade))]
     public class HttpFacade : IHttpFacade
     {
+        private readonly HttpClient client = new HttpClient();
+
         /// <summary>
         ///     Posts the asynchronous.
         /// </summary>
@@ -41,11 +43,8 @@ namespace McFly
         public Task<HttpResponseMessage> PostAsync(Uri resourceUri, Dictionary<string, string> formContent,
             HttpHeaders requestHeaders)
         {
-            using (var client = new HttpClient())
-            {
-                SetHeaders(requestHeaders, client);
-                return client.PostAsync(resourceUri, new FormUrlEncodedContent(formContent));
-            }
+            SetHeaders(requestHeaders, client);
+            return client.PostAsync(resourceUri, new FormUrlEncodedContent(formContent));
         }
 
         /// <summary>
@@ -57,11 +56,8 @@ namespace McFly
         /// <returns>Task&lt;HttpResponseMessage&gt;.</returns>
         public Task<HttpResponseMessage> PostAsync(Uri resourceUri, byte[] content, HttpHeaders requestHeaders)
         {
-            using (var client = new HttpClient())
-            {
-                SetHeaders(requestHeaders, client);
-                return client.PostAsync(resourceUri, new ByteArrayContent(content));
-            }
+            SetHeaders(requestHeaders, client);
+            return client.PostAsync(resourceUri, new ByteArrayContent(content));
         }
 
         /// <summary>
@@ -74,14 +70,11 @@ namespace McFly
         public Task<HttpResponseMessage> PostJsonAsync(Uri resourceUri, object content,
             HttpHeaders requestHeaders)
         {
-            using (var client = new HttpClient())
-            {
-                var json = JsonConvert.SerializeObject(content);
-                var bytes = Encoding.UTF8.GetBytes(json);
-                var c = new ByteArrayContent(bytes);
-                c.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                return client.PostAsync(resourceUri, c);
-            }
+            var json = JsonConvert.SerializeObject(content);
+            var bytes = Encoding.UTF8.GetBytes(json);
+            var c = new ByteArrayContent(bytes);
+            c.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            return client.PostAsync(resourceUri, c);
         }
 
         /// <summary>
