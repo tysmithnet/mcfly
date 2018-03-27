@@ -15,10 +15,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
-using CommandLine;
 using McFly.Core;
 
 namespace McFly
@@ -81,7 +79,7 @@ namespace McFly
         ///     Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
-        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()                             // todo: add thread specifier
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder() // todo: add thread specifier
             .SetName("index")
             .SetDescription("Record the state of registers, memory, etc for further analysis")
             .AddSwitch("-m, --memory range[ range]", "Memory ranges to index")
@@ -89,10 +87,12 @@ namespace McFly
             .AddSwitch("-e, --end pos", "Highest possible frame to index during the run")
             .AddSwitch("--bm mask[ mask]", "Breakpoint masks of the form mod!func, wildcards supported")
             .AddSwitch("--ba spec[ spec]", "Memory access breakpoints")
-            .AddSwitch("--step n", "Number of positions to record after a break") // todo: should allow for +/- around break
+            .AddSwitch("--step n",
+                "Number of positions to record after a break") // todo: should allow for +/- around break
             .AddExample("!mf index --bm user32!*", "Record all function calls in user32")
             .AddExample("!mf index --ba rw8:abc123", "Record all read/writes to abc123:abc12b")
-            .AddExample("!mf index --ba rw8:abc123 --step 3", "Record all read/writes to abc123:abc12b and 3 positions after")
+            .AddExample("!mf index --ba rw8:abc123 --step 3",
+                "Record all read/writes to abc123:abc12b and 3 positions after")
             .AddExample("!mf index -s 35:0 -e 35:f", "Index every position from 35:0 to 35:f")
             .Build();
 
@@ -112,9 +112,9 @@ namespace McFly
 
         internal static IndexOptions ExtractIndexOptions(string[] args)
         {
-            IndexOptions options = new IndexOptions();
+            var options = new IndexOptions();
             var switches = new[] {"-m", "--memory", "-s", "--start", "-e", "--end", "--bm", "--ba", "--step"};
-            for (int i = 0; i < args.Length; i++)
+            for (var i = 0; i < args.Length; i++)
             {
                 var arg = args[i];
                 switch (arg)
@@ -122,7 +122,7 @@ namespace McFly
                     case "-m":
                     case "--memory":
                         var ranges = new List<MemoryRange>();
-                        for (int j = i + 1; j < args.Length; j++)
+                        for (var j = i + 1; j < args.Length; j++)
                         {
                             var ptr = args[j];
                             if (switches.Contains(ptr))
@@ -169,7 +169,7 @@ namespace McFly
                         break;
                     case "--bm":
                         var breakpointMasks = new List<BreakpointMask>();
-                        for (int j = i + 1; j < args.Length; j++)
+                        for (var j = i + 1; j < args.Length; j++)
                         {
                             var ptr = args[j];
                             if (switches.Contains(ptr))
@@ -190,7 +190,7 @@ namespace McFly
                         break;
                     case "--ba":
                         var accessBreakpoints = new List<AccessBreakpoint>();
-                        for (int j = i + 1; j < args.Length; j++)
+                        for (var j = i + 1; j < args.Length; j++)
                         {
                             var ptr = args[j];
                             if (switches.Contains(ptr))

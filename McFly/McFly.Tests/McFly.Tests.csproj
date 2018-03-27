@@ -81,6 +81,7 @@
     <Compile Include="DisassemblyFacadeBuilder.cs" />
     <Compile Include="DisassemblyFacade_Should.cs" />
     <Compile Include="HelpMethod_Should.cs" />
+    <Compile Include="HttpFacadeBuilder.cs" />
     <Compile Include="HttpHeaders_Should.cs" />
     <Compile Include="IndexMethod_Should.cs" />
     <Compile Include="InitMethod_Should.cs" />
