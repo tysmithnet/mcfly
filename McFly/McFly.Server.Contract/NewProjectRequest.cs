@@ -112,6 +112,8 @@ namespace McFly.Server.Contract
         /// <returns>The result of the operator.</returns>
         public static bool operator ==(NewProjectRequest left, NewProjectRequest right)
         {
+            if (ReferenceEquals(left, right)) return true;
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
             return Equals(left, right);
         }
 

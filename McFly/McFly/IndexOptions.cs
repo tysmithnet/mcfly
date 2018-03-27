@@ -122,6 +122,8 @@ namespace McFly
         /// <returns>The result of the operator.</returns>
         public static bool operator ==(IndexOptions left, IndexOptions right)
         {
+            if (ReferenceEquals(left, right)) return true;
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
             return Equals(left, right);
         }
 
