@@ -55,7 +55,7 @@ namespace McFly.Tests
             // Arrange                             
             var options = new IndexOptions
             {
-                End = "35:1"
+                End = new Position(0x35, 0x1)
             };
 
             var dbg = new DebugEngineProxyBuilder();
@@ -79,7 +79,7 @@ namespace McFly.Tests
             // Arrange                             
             var options = new IndexOptions
             {
-                Start = "35:1"
+                Start = new Position(0x35, 0x1)
             };
 
             var dbg = new DebugEngineProxyBuilder();
@@ -104,8 +104,8 @@ namespace McFly.Tests
             var indexMethod = new IndexMethod();
             var indexOptions = new IndexOptions
             {
-                AccessBreakpoints = new[] {"r8:100", "w10:200", "rw10:300"},
-                BreakpointMasks = new[] {"kernel32!createprocess*", "user32!*", "mycustommod!myfancyfunction"}
+                AccessBreakpoints = new[] {AccessBreakpoint.Parse("r8:100"), AccessBreakpoint.Parse("w8:200"), AccessBreakpoint.Parse("rw4:300"), },
+                BreakpointMasks = new[] {BreakpointMask.Parse("kernel32!createprocess*"), BreakpointMask.Parse("user32!*"), BreakpointMask.Parse("mycustommod!myfancyfunction"), }
             };
             var builder = new BreakpointFacadeBuilder();
             indexMethod.BreakpointFacade = builder.Build();
@@ -114,14 +114,14 @@ namespace McFly.Tests
             indexMethod.SetBreakpoints(indexOptions);
 
             // assert
-            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("kernel32!createprocess*"), Times.Once);
-            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("user32!*"), Times.Once);
-            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("mycustommod!myfancyfunction"), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("kernel32", "createprocess*"), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("user32", "*"), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("mycustommod", "myfancyfunction"), Times.Once);
 
             builder.Mock.Verify(proxy => proxy.SetReadAccessBreakpoint(0x8, 0x100), Times.Once);
-            builder.Mock.Verify(proxy => proxy.SetReadAccessBreakpoint(0x10, 0x300), Times.Once);
-            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x10, 0x200), Times.Once);
-            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x10, 0x300), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetReadAccessBreakpoint(0x4, 0x300), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x8, 0x200), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x4, 0x300), Times.Once);
         }
 
         [Fact]

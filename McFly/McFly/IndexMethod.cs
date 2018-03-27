@@ -105,7 +105,7 @@ namespace McFly
         public void Process(string[] args)
         {
             // todo: handle help
-            IndexOptions options;
+            IndexOptions options = new IndexOptions();
             var switches = new[] {"-m", "--memory", "-s", "--start", "-e", "--end", "--bm", "--ba", "--step"};
             for (int i = 0; i < args.Length; i++)
             {
@@ -114,23 +114,93 @@ namespace McFly
                 {
                     case "-m":
                     case "--memory":
-                        var ranges = new List<string>();
+                        var ranges = new List<MemoryRange>();
                         for (int j = i + 1; j < args.Length; j++)
                         {
                             var ptr = args[j];
                             if (switches.Contains(ptr))
                                 break;
+                            try
+                            {
+                                var range = MemoryRange.Parse(ptr); 
+                                ranges.Add(range);
+                            }
+                            catch (Exception e)
+                            {
+                                throw new FormatException($"Unable to parse memory range {ptr}", e);
+                            }
                         }
+                        if(!ranges.Any())
+                            throw new ArgumentException($"No memory ranges provided to {arg}");
+                        options.MemoryRanges = ranges;
                         break;
                     case "-s":
                     case "--start":
+                        if(i + 1 >= args.Length)
+                            throw new ArgumentException($"No argument passed to {arg}");
+                        try
+                        {
+                            options.Start = Position.Parse(args[i + 1]);
+                        }
+                        catch (Exception e)
+                        {
+                            throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e); 
+                        }
                         break;
                     case "-e":
                     case "--end":
+                        if (i + 1 >= args.Length)
+                            throw new ArgumentException($"No argument passed to {arg}");
+                        try
+                        {
+                            options.End = Position.Parse(args[i + 1]);
+                        }
+                        catch (Exception e)
+                        {
+                            throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e);
+                        }
                         break;
                     case "--bm":
+                        var breakpointMasks = new List<BreakpointMask>();
+                        for (int j = i + 1; j < args.Length; j++)
+                        {
+                            var ptr = args[j];
+                            if (switches.Contains(ptr))
+                                break;
+                            try
+                            {
+                                var mask = BreakpointMask.Parse(ptr);
+                                breakpointMasks.Add(mask);
+                            }
+                            catch (Exception e)
+                            {
+                                throw new FormatException($"Unable to parse {ptr} as a BreakpointMask", e);
+                            }
+                        }
+                        if (!breakpointMasks.Any())
+                            throw new ArgumentException($"No breakpoint masks provided to {arg}");
+                        options.BreakpointMasks = breakpointMasks;
                         break;
                     case "--ba":
+                        var accessBreakpoints = new List<AccessBreakpoint>();
+                        for (int j = i + 1; j < args.Length; j++)
+                        {
+                            var ptr = args[j];
+                            if (switches.Contains(ptr))
+                                break;
+                            try
+                            {
+                                var bp = AccessBreakpoint.Parse(ptr);
+                                accessBreakpoints.Add(bp);
+                            }
+                            catch (Exception e)
+                            {
+                                throw new FormatException($"Unable to parse {ptr} as an access breakpoint", e);
+                            }
+                        }
+                        if (!accessBreakpoints.Any())
+                            throw new ArgumentException($"No memory ranges provided to {arg}");
+                        options.AccessBreakpoints = accessBreakpoints;
                         break;
                     case "--step":
                         break;
@@ -160,9 +230,7 @@ namespace McFly
         {
             if (options == null || options.Start == null)
                 return TimeTravelFacade.GetStartingPosition();
-            if (!Position.TryParse(options.Start, out var startingPosition))
-                throw new FormatException($"Invalid position passed to Start option: {options.Start}");
-            return startingPosition;
+            return options.Start;
         }
 
         /// <summary>
@@ -175,9 +243,7 @@ namespace McFly
         {
             if (options == null || options.End == null)
                 return TimeTravelFacade.GetEndingPosition();
-            if (!Position.TryParse(options.End, out var endingPosition))
-                throw new FormatException($"Invalid position passed to End option: {options.End}");
-            return endingPosition;
+            return options.End;
         }
 
         /// <summary>
@@ -263,35 +329,11 @@ namespace McFly
 
             if (options.BreakpointMasks != null)
                 foreach (var optionsBreakpointMask in options.BreakpointMasks)
-                    BreakpointFacade.SetBreakpointByMask(optionsBreakpointMask);
+                    optionsBreakpointMask.SetBreakpoint(BreakpointFacade);
 
             if (options.AccessBreakpoints == null) return;
             foreach (var accessBreakpoint in options.AccessBreakpoints)
-            {
-                // todo: move
-                var match = Regex.Match(accessBreakpoint,
-                    @"^\s*(?<access>[rw]{1,2})(?<length>[a-fA-F0-9]+):(?<address>[a-fA-F0-9]+)\s*$");
-                if (!match.Success)
-                {
-                    Log.Error($"Error: invalid access breakpoint: {accessBreakpoint}");
-                    continue;
-                }
-
-                foreach (var c in match.Groups["access"].Value)
-                {
-                    var length = Convert.ToInt32(match.Groups["length"].Value, 16); // todo: allow for decimal/hex
-                    var address = Convert.ToUInt64(match.Groups["address"].Value, 16);
-                    switch (c)
-                    {
-                        case 'r':
-                            BreakpointFacade.SetReadAccessBreakpoint(length, address);
-                            break;
-                        case 'w':
-                            BreakpointFacade.SetWriteAccessBreakpoint(length, address);
-                            break;
-                    }
-                }
-            }
+                accessBreakpoint.SetBreakpoint(BreakpointFacade);
         }
     }
 }

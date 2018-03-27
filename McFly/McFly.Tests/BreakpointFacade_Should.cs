@@ -49,7 +49,7 @@ namespace McFly.Tests
             facade.DebugEngineProxy = builder.Build();
 
             // act
-            facade.SetBreakpointByMask("kernel32!createprocess*");
+            facade.SetBreakpointByMask("kernel32", "createprocess*");
 
             // assert
             builder.Mock.Verify(proxy => proxy.Execute("bm kernel32!createprocess*"), Times.Once);

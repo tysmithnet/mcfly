@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 03-26-2018
 // ***********************************************************************
 // <copyright file="IBreakpointFacade.cs" company="">
 //     Copyright ©  2018
@@ -23,8 +23,9 @@ namespace McFly
         /// <summary>
         ///     Sets the breakpoint by mask.
         /// </summary>
-        /// <param name="breakpointMask">The breakpoint mask.</param>
-        void SetBreakpointByMask(string breakpointMask);
+        /// <param name="moduleMask">The module mask.</param>
+        /// <param name="functionMask">The function mask.</param>
+        void SetBreakpointByMask(string moduleMask, string functionMask);
 
         /// <summary>
         ///     Sets the read access breakpoint.

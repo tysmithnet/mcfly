@@ -98,7 +98,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessBreakpoint.cs" />
     <Compile Include="BreakpointFacade.cs" />
+    <Compile Include="BreakpointMask.cs" />
     <Compile Include="ByteArrayBuilder.cs" />
     <Compile Include="DebugEngineProxy.cs" />
     <Compile Include="Debugger\Enums.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="HelpMethod.cs" />
     <Compile Include="HttpFacade.cs" />
     <Compile Include="HttpHeaders.cs" />
+    <Compile Include="IBreakpoint.cs" />
     <Compile Include="IBreakpointFacade.cs" />
     <Compile Include="IDebugEngineProxy.cs" />
     <Compile Include="IDisassemblyFacade.cs" />
