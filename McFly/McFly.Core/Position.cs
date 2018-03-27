@@ -217,7 +217,10 @@ namespace McFly.Core
         /// <returns>The result of the operator.</returns>
         public static bool operator ==(Position left, Position right)
         {
-            return left?.Equals(right) ?? right == null;
+            if (ReferenceEquals(left, right)) return true;
+            if (ReferenceEquals(left, null)) return false;
+            if (ReferenceEquals(right, null)) return false;
+            return left.Equals(right);
         }
 
         /// <summary>
