@@ -106,6 +106,36 @@ namespace McFly
         {
             // todo: handle help
             IndexOptions options;
+            var switches = new[] {"-m", "--memory", "-s", "--start", "-e", "--end", "--bm", "--ba", "--step"};
+            for (int i = 0; i < args.Length; i++)
+            {
+                var arg = args[i];
+                switch (arg)
+                {
+                    case "-m":
+                    case "--memory":
+                        var ranges = new List<string>();
+                        for (int j = i + 1; j < args.Length; j++)
+                        {
+                            var ptr = args[j];
+                            if (switches.Contains(ptr))
+                                break;
+                        }
+                        break;
+                    case "-s":
+                    case "--start":
+                        break;
+                    case "-e":
+                    case "--end":
+                        break;
+                    case "--bm":
+                        break;
+                    case "--ba":
+                        break;
+                    case "--step":
+                        break;
+                }
+            }
 
             Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o =>
             {

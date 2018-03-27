@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="DisassemblyLine.cs" />
     <Compile Include="Frame.cs" />
+    <Compile Include="MemoryRange.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="PrimitiveExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
