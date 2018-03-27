@@ -15,7 +15,6 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using McFly.Core;
 
 namespace McFly
 {
@@ -81,9 +80,12 @@ namespace McFly
         /// <value><c>true</c> if this instance is write; otherwise, <c>false</c>.</value>
         public bool IsWrite { get; }
 
-        public string ToCommand()
+        public void SetBreakpoint(IBreakpointFacade breakpointFacade)
         {
-            return $"";
+            if (IsRead)
+                breakpointFacade.SetReadAccessBreakpoint(Length, Address);
+            if (IsWrite)
+                breakpointFacade.SetWriteAccessBreakpoint(Length, Address);
         }
 
         /// <summary>
@@ -97,6 +99,11 @@ namespace McFly
             if (ReferenceEquals(this, other)) return true;
             return Address == other.Address && Length == other.Length && IsRead == other.IsRead &&
                    IsWrite == other.IsWrite;
+        }
+
+        public string ToCommand()
+        {
+            return $"";
         }
 
         /// <summary>
@@ -126,14 +133,6 @@ namespace McFly
                 hashCode = (hashCode * 397) ^ IsWrite.GetHashCode();
                 return hashCode;
             }
-        }
-
-        public void SetBreakpoint(IBreakpointFacade breakpointFacade)
-        {
-            if(IsRead)
-                breakpointFacade.SetReadAccessBreakpoint(Length, Address);
-            if(IsWrite)
-                breakpointFacade.SetWriteAccessBreakpoint(Length, Address);
         }
 
         /// <summary>

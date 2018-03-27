@@ -70,13 +70,13 @@ namespace McFly
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return 
-                   Equals(Start, other.Start) &&
-                   Equals(End, other.End) &&
-                   MemoryRanges.SequenceEqual(other.MemoryRanges) &&
-                   BreakpointMasks.SequenceEqual(other.BreakpointMasks) &&
-                   AccessBreakpoints.SequenceEqual(other.AccessBreakpoints) &&
-                   Step == other.Step;
+            return
+                Equals(Start, other.Start) &&
+                Equals(End, other.End) &&
+                MemoryRanges.SequenceEqual(other.MemoryRanges) &&
+                BreakpointMasks.SequenceEqual(other.BreakpointMasks) &&
+                AccessBreakpoints.SequenceEqual(other.AccessBreakpoints) &&
+                Step == other.Step;
         }
 
         /// <summary>

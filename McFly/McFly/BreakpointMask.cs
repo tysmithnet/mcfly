@@ -14,7 +14,6 @@
 
 using System;
 using System.Text.RegularExpressions;
-using McFly.Core;
 
 namespace McFly
 {
@@ -47,7 +46,12 @@ namespace McFly
         /// </summary>
         /// <value>The function mask.</value>
         public string FunctionMask { get; }
-         
+
+        public void SetBreakpoint(IBreakpointFacade breakpointFacade)
+        {
+            breakpointFacade.SetBreakpointByMask(ModuleMask, FunctionMask);
+        }
+
         /// <summary>
         ///     Equalses the specified other.
         /// </summary>
@@ -84,11 +88,6 @@ namespace McFly
                 return ((ModuleMask != null ? ModuleMask.GetHashCode() : 0) * 397) ^
                        (FunctionMask != null ? FunctionMask.GetHashCode() : 0);
             }
-        }
-
-        public void SetBreakpoint(IBreakpointFacade breakpointFacade)
-        {
-            breakpointFacade.SetBreakpointByMask(ModuleMask, FunctionMask);
         }
 
         /// <summary>
