@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace McFly.Core
 {
@@ -39,7 +40,7 @@ namespace McFly.Core
         /// </summary>
         /// <param name="low">The low.</param>
         /// <param name="high">The high.</param>
-        /// <exception cref="System.ArgumentOutOfRangeException">low > high</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">low &gt; high</exception>
         public MemoryRange(ulong low, ulong high)
         {
             if (low > high)
@@ -191,6 +192,39 @@ namespace McFly.Core
         public static bool operator >=(MemoryRange left, MemoryRange right)
         {
             return Comparer<MemoryRange>.Default.Compare(left, right) >= 0;
+        }
+
+        /// <summary>
+        ///     Parses the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>MemoryRange.</returns>
+        /// <exception cref="System.FormatException">
+        ///     Input did not match either a range+length range nor a start:end range, e.g.
+        ///     abcL123, abc:def
+        /// </exception>
+        public static MemoryRange Parse(string input)
+        {
+            var lengthMatch = Regex.Match(input, "^(?<s>[a-f0-9]+)l(?<l>[a-f0-9]+)$", RegexOptions.IgnoreCase);
+            if (lengthMatch.Success)
+            {
+                var start = lengthMatch.Groups["s"].Value;
+                var length = lengthMatch.Groups["l"].Value;
+                var startULong = Convert.ToUInt64(start, 16);
+                var lengthULong = Convert.ToUInt64(length, 16);
+                return new MemoryRange(startULong, startULong + lengthULong);
+            }
+            var startEndMatch = Regex.Match(input, "(?<s>[a-f0-9]+):(?<e>[a-f0-9]+)", RegexOptions.IgnoreCase);
+            if (startEndMatch.Success)
+            {
+                var start = startEndMatch.Groups["s"].Value;
+                var end = startEndMatch.Groups["e"].Value;
+                var startULong = Convert.ToUInt64(start, 16);
+                var endULong = Convert.ToUInt64(end, 16);
+                return new MemoryRange(startULong, endULong);
+            }
+            throw new FormatException(
+                "Input did not match either a range+length range nor a start:end range, e.g. abcL123, abc:def");
         }
     }
 }
