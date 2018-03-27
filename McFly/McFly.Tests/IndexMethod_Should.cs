@@ -158,5 +158,38 @@ namespace McFly.Tests
                 client.UpsertFrames(
                     It.Is<IEnumerable<Frame>>(frames => frames.SequenceEqual(MockFrames.SingleThreaded0))));
         }
+
+        [Fact]
+        public void Properly_Parse_Args_Into_Options()
+        {
+            // arrange
+            var args0 =
+                "--start abc:123 --end def:456 --bm kernel32!*create* user32!* --ba rw8:10000 w4:30000 -m abcl100 abc:def"
+                    .Split(' ');
+            var options0 = new IndexOptions()
+            {
+                Start = new Position(0xabc, 0x123),
+                End = new Position(0xdef, 0x456),
+                BreakpointMasks = new []
+                {
+                    new BreakpointMask("kernel32", "*create*"), 
+                    new BreakpointMask("user32", "*"), 
+                },
+                AccessBreakpoints = new[]
+                {
+                    new AccessBreakpoint(0x10000, 8, true, true), 
+                    new AccessBreakpoint(0x30000, 4, false, true), 
+                },
+                MemoryRanges = new []
+                {
+                    new MemoryRange(0xabc, 0xbbc), 
+                    new MemoryRange(0xabc, 0xdef), 
+                }
+            };
+
+            // act
+            // assert
+            IndexMethod.ExtractIndexOptions(args0).Should().Be(options0);
+        }
     }
 }

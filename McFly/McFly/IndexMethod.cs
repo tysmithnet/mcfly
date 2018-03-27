@@ -101,10 +101,17 @@ namespace McFly
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
-        [ExcludeFromCodeCoverage]
         public void Process(string[] args)
         {
-            // todo: handle help
+            var options = ExtractIndexOptions(args);
+            var startingPosition = GetStartingPosition(options);
+            var endingPosition = GetEndingPosition(options);
+            SetBreakpoints(options);
+            ProcessInternal(startingPosition, endingPosition);
+        }
+
+        internal static IndexOptions ExtractIndexOptions(string[] args)
+        {
             IndexOptions options = new IndexOptions();
             var switches = new[] {"-m", "--memory", "-s", "--start", "-e", "--end", "--bm", "--ba", "--step"};
             for (int i = 0; i < args.Length; i++)
@@ -122,7 +129,7 @@ namespace McFly
                                 break;
                             try
                             {
-                                var range = MemoryRange.Parse(ptr); 
+                                var range = MemoryRange.Parse(ptr);
                                 ranges.Add(range);
                             }
                             catch (Exception e)
@@ -130,13 +137,13 @@ namespace McFly
                                 throw new FormatException($"Unable to parse memory range {ptr}", e);
                             }
                         }
-                        if(!ranges.Any())
+                        if (!ranges.Any())
                             throw new ArgumentException($"No memory ranges provided to {arg}");
                         options.MemoryRanges = ranges;
                         break;
                     case "-s":
                     case "--start":
-                        if(i + 1 >= args.Length)
+                        if (i + 1 >= args.Length)
                             throw new ArgumentException($"No argument passed to {arg}");
                         try
                         {
@@ -144,7 +151,7 @@ namespace McFly
                         }
                         catch (Exception e)
                         {
-                            throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e); 
+                            throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e);
                         }
                         break;
                     case "-e":
@@ -206,18 +213,7 @@ namespace McFly
                         break;
                 }
             }
-
-            Parser.Default.ParseArguments<IndexOptions>(args).WithParsed(o =>
-            {
-                options = o;
-                var startingPosition = GetStartingPosition(options);
-                var endingPosition = GetEndingPosition(options);
-                SetBreakpoints(options);
-                ProcessInternal(startingPosition, endingPosition);
-            }).WithNotParsed(errors =>
-            {
-                Log.Error($"Error: Unable to parse arguments"); // todo: add errors
-            });
+            return options;
         }
 
         /// <summary>
