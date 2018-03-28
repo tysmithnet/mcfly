@@ -51,6 +51,21 @@ namespace McFly.Server.Data
             }
         }
 
+        protected virtual void ExecuteStoredProcedureNonQuery(string projectName, string procName,
+            IEnumerable<SqlParameter> parameters)
+        {
+            using (var conn = new SqlConnection(GetProjectConnectionString(projectName)))
+            using (var command = conn.CreateCommand())
+            {
+                conn.Open();
+                command.CommandText = procName;
+                command.CommandType = CommandType.StoredProcedure;
+                foreach (var sqlParameter in parameters)
+                    command.Parameters.Add(sqlParameter);
+                command.ExecuteNonQuery();
+            }
+        }
+
         /// <summary>
         ///     Gets the project connection string.
         /// </summary>

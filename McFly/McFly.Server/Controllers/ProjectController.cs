@@ -27,7 +27,7 @@ namespace McFly.Server.Controllers
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     /// <seealso cref="Controller" />
-    [Export(typeof(ProjectController))]
+    [Export]
     [Route("api/project")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ProjectController : ApiController
