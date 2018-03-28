@@ -66,22 +66,23 @@ namespace McFly
         /// <param name="text">The text.</param>
         public void AddNote(Position position, int threadId, string text)
         {
-            var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/note/{Settings.ProjectName}"};
-
-            var d = new Dictionary<string, string>
+            var ub = new UriBuilder(Settings.ServerUrl) { Path = $"api/note" };
+            var headers = new HttpHeaders
             {
-                ["projectName"] = Settings.ProjectName,
+                ["X-Project-Name"] = Settings.ProjectName
+            };
+            var d = new Dictionary<string, string>()
+            {
                 ["position"] = position.ToString(),
                 ["threadId"] = threadId.ToString(),
                 ["text"] = text
             };
-
-            HttpFacade.PostAsync(ub.Uri, d, null).GetAwaiter().GetResult();
+            HttpFacade.PostAsync(ub.Uri, d, headers).GetAwaiter().GetResult();
         }
 
-        public void AddNote(string projectName, Position position, int? threadId, string text)
+        public void AddNote(Position position, int? threadId, string text)
         {
-            var ub = new UriBuilder(Settings.ServerUrl) { Path = $"api/frame" };
+            var ub = new UriBuilder(Settings.ServerUrl) { Path = $"api/note" };
             var headers = new HttpHeaders
             {
                 ["X-Project-Name"] = Settings.ProjectName

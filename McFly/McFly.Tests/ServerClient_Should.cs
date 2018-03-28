@@ -27,19 +27,20 @@ namespace McFly.Tests
             var serverClient = new ServerClient {HttpFacade = httpBuilder.Build(), Settings = settings};
             var expected = new Dictionary<string, string>
             {
-                ["projectName"] = "testing",
                 ["position"] = "ABC:123",
                 ["threadId"] = "1",
                 ["text"] = "hello world"
             };
+            var headers = new HttpHeaders();
+            headers.Add("X-Project-Name", "testing");
 
             // act
             serverClient.AddNote(new Position(0xabc, 0x123), 1, "hello world");
 
             // assert
             httpBuilder.Mock.Verify(
-                facade => facade.PostAsync(new Uri("https://some.server.net/api/note/testing"),
-                    It.Is<Dictionary<string, string>>(e => e.Count == expected.Count && !e.Except(expected).Any()), null),
+                facade => facade.PostAsync(new Uri("https://some.server.net/api/note"),
+                    It.Is<Dictionary<string, string>>(e => e.Count == expected.Count && !e.Except(expected).Any()), headers),
                 Times.Once);
         }
 

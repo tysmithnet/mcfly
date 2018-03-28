@@ -95,7 +95,7 @@ namespace McFly
         {
             var positions = TimeTravelFacade.Positions();
             var current = positions.CurrentThreadResult;
-            ServerClient.AddNote(Settings.ProjectName, current.Position, addOptions.IsAllThreadsAtPosition ? null : (int?)current.ThreadId, addOptions.Text);
+            ServerClient.AddNote(current.Position, addOptions.IsAllThreadsAtPosition ? null : (int?)current.ThreadId, addOptions.Text);
         }
 
         protected internal AddNoteOptions ExtractAddOptions(IEnumerable<string> args)
