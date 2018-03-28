@@ -25,9 +25,10 @@ namespace McFly.Core
     /// <seealso cref="System.IComparable" />
     /// <seealso cref="System.IComparable{McFly.Core.Position}" />
     /// <seealso cref="System.IEquatable{McFly.Core.Position}" />
-    [DebuggerDisplay("{_high:X}:{_low:X}")]
+    [DebuggerDisplay("{DebugDisplay}")]
     public class Position : IComparable<Position>, IEquatable<Position>, IComparable
     {
+        private string DebugDisplay => ToString();
         /// <summary>
         ///     The high portion of the position, e.g. abc:123 =&gt; abc
         /// </summary>

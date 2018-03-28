@@ -167,7 +167,7 @@ namespace McFly
         /// <returns>System.String.</returns>
         public string Execute(int threadId, string command)
         {
-            return Execute($"~~[{threadId:X}] {command}");
+            return Execute($"~~[0x{threadId:X}]e {command}");
         }
 
         /// <summary>

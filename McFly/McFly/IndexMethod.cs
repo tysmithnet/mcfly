@@ -267,7 +267,7 @@ namespace McFly
             // loop through all the set break points and record relevant values
             var frames = new List<Frame>();
             Position last = null;
-            while (true) // todo: have better abstraction... while(!DbgEngProxy.RunTo(endingPosition))
+            while (true) // todo: have better abstraction... while(!TimeTravelFacade.RunTo(endingPosition))
             {
                 DebugEngineProxy.RunUntilBreak();
                 var positions = TimeTravelFacade.Positions();

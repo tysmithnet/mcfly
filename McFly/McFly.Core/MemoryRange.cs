@@ -25,7 +25,7 @@ namespace McFly.Core
     /// <seealso cref="System.IEquatable{McFly.Core.MemoryRange}" />
     /// <seealso cref="System.IComparable{McFly.Core.MemoryRange}" />
     /// <seealso cref="System.IComparable" />
-    [DebuggerDisplay("{Low:X}:{High:X}")]
+    [DebuggerDisplay("{DebuggerDisplay}")]
     public class MemoryRange : IEquatable<MemoryRange>, IComparable<MemoryRange>, IComparable
     {
         /// <summary>
@@ -50,6 +50,8 @@ namespace McFly.Core
             Low = low;
             High = high;
         }
+
+        private string DebuggerDisplay => ToString();
 
         /// <summary>
         ///     Gets the low address.
@@ -101,6 +103,11 @@ namespace McFly.Core
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             return Low == other.Low && High == other.High;
+        }
+
+        public override string ToString()
+        {
+            return $"{Low:X}:{High:X}";
         }
 
         /// <summary>
