@@ -34,8 +34,6 @@ namespace McFly.Server
         /// <param name="args">The arguments.</param>
         public static void Main(string[] args)
         {
-            var log = LogManager.GetLogger<Program>();
-            log.Fatal("Starting application");
             DataAccess.ConnectionString = //Environment.GetEnvironmentVariable("ConnectionString");
                 "Data Source=localhost;Integrated Security=true";
             var baseAddress = "http://localhost:5000/";

@@ -12,12 +12,15 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Web.Http;
+using Common.Logging;
 using McFly.Server.Headers;
 using Owin;
 using Swashbuckle.Application;
@@ -30,16 +33,19 @@ namespace McFly.Server
     [ExcludeFromCodeCoverage]
     public class Startup
     {
+        private ILog Log = LogManager.GetLogger<Startup>();
+
         /// <summary>
         ///     Configurations the specified application builder.
         /// </summary>
         /// <param name="appBuilder">The application builder.</param>
         public void Configuration(IAppBuilder appBuilder)
         {
+            appBuilder.Use<LoggingMiddleware>();
             var config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
-
             // todo: extract
+            Log.Info("Looking for MEF components");
             var executingAssemblyFile = Assembly.GetExecutingAssembly().Location;
             var executingDirectory = Path.GetDirectoryName(executingAssemblyFile);
             var mcFlyAssemblies =

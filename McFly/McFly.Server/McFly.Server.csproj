@@ -53,9 +53,6 @@
     <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.MultipleLogger, Version=0.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Common.Logging.MultipleLogger.3.4.1\lib\net40\Common.Logging.MultipleLogger.dll</HintPath>
-    </Reference>
     <Reference Include="Common.Logging.NLog444, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\packages\Common.Logging.NLog444.3.4.1\lib\net40\Common.Logging.NLog444.dll</HintPath>
     </Reference>
@@ -209,6 +206,7 @@
     <Compile Include="Headers\FromHeaderAttribute.cs" />
     <Compile Include="Headers\FromHeaderAttributeOperationFilter.cs" />
     <Compile Include="Headers\FromHeaderBinding.cs" />
+    <Compile Include="LoggingMiddleware.cs" />
     <Compile Include="MefDependencyResolver.cs" />
     <Compile Include="Headers\FromProjectNameHeaderAttribute.cs" />
     <Compile Include="Program.cs" />
