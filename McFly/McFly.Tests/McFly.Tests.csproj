@@ -86,6 +86,7 @@
     <Compile Include="IndexMethod_Should.cs" />
     <Compile Include="InitMethod_Should.cs" />
     <Compile Include="MockFrames.cs" />
+    <Compile Include="NoteMethod_Should.cs" />
     <Compile Include="PositionsRecord_Should.cs" />
     <Compile Include="PositionsResult_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
