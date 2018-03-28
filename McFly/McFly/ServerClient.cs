@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Net.Http;
 using McFly.Core;
 using McFly.Server.Contract;
 
@@ -76,6 +77,22 @@ namespace McFly
             };
 
             HttpFacade.PostAsync(ub.Uri, d, null).GetAwaiter().GetResult();
+        }
+
+        public void AddNote(string projectName, Position position, int? threadId, string text)
+        {
+            var ub = new UriBuilder(Settings.ServerUrl) { Path = $"api/frame" };
+            var headers = new HttpHeaders
+            {
+                ["X-Project-Name"] = Settings.ProjectName
+            };
+            var d = new  Dictionary<string, string>()
+            {
+                ["position"] = position.ToString(),
+                ["threadId"] = threadId?.ToString(),
+                ["text"] = text
+            };
+            HttpFacade.PostAsync(ub.Uri, d, headers).GetAwaiter().GetResult();
         }
 
         public void InitializeProject(string projectName, Position start, Position end)

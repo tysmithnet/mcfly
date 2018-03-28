@@ -1,11 +1,45 @@
 ﻿using System;
 using FluentAssertions;
+using McFly.Core;
 using Xunit;
 
 namespace McFly.Tests
 {
     public class NoteMethod_Should
     {
+        [Fact]
+        public void Add_Notes_Correctly()
+        {
+            var noteMethod = new NoteMethod();
+            var dbg = new DebugEngineProxyBuilder();
+            noteMethod.TimeTravelFacade = new TimeTravelFacadeBuilder(dbg)
+                .WithPositions(new PositionsResult(new[]
+                {
+                    new PositionsRecord(1, new Position(0, 0), true),
+                    new PositionsRecord(2, new Position(0, 0), false), 
+                })).Build();
+            ServerClientBuilder serverClientBuilder = new ServerClientBuilder();
+            noteMethod.ServerClient = serverClientBuilder
+                .WithAddNote()
+                .Build();
+            noteMethod.Settings = new Settings(){ProjectName = "test"};
+            var options = new AddNoteOptions()
+            {
+                Text = "This is a note",
+                IsAllThreadsAtPosition = false
+            };
+
+            var options2 = new AddNoteOptions()
+            {
+                Text = "This is a note",
+                IsAllThreadsAtPosition = true
+            };
+
+            noteMethod.AddNote(options);
+
+            serverClientBuilder.Mock.Verify(client => client.AddNote("test", new Position(0,0), 1, "This is a note"));
+        }
+
         [Fact]
         public void Not_Allow_Multiple_Note_Bodies()
         {
@@ -28,7 +62,7 @@ namespace McFly.Tests
         {
             var noteMethod = new NoteMethod();
             var a = noteMethod.ExtractAddOptions(new[] {"note1", "-a"});
-            var a2 = noteMethod.ExtractAddOptions(new[] { "-a", "note1" });
+            var a2 = noteMethod.ExtractAddOptions(new[] {"-a", "note1"});
             var n = noteMethod.ExtractAddOptions(new[] {"this is content"});
 
             a.IsAllThreadsAtPosition.Should().BeTrue();

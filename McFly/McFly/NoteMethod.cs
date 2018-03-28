@@ -77,11 +77,25 @@ namespace McFly
                 {
                     case "add":
                         var addOptions = ExtractAddOptions(args.Skip(1));
+                        AddNote(addOptions);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException($"Unknown subcommand {command}");
                 }
             }
+        }
+
+        [Import]
+        protected internal IServerClient ServerClient { get; set; }
+
+        [Import]
+        protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
+
+        protected internal void AddNote(AddNoteOptions addOptions)
+        {
+            var positions = TimeTravelFacade.Positions();
+            var current = positions.CurrentThreadResult;
+            ServerClient.AddNote(Settings.ProjectName, current.Position, addOptions.IsAllThreadsAtPosition ? null : (int?)current.ThreadId, addOptions.Text);
         }
 
         protected internal AddNoteOptions ExtractAddOptions(IEnumerable<string> args)

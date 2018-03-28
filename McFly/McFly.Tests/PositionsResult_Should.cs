@@ -20,7 +20,7 @@ namespace McFly.Tests
             var result = new PositionsResult(records);
 
             // act
-            var thread = result.CurrentThread;
+            var thread = result.CurrentThreadResult;
 
             // assert
             thread.ThreadId.Should().Be(2);

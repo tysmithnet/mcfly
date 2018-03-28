@@ -271,7 +271,7 @@ namespace McFly
             {
                 DebugEngineProxy.RunUntilBreak();
                 var positions = TimeTravelFacade.Positions();
-                var breakRecord = positions.CurrentThread;
+                var breakRecord = positions.CurrentThreadResult;
                 if (last == breakRecord.Position)
                     break;
 

@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="FrameAccessBuilder.cs" />
     <Compile Include="FrameController_Should.cs" />
+    <Compile Include="NoteAccessBuilder.cs" />
     <Compile Include="NoteController_Should.cs" />
     <Compile Include="ProjectAccessBuilder.cs" />
     <Compile Include="ProjectController_Should.cs" />

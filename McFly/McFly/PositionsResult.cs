@@ -46,7 +46,7 @@ namespace McFly
         ///     Gets the current thread.
         /// </summary>
         /// <value>The current thread.</value>
-        public PositionsRecord CurrentThread => PositionsRecords.Single(x => x.IsCurrentThread);
+        public PositionsRecord CurrentThreadResult => PositionsRecords.Single(x => x.IsCurrentThread);
 
         /// <summary>
         ///     Gets the enumerator.
