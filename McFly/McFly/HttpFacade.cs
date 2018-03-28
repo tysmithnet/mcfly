@@ -4,7 +4,7 @@
 // Created          : 03-23-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 03-27-2018
 // ***********************************************************************
 // <copyright file="HttpFacade.cs" company="">
 //     Copyright ©  2018
@@ -31,6 +31,9 @@ namespace McFly
     [Export(typeof(IHttpFacade))]
     public class HttpFacade : IHttpFacade
     {
+        /// <summary>
+        ///     The client
+        /// </summary>
         private readonly HttpClient client = new HttpClient();
 
         /// <summary>
@@ -43,8 +46,11 @@ namespace McFly
         public Task<HttpResponseMessage> PostAsync(Uri resourceUri, Dictionary<string, string> formContent,
             HttpHeaders requestHeaders)
         {
-            SetHeaders(requestHeaders, client);
-            return client.PostAsync(resourceUri, new FormUrlEncodedContent(formContent));
+            lock (client)
+            {
+                SetHeaders(requestHeaders, client);
+                return client.PostAsync(resourceUri, new FormUrlEncodedContent(formContent));
+            }
         }
 
         /// <summary>
@@ -56,8 +62,11 @@ namespace McFly
         /// <returns>Task&lt;HttpResponseMessage&gt;.</returns>
         public Task<HttpResponseMessage> PostAsync(Uri resourceUri, byte[] content, HttpHeaders requestHeaders)
         {
-            SetHeaders(requestHeaders, client);
-            return client.PostAsync(resourceUri, new ByteArrayContent(content));
+            lock (client)
+            {
+                SetHeaders(requestHeaders, client);
+                return client.PostAsync(resourceUri, new ByteArrayContent(content));
+            }
         }
 
         /// <summary>
@@ -74,7 +83,11 @@ namespace McFly
             var bytes = Encoding.UTF8.GetBytes(json);
             var c = new ByteArrayContent(bytes);
             c.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            return client.PostAsync(resourceUri, c);
+            lock (client)
+            {
+                SetHeaders(requestHeaders, client);
+                return client.PostAsync(resourceUri, c); // todo: timeout 
+            }
         }
 
         /// <summary>

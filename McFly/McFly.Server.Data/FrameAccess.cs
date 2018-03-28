@@ -91,10 +91,10 @@ namespace McFly.Server.Data
                     frame.Position.High,
                     frame.Position.Low,
                     frame.ThreadId,
-                    frame.RegisterSet.Rax,
-                    frame.RegisterSet.Rbx,
-                    frame.RegisterSet.Rcx,
-                    frame.RegisterSet.Rdx,
+                    frame.RegisterSet.Rax.ToLong(),
+                    frame.RegisterSet.Rbx.ToLong(),
+                    frame.RegisterSet.Rcx.ToLong(),
+                    frame.RegisterSet.Rdx.ToLong(),
                     frame.DisassemblyLine.OpCode,
                     frame.DisassemblyLine.OpCodeMnemonic,
                     frame.DisassemblyLine.DisassemblyNote);
@@ -107,6 +107,8 @@ namespace McFly.Server.Data
                         frame.Position.Low,
                         frame.ThreadId,
                         index,
+                        stackFrame.StackPointer,
+                        stackFrame.ReturnAddress,
                         stackFrame.Module,
                         stackFrame.FunctionName,
                         stackFrame.Offset
