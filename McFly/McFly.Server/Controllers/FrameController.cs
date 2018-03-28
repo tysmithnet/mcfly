@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Text;
 using System.Web.Http;
 using Common.Logging;
 using McFly.Core;
@@ -54,7 +55,19 @@ namespace McFly.Server.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] IEnumerable<Frame> frames)
         {
-            FrameAccess.UpsertFrames(projectName, frames);
+            try
+            {
+                FrameAccess.UpsertFrames(projectName, frames);
+            }
+            catch (Exception e)
+            {
+                var sb = new StringBuilder();
+                sb.AppendLine($"Problem upserting frames. Does the {projectName} database exist?");
+                sb.AppendLine($"{e.GetType().FullName} - {e.Message}");
+                sb.AppendLine($"{e.StackTrace}");
+                Log.Error(sb.ToString());
+                return InternalServerError(e);
+            }
             return Ok();
         }
     }
