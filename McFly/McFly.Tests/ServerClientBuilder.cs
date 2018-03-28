@@ -69,5 +69,11 @@ namespace McFly.Tests
             Mock.Setup(client => client.AddNote(It.IsAny<string>(), It.IsAny<Position>(), It.IsAny<int?>(), It.IsAny<string>()));
             return this;
         }
+
+        public ServerClientBuilder WithAddNote(string projectName, Position position, int threadId, string text)
+        {
+            Mock.Setup(client => client.AddNote(projectName, position, threadId, text));
+            return this;
+        }
     }
 }

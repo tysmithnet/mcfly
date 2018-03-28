@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using McFly.Core;
+using Moq;
 using Xunit;
 
 namespace McFly.Tests
@@ -20,7 +21,8 @@ namespace McFly.Tests
                 })).Build();
             ServerClientBuilder serverClientBuilder = new ServerClientBuilder();
             noteMethod.ServerClient = serverClientBuilder
-                .WithAddNote()
+                .WithAddNote("test", new Position(0, 0), 1, "This is a note")
+                .WithAddNote("test", new Position(0, 0), 2, "This is a note")
                 .Build();
             noteMethod.Settings = new Settings(){ProjectName = "test"};
             var options = new AddNoteOptions()
@@ -36,8 +38,9 @@ namespace McFly.Tests
             };
 
             noteMethod.AddNote(options);
-
-            serverClientBuilder.Mock.Verify(client => client.AddNote("test", new Position(0,0), 1, "This is a note"));
+            noteMethod.AddNote(options2);
+            serverClientBuilder.Mock.Verify(client => client.AddNote("test", new Position(0,0), 1, "This is a note"), Times.Once);
+            serverClientBuilder.Mock.Verify(client => client.AddNote("test", new Position(0, 0), null, "This is a note"), Times.Once);
         }
 
         [Fact]
