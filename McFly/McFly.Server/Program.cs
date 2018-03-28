@@ -14,6 +14,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using Common.Logging;
 using McFly.Server.Data;
 using Microsoft.Owin.Hosting;
 
@@ -25,12 +26,16 @@ namespace McFly.Server
     [ExcludeFromCodeCoverage]
     public class Program
     {
+        private ILog Log = LogManager.GetLogger<Program>();
+
         /// <summary>
         ///     Defines the entry point of the application.
         /// </summary>
         /// <param name="args">The arguments.</param>
         public static void Main(string[] args)
         {
+            var log = LogManager.GetLogger<Program>();
+            log.Fatal("Starting application");
             DataAccess.ConnectionString = //Environment.GetEnvironmentVariable("ConnectionString");
                 "Data Source=localhost;Integrated Security=true";
             var baseAddress = "http://localhost:5000/";
