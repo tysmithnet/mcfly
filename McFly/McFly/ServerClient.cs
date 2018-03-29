@@ -27,7 +27,7 @@ namespace McFly
     /// <seealso cref="McFly.IServerClient" />
     /// <seealso cref="System.IDisposable" />
     [Export(typeof(IServerClient))]
-    public class ServerClient : IServerClient
+    public class ServerClient : IServerClient  // todo: move to McFly.Server
     {
         /// <summary>
         ///     Gets or sets the HTTP facade.
@@ -57,43 +57,16 @@ namespace McFly
             };
             HttpFacade.PostJsonAsync(ub.Uri, frames, headers).GetAwaiter().GetResult();
         }
-
-        /// <summary>
-        ///     Adds the note.
-        /// </summary>
-        /// <param name="position">The position.</param>
-        /// <param name="threadId">The thread identifier.</param>
-        /// <param name="text">The text.</param>
-        public void AddNote(Position position, int threadId, string text)
-        {
-            var ub = new UriBuilder(Settings.ServerUrl) { Path = $"api/note" };
-            var headers = new HttpHeaders
-            {
-                ["X-Project-Name"] = Settings.ProjectName
-            };
-            var d = new Dictionary<string, string>()
-            {
-                ["position"] = position.ToString(),
-                ["threadId"] = threadId.ToString(),
-                ["text"] = text
-            };
-            HttpFacade.PostAsync(ub.Uri, d, headers).GetAwaiter().GetResult();
-        }
-
+            
         public void AddNote(Position position, int? threadId, string text)
         {
             var ub = new UriBuilder(Settings.ServerUrl) { Path = $"api/note" };
+            var addNoteRequest = new AddNoteRequest(position, threadId, text);
             var headers = new HttpHeaders
             {
                 ["X-Project-Name"] = Settings.ProjectName
             };
-            var d = new  Dictionary<string, string>()
-            {
-                ["position"] = position.ToString(),
-                ["threadId"] = threadId?.ToString(),
-                ["text"] = text
-            };
-            HttpFacade.PostAsync(ub.Uri, d, headers).GetAwaiter().GetResult();
+            HttpFacade.PostJsonAsync(ub.Uri, addNoteRequest, headers).GetAwaiter().GetResult();
         }
 
         public void InitializeProject(string projectName, Position start, Position end)

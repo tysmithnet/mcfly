@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Data;
 using System.Data.SqlClient;
 using McFly.Core;
@@ -24,6 +25,7 @@ namespace McFly.Server.Data
     /// </summary>
     /// <seealso cref="McFly.Server.Data.DataAccess" />
     /// <seealso cref="McFly.Server.Data.INoteAccess" />
+    [Export(typeof(INoteAccess))]
     public class NoteAccess : DataAccess, INoteAccess
     {
         /// <summary>

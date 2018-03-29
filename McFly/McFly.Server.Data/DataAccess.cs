@@ -73,7 +73,7 @@ namespace McFly.Server.Data
         /// <returns>System.String.</returns>
         protected string GetProjectConnectionString(string projectName)
         {
-            var sb = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName};
+            var sb = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName, IntegratedSecurity = true};
             return sb.ToString();
         }
     }

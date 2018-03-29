@@ -15,6 +15,7 @@
 using System.ComponentModel.Composition;
 using System.Web.Http;
 using McFly.Core;
+using McFly.Server.Contract;
 using McFly.Server.Data;
 using McFly.Server.Headers;
 
@@ -26,6 +27,7 @@ namespace McFly.Server.Controllers
     /// <seealso cref="System.Web.Http.ApiController" />
     [Route("api/note")]
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class NoteController : ApiController
     {
         /// <summary>
@@ -44,24 +46,9 @@ namespace McFly.Server.Controllers
         /// <param name="text">The text.</param>
         /// <returns>IHttpActionResult.</returns>
         [HttpPost]
-        public IHttpActionResult Post([FromProjectNameHeader] string projectName, Position position, int threadId,
-            string text)
+        public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody]AddNoteRequest request)
         {
-            NoteAccess.AddNote(projectName, position, threadId, text);
-            return Ok();
-        }
-
-        /// <summary>
-        ///     Posts the specified project name.
-        /// </summary>
-        /// <param name="projectName">Name of the project.</param>
-        /// <param name="position">The position.</param>
-        /// <param name="text">The text.</param>
-        /// <returns>IHttpActionResult.</returns>
-        [HttpPost]
-        public IHttpActionResult Post([FromProjectNameHeader] string projectName, Position position, string text)
-        {
-            NoteAccess.AddNote(projectName, position, null, text);
+            NoteAccess.AddNote(projectName, request.Position, request.ThreadId, request.Text);
             return Ok();
         }
     }

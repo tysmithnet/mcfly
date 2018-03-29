@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using McFly.Core;
 using McFly.Server.Contract;
 using Moq;
@@ -25,12 +24,7 @@ namespace McFly.Tests
                 ProjectName = "testing"
             };
             var serverClient = new ServerClient {HttpFacade = httpBuilder.Build(), Settings = settings};
-            var expected = new Dictionary<string, string>
-            {
-                ["position"] = "ABC:123",
-                ["threadId"] = "1",
-                ["text"] = "hello world"
-            };
+
             var headers = new HttpHeaders();
             headers.Add("X-Project-Name", "testing");
 
@@ -39,9 +33,8 @@ namespace McFly.Tests
 
             // assert
             httpBuilder.Mock.Verify(
-                facade => facade.PostAsync(new Uri("https://some.server.net/api/note"),
-                    It.Is<Dictionary<string, string>>(e => e.Count == expected.Count && !e.Except(expected).Any()), headers),
-                Times.Once);
+                facade => facade.PostJsonAsync(new Uri("https://some.server.net/api/note"),
+                    new AddNoteRequest(new Position(0xabc, 0x123), 1, "hello world"), headers), Times.Once);
         }
 
         [Fact]
@@ -62,7 +55,8 @@ namespace McFly.Tests
             serverClient.InitializeProject("testing", new Position(0x35, 0), new Position(0x1000, 0));
 
             // assert
-            httpBuilder.Mock.Verify(f => f.PostJsonAsync(new Uri("https://some.server.net/api/project"), expected, null), Times.Once);
+            httpBuilder.Mock.Verify(
+                f => f.PostJsonAsync(new Uri("https://some.server.net/api/project"), expected, null), Times.Once);
         }
 
         [Fact]
@@ -78,8 +72,8 @@ namespace McFly.Tests
             };
             var serverClient = new ServerClient {HttpFacade = httpBuilder.Build(), Settings = settings};
             var frames = MockFrames.SingleThreaded0;
-            var headers = new HttpHeaders()
-            {   
+            var headers = new HttpHeaders
+            {
                 ["X-Project-Name"] = "testing"
             };
 

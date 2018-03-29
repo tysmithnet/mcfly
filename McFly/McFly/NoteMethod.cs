@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using CommandLine;
 
 namespace McFly
 {
@@ -26,6 +25,7 @@ namespace McFly
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [ExcludeFromCodeCoverage]
+    [Export(typeof(IMcFlyMethod))]
     internal class NoteMethod : IMcFlyMethod
     {
         /// <summary>
@@ -41,6 +41,12 @@ namespace McFly
         /// <value>The debug eng proxy.</value>
         [Import]
         public IDebugEngineProxy DebugEngineProxy { get; set; }
+
+        [Import]
+        protected internal IServerClient ServerClient { get; set; }
+
+        [Import]
+        protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
 
         /// <summary>
         ///     Gets the help information.
@@ -85,17 +91,12 @@ namespace McFly
             }
         }
 
-        [Import]
-        protected internal IServerClient ServerClient { get; set; }
-
-        [Import]
-        protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
-
         protected internal void AddNote(AddNoteOptions addOptions)
         {
             var positions = TimeTravelFacade.Positions();
             var current = positions.CurrentThreadResult;
-            ServerClient.AddNote(current.Position, addOptions.IsAllThreadsAtPosition ? null : (int?)current.ThreadId, addOptions.Text);
+            ServerClient.AddNote(current.Position, addOptions.IsAllThreadsAtPosition ? null : (int?) current.ThreadId,
+                addOptions.Text);
         }
 
         protected internal AddNoteOptions ExtractAddOptions(IEnumerable<string> args)
@@ -103,7 +104,7 @@ namespace McFly
             var options = new AddNoteOptions();
             var arr = args.ToArray();
 
-            for (int i = 0; i < arr.Length; i++)
+            for (var i = 0; i < arr.Length; i++)
             {
                 var ptr = arr[i];
 
@@ -131,6 +132,7 @@ namespace McFly
     internal class AddNoteOptions
     {
         public bool IsAllThreadsAtPosition { get; set; }
+
         /// <summary>
         ///     Gets or sets the content.
         /// </summary>

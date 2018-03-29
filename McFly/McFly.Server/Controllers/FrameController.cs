@@ -31,6 +31,7 @@ namespace McFly.Server.Controllers
     /// <seealso cref="System.Web.Mvc.Controller" />
     [Route("api/frame/")]
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class FrameController : ApiController
     {
         /// <summary>
