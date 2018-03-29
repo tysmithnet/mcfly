@@ -29,10 +29,10 @@ namespace McFly.Core
         /// </summary>
         /// <param name="stackFrames">The stack frames.</param>
         /// <exception cref="ArgumentNullException">stackFrames</exception>
-        public StackTrace(IEnumerable<StackFrame> stackFrames)
+        public StackTrace(IEnumerable<StackFrame> stackFrames = null)
         {
-            StackFrames = stackFrames?.ToList() ?? throw new ArgumentNullException(nameof(stackFrames));
-            NumFrames = StackFrames.Count();
+            StackFrames = stackFrames?.ToList() ?? new List<StackFrame>();
+            
         }
 
         /// <summary>
@@ -40,12 +40,6 @@ namespace McFly.Core
         /// </summary>
         /// <value>The stack frames.</value>
         public IEnumerable<StackFrame> StackFrames { get; internal set; }
-
-        /// <summary>
-        ///     Gets the number frames.
-        /// </summary>
-        /// <value>The number frames.</value>
-        public int NumFrames { get; internal set; }
 
         /// <summary>
         ///     Equalses the specified other.
@@ -84,7 +78,6 @@ namespace McFly.Core
                                ? StackFrames.Select(x => x.GetHashCode())
                                    .Aggregate((l, r) => l.GetHashCode() ^ r.GetHashCode())
                                : 0);
-                hashCode = (hashCode * 397) ^ NumFrames;
                 return hashCode;
             }
         }

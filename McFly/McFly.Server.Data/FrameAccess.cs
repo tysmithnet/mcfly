@@ -17,6 +17,7 @@ using System.ComponentModel.Composition;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Common.Logging;
 using McFly.Core;
 
 namespace McFly.Server.Data
@@ -30,6 +31,8 @@ namespace McFly.Server.Data
     [Export(typeof(FrameAccess))]
     public class FrameAccess : DataAccess, IFrameAccess
     {
+        private ILog Log = LogManager.GetLogger<FrameAccess>();
+
         /// <summary>
         ///     Upserts the frame.
         /// </summary>
@@ -51,6 +54,7 @@ namespace McFly.Server.Data
             }
             catch (SqlException e)
             {
+                Log.Error($"Error upserting frames. Is your payload correct? Is the project name correct?", e);
                 throw;
             }
         }
@@ -91,27 +95,27 @@ namespace McFly.Server.Data
                     frame.Position.High,
                     frame.Position.Low,
                     frame.ThreadId,
-                    frame.RegisterSet.Rax.ToLong(),
-                    frame.RegisterSet.Rbx.ToLong(),
-                    frame.RegisterSet.Rcx.ToLong(),
-                    frame.RegisterSet.Rdx.ToLong(),
-                    frame.DisassemblyLine.OpCode,
-                    frame.DisassemblyLine.OpCodeMnemonic,
-                    frame.DisassemblyLine.DisassemblyNote);
+                    frame.RegisterSet?.Rax.ToLong(),
+                    frame.RegisterSet?.Rbx.ToLong(),
+                    frame.RegisterSet?.Rcx.ToLong(),
+                    frame.RegisterSet?.Rdx.ToLong(),
+                    frame.DisassemblyLine?.OpCode,
+                    frame.DisassemblyLine?.OpCodeMnemonic,
+                    frame.DisassemblyLine?.DisassemblyNote);
 
-                for (var index = 0; index < frame.StackTrace.NumFrames; index++)
+                for (var index = 0; index < frame.StackTrace?.StackFrames.Count(); index++)
                 {
-                    var stackFrame = frame.StackTrace.StackFrames.ElementAt(index);
+                    var stackFrame = frame.StackTrace?.StackFrames.ElementAt(index);
                     stackFrameTable.Rows.Add(
                         frame.Position.High,
                         frame.Position.Low,
                         frame.ThreadId,
                         index,
-                        stackFrame.StackPointer,
-                        stackFrame.ReturnAddress,
-                        stackFrame.Module,
-                        stackFrame.FunctionName,
-                        stackFrame.Offset
+                        stackFrame?.StackPointer,
+                        stackFrame?.ReturnAddress,
+                        stackFrame?.Module,
+                        stackFrame?.FunctionName,
+                        stackFrame?.Offset
                     );
                 }
             }

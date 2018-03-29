@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace McFly.Core
 {
@@ -69,7 +70,7 @@ namespace McFly.Core
         /// </summary>
         /// <value>The disassembly line.</value>
         public DisassemblyLine DisassemblyLine { get; set; }
-
+                                                    
         /// <summary>
         ///     Compares to.
         /// </summary>
