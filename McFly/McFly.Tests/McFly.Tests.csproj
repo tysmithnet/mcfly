@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessBreakpoint_Should.cs" />
     <Compile Include="BreakpointFacadeBuilder.cs" />
     <Compile Include="BreakpointFacade_Should.cs" />
     <Compile Include="ByteArrayBuilder_Should.cs" />
