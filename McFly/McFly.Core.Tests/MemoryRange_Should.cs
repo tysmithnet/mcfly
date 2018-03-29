@@ -18,6 +18,12 @@ namespace McFly.Core.Tests
 
             // act
             // assert
+            m1.Equals(null).Should().BeFalse();
+            m1.Equals((MemoryRange) null);
+            m1.Equals(new object()).Should().BeFalse();
+            m1.CompareTo(m1).Should().Be(0);
+            m1.Equals((object) m1).Should().BeTrue();
+            m1.Equals(m1).Should().BeTrue();
             m1.Equals(m2).Should().BeTrue();
             m1.Equals((object) m2).Should().BeTrue();
             m1.CompareTo(m2).Should().Be(0);
@@ -73,6 +79,12 @@ namespace McFly.Core.Tests
             MemoryRange.Parse(l1).Should().Be(new MemoryRange(0xabc, 0xbbc));
             MemoryRange.Parse(s1).Should().Be(new MemoryRange(0xabc, 0xdef));
             MemoryRange.Parse(s1).Should().Be(new MemoryRange(0xabc, 0xdef));
+        }
+
+        [Fact]
+        public void Have_A_String_Representation_Like_The_Debugger()
+        {
+            new MemoryRange(0x123, 0xabc).ToString().Should().Be("123:ABC");
         }
     }
 }

@@ -31,13 +31,6 @@ namespace McFly.Core
         /// <summary>
         ///     Initializes a new instance of the <see cref="MemoryRange" /> class.
         /// </summary>
-        internal MemoryRange()
-        {
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="MemoryRange" /> class.
-        /// </summary>
         /// <param name="low">The low.</param>
         /// <param name="high">The high.</param>
         /// <exception cref="System.ArgumentOutOfRangeException">low &gt; high</exception>
