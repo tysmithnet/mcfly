@@ -11,6 +11,10 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
+using System;
+using System.Collections.Generic;
+using McFly.Core;
 using McFly.Server.Data;
 using Moq;
 
@@ -33,6 +37,13 @@ namespace McFly.Server.Test
         public IFrameAccess Build()
         {
             return Mock.Object;
+        }
+
+        public FrameAccessBuilder WithUpsertFrames(Exception exception)
+        {
+            Mock.Setup(access => access.UpsertFrames(It.IsAny<string>(), It.IsAny<IEnumerable<Frame>>()))
+                .Throws(exception);
+            return this;
         }
     }
 }

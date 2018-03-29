@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Common.Logging;
 using Microsoft.Owin;
@@ -23,6 +24,7 @@ namespace McFly.Server
     ///     Class LoggingMiddleware.
     /// </summary>
     /// <seealso cref="Microsoft.Owin.OwinMiddleware" />
+    [ExcludeFromCodeCoverage]
     public class LoggingMiddleware : OwinMiddleware
     {
         /// <summary>
