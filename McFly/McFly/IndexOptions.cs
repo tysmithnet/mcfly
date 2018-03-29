@@ -73,9 +73,9 @@ namespace McFly
             return
                 Equals(Start, other.Start) &&
                 Equals(End, other.End) &&
-                MemoryRanges.SequenceEqual(other.MemoryRanges) &&
-                BreakpointMasks.SequenceEqual(other.BreakpointMasks) &&
-                AccessBreakpoints.SequenceEqual(other.AccessBreakpoints) &&
+                (MemoryRanges?.SequenceEqual(other.MemoryRanges)).GetValueOrDefault(true) &&
+                (BreakpointMasks?.SequenceEqual(other.BreakpointMasks)).GetValueOrDefault(true) &&
+                (AccessBreakpoints?.SequenceEqual(other.AccessBreakpoints)).GetValueOrDefault(true) &&
                 Step == other.Step;
         }
 

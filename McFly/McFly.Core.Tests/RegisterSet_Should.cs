@@ -39,6 +39,18 @@ namespace McFly.Core.Tests
         }
 
         [Fact]
+        public void Exhibit_Value_Equality()
+        {
+            var r1 = new RegisterSet();
+            var r2 = new RegisterSet();
+            (r1 == r2).Should().BeTrue();
+            r1.Equals(r2).Should().BeTrue();
+            r1.Equals(r1).Should().BeTrue();
+            r1.GetHashCode().Should().Be(r2.GetHashCode());
+
+        }
+
+        [Fact]
         public void Have_Correct_Register_Num_Bits()
         {
             // arrange

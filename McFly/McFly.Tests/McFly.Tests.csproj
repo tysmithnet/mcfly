@@ -86,6 +86,7 @@
     <Compile Include="HttpFacadeBuilder.cs" />
     <Compile Include="HttpHeaders_Should.cs" />
     <Compile Include="IndexMethod_Should.cs" />
+    <Compile Include="IndexOptions_Should.cs" />
     <Compile Include="InitMethod_Should.cs" />
     <Compile Include="MockFrames.cs" />
     <Compile Include="NoteMethod_Should.cs" />
