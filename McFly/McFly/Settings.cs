@@ -4,7 +4,7 @@
 // Created          : 02-25-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-06-2018
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="Settings.cs" company="">
 //     Copyright ©  2018
@@ -34,7 +34,7 @@ namespace McFly
         ///     Gets or sets the launcher path.
         /// </summary>
         /// <value>The launcher path.</value>
-        public string LauncherPath { get; set; }
+        public string ServerExePath { get; set; }
 
         /// <summary>
         ///     Gets or sets the server URL.

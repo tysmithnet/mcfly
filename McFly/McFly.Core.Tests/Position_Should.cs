@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 
@@ -10,6 +6,40 @@ namespace McFly.Core.Tests
 {
     public class Position_Should
     {
+        [Fact]
+        public void Demonstrate_Field_Equality()
+        {
+            // arrange
+            var left = new Position(123, 456);
+            var left2 = new Position(0, 0);
+            var right = new Position(123, 456);
+            var right2 = new Position(123, 457);
+            var comp = Position.HighLowComparer;
+
+            // act
+            // assert
+            (left == right).Should().Be(true, " == should be overloaded");
+            (left != right).Should().Be(false, " == should be overloaded");
+            left.Equals((object) null).Should().Be(false, "Object equals  operator should be overloaded");
+            left.Equals((object) left).Should().Be(true, "Object equals  operator should be overloaded");
+            left.Equals((object) right).Should().Be(true, "Object equals should be overriden");
+            left.Equals(3).Should().Be(false, "Object equals should be overriden");
+            left.Equals(null).Should().Be(false, "Position equals  operator should be overloaded");
+            left.Equals(left).Should().Be(true, "Position equals  operator should be overloaded");
+            left.Equals(right).Should().Be(true, "Position equals should be overriden");
+            left.Equals(right).Should().Be(true, "Position equals should be overriden");
+            (left < right).Should().Be(false, "< operator should be overriden");
+            (left2 < right).Should().Be(true, "< operator should be overriden");
+            (left > right).Should().Be(false, "> operator should be overriden");
+            (right2 > right).Should().Be(true, "> operator should be overriden");
+            (left <= right).Should().Be(true, "<= operator should be overriden");
+            (left >= right).Should().Be(true, ">= operator should be overriden");
+            left.CompareTo(left).Should().Be(0, "CompareTo should be implemented");
+            left.CompareTo(null).Should().Be(1, "CompareTo should be implemented");
+            comp.Equals(left, left).Should().BeTrue("IEquatable should be implemented");
+            comp.GetHashCode(left).Should().Be(left.GetHashCode(), "The same object should have the same hash code");
+        }
+
         [Fact]
         public void Not_Allow_Negative_Values()
         {
@@ -39,7 +69,9 @@ namespace McFly.Core.Tests
             // act
             // assert
             position.Equals(new Position(0xabc, 0x123)).Should().BeTrue("Positions use hex");
-            position.Equals(new Position(0xabc, 0x123)).Should().BeTrue("Positions use hex and case doesn't matter");
+            position2.Equals(new Position(0xabc, 0x123)).Should().BeTrue("Positions use hex and case doesn't matter");
+            position.High.Should().Be(0xabc, "The high portion is everything before the :");
+            position.Low.Should().Be(0x123, "The low portion is everything after the :");
             throws.Should().Throw<FormatException>("Input should be in the form xxx:xxx");
         }
 
@@ -54,40 +86,6 @@ namespace McFly.Core.Tests
             // assert
             zero.ToString().Should().Be("0:0", "Zeros show up as zeros");
             rand.ToString().Should().Be("123:ABC", "Positions are upper case hex pairs separated by :");
-        }
-
-        [Fact]
-        public void Demonstrate_Field_Equality()
-        {
-            // arrange
-            var left = new Position(123, 456);
-            var left2 = new Position(0, 0);
-            var right = new Position(123, 456);
-            var right2 = new Position(123, 457);
-            var comp = Position.HighLowThreadIdComparer;
-
-            // act
-            // assert
-            (left == right).Should().Be(true, " == should be overloaded");
-            (left != right).Should().Be(false, " == should be overloaded");
-            left.Equals((object)null).Should().Be(false, "Object equals  operator should be overloaded");
-            left.Equals((object)left).Should().Be(true, "Object equals  operator should be overloaded");
-            left.Equals((object)right).Should().Be(true, "Object equals should be overriden");
-            left.Equals((object) 3).Should().Be(false, "Object equals should be overriden");
-            left.Equals((Position)null).Should().Be(false, "Position equals  operator should be overloaded");
-            left.Equals((Position)left).Should().Be(true, "Position equals  operator should be overloaded");
-            left.Equals((Position)right).Should().Be(true, "Position equals should be overriden");
-            left.Equals(right).Should().Be(true, "Position equals should be overriden");
-            (left < right).Should().Be(false, "< operator should be overriden");
-            (left2 < right).Should().Be(true, "< operator should be overriden");
-            (left > right).Should().Be(false, "> operator should be overriden");
-            (right2 > right).Should().Be(true, "> operator should be overriden");
-            (left <= right).Should().Be(true, "<= operator should be overriden");
-            (left >= right).Should().Be(true, ">= operator should be overriden");
-            left.CompareTo(left).Should().Be(0, "CompareTo should be implemented");
-            left.CompareTo(null).Should().Be(1, "CompareTo should be implemented");
-            comp.Equals(left, left).Should().BeTrue("IEquatable should be implemented");
-            comp.GetHashCode(left).Should().Be(left.GetHashCode(), "The same object should have the same hash code");
         }
     }
 }

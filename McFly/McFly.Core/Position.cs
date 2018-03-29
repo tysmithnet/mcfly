@@ -4,7 +4,7 @@
 // Created          : 02-25-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-09-2018
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="Position.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -22,18 +22,20 @@ namespace McFly.Core
     /// <summary>
     ///     Class Position.
     /// </summary>
+    /// <seealso cref="System.IComparable" />
     /// <seealso cref="System.IComparable{McFly.Core.Position}" />
     /// <seealso cref="System.IEquatable{McFly.Core.Position}" />
-    [DebuggerDisplay("{_high}:{_low}")]
-    public class Position : IComparable<Position>, IEquatable<Position>
+    [DebuggerDisplay("{DebugDisplay}")]
+    public class Position : IComparable<Position>, IEquatable<Position>, IComparable
     {
+        private string DebugDisplay => ToString();
         /// <summary>
-        ///     The high
+        ///     The high portion of the position, e.g. abc:123 =&gt; abc
         /// </summary>
         private int _high;
 
         /// <summary>
-        ///     The low
+        ///     The low portion of the position, e.g. abc:123 =&gt; 123
         /// </summary>
         private int _low;
 
@@ -49,20 +51,16 @@ namespace McFly.Core
         /// </exception>
         public Position(int high, int low)
         {
-            if (high < 0)
-                throw new ArgumentOutOfRangeException($"{nameof(high)} must be a non negative integer");
-            if (low < 0)
-                throw new ArgumentOutOfRangeException($"{nameof(low)} must be a non negative integer");
-            _high = high;
-            _low = low;
+            High = high;
+            Low = low;
         }
 
         /// <summary>
-        ///     Gets or sets the high.
+        ///     Gets or sets the high portion.
         /// </summary>
-        /// <value>The high.</value>
-        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
+        /// <value>The high portion.</value>
         /// <exception cref="ArgumentOutOfRangeException">value</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
         public int High
         {
             get => _high;
@@ -75,11 +73,11 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Gets or sets the low.
+        ///     Gets or sets the low portion.
         /// </summary>
-        /// <value>The low.</value>
-        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
+        /// <value>The low portion.</value>
         /// <exception cref="ArgumentOutOfRangeException">value</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">value</exception>
         public int Low
         {
             get => _low;
@@ -92,11 +90,25 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Gets the high low thread identifier comparer.
+        ///     Gets a comparator that first compares the high portions and then the low portions only if the high are equal
         /// </summary>
         /// <value>The high low thread identifier comparer.</value>
-        public static IEqualityComparer<Position> HighLowThreadIdComparer { get; } =
+        public static IEqualityComparer<Position> HighLowComparer { get; } =
             new HighLowEqualityComparer();
+
+        /// <summary>
+        ///     Compares to.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="ArgumentException">Position</exception>
+        public int CompareTo(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return 1;
+            if (ReferenceEquals(this, obj)) return 0;
+            if (!(obj is Position)) throw new ArgumentException($"Object must be of type {nameof(Position)}");
+            return CompareTo((Position) obj);
+        }
 
         /// <summary>
         ///     Compares to.
@@ -137,12 +149,12 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Parses the specified text.
+        ///     Parses the specified text into a new Position instance.
         /// </summary>
         /// <param name="text">The text.</param>
         /// <returns>Position.</returns>
-        /// <exception cref="System.FormatException">text</exception>
         /// <exception cref="FormatException">text</exception>
+        /// <exception cref="System.FormatException">text</exception>
         public static Position Parse(string text)
         {
             var match = Regex.Match(text, @"^\s*(?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+\s*$)");
@@ -150,26 +162,7 @@ namespace McFly.Core
                 throw new FormatException($"{nameof(text)} is not a valid format for Position.. must be like 1f0:df");
             return new Position(Convert.ToInt32(match.Groups["hi"].Value, 16),
                 Convert.ToInt32(match.Groups["lo"].Value, 16));
-        }
-
-        /// <summary>
-        ///     Tries the parse.
-        /// </summary>
-        /// <param name="text">The text.</param>
-        /// <param name="outVar">The out variable.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool TryParse(string text, out Position outVar)
-        {
-            var match = Regex.Match(text, @"^\s*(?<hi>[a-fA-F0-9]+):(?<lo>[a-fA-F0-9]+\s*$)");
-            if (!match.Success)
-            {
-                outVar = null;
-                return false;
-            }
-            outVar = new Position(Convert.ToInt32(match.Groups["hi"].Value, 16),
-                Convert.ToInt32(match.Groups["lo"].Value, 16));
-            return true;
-        }
+        }  
 
         /// <summary>
         ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
@@ -206,7 +199,9 @@ namespace McFly.Core
         /// <returns>The result of the operator.</returns>
         public static bool operator ==(Position left, Position right)
         {
-            return left.Equals(right);
+            if (ReferenceEquals(left, right)) return true;
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
+            return Equals(left, right);
         }
 
         /// <summary>
@@ -278,7 +273,7 @@ namespace McFly.Core
             /// <returns>true if the specified objects are equal; otherwise, false.</returns>
             public bool Equals(Position x, Position y)
             {
-                return x.Equals(y);
+                return x?.Equals(y) ?? y == null;
             }
 
             /// <summary>

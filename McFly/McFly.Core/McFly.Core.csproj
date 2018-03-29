@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{83E7C87B-C06E-49B0-A389-14C89E0D137F}</ProjectGuid>
+    <ProjectGuid>{3243A211-CF4F-4296-BD68-2D4DD5406542}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>McFly.Core</RootNamespace>
@@ -40,13 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisassemblyLine.cs" />
     <Compile Include="Frame.cs" />
+    <Compile Include="MemoryRange.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="PrimitiveExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.cs" />
     <Compile Include="RegisterSet.cs" />
     <Compile Include="StackFrame.cs" />
+    <Compile Include="StackTrace.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

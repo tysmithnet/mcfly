@@ -7,8 +7,11 @@
     [rbx] BIGINT NULL, 
     [rcx] BIGINT NULL, 
     [rdx] BIGINT NULL, 
+    [opcode] VARBINARY(32) NULL,
     [opcode_mnemonic] VARCHAR(32) NULL, 
-    [disassembly_note] VARCHAR(256) NULL
+    [disassembly_note] VARCHAR(256) NULL,
+
+    PRIMARY KEY (pos_hi, pos_lo, thread_id)
 );
 
 GO

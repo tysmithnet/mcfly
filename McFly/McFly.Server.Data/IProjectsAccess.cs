@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-12-2018
 // ***********************************************************************
 // <copyright file="IProjectsAccess.cs" company="McFly.Server.Data">
 //     Copyright (c) . All rights reserved.
@@ -18,7 +18,7 @@ using McFly.Core;
 namespace McFly.Server.Data
 {
     /// <summary>
-    ///     Interface IProjectsAccess
+    ///     Represents an object is capable of handing the data access to the project domain
     /// </summary>
     public interface IProjectsAccess
     {

@@ -4,7 +4,7 @@
 // Created          : 02-27-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-08-2018
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="Register.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -13,11 +13,12 @@
 // ***********************************************************************
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace McFly.Core
 {
     /// <summary>
-    ///     Class Register.
+    ///     Typesafe Enum for Registers in the CPU
     /// </summary>
     public abstract class Register
     {
@@ -27,26 +28,36 @@ namespace McFly.Core
         static Register()
         {
             AllRegisters64 = new[] {Rax, Rbx, Rcx, Rdx};
+            AllRegisters32 = new[] {Eax, Ebx, Ecx, Edx};
+            AllRegisters = AllRegisters64.Concat(AllRegisters32).ToArray();
             CoreUserRegisters64 = new[] {Rax, Rbx, Rcx, Rdx};
         }
 
         /// <summary>
-        ///     Gets all registers64.
+        ///     Gets all 32 bit registers.
         /// </summary>
-        /// <value>All registers64.</value>
-        public static IReadOnlyCollection<Register> AllRegisters64 { get; }
+        /// <value>All registers32.</value>
+        public static Register[] AllRegisters32 { get; }
 
         /// <summary>
-        ///     Gets the name.
+        ///     Gets all registers.
+        /// </summary>
+        /// <value>All registers.</value>
+        public static Register[] AllRegisters { get; }
+
+        /// <summary>
+        ///     Gets the name of the regiser, e.g. rip, rax, edi.
         /// </summary>
         /// <value>The name.</value>
         public abstract string Name { get; }
 
         /// <summary>
-        ///     Gets the number bits.
+        ///     Gets the number bits for the register, e.g. 32, 64.
         /// </summary>
         /// <value>The number bits.</value>
         public abstract int NumBits { get; }
+
+        #region 64 Bit Registers
 
         /// <summary>
         ///     Gets the rax.
@@ -72,11 +83,53 @@ namespace McFly.Core
         /// <value>The RDX.</value>
         public static Register Rdx { get; } = new RdxRegister();
 
+        #endregion
+
+        #region 32 Bit Registers
+
         /// <summary>
-        ///     Gets the core user registers64.
+        ///     Gets the Eax.
+        /// </summary>
+        /// <value>The Eax.</value>
+        public static Register Eax { get; } = new EaxRegister();
+
+        /// <summary>
+        ///     Gets the Ebx.
+        /// </summary>
+        /// <value>The Ebx.</value>
+        public static Register Ebx { get; } = new EbxRegister();
+
+        /// <summary>
+        ///     Gets the Ecx.
+        /// </summary>
+        /// <value>The Ecx.</value>
+        public static Register Ecx { get; } = new EcxRegister();
+
+        /// <summary>
+        ///     Gets the Edx.
+        /// </summary>
+        /// <value>The Edx.</value>
+        public static Register Edx { get; } = new EdxRegister();
+
+        #endregion
+
+        #region Common Register Groupings
+
+        /// <summary>
+        ///     Gets all 64 bit registers.
+        /// </summary>
+        /// <value>All registers64.</value>
+        public static IReadOnlyCollection<Register> AllRegisters64 { get; }
+
+        /// <summary>
+        ///     Gets the core user 64 bit registers.
         /// </summary>
         /// <value>The core user registers64.</value>
         public static IReadOnlyCollection<Register> CoreUserRegisters64 { get; }
+
+        #endregion
+
+        #region 64 Bit Register Classes
 
         /// <summary>
         ///     Class RaxRegister.
@@ -153,5 +206,87 @@ namespace McFly.Core
             /// <value>The number bits.</value>
             public override int NumBits { get; } = 64;
         }
+
+        #endregion
+
+        #region 32 Bit Register Classes
+
+        /// <summary>
+        ///     Class EaxRegister.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
+        protected class EaxRegister : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            public override string Name { get; } = "Eax";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            public override int NumBits { get; } = 32;
+        }
+
+        /// <summary>
+        ///     Class EbxRegister.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
+        protected class EbxRegister : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            public override string Name { get; } = "Ebx";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            public override int NumBits { get; } = 32;
+        }
+
+        /// <summary>
+        ///     Class EcxRegister.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
+        protected class EcxRegister : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            public override string Name { get; } = "Ecx";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            public override int NumBits { get; } = 32;
+        }
+
+        /// <summary>
+        ///     Class EdxRegister.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
+        protected class EdxRegister : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            public override string Name { get; } = "Edx";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            public override int NumBits { get; } = 32;
+        }
+
+        #endregion
     }
 }

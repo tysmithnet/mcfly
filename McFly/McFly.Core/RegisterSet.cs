@@ -4,7 +4,7 @@
 // Created          : 02-28-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-09-2018
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="RegisterSet.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -18,7 +18,7 @@ using System.Linq;
 namespace McFly.Core
 {
     /// <summary>
-    ///     Class RegisterSet.
+    ///     Represents the collection of all register values at a particular instance in time for a specific thread
     /// </summary>
     public class RegisterSet
     {
@@ -89,7 +89,7 @@ namespace McFly.Core
         public uint Eax
         {
             get => _rax.Lo32();
-            set => _rax.Lo32(value);
+            set => _rax = _rax.Lo32(value);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace McFly.Core
         public uint Ebx
         {
             get => _rbx.Lo32();
-            set => _rbx.Lo32(value);
+            set => _rbx = _rbx.Lo32(value);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace McFly.Core
         public uint Ecx
         {
             get => _rcx.Lo32();
-            set => _rcx.Lo32(value);
+            set => _rcx = _rcx.Lo32(value);
         }
 
         /// <summary>
@@ -119,45 +119,136 @@ namespace McFly.Core
         public uint Edx
         {
             get => _rdx.Lo32();
-            set => _rdx.Lo32(value);
+            set => _rdx = _rdx.Lo32(value);
         }
 
         /// <summary>
-        ///     Processes the specified register.
+        ///     Clears this instance.
+        /// </summary>
+        public void Clear()
+        {
+            _rax = _rbx = _rcx = _rdx = 0;
+        }
+
+        /// <summary>
+        ///     Equalses the specified other.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        protected bool Equals(RegisterSet other)
+        {
+            return _rax == other._rax && _rbx == other._rbx && _rcx == other._rcx && _rdx == other._rdx;
+        }
+
+        /// <summary>
+        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((RegisterSet) obj);
+        }
+
+        /// <summary>
+        ///     Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = _rax.GetHashCode();
+                hashCode = (hashCode * 397) ^ _rbx.GetHashCode();
+                hashCode = (hashCode * 397) ^ _rcx.GetHashCode();
+                hashCode = (hashCode * 397) ^ _rdx.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        /// <summary>
+        ///     Implements the == operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator ==(RegisterSet left, RegisterSet right)
+        {
+            if (ReferenceEquals(left, right)) return true;
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
+            return Equals(left, right);
+        }
+
+        /// <summary>
+        ///     Implements the != operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator !=(RegisterSet left, RegisterSet right)
+        {
+            return !Equals(left, right);
+        }
+
+        /// <summary>
+        ///     Interprets the arguments as changes to the register set
+        ///     e.g. Process("rax", "16", 10) will set the value of the rax register to 16
         /// </summary>
         /// <param name="register">The register.</param>
         /// <param name="input">The input.</param>
         /// <param name="radix">The radix.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     register
+        ///     or
+        ///     input
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">register</exception>
         /// <exception cref="System.ArgumentNullException">
         ///     register
         ///     or
         ///     input
         /// </exception>
         /// <exception cref="System.ArgumentOutOfRangeException">register</exception>
-        public void Process(string register, string input, int radix)
+        public void Process(string register, string input, int radix = 16)
         {
             register = register ?? throw new ArgumentNullException(nameof(register));
             input = input ?? throw new ArgumentNullException(nameof(input));
 
-            var first = Register.AllRegisters64.FirstOrDefault(x => x.Name == register);
-            if (first != null)
-                switch (first.Name.ToLower())
-                {
-                    case "rax":
-                        _rax = Convert.ToUInt64(input, radix);
-                        break;
-                    case "rbx":
-                        _rbx = Convert.ToUInt64(input, radix);
-                        break;
-                    case "rcx":
-                        _rcx = Convert.ToUInt64(input, radix);
-                        break;
-                    case "rdx":
-                        _rdx = Convert.ToUInt64(input, radix);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException($"{nameof(register)} is not a valid register");
-                }
+            var first = Register.AllRegisters.FirstOrDefault(x =>
+                x.Name.Equals(register, StringComparison.OrdinalIgnoreCase));
+            if (first == null) return;
+            switch (first.Name.ToLower())
+            {
+                case "rax":
+                    _rax = Convert.ToUInt64(input, radix);
+                    break;
+                case "rbx":
+                    _rbx = Convert.ToUInt64(input, radix);
+                    break;
+                case "rcx":
+                    _rcx = Convert.ToUInt64(input, radix);
+                    break;
+                case "rdx":
+                    _rdx = Convert.ToUInt64(input, radix);
+                    break;
+                case "eax":
+                    _rax = _rax.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    break;
+                case "ebx":
+                    _rbx = _rbx.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    break;
+                case "ecx":
+                    _rcx = _rcx.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    break;
+                case "edx":
+                    _rdx = _rdx.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException($"{nameof(register)} is not a valid register");
+            }
         }
     }
 }

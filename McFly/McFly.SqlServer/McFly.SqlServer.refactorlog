@@ -14,4 +14,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Lock" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="6c6fc6ca-96fa-4c19-b54e-d1a067c72124" ChangeDateTime="03/11/2018 23:36:57">
+    <Property Name="ElementName" Value="[dbo].[stackframe].[function]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[stackframe]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="function_name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7f4e123e-14be-43ab-b4a8-f8eb1d4da3c0" ChangeDateTime="03/28/2018 06:46:57">
+    <Property Name="ElementName" Value="[dbo].[frame_note].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[frame_note]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="frame_id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="338ea4b8-1c9e-4c9c-b554-14d83aac47e2" ChangeDateTime="03/28/2018 06:48:20">
+    <Property Name="ElementName" Value="[dbo].[frame_note].[frame_id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[frame_note]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="pos_hi" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="54a331d0-fb9b-4e6c-a275-f9cdaa3c710f" ChangeDateTime="03/28/2018 06:48:23">
+    <Property Name="ElementName" Value="[dbo].[frame_note].[note_id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[frame_note]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="pos_lo" />
+  </Operation>
 </Operations>

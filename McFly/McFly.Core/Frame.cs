@@ -4,7 +4,7 @@
 // Created          : 02-28-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="Frame.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -14,18 +14,25 @@
 
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace McFly.Core
 {
     /// <summary>
-    ///     Class Frame.
+    ///     Represents an instance in time for a thread in the trace file
     /// </summary>
-    public class Frame
+    /// <seealso cref="System.IComparable{McFly.Core.Frame}" />
+    /// <seealso cref="System.IComparable" />
+    /// <seealso cref="System.IEquatable{McFly.Core.Frame}" />
+    public class Frame : IComparable<Frame>, IComparable, IEquatable<Frame>
     {
+        /// <summary>
+        ///     The thread identifier
+        /// </summary>
         private int _threadId;
 
         /// <summary>
-        ///     Gets or sets the position.
+        ///     Gets or sets the position for this frame in the context of the trace
         /// </summary>
         /// <value>The position.</value>
         public Position Position { get; set; }
@@ -34,6 +41,7 @@ namespace McFly.Core
         ///     Gets or sets the thread identifier.
         /// </summary>
         /// <value>The thread identifier.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public int ThreadId
         {
             get => _threadId;
@@ -52,27 +60,155 @@ namespace McFly.Core
         public RegisterSet RegisterSet { get; set; }
 
         /// <summary>
-        ///     Gets or sets the opcode nmemonic.
+        ///     Gets or sets the stack trace.
         /// </summary>
-        /// <value>The opcode nmemonic.</value>
-        public string OpcodeMnemonic { get; set; }
+        /// <value>The stack trace.</value>
+        public StackTrace StackTrace { get; set; }
 
         /// <summary>
-        ///     Gets or sets the stack frames.
+        ///     Gets or sets the disassembly line.
         /// </summary>
-        /// <value>The stack frames.</value>
-        public IList<StackFrame> StackFrames { get; set; }
+        /// <value>The disassembly line.</value>
+        public DisassemblyLine DisassemblyLine { get; set; }
+                                                    
+        /// <summary>
+        ///     Compares to.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="ArgumentException">Frame</exception>
+        public int CompareTo(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return 1;
+            if (ReferenceEquals(this, obj)) return 0;
+            if (!(obj is Frame)) throw new ArgumentException($"Object must be of type {nameof(Frame)}");
+            return CompareTo((Frame) obj);
+        }
 
         /// <summary>
-        ///     Gets or sets the disassembly note.
+        ///     Compares to.
         /// </summary>
-        /// <value>The disassembly note.</value>
-        public string DisassemblyNote { get; set; }
+        /// <param name="other">The other.</param>
+        /// <returns>System.Int32.</returns>
+        public int CompareTo(Frame other)
+        {
+            if (ReferenceEquals(this, other)) return 0;
+            if (ReferenceEquals(null, other)) return 1;
+            var positionComparison = Comparer<Position>.Default.Compare(Position, other.Position);
+            if (positionComparison != 0) return positionComparison;
+            return _threadId.CompareTo(other._threadId);
+        }
 
         /// <summary>
-        ///     Gets or sets the op code.
+        ///     Equalses the specified other.
         /// </summary>
-        /// <value>The op code.</value>
-        public byte[] OpCode { get; set; }
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool Equals(Frame other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return _threadId == other._threadId && Equals(Position, other.Position) &&
+                   Equals(RegisterSet, other.RegisterSet) && Equals(StackTrace, other.StackTrace) &&
+                   Equals(DisassemblyLine, other.DisassemblyLine);
+        }
+
+        /// <summary>
+        ///     Implements the &lt; operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator <(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) < 0;
+        }
+
+        /// <summary>
+        ///     Implements the &gt; operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator >(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) > 0;
+        }
+
+        /// <summary>
+        ///     Implements the &lt;= operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator <=(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) <= 0;
+        }
+
+        /// <summary>
+        ///     Implements the &gt;= operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator >=(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) >= 0;
+        }
+
+        /// <summary>
+        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((Frame) obj);
+        }
+
+        /// <summary>
+        ///     Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = _threadId;
+                hashCode = (hashCode * 397) ^ (Position != null ? Position.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (RegisterSet != null ? RegisterSet.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (StackTrace != null ? StackTrace.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (DisassemblyLine != null ? DisassemblyLine.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
+
+        /// <summary>
+        ///     Implements the == operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator ==(Frame left, Frame right)
+        {
+            if (ReferenceEquals(left, right)) return true;
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
+            return Equals(left, right);
+        }
+
+        /// <summary>
+        ///     Implements the != operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator !=(Frame left, Frame right)
+        {
+            return !Equals(left, right);
+        }
     }
 }

@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("83e7c87b-c06e-49b0-a389-14c89e0d137f")]
+[assembly: Guid("3243a211-cf4f-4296-bd68-2d4dd5406542")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -35,4 +35,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: InternalsVisibleTo("McFly.Core.Tests")]
+[assembly: InternalsVisibleTo("McFly.Tests")]

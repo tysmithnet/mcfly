@@ -4,7 +4,7 @@
 // Created          : 03-03-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-16-2018
 // ***********************************************************************
 // <copyright file="FrameController.cs" company="McFly.Server">
 //     Copyright (c) . All rights reserved.
@@ -12,53 +12,63 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Text;
+using System.Web.Http;
+using Common.Logging;
 using McFly.Core;
 using McFly.Server.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using McFly.Server.Headers;
 
 namespace McFly.Server.Controllers
 {
     /// <summary>
-    ///     Class FrameController.
+    ///    Represents the business logic behind the frame api
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
-    [Route("api/frame/{projectName}")]
-    public class FrameController : Controller
+    /// <seealso cref="System.Web.Http.ApiController" />
+    /// <seealso cref="System.Web.Mvc.Controller" />
+    [Route("api/frame/")]
+    [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public class FrameController : ApiController
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="FrameController" /> class.
+        ///     Gets or sets the logger.
         /// </summary>
-        /// <param name="logger">The logger.</param>
-        /// <param name="frameAccess">The frame access.</param>
-        public FrameController(ILogger<FrameController> logger, IFrameAccess frameAccess)
-        {
-            FrameAccess = frameAccess;
-        }
+        /// <value>The logger.</value>
+        private ILog Log = LogManager.GetLogger<FrameController>();
 
         /// <summary>
         ///     Gets or sets the frame access.
         /// </summary>
         /// <value>The frame access.</value>
-        protected IFrameAccess FrameAccess { get; set; }
+        [Import]
+        protected internal IFrameAccess FrameAccess { get; set; }
 
         /// <summary>
-        ///     Gets or sets the logger.
-        /// </summary>
-        /// <value>The logger.</value>
-        private ILogger<FrameController> Logger { get; set; }
-
-        /// <summary>
-        ///     Posts the specified project name.
+        ///     Adds frames to a project's collection
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="frames">The frames.</param>
         /// <returns>ActionResult.</returns>
         [HttpPost]
-        public ActionResult Post(string projectName, [FromBody] IEnumerable<Frame> frames)
-        {                                   
-            FrameAccess.UpsertFrames(projectName, frames);
+        public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] IEnumerable<Frame> frames)
+        {
+            try
+            {
+                FrameAccess.UpsertFrames(projectName, frames);
+            }
+            catch (Exception e)
+            {
+                var sb = new StringBuilder();
+                sb.AppendLine($"Problem upserting frames. Does the {projectName} database exist?");
+                sb.AppendLine($"{e.GetType().FullName} - {e.Message}");
+                sb.AppendLine($"{e.StackTrace}");
+                Log.Error(sb.ToString());
+                return InternalServerError(e);
+            }
             return Ok();
         }
     }

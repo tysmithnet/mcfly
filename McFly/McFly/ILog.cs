@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : master
+// Author           : @tysmithnet
 // Created          : 03-04-2018
 //
-// Last Modified By : master
-// Last Modified On : 03-04-2018
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="ILog.cs" company="">
 //     Copyright ©  2018
@@ -19,6 +19,7 @@ namespace McFly
     /// <summary>
     ///     Interface ILog
     /// </summary>
+    /// <seealso cref="System.IDisposable" />
     /// <seealso cref="McFly.IInjectable" />
     public interface ILog : IDisposable, IInjectable
     {

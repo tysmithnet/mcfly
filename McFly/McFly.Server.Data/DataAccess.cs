@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-12-2018
 // ***********************************************************************
 // <copyright file="DataAccess.cs" company="McFly.Server.Data">
 //     Copyright (c) . All rights reserved.
@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -20,12 +19,12 @@ using System.Data.SqlClient;
 namespace McFly.Server.Data
 {
     /// <summary>
-    ///     Class DataAccess.
+    ///     Represents the common data access logic for the application
     /// </summary>
     public abstract class DataAccess
     {
         /// <summary>
-        ///     Gets or sets the connection string.
+        ///     Gets or sets the connection string to the data store
         /// </summary>
         /// <value>The connection string.</value>
         public static string ConnectionString { get; set; }
@@ -52,6 +51,21 @@ namespace McFly.Server.Data
             }
         }
 
+        protected virtual void ExecuteStoredProcedureNonQuery(string projectName, string procName,
+            IEnumerable<SqlParameter> parameters)
+        {
+            using (var conn = new SqlConnection(GetProjectConnectionString(projectName)))
+            using (var command = conn.CreateCommand())
+            {
+                conn.Open();
+                command.CommandText = procName;
+                command.CommandType = CommandType.StoredProcedure;
+                foreach (var sqlParameter in parameters)
+                    command.Parameters.Add(sqlParameter);
+                command.ExecuteNonQuery();
+            }
+        }
+
         /// <summary>
         ///     Gets the project connection string.
         /// </summary>
@@ -59,7 +73,7 @@ namespace McFly.Server.Data
         /// <returns>System.String.</returns>
         protected string GetProjectConnectionString(string projectName)
         {
-            var sb = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName};
+            var sb = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName, IntegratedSecurity = true};
             return sb.ToString();
         }
     }

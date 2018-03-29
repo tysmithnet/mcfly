@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : master
+// Author           : @tysmithnet
 // Created          : 03-06-2018
 //
-// Last Modified By : master
-// Last Modified On : 03-08-2018
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="SettingsJsonConverter.cs" company="">
 //     Copyright ©  2018
@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -23,6 +24,7 @@ namespace McFly
     ///     Class SettingsJsonConverter.
     /// </summary>
     /// <seealso cref="Newtonsoft.Json.JsonConverter{System.Collections.Generic.IEnumerable{McFly.ISettings}}" />
+    [ExcludeFromCodeCoverage]
     internal class SettingsJsonConverter : JsonConverter<IEnumerable<ISettings>>
     {
         /// <summary>
@@ -56,13 +58,13 @@ namespace McFly
         /// <param name="hasExistingValue">The existing value has a value.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         /// <exception cref="NotImplementedException"></exception>
+        /// <exception cref="System.NotImplementedException"></exception>
         public override IEnumerable<ISettings> ReadJson(JsonReader reader, Type objectType,
             IEnumerable<ISettings> existingValue, bool hasExistingValue,
             JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); // todo: implement this so we can save
         }
     }
 }

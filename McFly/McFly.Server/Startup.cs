@@ -1,74 +1,70 @@
 ﻿// ***********************************************************************
 // Assembly         : McFly.Server
-// Author           : @tsmithnet
-// Created          : 02-20-2018
+// Author           : @tysmithnet
+// Created          : 03-12-2018
 //
-// Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-16-2018
 // ***********************************************************************
-// <copyright file="Startup.cs" company="McFly.Server">
-//     Copyright (c) . All rights reserved.
+// <copyright file="Startup.cs" company="">
+//     Copyright ©  2018
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 
-using McFly.Server.Data;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.ComponentModel.Composition.Hosting;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
+using System.Web.Http;
+using Common.Logging;
+using McFly.Server.Headers;
+using Owin;
+using Swashbuckle.Application;
 
 namespace McFly.Server
 {
     /// <summary>
-    ///     Class Startup.
+    ///     Represents the start up logic for the application
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
+        private ILog Log = LogManager.GetLogger<Startup>();
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Startup" /> class.
+        ///     Configurations the specified application builder.
         /// </summary>
-        /// <param name="configuration">The configuration.</param>
-        public Startup(IConfiguration configuration)
+        /// <param name="appBuilder">The application builder.</param>
+        public void Configuration(IAppBuilder appBuilder)
         {
-            Configuration = configuration;
-        }
+            appBuilder.Use<LoggingMiddleware>();
+            var config = new HttpConfiguration();
+            config.MapHttpAttributeRoutes();
+            // todo: extract
+            Log.Info("Looking for MEF components");
+            var executingAssemblyFile = Assembly.GetExecutingAssembly().Location;
+            var executingDirectory = Path.GetDirectoryName(executingAssemblyFile);
+            var mcFlyAssemblies =
+                Directory.EnumerateFiles(executingDirectory, "McFly*.dll", SearchOption.AllDirectories);
+            var assemblies = mcFlyAssemblies.Select(Assembly.LoadFile).Select(a => new AssemblyCatalog(a));
+            var executingAssembly = Assembly.GetExecutingAssembly();
+            var executingAssemblyCatalog = new AssemblyCatalog(executingAssembly);
+            var aggregateCatalog = new AggregateCatalog(assemblies.Concat(new[] {executingAssemblyCatalog}));
+            var compositionContainer = new CompositionContainer(aggregateCatalog);
 
-        /// <summary>
-        ///     Gets the configuration.
-        /// </summary>
-        /// <value>The configuration.</value>
-        public IConfiguration Configuration { get; }
+            var mefDependencyResolver = new MefDependencyResolver(compositionContainer, config.DependencyResolver);
+            config.DependencyResolver = mefDependencyResolver;
+            config.EnableSwagger(c =>
+            {
+                c.SingleApiVersion("v1", "McFly API");
+                c.OperationFilter(() => new FromHeaderAttributeOperationFilter());
+            }).EnableSwaggerUi();
 
-        /// <summary>
-        ///     Configures the services.
-        /// </summary>
-        /// <param name="services">The services.</param>
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddTransient<IProjectsAccess, ProjectsAccess>();
-            services.AddMvc();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "My API", Version = "v1"}); });
-
-            services.AddTransient<IFrameAccess, FrameAccess>();
-        }
-
-        /// <summary>
-        ///     Configures the specified application.
-        /// </summary>
-        /// <param name="app">The application.</param>
-        /// <param name="env">The env.</param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
-
-            app.UseMvc();
+            appBuilder.UseWebApi(config);
         }
     }
 }

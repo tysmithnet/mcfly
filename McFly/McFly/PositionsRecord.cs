@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : master
+// Author           : @tysmithnet
 // Created          : 03-03-2018
 //
-// Last Modified By : master
-// Last Modified On : 03-09-2018
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="PositionsRecord.cs" company="">
 //     Copyright ©  2018
@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using McFly.Core;
 
 namespace McFly
@@ -27,13 +28,14 @@ namespace McFly
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="position">The position.</param>
-        /// <param name="isThreadWithBreak">if set to <c>true</c> [is thread with break].</param>
+        /// <param name="isCurrentThread">if set to <c>true</c> [is thread with break].</param>
+        /// <exception cref="ArgumentNullException">position</exception>
         /// <exception cref="System.ArgumentNullException">position</exception>
-        public PositionsRecord(int threadId, Position position, bool isThreadWithBreak)
+        public PositionsRecord(int threadId, Position position, bool isCurrentThread)
         {
             ThreadId = threadId;
             Position = position ?? throw new ArgumentNullException(nameof(position));
-            IsThreadWithBreak = isThreadWithBreak;
+            IsCurrentThread = isCurrentThread;
         }
 
         /// <summary>
@@ -52,7 +54,7 @@ namespace McFly
         ///     Gets or sets a value indicating whether this instance is thread with break.
         /// </summary>
         /// <value><c>true</c> if this instance is thread with break; otherwise, <c>false</c>.</value>
-        public bool IsThreadWithBreak { get; internal set; }
+        public bool IsCurrentThread { get; internal set; }
 
         /// <summary>
         ///     Equalses the specified other.
@@ -62,7 +64,7 @@ namespace McFly
         private bool Equals(PositionsRecord other)
         {
             return ThreadId == other.ThreadId && Position.Equals(other.Position) &&
-                   IsThreadWithBreak == other.IsThreadWithBreak;
+                   IsCurrentThread == other.IsCurrentThread;
         }
 
         /// <summary>
@@ -70,6 +72,7 @@ namespace McFly
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
         /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        [ExcludeFromCodeCoverage]
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -81,37 +84,16 @@ namespace McFly
         ///     Returns a hash code for this instance.
         /// </summary>
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        [ExcludeFromCodeCoverage]
         public override int GetHashCode()
         {
             unchecked
             {
                 var hashCode = ThreadId;
                 hashCode = (hashCode * 397) ^ Position.GetHashCode();
-                hashCode = (hashCode * 397) ^ IsThreadWithBreak.GetHashCode();
+                hashCode = (hashCode * 397) ^ IsCurrentThread.GetHashCode();
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        ///     Implements the == operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator ==(PositionsRecord left, PositionsRecord right)
-        {
-            return Equals(left, right);
-        }
-
-        /// <summary>
-        ///     Implements the != operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator !=(PositionsRecord left, PositionsRecord right)
-        {
-            return !Equals(left, right);
         }
     }
 }

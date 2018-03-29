@@ -37,7 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>
+    </OutputPath>
     <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <DebugSymbols>true</DebugSymbols>
@@ -70,21 +71,16 @@
     <Build Include="Types\Table Types\tt_frame.sql" />
     <Build Include="Stored Procedures\pr_upsert_frames.sql" />
     <Build Include="Tables\trace_info.sql" />
+    <Build Include="Stored Procedures\pr_add_note.sql" />
+    <Build Include="Tables\stackframe.sql" />
+    <Build Include="Types\Table Types\tt_stackframe.sql" />
+    <Build Include="Tables\frame_note.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="McFly.SqlServer.refactorlog" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\McFly.Server.Data\McFly.Server.Data.csproj">
-      <Name>McFly.Server.Data</Name>
-      <Project>{b57aa3e4-323b-4969-8f78-cd8ef96bd302}</Project>
-      <Private>True</Private>
-      <IsModelAware>True</IsModelAware>
-      <GenerateSqlClrDdl>True</GenerateSqlClrDdl>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)McFly.SqlServer_Create.sql" "$(SolutionDir)McFly\bin\x64\Debug\create.sql"
-echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)McFly.SqlServer_Create.sql" "$(SolutionDir)McFly\bin\x86\Debug\create.sql"</PostBuildEvent>
+    <PostBuildEvent>echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.*" "$(SolutionDir)McFly.Server\bin\Debug\"
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
 // Assembly         : McFly.Core
-// Author           : master
+// Author           : @tysmithnet
 // Created          : 03-04-2018
 //
-// Last Modified By : master
-// Last Modified On : 03-04-2018
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-24-2018
 // ***********************************************************************
 // <copyright file="PrimitiveExtensions.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -15,7 +15,7 @@
 namespace McFly.Core
 {
     /// <summary>
-    ///     Class PrimitiveExtensions.
+    ///     Extension methods for common primitive conversions
     /// </summary>
     public static class PrimitiveExtensions
     {
@@ -79,6 +79,26 @@ namespace McFly.Core
         public static ulong Lo32(this ulong ulongValue, uint lo32)
         {
             return ((ulongValue >> 32) << 32) | lo32;
+        }
+
+        /// <summary>
+        ///     To the u int.
+        /// </summary>
+        /// <param name="intValue">The int value.</param>
+        /// <returns>System.UInt32.</returns>
+        public static uint ToUInt(this int intValue)
+        {
+            return unchecked ((uint) intValue);
+        }
+
+        /// <summary>
+        ///     Converts the string representation of a number to an integer.
+        /// </summary>
+        /// <param name="uintValue">The uint value.</param>
+        /// <returns>System.Int32.</returns>
+        public static int ToInt(this uint uintValue)
+        {
+            return unchecked((int) uintValue);
         }
     }
 }

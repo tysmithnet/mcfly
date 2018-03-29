@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : master
+// Author           : @tysmithnet
 // Created          : 03-06-2018
 //
-// Last Modified By : master
-// Last Modified On : 03-07-2018
+// Last Modified By : @tysmithnet
+// Last Modified On : 03-25-2018
 // ***********************************************************************
 // <copyright file="StartMethod.cs" company="">
 //     Copyright ©  2018
@@ -14,6 +14,7 @@
 
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace McFly
@@ -43,36 +44,40 @@ namespace McFly
         ///     Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
-        [Import(typeof(IDbgEngProxy))]
-        private IDbgEngProxy DbgEngProxy { get; set; }
+        [Import(typeof(IDebugEngineProxy))]
+        private IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        ///     Gets the name.
+        ///     Gets the help information.
         /// </summary>
-        /// <value>The name.</value>
-        public string Name { get; } = "start";
+        /// <value>The help information.</value>
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+            .SetName("start")
+            .SetDescription("Start the local server")
+            .Build();
 
         /// <summary>
         ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
+        [ExcludeFromCodeCoverage]
         public void Process(string[] args)
         {
-            if (string.IsNullOrWhiteSpace(Settings.LauncherPath))
+            if (string.IsNullOrWhiteSpace(Settings.ServerExePath))
             {
                 Log.Error("Start called but no launcher path was set. Check the settings file.");
                 return;
             }
-            if (!File.Exists(Settings.LauncherPath))
+            if (!File.Exists(Settings.ServerExePath))
             {
-                Log.Error($"Start called but could not find file: {Settings.LauncherPath}");
+                Log.Error($"Start called but could not find file: {Settings.ServerExePath}");
                 return;
             }
 
             var startInfo = new ProcessStartInfo
             {
-                FileName = Settings.LauncherPath,
+                FileName = Settings.ServerExePath,
                 CreateNoWindow = false,
                 Environment = {{"ConnectionString", Settings.ConnectionString}},
                 UseShellExecute = false

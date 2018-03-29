@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-03-2018
+// Last Modified On : 03-15-2018
 // ***********************************************************************
 // <copyright file="Program.cs" company="McFly.Server">
 //     Copyright (c) . All rights reserved.
@@ -13,51 +13,38 @@
 // ***********************************************************************
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using Common.Logging;
 using McFly.Server.Data;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Microsoft.Owin.Hosting;
 
 namespace McFly.Server
 {
     /// <summary>
-    ///     Class Program.
+    ///     Entry point into the application
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class Program
     {
+        private ILog Log = LogManager.GetLogger<Program>();
+
         /// <summary>
         ///     Defines the entry point of the application.
         /// </summary>
         /// <param name="args">The arguments.</param>
         public static void Main(string[] args)
         {
-            DataAccess.ConnectionString = Environment.GetEnvironmentVariable("ConnectionString");
-            BuildWebHost(args).Run();
-        }
+            DataAccess.ConnectionString = //Environment.GetEnvironmentVariable("ConnectionString");
+                "Data Source=localhost;Integrated Security=true";
+            var baseAddress = "http://localhost:5000/";
 
-        /// <summary>
-        ///     Builds the web host.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <returns>IWebHost.</returns>
-        public static IWebHost BuildWebHost(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((context, builder) =>
-                {
-                    var env = context.HostingEnvironment;
-                    builder.AddJsonFile("appsettings.json", true, true)
-                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true);
-                    builder.AddEnvironmentVariables();
-                })
-                .ConfigureLogging((context, builder) =>
-                {
-                    builder.AddConsole();
-                    builder.AddDebug();
-                })
-                .UseStartup<Startup>()
-                .Build();
+            // Start OWIN host 
+            using (WebApp.Start<Startup>(baseAddress))
+            {
+                // Create HttpCient and make a request to api/values 
+
+                Console.ReadLine();
+            }
         }
     }
 }

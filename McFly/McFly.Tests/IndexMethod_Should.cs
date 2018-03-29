@@ -2,47 +2,13 @@
 using System.Linq;
 using FluentAssertions;
 using McFly.Core;
+using Moq;
 using Xunit;
 
 namespace McFly.Tests
 {
     public class IndexMethod_Should
     {
-        [Fact]
-        public void Create_Frame_Correctly()
-        {
-            // arrange
-            var builder = new DbgEngProxyBuilder();
-            builder.WithExecuteResult("u rip L1", "00007ffa`51315543 6645898632010000 mov     word ptr [r14+132h],r8w");
-            var indexMethod = new IndexMethod {DbgEngProxy = builder.Build()};
-
-            // act
-            var frame = indexMethod.CreateFrame(false, new PositionsRecord(1, new Position(0, 0), true),
-                new RegisterSet(), new List<StackFrame>());
-
-            // assert
-        }
-
-        [Fact]
-        public void Get_Current_Instruction_Disassembly()
-        {
-            var builder = new DbgEngProxyBuilder();
-            builder.WithExecuteResult("u rip L1",
-                @"KERNEL32!GetTimeFormatWWorker+0xc43:
-00007ffa`51315543 6645898632010000 mov     word ptr [r14+132h],r8w");
-            var indexMethod = new IndexMethod();
-            indexMethod.DbgEngProxy = builder.Build();
-
-            var line = indexMethod.GetCurrentDisassemblyLine(false);
-
-            line.InstructionAddress.Should().Be(0x7ffa51315543, "The first ulong is the instruction address");
-            line.OpCode.Should().Equal(new byte[] {0x66, 0x45, 0x89, 0x86, 0x32, 0x01, 0x00, 0x00},
-                "The op code follows the instruction address and varies in length");
-            line.OpCodeMnemonic.Should().Be("mov", "The opcode mnemonic follows the opcode");
-            line.DisassemblyNote.Should().Be("word ptr [r14+132h],r8w", "The disassembly note is last");
-
-        }
-
         [Fact]
         public void Get_Stack_Frames_Correctly()
         {
@@ -62,35 +28,10 @@ namespace McFly.Tests
         }
 
         [Fact]
-        public void Get_Thread_Positions_Correctly()
-        {
-            // arrange
-            var indexMethod = new IndexMethod();
-            var builder = new DbgEngProxyBuilder();
-            builder.WithExecuteResult("!positions", @">Thread ID=0x7590 - Position: 168CC:0
- Thread ID=0x12A0 - Position: 211F5:0
- Thread ID=0x6CDC - Position: 21D59:0");
-            indexMethod.DbgEngProxy = builder.Build();
-            var expected = new[]
-            {
-                new PositionsRecord(0x7590, new Position(0x168CC, 0), true),
-                new PositionsRecord(0x12A0, new Position(0x211F5, 0), false),
-                new PositionsRecord(0x6CDC, new Position(0x21D59, 0), false)
-            };
-
-            // act
-            var actual = indexMethod.GetPositions();
-
-            // assert
-            actual.SequenceEqual(expected).Should()
-                .BeTrue("This is the pattern: >Thread ID=0x7590 - Position: 168CC:0");
-        }
-
-        [Fact]
         public void Identify_32_And_64_Bit_Arch()
         {
             // Arrange
-            var builder = new DbgEngProxyBuilder();
+            var builder = new DebugEngineProxyBuilder();
             builder.WithExecuteResult("!peb", @"PEB at 00000000003b9000
     InheritedAddressSpace:    No
     ReadImageFileExecOptions: No
@@ -101,11 +42,35 @@ namespace McFly.Tests
 
             // Act
             var indexMethod = new IndexMethod();
-            indexMethod.DbgEngProxy = builder.Build();
+            indexMethod.DebugEngineProxy = builder.Build();
             var is32 = indexMethod.Is32Bit();
 
             // Assert
             is32.Should().BeFalse("00000000003b9000 is 16 characters and thus 64bit");
+        }
+
+        [Fact]
+        public void Identify_Correct_Ending_Position()
+        {
+            // Arrange                             
+            var options = new IndexOptions
+            {
+                End = new Position(0x35, 0x1)
+            };
+
+            var dbg = new DebugEngineProxyBuilder();
+            var indexMethod = new IndexMethod();
+            indexMethod.DebugEngineProxy = dbg.Build();
+            var builder = new TimeTravelFacadeBuilder(dbg);
+            builder.WithGetEndingPosition(new Position(0x35, 5));
+            indexMethod.TimeTravelFacade = builder.Build();
+
+            // Act
+            var endingPosition = indexMethod.GetEndingPosition(options);
+
+            // Assert
+            endingPosition.Should().Be(new Position(0x35, 1),
+                "35:1 means that the high portion is 35 and the low portion is 1");
         }
 
         [Fact]
@@ -114,26 +79,117 @@ namespace McFly.Tests
             // Arrange                             
             var options = new IndexOptions
             {
-                Start = "35:1"
+                Start = new Position(0x35, 0x1)
             };
-            var invalidStartOptions = new IndexOptions
-            {
-                Start = "hello there"
-            };
+
+            var dbg = new DebugEngineProxyBuilder();
             var indexMethod = new IndexMethod();
-            var builder = new DbgEngProxyBuilder();
-            builder.WithStartingPosition(new Position(0x35, 0));
-            indexMethod.DbgEngProxy = builder.Build();
+            indexMethod.DebugEngineProxy = dbg.Build();
+            var builder = new TimeTravelFacadeBuilder(dbg);
+            builder.WithGetStartingPosition(new Position(0x35, 0));
+            indexMethod.TimeTravelFacade = builder.Build();
 
             // Act
             var startingPosition = indexMethod.GetStartingPosition(options);
-            var invalidStartPosition = indexMethod.GetStartingPosition(invalidStartOptions);
 
             // Assert
             startingPosition.Should().Be(new Position(0x35, 1),
-                "35:1 means that the high portion is 35 and the low portion is 1");              
-            invalidStartPosition.Should().Be(new Position(0, 0),
-                "Any invalid input should result in a default position of 0:0");
+                "35:1 means that the high portion is 35 and the low portion is 1");
+        }
+
+        [Fact]
+        public void Set_Breakpoints_If_They_Are_Provided_In_The_Options()
+        {
+            // arrange
+            var indexMethod = new IndexMethod();
+            var indexOptions = new IndexOptions
+            {
+                AccessBreakpoints = new[] {AccessBreakpoint.Parse("r8:100"), AccessBreakpoint.Parse("w8:200"), AccessBreakpoint.Parse("rw4:300"), },
+                BreakpointMasks = new[] {BreakpointMask.Parse("kernel32!createprocess*"), BreakpointMask.Parse("user32!*"), BreakpointMask.Parse("mycustommod!myfancyfunction"), }
+            };
+            var builder = new BreakpointFacadeBuilder();
+            indexMethod.BreakpointFacade = builder.Build();
+
+            // act
+            indexMethod.SetBreakpoints(indexOptions);
+
+            // assert
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("kernel32", "createprocess*"), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("user32", "*"), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetBreakpointByMask("mycustommod", "myfancyfunction"), Times.Once);
+
+            builder.Mock.Verify(proxy => proxy.SetReadAccessBreakpoint(0x8, 0x100), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetReadAccessBreakpoint(0x4, 0x300), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x8, 0x200), Times.Once);
+            builder.Mock.Verify(proxy => proxy.SetWriteAccessBreakpoint(0x4, 0x300), Times.Once);
+        }
+
+        [Fact]
+        public void Upsert_Frames_From_Breaks()
+        {
+            var dbg = new DebugEngineProxyBuilder();
+            var tt = new TimeTravelFacadeBuilder(dbg);
+            var sc = new ServerClientBuilder();
+
+            dbg.WithRunUntilBreak();
+            var count = 0;
+            dbg.SetRunUntilBreakCallback(() =>
+            {
+                if (count++ > 0)
+                    tt.AdvanceToNextPosition();
+            });
+            var dbgEngProxy = dbg.Build();
+            var timeTravelFacade = tt.Build();
+            var serverClient = sc.Build();
+
+            dbg.CurrentThreadId = MockFrames.SingleThreaded0.First().ThreadId;
+            tt.WithFrames(MockFrames.SingleThreaded0);
+            sc.WithUpsertFrames(() => { });
+
+            var indexMethod = new IndexMethod
+            {
+                DebugEngineProxy = dbgEngProxy,
+                TimeTravelFacade = timeTravelFacade,
+                ServerClient = serverClient
+            };
+
+            indexMethod.ProcessInternal(new Position(0, 0), MockFrames.SingleThreaded0.Max(x => x.Position));
+            sc.Mock.Verify(client =>
+                client.UpsertFrames(
+                    It.Is<IEnumerable<Frame>>(frames => frames.SequenceEqual(MockFrames.SingleThreaded0))));
+        }
+
+        [Fact]
+        public void Properly_Parse_Args_Into_Options()
+        {
+            // arrange
+            var args0 =
+                "--start abc:123 --end def:456 --bm kernel32!*create* user32!* --ba rw8:10000 w4:30000 -m abcl100 abc:def"
+                    .Split(' ');
+            var options0 = new IndexOptions()
+            {
+                Start = new Position(0xabc, 0x123),
+                End = new Position(0xdef, 0x456),
+                BreakpointMasks = new []
+                {
+                    new BreakpointMask("kernel32", "*create*"), 
+                    new BreakpointMask("user32", "*"), 
+                },
+                AccessBreakpoints = new[]
+                {
+                    new AccessBreakpoint(0x10000, 8, true, true), 
+                    new AccessBreakpoint(0x30000, 4, false, true), 
+                },
+                MemoryRanges = new []
+                {
+                    new MemoryRange(0xabc, 0xbbc), 
+                    new MemoryRange(0xabc, 0xdef), 
+                }
+            };
+
+            // act
+            // assert
+            IndexMethod.ExtractIndexOptions(args0).Should().Be(options0);
         }
     }
 }
