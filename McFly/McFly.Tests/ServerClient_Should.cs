@@ -18,6 +18,7 @@ namespace McFly.Tests
             // arrange
             var httpBuilder = new HttpFacadeBuilder();
             httpBuilder.WithPostAsync(new HttpResponseMessage(HttpStatusCode.OK));
+            httpBuilder.WithPostJsonAsync(new HttpResponseMessage(HttpStatusCode.OK));
             var settings = new Settings
             {
                 ServerUrl = "https://some.server.net",
@@ -29,12 +30,12 @@ namespace McFly.Tests
             headers.Add("X-Project-Name", "testing");
 
             // act
-            serverClient.AddNote(new Position(0xabc, 0x123), 1, "hello world");
+            serverClient.AddNote(new Position(0xabc, 0x123), new[] {1}, "hello world");
 
             // assert
             httpBuilder.Mock.Verify(
                 facade => facade.PostJsonAsync(new Uri("https://some.server.net/api/note"),
-                    new AddNoteRequest(new Position(0xabc, 0x123), 1, "hello world"), headers), Times.Once);
+                    new AddNoteRequest(new Position(0xabc, 0x123), new[] {1}, "hello world"), headers), Times.Once);
         }
 
         [Fact]

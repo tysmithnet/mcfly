@@ -1,26 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using McFly.Core;
 
 namespace McFly.Server.Contract
 {
     public class AddNoteRequest : IEquatable<AddNoteRequest>
     {
-        public AddNoteRequest(Position position, int? threadId, string text)
+        public AddNoteRequest(Position position, IEnumerable<int> threadIds, string text)
         {
             Position = position;
-            ThreadId = threadId;
+            ThreadIds = threadIds ?? throw new ArgumentNullException(nameof(threadIds));
             Text = text;
         }
 
         public Position Position { get; set; }
-        public int? ThreadId { get; set; }
+        public IEnumerable<int> ThreadIds { get; set; }
         public string Text { get; set; }
 
         public bool Equals(AddNoteRequest other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(Position, other.Position) && ThreadId == other.ThreadId && string.Equals(Text, other.Text);
+            return Equals(Position, other.Position) && ThreadIds.SequenceEqual(other.ThreadIds) && string.Equals(Text, other.Text);
         }
 
         public override bool Equals(object obj)
@@ -36,7 +38,7 @@ namespace McFly.Server.Contract
             unchecked
             {
                 var hashCode = (Position != null ? Position.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ ThreadId.GetHashCode();
+                hashCode = (hashCode * 397) ^ ThreadIds.GetHashCode();
                 hashCode = (hashCode * 397) ^ (Text != null ? Text.GetHashCode() : 0);
                 return hashCode;
             }

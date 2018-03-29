@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Collections.Generic;
 using McFly.Core;
 
 namespace McFly.Server.Data
@@ -27,6 +28,6 @@ namespace McFly.Server.Data
         /// <param name="position">The position.</param>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="text">The text.</param>
-        void AddNote(string projectName, Position position, int? threadId, string text);
+        void AddNote(string projectName, Position position, IEnumerable<int> threadIds, string text);
     }
 }

@@ -16,13 +16,13 @@ namespace McFly.Server.Test
             var controller = new NoteController();
             var builder = new NoteAccessBuilder();
             controller.NoteAccess = builder.Build();
-            var request = new AddNoteRequest(new Position(0, 0), 1, "hi world");
+            var request = new AddNoteRequest(new Position(0, 0), new[] {1}, "hi world");
 
             // act
             // assert
             controller.Post("testing", request);
 
-            builder.Mock.Verify(access => access.AddNote("testing", new Position(0,0), 1, "hi world"), Times.Once);
+            builder.Mock.Verify(access => access.AddNote("testing", new Position(0,0), new[] {1}, "hi world"), Times.Once);
         }
     }
 }

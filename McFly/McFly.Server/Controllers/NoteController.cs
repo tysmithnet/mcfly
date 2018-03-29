@@ -48,7 +48,7 @@ namespace McFly.Server.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody]AddNoteRequest request)
         {
-            NoteAccess.AddNote(projectName, request.Position, request.ThreadId, request.Text);
+            NoteAccess.AddNote(projectName, request.Position, request.ThreadIds, request.Text);
             return Ok();
         }
     }
