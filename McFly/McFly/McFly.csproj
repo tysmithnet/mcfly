@@ -179,6 +179,7 @@
     <Compile Include="PositionsResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterFacade.cs" />
+    <Compile Include="SearchResult.cs" />
     <Compile Include="ServerClient.cs" />
     <Compile Include="SettingsMethod.cs" />
     <Compile Include="Settings.cs" />
