@@ -96,6 +96,7 @@
     <Compile Include="RegisterFacadeBuilder.cs" />
     <Compile Include="RegisterFacade_Should.cs" />
     <Compile Include="SearchMethod_Should.cs" />
+    <Compile Include="SearchParser_Should.cs" />
     <Compile Include="ServerClientBuilder.cs" />
     <Compile Include="ServerClient_Should.cs" />
     <Compile Include="StackFacadeBuilder.cs" />

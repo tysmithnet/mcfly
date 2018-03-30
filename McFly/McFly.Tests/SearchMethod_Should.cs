@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using FluentAssertions;
 using McFly.Core;
 using Moq;
 using Xunit;
@@ -46,30 +45,6 @@ namespace McFly.Tests
         }
     }
 
-    public class SearchParser_Should
-    {
-        [Fact]
-        public void Parse_Arguments_Correctly()
-        {
-            var searchParser = new SearchParser();
-            var emptyExpected = new SearchPlan(new InitialSearch(), new List<SearchFilter>());
-            var startEndExpected = new SearchPlan(new InitialSearch()
-            {
-                Start = new Position(0,0),
-                End = new Position(0x100, 0)
-            }, new List<SearchFilter>());
-
-            var empty = searchParser.Parse("".Split(' '));
-            var startEnd = searchParser.Parse("-s 0:0 -e 100:0".Split(' '));
-            var kernel32 = searchParser.Parse("kernel32".Split(' '));
-            var where = searchParser.Parse("| where rax -eq 1 | mod -contains 32".Split(' '));
-            var whereFields = searchParser.Parse("| where rax -eq 1 | where mod -contains 32 | fields rax rip mod fun".Split(' '));
-
-            empty.Should().Be(emptyExpected);
-            startEnd.Should().Be(startEndExpected);
-        }
-    }
-
     public class SearchMethod_Should
     {
         [Fact]
@@ -92,8 +67,19 @@ namespace McFly.Tests
                 },
                 SearchPlanInterpreter = searchPlanInterpreterBuilder.Build()
             };
+        }
+    }
 
-            
+    public class SearchPlanInterpreter_Should // todo: move to SQL data project
+    {
+        public void Generate_The_Correct_Sql_Statement()
+        {
+            var initial = new InitialSearch()
+            {
+                Start = new Position(1,1),
+                End = new Position(8, 0),
+            };
+            var plan = new SearchPlan();
         }
     }
 }
