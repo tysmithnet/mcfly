@@ -166,7 +166,10 @@
     <Compile Include="IndexMethod.cs" />
     <Compile Include="InitMethod.cs" />
     <Compile Include="InitOptions.cs" />
+    <Compile Include="ISearchParser.cs" />
     <Compile Include="IRegisterFacade.cs" />
+    <Compile Include="ISearchPlan.cs" />
+    <Compile Include="ISearchPlanInterpreter.cs" />
     <Compile Include="IServerClient.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="IStackFacade.cs" />

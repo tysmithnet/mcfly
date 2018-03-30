@@ -70,7 +70,7 @@ namespace McFly
         /// <returns>Task.</returns>
         public void Process(string[] args)
         {
-            Parser.Default.ParseArguments<InitOptions>(args)
+            SearchParser.Default.ParseArguments<InitOptions>(args)
                 .WithParsed(options =>
                 {
                     var start = TimeTravelFacade.GetStartingPosition();
