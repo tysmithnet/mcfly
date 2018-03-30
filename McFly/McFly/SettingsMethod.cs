@@ -65,20 +65,20 @@ namespace McFly
         [ExcludeFromCodeCoverage]
         public void Process(string[] args)
         {
-            //SearchParser.Default.ParseArguments<ReloadOptions, ListOptions, OpenOptions>(args)
-            //    .WithParsed<ReloadOptions>(r => { McFlyExtension.PopulateSettings(); })
-            //    .WithParsed<ListOptions>(l =>
-            //    {
-            //        foreach (var settings in AllSettings)
-            //        {
-            //            DebugEngineProxy.WriteLine(settings.GetType().FullName);
-            //            DebugEngineProxy.WriteLine(JsonConvert.SerializeObject(settings, Formatting.Indented));
-            //        }
-            //    })
-            //    .WithParsed<OpenOptions>(o =>
-            //    {
-            //        var p = System.Diagnostics.Process.Start(McFlyExtension.GetLogPath());
-            //    });
+            Parser.Default.ParseArguments<ReloadOptions, ListOptions, OpenOptions>(args)
+                .WithParsed<ReloadOptions>(r => { McFlyExtension.PopulateSettings(); })
+                .WithParsed<ListOptions>(l =>
+                {
+                    foreach (var settings in AllSettings)
+                    {
+                        DebugEngineProxy.WriteLine(settings.GetType().FullName);
+                        DebugEngineProxy.WriteLine(JsonConvert.SerializeObject(settings, Formatting.Indented));
+                    }
+                })
+                .WithParsed<OpenOptions>(o =>
+                {
+                    var p = System.Diagnostics.Process.Start(McFlyExtension.GetLogPath());
+                });
         }
     }
 

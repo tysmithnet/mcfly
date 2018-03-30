@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 
 namespace McFly
 {
@@ -43,56 +42,5 @@ namespace McFly
              */
              
         }
-    }
-
-    public class SearchParser : ISearchParser
-    {
-        public SearchPlan Parse(string[] args)
-        {
-            return null;
-        }
-    }
-
-    public class SearchPlanInterpreter : ISearchPlanInterpreter
-    {
-        public IEnumerable<ISearchResult> Interpret(SearchPlan searchPlan)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-
-    public class SearchPlan : ISearchPlan
-    {
-        public InitialSearch InitialSearch { get; set; }
-        public IEnumerable<SearchFilter> SearchFilters { get; set; }
-    }
-
-    public sealed class InitialSearch
-    {
-        
-    }
-
-    public sealed class SearchFilter
-    {
-        public string Property { get; set; }
-        public string Operator { get; set; }
-        public string Value { get; set; }
-    }
-
-
-    public interface ISearchResult : IInjectable
-    {
-        string DisplayText { get; set; }
-    }
-
-    public interface ISearchIndex : IInjectable
-    {
-        IEnumerable<ISearchResult> GeneralSearch(string searchText);
-        IEnumerable<ISearchResult> Search(string[] args);
-    }
-
-    public interface ISearchResultDisplayStrategy : IInjectable
-    {
-        void Display(IEnumerable<ISearchResult> searchResults);
     }
 }
