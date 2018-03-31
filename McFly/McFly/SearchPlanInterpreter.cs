@@ -1,0 +1,12 @@
+﻿using System.Collections.Generic;
+
+namespace McFly
+{
+    public class SearchPlanInterpreter : ISearchPlanInterpreter // todo: rename this and all the other default stuff to ___Sql
+    {
+        public IEnumerable<ISearchResult> Interpret(SearchPlan searchPlan)
+        {
+            return null;
+        }
+    }
+}

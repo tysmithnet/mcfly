@@ -1,51 +1,25 @@
-﻿CREATE PROCEDURE [dbo].[pr_add_note] @pos_hi    INT, 
-                                     @pos_lo    INT, 
-                                     @thread_id INT = NULL, 
-                                     @text      TEXT 
-AS 
-    DECLARE @note_id INT; 
+﻿CREATE PROCEDURE [dbo].[pr_add_note] @pos_hi INT,
+	@pos_lo INT,
+	@thread_ids tt_int readonly,
+	@text TEXT
+AS
+BEGIN TRANSACTION
 
-    IF @thread_id IS NULL 
-      BEGIN 
-          BEGIN TRAN 
+INSERT INTO note
+VALUES (
+	GETUTCDATE(),
+	@text
+	)
 
-          INSERT INTO note 
-          VALUES      (Getutcdate(), 
-                       @text) 
+DECLARE @note_id INT = @@identity
 
-          SET @note_id = @@IDENTITY 
+INSERT INTO frame_note
+SELECT @pos_hi,
+	@pos_lo,
+	value0,
+	@text
+FROM @thread_ids
 
-          INSERT INTO frame_note 
-          SELECT pos_hi, 
-                 pos_lo, 
-                 thread_id, 
-                 @note_id AS note_id 
-          FROM   frame 
-          WHERE  pos_hi = @pos_hi 
-                 AND pos_lo = @pos_lo 
+COMMIT TRANSACTION
 
-          COMMIT TRAN 
-      END 
-    ELSE 
-      BEGIN 
-          BEGIN TRAN 
-
-          INSERT INTO note 
-          VALUES      (Getutcdate(), 
-                       @text) 
-
-          SET @note_id = @@IDENTITY 
-
-          INSERT INTO frame_note 
-          SELECT pos_hi, 
-                 pos_lo, 
-                 @thread_id AS thread_id, 
-                 @note_id   AS note_id 
-          FROM   frame 
-          WHERE  pos_hi = @pos_hi 
-                 AND pos_lo = @pos_lo 
-
-          COMMIT TRAN 
-      END 
-
-    RETURN 0 
+RETURN 0

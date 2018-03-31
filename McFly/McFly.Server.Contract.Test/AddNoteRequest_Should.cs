@@ -9,8 +9,8 @@ namespace McFly.Server.Contract.Test
         [Fact]
         public void Exhibit_Value_Equality()
         {
-            var addNoteRequest = new AddNoteRequest(new Position(0, 0), 1, "");
-            var expected = new AddNoteRequest(new Position(0, 0), 1, "");
+            var addNoteRequest = new AddNoteRequest(new Position(0, 0), new[] {1}, "");
+            var expected = new AddNoteRequest(new Position(0, 0), new[] {1}, "");
             addNoteRequest.Should().Be(expected);
             addNoteRequest.GetHashCode().Should().Be(addNoteRequest.GetHashCode());
             (addNoteRequest == expected).Should().BeTrue();

@@ -78,7 +78,7 @@ namespace McFly
         /// </summary>
         /// <param name="command">The command.</param>
         /// <returns>System.String.</returns>
-        private string GetCommandHelp(string command)
+        private string GetCommandHelp(string command)   // todo: support sub command help
         {
             var help = Methods.Single(x => x.HelpInfo.Name == command).HelpInfo;
             var sb = new StringBuilder();

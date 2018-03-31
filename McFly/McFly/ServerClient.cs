@@ -58,10 +58,10 @@ namespace McFly
             HttpFacade.PostJsonAsync(ub.Uri, frames, headers).GetAwaiter().GetResult();
         }
             
-        public void AddNote(Position position, int? threadId, string text)
+        public void AddNote(Position position, IEnumerable<int> threadIds, string text)
         {
             var ub = new UriBuilder(Settings.ServerUrl) { Path = $"api/note" };
-            var addNoteRequest = new AddNoteRequest(position, threadId, text);
+            var addNoteRequest = new AddNoteRequest(position, threadIds, text);
             var headers = new HttpHeaders
             {
                 ["X-Project-Name"] = Settings.ProjectName
