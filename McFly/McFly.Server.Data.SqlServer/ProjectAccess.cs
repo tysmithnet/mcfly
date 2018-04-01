@@ -40,7 +40,7 @@ namespace McFly.Server.Data.SqlServer
         ///     Gets the log.
         /// </summary>
         /// <value>The log.</value>
-        private ILog Log { get; } = LogManager.GetLogger<ProjectsAccess>();
+        private Common.Logging.ILog Log { get; } = LogManager.GetLogger<ProjectsAccess>();
 
         [Import]
         protected internal IContextFactory ContextFactory { get; set; }

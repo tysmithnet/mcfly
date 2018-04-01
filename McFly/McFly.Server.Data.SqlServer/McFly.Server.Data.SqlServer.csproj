@@ -78,10 +78,35 @@
       <Project>{EFF4A343-5729-4705-BCC5-F4531C54A672}</Project>
       <Name>McFly.Server</Name>
     </ProjectReference>
+    <ProjectReference Include="..\McFly\McFly.csproj">
+      <Project>{D7EB4C59-22EF-4020-9850-CBBF6A015F80}</Project>
+      <Name>McFly</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.dll" "$(SolutionDir)McFly\bin\x64\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.dll" "$(SolutionDir)McFly\bin\x86\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.exe" "$(SolutionDir)McFly\bin\x64\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.exe" "$(SolutionDir)McFly\bin\x86\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.pdb" "$(SolutionDir)McFly\bin\x64\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.pdb" "$(SolutionDir)McFly\bin\x86\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.dll" "$(SolutionDir)McFly\bin\x64\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.dll" "$(SolutionDir)McFly\bin\x86\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.exe" "$(SolutionDir)McFly\bin\x64\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.exe" "$(SolutionDir)McFly\bin\x86\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.pdb" "$(SolutionDir)McFly\bin\x64\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.pdb" "$(SolutionDir)McFly\bin\x86\Debug\"
+
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.dll" "$(SolutionDir)McFly.Server\bin\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.dll" "$(SolutionDir)McFly.Server\bin\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.exe" "$(SolutionDir)McFly.Server\bin\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.exe" "$(SolutionDir)McFly.Server\bin\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.pdb" "$(SolutionDir)McFly.Server\bin\Debug\"
+echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.pdb" "$(SolutionDir)McFly.Server\bin\Debug\"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

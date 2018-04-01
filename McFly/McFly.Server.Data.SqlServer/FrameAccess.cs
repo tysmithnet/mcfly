@@ -15,7 +15,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using Common.Logging;
 using McFly.Core;
@@ -31,7 +30,7 @@ namespace McFly.Server.Data.SqlServer
     [Export(typeof(FrameAccess))]
     internal class FrameAccess : DataAccess, IFrameAccess
     {
-        private ILog Log = LogManager.GetLogger<FrameAccess>();
+        private Common.Logging.ILog Log = LogManager.GetLogger<FrameAccess>();    // todo: fix logging in mcfly
 
         [Import]
         protected internal IContextFactory ContextFactory { get; set; }
@@ -45,7 +44,6 @@ namespace McFly.Server.Data.SqlServer
         {
             using (var context = ContextFactory.GetContext(projectName))
             {
-                
             }
         }
 
