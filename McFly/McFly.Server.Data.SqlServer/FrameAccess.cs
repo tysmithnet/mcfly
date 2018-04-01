@@ -38,7 +38,7 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="frames">The frames.</param>
-        public void UpsertFrames(string projectName, IEnumerable<Frame> frames)
+        public void UpsertFrames(string projectName, IEnumerable<Core.Frame> frames)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <param name="frames">The frames.</param>
         /// <returns>FrameDto.</returns>
-        private FrameDto ConvertToTableType(IEnumerable<Frame> frames)
+        private FrameDto ConvertToTableType(IEnumerable<Core.Frame> frames)
         {
             var frameTable = new DataTable("tt_frame");
             frameTable.Columns.Add("@pos_hi", typeof(int));
