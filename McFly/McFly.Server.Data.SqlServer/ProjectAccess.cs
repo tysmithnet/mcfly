@@ -75,7 +75,7 @@ namespace McFly.Server.Data.SqlServer
         {
             using (var context = ContextFactory.GetContext(projectName))
             {
-                
+                var f = context.FrameEntities.FirstOrDefault();
             }
         }
     }
