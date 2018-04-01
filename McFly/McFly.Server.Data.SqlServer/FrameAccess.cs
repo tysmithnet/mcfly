@@ -45,51 +45,75 @@ namespace McFly.Server.Data.SqlServer
             frames = frames.ToList();
             using (var context = ContextFactory.GetContext(projectName))
             {
-                var existing = context.FrameEntities.Where(e => frames.Any(EntityFrameComparer(e)));
-                foreach (var frameEntity in existing)
+                foreach (var frame in frames)
                 {
-                    var frame = frames.Single(EntityFrameComparer(frameEntity));
-                    var newEntity = frame.ToFrameEntity();
-                    CopyValues(newEntity, frameEntity);
+                    var source = frame.ToFrameEntity();
+                    var target = context.FrameEntities.FirstOrDefault(x =>
+                        x.PosHi == source.PosHi && x.PosLo == source.PosLo && x.ThreadId == source.ThreadId);
+                    if (target != null)
+                    {
+                        // copy values
+                        CopyValues(source, target);
+                    }
+                    else
+                    {
+                        // add new
+                        context.FrameEntities.Add(source);
+                    }
                 }
-
                 context.SaveChanges();
             }
         }
 
-        private static void CopyValues(FrameEntity newEntity, FrameEntity frameEntity)
+        private static void CopyValues(FrameEntity source, FrameEntity target)
         {
-            if (newEntity.Rax.HasValue)
-                frameEntity.Rax = newEntity.Rax;
+            if (source.Rax.HasValue)
+                target.Rax = source.Rax;
 
-            if (newEntity.Rbx.HasValue)
-                frameEntity.Rbx = newEntity.Rbx;
+            if (source.Rbx.HasValue)
+                target.Rbx = source.Rbx;
 
-            if (newEntity.Rcx.HasValue)
-                frameEntity.Rcx = newEntity.Rcx;
+            if (source.Rcx.HasValue)
+                target.Rcx = source.Rcx;
 
-            if (newEntity.Rdx.HasValue)
-                frameEntity.Rdx = newEntity.Rdx;
+            if (source.Rdx.HasValue)
+                target.Rdx = source.Rdx;
 
-            if (newEntity.Address.HasValue)
-                frameEntity.Address = newEntity.Address;
+            if (source.Address.HasValue)
+                target.Address = source.Address;
 
-            if (newEntity.DisassemblyNote != null)
-                frameEntity.DisassemblyNote = newEntity.DisassemblyNote;
+            if (source.DisassemblyNote != null)
+                target.DisassemblyNote = source.DisassemblyNote;
 
-            if (newEntity.OpCode != null)
-                frameEntity.OpCode = newEntity.OpCode;
+            if (source.OpCode != null)
+                target.OpCode = source.OpCode;
 
-            if (newEntity.OpCodeMnemonic != null)
-                frameEntity.OpCodeMnemonic = newEntity.DisassemblyNote;
+            if (source.OpCodeMnemonic != null)
+                target.OpCodeMnemonic = source.DisassemblyNote;
 
-            
-        }
-
-        private static Func<Frame, bool> EntityFrameComparer(FrameEntity e)
-        {
-            return f =>
-                f.Position.High == e.PosHi && f.Position.Low == e.PosLo && f.ThreadId == e.ThreadId;
+            if (source.StackFrames != null)
+            {
+                foreach (var sourceStackFrame in source.StackFrames)
+                {
+                    var targetStackFrame = target.StackFrames?.FirstOrDefault(x => x.StackPointer == sourceStackFrame.StackPointer);
+                    if (targetStackFrame != null)
+                    {
+                        // copy source values to target
+                        if (sourceStackFrame.ReturnAddress.HasValue)
+                            targetStackFrame.ReturnAddress = sourceStackFrame.ReturnAddress;
+                        if (sourceStackFrame.ModuleName != null)
+                            targetStackFrame.ModuleName = sourceStackFrame.ModuleName;
+                        if (sourceStackFrame.Function != null)
+                            targetStackFrame.Function = sourceStackFrame.Function;
+                        if (sourceStackFrame.Offset.HasValue)
+                            targetStackFrame.Offset = sourceStackFrame.Offset;
+                    }
+                    else
+                    {
+                        target.StackFrames.Add(sourceStackFrame);
+                    }
+                }
+            }
         }
     }
 }

@@ -77,7 +77,7 @@ namespace McFly.Server.Data.SqlServer
         public long? StackFrameId { get; set; }
                                             
         [Column("stack_pointer")]
-        public long? StackPointer { get; set; }
+        public long StackPointer { get; set; }
 
         [Column("return_address")]
         public long? ReturnAddress { get; set; }
@@ -211,14 +211,14 @@ namespace McFly.Server.Data.SqlServer
 
         public static StackFrame ToStackFrame(this StackFrameEntity entity)
         {
-            return new StackFrame(entity.StackPointer?.ToULong(), entity.ReturnAddress?.ToULong(), entity.ModuleName, entity.Function, entity.Offset?.ToULong());
+            return new StackFrame(entity.StackPointer.ToULong(), entity.ReturnAddress?.ToULong(), entity.ModuleName, entity.Function, entity.Offset?.ToULong());
         }
 
         public static StackFrameEntity ToStackFrameEntity(this StackFrame stackFrame)
         {
             return new StackFrameEntity
             {                     
-                StackPointer = stackFrame.StackPointer?.ToLong(),
+                StackPointer = stackFrame.StackPointer.ToLong(),
                 ReturnAddress = stackFrame.ReturnAddress?.ToLong(),
                 ModuleName = stackFrame.Module,
                 Function = stackFrame.FunctionName,
