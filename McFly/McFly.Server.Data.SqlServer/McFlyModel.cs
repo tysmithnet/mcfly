@@ -1,5 +1,3 @@
-using McFly.Server.Data.SqlServer.Entities;
-
 namespace McFly.Server.Data.SqlServer
 {
     using System;
@@ -14,40 +12,40 @@ namespace McFly.Server.Data.SqlServer
         {
         }
 
-        public virtual DbSet<FrameEntity> frames { get; set; }
-        public virtual DbSet<NoteEntity> notes { get; set; }
-        public virtual DbSet<StackFrameEntity> stackframes { get; set; }
-        public virtual DbSet<TraceInfoEntity> trace_info { get; set; }
+        public virtual DbSet<frame> frames { get; set; }
+        public virtual DbSet<note> notes { get; set; }
+        public virtual DbSet<stackframe> stackframes { get; set; }
+        public virtual DbSet<trace_info> trace_info { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<FrameEntity>()
-                .Property(e => e.OpcodeMnemonic)
+            modelBuilder.Entity<frame>()
+                .Property(e => e.opcode_mnemonic)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<FrameEntity>()
-                .Property(e => e.DisassemblyNote)
+            modelBuilder.Entity<frame>()
+                .Property(e => e.disassembly_note)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<FrameEntity>()
-                .HasMany(e => e.Notes)
+            modelBuilder.Entity<frame>()
+                .HasMany(e => e.notes)
                 .WithMany(e => e.frames)
                 .Map(m => m.ToTable("frame_note").MapLeftKey(new[] { "pos_hi", "pos_lo", "thread_id" }));
 
-            modelBuilder.Entity<NoteEntity>()
+            modelBuilder.Entity<note>()
                 .Property(e => e.content)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<StackFrameEntity>()
-                .Property(e => e.Module)
+            modelBuilder.Entity<stackframe>()
+                .Property(e => e.module)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<StackFrameEntity>()
-                .Property(e => e.FunctionName)
+            modelBuilder.Entity<stackframe>()
+                .Property(e => e.function_name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<TraceInfoEntity>()
-                .Property(e => e.Lock)
+            modelBuilder.Entity<trace_info>()
+                .Property(e => e._lock)
                 .IsFixedLength()
                 .IsUnicode(false);
         }
