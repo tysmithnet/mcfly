@@ -5,10 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Effort;
-using Effort.DataLoaders;
 using FluentAssertions;
 using McFly.Core;
-using Moq;
 using Xunit;
 
 namespace McFly.Server.Data.SqlServer.Test
@@ -16,7 +14,7 @@ namespace McFly.Server.Data.SqlServer.Test
     public class FrameAccess_Should
     {
         [Fact]
-        public void Update_An_Existing_Frame_If_One_Exists()
+        public void Get_The_Correct_Frame_If_One_Exists()
         {
             var access = new FrameAccess();
             var builder = new ContextFactoryBuilder();
@@ -30,29 +28,25 @@ namespace McFly.Server.Data.SqlServer.Test
             access.ContextFactory = builder.Build();
             access.GetFrame("anyproject", new Position(0, 0), 1).Should().Be(frame.ToFrame());
         }
-    }
 
-    internal class ContextFactoryBuilder
-    {
-        public Mock<IContextFactory> Mock = new Mock<IContextFactory>();
-        private McFlyContext _context;
-
-        public ContextFactoryBuilder()
+        [Fact]
+        public void Throw_If_Frame_Cant_Be_Found()
         {
-            var loader = new EmptyDataLoader();
-            var connection = Effort.DbConnectionFactory.CreateTransient(loader);
-            _context = new McFlyContext(connection);
-        }
+            var access = new FrameAccess();
+            var builder = new ContextFactoryBuilder();
+            FrameEntity frame = new FrameEntity()
+            {
+                PosHi = 0,
+                PosLo = 0,
+                ThreadId = 1
+            };
+            builder.WithFrame(frame);
+            access.ContextFactory = builder.Build();
+            Action throws = () => access.GetFrame("test", new Position(1, 0), 1);
 
-        public ContextFactoryBuilder WithFrame(FrameEntity frame)
-        {
-            _context.FrameEntities.Add(frame);
-            return this;
-        }
-
-        public IContextFactory Build()
-        {
-            return Mock.Object;
+            throws.Should().Throw<IndexOutOfRangeException>();
         }
     }
+
+
 }
