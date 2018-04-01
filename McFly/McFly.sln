@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer", "SqlServer", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Server.Data.SqlServer", "McFly.Server.Data.SqlServer\McFly.Server.Data.SqlServer.csproj", "{5FAA1707-D76B-48A6-A63C-37C510ECEAB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Server.Data.SqlServer.Test", "McFly.Server.Data.SqlServer.Test\McFly.Server.Data.SqlServer.Test.csproj", "{1A1071C3-5F84-4E12-A489-8D781310AF46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +175,18 @@ Global
 		{5FAA1707-D76B-48A6-A63C-37C510ECEAB5}.Release|x64.Build.0 = Release|Any CPU
 		{5FAA1707-D76B-48A6-A63C-37C510ECEAB5}.Release|x86.ActiveCfg = Release|Any CPU
 		{5FAA1707-D76B-48A6-A63C-37C510ECEAB5}.Release|x86.Build.0 = Release|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Debug|x64.Build.0 = Debug|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Debug|x86.Build.0 = Debug|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Release|x64.ActiveCfg = Release|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Release|x64.Build.0 = Release|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Release|x86.ActiveCfg = Release|Any CPU
+		{1A1071C3-5F84-4E12-A489-8D781310AF46}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +201,7 @@ Global
 		{BCFFB741-26F9-4D12-A152-04CF601D373E} = {FE35C142-4CD6-4249-A34A-BAACDE54B444}
 		{3E825958-D919-4941-BDAA-967836C678D1} = {FE35C142-4CD6-4249-A34A-BAACDE54B444}
 		{5FAA1707-D76B-48A6-A63C-37C510ECEAB5} = {C4BFF334-1936-49C5-BD50-4616B47F3119}
+		{1A1071C3-5F84-4E12-A489-8D781310AF46} = {C4BFF334-1936-49C5-BD50-4616B47F3119}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4975AD4B-1EDB-4156-84B5-3335487BF604}
