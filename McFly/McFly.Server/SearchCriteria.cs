@@ -7,7 +7,12 @@ namespace McFly.Server
 {
     public interface ICriterion
     {
-        
+        void Accept(ICriterionVisitor visitor);
+    }
+
+    public interface ICriterionVisitor
+    {
+        void Visit(ICriterion criterion);
     }
 
     public sealed class AndCriterion : ICriterion
@@ -17,6 +22,11 @@ namespace McFly.Server
         public AndCriterion(IEnumerable<ICriterion> criteria)
         {
             Criteria = criteria?.ToList() ?? throw new ArgumentNullException(nameof(criteria));
+        }
+
+        public void Accept(ICriterionVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 
@@ -28,6 +38,11 @@ namespace McFly.Server
         {
             Criteria = criteria?.ToList() ?? throw new ArgumentNullException(nameof(criteria));
         }
+
+        public void Accept(ICriterionVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 
     public sealed class NotCriterion : ICriterion
@@ -37,6 +52,11 @@ namespace McFly.Server
         public NotCriterion(ICriterion criterion)
         {
             Criterion = criterion ?? throw new ArgumentNullException(nameof(criterion));
+        }
+
+        public void Accept(ICriterionVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 
@@ -48,6 +68,8 @@ namespace McFly.Server
         {
             Registers = registers?.ToList() ?? throw new ArgumentNullException(nameof(registers));
         }
+
+        public abstract void Accept(ICriterionVisitor visitor);
     }
 
     public class RegisterEqualsCriterion : RegisterCriterion
@@ -57,6 +79,11 @@ namespace McFly.Server
         public RegisterEqualsCriterion(IEnumerable<Register> registers, ulong value) : base(registers)
         {
             Value = value;
+        }
+
+        public override void Accept(ICriterionVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 
@@ -72,6 +99,11 @@ namespace McFly.Server
             Low = low;
             High = high;
         }
+
+        public override void Accept(ICriterionVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 
     public class RegisterInCriterion : RegisterCriterion
@@ -82,11 +114,16 @@ namespace McFly.Server
         {
             Values = values?.ToList() ?? throw new ArgumentNullException(nameof(values));
         }
+
+        public override void Accept(ICriterionVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 
     public abstract class NoteCriterion : ICriterion
     {
-        
+        public abstract void Accept(ICriterionVisitor visitor);
     }
 
     public class NoteCreatedBeforeCriterion : NoteCriterion
@@ -97,6 +134,11 @@ namespace McFly.Server
         {
             DateTime = dateTime;
         }
+
+        public override void Accept(ICriterionVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 
     public class NoteCreatedAfterCriterion : NoteCriterion
@@ -106,6 +148,11 @@ namespace McFly.Server
         public NoteCreatedAfterCriterion(DateTime dateTime)
         {
             DateTime = dateTime;
+        }
+
+        public override void Accept(ICriterionVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 
@@ -121,6 +168,11 @@ namespace McFly.Server
             Low = low;
             High = high;
         }
+
+        public override void Accept(ICriterionVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 
     public class NoteTextContainsCriterion : NoteCriterion
@@ -130,6 +182,11 @@ namespace McFly.Server
         public NoteTextContainsCriterion(string substring)
         {
             Substring = substring ?? throw new ArgumentNullException(nameof(substring));
+        }
+
+        public override void Accept(ICriterionVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }
