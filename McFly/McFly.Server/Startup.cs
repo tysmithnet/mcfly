@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -55,8 +56,8 @@ namespace McFly.Server
             var executingAssemblyCatalog = new AssemblyCatalog(executingAssembly);
             var aggregateCatalog = new AggregateCatalog(assemblies.Concat(new[] {executingAssemblyCatalog}));
             var compositionContainer = new CompositionContainer(aggregateCatalog);
-            var settings = new Settings();
-            settings.ConnectionString = "Data Source=localhost;Integrated Security=true";
+            var settings = new Settings {ConnectionString = "Data Source=localhost;Integrated Security=true"};
+            compositionContainer.ComposeExportedValue(settings);
             var mefDependencyResolver = new MefDependencyResolver(compositionContainer, config.DependencyResolver);
             config.DependencyResolver = mefDependencyResolver;
             config.EnableSwagger(c =>

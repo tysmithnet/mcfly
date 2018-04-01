@@ -184,9 +184,9 @@ namespace McFly.Server
             Substring = substring ?? throw new ArgumentNullException(nameof(substring));
         }
 
-        public override void Accept(ICriterionVisitor visitor)
+        public override object Accept(ICriterionVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 }

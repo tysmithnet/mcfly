@@ -29,9 +29,12 @@ namespace McFly.Server.Data.SqlServer
     /// <seealso cref="McFly.Server.Data.IFrameAccess" />
     [Export(typeof(IFrameAccess))]
     [Export(typeof(FrameAccess))]
-    public class FrameAccess : DataAccess, IFrameAccess
+    internal class FrameAccess : DataAccess, IFrameAccess
     {
         private ILog Log = LogManager.GetLogger<FrameAccess>();
+
+        [Import]
+        protected internal IContextFactory ContextFactory { get; set; }
 
         /// <summary>
         ///     Upserts the frame.
@@ -40,22 +43,9 @@ namespace McFly.Server.Data.SqlServer
         /// <param name="frames">The frames.</param>
         public void UpsertFrames(string projectName, IEnumerable<Frame> frames)
         {
-            try
+            using (var context = ContextFactory.GetContext(projectName))
             {
-                var tableTypes = ConvertToTableType(frames);
-                var framesParam = new SqlParameter("@frames", SqlDbType.Structured) {Value = tableTypes.Frames};
-                var stackFrameParams =
-                    new SqlParameter("@stackframes", SqlDbType.Structured) {Value = tableTypes.StackFrames};
-                using (var reader = ExecuteStoredProcedureReader(projectName, "pr_upsert_frames",
-                    new[] {framesParam, stackFrameParams}))
-                {
-                    ;
-                }
-            }
-            catch (SqlException e)
-            {
-                Log.Error($"Error upserting frames. Is your payload correct? Is the project name correct?", e);
-                throw;
+                
             }
         }
 

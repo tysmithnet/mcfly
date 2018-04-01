@@ -54,10 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextFactory.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="Entities.cs" />
     <Compile Include="FrameAccess.cs" />
     <Compile Include="FrameDto.cs" />
+    <Compile Include="IContextFactory.cs" />
     <Compile Include="NoteAccess.cs" />
     <Compile Include="ProjectAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -45,6 +45,10 @@ namespace McFly.Server.Data.SqlServer
         public DbSet<FrameEntity> FrameEntities { get; set; }
         public DbSet<NoteEntity> NoteEntities { get; set; }
         public DbSet<StackFrameEntity> StackFrameEntities { get; set; }
-    }
 
+        public McFlyContext(string connectionString) : base(connectionString)
+        {
+            
+        }
+    }                                                                  
 }
