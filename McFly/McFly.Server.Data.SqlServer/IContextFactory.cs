@@ -1,6 +1,6 @@
 ﻿namespace McFly.Server.Data.SqlServer
 {
-    internal interface IContextFactory : IInjectable
+    internal interface IContextFactory
     {
         McFlyContext GetContext(string projectName);
     }
