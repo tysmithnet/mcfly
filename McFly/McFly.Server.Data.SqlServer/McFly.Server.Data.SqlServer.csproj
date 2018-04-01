@@ -30,7 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,7 +47,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess.cs" />
+    <Compile Include="FrameAccess.cs" />
+    <Compile Include="FrameDto.cs" />
+    <Compile Include="NoteAccess.cs" />
+    <Compile Include="ProjectAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
+      <Project>{3243A211-CF4F-4296-BD68-2D4DD5406542}</Project>
+      <Name>McFly.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\McFly.Server.Data\McFly.Server.Data.csproj">
+      <Project>{DFDEC1CA-5A5C-4FC6-8C7B-11C777C396DC}</Project>
+      <Name>McFly.Server.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\McFly.Server\McFly.Server.csproj">
+      <Project>{EFF4A343-5729-4705-BCC5-F4531C54A672}</Project>
+      <Name>McFly.Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

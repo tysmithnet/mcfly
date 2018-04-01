@@ -20,12 +20,12 @@ using System.Linq;
 using Common.Logging;
 using McFly.Core;
 
-namespace McFly.Server.Data
+namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
     ///     Represents the data access logic for the frame domain
     /// </summary>
-    /// <seealso cref="McFly.Server.Data.DataAccess" />
+    /// <seealso cref="DataAccess" />
     /// <seealso cref="McFly.Server.Data.IFrameAccess" />
     [Export(typeof(IFrameAccess))]
     [Export(typeof(FrameAccess))]

@@ -24,12 +24,12 @@ using System.Text.RegularExpressions;
 using Common.Logging;
 using McFly.Core;
 
-namespace McFly.Server.Data
+namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
     ///     IProjectsAccess implementation that uses SqlServer
     /// </summary>
-    /// <seealso cref="McFly.Server.Data.DataAccess" />
+    /// <seealso cref="DataAccess" />
     /// <seealso cref="McFly.Server.Data.IProjectsAccess" />
     [Export(typeof(IProjectsAccess))]
     [Export(typeof(ProjectsAccess))]
@@ -48,7 +48,7 @@ namespace McFly.Server.Data
         /// <returns>IEnumerable&lt;System.String&gt;.</returns>
         public IEnumerable<string> GetDatabases()
         {
-            using (var conn = new SqlConnection(ConnectionString))
+            using (var conn = new SqlConnection(Settings.ConnectionString))
             using (var command = conn.CreateCommand())
             {
                 conn.Open();
@@ -83,7 +83,7 @@ namespace McFly.Server.Data
                 throw;
             }
 
-            using (var conn = new SqlConnection(ConnectionString))
+            using (var conn = new SqlConnection(Settings.ConnectionString))
             {
                 try
                 {

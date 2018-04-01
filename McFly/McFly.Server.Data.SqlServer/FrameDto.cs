@@ -14,12 +14,12 @@
 
 using System.Data;
 
-namespace McFly.Server.Data
+namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
     ///     A dto for frame access
     /// </summary>
-    internal class FrameDto
+    public class FrameDto
     {
         /// <summary>
         ///     Gets or sets the frames.

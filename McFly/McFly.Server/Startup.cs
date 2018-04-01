@@ -55,7 +55,8 @@ namespace McFly.Server
             var executingAssemblyCatalog = new AssemblyCatalog(executingAssembly);
             var aggregateCatalog = new AggregateCatalog(assemblies.Concat(new[] {executingAssemblyCatalog}));
             var compositionContainer = new CompositionContainer(aggregateCatalog);
-
+            var settings = new Settings();
+            settings.ConnectionString = "Data Source=localhost;Integrated Security=true";
             var mefDependencyResolver = new MefDependencyResolver(compositionContainer, config.DependencyResolver);
             config.DependencyResolver = mefDependencyResolver;
             config.EnableSwagger(c =>

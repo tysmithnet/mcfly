@@ -18,12 +18,12 @@ using System.Data;
 using System.Data.SqlClient;
 using McFly.Core;
 
-namespace McFly.Server.Data
+namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
     ///     INoteAccess implementation that uses SQL Server
     /// </summary>
-    /// <seealso cref="McFly.Server.Data.DataAccess" />
+    /// <seealso cref="DataAccess" />
     /// <seealso cref="McFly.Server.Data.INoteAccess" />
     [Export(typeof(INoteAccess))]
     public class NoteAccess : DataAccess, INoteAccess

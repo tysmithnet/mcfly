@@ -13,21 +13,19 @@
 // ***********************************************************************
 
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace McFly.Server.Data
+namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
     ///     Represents the common data access logic for the application
     /// </summary>
     public abstract class DataAccess
     {
-        /// <summary>
-        ///     Gets or sets the connection string to the data store
-        /// </summary>
-        /// <value>The connection string.</value>
-        public static string ConnectionString { get; set; }
+        [Import]
+        protected internal Settings Settings { get; set; }
 
         /// <summary>
         ///     Executes the stored procedure reader.
@@ -73,7 +71,11 @@ namespace McFly.Server.Data
         /// <returns>System.String.</returns>
         protected string GetProjectConnectionString(string projectName)
         {
-            var sb = new SqlConnectionStringBuilder(ConnectionString) {InitialCatalog = projectName, IntegratedSecurity = true};
+            var sb = new SqlConnectionStringBuilder(Settings.ConnectionString)
+            {
+                InitialCatalog = projectName,
+                IntegratedSecurity = true
+            };
             return sb.ToString();
         }
     }
