@@ -61,7 +61,7 @@ namespace McFly.Server.Data.SqlServer
                 var reader = command.ExecuteReader();
                 while (reader.Read())
                     databases.Add(reader.GetFieldValue<string>(0));
-                return databases;
+                return databases.Where(s => s.StartsWith("mcfly_"));
             }
         }
 
@@ -75,7 +75,18 @@ namespace McFly.Server.Data.SqlServer
         {
             using (var context = ContextFactory.GetContext(projectName))
             {
-                var f = context.FrameEntities.FirstOrDefault();
+                // forces a new database to be created
+                var traceInfo = new TraceInfoEntity()
+                {
+                    Lock = 1,
+                    CreateDate = DateTime.UtcNow,
+                    StartPosHi = start.High,
+                    StartPosLo = start.Low,
+                    EndPosHi = end.High,
+                    EndPosLo = end.Low
+                };
+                context.TraceInfoEntities.Add(traceInfo);
+                context.SaveChanges(); // todo: error checking
             }
         }
     }

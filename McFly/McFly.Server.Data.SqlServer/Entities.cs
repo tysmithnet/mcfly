@@ -93,6 +93,30 @@ namespace McFly.Server.Data.SqlServer
         public FrameEntity Frame { get; set; }
     }
 
+    [Table("trace_info")]
+    public class TraceInfoEntity
+    {
+        [Column("lock")]
+        [Range(1,1)]
+        [Key]
+        public int Lock { get; set; }
+
+        [Column("create_date")]
+        public DateTime CreateDate { get; set; }
+
+        [Column("start_pos_hi")]
+        public int StartPosHi { get; set; }
+
+        [Column("start_pos_lo")]
+        public int StartPosLo { get; set; }
+
+        [Column("end_pos_hi")]
+        public int EndPosHi { get; set; }
+
+        [Column("end_pos_lo")]
+        public int EndPosLo { get; set; }
+    }
+
     internal class McFlyContext : DbContext
     {
         public McFlyContext(string connectionString) : base(connectionString)
@@ -102,6 +126,7 @@ namespace McFly.Server.Data.SqlServer
         public DbSet<FrameEntity> FrameEntities { get; set; }
         public DbSet<NoteEntity> NoteEntities { get; set; }
         public DbSet<StackFrameEntity> StackFrameEntities { get; set; }
+        public DbSet<TraceInfoEntity> TraceInfoEntities { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -114,6 +139,12 @@ namespace McFly.Server.Data.SqlServer
                     entity.PosLo,
                     entity.ThreadId
                 }).IsUnique(true);
+
+            modelBuilder.Entity<TraceInfoEntity>()
+                .HasIndex(entity => entity.Lock)
+                .IsUnique(true);
         }
+
+
     }
 }
