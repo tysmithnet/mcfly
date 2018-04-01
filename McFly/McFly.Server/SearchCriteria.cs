@@ -7,12 +7,12 @@ namespace McFly.Server
 {
     public interface ICriterion
     {
-        void Accept(ICriterionVisitor visitor);
+        object Accept(ICriterionVisitor visitor);
     }
 
     public interface ICriterionVisitor
     {
-        void Visit(ICriterion criterion);
+        object Visit(ICriterion criterion);
     }
 
     public sealed class AndCriterion : ICriterion
@@ -24,9 +24,9 @@ namespace McFly.Server
             Criteria = criteria?.ToList() ?? throw new ArgumentNullException(nameof(criteria));
         }
 
-        public void Accept(ICriterionVisitor visitor)
+        public object Accept(ICriterionVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 
@@ -39,9 +39,9 @@ namespace McFly.Server
             Criteria = criteria?.ToList() ?? throw new ArgumentNullException(nameof(criteria));
         }
 
-        public void Accept(ICriterionVisitor visitor)
+        public object Accept(ICriterionVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 
@@ -54,9 +54,9 @@ namespace McFly.Server
             Criterion = criterion ?? throw new ArgumentNullException(nameof(criterion));
         }
 
-        public void Accept(ICriterionVisitor visitor)
+        public object Accept(ICriterionVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 
@@ -69,7 +69,7 @@ namespace McFly.Server
             Registers = registers?.ToList() ?? throw new ArgumentNullException(nameof(registers));
         }
 
-        public abstract void Accept(ICriterionVisitor visitor);
+        public abstract object Accept(ICriterionVisitor visitor);
     }
 
     public class RegisterEqualsCriterion : RegisterCriterion
@@ -81,9 +81,9 @@ namespace McFly.Server
             Value = value;
         }
 
-        public override void Accept(ICriterionVisitor visitor)
+        public override object Accept(ICriterionVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 
@@ -100,9 +100,9 @@ namespace McFly.Server
             High = high;
         }
 
-        public override void Accept(ICriterionVisitor visitor)
+        public override object Accept(ICriterionVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 
@@ -115,15 +115,15 @@ namespace McFly.Server
             Values = values?.ToList() ?? throw new ArgumentNullException(nameof(values));
         }
 
-        public override void Accept(ICriterionVisitor visitor)
+        public override object Accept(ICriterionVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 
     public abstract class NoteCriterion : ICriterion
     {
-        public abstract void Accept(ICriterionVisitor visitor);
+        public abstract object Accept(ICriterionVisitor visitor);
     }
 
     public class NoteCreatedBeforeCriterion : NoteCriterion
@@ -135,9 +135,9 @@ namespace McFly.Server
             DateTime = dateTime;
         }
 
-        public override void Accept(ICriterionVisitor visitor)
+        public override object Accept(ICriterionVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 
@@ -150,9 +150,9 @@ namespace McFly.Server
             DateTime = dateTime;
         }
 
-        public override void Accept(ICriterionVisitor visitor)
+        public override object Accept(ICriterionVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 
@@ -169,9 +169,9 @@ namespace McFly.Server
             High = high;
         }
 
-        public override void Accept(ICriterionVisitor visitor)
+        public override object Accept(ICriterionVisitor visitor)
         {
-            visitor.Visit(this);
+            return visitor.Visit(this);
         }
     }
 
