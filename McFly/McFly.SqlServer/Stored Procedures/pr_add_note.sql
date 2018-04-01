@@ -17,7 +17,7 @@ INSERT INTO frame_note
 SELECT @pos_hi,
 	@pos_lo,
 	value0,
-	@text
+	@note_id
 FROM @thread_ids
 
 COMMIT TRANSACTION
