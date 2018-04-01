@@ -23,6 +23,11 @@ namespace McFly.Core
     /// </summary>
     public class DisassemblyLine
     {
+        public DisassemblyLine()
+        {
+            
+        }
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="DisassemblyLine" /> class.
         /// </summary>
@@ -40,9 +45,9 @@ namespace McFly.Core
         public DisassemblyLine(ulong? instructionAddress, byte[] opCode, string opCodeMnemonic, string disassemblyNote)
         {
             InstructionAddress = instructionAddress;
-            OpCode = opCode ?? throw new ArgumentNullException(nameof(opCode));
-            OpCodeMnemonic = opCodeMnemonic?.Trim() ?? throw new ArgumentNullException(nameof(opCodeMnemonic));
-            DisassemblyNote = disassemblyNote?.Trim() ?? throw new ArgumentNullException(nameof(disassemblyNote));
+            OpCode = opCode;
+            OpCodeMnemonic = opCodeMnemonic?.Trim();
+            DisassemblyNote = disassemblyNote?.Trim();
         }
 
         /// <summary>

@@ -14,6 +14,7 @@
 
 using System;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace McFly.Core
 {
@@ -86,6 +87,7 @@ namespace McFly.Core
         ///     Gets or sets the eax.
         /// </summary>
         /// <value>The eax.</value>
+        [JsonIgnore]
         public uint? Eax
         {
             get => _rax?.Lo32();
@@ -96,6 +98,7 @@ namespace McFly.Core
         ///     Gets or sets the ebx.
         /// </summary>
         /// <value>The ebx.</value>
+        [JsonIgnore]
         public uint? Ebx
         {
             get => _rbx?.Lo32();
@@ -106,6 +109,7 @@ namespace McFly.Core
         ///     Gets or sets the ecx.
         /// </summary>
         /// <value>The ecx.</value>
+        [JsonIgnore]
         public uint? Ecx
         {
             get => _rcx?.Lo32();
@@ -116,6 +120,7 @@ namespace McFly.Core
         ///     Gets or sets the edx.
         /// </summary>
         /// <value>The edx.</value>
+        [JsonIgnore]
         public uint? Edx
         {
             get => _rdx?.Lo32();
