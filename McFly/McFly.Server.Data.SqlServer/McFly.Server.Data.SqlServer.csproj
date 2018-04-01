@@ -60,6 +60,7 @@
     <Compile Include="Entities\FrameEntity.cs" />
     <Compile Include="FrameAccess.cs" />
     <Compile Include="FrameDto.cs" />
+    <Compile Include="FrameToEntityMapper.cs" />
     <Compile Include="McFlyModel.cs" />
     <Compile Include="Entities\NoteEntity.cs" />
     <Compile Include="NoteAccess.cs" />
