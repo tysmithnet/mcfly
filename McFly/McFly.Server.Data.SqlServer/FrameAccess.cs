@@ -44,75 +44,8 @@ namespace McFly.Server.Data.SqlServer
         {
             using (var context = ContextFactory.GetContext(projectName))
             {
+
             }
-        }
-
-        /// <summary>
-        ///     Converts the type of to table.
-        /// </summary>
-        /// <param name="frames">The frames.</param>
-        /// <returns>FrameDto.</returns>
-        private FrameDto ConvertToTableType(IEnumerable<Frame> frames)
-        {
-            var frameTable = new DataTable("tt_frame");
-            frameTable.Columns.Add("@pos_hi", typeof(int));
-            frameTable.Columns.Add("@pos_lo", typeof(int));
-            frameTable.Columns.Add("@thread_id", typeof(int));
-            frameTable.Columns.Add("@rax", typeof(long));
-            frameTable.Columns.Add("@rbx", typeof(long));
-            frameTable.Columns.Add("@rcx", typeof(long));
-            frameTable.Columns.Add("@rdx", typeof(long));
-            frameTable.Columns.Add("@opcode", typeof(byte[]));
-            frameTable.Columns.Add("@opcode_mnemonic", typeof(string));
-            frameTable.Columns.Add("@disassembly_note", typeof(string));
-
-            var stackFrameTable = new DataTable("tt_stackframe");
-            stackFrameTable.Columns.Add("@pos_hi", typeof(int));
-            stackFrameTable.Columns.Add("@pos_lo", typeof(int));
-            stackFrameTable.Columns.Add("@thread_id", typeof(int));
-            stackFrameTable.Columns.Add("@depth", typeof(int));
-            stackFrameTable.Columns.Add("@stack_pointer", typeof(long));
-            stackFrameTable.Columns.Add("@return_address", typeof(long));
-            stackFrameTable.Columns.Add("@module", typeof(string));
-            stackFrameTable.Columns.Add("@function", typeof(string));
-            stackFrameTable.Columns.Add("@offset", typeof(long));
-
-            foreach (var frame in frames)
-            {
-                frameTable.Rows.Add(
-                    frame.Position.High,
-                    frame.Position.Low,
-                    frame.ThreadId,
-                    frame.RegisterSet?.Rax.ToLong(),
-                    frame.RegisterSet?.Rbx.ToLong(),
-                    frame.RegisterSet?.Rcx.ToLong(),
-                    frame.RegisterSet?.Rdx.ToLong(),
-                    frame.DisassemblyLine?.OpCode,
-                    frame.DisassemblyLine?.OpCodeMnemonic,
-                    frame.DisassemblyLine?.DisassemblyNote);
-
-                for (var index = 0; index < frame.StackTrace?.StackFrames.Count(); index++)
-                {
-                    var stackFrame = frame.StackTrace?.StackFrames.ElementAt(index);
-                    stackFrameTable.Rows.Add(
-                        frame.Position.High,
-                        frame.Position.Low,
-                        frame.ThreadId,
-                        index,
-                        stackFrame?.StackPointer,
-                        stackFrame?.ReturnAddress,
-                        stackFrame?.Module,
-                        stackFrame?.FunctionName,
-                        stackFrame?.Offset
-                    );
-                }
-            }
-
-            return new FrameDto
-            {
-                Frames = frameTable,
-                StackFrames = stackFrameTable
-            };
         }
     }
 }
