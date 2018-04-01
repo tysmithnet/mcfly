@@ -70,7 +70,9 @@ namespace McFly.Core
         /// </summary>
         /// <value>The disassembly line.</value>
         public DisassemblyLine DisassemblyLine { get; set; }
-                                                    
+
+        public ICollection<Note> Notes { get; set; } // todo: change equals
+
         /// <summary>
         ///     Compares to.
         /// </summary>

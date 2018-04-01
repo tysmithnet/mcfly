@@ -30,7 +30,7 @@ namespace McFly.Core
         /// <param name="module">The module.</param>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="offset">The offset.</param>
-        public StackFrame(ulong stackPointer, ulong returnAddress, string module, string functionName, uint offset)
+        public StackFrame(ulong? stackPointer, ulong? returnAddress, string module, string functionName, ulong? offset)
         {
             StackPointer = stackPointer;
             ReturnAddress = returnAddress;
@@ -43,13 +43,13 @@ namespace McFly.Core
         ///     Gets or sets the stack pointer.
         /// </summary>
         /// <value>The stack pointer.</value>
-        public ulong StackPointer { get; set; }
+        public ulong? StackPointer { get; set; }
 
         /// <summary>
         ///     Gets or sets the return address.
         /// </summary>
         /// <value>The return address.</value>
-        public ulong ReturnAddress { get; set; }
+        public ulong? ReturnAddress { get; set; }
 
         /// <summary>
         ///     Gets or sets the module.
@@ -67,7 +67,7 @@ namespace McFly.Core
         ///     Gets or sets the offset.
         /// </summary>
         /// <value>The offset.</value>
-        public uint Offset { get; set; }
+        public ulong? Offset { get; set; }
 
         /// <summary>
         ///     Is this instance equal to another stack frame

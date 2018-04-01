@@ -37,7 +37,7 @@ namespace McFly.Core
         ///     or
         ///     disassemblyNote
         /// </exception>
-        public DisassemblyLine(ulong instructionAddress, byte[] opCode, string opCodeMnemonic, string disassemblyNote)
+        public DisassemblyLine(ulong? instructionAddress, byte[] opCode, string opCodeMnemonic, string disassemblyNote)
         {
             InstructionAddress = instructionAddress;
             OpCode = opCode ?? throw new ArgumentNullException(nameof(opCode));
@@ -49,7 +49,7 @@ namespace McFly.Core
         ///     Gets the instruction address.
         /// </summary>
         /// <value>The instruction address.</value>
-        public ulong InstructionAddress { get; }
+        public ulong? InstructionAddress { get; }
 
         /// <summary>
         ///     Gets the op code.

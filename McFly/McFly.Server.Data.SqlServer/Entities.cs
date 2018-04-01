@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Linq;
+using McFly.Core;
 
 namespace McFly.Server.Data.SqlServer
 {
@@ -24,16 +26,19 @@ namespace McFly.Server.Data.SqlServer
         public int ThreadId { get; set; }
 
         [Column("rax")]
-        public long Rax { get; set; }
+        public long? Rax { get; set; }
 
         [Column("rbx")]
-        public long Rbx { get; set; }
+        public long? Rbx { get; set; }
 
         [Column("rcx")]
-        public long Rcx { get; set; }
+        public long? Rcx { get; set; }
 
         [Column("rdx")]
-        public long Rdx { get; set; }
+        public long? Rdx { get; set; }
+
+        [Column("address")]
+        public long? Address { get; set; }
 
         [Column("opcode")]
         public byte[] OpCode { get; set; }
@@ -69,13 +74,13 @@ namespace McFly.Server.Data.SqlServer
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long StackFrameId { get; set; }
+        public long? StackFrameId { get; set; }
                                             
         [Column("stack_pointer")]
-        public long StackPointer { get; set; }
+        public long? StackPointer { get; set; }
 
         [Column("return_address")]
-        public long ReturnAddress { get; set; }
+        public long? ReturnAddress { get; set; }
 
         [Column("module_name")]
         public string ModuleName { get; set; }
@@ -84,7 +89,7 @@ namespace McFly.Server.Data.SqlServer
         public string Function { get; set; }
 
         [Column("offset")]
-        public long Offset { get; set; }
+        public long? Offset { get; set; }
 
         [Column("frame_id")]
         public long FrameId { get; set; }
@@ -144,7 +149,81 @@ namespace McFly.Server.Data.SqlServer
                 .HasIndex(entity => entity.Lock)
                 .IsUnique(true);
         }
+    }
 
+    internal static class DomainEntityConversion
+    {
+        public static FrameEntity ToFrameEntity(this Frame frame)
+        {
+            return new FrameEntity
+            {
+                PosHi = frame.Position.High,
+                PosLo = frame.Position.Low,
+                ThreadId = frame.ThreadId,
+                Rax = frame.RegisterSet.Rax?.ToLong(),
+                Rbx = frame.RegisterSet.Rbx?.ToLong(),
+                Rcx = frame.RegisterSet.Rcx?.ToLong(),
+                Rdx = frame.RegisterSet.Rdx?.ToLong(),
+                OpCode = frame.DisassemblyLine?.OpCode,
+                OpCodeMnemonic = frame.DisassemblyLine?.OpCodeMnemonic,
+                DisassemblyNote = frame.DisassemblyLine?.DisassemblyNote,
+                StackFrames = frame.StackTrace.StackFrames.Select(x => x.ToStackFrameEntity()).ToList(),
+                Notes = frame.Notes.Select(x => x.ToNoteEntity()).ToList()
+            };    
+        }
 
+        public static Frame ToFrame(this FrameEntity entity)
+        {
+            return new Frame
+            {
+                Position = new Position(entity.PosHi, entity.PosLo),
+                ThreadId = entity.ThreadId,
+                DisassemblyLine = new DisassemblyLine(entity.Address?.ToULong(), entity.OpCode, entity.OpCodeMnemonic, entity.DisassemblyNote),
+                RegisterSet = new RegisterSet
+                {
+                    Rax = entity.Rax?.ToULong(),
+                    Rbx = entity.Rbx?.ToULong(),
+                    Rcx = entity.Rcx?.ToULong(),
+                    Rdx = entity.Rdx?.ToULong(),
+                },
+                Notes = entity.Notes.Select(x => x.ToNote()).ToList(),
+                
+            };
+        }
+
+        public static Note ToNote(this NoteEntity entity)
+        {
+            return new Note
+            {
+                CreateDate = entity.CreateDate,
+                Text = entity.Text
+            };
+        }
+
+        public static NoteEntity ToNoteEntity(this Note note)
+        {
+            return new NoteEntity
+            {
+                CreateDate = note.CreateDate,
+                Text = note.Text
+            };
+        }
+
+        public static StackFrame ToStackFrame(this StackFrameEntity entity)
+        {
+            return new StackFrame(entity.StackPointer?.ToULong(), entity.ReturnAddress?.ToULong(), entity.ModuleName, entity.Function, entity.Offset?.ToULong());
+        }
+
+        public static StackFrameEntity ToStackFrameEntity(this StackFrame stackFrame)
+        {
+            return new StackFrameEntity
+            {                     
+                StackPointer = stackFrame.StackPointer?.ToLong(),
+                ReturnAddress = stackFrame.ReturnAddress?.ToLong(),
+                ModuleName = stackFrame.Module,
+                Function = stackFrame.FunctionName,
+                Offset = stackFrame.Offset?.ToLong()
+            };
+        }   
     }
 }
