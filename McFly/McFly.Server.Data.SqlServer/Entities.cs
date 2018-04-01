@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
 using McFly.Core;
@@ -126,6 +127,11 @@ namespace McFly.Server.Data.SqlServer
     {
         public McFlyContext(string connectionString) : base(connectionString)
         {
+        }
+
+        public McFlyContext(DbConnection connection) : base(connection, true)
+        {
+            
         }
 
         public DbSet<FrameEntity> FrameEntities { get; set; }

@@ -30,10 +30,22 @@ namespace McFly.Server.Data.SqlServer
     [Export(typeof(FrameAccess))]
     internal class FrameAccess : DataAccess, IFrameAccess
     {
-        private Common.Logging.ILog Log = LogManager.GetLogger<FrameAccess>(); // todo: fix logging in mcfly
+        private ILog Log = LogManager.GetLogger<FrameAccess>(); // todo: fix logging in mcfly
 
         [Import]
         protected internal IContextFactory ContextFactory { get; set; }
+
+        public Frame GetFrame(string projectName, Position position, int threadId)
+        {
+            using (var context = ContextFactory.GetContext(projectName))
+            {
+                var first = context.FrameEntities.FirstOrDefault(x =>
+                    x.PosHi == position.High && x.PosLo == position.Low && x.ThreadId == threadId);
+                if(first == null)
+                    throw new IndexOutOfRangeException($"Count not find a frame with position: {position} and threadid: {threadId}");
+                return first.ToFrame();
+            }
+        }
 
         /// <summary>
         ///     Upserts the frame.
