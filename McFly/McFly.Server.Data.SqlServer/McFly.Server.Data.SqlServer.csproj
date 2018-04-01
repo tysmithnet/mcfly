@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess.cs" />
+    <Compile Include="Entities.cs" />
     <Compile Include="FrameAccess.cs" />
     <Compile Include="FrameDto.cs" />
     <Compile Include="NoteAccess.cs" />
