@@ -173,6 +173,7 @@ namespace McFly.Server.Data.SqlServer
                 Rbx = frame.RegisterSet.Rbx?.ToLong(),
                 Rcx = frame.RegisterSet.Rcx?.ToLong(),
                 Rdx = frame.RegisterSet.Rdx?.ToLong(),
+                Address = frame.DisassemblyLine?.InstructionAddress?.ToLong(),
                 OpCode = frame.DisassemblyLine?.OpCode,
                 OpCodeMnemonic = frame.DisassemblyLine?.OpCodeMnemonic,
                 DisassemblyNote = frame.DisassemblyLine?.DisassemblyNote,
