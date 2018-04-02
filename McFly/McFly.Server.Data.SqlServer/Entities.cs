@@ -51,9 +51,9 @@ namespace McFly.Server.Data.SqlServer
         [Column("disassembly_note")]
         public string DisassemblyNote { get; set; }
 
-        public virtual List<NoteEntity> Notes { get; set; }
+        public virtual List<NoteEntity> Notes { get; set; } = new List<NoteEntity>();
 
-        public virtual List<StackFrameEntity> StackFrames { get; set; }
+        public virtual List<StackFrameEntity> StackFrames { get; set; } = new List<StackFrameEntity>();
     }
 
     [Table("note")]
@@ -69,6 +69,12 @@ namespace McFly.Server.Data.SqlServer
 
         [Column("text")]
         public string Text { get; set; }
+
+        [Column("frame_id")]
+        public long FrameId { get; set; }
+
+        [ForeignKey("FrameId")]
+        public FrameEntity Frame { get; set; }
     }
 
     [Table("stack_frame")]

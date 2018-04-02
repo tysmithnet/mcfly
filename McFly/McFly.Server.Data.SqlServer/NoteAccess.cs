@@ -12,10 +12,12 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using McFly.Core;
 
 namespace McFly.Server.Data.SqlServer
@@ -28,6 +30,9 @@ namespace McFly.Server.Data.SqlServer
     [Export(typeof(INoteAccess))]
     public class NoteAccess : DataAccess, INoteAccess
     {
+        [Import]
+        internal IContextFactory ContextFactory { get; set; }
+
         /// <summary>
         ///     Adds a note to a thread position
         /// </summary>
@@ -36,7 +41,31 @@ namespace McFly.Server.Data.SqlServer
         /// <param name="text">The text.</param>
         public void AddNote(string projectName, Position position, IEnumerable<int> threadIds, string text)
         {
-           
+            threadIds = threadIds.ToList();
+            using (var ctx = ContextFactory.GetContext(projectName))
+            {
+                var frames = ctx.FrameEntities.Where(f =>
+                    f.PosHi == position.High && f.PosLo == position.Low && threadIds.Contains(f.ThreadId));
+                foreach (var frameEntity in frames)
+                {
+                    frameEntity.Notes.Add(new NoteEntity()
+                    {
+                        CreateDate = DateTime.UtcNow,
+                        Text = text
+                    });
+                }
+                ctx.SaveChanges();
+            }
+        }
+
+        public IEnumerable<Note> GetNotes(string projectName, Position position, int threadId)
+        {
+            using (var ctx = ContextFactory.GetContext(projectName))
+            {
+                var frame = ctx.FrameEntities.FirstOrDefault(entity =>
+                    entity.PosHi == position.High && entity.PosLo == position.Low && entity.ThreadId == threadId);
+                return frame.Notes.Select(x => x.ToNote());
+            }
         }
     }
 }
