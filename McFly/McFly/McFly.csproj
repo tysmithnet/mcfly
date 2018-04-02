@@ -168,7 +168,6 @@
     <Compile Include="InitMethod.cs" />
     <Compile Include="InitOptions.cs" />
     <Compile Include="ISearchIndex.cs" />
-    <Compile Include="ISearchParser.cs" />
     <Compile Include="IRegisterFacade.cs" />
     <Compile Include="ISearchPlan.cs" />
     <Compile Include="ISearchPlanInterpreter.cs" />
@@ -187,7 +186,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterFacade.cs" />
     <Compile Include="SearchFilter.cs" />
-    <Compile Include="SearchParser.cs" />
     <Compile Include="SearchPlan.cs" />
     <Compile Include="SearchPlanInterpreter.cs" />
     <Compile Include="SearchResult.cs" />

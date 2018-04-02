@@ -20,8 +20,6 @@ namespace McFly
             .AddExample("!mf search | where rax -eq 1 and mod -contains 32 | fields rax rip mod fun", "Get the rax, rip, mod, fun all frames where rax=1 the instruction module contains 32")
             .Build();
 
-        [Import]
-        public ISearchParser SearchParser { get; set; }
 
         [Import]
         public ISearchPlanInterpreter SearchPlanInterpreter { get; set; }
@@ -31,16 +29,7 @@ namespace McFly
 
         public void Process(string[] args)
         {
-            var searchPlan = SearchParser.Parse(args);
-            var searchResults = SearchPlanInterpreter.Interpret(searchPlan);
-            SearchResultDisplayStrategy.Display(searchResults);
-            /*
-             tokenize everything
-             construct search plan
-             give it to the search plan executor and get results
-             display results in text table
-             */
-             
+            
         }
     }
 }
