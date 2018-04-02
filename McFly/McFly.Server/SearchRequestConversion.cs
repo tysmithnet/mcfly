@@ -10,13 +10,16 @@ namespace McFly.Server
     {
         public override void WriteJson(JsonWriter writer, SearchRequest value, JsonSerializer serializer)
         {
+            var visitor = new SearchResultJsonWriterVisitor();
+            var o = visitor.ConvertToJObject(value);
+            writer.WriteToken(o.CreateReader());
         }
 
         public override SearchRequest ReadJson(JsonReader reader, Type objectType, SearchRequest existingValue,
             bool hasExistingValue,
             JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            return existingValue;
         }
     }
 
@@ -24,8 +27,13 @@ namespace McFly.Server
     {
         public string ConvertToJson(SearchRequest searchRequest)
         {
-            var o = (JObject) Visit(searchRequest.Criterion);
-            return o.ToString(Formatting.Indented);
+            return ConvertToJObject(searchRequest).ToString(Formatting.Indented);
+        }
+
+        public JObject ConvertToJObject(SearchRequest searchRequest)
+        {
+            var o = (JObject)Visit(searchRequest.Criterion);
+            return o;
         }
 
         public object Visit(Criterion criterion)

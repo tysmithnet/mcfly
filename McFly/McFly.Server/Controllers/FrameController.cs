@@ -19,6 +19,7 @@ using System.Text;
 using System.Web.Http;
 using Common.Logging;
 using McFly.Core;
+using McFly.Server.Contract;
 using McFly.Server.Data;
 using McFly.Server.Headers;
 
@@ -71,7 +72,5 @@ namespace McFly.Server.Controllers
             }
             return Ok();
         }
-
-        
     }
 }
