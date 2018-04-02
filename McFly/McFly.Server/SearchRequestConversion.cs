@@ -2,13 +2,14 @@
 using System.Linq;
 using System.Web.Http.Controllers;
 using System.Web.Http.ModelBinding;
+using System.Web.Http.ValueProviders;
 using McFly.Server.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace McFly.Server
 {
-    internal class SearchRequestJsonConverter : JsonConverter<Criterion>
+    internal class SearchRequestJsonConverter : JsonConverter<Criterion>, IModelBinder
     {
         public override void WriteJson(JsonWriter writer, Criterion value, JsonSerializer serializer)
         {
@@ -21,8 +22,59 @@ namespace McFly.Server
             bool hasExistingValue,
             JsonSerializer serializer)
         {
-            return existingValue;
-        }   
+            JObject o = JObject.Load(reader);
+            return ExtractCriterion(o);
+        }
+
+        private Criterion ExtractCriterion(JObject o)
+        {
+            string type = null;
+            string exp = null;
+            Criterion[] arr = null;
+            foreach (var prop in o)
+            {
+                switch (prop.Key)
+                {
+                    case "Type":
+                        type = prop.Value.Value<string>();
+                        break;
+                    case "Expression":
+                        exp = prop.Value.Value<string>();
+                        break;
+                    case "SubCriteria":
+                        if (prop.Value is JArray jarr)
+                        {
+                            arr = jarr.OfType<JObject>().Select(ExtractCriterion).ToArray();
+                        }
+                        break;
+                }
+            }
+            if (exp != null)
+                return new TerminalCriterion()
+                {
+                    Type = type,
+                    Expression = exp
+                };
+            else // todo: needs to check for type and arr
+                return new Criterion()
+                {
+                    Type = type,
+                    SubCriteria = arr
+                };
+        }
+
+        
+
+        public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+        {
+            if (!typeof(Criterion).IsAssignableFrom(bindingContext.ModelType)) return false;
+            ValueProviderResult val = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName);
+            if (val == null) return false;
+            
+            ;
+            return true;
+        }
     }
 
     internal class SearchResultJsonWriterVisitor : ISearchRequestVisitor
