@@ -190,6 +190,7 @@
     <Compile Include="ISearchIndex.cs" />
     <Compile Include="IRegisterFacade.cs" />
     <Compile Include="ISearchPlan.cs" />
+    <Compile Include="ISearchPlanFactory.cs" />
     <Compile Include="ISearchPlanInterpreter.cs" />
     <Compile Include="ISearchResult.cs" />
     <Compile Include="ISearchResultDisplayStrategy.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="SearchFilter.cs" />
     <Compile Include="SearchMethod.cs" />
     <Compile Include="SearchPlan.cs" />
+    <Compile Include="SearchPlanFactory.cs" />
     <Compile Include="SearchPlanInterpreter.cs" />
     <Compile Include="ServerClient.cs" />
     <Compile Include="SettingsMethod.cs" />
