@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace McFly.Server.Search
+namespace McFly.Server.Data.Search
 {
     public class NoteTextContainsCriterion : NoteCriterion
     {

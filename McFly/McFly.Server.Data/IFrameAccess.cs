@@ -14,6 +14,7 @@
 
 using System.Collections.Generic;
 using McFly.Core;
+using McFly.Server.Data.Search;
 
 namespace McFly.Server.Data
 {
@@ -28,5 +29,9 @@ namespace McFly.Server.Data
         /// <param name="projectName">Name of the project.</param>
         /// <param name="frames">The frames.</param>
         void UpsertFrames(string projectName, IEnumerable<Frame> frames);
+
+        Frame GetFrame(string projectName, Position position, int threadId);
+
+        IEnumerable<Frame> Search(ICriterion criterion);
     }
 }

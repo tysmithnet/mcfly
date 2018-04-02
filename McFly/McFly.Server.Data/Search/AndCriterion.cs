@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace McFly.Server.Search
+namespace McFly.Server.Data.Search
 {
     public sealed class AndCriterion : ICriterion
     {

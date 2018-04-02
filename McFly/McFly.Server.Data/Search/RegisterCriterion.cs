@@ -1,6 +1,6 @@
 ﻿using McFly.Core;
 
-namespace McFly.Server.Search
+namespace McFly.Server.Data.Search
 {
     public abstract class RegisterCriterion : ICriterion
     {

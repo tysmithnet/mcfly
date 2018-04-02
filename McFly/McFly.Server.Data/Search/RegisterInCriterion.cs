@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using McFly.Core;
 
-namespace McFly.Server.Search
+namespace McFly.Server.Data.Search
 {
     public class RegisterInCriterion : RegisterCriterion
     {

@@ -104,6 +104,20 @@
     <Compile Include="INoteAccess.cs" />
     <Compile Include="IProjectsAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\AndCriterion.cs" />
+    <Compile Include="Search\ICriterion.cs" />
+    <Compile Include="Search\ICriterionVisitor.cs" />
+    <Compile Include="Search\NotCriterion.cs" />
+    <Compile Include="Search\NoteCreatedAfterCriterion.cs" />
+    <Compile Include="Search\NoteCreatedBeforeCriterion.cs" />
+    <Compile Include="Search\NoteCreatedBetweenCriterion.cs" />
+    <Compile Include="Search\NoteCriterion.cs" />
+    <Compile Include="Search\NoteTextContainsCriterion.cs" />
+    <Compile Include="Search\OrCriterion.cs" />
+    <Compile Include="Search\RegisterBetweenCriterion.cs" />
+    <Compile Include="Search\RegisterCriterion.cs" />
+    <Compile Include="Search\RegisterEqualsCriterion.cs" />
+    <Compile Include="Search\RegisterInCriterion.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">

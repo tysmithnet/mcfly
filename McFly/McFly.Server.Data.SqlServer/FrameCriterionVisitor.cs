@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using McFly.Core;
-using McFly.Server.Search;
+using McFly.Server.Data.Search;
 using Filter = System.Func<McFly.Server.Data.SqlServer.FrameEntity, bool>;
 
 namespace McFly.Server.Data.SqlServer

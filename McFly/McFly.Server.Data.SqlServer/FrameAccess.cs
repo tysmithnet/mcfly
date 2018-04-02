@@ -18,6 +18,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using Common.Logging;
 using McFly.Core;
+using McFly.Server.Data.Search;
 
 namespace McFly.Server.Data.SqlServer
 {
@@ -86,6 +87,11 @@ namespace McFly.Server.Data.SqlServer
                         $"Count not find a frame with position: {position} and threadid: {threadId}");
                 return first.ToFrame();
             }
+        }
+
+        public IEnumerable<Frame> Search(ICriterion criterion)
+        {
+            return null;
         }
 
         /// <summary>

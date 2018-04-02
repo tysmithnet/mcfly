@@ -1,4 +1,4 @@
-﻿namespace McFly.Server.Search
+﻿namespace McFly.Server.Data.Search
 {
     public abstract class NoteCriterion : ICriterion
     {
