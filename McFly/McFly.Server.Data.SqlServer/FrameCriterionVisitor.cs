@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using McFly.Core;
+using McFly.Server.Search;
 using Filter = System.Func<McFly.Server.Data.SqlServer.FrameEntity, bool>;
 
 namespace McFly.Server.Data.SqlServer
@@ -23,7 +24,7 @@ namespace McFly.Server.Data.SqlServer
     /// <summary>
     ///     Class SqlServerCriterionVisitor.
     /// </summary>
-    /// <seealso cref="McFly.Server.ICriterionVisitor" />
+    /// <seealso cref="ICriterionVisitor" />
     internal class FrameCriterionVisitor : ICriterionVisitor
     {
         /// <summary>

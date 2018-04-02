@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using McFly.Core;
+using McFly.Server.Search;
 using Xunit;
 
 namespace McFly.Server.Data.SqlServer.Test

@@ -199,6 +199,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Search\AndCriterion.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\FrameController.cs" />
     <Compile Include="Controllers\NoteController.cs" />
@@ -206,12 +207,24 @@
     <Compile Include="Headers\FromHeaderAttribute.cs" />
     <Compile Include="Headers\FromHeaderAttributeOperationFilter.cs" />
     <Compile Include="Headers\FromHeaderBinding.cs" />
+    <Compile Include="Search\ICriterion.cs" />
+    <Compile Include="Search\ICriterionVisitor.cs" />
     <Compile Include="LoggingMiddleware.cs" />
     <Compile Include="MefDependencyResolver.cs" />
     <Compile Include="Headers\FromProjectNameHeaderAttribute.cs" />
+    <Compile Include="Search\NotCriterion.cs" />
+    <Compile Include="Search\NoteCreatedAfterCriterion.cs" />
+    <Compile Include="Search\NoteCreatedBeforeCriterion.cs" />
+    <Compile Include="Search\NoteCreatedBetweenCriterion.cs" />
+    <Compile Include="Search\NoteCriterion.cs" />
+    <Compile Include="Search\OrCriterion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchCriteria.cs" />
+    <Compile Include="Search\RegisterBetweenCriterion.cs" />
+    <Compile Include="Search\RegisterCriterion.cs" />
+    <Compile Include="Search\RegisterEqualsCriterion.cs" />
+    <Compile Include="Search\RegisterInCriterion.cs" />
+    <Compile Include="Search\NoteTextContainsCriterion.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -245,6 +258,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>echo f | xcopy /f /y "$(ProjectDir)$(OutputPath)*.dll" "$(SolutionDir)McFly\bin\x64\Debug\"
