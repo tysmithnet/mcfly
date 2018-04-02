@@ -39,7 +39,7 @@ namespace McFly.Server.Test
                 Type = "register",
                 Expression = "rax -eq 10"
             });
-            frames.All(x => x.RegisterSet.Rax == 11).Should().BeTrue();
+            frames.All(x => x.RegisterSet.Rax == 10).Should().BeTrue();
         }
     }
 
