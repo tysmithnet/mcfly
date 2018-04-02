@@ -16,10 +16,26 @@ namespace McFly.Server.Contract
     {
         public string Type { get; set; }
         public Criterion[] SubCriteria { get; set; }
+
+        public virtual object Accept(ISearchRequestVisitor visitor)
+        {
+            return visitor.Visit(this);
+        }
     }
 
     public class TerminalCriterion : Criterion
     {
         public string Expression { get; set; }
+
+        public override object Accept(ISearchRequestVisitor visitor)
+        {
+            return visitor.Visit(this);
+        }
+    }
+
+    public interface ISearchRequestVisitor
+    {
+        object Visit(Criterion criterion);
+        object Visit(TerminalCriterion criterion);
     }
 }
