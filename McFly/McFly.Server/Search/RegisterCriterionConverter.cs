@@ -9,7 +9,7 @@ using Conv = System.Convert;
 namespace McFly.Server.Search
 {
     [Export(typeof(ISearchCriterionConverter))]
-    internal abstract class RegisterCriterionConverter : BaseSearchCriterionConverter
+    internal class RegisterCriterionConverter : BaseSearchCriterionConverter
     {
         public override bool CanConvert(SearchCriterionDto searchCriterionDto)
         {
