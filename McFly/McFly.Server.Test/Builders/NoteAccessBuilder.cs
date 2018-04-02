@@ -1,7 +1,7 @@
 ﻿using McFly.Server.Data;
 using Moq;
 
-namespace McFly.Server.Test
+namespace McFly.Server.Test.Builders
 {
     public class NoteAccessBuilder
     {

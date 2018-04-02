@@ -11,11 +11,12 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 using McFly.Server.Data;
 using Moq;
 
-namespace McFly.Server.Test
+namespace McFly.Server.Test.Builders
 {
     /// <summary>
     /// Builder for mock project access

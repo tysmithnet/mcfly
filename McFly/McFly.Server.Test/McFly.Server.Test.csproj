@@ -104,14 +104,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrameAccessBuilder.cs" />
-    <Compile Include="FrameController_Should.cs" />
-    <Compile Include="NoteAccessBuilder.cs" />
-    <Compile Include="NoteController_Should.cs" />
-    <Compile Include="ProjectAccessBuilder.cs" />
-    <Compile Include="ProjectController_Should.cs" />
+    <Compile Include="Builders\FrameAccessBuilder.cs" />
+    <Compile Include="Controllers\FrameController_Should.cs" />
+    <Compile Include="Builders\NoteAccessBuilder.cs" />
+    <Compile Include="Controllers\NoteController_Should.cs" />
+    <Compile Include="Builders\ProjectAccessBuilder.cs" />
+    <Compile Include="Controllers\ProjectController_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchController_Should.cs" />
+    <Compile Include="Controllers\SearchController_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

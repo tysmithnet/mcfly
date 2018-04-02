@@ -5,10 +5,11 @@ using McFly.Server.Contract;
 using McFly.Server.Controllers;
 using McFly.Server.Data.Search;
 using McFly.Server.Search;
+using McFly.Server.Test.Builders;
 using Moq;
 using Xunit;
 
-namespace McFly.Server.Test
+namespace McFly.Server.Test.Controllers
 {
     public class SearchController_Should
     {

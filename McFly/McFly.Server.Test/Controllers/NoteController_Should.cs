@@ -1,11 +1,11 @@
-﻿using System.Web.Http;
-using McFly.Core;
+﻿using McFly.Core;
 using McFly.Server.Contract;
 using McFly.Server.Controllers;
+using McFly.Server.Test.Builders;
 using Moq;
 using Xunit;
 
-namespace McFly.Server.Test
+namespace McFly.Server.Test.Controllers
 {
     public class NoteController_Should
     {

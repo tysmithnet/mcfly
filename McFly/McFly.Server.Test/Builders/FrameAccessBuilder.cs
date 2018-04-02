@@ -19,7 +19,7 @@ using McFly.Server.Data;
 using McFly.Server.Data.Search;
 using Moq;
 
-namespace McFly.Server.Test
+namespace McFly.Server.Test.Builders
 {
     /// <summary>
     /// Builder for mock frame access
