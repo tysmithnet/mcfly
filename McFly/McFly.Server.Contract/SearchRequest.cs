@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace McFly.Server.Contract
 {
-    [TypeConverter(typeof(SearchRequestJsonConverter))]
     public class Criterion
     {
         public string Type { get; set; }

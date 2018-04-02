@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Web.Http.Controllers;
+using System.Web.Http.ModelBinding;
 using McFly.Server.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace McFly.Server.Contract
+namespace McFly.Server
 {
     internal class SearchRequestJsonConverter : JsonConverter<Criterion>
     {
@@ -20,7 +22,7 @@ namespace McFly.Server.Contract
             JsonSerializer serializer)
         {
             return existingValue;
-        }
+        }   
     }
 
     internal class SearchResultJsonWriterVisitor : ISearchRequestVisitor

@@ -47,7 +47,6 @@
     <Compile Include="SearchRequest.cs" />
     <Compile Include="NewProjectRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchRequestConversion.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
