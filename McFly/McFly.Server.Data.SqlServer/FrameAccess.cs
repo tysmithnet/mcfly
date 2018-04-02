@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-18-2018
+// Last Modified On : 04-01-2018
 // ***********************************************************************
 // <copyright file="FrameAccess.cs" company="McFly.Server.Data">
 //     Copyright (c) . All rights reserved.
@@ -24,28 +24,24 @@ namespace McFly.Server.Data.SqlServer
     /// <summary>
     ///     Represents the data access logic for the frame domain
     /// </summary>
+    /// <seealso cref="McFly.Server.Data.SqlServer.DataAccess" />
     /// <seealso cref="DataAccess" />
     /// <seealso cref="McFly.Server.Data.IFrameAccess" />
     [Export(typeof(IFrameAccess))]
     [Export(typeof(FrameAccess))]
     internal class FrameAccess : DataAccess, IFrameAccess
     {
+        /// <summary>
+        ///     The log
+        /// </summary>
         private ILog Log = LogManager.GetLogger<FrameAccess>(); // todo: fix logging in mcfly
 
+        /// <summary>
+        ///     Gets or sets the context factory.
+        /// </summary>
+        /// <value>The context factory.</value>
         [Import]
         protected internal IContextFactory ContextFactory { get; set; }
-
-        public Frame GetFrame(string projectName, Position position, int threadId)
-        {
-            using (var context = ContextFactory.GetContext(projectName))
-            {
-                var first = context.FrameEntities.FirstOrDefault(x =>
-                    x.PosHi == position.High && x.PosLo == position.Low && x.ThreadId == threadId);
-                if(first == null)
-                    throw new IndexOutOfRangeException($"Count not find a frame with position: {position} and threadid: {threadId}");
-                return first.ToFrame();
-            }
-        }
 
         /// <summary>
         ///     Upserts the frame.
@@ -63,20 +59,40 @@ namespace McFly.Server.Data.SqlServer
                     var target = context.FrameEntities.FirstOrDefault(x =>
                         x.PosHi == source.PosHi && x.PosLo == source.PosLo && x.ThreadId == source.ThreadId);
                     if (target != null)
-                    {
-                        // copy values
                         CopyValues(source, target);
-                    }
                     else
-                    {
-                        // add new
                         context.FrameEntities.Add(source);
-                    }
                 }
                 context.SaveChanges();
             }
         }
 
+        /// <summary>
+        ///     Gets the frame.
+        /// </summary>
+        /// <param name="projectName">Name of the project.</param>
+        /// <param name="position">The position.</param>
+        /// <param name="threadId">The thread identifier.</param>
+        /// <returns>Frame.</returns>
+        /// <exception cref="IndexOutOfRangeException"></exception>
+        public Frame GetFrame(string projectName, Position position, int threadId)
+        {
+            using (var context = ContextFactory.GetContext(projectName))
+            {
+                var first = context.FrameEntities.FirstOrDefault(x =>
+                    x.PosHi == position.High && x.PosLo == position.Low && x.ThreadId == threadId);
+                if (first == null)
+                    throw new IndexOutOfRangeException(
+                        $"Count not find a frame with position: {position} and threadid: {threadId}");
+                return first.ToFrame();
+            }
+        }
+
+        /// <summary>
+        ///     Copies the values.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="target">The target.</param>
         private static void CopyValues(FrameEntity source, FrameEntity target)
         {
             if (source.Rax.HasValue)
@@ -104,10 +120,10 @@ namespace McFly.Server.Data.SqlServer
                 target.OpCodeMnemonic = source.DisassemblyNote;
 
             if (source.StackFrames != null)
-            {
                 foreach (var sourceStackFrame in source.StackFrames)
                 {
-                    var targetStackFrame = target.StackFrames?.FirstOrDefault(x => x.StackPointer == sourceStackFrame.StackPointer);
+                    var targetStackFrame =
+                        target.StackFrames?.FirstOrDefault(x => x.StackPointer == sourceStackFrame.StackPointer);
                     if (targetStackFrame != null)
                     {
                         // copy source values to target
@@ -125,7 +141,6 @@ namespace McFly.Server.Data.SqlServer
                         target.StackFrames.Add(sourceStackFrame);
                     }
                 }
-            }
         }
     }
 }

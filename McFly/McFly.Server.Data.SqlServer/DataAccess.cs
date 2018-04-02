@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-12-2018
+// Last Modified On : 04-01-2018
 // ***********************************************************************
 // <copyright file="DataAccess.cs" company="McFly.Server.Data">
 //     Copyright (c) . All rights reserved.
@@ -12,9 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace McFly.Server.Data.SqlServer
@@ -24,6 +22,10 @@ namespace McFly.Server.Data.SqlServer
     /// </summary>
     public abstract class DataAccess
     {
+        /// <summary>
+        ///     Gets or sets the settings.
+        /// </summary>
+        /// <value>The settings.</value>
         [Import]
         protected internal Settings Settings { get; set; }
 

@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-15-2018
+// Last Modified On : 04-01-2018
 // ***********************************************************************
 // <copyright file="ProjectsAccess.cs" company="McFly.Server.Data">
 //     Copyright (c) . All rights reserved.
@@ -17,10 +17,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Data.SqlClient;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
 using Common.Logging;
 using McFly.Core;
 
@@ -29,6 +26,7 @@ namespace McFly.Server.Data.SqlServer
     /// <summary>
     ///     IProjectsAccess implementation that uses SqlServer
     /// </summary>
+    /// <seealso cref="McFly.Server.Data.SqlServer.DataAccess" />
     /// <seealso cref="DataAccess" />
     /// <seealso cref="McFly.Server.Data.IProjectsAccess" />
     [Export(typeof(IProjectsAccess))]
@@ -40,8 +38,12 @@ namespace McFly.Server.Data.SqlServer
         ///     Gets the log.
         /// </summary>
         /// <value>The log.</value>
-        private Common.Logging.ILog Log { get; } = LogManager.GetLogger<ProjectsAccess>();
+        private ILog Log { get; } = LogManager.GetLogger<ProjectsAccess>();
 
+        /// <summary>
+        ///     Gets or sets the context factory.
+        /// </summary>
+        /// <value>The context factory.</value>
         [Import]
         protected internal IContextFactory ContextFactory { get; set; }
 
@@ -76,7 +78,7 @@ namespace McFly.Server.Data.SqlServer
             using (var context = ContextFactory.GetContext(projectName))
             {
                 // forces a new database to be created
-                var traceInfo = new TraceInfoEntity()
+                var traceInfo = new TraceInfoEntity
                 {
                     Lock = 1,
                     CreateDate = DateTime.UtcNow,

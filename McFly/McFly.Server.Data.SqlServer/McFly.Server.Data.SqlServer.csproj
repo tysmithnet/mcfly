@@ -64,7 +64,6 @@
     <Compile Include="DataAccess.cs" />
     <Compile Include="DomainEntityConversion.cs" />
     <Compile Include="FrameAccess.cs" />
-    <Compile Include="FrameDto.cs" />
     <Compile Include="FrameEntity.cs" />
     <Compile Include="IContextFactory.cs" />
     <Compile Include="IMcFlyContext.cs" />
