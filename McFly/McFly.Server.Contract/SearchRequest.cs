@@ -36,6 +36,5 @@ namespace McFly.Server.Contract
     public interface ISearchRequestVisitor
     {
         object Visit(Criterion criterion);
-        object Visit(TerminalCriterion criterion);
     }
 }

@@ -22,10 +22,17 @@ namespace McFly.Server
 
     internal class SearchResultJsonWriterVisitor : ISearchRequestVisitor
     {
+        public string ConvertToJson(SearchRequest searchRequest)
+        {
+            var o = (JObject) Visit(searchRequest.Criterion);
+            return o.ToString(Formatting.Indented);
+        }
+
         public object Visit(Criterion criterion)
         {
-            var o = new JObject();
-            o.Add("Type", criterion.Type);
+            if (criterion is TerminalCriterion terminal)
+                return Visit(terminal);
+            var o = new JObject {{"Type", criterion.Type}};
             var childObjects = criterion.SubCriteria.Select(c => c.Accept(this)).Cast<JObject>().ToArray();
             var arr = new JArray(childObjects);
             o.Add("SubCriteria", arr);
