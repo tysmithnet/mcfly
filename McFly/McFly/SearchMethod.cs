@@ -19,11 +19,7 @@ namespace McFly
             .AddExample("!mf search kernel32", "Searches all indices for the general term kernel32")
             .AddExample("!mf search | where rax -eq 1 and mod -contains 32 | fields rax rip mod fun", "Get the rax, rip, mod, fun all frames where rax=1 the instruction module contains 32")
             .Build();
-
-
-        [Import]
-        public ISearchPlanInterpreter SearchPlanInterpreter { get; set; }
-
+                                                                         
         [Import]
         public ISearchResultDisplayStrategy SearchResultDisplayStrategy { get; set; }
 
