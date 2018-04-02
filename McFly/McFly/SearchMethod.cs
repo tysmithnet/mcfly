@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 
 namespace McFly
 {
@@ -12,13 +13,26 @@ namespace McFly
             .SetName("search")
             .SetDescription("Search for indexed content")
             .Build();
-                                                                         
+         
         [Import]
-        public ISearchResultDisplayStrategy SearchResultDisplayStrategy { get; set; }
+        internal ISearchPlanFactory Factory { get; set; }
+
+        [Import]
+        internal ISearchPlanInterpreter Interpreter { get; set; }
+
+        [Import]
+        internal ISearchResultDisplayStrategy SearchResultDisplayStrategy { get; set; }
 
         public void Process(string[] args)
         {
-            
+            var plan = Factory.Create(args);
+            var results = Interpreter.Interpret(plan);
+            SearchResultDisplayStrategy.Display(results);
         }
+    }
+
+    public interface ISearchPlanFactory
+    {
+        ISearchPlan Create(string[] args);
     }
 }
