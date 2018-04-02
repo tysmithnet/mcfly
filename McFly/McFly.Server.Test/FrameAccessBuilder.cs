@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using McFly.Core;
 using McFly.Server.Data;
+using McFly.Server.Data.Search;
 using Moq;
 
 namespace McFly.Server.Test
@@ -43,6 +44,12 @@ namespace McFly.Server.Test
         {
             Mock.Setup(access => access.UpsertFrames(It.IsAny<string>(), It.IsAny<IEnumerable<Frame>>()))
                 .Throws(exception);
+            return this;
+        }
+
+        public FrameAccessBuilder WithSearch(IEnumerable<Frame> frames)
+        {
+            Mock.Setup(access => access.Search(It.IsAny<string>(), It.IsAny<ICriterion>())).Returns(frames);
             return this;
         }
     }
