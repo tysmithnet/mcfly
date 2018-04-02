@@ -89,9 +89,14 @@ namespace McFly.Server.Data.SqlServer
             }
         }
 
-        public IEnumerable<Frame> Search(ICriterion criterion)
+        public IEnumerable<Frame> Search(string projectName, ICriterion criterion)
         {
-            return null;
+            var visitor = new FrameCriterionVisitor();
+            var f = (Func<FrameEntity, bool>)visitor.Visit(criterion);
+            using (var ctx = ContextFactory.GetContext(projectName))
+            {
+                return ctx.FrameEntities.Where(x => f(x)).Select(x => x.ToFrame());
+            }
         }
 
         /// <summary>
