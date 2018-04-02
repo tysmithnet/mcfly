@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using McFly.Server.Contract;
 using McFly.Server.Search;
 using Xunit;
@@ -17,7 +12,7 @@ namespace McFly.Server.Test.Search
         {
             var converter = new RegisterCriterionConverter();
 
-            converter.CanConvert(new TerminalSearchCriterionDto()
+            converter.CanConvert(new TerminalSearchCriterionDto
             {
                 Type = "register"
             }).Should().BeTrue();
