@@ -24,7 +24,7 @@ namespace McFly.Server.Test.Controllers
 
             // assert
             builder.Mock.Verify(access => access.CreateProject("testing", new Position(0, 0), new Position(1, 1)),
-                Times.Never);
+                Times.Once);
         }
 
         [Fact]

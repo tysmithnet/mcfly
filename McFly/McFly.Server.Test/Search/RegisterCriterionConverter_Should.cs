@@ -15,13 +15,12 @@ namespace McFly.Server.Test.Search
         [Fact]
         public void Correctly_Repond_To_Conversion_Requests()
         {
-            //var converter = new RegisterCriterionConverter();
+            var converter = new RegisterCriterionConverter();
 
-            //converter.CanConvert(new SearchCriterionDto
-            //{
-            //    Type = ""
-            //}).Should().BeTrue();
-            true.Should().Be(false);
+            converter.CanConvert(new TerminalSearchCriterionDto()
+            {
+                Type = "register"
+            }).Should().BeTrue();
         }
     }
 }
