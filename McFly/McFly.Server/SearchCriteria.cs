@@ -62,11 +62,11 @@ namespace McFly.Server
 
     public abstract class RegisterCriterion : ICriterion
     {
-        public IEnumerable<Register> Registers { get; set; }
+        public Register Register { get; set; }
 
-        protected RegisterCriterion(IEnumerable<Register> registers)
+        protected RegisterCriterion(Register register)
         {
-            Registers = registers?.ToList() ?? throw new ArgumentNullException(nameof(registers));
+            Register = register;
         }
 
         public abstract object Accept(ICriterionVisitor visitor);
@@ -76,7 +76,7 @@ namespace McFly.Server
     {
         public ulong Value { get; }
 
-        public RegisterEqualsCriterion(IEnumerable<Register> registers, ulong value) : base(registers)
+        public RegisterEqualsCriterion(Register register, ulong value) : base(register)
         {
             Value = value;
         }
@@ -92,7 +92,7 @@ namespace McFly.Server
         public ulong Low { get; }
         public ulong High { get; } // todo: bound checking
 
-        public RegisterBetweenCriterion(IEnumerable<Register> registers, ulong low, ulong high) : base(registers)
+        public RegisterBetweenCriterion(Register register, ulong low, ulong high) : base(register)
         {
             if(low > high)
                 throw new IndexOutOfRangeException("Low cannot be bigger than High");
@@ -110,7 +110,7 @@ namespace McFly.Server
     {
         public IEnumerable<ulong> Values { get; }
 
-        public RegisterInCriterion(IEnumerable<Register> registers, IEnumerable<ulong> values) : base(registers)
+        public RegisterInCriterion(Register register, IEnumerable<ulong> values) : base(register)
         {
             Values = values?.ToList() ?? throw new ArgumentNullException(nameof(values));
         }

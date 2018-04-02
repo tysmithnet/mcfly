@@ -72,7 +72,7 @@
     <Compile Include="NoteEntity.cs" />
     <Compile Include="ProjectAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlServerCriterionVisitor.cs" />
+    <Compile Include="FrameCriterionVisitor.cs" />
     <Compile Include="StackFrameEntity.cs" />
     <Compile Include="TraceInfoEntity.cs" />
   </ItemGroup>

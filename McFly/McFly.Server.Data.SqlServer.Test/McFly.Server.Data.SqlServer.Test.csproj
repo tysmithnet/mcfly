@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="ContextFactoryBuilder.cs" />
     <Compile Include="FrameAccess_Should.cs" />
+    <Compile Include="FrameCriterionVisitor_Should.cs" />
     <Compile Include="NoteAccess_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
