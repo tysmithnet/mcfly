@@ -15,14 +15,14 @@
 using System;
 using System.Diagnostics;
 using System.Text;
-using McFly.Debugger;
+using McFly.Native;
 
 namespace McFly
 {
     /// <summary>
     ///     Wrapper around the debug client such that you can execute raw commands
     /// </summary>
-    /// <seealso cref="McFly.Debugger.IDebugOutputCallbacks" />
+    /// <seealso cref="IDebugOutputCallbacks" />
     /// <seealso cref="System.IDisposable" />
     public class ExecuteWrapper : IDebugOutputCallbacks, IDisposable
     {

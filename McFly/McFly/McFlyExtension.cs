@@ -22,7 +22,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
-using McFly.Debugger;
+using McFly.Native;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RGiesecke.DllExport;

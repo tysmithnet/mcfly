@@ -18,7 +18,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using McFly.Core;
-using McFly.Debugger;
+using McFly.Native;
 
 namespace McFly
 {
