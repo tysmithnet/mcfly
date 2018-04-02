@@ -33,6 +33,16 @@ namespace McFly.Server.Data.SqlServer
         /// <returns>System.Object.</returns>
         public object Visit(ICriterion criterion)
         {
+            switch (criterion)
+            {
+                case AndCriterion and:
+                    return Visit(and);
+                case OrCriterion or:
+                    return Visit(or);
+                case RegisterEqualsCriterion equal:
+                    return Visit(equal);
+            }
+
             Func<FrameEntity, bool> identity = entity => true;
             return identity;
         }
