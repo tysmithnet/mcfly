@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace McFly.Server.Contract
 {
-    public class SearchRequest
-    {
-        public string Index  { get; set; }
-        public Criterion Criterion { get; set; }
-    }
-
+    [TypeConverter(typeof(SearchRequestJsonConverter))]
     public class Criterion
     {
         public string Type { get; set; }

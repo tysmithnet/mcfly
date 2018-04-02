@@ -4,18 +4,18 @@ using McFly.Server.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace McFly.Server
+namespace McFly.Server.Contract
 {
-    internal class SearchRequestJsonConverter : JsonConverter<SearchRequest>
+    internal class SearchRequestJsonConverter : JsonConverter<Criterion>
     {
-        public override void WriteJson(JsonWriter writer, SearchRequest value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, Criterion value, JsonSerializer serializer)
         {
             var visitor = new SearchResultJsonWriterVisitor();
             var o = visitor.ConvertToJObject(value);
             writer.WriteToken(o.CreateReader());
         }
 
-        public override SearchRequest ReadJson(JsonReader reader, Type objectType, SearchRequest existingValue,
+        public override Criterion ReadJson(JsonReader reader, Type objectType, Criterion existingValue,
             bool hasExistingValue,
             JsonSerializer serializer)
         {
@@ -25,14 +25,14 @@ namespace McFly.Server
 
     internal class SearchResultJsonWriterVisitor : ISearchRequestVisitor
     {
-        public string ConvertToJson(SearchRequest searchRequest)
+        public string ConvertToJson(Criterion searchRequest)
         {
             return ConvertToJObject(searchRequest).ToString(Formatting.Indented);
         }
 
-        public JObject ConvertToJObject(SearchRequest searchRequest)
+        public JObject ConvertToJObject(Criterion searchRequest)
         {
-            var o = (JObject)Visit(searchRequest.Criterion);
+            var o = (JObject)Visit(searchRequest);
             return o;
         }
 
