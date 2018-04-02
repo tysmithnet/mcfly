@@ -93,5 +93,25 @@ namespace McFly.Server.Data.SqlServer
                 return false;
             };
         }
+
+        public Filter Visit(RegisterBetweenCriterion registerBetweenCriterion)
+        {
+            return entity =>
+            {
+                if (registerBetweenCriterion.Register == Register.Rax)
+                    return entity.Rax < registerBetweenCriterion.High.ToLong() && entity.Rax >= registerBetweenCriterion.Low.ToLong();
+
+                if (registerBetweenCriterion.Register == Register.Rbx)
+                    return entity.Rbx < registerBetweenCriterion.High.ToLong() && entity.Rbx >= registerBetweenCriterion.Low.ToLong();
+
+                if (registerBetweenCriterion.Register == Register.Rcx)
+                    return entity.Rcx < registerBetweenCriterion.High.ToLong() && entity.Rcx >= registerBetweenCriterion.Low.ToLong();
+
+                if (registerBetweenCriterion.Register == Register.Rdx)
+                    return entity.Rdx < registerBetweenCriterion.High.ToLong() && entity.Rdx >= registerBetweenCriterion.Low.ToLong();
+
+                return false;
+            };
+        }
     }
 }

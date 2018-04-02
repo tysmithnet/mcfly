@@ -46,5 +46,23 @@ namespace McFly.Server.Data.SqlServer.Test
             f(frame).Should().BeTrue();
             f(frame2).Should().BeFalse();
         }
+
+        [Fact]
+        public void Create_The_Correct_Expression_Tree_For_RegisterBetween()
+        {
+            var visitor = new FrameCriterionVisitor();
+            var criteria = new RegisterBetweenCriterion(Register.Rax, 0, 10);
+            var f = visitor.Visit(criteria);
+            var frame = new FrameEntity
+            {
+                Rax = 0
+            };
+            var frame2 = new FrameEntity
+            {
+                Rax = 10
+            };
+            f(frame).Should().BeTrue();
+            f(frame2).Should().BeFalse();
+        }
     }
 }
