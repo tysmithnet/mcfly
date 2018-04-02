@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using McFly.Server.Contract;
 using McFly.Server.Data.Search;
 
-namespace McFly.Server.Controllers
+namespace McFly.Server.Search
 {
     internal abstract class BaseSearchCriterionConverter : ISearchCriterionConverter
     {
@@ -35,9 +36,9 @@ namespace McFly.Server.Controllers
         }
 
         /// <inheritdoc />
-        public abstract bool CanConvert(string conversionType);
+        public abstract bool CanConvert(SearchCriterionDto searchCriterionDto);
 
         /// <inheritdoc />
-        public abstract ICriterion Convert(string conversionType, string input);
+        public abstract ICriterion Convert(SearchCriterionDto searchCriterionDto);
     }
 }

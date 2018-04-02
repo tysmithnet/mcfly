@@ -200,14 +200,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
-    <Compile Include="Controllers\BaseSearchCriterionConverter.cs" />
+    <Compile Include="Search\BaseSearchCriterionConverter.cs" />
     <Compile Include="Controllers\FrameController.cs" />
-    <Compile Include="Controllers\ISearchCriterionConverter.cs" />
+    <Compile Include="Search\ISearchCriterionConversionFacade.cs" />
+    <Compile Include="Search\ISearchCriterionConverter.cs" />
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
-    <Compile Include="Controllers\RegisterCriterionConverter.cs" />
+    <Compile Include="Search\RegisterCriterionConverter.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\SearchConverterRenameMe.cs" />
+    <Compile Include="Search\SearchCriterionConversionFacade.cs" />
     <Compile Include="Headers\FromHeaderAttribute.cs" />
     <Compile Include="Headers\FromHeaderAttributeOperationFilter.cs" />
     <Compile Include="Headers\FromHeaderBinding.cs" />

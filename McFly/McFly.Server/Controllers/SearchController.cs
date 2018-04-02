@@ -3,6 +3,7 @@ using System.Web.Http;
 using McFly.Server.Contract;
 using McFly.Server.Data;
 using McFly.Server.Headers;
+using McFly.Server.Search;
 
 namespace McFly.Server.Controllers
 {
@@ -12,11 +13,14 @@ namespace McFly.Server.Controllers
         [Import]
         protected internal IFrameAccess FrameAccess { get; set; }
 
+        [Import]
+        internal ISearchCriterionConversionFacade ConversionFacade { get; set; }
+
         [Route("{index}")]
         public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromUri] string index,
             [FromBody] SearchCriterionDto searchCriterionDto)
         {
-            var searchCriteria = searchCriterionDto.ToSearchCriteria();
+            var searchCriteria = ConversionFacade.Convert(searchCriterionDto);
             var results = FrameAccess.Search(projectName, searchCriteria);
             return Ok(results);
         }
