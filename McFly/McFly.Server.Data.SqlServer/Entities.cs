@@ -135,16 +135,7 @@ namespace McFly.Server.Data.SqlServer
         public McFlyContext(string connectionString) : base(connectionString)
         {
         }
-
-        public McFlyContext(DbConnection connection) : base(connection, true)
-        {
-            
-        }
-
-        public McFlyContext(ObjectContext objectContext) : base(objectContext, true)
-        {
-            
-        }
+        
 
         public DbSet<FrameEntity> FrameEntities { get; set; }
         public DbSet<NoteEntity> NoteEntities { get; set; }
