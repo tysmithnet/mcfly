@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
+using McFly.Tests.Builders;
 using Xunit;
 
 namespace McFly.Tests

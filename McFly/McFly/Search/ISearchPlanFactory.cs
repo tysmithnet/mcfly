@@ -1,4 +1,4 @@
-﻿namespace McFly
+﻿namespace McFly.Search
 {
     public interface ISearchPlanFactory
     {

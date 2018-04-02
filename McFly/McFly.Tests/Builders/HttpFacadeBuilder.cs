@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Moq;
 
-namespace McFly.Tests
+namespace McFly.Tests.Builders
 {
     /// <summary>
     ///     Class HttpFacadeBuilder.

@@ -75,15 +75,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessBreakpoint_Should.cs" />
-    <Compile Include="BreakpointFacadeBuilder.cs" />
+    <Compile Include="Builders\BreakpointFacadeBuilder.cs" />
     <Compile Include="BreakpointFacade_Should.cs" />
     <Compile Include="BreakpointMask_Should.cs" />
     <Compile Include="ByteArrayBuilder_Should.cs" />
-    <Compile Include="DebugEngineProxyBuilder.cs" />
-    <Compile Include="DisassemblyFacadeBuilder.cs" />
+    <Compile Include="Builders\DebugEngineProxyBuilder.cs" />
+    <Compile Include="Builders\DisassemblyFacadeBuilder.cs" />
     <Compile Include="DisassemblyFacade_Should.cs" />
     <Compile Include="HelpMethod_Should.cs" />
-    <Compile Include="HttpFacadeBuilder.cs" />
+    <Compile Include="Builders\HttpFacadeBuilder.cs" />
     <Compile Include="HttpHeaders_Should.cs" />
     <Compile Include="IndexMethod_Should.cs" />
     <Compile Include="IndexOptions_Should.cs" />
@@ -93,14 +93,14 @@
     <Compile Include="PositionsRecord_Should.cs" />
     <Compile Include="PositionsResult_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegisterFacadeBuilder.cs" />
+    <Compile Include="Builders\RegisterFacadeBuilder.cs" />
     <Compile Include="RegisterFacade_Should.cs" />
-    <Compile Include="SearchMethod_Should.cs" />
+    <Compile Include="Search\SearchMethod_Should.cs" />
     <Compile Include="ServerClientBuilder.cs" />
     <Compile Include="ServerClient_Should.cs" />
-    <Compile Include="StackFacadeBuilder.cs" />
+    <Compile Include="Builders\StackFacadeBuilder.cs" />
     <Compile Include="StackFacade_Should.cs" />
-    <Compile Include="TimeTravelFacadeBuilder.cs" />
+    <Compile Include="Builders\TimeTravelFacadeBuilder.cs" />
     <Compile Include="TimeTravelFacade_Should.cs" />
   </ItemGroup>
   <ItemGroup>

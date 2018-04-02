@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace McFly
+namespace McFly.Search
 {
     public interface ISearchResultDisplayStrategy : IInjectable
     {

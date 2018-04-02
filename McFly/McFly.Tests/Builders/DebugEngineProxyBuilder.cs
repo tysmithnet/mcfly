@@ -15,7 +15,7 @@
 using System;
 using Moq;
 
-namespace McFly.Tests
+namespace McFly.Tests.Builders
 {
     /// <summary>
     ///     Class DbgEngProxyBuilder.

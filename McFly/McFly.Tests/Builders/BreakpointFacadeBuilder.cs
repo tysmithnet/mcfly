@@ -14,7 +14,7 @@
 
 using Moq;
 
-namespace McFly.Tests
+namespace McFly.Tests.Builders
 {
     /// <summary>
     ///     Class BreakpointFacadeBuilder.

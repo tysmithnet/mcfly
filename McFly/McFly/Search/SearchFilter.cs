@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace McFly
+namespace McFly.Search
 {
     public sealed class SearchFilter : IEquatable<SearchFilter>
     {

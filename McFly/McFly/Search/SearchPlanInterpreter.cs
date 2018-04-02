@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace McFly
+namespace McFly.Search
 {
     public class SearchPlanInterpreter : ISearchPlanInterpreter // todo: rename this and all the other default stuff to ___Sql
     {

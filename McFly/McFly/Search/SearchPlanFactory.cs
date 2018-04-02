@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace McFly
+namespace McFly.Search
 {
     internal class SearchPlanFactory : ISearchPlanFactory
     {

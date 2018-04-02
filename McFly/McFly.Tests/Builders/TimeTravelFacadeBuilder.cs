@@ -19,7 +19,7 @@ using McFly.Core;
 using Moq;
 using MoreLinq;
 
-namespace McFly.Tests
+namespace McFly.Tests.Builders
 {
     /// <summary>
     ///     Class TimeTravelFacadeBuilder.

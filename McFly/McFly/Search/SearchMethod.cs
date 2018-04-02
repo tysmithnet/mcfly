@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 
-namespace McFly
+namespace McFly.Search
 {
     [Export(typeof(IMcFlyMethod))]
     public class SearchMethod : IMcFlyMethod
