@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace McFly.Server.Contract
 {
-    public class Criterion
+    public class SearchCriterionDto
     {
         public string Type { get; set; }
-        public Criterion[] SubCriteria { get; set; }
+        public SearchCriterionDto[] SubSearchCriteriaDto { get; set; }
 
         public virtual object Accept(ISearchRequestVisitor visitor)
         {
@@ -18,7 +18,7 @@ namespace McFly.Server.Contract
         }
     }
 
-    public class TerminalCriterion : Criterion
+    public class TerminalSearchCriterionDto : SearchCriterionDto
     {
         public string Expression { get; set; }
 
@@ -30,6 +30,6 @@ namespace McFly.Server.Contract
 
     public interface ISearchRequestVisitor
     {
-        object Visit(Criterion criterion);
+        object Visit(SearchCriterionDto searchCriterionDto);
     }
 }

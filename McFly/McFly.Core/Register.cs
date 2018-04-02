@@ -14,6 +14,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace McFly.Core
 {
@@ -31,6 +32,11 @@ namespace McFly.Core
             AllRegisters32 = new[] {Eax, Ebx, Ecx, Edx};
             AllRegisters = AllRegisters64.Concat(AllRegisters32).ToArray();
             CoreUserRegisters64 = new[] {Rax, Rbx, Rcx, Rdx};
+        }
+
+        public static Register Lookup(string name)
+        {
+            return AllRegisters.FirstOrDefault(x => Regex.IsMatch(name, x.Name, RegexOptions.IgnoreCase));
         }
 
         /// <summary>

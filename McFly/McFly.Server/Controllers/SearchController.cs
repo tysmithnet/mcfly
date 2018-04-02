@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using McFly.Server.Contract;
-using McFly.Server.Data.Search;
+using McFly.Server.Data;
 using McFly.Server.Headers;
 
 namespace McFly.Server.Controllers
@@ -14,20 +9,16 @@ namespace McFly.Server.Controllers
     [RoutePrefix("api/search")]
     public class SearchController : ApiController
     {
+        [Import]
+        protected internal IFrameAccess FrameAccess { get; set; }
+
         [Route("{index}")]
         public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromUri] string index,
-            [FromBody] Criterion criterion)
+            [FromBody] SearchCriterionDto searchCriterionDto)
         {
-
-            return Ok();
+            var searchCriteria = searchCriterionDto.ToSearchCriteria();
+            var results = FrameAccess.Search(projectName, searchCriteria);
+            return Ok(results);
         }
     }
-
-    internal interface ISearchCriterionConverter
-    {
-        bool CanConvert(string conversionType);
-        ICriterion Convert(string conversionType, string input);
-    }
-
-    // todo: add register converter, etc
 }
