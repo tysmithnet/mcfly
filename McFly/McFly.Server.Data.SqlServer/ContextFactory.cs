@@ -9,7 +9,7 @@ namespace McFly.Server.Data.SqlServer
         [Import]
         protected internal Settings Settings { get; set; }
 
-        public McFlyContext GetContext(string projectName)
+        public IMcFlyContext GetContext(string projectName)
         {
             var builder =
                 new SqlConnectionStringBuilder(Settings.ConnectionString ?? "")

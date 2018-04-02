@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using McFly.Core;
 
@@ -123,7 +124,7 @@ namespace McFly.Server.Data.SqlServer
         public int EndPosLo { get; set; }
     }
 
-    internal class McFlyContext : DbContext
+    internal class McFlyContext : DbContext, IMcFlyContext
     {
         public McFlyContext(string connectionString) : base(connectionString)
         {
@@ -134,11 +135,16 @@ namespace McFly.Server.Data.SqlServer
             
         }
 
+        public McFlyContext(ObjectContext objectContext) : base(objectContext, true)
+        {
+            
+        }
+
         public DbSet<FrameEntity> FrameEntities { get; set; }
         public DbSet<NoteEntity> NoteEntities { get; set; }
         public DbSet<StackFrameEntity> StackFrameEntities { get; set; }
         public DbSet<TraceInfoEntity> TraceInfoEntities { get; set; }
-
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -192,7 +198,7 @@ namespace McFly.Server.Data.SqlServer
                     Rcx = entity.Rcx?.ToULong(),
                     Rdx = entity.Rdx?.ToULong(),
                 },
-                Notes = entity.Notes.Select(x => x.ToNote()).ToList(),
+                Notes = entity.Notes?.Select(x => x.ToNote()).ToList(),
                 
             };
         }

@@ -2,6 +2,6 @@
 {
     internal interface IContextFactory
     {
-        McFlyContext GetContext(string projectName);
+        IMcFlyContext GetContext(string projectName);
     }
 }
