@@ -14,6 +14,7 @@
 
 using System;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace McFly.Core
 {
@@ -25,28 +26,28 @@ namespace McFly.Core
         /// <summary>
         ///     The rax
         /// </summary>
-        private ulong _rax;
+        private ulong? _rax;
 
         /// <summary>
         ///     The RBX
         /// </summary>
-        private ulong _rbx;
+        private ulong? _rbx;
 
         /// <summary>
         ///     The RCX
         /// </summary>
-        private ulong _rcx;
+        private ulong? _rcx;
 
         /// <summary>
         ///     The RDX
         /// </summary>
-        private ulong _rdx;
+        private ulong? _rdx;
 
         /// <summary>
         ///     Gets or sets the rax register
         /// </summary>
         /// <value>The rax register</value>
-        public ulong Rax
+        public ulong? Rax
         {
             get => _rax;
             set => _rax = value;
@@ -56,7 +57,7 @@ namespace McFly.Core
         ///     Gets or sets the rbx register
         /// </summary>
         /// <value>The rbx register</value>
-        public ulong Rbx
+        public ulong? Rbx
         {
             get => _rbx;
             set => _rbx = value;
@@ -66,7 +67,7 @@ namespace McFly.Core
         ///     Gets or sets the rcx register
         /// </summary>
         /// <value>The rcx register</value>
-        public ulong Rcx
+        public ulong? Rcx
         {
             get => _rcx;
             set => _rcx = value;
@@ -76,7 +77,7 @@ namespace McFly.Core
         ///     Gets or sets the rdx register
         /// </summary>
         /// <value>the rdx register</value>
-        public ulong Rdx
+        public ulong? Rdx
         {
             get => _rdx;
             set => _rdx = value;
@@ -86,40 +87,44 @@ namespace McFly.Core
         ///     Gets or sets the eax.
         /// </summary>
         /// <value>The eax.</value>
-        public uint Eax
+        [JsonIgnore]
+        public uint? Eax
         {
-            get => _rax.Lo32();
-            set => _rax = _rax.Lo32(value);
+            get => _rax?.Lo32();
+            set => _rax = _rax?.Lo32(value.GetValueOrDefault());
         }
 
         /// <summary>
         ///     Gets or sets the ebx.
         /// </summary>
         /// <value>The ebx.</value>
-        public uint Ebx
+        [JsonIgnore]
+        public uint? Ebx
         {
-            get => _rbx.Lo32();
-            set => _rbx = _rbx.Lo32(value);
+            get => _rbx?.Lo32();
+            set => _rbx = _rbx?.Lo32(value.GetValueOrDefault());
         }
 
         /// <summary>
         ///     Gets or sets the ecx.
         /// </summary>
         /// <value>The ecx.</value>
-        public uint Ecx
+        [JsonIgnore]
+        public uint? Ecx
         {
-            get => _rcx.Lo32();
-            set => _rcx = _rcx.Lo32(value);
+            get => _rcx?.Lo32();
+            set => _rcx = _rcx?.Lo32(value.GetValueOrDefault());
         }
 
         /// <summary>
         ///     Gets or sets the edx.
         /// </summary>
         /// <value>The edx.</value>
-        public uint Edx
+        [JsonIgnore]
+        public uint? Edx
         {
-            get => _rdx.Lo32();
-            set => _rdx = _rdx.Lo32(value);
+            get => _rdx?.Lo32();
+            set => _rdx = _rdx?.Lo32(value.GetValueOrDefault());
         }
 
         /// <summary>
@@ -235,16 +240,16 @@ namespace McFly.Core
                     _rdx = Convert.ToUInt64(input, radix);
                     break;
                 case "eax":
-                    _rax = _rax.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    _rax = _rax?.Lo32(Convert.ToInt32(input, radix).ToUInt());
                     break;
                 case "ebx":
-                    _rbx = _rbx.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    _rbx = _rbx?.Lo32(Convert.ToInt32(input, radix).ToUInt());
                     break;
                 case "ecx":
-                    _rcx = _rcx.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    _rcx = _rcx?.Lo32(Convert.ToInt32(input, radix).ToUInt());
                     break;
                 case "edx":
-                    _rdx = _rdx.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    _rdx = _rdx?.Lo32(Convert.ToInt32(input, radix).ToUInt());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException($"{nameof(register)} is not a valid register");

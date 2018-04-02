@@ -57,20 +57,22 @@ namespace McFly.Core
         ///     Gets or sets the register set.
         /// </summary>
         /// <value>The register set.</value>
-        public RegisterSet RegisterSet { get; set; }
+        public RegisterSet RegisterSet { get; set; } = new RegisterSet();
 
         /// <summary>
         ///     Gets or sets the stack trace.
         /// </summary>
         /// <value>The stack trace.</value>
-        public StackTrace StackTrace { get; set; }
+        public StackTrace StackTrace { get; set; } = new StackTrace();
 
         /// <summary>
         ///     Gets or sets the disassembly line.
         /// </summary>
         /// <value>The disassembly line.</value>
-        public DisassemblyLine DisassemblyLine { get; set; }
-                                                    
+        public DisassemblyLine DisassemblyLine { get; set; } = new DisassemblyLine();
+
+        public ICollection<Note> Notes { get; set; } = new List<Note>();
+
         /// <summary>
         ///     Compares to.
         /// </summary>

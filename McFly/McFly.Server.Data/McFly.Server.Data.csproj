@@ -100,14 +100,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess.cs" />
-    <Compile Include="FrameAccess.cs" />
-    <Compile Include="FrameDto.cs" />
     <Compile Include="IFrameAccess.cs" />
     <Compile Include="INoteAccess.cs" />
     <Compile Include="IProjectsAccess.cs" />
-    <Compile Include="NoteAccess.cs" />
-    <Compile Include="ProjectAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
