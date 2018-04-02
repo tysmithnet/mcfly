@@ -18,7 +18,7 @@ namespace McFly.Server.Controllers
 
         [Route("{index}")]
         public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromUri] string index,
-            [FromBody] SearchCriterionDto searchCriterionDto)
+            [FromBody] SearchCriterionDto searchCriterionDto)    // todo: add paging headers
         {
             var searchCriteria = ConversionFacade.Convert(searchCriterionDto);
             var results = FrameAccess.Search(projectName, searchCriteria);
