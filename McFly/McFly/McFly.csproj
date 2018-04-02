@@ -185,7 +185,6 @@
     <Compile Include="IMcFlyMethod.cs" />
     <Compile Include="HelpInfo.cs" />
     <Compile Include="IndexMethod.cs" />
-    <Compile Include="InitialSearch.cs" />
     <Compile Include="InitMethod.cs" />
     <Compile Include="InitOptions.cs" />
     <Compile Include="ISearchIndex.cs" />
