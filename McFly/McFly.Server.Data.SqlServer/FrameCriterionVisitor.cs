@@ -47,52 +47,7 @@ namespace McFly.Server.Data.SqlServer
             Func<FrameEntity, bool> identity = entity => true;
             return identity;
         }
-
-        object ICriterionVisitor.Visit(AndCriterion andCriterion)
-        {
-            return Visit(andCriterion);
-        }
-
-        object ICriterionVisitor.Visit(OrCriterion orCriterion)
-        {
-            return Visit(orCriterion);
-        }
-
-        public object Visit(NotCriterion notCriterion)
-        {
-            throw new NotImplementedException();
-        }
-
-        object ICriterionVisitor.Visit(RegisterEqualsCriterion registerEqualsCriterion)
-        {
-            return Visit(registerEqualsCriterion);
-        }
-
-        object ICriterionVisitor.Visit(RegisterBetweenCriterion registerBetweenCriterion)
-        {
-            return Visit(registerBetweenCriterion);
-        }
-
-        public object Visit(RegisterInCriterion registerInCriterion)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Visit(NoteCreatedAfterCriterion noteCreatedAfterCriterion)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Visit(NoteCreatedBeforeCriterion noteCreatedBeforeCriterion)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Visit(NoteCreatedBetweenCriterion noteCreatedBetweenCriterion)
-        {
-            throw new NotImplementedException();
-        }
-
+          
         /// <summary>
         ///     Visits the specified and criterion.
         /// </summary>
