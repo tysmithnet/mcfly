@@ -38,13 +38,16 @@ namespace McFly.Server
                     case "Type":
                         type = prop.Value.Value<string>();
                         break;
-                    case "Expression":
-                        exp = prop.Value.Value<string[]>();
+                    case "Args":
+                        if (prop.Value is JArray jarr1)
+                        {
+                            exp = jarr1.Values<string>().ToArray();
+                        }
                         break;
                     case "SubCriteria":
-                        if (prop.Value is JArray jarr)
+                        if (prop.Value is JArray jarr2)
                         {
-                            arr = jarr.OfType<JObject>().Select(ExtractCriterion).ToArray();
+                            arr = jarr2.OfType<JObject>().Select(ExtractCriterion).ToArray();
                         }
                         break;
                 }

@@ -14,10 +14,13 @@ namespace McFly.Search
         /// <inheritdoc />
         public SearchCriterionDto Convert(ISearchPlan searchPlan)
         {
+            var subs = searchPlan.SearchFilters.Select(Helper).ToArray();
+            if (subs.Length == 1)
+                return subs[0];
             var crit = new SearchCriterionDto
             {
                 Type = "and",
-                SubCriteria = searchPlan.SearchFilters.Select(Helper).ToArray()
+                SubCriteria =  subs
             };
             return crit;
         }

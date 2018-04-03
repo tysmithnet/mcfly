@@ -11,6 +11,7 @@ using McFly.Server.Search;
 namespace McFly.Server.Controllers
 {
     [RoutePrefix("api/search")]
+    [Export]
     public class SearchController : ApiController
     {
         [Import]

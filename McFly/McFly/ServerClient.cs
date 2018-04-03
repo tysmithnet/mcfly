@@ -85,7 +85,7 @@ namespace McFly
             {
                 ["X-Project-Name"] = Settings.ProjectName
             });
-            var json = res.Result.Content.ReadAsStringAsync().Result;
+            var json = res.Result.Content.ReadAsStringAsync().Result;           // todo: 500's
             var returnVal = JsonConvert.DeserializeObject<IEnumerable<Frame>>(json);
             return returnVal;
         }
