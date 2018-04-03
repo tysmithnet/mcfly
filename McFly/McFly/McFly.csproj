@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessBreakpoint.cs" />
+    <Compile Include="AddNoteOptions.cs" />
     <Compile Include="BreakpointFacade.cs" />
     <Compile Include="BreakpointMask.cs" />
     <Compile Include="ByteArrayBuilder.cs" />
@@ -143,6 +144,9 @@
     <Compile Include="IndexMethod.cs" />
     <Compile Include="InitMethod.cs" />
     <Compile Include="InitOptions.cs" />
+    <Compile Include="ListOptions.cs" />
+    <Compile Include="OpenOptions.cs" />
+    <Compile Include="ReloadOptions.cs" />
     <Compile Include="Search\ISearchIndex.cs" />
     <Compile Include="IRegisterFacade.cs" />
     <Compile Include="Search\ISearchPlan.cs" />
