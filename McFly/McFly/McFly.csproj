@@ -125,9 +125,53 @@
     <Compile Include="BreakpointMask.cs" />
     <Compile Include="ByteArrayBuilder.cs" />
     <Compile Include="DebugEngineProxy.cs" />
+    <Compile Include="Debugger\Enums.cs" />
+    <Compile Include="Debugger\IDebugAdvanced.cs" />
+    <Compile Include="Debugger\IDebugAdvanced2.cs" />
+    <Compile Include="Debugger\IDebugAdvanced3.cs" />
+    <Compile Include="Debugger\IDebugBreakpoint.cs" />
+    <Compile Include="Debugger\IDebugBreakpoint2.cs" />
+    <Compile Include="Debugger\IDebugBreakpoint3.cs" />
+    <Compile Include="Debugger\IDebugClient.cs" />
+    <Compile Include="Debugger\IDebugClient2.cs" />
+    <Compile Include="Debugger\IDebugClient3.cs" />
+    <Compile Include="Debugger\IDebugClient4.cs" />
+    <Compile Include="Debugger\IDebugClient5.cs" />
+    <Compile Include="Debugger\IDebugClient6.cs" />
+    <Compile Include="Debugger\IDebugControl.cs" />
+    <Compile Include="Debugger\IDebugControl2.cs" />
+    <Compile Include="Debugger\IDebugControl3.cs" />
+    <Compile Include="Debugger\IDebugControl4.cs" />
+    <Compile Include="Debugger\IDebugControl5.cs" />
+    <Compile Include="Debugger\IDebugControl6.cs" />
+    <Compile Include="Debugger\IDebugDataSpaces.cs" />
+    <Compile Include="Debugger\IDebugDataSpaces2.cs" />
+    <Compile Include="Debugger\IDebugDataSpaces3.cs" />
+    <Compile Include="Debugger\IDebugDataSpaces4.cs" />
+    <Compile Include="Debugger\IDebugEventCallbacks.cs" />
+    <Compile Include="Debugger\IDebugEventCallbacksWide.cs" />
+    <Compile Include="Debugger\IDebugEventContextCallbacks.cs" />
+    <Compile Include="Debugger\IDebugInputCallbacks.cs" />
+    <Compile Include="Debugger\IDebugOutputCallbacks.cs" />
+    <Compile Include="Debugger\IDebugOutputCallbacks2.cs" />
+    <Compile Include="Debugger\IDebugOutputCallbacksWide.cs" />
+    <Compile Include="Debugger\IDebugRegisters.cs" />
+    <Compile Include="Debugger\IDebugRegisters2.cs" />
+    <Compile Include="Debugger\IDebugSymbolGroup.cs" />
+    <Compile Include="Debugger\IDebugSymbolGroup2.cs" />
+    <Compile Include="Debugger\IDebugSymbols.cs" />
+    <Compile Include="Debugger\IDebugSymbols2.cs" />
+    <Compile Include="Debugger\IDebugSymbols3.cs" />
+    <Compile Include="Debugger\IDebugSymbols4.cs" />
+    <Compile Include="Debugger\IDebugSymbols5.cs" />
+    <Compile Include="Debugger\IDebugSystemObjects.cs" />
+    <Compile Include="Debugger\IDebugSystemObjects2.cs" />
+    <Compile Include="Debugger\IDebugSystemObjects3.cs" />
+    <Compile Include="Debugger\Structs.cs" />
     <Compile Include="DefaultLog.cs" />
     <Compile Include="DisassemblyFacade.cs" />
     <Compile Include="ExecuteWrapper.cs" />
+    <Compile Include="Debugger\HRESULT.cs" />
     <Compile Include="HelpInfoBuilder.cs" />
     <Compile Include="HelpMethod.cs" />
     <Compile Include="HttpFacade.cs" />
@@ -186,10 +230,6 @@
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
       <Project>{3243a211-cf4f-4296-bd68-2d4dd5406542}</Project>
       <Name>McFly.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\McFly.Native\McFly.Native.csproj">
-      <Project>{0008958d-3d58-4801-ae15-a7aaf1191793}</Project>
-      <Name>McFly.Native</Name>
     </ProjectReference>
     <ProjectReference Include="..\McFly.Server.Contract\McFly.Server.Contract.csproj">
       <Project>{BCFFB741-26F9-4D12-A152-04CF601D373E}</Project>
