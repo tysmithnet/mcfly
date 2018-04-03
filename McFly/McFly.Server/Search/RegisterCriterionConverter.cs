@@ -20,7 +20,7 @@ namespace McFly.Server.Search
         public override ICriterion Convert(SearchCriterionDto searchCriterionDto)
         {
             var terminal = (TerminalSearchCriterionDto) searchCriterionDto;
-            var args = CommandLineToArgs(terminal.Expression);
+            var args = terminal.Args;
             if (args.Length < 3)
                 throw new ArgumentException("Input has to have at least 3 arguments");
             var reg = Register.Lookup(args[0]);

@@ -21,7 +21,7 @@ namespace McFly.Tests.Search
                 new SearchFilter()
                 {
                     Command = "where",
-                    Args = new List<string>() {"rax", "-eq", "10", "AND", "rbx", "-neq", "0"}
+                    Args = new List<string>() {"rax", "-eq", "10"}
                 }
             });
 
@@ -31,11 +31,7 @@ namespace McFly.Tests.Search
             res.SubCriteria[0].Type.Should().Be("register");
             res.SubCriteria[0].SubCriteria.Should().BeNullOrEmpty();
             res.SubCriteria[0].Should().BeOfType<TerminalSearchCriterionDto>();
-            (res.SubCriteria[0] as TerminalSearchCriterionDto).Expression.Should().Be("rax -eq 10");
-            res.SubCriteria[1].Type.Should().Be("register");
-            res.SubCriteria[1].SubCriteria.Should().BeNullOrEmpty();
-            res.SubCriteria[1].Should().BeOfType<TerminalSearchCriterionDto>();
-            (res.SubCriteria[1] as TerminalSearchCriterionDto).Expression.Should().Be("rax -eq 11");
+            (res.SubCriteria[0] as TerminalSearchCriterionDto).Args.Should().Equal("rax -eq 10".Split(' '));
             ;
         }
     }

@@ -20,7 +20,7 @@ namespace McFly.Server.Contract
 
     public class TerminalSearchCriterionDto : SearchCriterionDto
     {
-        public string Expression { get; set; }
+        public string[] Args { get; set; }
 
         public override object Accept(ISearchRequestVisitor visitor)
         {

@@ -6,7 +6,7 @@ namespace McFly.Search
     {
         public IEnumerable<ISearchResult> Interpret(ISearchPlan searchPlan)
         {
-            
+            return null;
         }
     }
 }

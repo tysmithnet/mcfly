@@ -19,7 +19,7 @@ namespace McFly.Server.Test.Search
             var result = facade.Convert(new TerminalSearchCriterionDto
             {
                 Type = "register",
-                Expression = "rax -eq 10"
+                Args = "rax -eq 10".Split(' ')
             });
             result.Should().BeOfType<RegisterEqualsCriterion>();
         }

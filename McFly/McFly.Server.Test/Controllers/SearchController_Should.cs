@@ -38,7 +38,7 @@ namespace McFly.Server.Test.Controllers
             var frames = searchController.SearchFrames("", new TerminalSearchCriterionDto
             {
                 Type = "register",
-                Expression = "rax -eq 10"
+                Args = "rax -eq 10".Split(' ')
             });
             frames.All(x => x.RegisterSet.Rax == 10).Should().BeTrue();
         }

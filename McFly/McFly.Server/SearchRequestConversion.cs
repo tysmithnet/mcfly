@@ -29,7 +29,7 @@ namespace McFly.Server
         private SearchCriterionDto ExtractCriterion(JObject o)
         {
             string type = null;
-            string exp = null;
+            string[] exp = null;
             SearchCriterionDto[] arr = null;
             foreach (var prop in o)
             {
@@ -39,7 +39,7 @@ namespace McFly.Server
                         type = prop.Value.Value<string>();
                         break;
                     case "Expression":
-                        exp = prop.Value.Value<string>();
+                        exp = prop.Value.Value<string[]>();
                         break;
                     case "SubCriteria":
                         if (prop.Value is JArray jarr)
@@ -53,7 +53,7 @@ namespace McFly.Server
                 return new TerminalSearchCriterionDto()
                 {
                     Type = type,
-                    Expression = exp
+                    Args = exp
                 };
             else // todo: needs to check for type and arr
                 return new SearchCriterionDto()
@@ -74,37 +74,6 @@ namespace McFly.Server
             
             ;
             return true;
-        }
-    }
-
-    internal class SearchResultJsonWriterVisitor : ISearchRequestVisitor
-    {
-        public string ConvertToJson(SearchCriterionDto searchRequest)
-        {
-            return ConvertToJObject(searchRequest).ToString(Formatting.Indented);
-        }
-
-        public JObject ConvertToJObject(SearchCriterionDto searchRequest)
-        {
-            var o = (JObject)Visit(searchRequest);
-            return o;
-        }
-
-        public object Visit(SearchCriterionDto searchCriterionDto)
-        {
-            if (searchCriterionDto is TerminalSearchCriterionDto terminal)
-                return Visit(terminal);
-            var o = new JObject {{"Type", searchCriterionDto.Type}};
-            var childObjects = searchCriterionDto.SubCriteria.Select(c => c.Accept(this)).Cast<JObject>().ToArray();
-            var arr = new JArray(childObjects);
-            o.Add("SubCriteria", arr);
-            return o;
-        }
-
-        public object Visit(TerminalSearchCriterionDto searchCriterionDto)
-        {
-            var o = new JObject {{"Type", searchCriterionDto.Type}, {"Expression", searchCriterionDto.Expression}};
-            return o;
         }
     }
 }
