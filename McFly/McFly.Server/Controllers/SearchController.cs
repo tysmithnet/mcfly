@@ -12,6 +12,7 @@ namespace McFly.Server.Controllers
 {
     [RoutePrefix("api/search")]
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class SearchController : ApiController
     {
         [Import]
