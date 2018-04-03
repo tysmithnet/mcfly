@@ -1,6 +1,6 @@
 ﻿namespace McFly.Search
 {
-    public interface ISearchPlanFactory
+    public interface ISearchPlanFactory : IInjectable
     {
         ISearchPlan Create(string[] args);
     }

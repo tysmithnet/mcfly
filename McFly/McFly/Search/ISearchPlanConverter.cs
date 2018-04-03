@@ -2,7 +2,7 @@
 
 namespace McFly.Search
 {
-    internal interface ISearchPlanConverter
+    internal interface ISearchPlanConverter : IInjectable
     {
         SearchCriterionDto Convert(ISearchPlan searchPlan);
     }
