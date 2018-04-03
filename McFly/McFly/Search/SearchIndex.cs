@@ -2,9 +2,8 @@
 {
     public abstract class SearchIndex
     {
-        public abstract string ShortName { get; }
-
         public static readonly SearchIndex Frame = new _Frame();
+        public abstract string ShortName { get; }
 
         private class _Frame : SearchIndex
         {

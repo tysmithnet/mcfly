@@ -13,15 +13,15 @@ namespace McFly.Search
             _searchFilters = searchFilters.ToList();
         }
 
-        public void AddSearchFilter(SearchFilter filter)
-        {
-            _searchFilters.Add(filter);
-        }
-
         /// <inheritdoc />
         public string Index { get; }
 
         /// <inheritdoc />
         public IEnumerable<SearchFilter> SearchFilters => _searchFilters;
+
+        public void AddSearchFilter(SearchFilter filter)
+        {
+            _searchFilters.Add(filter);
+        }
     }
 }

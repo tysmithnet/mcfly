@@ -147,12 +147,10 @@
     <Compile Include="ListOptions.cs" />
     <Compile Include="OpenOptions.cs" />
     <Compile Include="ReloadOptions.cs" />
-    <Compile Include="Search\ISearchIndex.cs" />
     <Compile Include="IRegisterFacade.cs" />
     <Compile Include="Search\ISearchPlan.cs" />
     <Compile Include="Search\ISearchPlanConverter.cs" />
     <Compile Include="Search\ISearchPlanFactory.cs" />
-    <Compile Include="Search\ISearchResult.cs" />
     <Compile Include="Search\ISearchResultDisplayStrategy.cs" />
     <Compile Include="IServerClient.cs" />
     <Compile Include="ISettings.cs" />
@@ -198,9 +196,7 @@
       <Name>McFly.Server.Contract</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Debugger\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="../packages/UnmanagedExports.1.2.7/tools/RGiesecke.DllExport.targets" Condition="Exists('../packages/UnmanagedExports.1.2.7/tools/RGiesecke.DllExport.targets')" />
 </Project>

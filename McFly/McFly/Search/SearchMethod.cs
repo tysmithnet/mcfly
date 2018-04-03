@@ -35,9 +35,8 @@ namespace McFly.Search
                 var searchResults = ServerClient.SearchFrames(converted);
                 var first = SearchResultDisplayStrategies.FirstOrDefault(x => x.CanDisplay(searchResults));
                 if (first == null)
-                {
-                    throw new InvalidOperationException("No display strategy is registered that can handle the search results");
-                }
+                    throw new InvalidOperationException(
+                        "No display strategy is registered that can handle the search results");
                 first.Display(searchResults);
             }
             else

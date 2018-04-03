@@ -14,7 +14,9 @@ namespace McFly.Search
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             if (Args == null && other.Args == null) return true;
-            return string.Equals(Command, other.Command) && Args == null ? false : Args.SequenceEqual(other.Args ?? new string[0]);
+            return string.Equals(Command, other.Command) && Args == null
+                ? false
+                : Args.SequenceEqual(other.Args ?? new string[0]);
         }
 
         public override bool Equals(object obj)

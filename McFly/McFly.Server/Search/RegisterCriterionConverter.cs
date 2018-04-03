@@ -9,15 +9,15 @@ using Conv = System.Convert;
 namespace McFly.Server.Search
 {
     [Export(typeof(ISearchCriterionConverter))]
-    internal class RegisterCriterionConverter : BaseSearchCriterionConverter
+    internal class RegisterCriterionConverter : ISearchCriterionConverter
     {
-        public override bool CanConvert(SearchCriterionDto searchCriterionDto)
+        public bool CanConvert(SearchCriterionDto searchCriterionDto)
         {
             return searchCriterionDto is TerminalSearchCriterionDto && Regex.IsMatch(searchCriterionDto?.Type ?? "",
                        "register", RegexOptions.IgnoreCase);
         }
 
-        public override ICriterion Convert(SearchCriterionDto searchCriterionDto)
+        public ICriterion Convert(SearchCriterionDto searchCriterionDto)
         {
             var terminal = (TerminalSearchCriterionDto) searchCriterionDto;
             var args = terminal.Args;

@@ -215,7 +215,6 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="SearchResultJsonWriterVisitor.cs" />
-    <Compile Include="Search\BaseSearchCriterionConverter.cs" />
     <Compile Include="Controllers\FrameController.cs" />
     <Compile Include="Search\ISearchCriterionConversionFacade.cs" />
     <Compile Include="Search\ISearchCriterionConverter.cs" />
