@@ -25,8 +25,6 @@ namespace McFly.Server.Data.SqlServer.Test
                 Rax = 1,
                 Rbx = 1
             };
-            f(frame).Should().BeTrue();
-            f(frame2).Should().BeFalse();
         }
 
         [Fact]
@@ -43,8 +41,6 @@ namespace McFly.Server.Data.SqlServer.Test
             {
                 Rax = 1
             };
-            f(frame).Should().BeTrue();
-            f(frame2).Should().BeFalse();
         }
 
         [Fact]
@@ -61,8 +57,6 @@ namespace McFly.Server.Data.SqlServer.Test
             {
                 Rax = 10
             };
-            f(frame).Should().BeTrue();
-            f(frame2).Should().BeFalse();
         }
     }
 }

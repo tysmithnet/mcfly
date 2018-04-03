@@ -208,7 +208,7 @@
     <Compile Include="PositionsResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterFacade.cs" />
-    <Compile Include="Search\NullDisplayStrategy.cs" />
+    <Compile Include="Search\JsonDisplayStrategy.cs" />
     <Compile Include="Search\SearchFilter.cs" />
     <Compile Include="Search\SearchIndex.cs" />
     <Compile Include="Search\SearchMethod.cs" />

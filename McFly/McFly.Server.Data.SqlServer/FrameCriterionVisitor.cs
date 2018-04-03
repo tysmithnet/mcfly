@@ -15,9 +15,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using McFly.Core;
 using McFly.Server.Data.Search;
-using Filter = System.Func<McFly.Server.Data.SqlServer.FrameEntity, bool>;
 
 namespace McFly.Server.Data.SqlServer
 {
@@ -52,66 +52,46 @@ namespace McFly.Server.Data.SqlServer
         ///     Visits the specified and criterion.
         /// </summary>
         /// <param name="andCriterion">The and criterion.</param>
-        public Filter Visit(AndCriterion andCriterion)
+        public Expression Visit(AndCriterion andCriterion)
         {
-            var list = new List<Filter>();
+            Expression result = null;
             foreach (var c in andCriterion.Criteria)
             {
-                var f = (Filter)c.Accept(this);
-                list.Add(f);
+                var f = (Expression)c.Accept(this);
+                if (result == null)
+                {
+                    result = f;
+                    continue;
+                }
+
+                result = Expression.AndAlso(result, f);
             }
-            return entity => list.All(x => x(entity));
+
+            return result;
         }
 
-        public Filter Visit(OrCriterion orCriteria)
+        public Expression Visit(OrCriterion orCriterion)
         {
-            var list = new List<Filter>();
-            foreach (var c in orCriteria.Criteria)
+            Expression result = null;
+            foreach (var c in orCriterion.Criteria)
             {
-                var f = (Filter)c.Accept(this);
-                list.Add(f);
+                var f = (Expression)c.Accept(this);
+                if (result == null)
+                {
+                    result = f;
+                    continue;
+                }
+
+                result = Expression.OrElse(result, f);
             }
-            return entity => list.Any(x => x(entity));
+
+            return result;
         }
 
-        public Filter Visit(RegisterEqualsCriterion registerEqualsCriterion)
+        public Expression Visit(RegisterEqualsCriterion registerEqualsCriterion)
         {
-            return entity =>
-            {
-                if (registerEqualsCriterion.Register == Register.Rax)
-                    return entity.Rax == registerEqualsCriterion.Value.ToLong();
-
-                if (registerEqualsCriterion.Register == Register.Rbx)
-                    return entity.Rbx == registerEqualsCriterion.Value.ToLong();
-
-                if (registerEqualsCriterion.Register == Register.Rcx)
-                    return entity.Rcx == registerEqualsCriterion.Value.ToLong();
-
-                if (registerEqualsCriterion.Register == Register.Rdx)
-                    return entity.Rdx == registerEqualsCriterion.Value.ToLong();
-
-                return false;
-            };
-        }
-
-        public Filter Visit(RegisterBetweenCriterion registerBetweenCriterion)
-        {
-            return entity =>
-            {
-                if (registerBetweenCriterion.Register == Register.Rax)
-                    return entity.Rax < registerBetweenCriterion.High.ToLong() && entity.Rax >= registerBetweenCriterion.Low.ToLong();
-
-                if (registerBetweenCriterion.Register == Register.Rbx)
-                    return entity.Rbx < registerBetweenCriterion.High.ToLong() && entity.Rbx >= registerBetweenCriterion.Low.ToLong();
-
-                if (registerBetweenCriterion.Register == Register.Rcx)
-                    return entity.Rcx < registerBetweenCriterion.High.ToLong() && entity.Rcx >= registerBetweenCriterion.Low.ToLong();
-
-                if (registerBetweenCriterion.Register == Register.Rdx)
-                    return entity.Rdx < registerBetweenCriterion.High.ToLong() && entity.Rdx >= registerBetweenCriterion.Low.ToLong();
-
-                return false;
-            };
+            Expression<Func<FrameEntity, bool>> exp = entity => entity.Rax == 0;
+            return exp;
         }
     }
 }
