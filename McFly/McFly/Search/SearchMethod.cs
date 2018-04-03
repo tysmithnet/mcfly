@@ -29,14 +29,14 @@ namespace McFly.Search
         {
             var plan = Factory.Create(args);
             var converted = Converter.Convert(plan);
-            switch (plan.Index)
+            if (plan.Index == SearchIndex.Frame.ShortName)
             {
-                case "frame": // todo: typesafe enum
-                    SearchResultDisplayStrategy.Display(ServerClient.SearchFrames(converted));
-                    return;
-                default:
-                    throw new ArgumentOutOfRangeException($"Unknown index: {plan.Index}");
-            }                                                                             
+                SearchResultDisplayStrategy.Display(ServerClient.SearchFrames(converted));
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException($"Unknown index: {plan.Index}");
+            }
         }
     }
 }
