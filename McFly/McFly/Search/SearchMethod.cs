@@ -16,7 +16,7 @@ namespace McFly.Search
         internal ISearchResultDisplayStrategy SearchResultDisplayStrategy { get; set; }
 
         [Import]
-        internal ServerClient ServerClient { get; set; }
+        internal IServerClient ServerClient { get; set; }
 
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
             .SetName("search")

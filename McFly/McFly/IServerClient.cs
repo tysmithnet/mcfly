@@ -47,5 +47,6 @@ namespace McFly
         /// <param name="frames">The frames.</param>
         void UpsertFrames(IEnumerable<Frame> frames);
 
+        IEnumerable<Frame> SearchFrames(SearchCriterionDto converted);
     }
 }
