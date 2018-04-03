@@ -10,7 +10,7 @@ namespace McFly.Server.Contract
     public class SearchCriterionDto
     {
         public string Type { get; set; }
-        public SearchCriterionDto[] SubSearchCriteriaDto { get; set; }
+        public SearchCriterionDto[] SubCriteria { get; set; }
 
         public virtual object Accept(ISearchRequestVisitor visitor)
         {

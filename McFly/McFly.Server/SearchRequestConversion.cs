@@ -59,7 +59,7 @@ namespace McFly.Server
                 return new SearchCriterionDto()
                 {
                     Type = type,
-                    SubSearchCriteriaDto = arr
+                    SubCriteria = arr
                 };
         }
 
@@ -95,7 +95,7 @@ namespace McFly.Server
             if (searchCriterionDto is TerminalSearchCriterionDto terminal)
                 return Visit(terminal);
             var o = new JObject {{"Type", searchCriterionDto.Type}};
-            var childObjects = searchCriterionDto.SubSearchCriteriaDto.Select(c => c.Accept(this)).Cast<JObject>().ToArray();
+            var childObjects = searchCriterionDto.SubCriteria.Select(c => c.Accept(this)).Cast<JObject>().ToArray();
             var arr = new JArray(childObjects);
             o.Add("SubCriteria", arr);
             return o;
