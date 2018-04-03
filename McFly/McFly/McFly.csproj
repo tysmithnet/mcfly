@@ -148,7 +148,6 @@
     <Compile Include="Search\ISearchPlan.cs" />
     <Compile Include="Search\ISearchPlanConverter.cs" />
     <Compile Include="Search\ISearchPlanFactory.cs" />
-    <Compile Include="Search\ISearchPlanInterpreter.cs" />
     <Compile Include="Search\ISearchResult.cs" />
     <Compile Include="Search\ISearchResultDisplayStrategy.cs" />
     <Compile Include="IServerClient.cs" />
@@ -168,7 +167,6 @@
     <Compile Include="Search\SearchPlan.cs" />
     <Compile Include="Search\SearchPlanConverter.cs" />
     <Compile Include="Search\SearchPlanFactory.cs" />
-    <Compile Include="Search\SearchPlanInterpreter.cs" />
     <Compile Include="ServerClient.cs" />
     <Compile Include="SettingsMethod.cs" />
     <Compile Include="Settings.cs" />

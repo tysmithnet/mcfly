@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 
 namespace McFly.Search
 {
@@ -12,10 +13,10 @@ namespace McFly.Search
         internal ISearchPlanConverter Converter { get; set; }
 
         [Import]
-        internal ISearchPlanInterpreter Interpreter { get; set; }
+        internal ISearchResultDisplayStrategy SearchResultDisplayStrategy { get; set; }
 
         [Import]
-        internal ISearchResultDisplayStrategy SearchResultDisplayStrategy { get; set; }
+        internal ServerClient ServerClient { get; set; }
 
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
             .SetName("search")
@@ -27,8 +28,15 @@ namespace McFly.Search
         public void Process(string[] args)
         {
             var plan = Factory.Create(args);
-            var results = Interpreter.Interpret(plan);
-            SearchResultDisplayStrategy.Display(results);
+            var converted = Converter.Convert(plan);
+            switch (plan.Index)
+            {
+                case "frame": // todo: typesafe enum
+                    SearchResultDisplayStrategy.Display(ServerClient.SearchFrames(converted));
+                    return;
+                default:
+                    throw new ArgumentOutOfRangeException($"Unknown index: {plan.Index}");
+            }                                                                             
         }
     }
 }

@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Net.Http;
 using McFly.Core;
+using McFly.Search;
 using McFly.Server.Contract;
 
 namespace McFly
@@ -74,6 +75,11 @@ namespace McFly
             var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/project"};
             var request = new NewProjectRequest(projectName, start.ToString(), end.ToString());
             HttpFacade.PostJsonAsync(ub.Uri, request, null).GetAwaiter().GetResult();
+        }
+
+        public IEnumerable<ISearchResult> SearchFrames(SearchCriterionDto converted)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using FluentAssertions;
 using McFly.Search;
 using McFly.Server.Contract;
@@ -33,15 +29,6 @@ namespace McFly.Tests.Search
             res.SubCriteria[0].Should().BeOfType<TerminalSearchCriterionDto>();
             (res.SubCriteria[0] as TerminalSearchCriterionDto).Args.Should().Equal("rax -eq 10".Split(' '));
             ;
-        }
-    }
-
-    public class SearchPlanInterpreter_Should
-    {
-        public void Create_The_Correct_Search_Request()
-        {
-            var interpreter = new SearchPlanInterpreter();
-            
         }
     }
 }
