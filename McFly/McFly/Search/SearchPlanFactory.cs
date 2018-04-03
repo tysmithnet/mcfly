@@ -34,6 +34,7 @@ namespace McFly.Search
                         filter.Args.Add(args[j]);
                         i++;
                     }
+                    list.Add(filter);
                 }
             }
 
