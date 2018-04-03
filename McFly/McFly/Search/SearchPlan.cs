@@ -7,12 +7,6 @@ namespace McFly.Search
     {
         private readonly List<SearchFilter> _searchFilters;
 
-        public SearchPlan(string index)
-        {
-            Index = index;
-            _searchFilters = new List<SearchFilter>();
-        }
-
         public SearchPlan(string index, IEnumerable<SearchFilter> searchFilters)
         {
             Index = index;

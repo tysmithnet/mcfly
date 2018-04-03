@@ -5,6 +5,7 @@ namespace McFly.Search
 {
     public interface ISearchResultDisplayStrategy : IInjectable
     {
-        void Display(IEnumerable<Frame> searchResults);
+        bool CanDisplay(object obj);
+        void Display(object obj);
     }
 }

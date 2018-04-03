@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Linq;
 
 namespace McFly.Search
 {
@@ -12,8 +13,8 @@ namespace McFly.Search
         [Import]
         internal ISearchPlanConverter Converter { get; set; }
 
-        [Import]
-        internal ISearchResultDisplayStrategy SearchResultDisplayStrategy { get; set; }
+        [ImportMany]
+        internal ISearchResultDisplayStrategy[] SearchResultDisplayStrategies { get; set; }
 
         [Import]
         internal IServerClient ServerClient { get; set; }
@@ -31,7 +32,13 @@ namespace McFly.Search
             var converted = Converter.Convert(plan);
             if (plan.Index == SearchIndex.Frame.ShortName)
             {
-                SearchResultDisplayStrategy.Display(ServerClient.SearchFrames(converted));
+                var searchResults = ServerClient.SearchFrames(converted);
+                var first = SearchResultDisplayStrategies.FirstOrDefault(x => x.CanDisplay(searchResults));
+                if (first == null)
+                {
+                    throw new InvalidOperationException("No display strategy is registered that can handle the search results");
+                }
+                first.Display(searchResults);
             }
             else
             {
