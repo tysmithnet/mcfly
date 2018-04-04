@@ -19,18 +19,18 @@ using Moq;
 namespace McFly.Server.Test.Builders
 {
     /// <summary>
-    /// Builder for mock project access
+    ///     Builder for mock project access
     /// </summary>
     public class ProjectAccessBuilder
     {
         /// <summary>
-        /// Gets or sets the mock.
+        ///     Gets or sets the mock.
         /// </summary>
         /// <value>The mock.</value>
         internal Mock<IProjectsAccess> Mock { get; set; } = new Mock<IProjectsAccess>();
 
         /// <summary>
-        /// Whens the get databases.
+        ///     Whens the get databases.
         /// </summary>
         /// <param name="databases">The databases.</param>
         /// <returns>ProjectAccessBuilder.</returns>
@@ -41,7 +41,7 @@ namespace McFly.Server.Test.Builders
         }
 
         /// <summary>
-        /// Builds this instance.
+        ///     Builds this instance.
         /// </summary>
         /// <returns>IProjectsAccess.</returns>
         public IProjectsAccess Build()

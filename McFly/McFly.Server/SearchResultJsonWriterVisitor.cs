@@ -34,7 +34,7 @@ namespace McFly.Server
             var o = new JObject
             {
                 {"Type", searchCriterionDto.Type},
-                { "Args", new JArray(searchCriterionDto.Args)}
+                {"Args", new JArray(searchCriterionDto.Args)}
             };
             return o;
         }

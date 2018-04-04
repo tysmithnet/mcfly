@@ -14,7 +14,6 @@
 
 using System.ComponentModel.Composition;
 using System.Web.Http;
-using McFly.Core;
 using McFly.Server.Contract;
 using McFly.Server.Data;
 using McFly.Server.Headers;
@@ -46,7 +45,7 @@ namespace McFly.Server.Controllers
         /// <param name="text">The text.</param>
         /// <returns>IHttpActionResult.</returns>
         [HttpPost]
-        public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody]AddNoteRequest request)
+        public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] AddNoteRequest request)
         {
             NoteAccess.AddNote(projectName, request.Position, request.ThreadIds, request.Text);
             return Ok();

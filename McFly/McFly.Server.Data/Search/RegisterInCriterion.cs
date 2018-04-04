@@ -7,12 +7,12 @@ namespace McFly.Server.Data.Search
 {
     public class RegisterInCriterion : RegisterCriterion
     {
-        public IEnumerable<ulong> Values { get; }
-
         public RegisterInCriterion(Register register, IEnumerable<ulong> values) : base(register)
         {
             Values = values?.ToList() ?? throw new ArgumentNullException(nameof(values));
         }
+
+        public IEnumerable<ulong> Values { get; }
 
         public override object Accept(ICriterionVisitor visitor)
         {

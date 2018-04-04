@@ -97,9 +97,11 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetValues( //FIX ME!!! This needs to be tested
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Indices,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Indices,
             [In] uint Start,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] Values);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] Values);
 
         /// <summary>
         ///     Sets the values.
@@ -112,9 +114,11 @@ namespace McFly.Debugger
         [PreserveSig]
         int SetValues(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Indices,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Indices,
             [In] uint Start,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] Values);
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] Values);
 
         /// <summary>
         ///     Outputs the registers.

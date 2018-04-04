@@ -238,9 +238,11 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetModuleParameters(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] ulong[] Bases,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            ulong[] Bases,
             [In] uint Start,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_MODULE_PARAMETERS[] Params);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_MODULE_PARAMETERS[] Params);
 
         /// <summary>
         ///     Gets the symbol module.
@@ -352,7 +354,8 @@ namespace McFly.Debugger
             [In] ulong Offset,
             [In] ulong Module,
             [In] uint TypeId,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] byte[] Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)]
+            byte[] Buffer,
             [In] uint BufferSize,
             [Out] out uint BytesRead);
 
@@ -494,8 +497,10 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetScopeSymbolGroup(
             [In] DEBUG_SCOPE_GROUP Flags,
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugSymbolGroup Update,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugSymbolGroup Symbols);
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugSymbolGroup Update,
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugSymbolGroup Symbols);
 
         /// <summary>
         ///     Creates the symbol group.
@@ -504,7 +509,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int CreateSymbolGroup(
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugSymbolGroup Group);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugSymbolGroup Group);
 
         /// <summary>
         ///     Starts the symbol match.
@@ -692,7 +698,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetSourceFileLineOffsets(
             [In] [MarshalAs(UnmanagedType.LPStr)] string File,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] ulong[] Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            ulong[] Buffer,
             [In] int BufferLines,
             [Out] out uint FileLines);
 
@@ -713,7 +720,8 @@ namespace McFly.Debugger
             [In] uint Index,
             [In] ulong Base,
             [In] [MarshalAs(UnmanagedType.LPStr)] string Item,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint VerInfoSize);
 

@@ -19,14 +19,13 @@ using System.Text;
 using System.Web.Http;
 using Common.Logging;
 using McFly.Core;
-using McFly.Server.Contract;
 using McFly.Server.Data;
 using McFly.Server.Headers;
 
 namespace McFly.Server.Controllers
 {
     /// <summary>
-    ///    Represents the business logic behind the frame api
+    ///     Represents the business logic behind the frame api
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     /// <seealso cref="System.Web.Mvc.Controller" />
@@ -39,7 +38,7 @@ namespace McFly.Server.Controllers
         ///     Gets or sets the logger.
         /// </summary>
         /// <value>The logger.</value>
-        private ILog Log = LogManager.GetLogger<FrameController>();
+        private readonly ILog Log = LogManager.GetLogger<FrameController>();
 
         /// <summary>
         ///     Gets or sets the frame access.
@@ -70,6 +69,7 @@ namespace McFly.Server.Controllers
                 Log.Error(sb.ToString());
                 return InternalServerError(e);
             }
+
             return Ok();
         }
     }

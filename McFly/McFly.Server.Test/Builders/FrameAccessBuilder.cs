@@ -22,17 +22,17 @@ using Moq;
 namespace McFly.Server.Test.Builders
 {
     /// <summary>
-    /// Builder for mock frame access
+    ///     Builder for mock frame access
     /// </summary>
     public class FrameAccessBuilder
     {
         /// <summary>
-        /// The mock
+        ///     The mock
         /// </summary>
         public Mock<IFrameAccess> Mock = new Mock<IFrameAccess>();
 
         /// <summary>
-        /// Builds this instance.
+        ///     Builds this instance.
         /// </summary>
         /// <returns>IFrameAccess.</returns>
         public IFrameAccess Build()

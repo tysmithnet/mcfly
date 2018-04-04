@@ -22,14 +22,15 @@ namespace McFly.Server.Contract
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(Position, other.Position) && ThreadIds.SequenceEqual(other.ThreadIds) && string.Equals(Text, other.Text);
+            return Equals(Position, other.Position) && ThreadIds.SequenceEqual(other.ThreadIds) &&
+                   string.Equals(Text, other.Text);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((AddNoteRequest) obj);
         }
 
@@ -37,7 +38,7 @@ namespace McFly.Server.Contract
         {
             unchecked
             {
-                var hashCode = (Position != null ? Position.GetHashCode() : 0);
+                var hashCode = Position != null ? Position.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ ThreadIds.GetHashCode();
                 hashCode = (hashCode * 397) ^ (Text != null ? Text.GetHashCode() : 0);
                 return hashCode;

@@ -12,20 +12,14 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
-using System.Web.Http.ModelBinding.Binders;
 using Common.Logging;
-using McFly.Server.Contract;
-using McFly.Server.Data;
 using McFly.Server.Headers;
 using Owin;
 using Swashbuckle.Application;
@@ -38,7 +32,7 @@ namespace McFly.Server
     [ExcludeFromCodeCoverage]
     public class Startup
     {
-        private ILog Log = LogManager.GetLogger<Startup>();
+        private readonly ILog Log = LogManager.GetLogger<Startup>();
 
         /// <summary>
         ///     Configurations the specified application builder.

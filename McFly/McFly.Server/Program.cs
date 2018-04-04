@@ -15,7 +15,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Common.Logging;
-using McFly.Server.Data;
 using Microsoft.Owin.Hosting;
 
 namespace McFly.Server

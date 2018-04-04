@@ -4,12 +4,12 @@ namespace McFly.Server.Data.Search
 {
     public class NoteCreatedAfterCriterion : NoteCriterion
     {
-        public DateTime DateTime { get; }
-
         public NoteCreatedAfterCriterion(DateTime dateTime)
         {
             DateTime = dateTime;
         }
+
+        public DateTime DateTime { get; }
 
         public override object Accept(ICriterionVisitor visitor)
         {

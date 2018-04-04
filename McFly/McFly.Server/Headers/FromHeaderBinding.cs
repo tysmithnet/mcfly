@@ -93,6 +93,7 @@ namespace McFly.Server.Headers
                 throw new HttpResponseException(
                     actionContext.Request.CreateErrorResponse(HttpStatusCode.BadRequest, error));
             }
+
             return Task.FromResult<object>(null);
         }
     }

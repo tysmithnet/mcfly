@@ -24,6 +24,7 @@ namespace McFly.Server.Data.SqlServer.Test
                 Rax = 1,
                 Rbx = 1
             };
+            
         }
 
         [Fact]

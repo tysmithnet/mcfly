@@ -6,12 +6,12 @@ namespace McFly.Server.Data.Search
 {
     public sealed class AndCriterion : ICriterion
     {
-        public IEnumerable<ICriterion> Criteria { get; }
-
         public AndCriterion(IEnumerable<ICriterion> criteria)
         {
             Criteria = criteria?.ToList() ?? throw new ArgumentNullException(nameof(criteria));
         }
+
+        public IEnumerable<ICriterion> Criteria { get; }
 
         public object Accept(ICriterionVisitor visitor)
         {

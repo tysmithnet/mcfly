@@ -98,9 +98,11 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetValues( //FIX ME!!! This needs to be tested
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Indices,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Indices,
             [In] uint Start,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] Values);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] Values);
 
         /// <summary>
         ///     Sets the values.
@@ -113,9 +115,11 @@ namespace McFly.Debugger
         [PreserveSig]
         new int SetValues(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Indices,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Indices,
             [In] uint Start,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] Values);
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] Values);
 
         /// <summary>
         ///     Outputs the registers.
@@ -169,7 +173,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetDescriptionWide(
             [In] uint Register,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder NameBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder NameBuffer,
             [In] int NameBufferSize,
             [Out] out uint NameSize,
             [Out] out DEBUG_REGISTER_DESCRIPTION Desc);
@@ -228,7 +233,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetPseudoDescriptionWide(
             [In] uint Register,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder NameBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder NameBuffer,
             [In] int NameBufferSize,
             [Out] out uint NameSize,
             [Out] out ulong TypeModule,
@@ -272,9 +278,11 @@ namespace McFly.Debugger
         int GetPseudoValues(
             [In] uint Source,
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Indices,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Indices,
             [In] uint Start,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] Values
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] Values
         );
 
         /// <summary>
@@ -290,9 +298,11 @@ namespace McFly.Debugger
         int SetPseudoValues(
             [In] uint Source,
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Indices,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Indices,
             [In] uint Start,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] Values
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] Values
         );
 
         /// <summary>
@@ -308,9 +318,11 @@ namespace McFly.Debugger
         int GetValues2(
             [In] DEBUG_REGSRC Source,
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Indices,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Indices,
             [In] uint Start,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] Values
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] Values
         );
 
         /// <summary>
@@ -326,9 +338,11 @@ namespace McFly.Debugger
         int SetValues2(
             [In] uint Source,
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Indices,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Indices,
             [In] uint Start,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] Values
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] Values
         );
 
         /// <summary>

@@ -14,6 +14,7 @@
 
 using System;
 using System.Linq.Expressions;
+using McFly.Core;
 using McFly.Server.Data.Search;
 
 namespace McFly.Server.Data.SqlServer
@@ -41,7 +42,7 @@ namespace McFly.Server.Data.SqlServer
                     return Visit(equal);
             }
 
-            Func<FrameEntity, bool> identity = entity => true;
+            Expression<Func<FrameEntity, bool>> identity = entity => false;
             return identity;
         }
 
@@ -87,8 +88,19 @@ namespace McFly.Server.Data.SqlServer
 
         public Expression Visit(RegisterEqualsCriterion registerEqualsCriterion)
         {
-            Expression<Func<FrameEntity, bool>> exp = entity => entity.Rax == 0;
-            return exp;
+            if (registerEqualsCriterion.Register == Register.Rax)
+            {
+                Expression<Func<FrameEntity, bool>> exp = entity => entity.Rax == registerEqualsCriterion.Value.ToLong();
+                return exp.Body;
+            }
+
+            if (registerEqualsCriterion.Register == Register.Rbx)
+            {
+                Expression<Func<FrameEntity, bool>> exp = entity => entity.Rbx == registerEqualsCriterion.Value.ToLong();
+                return exp.Body;
+            }
+
+            throw new IndexOutOfRangeException("Unknown register");
         }
     }
 }

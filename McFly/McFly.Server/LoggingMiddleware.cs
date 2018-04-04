@@ -62,6 +62,7 @@ namespace McFly.Server
             {
                 requestNum = _requestNum++;
             }
+
             var req = context.Request;
             var sw = Stopwatch.StartNew();
             Log.Info($"-> {requestNum} {req.Method} {req.Path}{req.QueryString}");

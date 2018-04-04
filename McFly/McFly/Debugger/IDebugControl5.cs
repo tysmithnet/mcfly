@@ -344,7 +344,8 @@ namespace McFly.Debugger
             [Out] out uint OffsetLine,
             [Out] out ulong StartOffset,
             [Out] out ulong EndOffset,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] ulong[] LineOffsets);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            ulong[] LineOffsets);
 
         /// <summary>
         ///     Gets the near instruction.
@@ -374,7 +375,8 @@ namespace McFly.Debugger
             [In] ulong FrameOffset,
             [In] ulong StackOffset,
             [In] ulong InstructionOffset,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_STACK_FRAME[] Frames,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_STACK_FRAME[] Frames,
             [In] int FrameSize,
             [Out] out uint FramesFilled);
 
@@ -398,7 +400,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int OutputStackTrace(
             [In] DEBUG_OUTCTL OutputControl,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_STACK_FRAME[] Frames,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_STACK_FRAME[] Frames,
             [In] int FramesSize,
             [In] DEBUG_STACK Flags);
 
@@ -451,7 +454,8 @@ namespace McFly.Debugger
         new int GetPossibleExecutingProcessorTypes(
             [In] uint Start,
             [In] uint Count,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] IMAGE_FILE_MACHINE[] Types);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            IMAGE_FILE_MACHINE[] Types);
 
         /// <summary>
         ///     Gets the number processors.
@@ -542,7 +546,8 @@ namespace McFly.Debugger
         new int GetSupportedProcessorTypes(
             [In] uint Start,
             [In] uint Count,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] IMAGE_FILE_MACHINE[] Types);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            IMAGE_FILE_MACHINE[] Types);
 
         /// <summary>
         ///     Gets the processor type names.
@@ -760,9 +765,12 @@ namespace McFly.Debugger
         [PreserveSig]
         new int CoerceValues(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] In,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE_TYPE[] OutType,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] Out);
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] In,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE_TYPE[] OutType,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] Out);
 
         /// <summary>
         ///     Executes the specified output control.
@@ -808,7 +816,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetBreakpointByIndex(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugBreakpoint bp);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugBreakpoint bp);
 
         /// <summary>
         ///     Gets the breakpoint by identifier.
@@ -819,7 +828,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetBreakpointById(
             [In] uint Id,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugBreakpoint bp);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugBreakpoint bp);
 
         /// <summary>
         ///     Gets the breakpoint parameters.
@@ -832,9 +842,11 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetBreakpointParameters(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Ids,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Ids,
             [In] uint Start,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_BREAKPOINT_PARAMETERS[] Params);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_BREAKPOINT_PARAMETERS[] Params);
 
         /// <summary>
         ///     Adds the breakpoint.
@@ -847,7 +859,8 @@ namespace McFly.Debugger
         new int AddBreakpoint(
             [In] DEBUG_BREAKPOINT_TYPE Type,
             [In] uint DesiredId,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugBreakpoint Bp);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugBreakpoint Bp);
 
         /// <summary>
         ///     Removes the breakpoint.
@@ -856,7 +869,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int RemoveBreakpoint(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugBreakpoint Bp);
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugBreakpoint Bp);
 
         /// <summary>
         ///     Adds the extension.
@@ -1004,7 +1018,8 @@ namespace McFly.Debugger
         new int GetSpecificFilterParameters(
             [In] uint Start,
             [In] uint Count,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_SPECIFIC_FILTER_PARAMETERS[] Params);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_SPECIFIC_FILTER_PARAMETERS[] Params);
 
         /// <summary>
         ///     Sets the specific filter parameters.
@@ -1017,7 +1032,8 @@ namespace McFly.Debugger
         new int SetSpecificFilterParameters(
             [In] uint Start,
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_SPECIFIC_FILTER_PARAMETERS[] Params);
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_SPECIFIC_FILTER_PARAMETERS[] Params);
 
         /// <summary>
         ///     Gets the specific event filter argument.
@@ -1056,9 +1072,11 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetExceptionFilterParameters(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Codes,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Codes,
             [In] uint Start,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_EXCEPTION_FILTER_PARAMETERS[] Params);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_EXCEPTION_FILTER_PARAMETERS[] Params);
 
         /// <summary>
         ///     Sets the exception filter parameters.
@@ -1069,7 +1087,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int SetExceptionFilterParameters(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_EXCEPTION_FILTER_PARAMETERS[] Params);
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_EXCEPTION_FILTER_PARAMETERS[] Params);
 
         /// <summary>
         ///     Gets the exception filter second command.
@@ -1378,7 +1397,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int GetLogFileWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint FileSize,
             [Out] [MarshalAs(UnmanagedType.Bool)] out bool Append);
@@ -1403,7 +1423,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int InputWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint InputSize);
 
@@ -1501,7 +1522,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int GetPromptTextWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint TextSize);
 
@@ -1532,7 +1554,8 @@ namespace McFly.Debugger
         new int DisassembleWide(
             [In] ulong Offset,
             [In] DEBUG_DISASM Flags,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint DisassemblySize,
             [Out] out ulong EndOffset);
@@ -1551,10 +1574,12 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetProcessorTypeNamesWide(
             [In] IMAGE_FILE_MACHINE Type,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder FullNameBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder FullNameBuffer,
             [In] int FullNameBufferSize,
             [Out] out uint FullNameSize,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder AbbrevNameBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder AbbrevNameBuffer,
             [In] int AbbrevNameBufferSize,
             [Out] out uint AbbrevNameSize);
 
@@ -1569,7 +1594,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetTextMacroWide(
             [In] uint Slot,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint MacroSize);
 
@@ -1634,7 +1660,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetBreakpointByIndex2(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugBreakpoint2 bp);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugBreakpoint2 bp);
 
         /// <summary>
         ///     Gets the breakpoint by id2.
@@ -1645,7 +1672,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetBreakpointById2(
             [In] uint Id,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugBreakpoint2 bp);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugBreakpoint2 bp);
 
         /// <summary>
         ///     Adds the breakpoint2.
@@ -1658,7 +1686,8 @@ namespace McFly.Debugger
         new int AddBreakpoint2(
             [In] DEBUG_BREAKPOINT_TYPE Type,
             [In] uint DesiredId,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugBreakpoint2 Bp);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugBreakpoint2 Bp);
 
         /// <summary>
         ///     Removes the breakpoint2.
@@ -1667,7 +1696,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int RemoveBreakpoint2(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugBreakpoint2 Bp);
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugBreakpoint2 Bp);
 
         /// <summary>
         ///     Adds the extension wide.
@@ -1730,7 +1760,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetEventFilterTextWide(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint TextSize);
 
@@ -1745,7 +1776,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetEventFilterCommandWide(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint CommandSize);
 
@@ -1771,7 +1803,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetSpecificEventFilterArgumentWide(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint ArgumentSize);
 
@@ -1797,7 +1830,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetExceptionFilterSecondCommandWide(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint CommandSize);
 
@@ -1833,7 +1867,8 @@ namespace McFly.Debugger
             [In] IntPtr ExtraInformation,
             [In] int ExtraInformationSize,
             [Out] out uint ExtraInformationUsed,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Description,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Description,
             [In] int DescriptionSize,
             [Out] out uint DescriptionUsed);
 
@@ -1853,10 +1888,12 @@ namespace McFly.Debugger
         new int GetTextReplacementWide(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string SrcText,
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder SrcBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder SrcBuffer,
             [In] int SrcBufferSize,
             [Out] out uint SrcSize,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder DstBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder DstBuffer,
             [In] int DstBufferSize,
             [Out] out uint DstSize);
 
@@ -1894,10 +1931,12 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetExpressionSyntaxNamesWide(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder FullNameBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder FullNameBuffer,
             [In] int FullNameBufferSize,
             [Out] out uint FullNameSize,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder AbbrevNameBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder AbbrevNameBuffer,
             [In] int AbbrevNameBufferSize,
             [Out] out uint AbbrevNameSize);
 
@@ -1914,7 +1953,8 @@ namespace McFly.Debugger
         new int GetEventIndexDescriptionWide(
             [In] uint Index,
             [In] DEBUG_EINDEX Which,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint DescSize);
 
@@ -1954,7 +1994,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int GetLogFile2Wide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint FileSize,
             [Out] out DEBUG_LOG Flags);
@@ -2013,7 +2054,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetSystemVersionStringWide(
             [In] DEBUG_SYSVERSTR Which,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint StringSize);
 
@@ -2033,7 +2075,8 @@ namespace McFly.Debugger
         new int GetContextStackTrace(
             [In] IntPtr StartContext,
             [In] uint StartContextSize,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_STACK_FRAME[] Frames,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_STACK_FRAME[] Frames,
             [In] int FrameSize,
             [In] IntPtr FrameContexts,
             [In] uint FrameContextsSize,
@@ -2054,7 +2097,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int OutputContextStackTrace(
             [In] DEBUG_OUTCTL OutputControl,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_STACK_FRAME[] Frames,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_STACK_FRAME[] Frames,
             [In] int FramesSize,
             [In] IntPtr FrameContexts,
             [In] uint FrameContextsSize,
@@ -2116,7 +2160,8 @@ namespace McFly.Debugger
         new int GetManagedStatusWide(
             [Out] out DEBUG_MANAGED Flags,
             [In] DEBUG_MANSTR WhichString,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder String,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder String,
             [In] int StringSize,
             [Out] out uint StringNeeded);
 
@@ -2146,7 +2191,8 @@ namespace McFly.Debugger
             [In] ulong FrameOffset,
             [In] ulong StackOffset,
             [In] ulong InstructionOffset,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_STACK_FRAME_EX[] Frames,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_STACK_FRAME_EX[] Frames,
             [In] int FramesSize,
             [Out] out uint FramesFilled);
 
@@ -2161,7 +2207,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int OutputStackTraceEx(
             [In] uint OutputControl,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_STACK_FRAME_EX[] Frames,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_STACK_FRAME_EX[] Frames,
             [In] int FramesSize,
             [In] DEBUG_STACK Flags);
 
@@ -2181,7 +2228,8 @@ namespace McFly.Debugger
         int GetContextStackTraceEx(
             [In] IntPtr StartContext,
             [In] uint StartContextSize,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_STACK_FRAME_EX[] Frames,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_STACK_FRAME_EX[] Frames,
             [In] int FramesSize,
             [In] IntPtr FrameContexts,
             [In] uint FrameContextsSize,
@@ -2202,7 +2250,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int OutputContextStackTraceEx(
             [In] uint OutputControl,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_STACK_FRAME_EX[] Frames,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_STACK_FRAME_EX[] Frames,
             [In] int FramesSize,
             [In] IntPtr FrameContexts,
             [In] uint FrameContextsSize,
@@ -2217,7 +2266,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetBreakpointByGuid(
-            [In] [MarshalAs(UnmanagedType.LPStruct)] Guid Guid,
+            [In] [MarshalAs(UnmanagedType.LPStruct)]
+            Guid Guid,
             [Out] out IDebugBreakpoint3 Bp);
     }
 }

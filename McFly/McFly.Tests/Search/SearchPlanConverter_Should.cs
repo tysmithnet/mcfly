@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using McFly.Search;
 using McFly.Server.Contract;
@@ -23,12 +24,10 @@ namespace McFly.Tests.Search
 
             var res = searchPlanConverter.Convert(input);
 
-            res.Type.Should().Be("and");
-            res.SubCriteria[0].Type.Should().Be("register");
-            res.SubCriteria[0].SubCriteria.Should().BeNullOrEmpty();
-            res.SubCriteria[0].Should().BeOfType<TerminalSearchCriterionDto>();
-            (res.SubCriteria[0] as TerminalSearchCriterionDto).Args.Should().Equal("rax -eq 10".Split(' '));
-            ;
+            res.GetType().Should().Be<TerminalSearchCriterionDto>();
+            var term = res as TerminalSearchCriterionDto;
+            term.Type.Should().Be("register");
+            term.Args.SequenceEqual(new[] {"rax", "-eq", "10"}).Should().BeTrue();
         }
     }
 }

@@ -238,9 +238,11 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetModuleParameters(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] ulong[] Bases,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            ulong[] Bases,
             [In] uint Start,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_MODULE_PARAMETERS[] Params);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_MODULE_PARAMETERS[] Params);
 
         /// <summary>
         ///     Gets the symbol module.
@@ -352,7 +354,8 @@ namespace McFly.Debugger
             [In] ulong Offset,
             [In] ulong Module,
             [In] uint TypeId,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] byte[] Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)]
+            byte[] Buffer,
             [In] uint BufferSize,
             [Out] out uint BytesRead);
 
@@ -494,8 +497,10 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetScopeSymbolGroup(
             [In] DEBUG_SCOPE_GROUP Flags,
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugSymbolGroup Update,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugSymbolGroup Symbols);
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugSymbolGroup Update,
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugSymbolGroup Symbols);
 
         /// <summary>
         ///     Creates the symbol group.
@@ -504,7 +509,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int CreateSymbolGroup(
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugSymbolGroup Group);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugSymbolGroup Group);
 
         /// <summary>
         ///     Starts the symbol match.
@@ -692,7 +698,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetSourceFileLineOffsets(
             [In] [MarshalAs(UnmanagedType.LPStr)] string File,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] ulong[] Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            ulong[] Buffer,
             [In] int BufferLines,
             [Out] out uint FileLines);
 
@@ -713,7 +720,8 @@ namespace McFly.Debugger
             [In] uint Index,
             [In] ulong Base,
             [In] [MarshalAs(UnmanagedType.LPStr)] string Item,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint VerInfoSize);
 
@@ -824,7 +832,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetNameByOffsetWide(
             [In] ulong Offset,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder NameBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder NameBuffer,
             [In] int NameBufferSize,
             [Out] out uint NameSize,
             [Out] out ulong Displacement);
@@ -854,7 +863,8 @@ namespace McFly.Debugger
         int GetNearNameByOffsetWide(
             [In] ulong Offset,
             [In] int Delta,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder NameBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder NameBuffer,
             [In] int NameBufferSize,
             [Out] out uint NameSize,
             [Out] out ulong Displacement);
@@ -873,7 +883,8 @@ namespace McFly.Debugger
         int GetLineByOffsetWide(
             [In] ulong Offset,
             [Out] out uint Line,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder FileBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder FileBuffer,
             [In] int FileBufferSize,
             [Out] out uint FileSize,
             [Out] out ulong Displacement);
@@ -930,7 +941,8 @@ namespace McFly.Debugger
         int GetTypeNameWide(
             [In] ulong Module,
             [In] uint TypeId,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder NameBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder NameBuffer,
             [In] int NameBufferSize,
             [Out] out uint NameSize);
 
@@ -985,8 +997,10 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetScopeSymbolGroup2(
             [In] DEBUG_SCOPE_GROUP Flags,
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugSymbolGroup2 Update,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugSymbolGroup2 Symbols);
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugSymbolGroup2 Update,
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugSymbolGroup2 Symbols);
 
         /// <summary>
         ///     Creates the symbol group2.
@@ -995,7 +1009,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int CreateSymbolGroup2(
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugSymbolGroup2 Group);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugSymbolGroup2 Group);
 
         /// <summary>
         ///     Starts the symbol match wide.
@@ -1020,7 +1035,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetNextSymbolMatchWide(
             [In] ulong Handle,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint MatchSize,
             [Out] out ulong Offset);
@@ -1043,7 +1059,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetSymbolPathWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint PathSize);
 
@@ -1074,7 +1091,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetImagePathWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint PathSize);
 
@@ -1105,7 +1123,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetSourcePathWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint PathSize);
 
@@ -1120,7 +1139,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetSourcePathElementWide(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint ElementSize);
 
@@ -1159,7 +1179,8 @@ namespace McFly.Debugger
             [In] [MarshalAs(UnmanagedType.LPWStr)] string File,
             [In] DEBUG_FIND_SOURCE Flags,
             [Out] out uint FoundElement,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint FoundSize);
 
@@ -1174,7 +1195,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetSourceFileLineOffsetsWide(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string File,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] ulong[] Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            ulong[] Buffer,
             [In] int BufferLines,
             [Out] out uint FileLines);
 
@@ -1212,7 +1234,8 @@ namespace McFly.Debugger
             [In] DEBUG_MODNAME Which,
             [In] uint Index,
             [In] ulong Base,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint NameSize);
 
@@ -1231,7 +1254,8 @@ namespace McFly.Debugger
             [In] ulong Module,
             [In] uint TypeId,
             [In] ulong Value,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint NameSize);
 
@@ -1250,7 +1274,8 @@ namespace McFly.Debugger
             [In] ulong Module,
             [In] uint TypeId,
             [In] uint FieldIndex,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint NameSize);
 
@@ -1516,7 +1541,8 @@ namespace McFly.Debugger
         /// <param name="Id">The identifier.</param>
         /// <returns>System.Int32.</returns>
         [PreserveSig]
-        int RemoveSyntheticSymbol([In] [MarshalAs(UnmanagedType.LPStruct)] DEBUG_MODULE_AND_ID Id
+        int RemoveSyntheticSymbol([In] [MarshalAs(UnmanagedType.LPStruct)]
+            DEBUG_MODULE_AND_ID Id
         );
 
         /// <summary>
@@ -1533,8 +1559,10 @@ namespace McFly.Debugger
         int GetSymbolEntriesByOffset(
             [In] ulong Offset,
             [In] uint Flags,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_MODULE_AND_ID[] Ids,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] ulong[] Displacements,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_MODULE_AND_ID[] Ids,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            ulong[] Displacements,
             [In] uint IdsCount,
             [Out] out uint Entries
         );
@@ -1552,7 +1580,8 @@ namespace McFly.Debugger
         int GetSymbolEntriesByName(
             [In] [MarshalAs(UnmanagedType.LPStr)] string Symbol,
             [In] uint Flags,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_MODULE_AND_ID[] Ids,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_MODULE_AND_ID[] Ids,
             [In] uint IdsCount,
             [Out] out uint Entries
         );
@@ -1570,7 +1599,8 @@ namespace McFly.Debugger
         int GetSymbolEntriesByNameWide(
             [In] [MarshalAs(UnmanagedType.LPWStr)] string Symbol,
             [In] uint Flags,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_MODULE_AND_ID[] Ids,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_MODULE_AND_ID[] Ids,
             [In] uint IdsCount,
             [Out] out uint Entries
         );
@@ -1597,7 +1627,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetSymbolEntryInformation(
-            [In] [MarshalAs(UnmanagedType.LPStruct)] DEBUG_MODULE_AND_ID Id,
+            [In] [MarshalAs(UnmanagedType.LPStruct)]
+            DEBUG_MODULE_AND_ID Id,
             [Out] out DEBUG_SYMBOL_ENTRY Info
         );
 
@@ -1612,7 +1643,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetSymbolEntryString(
-            [In] [MarshalAs(UnmanagedType.LPStruct)] DEBUG_MODULE_AND_ID Id,
+            [In] [MarshalAs(UnmanagedType.LPStruct)]
+            DEBUG_MODULE_AND_ID Id,
             [In] uint Which,
             [Out] [MarshalAs(UnmanagedType.LPStr)] StringBuilder Buffer,
             [In] int BufferSize,
@@ -1630,9 +1662,11 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetSymbolEntryStringWide(
-            [In] [MarshalAs(UnmanagedType.LPStruct)] DEBUG_MODULE_AND_ID Id,
+            [In] [MarshalAs(UnmanagedType.LPStruct)]
+            DEBUG_MODULE_AND_ID Id,
             [In] uint Which,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint StringSize
         );
@@ -1648,9 +1682,11 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetSymbolEntryOffsetRegions(
-            [In] [MarshalAs(UnmanagedType.LPStruct)] DEBUG_MODULE_AND_ID Id,
+            [In] [MarshalAs(UnmanagedType.LPStruct)]
+            DEBUG_MODULE_AND_ID Id,
             [In] uint Flags,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_OFFSET_REGION[] Regions,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_OFFSET_REGION[] Regions,
             [In] uint RegionsCount,
             [Out] out uint RegionsAvail
         );
@@ -1665,7 +1701,8 @@ namespace McFly.Debugger
         [Obsolete("Do not use: no longer implemented.", true)]
         [PreserveSig]
         int GetSymbolEntryBySymbolEntry(
-            [In] [MarshalAs(UnmanagedType.LPStruct)] DEBUG_MODULE_AND_ID FromId,
+            [In] [MarshalAs(UnmanagedType.LPStruct)]
+            DEBUG_MODULE_AND_ID FromId,
             [In] uint Flags,
             [Out] out DEBUG_MODULE_AND_ID ToId
         );
@@ -1683,7 +1720,8 @@ namespace McFly.Debugger
         int GetSourceEntriesByOffset(
             [In] ulong Offset,
             [In] uint Flags,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_SYMBOL_SOURCE_ENTRY[] Entries,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_SYMBOL_SOURCE_ENTRY[] Entries,
             [In] uint EntriesCount,
             [Out] out uint EntriesAvail
         );
@@ -1703,7 +1741,8 @@ namespace McFly.Debugger
             [In] uint Line,
             [In] [MarshalAs(UnmanagedType.LPStr)] string File,
             [In] uint Flags,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_SYMBOL_SOURCE_ENTRY[] Entries,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_SYMBOL_SOURCE_ENTRY[] Entries,
             [In] uint EntriesCount,
             [Out] out uint EntriesAvail
         );
@@ -1723,7 +1762,8 @@ namespace McFly.Debugger
             [In] uint Line,
             [In] [MarshalAs(UnmanagedType.LPWStr)] string File,
             [In] uint Flags,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_SYMBOL_SOURCE_ENTRY[] Entries,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_SYMBOL_SOURCE_ENTRY[] Entries,
             [In] uint EntriesCount,
             [Out] out uint EntriesAvail
         );
@@ -1739,7 +1779,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetSourceEntryString(
-            [In] [MarshalAs(UnmanagedType.LPStruct)] DEBUG_SYMBOL_SOURCE_ENTRY Entry,
+            [In] [MarshalAs(UnmanagedType.LPStruct)]
+            DEBUG_SYMBOL_SOURCE_ENTRY Entry,
             [In] uint Which,
             [Out] [MarshalAs(UnmanagedType.LPStr)] StringBuilder Buffer,
             [In] int BufferSize,
@@ -1757,9 +1798,11 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetSourceEntryStringWide(
-            [In] [MarshalAs(UnmanagedType.LPStruct)] DEBUG_SYMBOL_SOURCE_ENTRY Entry,
+            [In] [MarshalAs(UnmanagedType.LPStruct)]
+            DEBUG_SYMBOL_SOURCE_ENTRY Entry,
             [In] uint Which,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint StringSize
         );
@@ -1775,9 +1818,11 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetSourceEntryOffsetRegions(
-            [In] [MarshalAs(UnmanagedType.LPStruct)] DEBUG_SYMBOL_SOURCE_ENTRY Entry,
+            [In] [MarshalAs(UnmanagedType.LPStruct)]
+            DEBUG_SYMBOL_SOURCE_ENTRY Entry,
             [In] uint Flags,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_OFFSET_REGION[] Regions,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_OFFSET_REGION[] Regions,
             [In] uint RegionsCount,
             [Out] out uint RegionsAvail
         );
@@ -1791,7 +1836,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetSourceEntryBySourceEntry(
-            [In] [MarshalAs(UnmanagedType.LPStruct)] DEBUG_SYMBOL_SOURCE_ENTRY FromEntry,
+            [In] [MarshalAs(UnmanagedType.LPStruct)]
+            DEBUG_SYMBOL_SOURCE_ENTRY FromEntry,
             [In] uint Flags,
             [Out] out DEBUG_SYMBOL_SOURCE_ENTRY ToEntry
         );

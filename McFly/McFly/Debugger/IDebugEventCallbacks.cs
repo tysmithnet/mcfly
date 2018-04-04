@@ -42,7 +42,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int Breakpoint(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugBreakpoint Bp);
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugBreakpoint Bp);
 
         /// <summary>
         ///     Exceptions the specified exception.

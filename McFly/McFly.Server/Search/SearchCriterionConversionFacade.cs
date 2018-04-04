@@ -15,7 +15,7 @@ namespace McFly.Server.Search
         public ICriterion Convert(SearchCriterionDto searchDto)
         {
             var first = Converters.FirstOrDefault(c => c.CanConvert(searchDto));
-            if(first == null)
+            if (first == null)
                 throw new Exception("aslkasldknasdklnas change me!");
 
             return first.Convert(searchDto);

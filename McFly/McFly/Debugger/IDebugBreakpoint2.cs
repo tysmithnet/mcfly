@@ -58,7 +58,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int GetAdder(
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugClient Adder);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugClient Adder);
 
         /// <summary>
         ///     Gets the flags.
@@ -245,7 +246,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetCommandWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint CommandSize);
 
@@ -267,7 +269,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetOffsetExpressionWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint ExpressionSize);
 

@@ -108,7 +108,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetRunningProcessSystemIds(
             [In] ulong Server,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] uint[] Ids,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Ids,
             [In] uint Count,
             [Out] out uint ActualCount);
 
@@ -332,7 +333,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int ExitDispatch(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugClient Client);
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugClient Client);
 
         /// <summary>
         ///     Creates the client.
@@ -341,7 +343,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int CreateClient(
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugClient Client);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugClient Client);
 
         /// <summary>
         ///     Gets the input callbacks.
@@ -350,7 +353,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int GetInputCallbacks(
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugInputCallbacks Callbacks);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugInputCallbacks Callbacks);
 
         /// <summary>
         ///     Sets the input callbacks.
@@ -359,7 +363,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int SetInputCallbacks(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugInputCallbacks Callbacks);
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugInputCallbacks Callbacks);
 
         /* GetOutputCallbacks could a conversion thunk from the debugger engine so we can't specify a specific interface */
 
@@ -409,7 +414,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int GetOtherOutputMask(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugClient Client,
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugClient Client,
             [Out] out DEBUG_OUTPUT Mask);
 
         /// <summary>
@@ -420,7 +426,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int SetOtherOutputMask(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugClient Client,
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugClient Client,
             [In] DEBUG_OUTPUT Mask);
 
         /// <summary>
@@ -627,10 +634,12 @@ namespace McFly.Debugger
             [In] ulong Server,
             [In] uint SystemId,
             [In] DEBUG_PROC_DESC Flags,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder ExeName,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder ExeName,
             [In] int ExeNameSize,
             [Out] out uint ActualExeNameSize,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Description,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Description,
             [In] int DescriptionSize,
             [Out] out uint ActualDescriptionSize);
 
@@ -748,7 +757,8 @@ namespace McFly.Debugger
         [PreserveSig]
         new int GetDumpFileWide(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint NameSize,
             [Out] out ulong Handle,
@@ -776,7 +786,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int GetKernelConnectionOptionsWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint OptionsSize);
 
@@ -866,7 +877,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int GetOutputLinePrefixWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint PrefixSize);
 
@@ -888,7 +900,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int GetIdentityWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint IdentitySize);
 
@@ -1102,7 +1115,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         new int GetQuitLockStringWide(
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint StringSize);
 

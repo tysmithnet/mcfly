@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
-using McFly.Server.Contract;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Xunit;
+﻿using Xunit;
 
 namespace McFly.Server.Contract.Test
 {
@@ -16,7 +7,6 @@ namespace McFly.Server.Contract.Test
         [Fact]
         public void Create_The_Correct_Json_Basic()
         {
-            
         }
     }
 }

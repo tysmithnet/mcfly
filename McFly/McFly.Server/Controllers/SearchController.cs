@@ -23,7 +23,7 @@ namespace McFly.Server.Controllers
 
         [Route("{index}")]
         public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromUri] string index,
-            [FromBody] SearchCriterionDto searchCriterionDto)    // todo: add paging headers
+            [FromBody] SearchCriterionDto searchCriterionDto) // todo: add paging headers
         {
             object results = null;
             switch (index.ToLower())

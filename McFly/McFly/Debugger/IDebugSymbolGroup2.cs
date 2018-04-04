@@ -94,7 +94,8 @@ namespace McFly.Debugger
         new int GetSymbolParameters(
             [In] uint Start,
             [In] uint Count,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_SYMBOL_PARAMETERS[] Params);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_SYMBOL_PARAMETERS[] Params);
 
         /// <summary>
         ///     Expands the symbol.
@@ -177,7 +178,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetSymbolNameWide(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint NameSize);
 
@@ -229,7 +231,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetSymbolTypeNameWide(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint NameSize);
 
@@ -292,7 +295,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetSymbolValueTextWide(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPWStr)] StringBuilder Buffer,
+            [Out] [MarshalAs(UnmanagedType.LPWStr)]
+            StringBuilder Buffer,
             [In] int BufferSize,
             [Out] out uint NameSize);
 

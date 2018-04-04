@@ -93,7 +93,8 @@ namespace McFly.Debugger
         int GetSymbolParameters(
             [In] uint Start,
             [In] uint Count,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_SYMBOL_PARAMETERS[] Params);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_SYMBOL_PARAMETERS[] Params);
 
         /// <summary>
         ///     Expands the symbol.
