@@ -33,7 +33,7 @@ namespace McFly
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
+        internal IDebugEngineProxy DebugEngineProxy { private get; set; }
 
         /// <summary>
         ///     Di

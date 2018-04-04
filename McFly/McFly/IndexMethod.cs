@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-04-2018
 // ***********************************************************************
 // <copyright file="IndexMethod.cs" company="">
 //     Copyright ©  2018
@@ -26,10 +26,17 @@ namespace McFly
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
-    internal class IndexMethod : IMcFlyMethod
+    [Export(typeof(IndexMethod))]
+    internal sealed class IndexMethod : IMcFlyMethod
     {
         /// <summary>
-        ///     The is32 bit
+        ///     The switches this application can take
+        /// </summary>
+        private static readonly string[] Switches =
+            {"-m", "--memory", "-s", "--start", "-e", "--end", "--bm", "--ba", "--step"};
+
+        /// <summary>
+        ///     The is32 bit flag
         /// </summary>
         private bool? _is32Bit;
 
@@ -38,42 +45,42 @@ namespace McFly
         /// </summary>
         /// <value>The log.</value>
         [Import]
-        protected internal ILog Log { get; set; }
+        private ILog Log { get; set; }
 
         /// <summary>
         ///     Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
+        internal IDebugEngineProxy DebugEngineProxy { private get; set; }
 
         /// <summary>
         ///     Gets or sets the breakpoint facade.
         /// </summary>
         /// <value>The breakpoint facade.</value>
         [Import]
-        protected internal IBreakpointFacade BreakpointFacade { get; set; }
+        internal IBreakpointFacade BreakpointFacade { private get; set; }
 
         /// <summary>
         ///     Gets or sets the time travel facade.
         /// </summary>
         /// <value>The time travel facade.</value>
         [Import]
-        protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
+        internal ITimeTravelFacade TimeTravelFacade { private get; set; }
 
         /// <summary>
         ///     Gets or sets the settings.
         /// </summary>
         /// <value>The settings.</value>
         [Import]
-        protected internal Settings Settings { get; set; }
+        internal Settings Settings { private get; set; }
 
         /// <summary>
         ///     Gets or sets the server client.
         /// </summary>
         /// <value>The server client.</value>
         [Import]
-        protected internal IServerClient ServerClient { get; set; }
+        internal IServerClient ServerClient { private get; set; }
 
         /// <summary>
         ///     Gets the help information.
@@ -115,14 +122,11 @@ namespace McFly
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>IndexOptions.</returns>
-        /// <exception cref="FormatException">
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// </exception>
+        /// <exception cref="FormatException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         internal static IndexOptions ExtractIndexOptions(string[] args)
         {
             var options = new IndexOptions();
-            var switches = new[] {"-m", "--memory", "-s", "--start", "-e", "--end", "--bm", "--ba", "--step"};
             for (var i = 0; i < args.Length; i++)
             {
                 var arg = args[i];
@@ -130,98 +134,21 @@ namespace McFly
                 {
                     case "-m":
                     case "--memory":
-                        var ranges = new List<MemoryRange>();
-                        for (var j = i + 1; j < args.Length; j++)
-                        {
-                            var ptr = args[j];
-                            if (switches.Contains(ptr))
-                                break;
-                            try
-                            {
-                                var range = MemoryRange.Parse(ptr);
-                                ranges.Add(range);
-                            }
-                            catch (Exception e)
-                            {
-                                throw new FormatException($"Unable to parse memory range {ptr}", e);
-                            }
-                        }
-
-                        if (!ranges.Any())
-                            throw new ArgumentException($"No memory ranges provided to {arg}");
-                        options.MemoryRanges = ranges;
+                        ExtractMemoryRanges(args, i, arg, options);
                         break;
                     case "-s":
                     case "--start":
-                        if (i + 1 >= args.Length)
-                            throw new ArgumentException($"No argument passed to {arg}");
-                        try
-                        {
-                            options.Start = Position.Parse(args[i + 1]);
-                        }
-                        catch (Exception e)
-                        {
-                            throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e);
-                        }
-
+                        ExtractStart(args, i, arg, options);
                         break;
                     case "-e":
                     case "--end":
-                        if (i + 1 >= args.Length)
-                            throw new ArgumentException($"No argument passed to {arg}");
-                        try
-                        {
-                            options.End = Position.Parse(args[i + 1]);
-                        }
-                        catch (Exception e)
-                        {
-                            throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e);
-                        }
-
+                        ExtractEnd(args, i, arg, options);
                         break;
                     case "--bm":
-                        var breakpointMasks = new List<BreakpointMask>();
-                        for (var j = i + 1; j < args.Length; j++)
-                        {
-                            var ptr = args[j];
-                            if (switches.Contains(ptr))
-                                break;
-                            try
-                            {
-                                var mask = BreakpointMask.Parse(ptr);
-                                breakpointMasks.Add(mask);
-                            }
-                            catch (Exception e)
-                            {
-                                throw new FormatException($"Unable to parse {ptr} as a BreakpointMask", e);
-                            }
-                        }
-
-                        if (!breakpointMasks.Any())
-                            throw new ArgumentException($"No breakpoint masks provided to {arg}");
-                        options.BreakpointMasks = breakpointMasks;
+                        ExtractMasks(args, i, arg, options);
                         break;
                     case "--ba":
-                        var accessBreakpoints = new List<AccessBreakpoint>();
-                        for (var j = i + 1; j < args.Length; j++)
-                        {
-                            var ptr = args[j];
-                            if (switches.Contains(ptr))
-                                break;
-                            try
-                            {
-                                var bp = AccessBreakpoint.Parse(ptr);
-                                accessBreakpoints.Add(bp);
-                            }
-                            catch (Exception e)
-                            {
-                                throw new FormatException($"Unable to parse {ptr} as an access breakpoint", e);
-                            }
-                        }
-
-                        if (!accessBreakpoints.Any())
-                            throw new ArgumentException($"No memory ranges provided to {arg}");
-                        options.AccessBreakpoints = accessBreakpoints;
+                        ExtractAccess(args, i, arg, options);
                         break;
                     case "--step":
                         break;
@@ -232,12 +159,157 @@ namespace McFly
         }
 
         /// <summary>
+        ///     Extracts the access.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="i">The i.</param>
+        /// <param name="arg">The argument.</param>
+        /// <param name="options">The options.</param>
+        /// <exception cref="FormatException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        internal static void ExtractAccess(string[] args, int i, string arg, IndexOptions options)
+        {
+            var accessBreakpoints = new List<AccessBreakpoint>();
+            for (var j = i + 1; j < args.Length; j++)
+            {
+                var ptr = args[j];
+                if (Switches.Contains(ptr))
+                    break;
+                try
+                {
+                    var bp = AccessBreakpoint.Parse(ptr);
+                    accessBreakpoints.Add(bp);
+                }
+                catch (Exception e)
+                {
+                    throw new FormatException($"Unable to parse {ptr} as an access breakpoint", e);
+                }
+            }
+
+            if (!accessBreakpoints.Any())
+                throw new ArgumentException($"No memory ranges provided to {arg}");
+            options.AccessBreakpoints = accessBreakpoints;
+        }
+
+        /// <summary>
+        ///     Extracts the masks.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="i">The i.</param>
+        /// <param name="arg">The argument.</param>
+        /// <param name="options">The options.</param>
+        /// <exception cref="FormatException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        internal static void ExtractMasks(string[] args, int i, string arg, IndexOptions options)
+        {
+            var breakpointMasks = new List<BreakpointMask>();
+            for (var j = i + 1; j < args.Length; j++)
+            {
+                var ptr = args[j];
+                if (Switches.Contains(ptr))
+                    break;
+                try
+                {
+                    var mask = BreakpointMask.Parse(ptr);
+                    breakpointMasks.Add(mask);
+                }
+                catch (Exception e)
+                {
+                    throw new FormatException($"Unable to parse {ptr} as a BreakpointMask", e);
+                }
+            }
+
+            if (!breakpointMasks.Any())
+                throw new ArgumentException($"No breakpoint masks provided to {arg}");
+            options.BreakpointMasks = breakpointMasks;
+        }
+
+        /// <summary>
+        ///     Extracts the end.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="i">The i.</param>
+        /// <param name="arg">The argument.</param>
+        /// <param name="options">The options.</param>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="FormatException"></exception>
+        internal static void ExtractEnd(string[] args, int i, string arg, IndexOptions options)
+        {
+            if (i + 1 >= args.Length)
+                throw new ArgumentException($"No argument passed to {arg}");
+            try
+            {
+                options.End = Position.Parse(args[i + 1]);
+            }
+            catch (Exception e)
+            {
+                throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e);
+            }
+        }
+
+        /// <summary>
+        ///     Extracts the start.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="i">The i.</param>
+        /// <param name="arg">The argument.</param>
+        /// <param name="options">The options.</param>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="FormatException"></exception>
+        internal static void ExtractStart(string[] args, int i, string arg, IndexOptions options)
+        {
+            if (i + 1 >= args.Length)
+                throw new ArgumentException($"No argument passed to {arg}");
+            try
+            {
+                options.Start = Position.Parse(args[i + 1]);
+            }
+            catch (Exception e)
+            {
+                throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e);
+            }
+        }
+
+        /// <summary>
+        ///     Extracts the memory ranges.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="i">The i.</param>
+        /// <param name="arg">The argument.</param>
+        /// <param name="options">The options.</param>
+        /// <exception cref="FormatException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        internal static void ExtractMemoryRanges(string[] args, int i, string arg, IndexOptions options)
+        {
+            var ranges = new List<MemoryRange>();
+            for (var j = i + 1; j < args.Length; j++)
+            {
+                var ptr = args[j];
+                if (Switches.Contains(ptr))
+                    break;
+                try
+                {
+                    var range = MemoryRange.Parse(ptr);
+                    ranges.Add(range);
+                }
+                catch (Exception e)
+                {
+                    throw new FormatException($"Unable to parse memory range {ptr}", e);
+                }
+            }
+
+            if (!ranges.Any())
+                throw new ArgumentException($"No memory ranges provided to {arg}");
+            options.MemoryRanges = ranges;
+        }
+
+        /// <summary>
         ///     Gets the starting position.
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>Position.</returns>
         /// <exception cref="FormatException"></exception>
-        protected internal Position GetStartingPosition(IndexOptions options)
+        internal Position GetStartingPosition(IndexOptions options)
         {
             if (options == null || options.Start == null)
                 return TimeTravelFacade.GetStartingPosition();
@@ -250,7 +322,7 @@ namespace McFly
         /// <param name="options">The options.</param>
         /// <returns>Position.</returns>
         /// <exception cref="FormatException"></exception>
-        protected internal Position GetEndingPosition(IndexOptions options)
+        internal Position GetEndingPosition(IndexOptions options)
         {
             if (options == null || options.End == null)
                 return TimeTravelFacade.GetEndingPosition();
@@ -261,7 +333,7 @@ namespace McFly
         ///     Is32s the bit.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        protected internal bool Is32Bit()
+        internal bool Is32Bit()
         {
             if (!_is32Bit.HasValue)
                 _is32Bit = Regex.Match(DebugEngineProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"]
@@ -276,7 +348,7 @@ namespace McFly
         /// </summary>
         /// <param name="startingPosition">The starting position.</param>
         /// <param name="endingPosition">The ending position.</param>
-        protected internal void ProcessInternal(Position startingPosition, Position endingPosition)
+        internal void ProcessInternal(Position startingPosition, Position endingPosition)
         {
             TimeTravelFacade.SetPosition(startingPosition);
             // loop through all the set break points and record relevant values
@@ -304,7 +376,7 @@ namespace McFly
         /// <param name="positions">The positions.</param>
         /// <param name="breakRecord">The break record.</param>
         /// <returns>List&lt;Frame&gt;.</returns>
-        protected internal List<Frame> CreateFramesForUpsert(PositionsResult positions,
+        internal List<Frame> CreateFramesForUpsert(PositionsResult positions,
             PositionsRecord breakRecord)
         {
             var frames = positions.Where(positionRecord => positionRecord.Position == breakRecord.Position)
@@ -317,7 +389,7 @@ namespace McFly
         /// </summary>
         /// <param name="stackTrace">The stack trace.</param>
         /// <returns>List&lt;StackFrame&gt;.</returns>
-        protected internal static List<StackFrame> GetStackFrames(string stackTrace)
+        internal static List<StackFrame> GetStackFrames(string stackTrace)
         {
             var stackFrames = (from m in Regex.Matches(stackTrace,
                         @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>[^+]+)\+?(?<off>[a-fA-F0-9x]+)?")
@@ -335,7 +407,7 @@ namespace McFly
         ///     Sets the breakpoints.
         /// </summary>
         /// <param name="options">The options.</param>
-        protected internal void SetBreakpoints(IndexOptions options)
+        internal void SetBreakpoints(IndexOptions options)
         {
             BreakpointFacade.ClearBreakpoints();
 

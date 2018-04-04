@@ -38,7 +38,7 @@ namespace McFly.Core
         ///     Gets the stack frames.
         /// </summary>
         /// <value>The stack frames.</value>
-        public IEnumerable<StackFrame> StackFrames { get; internal set; }
+        public IEnumerable<StackFrame> StackFrames { get; }
 
         /// <summary>
         ///     Equalses the specified other.

@@ -4,7 +4,7 @@
 // Created          : 03-31-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-01-2018
+// Last Modified On : 04-04-2018
 // ***********************************************************************
 // <copyright file="SqlServerCriterionVisitor.cs" company="">
 //     Copyright ©  2018
@@ -14,18 +14,18 @@
 
 using System;
 using System.Linq;
-using System.Linq.Expressions;
 using LinqKit;
 using McFly.Core;
 using McFly.Server.Data.Search;
-
-using FramePredicateExpression = System.Linq.Expressions.Expression<System.Func<McFly.Server.Data.SqlServer.FrameEntity, bool>>;
+using FramePredicateExpression =
+    System.Linq.Expressions.Expression<System.Func<McFly.Server.Data.SqlServer.FrameEntity, bool>>;
 
 namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
     ///     Class SqlServerCriterionVisitor.
     /// </summary>
+    /// <seealso cref="McFly.Server.Data.Search.ICriterionVisitor" />
     /// <seealso cref="ICriterionVisitor" />
     internal class FrameCriterionVisitor : ICriterionVisitor
     {
@@ -54,6 +54,7 @@ namespace McFly.Server.Data.SqlServer
         ///     Visits the specified and criterion.
         /// </summary>
         /// <param name="andCriterion">The and criterion.</param>
+        /// <returns>FramePredicateExpression.</returns>
         public FramePredicateExpression Visit(AndCriterion andCriterion)
         {
             FramePredicateExpression result = null;
@@ -72,12 +73,17 @@ namespace McFly.Server.Data.SqlServer
             return result;
         }
 
+        /// <summary>
+        ///     Visits the specified or criterion.
+        /// </summary>
+        /// <param name="orCriterion">The or criterion.</param>
+        /// <returns>FramePredicateExpression.</returns>
         public FramePredicateExpression Visit(OrCriterion orCriterion)
         {
             FramePredicateExpression result = null;
             foreach (var c in orCriterion.Criteria)
             {
-                var f = (FramePredicateExpression)c.Accept(this);
+                var f = (FramePredicateExpression) c.Accept(this);
                 if (result == null)
                 {
                     result = f;
@@ -90,6 +96,12 @@ namespace McFly.Server.Data.SqlServer
             return result;
         }
 
+        /// <summary>
+        ///     Visits the specified register equals criterion.
+        /// </summary>
+        /// <param name="registerEqualsCriterion">The register equals criterion.</param>
+        /// <returns>FramePredicateExpression.</returns>
+        /// <exception cref="IndexOutOfRangeException">Unknown register</exception>
         public FramePredicateExpression Visit(RegisterEqualsCriterion registerEqualsCriterion)
         {
             var bytes = registerEqualsCriterion.Value;
