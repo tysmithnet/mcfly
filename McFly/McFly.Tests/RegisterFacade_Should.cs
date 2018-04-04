@@ -14,7 +14,8 @@ namespace McFly.Tests
             var builder = new DebugEngineProxyBuilder();
             builder.With32Bit(false);
             var facade = new RegisterFacade();
-            builder.WithExecuteResult(@"rax=000000003205f31c rbx=000000001e042120 rcx=000000003205f322 rdx=000000003205f2ce");
+            builder.WithExecuteResult(
+                @"rax=000000003205f31c rbx=000000001e042120 rcx=000000003205f322 rdx=000000003205f2ce");
             builder.WithThreadId(1);
             facade.DebugEngineProxy = builder.Build();
 

@@ -147,6 +147,7 @@ namespace McFly
             catch
             {
             }
+
             return hr;
         }
 
@@ -165,6 +166,7 @@ namespace McFly
                 WriteLine("SourceFix: Unable to acquire client interface");
                 return null;
             }
+
             IDebugClient client = (IDebugClient5) obj;
             return client;
         }
@@ -370,6 +372,7 @@ namespace McFly
                 JsonConvert.PopulateObject(settingsObject.ToString(), settingsInstance);
                 numProcessed++;
             }
+
             if (settingsInstances.Count() != numProcessed)
                 File.WriteAllText(filePath,
                     JsonConvert.SerializeObject(settingsInstances, Formatting.Indented, new SettingsJsonConverter()));
@@ -423,6 +426,7 @@ namespace McFly
                 WriteLine("Error: Connection string is not configured yet");
                 return;
             }
+
             settings.ProjectName = projectName;
         }
 

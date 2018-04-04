@@ -18,7 +18,7 @@ namespace McFly.Search
         /// <inheritdoc />
         public void Display(object obj)
         {
-            string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(obj, Formatting.Indented);
             DebugEngineProxy.WriteLine(json);
         }
     }

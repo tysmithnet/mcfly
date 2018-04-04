@@ -14,7 +14,6 @@
 
 using System.Collections.Generic;
 using McFly.Core;
-using McFly.Search;
 using McFly.Server.Contract;
 
 namespace McFly

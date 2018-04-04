@@ -137,6 +137,7 @@ namespace McFly
                                 throw new FormatException($"Unable to parse memory range {ptr}", e);
                             }
                         }
+
                         if (!ranges.Any())
                             throw new ArgumentException($"No memory ranges provided to {arg}");
                         options.MemoryRanges = ranges;
@@ -153,6 +154,7 @@ namespace McFly
                         {
                             throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e);
                         }
+
                         break;
                     case "-e":
                     case "--end":
@@ -166,6 +168,7 @@ namespace McFly
                         {
                             throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e);
                         }
+
                         break;
                     case "--bm":
                         var breakpointMasks = new List<BreakpointMask>();
@@ -184,6 +187,7 @@ namespace McFly
                                 throw new FormatException($"Unable to parse {ptr} as a BreakpointMask", e);
                             }
                         }
+
                         if (!breakpointMasks.Any())
                             throw new ArgumentException($"No breakpoint masks provided to {arg}");
                         options.BreakpointMasks = breakpointMasks;
@@ -205,6 +209,7 @@ namespace McFly
                                 throw new FormatException($"Unable to parse {ptr} as an access breakpoint", e);
                             }
                         }
+
                         if (!accessBreakpoints.Any())
                             throw new ArgumentException($"No memory ranges provided to {arg}");
                         options.AccessBreakpoints = accessBreakpoints;
@@ -213,6 +218,7 @@ namespace McFly
                         break;
                 }
             }
+
             return options;
         }
 
@@ -279,6 +285,7 @@ namespace McFly
                 frames.AddRange(newFrames);
                 last = breakRecord.Position;
             }
+
             ServerClient.UpsertFrames(frames);
         }
 

@@ -65,6 +65,7 @@ namespace McFly.Server.Data.SqlServer
                     else
                         context.FrameEntities.Add(source);
                 }
+
                 context.SaveChanges();
             }
         }

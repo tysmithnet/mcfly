@@ -47,7 +47,6 @@ namespace McFly.Core.Tests
             r1.Equals(r2).Should().BeTrue();
             r1.Equals(r1).Should().BeTrue();
             r1.GetHashCode().Should().Be(r2.GetHashCode());
-
         }
 
         [Fact]

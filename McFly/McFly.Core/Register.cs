@@ -34,11 +34,6 @@ namespace McFly.Core
             CoreUserRegisters64 = new[] {Rax, Rbx, Rcx, Rdx};
         }
 
-        public static Register Lookup(string name)
-        {
-            return AllRegisters.FirstOrDefault(x => Regex.IsMatch(name, x.Name, RegexOptions.IgnoreCase));
-        }
-
         /// <summary>
         ///     Gets all 32 bit registers.
         /// </summary>
@@ -62,6 +57,11 @@ namespace McFly.Core
         /// </summary>
         /// <value>The number bits.</value>
         public abstract int NumBits { get; }
+
+        public static Register Lookup(string name)
+        {
+            return AllRegisters.FirstOrDefault(x => Regex.IsMatch(name, x.Name, RegexOptions.IgnoreCase));
+        }
 
         #region 64 Bit Registers
 

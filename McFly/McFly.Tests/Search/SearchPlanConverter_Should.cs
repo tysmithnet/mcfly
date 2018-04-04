@@ -12,12 +12,12 @@ namespace McFly.Tests.Search
         public void Convert_Basic_Cases()
         {
             var searchPlanConverter = new SearchPlanConverter();
-            var input = new SearchPlan("frame", new List<SearchFilter>()
+            var input = new SearchPlan("frame", new List<SearchFilter>
             {
-                new SearchFilter()
+                new SearchFilter
                 {
                     Command = "where",
-                    Args = new List<string>() {"rax", "-eq", "10"}
+                    Args = new List<string> {"rax", "-eq", "10"}
                 }
             });
 

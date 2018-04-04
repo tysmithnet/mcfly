@@ -55,6 +55,7 @@ namespace McFly
                 var val = match.Groups["val"].Value;
                 registerSet.Process(register.Name, val, 16);
             }
+
             return registerSet;
         }
 

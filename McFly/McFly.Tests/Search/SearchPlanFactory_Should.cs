@@ -32,16 +32,16 @@ namespace McFly.Tests.Search
                         "1"
                     }
                 },
-                new SearchFilter()
+                new SearchFilter
                 {
                     Command = "note",
-                    Args = new List<string>()
+                    Args = new List<string>
                     {
                         "text",
                         "-contains",
                         "encrypt"
                     }
-                }, 
+                }
             }).Should().BeTrue();
         }
     }

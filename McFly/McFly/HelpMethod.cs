@@ -66,6 +66,7 @@ namespace McFly
                 DebugEngineProxy.WriteLine(commandListing);
                 return;
             }
+
             if (IsSingleCommand(args))
             {
                 var commandHelp = GetCommandHelp(args[0]);
@@ -78,7 +79,7 @@ namespace McFly
         /// </summary>
         /// <param name="command">The command.</param>
         /// <returns>System.String.</returns>
-        private string GetCommandHelp(string command)   // todo: support sub command help
+        private string GetCommandHelp(string command) // todo: support sub command help
         {
             var help = Methods.Single(x => x.HelpInfo.Name == command).HelpInfo;
             var sb = new StringBuilder();
@@ -93,6 +94,7 @@ namespace McFly
                 foreach (var keyValuePair in help.Switches)
                     sb.AppendLine($"\t{keyValuePair.Key.PadRight(32)} {keyValuePair.Value}");
             }
+
             if (help.Subcommands.Any())
             {
                 sb
@@ -104,6 +106,7 @@ namespace McFly
                     sb.AppendLine($"\t{joint.PadRight(32)} {helpSubcommand.Description}");
                 }
             }
+
             if (help.Examples.Any())
             {
                 sb
@@ -117,6 +120,7 @@ namespace McFly
                         .AppendLine($"\t{kvp.Key}")
                         .AppendLine($"\t{kvp.Value}");
             }
+
             return sb.ToString();
         }
 

@@ -66,7 +66,8 @@ namespace McFly.Tests
 
         public ServerClientBuilder WithAddNote()
         {
-            Mock.Setup(client => client.AddNote(It.IsAny<Position>(), It.IsAny<IEnumerable<int>>(), It.IsAny<string>()));
+            Mock.Setup(client =>
+                client.AddNote(It.IsAny<Position>(), It.IsAny<IEnumerable<int>>(), It.IsAny<string>()));
             return this;
         }
 

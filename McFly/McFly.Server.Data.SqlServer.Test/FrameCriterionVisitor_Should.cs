@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using McFly.Core;
+﻿using McFly.Core;
 using McFly.Server.Data.Search;
 using Xunit;
 
@@ -28,22 +27,6 @@ namespace McFly.Server.Data.SqlServer.Test
         }
 
         [Fact]
-        public void Create_The_Correct_Expression_Tree_For_RegisterEqual()
-        {
-            var visitor = new FrameCriterionVisitor();
-            var criteria = new RegisterEqualsCriterion(Register.Rax, 0);
-            var f = visitor.Visit(criteria);
-            var frame = new FrameEntity
-            {
-                Rax = 0
-            };
-            var frame2 = new FrameEntity
-            {
-                Rax = 1
-            };
-        }
-
-        [Fact]
         public void Create_The_Correct_Expression_Tree_For_RegisterBetween()
         {
             var visitor = new FrameCriterionVisitor();
@@ -56,6 +39,22 @@ namespace McFly.Server.Data.SqlServer.Test
             var frame2 = new FrameEntity
             {
                 Rax = 10
+            };
+        }
+
+        [Fact]
+        public void Create_The_Correct_Expression_Tree_For_RegisterEqual()
+        {
+            var visitor = new FrameCriterionVisitor();
+            var criteria = new RegisterEqualsCriterion(Register.Rax, 0);
+            var f = visitor.Visit(criteria);
+            var frame = new FrameEntity
+            {
+                Rax = 0
+            };
+            var frame2 = new FrameEntity
+            {
+                Rax = 1
             };
         }
     }

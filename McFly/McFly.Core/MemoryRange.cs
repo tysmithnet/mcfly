@@ -216,6 +216,7 @@ namespace McFly.Core
                 var lengthULong = Convert.ToUInt64(length, 16);
                 return new MemoryRange(startULong, startULong + lengthULong);
             }
+
             var startEndMatch = Regex.Match(input, "(?<s>[a-f0-9]+):(?<e>[a-f0-9]+)", RegexOptions.IgnoreCase);
             if (startEndMatch.Success)
             {
@@ -225,6 +226,7 @@ namespace McFly.Core
                 var endULong = Convert.ToUInt64(end, 16);
                 return new MemoryRange(startULong, endULong);
             }
+
             throw new FormatException(
                 "Input did not match either a range+length range nor a start:end range, e.g. abcL123, abc:def");
         }

@@ -103,7 +103,7 @@ namespace McFly
             else
             {
                 ServerClient.AddNote(current.Position, new[] {current.ThreadId}, addOptions.Text);
-            }   
+            }
         }
 
         protected internal AddNoteOptions ExtractAddOptions(IEnumerable<string> args)
@@ -129,6 +129,7 @@ namespace McFly
                         break;
                 }
             }
+
             return options;
         }
     }

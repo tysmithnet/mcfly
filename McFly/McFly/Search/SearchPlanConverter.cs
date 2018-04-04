@@ -20,7 +20,7 @@ namespace McFly.Search
             var crit = new SearchCriterionDto
             {
                 Type = "and",
-                SubCriteria =  subs
+                SubCriteria = subs
             };
             return crit;
         }

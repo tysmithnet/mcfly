@@ -11,6 +11,30 @@ namespace McFly.Server.Data.SqlServer.Test
     public class FrameAccess_Should
     {
         [Fact]
+        public void Find_Matching_Frames_When_Searched_For()
+        {
+            var frameAccess = new FrameAccess();
+            var builder = new ContextFactoryBuilder();
+            builder.WithFrame(new FrameEntity
+            {
+                PosHi = 0,
+                PosLo = 0,
+                ThreadId = 1,
+                Rax = 1
+            }).WithFrame(new FrameEntity
+            {
+                PosHi = 0,
+                PosLo = 0,
+                ThreadId = 2,
+                Rax = 2
+            });
+            frameAccess.ContextFactory = builder.Build();
+
+            var results = frameAccess.Search("", new RegisterEqualsCriterion(Register.Rax, 1));
+            results.Single().RegisterSet.Rax.Should().Be(1);
+        }
+
+        [Fact]
         public void Get_The_Correct_Frame_If_One_Exists()
         {
             var access = new FrameAccess();
@@ -49,7 +73,7 @@ namespace McFly.Server.Data.SqlServer.Test
         {
             var access = new FrameAccess();
             var builder = new ContextFactoryBuilder();
-            builder.WithFrame(new FrameEntity()
+            builder.WithFrame(new FrameEntity
             {
                 PosHi = 0,
                 PosLo = 0,
@@ -60,9 +84,9 @@ namespace McFly.Server.Data.SqlServer.Test
                 Rdx = 4,
                 DisassemblyNote = "r9,r8",
                 Address = 90,
-                OpCode = new byte[]{0x10, 0x20},
+                OpCode = new byte[] {0x10, 0x20},
                 OpCodeMnemonic = "mov",
-                StackFrames = new List<StackFrameEntity>()
+                StackFrames = new List<StackFrameEntity>
                 {
                     new StackFrameEntity
                     {
@@ -73,9 +97,9 @@ namespace McFly.Server.Data.SqlServer.Test
                         Offset = 30
                     }
                 },
-                Notes = new List<NoteEntity>()
+                Notes = new List<NoteEntity>
                 {
-                    new NoteEntity()
+                    new NoteEntity
                     {
                         CreateDate = DateTime.MinValue,
                         Text = "note"
@@ -84,42 +108,42 @@ namespace McFly.Server.Data.SqlServer.Test
             });
             var newFrames = new[]
             {
-                new Frame()
+                new Frame
                 {
                     Position = new Position(0, 0),
                     ThreadId = 1,
-                    RegisterSet = new RegisterSet()
+                    RegisterSet = new RegisterSet
                     {
                         Rax = 2,
                         Rbx = 4,
                         Rcx = 6,
                         Rdx = 8
                     },
-                    DisassemblyLine = new DisassemblyLine(90, new byte[]{0x10, 0x20}, "mov", "r9,r8"),
-                    StackTrace = new StackTrace(new []
+                    DisassemblyLine = new DisassemblyLine(90, new byte[] {0x10, 0x20}, "mov", "r9,r8"),
+                    StackTrace = new StackTrace(new[]
                     {
                         new StackFrame(100, 700, "mymod", "myfun", 30),
-                        new StackFrame(200, 900, "mymod", "myfun2", 20),
+                        new StackFrame(200, 900, "mymod", "myfun2", 20)
                     }),
-                    Notes = new List<Note>()
+                    Notes = new List<Note>
                     {
-                        new Note()
+                        new Note
                         {
                             CreateDate = DateTime.MinValue,
                             Text = "note"
                         }
-                    } 
+                    }
                 },
-                new Frame()
+                new Frame
                 {
                     Position = new Position(1, 0),
                     ThreadId = 1,
-                    RegisterSet = new RegisterSet()
+                    RegisterSet = new RegisterSet
                     {
                         Rax = 13,
                         Rbx = 4
                     }
-                },
+                }
             };
             access.ContextFactory = builder.Build();
             access.UpsertFrames("", newFrames);
@@ -127,30 +151,6 @@ namespace McFly.Server.Data.SqlServer.Test
             access.GetFrame("", new Position(0, 0), 1).RegisterSet.Rbx.Should().Be(4);
             access.GetFrame("", new Position(1, 0), 1).RegisterSet.Rax.Should().Be(13);
             access.GetFrame("", new Position(1, 0), 1).RegisterSet.Rbx.Should().Be(4);
-        }
-
-        [Fact]
-        public void Find_Matching_Frames_When_Searched_For()
-        {
-            var frameAccess = new FrameAccess();
-            var builder = new ContextFactoryBuilder();
-            builder.WithFrame(new FrameEntity()
-            {
-                PosHi = 0,
-                PosLo = 0,
-                ThreadId = 1,
-                Rax = 1
-            }).WithFrame(new FrameEntity()
-            {
-                PosHi = 0,
-                PosLo = 0,
-                ThreadId = 2,
-                Rax = 2
-            });
-            frameAccess.ContextFactory = builder.Build();
-
-            var results = frameAccess.Search("", new RegisterEqualsCriterion(Register.Rax, 1));
-            results.Single().RegisterSet.Rax.Should().Be(1);
         }
     }
 }

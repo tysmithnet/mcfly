@@ -75,6 +75,7 @@ namespace McFly
                 var newLine = new DisassemblyLine(ip, opcode, instruction, note);
                 list.Add(newLine);
             }
+
             return list;
         }
     }

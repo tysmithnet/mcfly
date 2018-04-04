@@ -32,7 +32,6 @@ namespace McFly.Core
         public StackTrace(IEnumerable<StackFrame> stackFrames = null)
         {
             StackFrames = stackFrames?.ToList() ?? new List<StackFrame>();
-            
         }
 
         /// <summary>

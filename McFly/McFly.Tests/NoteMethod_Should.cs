@@ -18,21 +18,21 @@ namespace McFly.Tests
                 .WithPositions(new PositionsResult(new[]
                 {
                     new PositionsRecord(1, new Position(0, 0), true),
-                    new PositionsRecord(2, new Position(0, 0), false), 
+                    new PositionsRecord(2, new Position(0, 0), false)
                 })).Build();
-            ServerClientBuilder serverClientBuilder = new ServerClientBuilder();
+            var serverClientBuilder = new ServerClientBuilder();
             noteMethod.ServerClient = serverClientBuilder
-                .WithAddNote(new Position(0,0), new []{1}, "This is a note")
-                .WithAddNote(new Position(0, 0), new[] { 1, 2 }, "This is a note")
+                .WithAddNote(new Position(0, 0), new[] {1}, "This is a note")
+                .WithAddNote(new Position(0, 0), new[] {1, 2}, "This is a note")
                 .Build();
-            noteMethod.Settings = new Settings(){ProjectName = "test"};
-            var options = new AddNoteOptions()
+            noteMethod.Settings = new Settings {ProjectName = "test"};
+            var options = new AddNoteOptions
             {
                 Text = "This is a note",
                 IsAllThreadsAtPosition = false
             };
 
-            var options2 = new AddNoteOptions()
+            var options2 = new AddNoteOptions
             {
                 Text = "This is a note",
                 IsAllThreadsAtPosition = true
@@ -40,8 +40,10 @@ namespace McFly.Tests
 
             noteMethod.AddNote(options);
             noteMethod.AddNote(options2);
-            serverClientBuilder.Mock.Verify(client => client.AddNote(new Position(0,0), new[] {1}, "This is a note"), Times.Once);
-            serverClientBuilder.Mock.Verify(client => client.AddNote(new Position(0, 0), new [] {1,2}, "This is a note"), Times.Once);
+            serverClientBuilder.Mock.Verify(client => client.AddNote(new Position(0, 0), new[] {1}, "This is a note"),
+                Times.Once);
+            serverClientBuilder.Mock.Verify(
+                client => client.AddNote(new Position(0, 0), new[] {1, 2}, "This is a note"), Times.Once);
         }
 
         [Fact]

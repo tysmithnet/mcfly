@@ -63,6 +63,7 @@ namespace McFly
                     hashCode ^= keyValuePair.Value.GetHashCode();
                     hashCode *= 1331553;
                 }
+
                 return hashCode;
             }
         }

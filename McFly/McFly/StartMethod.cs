@@ -69,6 +69,7 @@ namespace McFly
                 Log.Error("Start called but no launcher path was set. Check the settings file.");
                 return;
             }
+
             if (!File.Exists(Settings.ServerExePath))
             {
                 Log.Error($"Start called but could not find file: {Settings.ServerExePath}");

@@ -25,7 +25,6 @@ namespace McFly.Core
     {
         public DisassemblyLine()
         {
-            
         }
 
         /// <summary>
@@ -106,7 +105,7 @@ namespace McFly.Core
         ///     Returns a hash code for this instance.
         /// </summary>
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
-        [ExcludeFromCodeCoverage]      // todo: should be covered
+        [ExcludeFromCodeCoverage] // todo: should be covered
         public override int GetHashCode()
         {
             unchecked

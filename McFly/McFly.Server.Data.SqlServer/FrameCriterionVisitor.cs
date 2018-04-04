@@ -13,10 +13,7 @@
 // ***********************************************************************
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using McFly.Core;
 using McFly.Server.Data.Search;
 
 namespace McFly.Server.Data.SqlServer
@@ -47,7 +44,7 @@ namespace McFly.Server.Data.SqlServer
             Func<FrameEntity, bool> identity = entity => true;
             return identity;
         }
-          
+
         /// <summary>
         ///     Visits the specified and criterion.
         /// </summary>
@@ -57,7 +54,7 @@ namespace McFly.Server.Data.SqlServer
             Expression result = null;
             foreach (var c in andCriterion.Criteria)
             {
-                var f = (Expression)c.Accept(this);
+                var f = (Expression) c.Accept(this);
                 if (result == null)
                 {
                     result = f;
@@ -75,7 +72,7 @@ namespace McFly.Server.Data.SqlServer
             Expression result = null;
             foreach (var c in orCriterion.Criteria)
             {
-                var f = (Expression)c.Accept(this);
+                var f = (Expression) c.Accept(this);
                 if (result == null)
                 {
                     result = f;

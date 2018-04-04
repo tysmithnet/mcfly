@@ -43,6 +43,7 @@ namespace McFly
                 writer.WritePropertyName(type.FullName);
                 writer.WriteToken(new JTokenReader(settingsValue));
             }
+
             writer.WriteEndObject();
         }
 

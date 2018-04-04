@@ -58,7 +58,7 @@ Examples:
                 new InitMethod(),
                 new HelpMethod(),
                 new SettingsMethod(),
-                new StartMethod(), 
+                new StartMethod()
             };
             var expected = @"5 Available commands:
 index                    Record the state of registers, memory, etc for further analysis
