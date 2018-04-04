@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using McFly.Core;
+using McFly.Server.Data.Search;
 using Xunit;
 
 namespace McFly.Server.Data.SqlServer.Test
@@ -125,6 +127,30 @@ namespace McFly.Server.Data.SqlServer.Test
             access.GetFrame("", new Position(0, 0), 1).RegisterSet.Rbx.Should().Be(4);
             access.GetFrame("", new Position(1, 0), 1).RegisterSet.Rax.Should().Be(13);
             access.GetFrame("", new Position(1, 0), 1).RegisterSet.Rbx.Should().Be(4);
+        }
+
+        [Fact]
+        public void Find_Matching_Frames_When_Searched_For()
+        {
+            var frameAccess = new FrameAccess();
+            var builder = new ContextFactoryBuilder();
+            builder.WithFrame(new FrameEntity()
+            {
+                PosHi = 0,
+                PosLo = 0,
+                ThreadId = 1,
+                Rax = 1
+            }).WithFrame(new FrameEntity()
+            {
+                PosHi = 0,
+                PosLo = 0,
+                ThreadId = 2,
+                Rax = 2
+            });
+            frameAccess.ContextFactory = builder.Build();
+
+            var results = frameAccess.Search("", new RegisterEqualsCriterion(Register.Rax, 1));
+            results.Single().RegisterSet.Rax.Should().Be(1);
         }
     }
 }

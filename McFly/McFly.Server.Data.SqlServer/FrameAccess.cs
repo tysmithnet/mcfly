@@ -16,8 +16,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Linq.Expressions;
 using Common.Logging;
 using McFly.Core;
+using McFly.Server.Data.Search;
 
 namespace McFly.Server.Data.SqlServer
 {
@@ -85,6 +87,16 @@ namespace McFly.Server.Data.SqlServer
                     throw new IndexOutOfRangeException(
                         $"Count not find a frame with position: {position} and threadid: {threadId}");
                 return first.ToFrame();
+            }
+        }
+
+        public IEnumerable<Frame> Search(string projectName, ICriterion criterion)
+        {
+            var visitor = new FrameCriterionVisitor();
+            var exp = (Expression<Func<FrameEntity, bool>>) visitor.Visit(criterion);
+            using (var ctx = ContextFactory.GetContext(projectName))
+            {
+                return ctx.FrameEntities.Where(exp).ToList().Select(x => x.ToFrame());
             }
         }
 

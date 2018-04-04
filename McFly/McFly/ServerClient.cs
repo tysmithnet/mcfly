@@ -17,7 +17,9 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Net.Http;
 using McFly.Core;
+using McFly.Search;
 using McFly.Server.Contract;
+using Newtonsoft.Json;
 
 namespace McFly
 {
@@ -74,6 +76,18 @@ namespace McFly
             var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/project"};
             var request = new NewProjectRequest(projectName, start.ToString(), end.ToString());
             HttpFacade.PostJsonAsync(ub.Uri, request, null).GetAwaiter().GetResult();
+        }
+
+        public IEnumerable<Frame> SearchFrames(SearchCriterionDto converted)
+        {
+            var ub = new UriBuilder(Settings.ServerUrl) { Path=$"api/search/frame"};
+            var res = HttpFacade.PostJsonAsync(ub.Uri, converted, new HttpHeaders()
+            {
+                ["X-Project-Name"] = Settings.ProjectName
+            });
+            var json = res.Result.Content.ReadAsStringAsync().Result;           // todo: 500's
+            var returnVal = JsonConvert.DeserializeObject<IEnumerable<Frame>>(json);
+            return returnVal;
         }
     }
 }

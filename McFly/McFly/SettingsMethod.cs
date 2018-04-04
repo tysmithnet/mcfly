@@ -81,25 +81,4 @@ namespace McFly
                 });
         }
     }
-
-    /// <summary>
-    ///     Class ReloadOptions.
-    /// </summary>
-    [Verb("reload")]
-    public class ReloadOptions
-    {
-    }
-
-    /// <summary>
-    ///     Class ListOptions.
-    /// </summary>
-    [Verb("list")]
-    public class ListOptions
-    {
-    }
-
-    [Verb("open")]
-    public class OpenOptions
-    {
-    }
 }

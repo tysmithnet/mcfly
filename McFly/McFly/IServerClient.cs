@@ -14,6 +14,8 @@
 
 using System.Collections.Generic;
 using McFly.Core;
+using McFly.Search;
+using McFly.Server.Contract;
 
 namespace McFly
 {
@@ -44,5 +46,7 @@ namespace McFly
         /// </summary>
         /// <param name="frames">The frames.</param>
         void UpsertFrames(IEnumerable<Frame> frames);
+
+        IEnumerable<Frame> SearchFrames(SearchCriterionDto converted);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using McFly.Core;
+using McFly.Tests.Builders;
 using Xunit;
 
 namespace McFly.Tests

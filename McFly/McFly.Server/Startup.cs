@@ -21,7 +21,10 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
+using System.Web.Http.ModelBinding.Binders;
 using Common.Logging;
+using McFly.Server.Contract;
 using McFly.Server.Data;
 using McFly.Server.Headers;
 using Owin;
@@ -45,8 +48,26 @@ namespace McFly.Server
         {
             appBuilder.Use<LoggingMiddleware>();
             var config = new HttpConfiguration();
+            //var provider = new SimpleModelBinderProvider(typeof(Criterion), new SearchRequestJsonConverter());
+            //config.Services.Insert(typeof(ModelBinderProvider), 0, provider);
+            var formatters = config.Formatters;
+            var jsonFormatter = formatters.JsonFormatter;
+            jsonFormatter.SerializerSettings.Converters.Add(new SearchRequestJsonConverter());
             config.MapHttpAttributeRoutes();
             // todo: extract
+            var mefDependencyResolver = GetDependencyResolver(config);
+            config.DependencyResolver = mefDependencyResolver;
+            config.EnableSwagger(c =>
+            {
+                c.SingleApiVersion("v1", "McFly API");
+                c.OperationFilter(() => new FromHeaderAttributeOperationFilter());
+            }).EnableSwaggerUi();
+
+            appBuilder.UseWebApi(config);
+        }
+
+        private MefDependencyResolver GetDependencyResolver(HttpConfiguration config)
+        {
             Log.Info("Looking for MEF components");
             var executingAssemblyFile = Assembly.GetExecutingAssembly().Location;
             var executingDirectory = Path.GetDirectoryName(executingAssemblyFile);
@@ -60,14 +81,7 @@ namespace McFly.Server
             var settings = new Settings {ConnectionString = "Data Source=localhost;Integrated Security=true"};
             compositionContainer.ComposeExportedValue(settings);
             var mefDependencyResolver = new MefDependencyResolver(compositionContainer, config.DependencyResolver);
-            config.DependencyResolver = mefDependencyResolver;
-            config.EnableSwagger(c =>
-            {
-                c.SingleApiVersion("v1", "McFly API");
-                c.OperationFilter(() => new FromHeaderAttributeOperationFilter());
-            }).EnableSwaggerUi();
-
-            appBuilder.UseWebApi(config);
+            return mefDependencyResolver;
         }
     }
 }
