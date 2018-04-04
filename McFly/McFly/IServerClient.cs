@@ -19,13 +19,13 @@ using McFly.Server.Contract;
 namespace McFly
 {
     /// <summary>
-    /// Interface IServerClient
+    ///     Interface IServerClient
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface IServerClient : IInjectable // todo: break up into cohesive types
     {
         /// <summary>
-        /// Adds the note.
+        ///     Adds the note.
         /// </summary>
         /// <param name="position">The position.</param>
         /// <param name="threadIds">The thread ids.</param>
@@ -33,7 +33,7 @@ namespace McFly
         void AddNote(Position position, IEnumerable<int> threadIds, string text);
 
         /// <summary>
-        /// Initializes the project.
+        ///     Initializes the project.
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="start">The start.</param>
@@ -41,13 +41,13 @@ namespace McFly
         void InitializeProject(string projectName, Position start, Position end);
 
         /// <summary>
-        /// Upserts the frames.
+        ///     Upserts the frames.
         /// </summary>
         /// <param name="frames">The frames.</param>
         void UpsertFrames(IEnumerable<Frame> frames);
 
         /// <summary>
-        /// Searches the frames.
+        ///     Searches the frames.
         /// </summary>
         /// <param name="converted">The converted.</param>
         /// <returns>IEnumerable&lt;Frame&gt;.</returns>

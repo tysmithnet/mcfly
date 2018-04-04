@@ -4,7 +4,7 @@
 // Created          : 02-27-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="Register.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -58,6 +58,11 @@ namespace McFly.Core
         /// <value>The number bits.</value>
         public abstract int NumBits { get; }
 
+        /// <summary>
+        ///     Lookups the specified name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>Register.</returns>
         public static Register Lookup(string name)
         {
             return AllRegisters.FirstOrDefault(x => Regex.IsMatch(name, x.Name, RegexOptions.IgnoreCase));

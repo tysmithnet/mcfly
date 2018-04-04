@@ -19,12 +19,12 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    /// One line of !positions
+    ///     One line of !positions
     /// </summary>
     public sealed class PositionsRecord
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PositionsRecord" /> class.
+        ///     Initializes a new instance of the <see cref="PositionsRecord" /> class.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="position">The position.</param>
@@ -39,25 +39,25 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets or sets the thread identifier.
+        ///     Gets or sets the thread identifier.
         /// </summary>
         /// <value>The thread identifier.</value>
         public int ThreadId { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the position.
+        ///     Gets or sets the position.
         /// </summary>
         /// <value>The position.</value>
         public Position Position { get; internal set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is thread with break.
+        ///     Gets or sets a value indicating whether this instance is thread with break.
         /// </summary>
         /// <value><c>true</c> if this instance is thread with break; otherwise, <c>false</c>.</value>
         public bool IsCurrentThread { get; internal set; }
 
         /// <summary>
-        /// Equalses the specified other.
+        ///     Equalses the specified other.
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
@@ -68,7 +68,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
         /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
@@ -81,7 +81,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
+        ///     Returns a hash code for this instance.
         /// </summary>
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         [ExcludeFromCodeCoverage]

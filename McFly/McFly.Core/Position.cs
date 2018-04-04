@@ -4,7 +4,7 @@
 // Created          : 02-25-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="Position.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -54,6 +54,10 @@ namespace McFly.Core
             Low = low;
         }
 
+        /// <summary>
+        ///     Gets the debug display.
+        /// </summary>
+        /// <value>The debug display.</value>
         private string DebugDisplay => ToString();
 
         /// <summary>

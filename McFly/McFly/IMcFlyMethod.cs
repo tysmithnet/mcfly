@@ -15,19 +15,19 @@
 namespace McFly
 {
     /// <summary>
-    /// Interface IMcFlyMethod
+    ///     Interface IMcFlyMethod
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface IMcFlyMethod : IInjectable
     {
         /// <summary>
-        /// Gets the help information.
+        ///     Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
         HelpInfo HelpInfo { get; }
 
         /// <summary>
-        /// Processes the specified arguments.
+        ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>

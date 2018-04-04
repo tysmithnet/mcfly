@@ -11,16 +11,17 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace McFly.Search
 {
     /// <summary>
-    /// Interface ISearchPlanFactory
+    ///     Interface ISearchPlanFactory
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface ISearchPlanFactory : IInjectable
     {
         /// <summary>
-        /// Creates the specified arguments.
+        ///     Creates the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>ISearchPlan.</returns>

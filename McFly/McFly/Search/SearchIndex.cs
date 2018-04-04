@@ -11,31 +11,33 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace McFly.Search
 {
     /// <summary>
-    /// Class SearchIndex.
+    ///     Class SearchIndex.
     /// </summary>
     public abstract class SearchIndex
     {
         /// <summary>
-        /// The frame
+        ///     The frame
         /// </summary>
         public static readonly SearchIndex Frame = new _Frame();
+
         /// <summary>
-        /// Gets the short name.
+        ///     Gets the short name.
         /// </summary>
         /// <value>The short name.</value>
         public abstract string ShortName { get; }
 
         /// <summary>
-        /// Class _Frame.
+        ///     Class _Frame.
         /// </summary>
         /// <seealso cref="McFly.Search.SearchIndex" />
         private class _Frame : SearchIndex
         {
             /// <summary>
-            /// Gets the short name.
+            ///     Gets the short name.
             /// </summary>
             /// <value>The short name.</value>
             /// <inheritdoc />

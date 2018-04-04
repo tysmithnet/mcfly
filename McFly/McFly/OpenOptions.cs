@@ -11,12 +11,13 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using CommandLine;
 
 namespace McFly
 {
     /// <summary>
-    /// Class OpenOptions.
+    ///     Class OpenOptions.
     /// </summary>
     [Verb("open")]
     public class OpenOptions

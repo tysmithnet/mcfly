@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -18,42 +19,42 @@ using System.Linq;
 namespace McFly.Search
 {
     /// <summary>
-    /// Class SearchMethod.
+    ///     Class SearchMethod.
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
     public class SearchMethod : IMcFlyMethod
     {
         /// <summary>
-        /// Gets or sets the factory.
+        ///     Gets or sets the factory.
         /// </summary>
         /// <value>The factory.</value>
         [Import]
         internal ISearchPlanFactory Factory { get; set; }
 
         /// <summary>
-        /// Gets or sets the converter.
+        ///     Gets or sets the converter.
         /// </summary>
         /// <value>The converter.</value>
         [Import]
         internal ISearchPlanConverter Converter { get; set; }
 
         /// <summary>
-        /// Gets or sets the search result display strategies.
+        ///     Gets or sets the search result display strategies.
         /// </summary>
         /// <value>The search result display strategies.</value>
         [ImportMany]
         internal ISearchResultDisplayStrategy[] SearchResultDisplayStrategies { get; set; }
 
         /// <summary>
-        /// Gets or sets the server client.
+        ///     Gets or sets the server client.
         /// </summary>
         /// <value>The server client.</value>
         [Import]
         internal IServerClient ServerClient { get; set; }
 
         /// <summary>
-        /// Gets the help information.
+        ///     Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
@@ -64,7 +65,7 @@ namespace McFly.Search
             .Build();
 
         /// <summary>
-        /// Processes the specified arguments.
+        ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>

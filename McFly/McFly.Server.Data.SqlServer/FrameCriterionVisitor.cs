@@ -17,6 +17,8 @@ using System.Linq.Expressions;
 using McFly.Core;
 using McFly.Server.Data.Search;
 
+using FramePredicateExpression = System.Linq.Expressions.Expression<System.Func<McFly.Server.Data.SqlServer.FrameEntity, bool>>;
+
 namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
@@ -42,7 +44,7 @@ namespace McFly.Server.Data.SqlServer
                     return Visit(equal);
             }
 
-            Expression<Func<FrameEntity, bool>> identity = entity => false;
+            FramePredicateExpression identity = entity => false;
             return identity;
         }
 
@@ -52,17 +54,17 @@ namespace McFly.Server.Data.SqlServer
         /// <param name="andCriterion">The and criterion.</param>
         public Expression Visit(AndCriterion andCriterion)
         {
-            Expression result = null;
+            FramePredicateExpression result = null;
             foreach (var c in andCriterion.Criteria)
             {
-                var f = (Expression) c.Accept(this);
+                var f = (FramePredicateExpression) c.Accept(this);
                 if (result == null)
                 {
                     result = f;
                     continue;
                 }
 
-                result = Expression.AndAlso(result, f);
+                result = Expression.AndAlso(result.Body, f.Body);
             }
 
             return result;
@@ -90,13 +92,15 @@ namespace McFly.Server.Data.SqlServer
         {
             if (registerEqualsCriterion.Register == Register.Rax)
             {
-                Expression<Func<FrameEntity, bool>> exp = entity => entity.Rax == registerEqualsCriterion.Value.ToLong();
+                Expression<Func<FrameEntity, bool>> exp = entity =>
+                    entity.Rax == registerEqualsCriterion.Value.ToLong();
                 return exp.Body;
             }
 
             if (registerEqualsCriterion.Register == Register.Rbx)
             {
-                Expression<Func<FrameEntity, bool>> exp = entity => entity.Rbx == registerEqualsCriterion.Value.ToLong();
+                Expression<Func<FrameEntity, bool>> exp = entity =>
+                    entity.Rbx == registerEqualsCriterion.Value.ToLong();
                 return exp.Body;
             }
 

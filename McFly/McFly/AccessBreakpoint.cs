@@ -19,7 +19,7 @@ using System.Text.RegularExpressions;
 namespace McFly
 {
     /// <summary>
-    /// Class AccessBreakpoint.
+    ///     Class AccessBreakpoint.
     /// </summary>
     /// <seealso cref="AccessBreakpoint" />
     /// <seealso cref="McFly.IBreakpoint" />
@@ -27,20 +27,22 @@ namespace McFly
     public class AccessBreakpoint : IEquatable<AccessBreakpoint>, IBreakpoint
     {
         /// <summary>
-        /// The valid length
+        ///     The valid length
         /// </summary>
         private static readonly uint[] _validLength = {1, 2, 4, 8};
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccessBreakpoint" /> class.
+        ///     Initializes a new instance of the <see cref="AccessBreakpoint" /> class.
         /// </summary>
         /// <param name="address">The address.</param>
         /// <param name="length">The length.</param>
         /// <param name="isRead">if set to <c>true</c> [is read].</param>
         /// <param name="isWrite">if set to <c>true</c> [is write].</param>
-        /// <exception cref="ArgumentOutOfRangeException">address
-        /// or
-        /// length</exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     address
+        ///     or
+        ///     length
+        /// </exception>
         /// <exception cref="ArgumentException">You cannot set an access breakpoint where neither read nor write is set</exception>
         public AccessBreakpoint(ulong address, ushort length, bool isRead = true, bool isWrite = true)
         {
@@ -57,31 +59,31 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the address.
+        ///     Gets the address.
         /// </summary>
         /// <value>The address.</value>
         public ulong Address { get; }
 
         /// <summary>
-        /// Gets the length.
+        ///     Gets the length.
         /// </summary>
         /// <value>The length.</value>
         public ushort Length { get; }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is read.
+        ///     Gets a value indicating whether this instance is read.
         /// </summary>
         /// <value><c>true</c> if this instance is read; otherwise, <c>false</c>.</value>
         public bool IsRead { get; }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is write.
+        ///     Gets a value indicating whether this instance is write.
         /// </summary>
         /// <value><c>true</c> if this instance is write; otherwise, <c>false</c>.</value>
         public bool IsWrite { get; }
 
         /// <summary>
-        /// Sets the breakpoint.
+        ///     Sets the breakpoint.
         /// </summary>
         /// <param name="breakpointFacade">The breakpoint facade.</param>
         public void SetBreakpoint(IBreakpointFacade breakpointFacade)
@@ -93,7 +95,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Equalses the specified other.
+        ///     Equalses the specified other.
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
@@ -106,7 +108,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// To the command.
+        ///     To the command.
         /// </summary>
         /// <returns>System.String.</returns>
         public string ToCommand()
@@ -115,7 +117,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
         /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
@@ -128,7 +130,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
+        ///     Returns a hash code for this instance.
         /// </summary>
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         public override int GetHashCode()
@@ -144,7 +146,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Implements the == operator.
+        ///     Implements the == operator.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -157,7 +159,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Implements the != operator.
+        ///     Implements the != operator.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -168,7 +170,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Parses the specified input.
+        ///     Parses the specified input.
         /// </summary>
         /// <param name="input">The input.</param>
         /// <returns>AccessBreakpoint.</returns>

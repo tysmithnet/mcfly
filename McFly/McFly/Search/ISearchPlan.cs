@@ -11,22 +11,24 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Collections.Generic;
 
 namespace McFly.Search
 {
     /// <summary>
-    /// Interface ISearchPlan
+    ///     Interface ISearchPlan
     /// </summary>
     public interface ISearchPlan
     {
         /// <summary>
-        /// Gets the index.
+        ///     Gets the index.
         /// </summary>
         /// <value>The index.</value>
         string Index { get; }
+
         /// <summary>
-        /// Gets the search filters.
+        ///     Gets the search filters.
         /// </summary>
         /// <value>The search filters.</value>
         IEnumerable<SearchFilter> SearchFilters { get; }

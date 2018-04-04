@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -20,19 +21,19 @@ using McFly.Server.Contract;
 namespace McFly.Search
 {
     /// <summary>
-    /// Class SearchPlanConverter.
+    ///     Class SearchPlanConverter.
     /// </summary>
     /// <seealso cref="McFly.Search.ISearchPlanConverter" />
     [Export(typeof(ISearchPlanConverter))]
     internal class SearchPlanConverter : ISearchPlanConverter
     {
         /// <summary>
-        /// The separators
+        ///     The separators
         /// </summary>
         private static readonly string[] Separators = {"AND", "OR"};
 
         /// <summary>
-        /// Converts the specified search plan.
+        ///     Converts the specified search plan.
         /// </summary>
         /// <param name="searchPlan">The search plan.</param>
         /// <returns>SearchCriterionDto.</returns>
@@ -51,7 +52,7 @@ namespace McFly.Search
         }
 
         /// <summary>
-        /// Helpers the specified filter.
+        ///     Helpers the specified filter.
         /// </summary>
         /// <param name="filter">The filter.</param>
         /// <returns>SearchCriterionDto.</returns>
@@ -72,7 +73,7 @@ namespace McFly.Search
         }
 
         /// <summary>
-        /// Extracts the where.
+        ///     Extracts the where.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <param name="start">The start.</param>
@@ -100,7 +101,7 @@ namespace McFly.Search
         }
 
         /// <summary>
-        /// Extracts the compound.
+        ///     Extracts the compound.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <param name="start">The start.</param>

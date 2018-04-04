@@ -22,42 +22,42 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    /// Default implementation of the time travel facade
+    ///     Default implementation of the time travel facade
     /// </summary>
     /// <seealso cref="McFly.ITimeTravelFacade" />
     [Export(typeof(ITimeTravelFacade))]
     public class TimeTravelFacade : ITimeTravelFacade
     {
         /// <summary>
-        /// Gets or sets the debug eng proxy.
+        ///     Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
         protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        /// Gets or sets the stack facade.
+        ///     Gets or sets the stack facade.
         /// </summary>
         /// <value>The stack facade.</value>
         [Import]
         protected internal IStackFacade StackFacade { get; set; }
 
         /// <summary>
-        /// Gets or sets the register facade.
+        ///     Gets or sets the register facade.
         /// </summary>
         /// <value>The register facade.</value>
         [Import]
         protected internal IRegisterFacade RegisterFacade { get; set; }
 
         /// <summary>
-        /// Gets or sets the disassembly facade.
+        ///     Gets or sets the disassembly facade.
         /// </summary>
         /// <value>The disassembly facade.</value>
         [Import]
         protected internal IDisassemblyFacade DisassemblyFacade { get; set; }
 
         /// <summary>
-        /// Sets the position.
+        ///     Sets the position.
         /// </summary>
         /// <param name="position">The position.</param>
         public void SetPosition(Position position)
@@ -66,7 +66,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the current position.
+        ///     Gets the current position.
         /// </summary>
         /// <returns>Position.</returns>
         public Position GetCurrentPosition()
@@ -75,7 +75,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the current position.
+        ///     Gets the current position.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>Position.</returns>
@@ -85,7 +85,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Positionses this instance.
+        ///     Positionses this instance.
         /// </summary>
         /// <returns>PositionsResult.</returns>
         public PositionsResult Positions()
@@ -96,7 +96,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the starting position of the trace. Many times this is 35:0
+        ///     Gets the starting position of the trace. Many times this is 35:0
         /// </summary>
         /// <returns>Position.</returns>
         public Position GetStartingPosition()
@@ -107,7 +107,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the ending position
+        ///     Gets the ending position
         /// </summary>
         /// <returns>Position.</returns>
         public Position GetEndingPosition()
@@ -118,7 +118,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the current frame.
+        ///     Gets the current frame.
         /// </summary>
         /// <returns>Frame.</returns>
         public Frame GetCurrentFrame()
@@ -139,7 +139,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the current frame.
+        ///     Gets the current frame.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>Frame.</returns>
@@ -156,7 +156,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Parses the positions command text.
+        ///     Parses the positions command text.
         /// </summary>
         /// <param name="positionsText">The positions text.</param>
         /// <returns>IEnumerable&lt;PositionsRecord&gt;.</returns>

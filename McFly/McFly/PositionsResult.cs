@@ -21,14 +21,14 @@ using System.Linq;
 namespace McFly
 {
     /// <summary>
-    /// Class PositionsResult.
+    ///     Class PositionsResult.
     /// </summary>
     /// <seealso cref="PositionsRecord" />
     /// <seealso cref="PositionsRecord" />
     public class PositionsResult : IEnumerable<PositionsRecord>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PositionsResult" /> class.
+        ///     Initializes a new instance of the <see cref="PositionsResult" /> class.
         /// </summary>
         /// <param name="positionsRecords">The positions records.</param>
         /// <exception cref="ArgumentNullException">positionsRecords</exception>
@@ -38,19 +38,19 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets or sets the positions records.
+        ///     Gets or sets the positions records.
         /// </summary>
         /// <value>The positions records.</value>
         private IEnumerable<PositionsRecord> PositionsRecords { get; }
 
         /// <summary>
-        /// Gets the current thread.
+        ///     Gets the current thread.
         /// </summary>
         /// <value>The current thread.</value>
         public PositionsRecord CurrentThreadResult => PositionsRecords.Single(x => x.IsCurrentThread);
 
         /// <summary>
-        /// Gets the enumerator.
+        ///     Gets the enumerator.
         /// </summary>
         /// <returns>IEnumerator&lt;PositionsRecord&gt;.</returns>
         public IEnumerator<PositionsRecord> GetEnumerator()
@@ -59,7 +59,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the enumerator.
+        ///     Gets the enumerator.
         /// </summary>
         /// <returns>IEnumerator.</returns>
         [ExcludeFromCodeCoverage]

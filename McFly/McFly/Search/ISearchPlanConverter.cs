@@ -11,18 +11,19 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using McFly.Server.Contract;
 
 namespace McFly.Search
 {
     /// <summary>
-    /// Interface ISearchPlanConverter
+    ///     Interface ISearchPlanConverter
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     internal interface ISearchPlanConverter : IInjectable
     {
         /// <summary>
-        /// Converts the specified search plan.
+        ///     Converts the specified search plan.
         /// </summary>
         /// <param name="searchPlan">The search plan.</param>
         /// <returns>SearchCriterionDto.</returns>

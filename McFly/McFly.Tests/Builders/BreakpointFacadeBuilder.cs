@@ -17,17 +17,17 @@ using Moq;
 namespace McFly.Tests.Builders
 {
     /// <summary>
-    /// Class BreakpointFacadeBuilder.
+    ///     Class BreakpointFacadeBuilder.
     /// </summary>
     internal class BreakpointFacadeBuilder
     {
         /// <summary>
-        /// The mock
+        ///     The mock
         /// </summary>
         public Mock<IBreakpointFacade> Mock = new Mock<IBreakpointFacade>();
 
         /// <summary>
-        /// Withes the set breakpoint by mask.
+        ///     Withes the set breakpoint by mask.
         /// </summary>
         /// <param name="mask">The mask.</param>
         /// <param name="function">The function.</param>
@@ -39,7 +39,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the set breakpoint by mask.
+        ///     Withes the set breakpoint by mask.
         /// </summary>
         /// <returns>BreakpointFacadeBuilder.</returns>
         public BreakpointFacadeBuilder WithSetBreakpointByMask()
@@ -49,7 +49,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the set read access breakpoint.
+        ///     Withes the set read access breakpoint.
         /// </summary>
         /// <param name="length">The length.</param>
         /// <param name="address">The address.</param>
@@ -61,7 +61,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the set read access breakpoint.
+        ///     Withes the set read access breakpoint.
         /// </summary>
         /// <returns>BreakpointFacadeBuilder.</returns>
         public BreakpointFacadeBuilder WithSetReadAccessBreakpoint()
@@ -71,7 +71,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the set write access breakpoint.
+        ///     Withes the set write access breakpoint.
         /// </summary>
         /// <param name="length">The length.</param>
         /// <param name="address">The address.</param>
@@ -83,7 +83,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the set write access breakpoint.
+        ///     Withes the set write access breakpoint.
         /// </summary>
         /// <returns>BreakpointFacadeBuilder.</returns>
         public BreakpointFacadeBuilder WithSetWriteAccessBreakpoint()
@@ -93,7 +93,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Builds this instance.
+        ///     Builds this instance.
         /// </summary>
         /// <returns>IBreakpointFacade.</returns>
         public IBreakpointFacade Build()

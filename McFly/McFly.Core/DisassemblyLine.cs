@@ -4,7 +4,7 @@
 // Created          : 03-10-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="DisassemblyLine.cs" company="">
 //     Copyright ©  2018
@@ -23,6 +23,9 @@ namespace McFly.Core
     /// </summary>
     public class DisassemblyLine
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="DisassemblyLine" /> class.
+        /// </summary>
         public DisassemblyLine()
         {
         }

@@ -20,50 +20,50 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    /// Class IndexOptions.
+    ///     Class IndexOptions.
     /// </summary>
     /// <seealso cref="IndexOptions" />
     /// <seealso cref="IndexOptions" />
     public class IndexOptions : IEquatable<IndexOptions>
     {
         /// <summary>
-        /// Gets or sets the memory ranges.
+        ///     Gets or sets the memory ranges.
         /// </summary>
         /// <value>The memory ranges.</value>
         public IEnumerable<MemoryRange> MemoryRanges { get; set; }
 
         /// <summary>
-        /// Gets or sets the start.
+        ///     Gets or sets the start.
         /// </summary>
         /// <value>The start.</value>
         public Position Start { get; set; }
 
         /// <summary>
-        /// Gets or sets the end.
+        ///     Gets or sets the end.
         /// </summary>
         /// <value>The end.</value>
         public Position End { get; set; }
 
         /// <summary>
-        /// Gets or sets the breakpoint masks.
+        ///     Gets or sets the breakpoint masks.
         /// </summary>
         /// <value>The breakpoint masks.</value>
         public IEnumerable<BreakpointMask> BreakpointMasks { get; set; }
 
         /// <summary>
-        /// Gets or sets the access breakpoints.
+        ///     Gets or sets the access breakpoints.
         /// </summary>
         /// <value>The access breakpoints.</value>
         public IEnumerable<AccessBreakpoint> AccessBreakpoints { get; set; }
 
         /// <summary>
-        /// Gets or sets the step.
+        ///     Gets or sets the step.
         /// </summary>
         /// <value>The step.</value>
         public int Step { get; set; }
 
         /// <summary>
-        /// Equalses the specified other.
+        ///     Equalses the specified other.
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
@@ -81,7 +81,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
         /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
@@ -94,7 +94,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
+        ///     Returns a hash code for this instance.
         /// </summary>
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         public override int GetHashCode()
@@ -116,7 +116,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Implements the == operator.
+        ///     Implements the == operator.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -129,7 +129,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Implements the != operator.
+        ///     Implements the != operator.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>

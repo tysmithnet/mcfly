@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -20,17 +21,17 @@ using Moq;
 namespace McFly.Tests.Builders
 {
     /// <summary>
-    /// Class HttpFacadeBuilder.
+    ///     Class HttpFacadeBuilder.
     /// </summary>
     internal class HttpFacadeBuilder
     {
         /// <summary>
-        /// The mock
+        ///     The mock
         /// </summary>
         public Mock<IHttpFacade> Mock = new Mock<IHttpFacade>();
 
         /// <summary>
-        /// Withes the post asynchronous.
+        ///     Withes the post asynchronous.
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>HttpFacadeBuilder.</returns>
@@ -44,7 +45,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the post json asynchronous.
+        ///     Withes the post json asynchronous.
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>HttpFacadeBuilder.</returns>
@@ -56,7 +57,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Builds this instance.
+        ///     Builds this instance.
         /// </summary>
         /// <returns>IHttpFacade.</returns>
         public IHttpFacade Build()

@@ -20,28 +20,28 @@ using Newtonsoft.Json;
 namespace McFly
 {
     /// <summary>
-    /// Class SettingsMethod.
+    ///     Class SettingsMethod.
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
     public class SettingsMethod : IMcFlyMethod
     {
         /// <summary>
-        /// Gets or sets all settings.
+        ///     Gets or sets all settings.
         /// </summary>
         /// <value>All settings.</value>
         [ImportMany]
         public ISettings[] AllSettings { get; set; }
 
         /// <summary>
-        /// Gets or sets the debug eng proxy.
+        ///     Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        /// Gets the help information.
+        ///     Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
@@ -58,7 +58,7 @@ namespace McFly
             .Build();
 
         /// <summary>
-        /// Processes the specified arguments.
+        ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>

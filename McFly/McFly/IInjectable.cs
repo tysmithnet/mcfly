@@ -15,7 +15,7 @@
 namespace McFly
 {
     /// <summary>
-    /// Interface IInjectable
+    ///     Interface IInjectable
     /// </summary>
     public interface IInjectable
     {

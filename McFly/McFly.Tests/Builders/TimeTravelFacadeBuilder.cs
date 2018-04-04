@@ -22,32 +22,32 @@ using MoreLinq;
 namespace McFly.Tests.Builders
 {
     /// <summary>
-    /// Class TimeTravelFacadeBuilder.
+    ///     Class TimeTravelFacadeBuilder.
     /// </summary>
     internal class TimeTravelFacadeBuilder
     {
         /// <summary>
-        /// The debug eng proxy builder
+        ///     The debug eng proxy builder
         /// </summary>
         private readonly DebugEngineProxyBuilder _debugEngineProxyBuilder;
 
         /// <summary>
-        /// The frames
+        ///     The frames
         /// </summary>
         private readonly List<Frame> _frames = new List<Frame>();
 
         /// <summary>
-        /// The current position
+        ///     The current position
         /// </summary>
         private Position _currentPosition = new Position(0, 0);
 
         /// <summary>
-        /// The mock
+        ///     The mock
         /// </summary>
         public Mock<ITimeTravelFacade> Mock = new Mock<ITimeTravelFacade>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TimeTravelFacadeBuilder" /> class.
+        ///     Initializes a new instance of the <see cref="TimeTravelFacadeBuilder" /> class.
         /// </summary>
         /// <param name="debugEngineProxyBuilder">The debug eng proxy builder.</param>
         public TimeTravelFacadeBuilder(DebugEngineProxyBuilder debugEngineProxyBuilder)
@@ -60,13 +60,13 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Gets the current frames.
+        ///     Gets the current frames.
         /// </summary>
         /// <value>The current frames.</value>
         public IEnumerable<Frame> CurrentFrames => _frames.Where(x => x.Position == _currentPosition);
 
         /// <summary>
-        /// Withes the get current position.
+        ///     Withes the get current position.
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>TimeTravelFacadeBuilder.</returns>
@@ -77,7 +77,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the get current position.
+        ///     Withes the get current position.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="result">The result.</param>
@@ -90,7 +90,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the get starting position.
+        ///     Withes the get starting position.
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>TimeTravelFacadeBuilder.</returns>
@@ -101,7 +101,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the get ending position.
+        ///     Withes the get ending position.
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>TimeTravelFacadeBuilder.</returns>
@@ -112,7 +112,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the positions.
+        ///     Withes the positions.
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>TimeTravelFacadeBuilder.</returns>
@@ -123,7 +123,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the frames.
+        ///     Withes the frames.
         /// </summary>
         /// <param name="frames">The frames.</param>
         /// <returns>TimeTravelFacadeBuilder.</returns>
@@ -141,11 +141,13 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Positionses this instance.
+        ///     Positionses this instance.
         /// </summary>
         /// <returns>PositionsResult.</returns>
-        /// <exception cref="InvalidOperationException">There needs to be exactly 1 positions record with the current thread tag at
-        /// any given position</exception>
+        /// <exception cref="InvalidOperationException">
+        ///     There needs to be exactly 1 positions record with the current thread tag at
+        ///     any given position
+        /// </exception>
         public PositionsResult Positions()
         {
             var thread = _debugEngineProxyBuilder.CurrentThreadId;
@@ -158,7 +160,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Advances to next position.
+        ///     Advances to next position.
         /// </summary>
         /// <returns>TimeTravelFacadeBuilder.</returns>
         public TimeTravelFacadeBuilder AdvanceToNextPosition()
@@ -172,7 +174,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Builds this instance.
+        ///     Builds this instance.
         /// </summary>
         /// <returns>ITimeTravelFacade.</returns>
         public ITimeTravelFacade Build()
@@ -181,7 +183,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the set position.
+        ///     Withes the set position.
         /// </summary>
         /// <returns>TimeTravelFacadeBuilder.</returns>
         public TimeTravelFacadeBuilder WithSetPosition()

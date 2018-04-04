@@ -18,7 +18,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace McFly
 {
     /// <summary>
-    /// Class McFlyApp.
+    ///     Class McFlyApp.
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     [Export]
@@ -26,7 +26,7 @@ namespace McFly
     internal class McFlyApp : IInjectable
     {
         /// <summary>
-        /// Gets or sets the mc fly methods.
+        ///     Gets or sets the mc fly methods.
         /// </summary>
         /// <value>The mc fly methods.</value>
         [ImportMany]

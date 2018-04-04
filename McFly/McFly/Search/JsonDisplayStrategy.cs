@@ -11,27 +11,28 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.ComponentModel.Composition;
 using Newtonsoft.Json;
 
 namespace McFly.Search
 {
     /// <summary>
-    /// Class JsonDisplayStrategy.
+    ///     Class JsonDisplayStrategy.
     /// </summary>
     /// <seealso cref="McFly.Search.ISearchResultDisplayStrategy" />
     [Export(typeof(ISearchResultDisplayStrategy))]
     internal class JsonDisplayStrategy : ISearchResultDisplayStrategy
     {
         /// <summary>
-        /// Gets or sets the debug engine proxy.
+        ///     Gets or sets the debug engine proxy.
         /// </summary>
         /// <value>The debug engine proxy.</value>
         [Import]
         internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        /// Determines whether this instance can display the specified object.
+        ///     Determines whether this instance can display the specified object.
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns><c>true</c> if this instance can display the specified object; otherwise, <c>false</c>.</returns>
@@ -42,7 +43,7 @@ namespace McFly.Search
         }
 
         /// <summary>
-        /// Displays the specified object.
+        ///     Displays the specified object.
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <inheritdoc />

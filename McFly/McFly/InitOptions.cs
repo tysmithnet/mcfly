@@ -17,12 +17,12 @@ using CommandLine;
 namespace McFly
 {
     /// <summary>
-    /// Class InitOptions.
+    ///     Class InitOptions.
     /// </summary>
     public class InitOptions
     {
         /// <summary>
-        /// Gets or sets the name of the project.
+        ///     Gets or sets the name of the project.
         /// </summary>
         /// <value>The name of the project.</value>
         [Option('n', "name", Required = true)]

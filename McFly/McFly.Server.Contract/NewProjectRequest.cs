@@ -4,7 +4,7 @@
 // Created          : 03-25-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="NewProjectRequest.cs" company="">
 //     Copyright ©  2018
@@ -30,6 +30,13 @@ namespace McFly.Server.Contract
         /// <param name="projectName">Name of the project.</param>
         /// <param name="startingPosition">The starting position.</param>
         /// <param name="endingPosition">The ending position.</param>
+        /// <exception cref="ArgumentNullException">
+        ///     projectName
+        ///     or
+        ///     startingPosition
+        ///     or
+        ///     endingPosition
+        /// </exception>
         /// <exception cref="System.ArgumentNullException">
         ///     projectName
         ///     or

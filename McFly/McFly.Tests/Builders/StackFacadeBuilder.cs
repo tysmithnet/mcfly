@@ -18,17 +18,17 @@ using Moq;
 namespace McFly.Tests.Builders
 {
     /// <summary>
-    /// Class StackFacadeBuilder.
+    ///     Class StackFacadeBuilder.
     /// </summary>
     internal class StackFacadeBuilder
     {
         /// <summary>
-        /// The mock
+        ///     The mock
         /// </summary>
         public Mock<IStackFacade> Mock = new Mock<IStackFacade>();
 
         /// <summary>
-        /// Withes the get current stack trace.
+        ///     Withes the get current stack trace.
         /// </summary>
         /// <param name="stackTrace">The stack trace.</param>
         /// <returns>StackFacadeBuilder.</returns>
@@ -39,7 +39,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the get current stack trace.
+        ///     Withes the get current stack trace.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="stackTrace">The stack trace.</param>
@@ -51,7 +51,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Builds this instance.
+        ///     Builds this instance.
         /// </summary>
         /// <returns>IStackFacade.</returns>
         public IStackFacade Build()

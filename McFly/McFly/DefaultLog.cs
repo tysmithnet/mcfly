@@ -19,7 +19,7 @@ using System.IO;
 namespace McFly
 {
     /// <summary>
-    /// Class DefaultLog.
+    ///     Class DefaultLog.
     /// </summary>
     /// <seealso cref="McFly.ILog" />
     /// <seealso cref="System.IDisposable" />
@@ -27,7 +27,7 @@ namespace McFly
     public class DefaultLog : ILog, IDisposable
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DefaultLog" /> class.
+        ///     Initializes a new instance of the <see cref="DefaultLog" /> class.
         /// </summary>
         /// <param name="filePath">The file path.</param>
         public DefaultLog(string filePath)
@@ -40,13 +40,13 @@ namespace McFly
         // todo: refactor this
 
         /// <summary>
-        /// Gets or sets the stream writer.
+        ///     Gets or sets the stream writer.
         /// </summary>
         /// <value>The stream writer.</value>
         private StreamWriter StreamWriter { get; }
 
         /// <summary>
-        /// Disposes this instance.
+        ///     Disposes this instance.
         /// </summary>
         public void Dispose()
         {
@@ -54,7 +54,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Verboses the specified message.
+        ///     Verboses the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         public void Verbose(string message)
@@ -63,7 +63,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Debugs the specified message.
+        ///     Debugs the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         public void Debug(string message)
@@ -72,7 +72,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Informations the specified message.
+        ///     Informations the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         public void Info(string message)
@@ -81,7 +81,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Errors the specified message.
+        ///     Errors the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         public void Error(string message)
@@ -90,7 +90,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Errors the specified exception.
+        ///     Errors the specified exception.
         /// </summary>
         /// <param name="exception">The exception.</param>
         public void Error(Exception exception)
@@ -103,7 +103,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Fatals the specified message.
+        ///     Fatals the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         public void Fatal(string message)
@@ -112,7 +112,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Fatals the specified exception.
+        ///     Fatals the specified exception.
         /// </summary>
         /// <param name="exception">The exception.</param>
         public void Fatal(Exception exception)

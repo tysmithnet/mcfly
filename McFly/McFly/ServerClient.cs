@@ -22,7 +22,7 @@ using Newtonsoft.Json;
 namespace McFly
 {
     /// <summary>
-    /// Class ServerClient.
+    ///     Class ServerClient.
     /// </summary>
     /// <seealso cref="McFly.IServerClient" />
     /// <seealso cref="System.IDisposable" />
@@ -30,14 +30,14 @@ namespace McFly
     public class ServerClient : IServerClient // todo: move to McFly.Server
     {
         /// <summary>
-        /// Gets or sets the HTTP facade.
+        ///     Gets or sets the HTTP facade.
         /// </summary>
         /// <value>The HTTP facade.</value>
         [Import]
         protected internal IHttpFacade HttpFacade { get; set; }
 
         /// <summary>
-        /// Gets or sets the settings.
+        ///     Gets or sets the settings.
         /// </summary>
         /// <value>The settings.</value>
         [Import]

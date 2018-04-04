@@ -18,22 +18,22 @@ using Moq;
 namespace McFly.Tests.Builders
 {
     /// <summary>
-    /// Class DbgEngProxyBuilder.
+    ///     Class DbgEngProxyBuilder.
     /// </summary>
     internal class DebugEngineProxyBuilder
     {
         /// <summary>
-        /// The thread identifier
+        ///     The thread identifier
         /// </summary>
         private int _threadId;
 
         /// <summary>
-        /// The mock
+        ///     The mock
         /// </summary>
         public Mock<IDebugEngineProxy> Mock = new Mock<IDebugEngineProxy>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DebugEngineProxyBuilder" /> class.
+        ///     Initializes a new instance of the <see cref="DebugEngineProxyBuilder" /> class.
         /// </summary>
         public DebugEngineProxyBuilder()
         {
@@ -41,7 +41,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Gets or sets the current thread identifier.
+        ///     Gets or sets the current thread identifier.
         /// </summary>
         /// <value>The current thread identifier.</value>
         public int CurrentThreadId
@@ -51,7 +51,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the execute result.
+        ///     Withes the execute result.
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>DbgEngProxyBuilder.</returns>
@@ -63,7 +63,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// With32s the bit.
+        ///     With32s the bit.
         /// </summary>
         /// <param name="result">if set to <c>true</c> [result].</param>
         /// <returns>DbgEngProxyBuilder.</returns>
@@ -74,7 +74,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the execute result.
+        ///     Withes the execute result.
         /// </summary>
         /// <param name="command">The command.</param>
         /// <param name="result">The result.</param>
@@ -87,7 +87,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Builds this instance.
+        ///     Builds this instance.
         /// </summary>
         /// <returns>IDbgEngProxy.</returns>
         public IDebugEngineProxy Build()
@@ -96,7 +96,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the thread identifier.
+        ///     Withes the thread identifier.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>DbgEngProxyBuilder.</returns>
@@ -107,7 +107,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the run until break.
+        ///     Withes the run until break.
         /// </summary>
         /// <returns>DbgEngProxyBuilder.</returns>
         public DebugEngineProxyBuilder WithRunUntilBreak()
@@ -117,7 +117,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Sets the run until break callback.
+        ///     Sets the run until break callback.
         /// </summary>
         /// <param name="callback">The callback.</param>
         /// <returns>DbgEngProxyBuilder.</returns>
@@ -128,7 +128,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        /// Withes the write line.
+        ///     Withes the write line.
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>DebugEngineProxyBuilder.</returns>

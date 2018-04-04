@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="PrimitiveExtensions.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.

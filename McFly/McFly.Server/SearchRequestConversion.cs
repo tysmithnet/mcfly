@@ -1,4 +1,18 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : McFly.Server
+// Author           : @tysmithnet
+// Created          : 04-03-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 04-03-2018
+// ***********************************************************************
+// <copyright file="SearchRequestConversion.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Linq;
 using System.Web.Http.Controllers;
 using System.Web.Http.ModelBinding;
@@ -8,8 +22,19 @@ using Newtonsoft.Json.Linq;
 
 namespace McFly.Server
 {
+    /// <summary>
+    ///     Class SearchRequestJsonConverter.
+    /// </summary>
+    /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Server.Contract.SearchCriterionDto}" />
+    /// <seealso cref="System.Web.Http.ModelBinding.IModelBinder" />
     internal class SearchRequestJsonConverter : JsonConverter<SearchCriterionDto>, IModelBinder
     {
+        /// <summary>
+        ///     Binds the model to a value by using the specified controller context and binding context.
+        /// </summary>
+        /// <param name="actionContext">The action context.</param>
+        /// <param name="bindingContext">The binding context.</param>
+        /// <returns>true if model binding is successful; otherwise, false.</returns>
         public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
         {
             if (!typeof(SearchCriterionDto).IsAssignableFrom(bindingContext.ModelType)) return false;
@@ -21,6 +46,12 @@ namespace McFly.Server
             return true;
         }
 
+        /// <summary>
+        ///     Writes the JSON representation of the object.
+        /// </summary>
+        /// <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter" /> to write to.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, SearchCriterionDto value, JsonSerializer serializer)
         {
             var visitor = new SearchResultJsonWriterVisitor();
@@ -28,6 +59,18 @@ namespace McFly.Server
             writer.WriteToken(o.CreateReader());
         }
 
+        /// <summary>
+        ///     Reads the JSON representation of the object.
+        /// </summary>
+        /// <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader" /> to read from.</param>
+        /// <param name="objectType">Type of the object.</param>
+        /// <param name="existingValue">
+        ///     The existing value of object being read. If there is no existing value then <c>null</c>
+        ///     will be used.
+        /// </param>
+        /// <param name="hasExistingValue">The existing value has a value.</param>
+        /// <param name="serializer">The calling serializer.</param>
+        /// <returns>The object value.</returns>
         public override SearchCriterionDto ReadJson(JsonReader reader, Type objectType,
             SearchCriterionDto existingValue,
             bool hasExistingValue,
@@ -37,6 +80,11 @@ namespace McFly.Server
             return ExtractCriterion(o);
         }
 
+        /// <summary>
+        ///     Extracts the criterion.
+        /// </summary>
+        /// <param name="o">The o.</param>
+        /// <returns>SearchCriterionDto.</returns>
         private SearchCriterionDto ExtractCriterion(JObject o)
         {
             string type = null;

@@ -4,7 +4,7 @@
 // Created          : 02-28-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="Frame.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -70,6 +70,10 @@ namespace McFly.Core
         /// <value>The disassembly line.</value>
         public DisassemblyLine DisassemblyLine { get; set; } = new DisassemblyLine();
 
+        /// <summary>
+        ///     Gets or sets the notes.
+        /// </summary>
+        /// <value>The notes.</value>
         public ICollection<Note> Notes { get; set; } = new List<Note>();
 
         /// <summary>

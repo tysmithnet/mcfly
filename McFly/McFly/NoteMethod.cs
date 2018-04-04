@@ -21,7 +21,7 @@ using System.Linq;
 namespace McFly
 {
     /// <summary>
-    /// Class NoteMethod.
+    ///     Class NoteMethod.
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [ExcludeFromCodeCoverage]
@@ -29,35 +29,35 @@ namespace McFly
     internal class NoteMethod : IMcFlyMethod
     {
         /// <summary>
-        /// Gets or sets the settings.
+        ///     Gets or sets the settings.
         /// </summary>
         /// <value>The settings.</value>
         [Import]
         public Settings Settings { get; set; }
 
         /// <summary>
-        /// Gets or sets the debug eng proxy.
+        ///     Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        /// Gets or sets the server client.
+        ///     Gets or sets the server client.
         /// </summary>
         /// <value>The server client.</value>
         [Import]
         protected internal IServerClient ServerClient { get; set; }
 
         /// <summary>
-        /// Gets or sets the time travel facade.
+        ///     Gets or sets the time travel facade.
         /// </summary>
         /// <value>The time travel facade.</value>
         [Import]
         protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
 
         /// <summary>
-        /// Gets the help information.
+        ///     Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
@@ -72,7 +72,7 @@ namespace McFly
             .Build();
 
         /// <summary>
-        /// Processes the specified arguments.
+        ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
@@ -102,7 +102,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Adds the note.
+        ///     Adds the note.
         /// </summary>
         /// <param name="addOptions">The add options.</param>
         protected internal void AddNote(AddNoteOptions addOptions)
@@ -121,7 +121,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Extracts the add options.
+        ///     Extracts the add options.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>AddNoteOptions.</returns>

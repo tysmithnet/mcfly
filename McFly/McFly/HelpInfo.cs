@@ -18,28 +18,30 @@ using System.Collections.Generic;
 namespace McFly
 {
     /// <summary>
-    /// Class HelpInfo.
+    ///     Class HelpInfo.
     /// </summary>
     public class HelpInfo
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="HelpInfo" /> class.
+        ///     Initializes a new instance of the <see cref="HelpInfo" /> class.
         /// </summary>
         internal HelpInfo()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HelpInfo" /> class.
+        ///     Initializes a new instance of the <see cref="HelpInfo" /> class.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
         /// <param name="switches">The switches.</param>
         /// <param name="examples">The examples.</param>
         /// <param name="subcommands">The subcommands.</param>
-        /// <exception cref="ArgumentNullException">name
-        /// or
-        /// description</exception>
+        /// <exception cref="ArgumentNullException">
+        ///     name
+        ///     or
+        ///     description
+        /// </exception>
         public HelpInfo(string name, string description, Dictionary<string, string> switches,
             Dictionary<string, string> examples, HelpInfo[] subcommands)
         {
@@ -51,31 +53,31 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the name.
+        ///     Gets the name.
         /// </summary>
         /// <value>The name.</value>
         public string Name { get; internal set; }
 
         /// <summary>
-        /// Gets the description.
+        ///     Gets the description.
         /// </summary>
         /// <value>The description.</value>
         public string Description { get; internal set; }
 
         /// <summary>
-        /// Gets the switches.
+        ///     Gets the switches.
         /// </summary>
         /// <value>The switches.</value>
         public Dictionary<string, string> Switches { get; internal set; }
 
         /// <summary>
-        /// Gets the examples.
+        ///     Gets the examples.
         /// </summary>
         /// <value>The examples.</value>
         public Dictionary<string, string> Examples { get; internal set; }
 
         /// <summary>
-        /// Gets the subcommands.
+        ///     Gets the subcommands.
         /// </summary>
         /// <value>The subcommands.</value>
         public HelpInfo[] Subcommands { get; internal set; }

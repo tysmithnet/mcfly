@@ -18,7 +18,7 @@ using System.Text.RegularExpressions;
 namespace McFly
 {
     /// <summary>
-    /// Class BreakpointMask.
+    ///     Class BreakpointMask.
     /// </summary>
     /// <seealso cref="System.IEquatable{McFly.BreakpointMask}" />
     /// <seealso cref="McFly.IBreakpoint" />
@@ -27,7 +27,7 @@ namespace McFly
         , IBreakpoint
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BreakpointMask" /> class.
+        ///     Initializes a new instance of the <see cref="BreakpointMask" /> class.
         /// </summary>
         /// <param name="moduleMask">The module mask.</param>
         /// <param name="functionMask">The function mask.</param>
@@ -38,19 +38,19 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the module mask.
+        ///     Gets the module mask.
         /// </summary>
         /// <value>The module mask.</value>
         public string ModuleMask { get; }
 
         /// <summary>
-        /// Gets the function mask.
+        ///     Gets the function mask.
         /// </summary>
         /// <value>The function mask.</value>
         public string FunctionMask { get; }
 
         /// <summary>
-        /// Sets the breakpoint.
+        ///     Sets the breakpoint.
         /// </summary>
         /// <param name="breakpointFacade">The breakpoint facade.</param>
         public void SetBreakpoint(IBreakpointFacade breakpointFacade)
@@ -59,7 +59,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Equalses the specified other.
+        ///     Equalses the specified other.
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
@@ -71,7 +71,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
         /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
@@ -84,7 +84,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Returns a hash code for this instance.
+        ///     Returns a hash code for this instance.
         /// </summary>
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         public override int GetHashCode()
@@ -97,7 +97,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Implements the == operator.
+        ///     Implements the == operator.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -110,7 +110,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Implements the != operator.
+        ///     Implements the != operator.
         /// </summary>
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
@@ -121,7 +121,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Parses the specified input.
+        ///     Parses the specified input.
         /// </summary>
         /// <param name="input">The input.</param>
         /// <returns>BreakpointMask.</returns>

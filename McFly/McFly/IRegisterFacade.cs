@@ -18,13 +18,13 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    /// Interface IRegisterFacade
+    ///     Interface IRegisterFacade
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface IRegisterFacade : IInjectable
     {
         /// <summary>
-        /// Gets the registers.
+        ///     Gets the registers.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="registers">The registers.</param>
@@ -32,7 +32,7 @@ namespace McFly
         RegisterSet GetCurrentRegisterSet(int threadId, IEnumerable<Register> registers);
 
         /// <summary>
-        /// Gets the current register set.
+        ///     Gets the current register set.
         /// </summary>
         /// <param name="registers">The registers.</param>
         /// <returns>RegisterSet.</returns>

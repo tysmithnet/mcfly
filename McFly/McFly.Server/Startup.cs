@@ -4,7 +4,7 @@
 // Created          : 03-12-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-16-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="Startup.cs" company="">
 //     Copyright ©  2018
@@ -32,6 +32,9 @@ namespace McFly.Server
     [ExcludeFromCodeCoverage]
     public class Startup
     {
+        /// <summary>
+        ///     The log
+        /// </summary>
         private readonly ILog Log = LogManager.GetLogger<Startup>();
 
         /// <summary>
@@ -42,8 +45,6 @@ namespace McFly.Server
         {
             appBuilder.Use<LoggingMiddleware>();
             var config = new HttpConfiguration();
-            //var provider = new SimpleModelBinderProvider(typeof(Criterion), new SearchRequestJsonConverter());
-            //config.Services.Insert(typeof(ModelBinderProvider), 0, provider);
             var formatters = config.Formatters;
             var jsonFormatter = formatters.JsonFormatter;
             jsonFormatter.SerializerSettings.Converters.Add(new SearchRequestJsonConverter());
@@ -60,6 +61,11 @@ namespace McFly.Server
             appBuilder.UseWebApi(config);
         }
 
+        /// <summary>
+        ///     Gets the dependency resolver.
+        /// </summary>
+        /// <param name="config">The configuration.</param>
+        /// <returns>MefDependencyResolver.</returns>
         private MefDependencyResolver GetDependencyResolver(HttpConfiguration config)
         {
             Log.Info("Looking for MEF components");

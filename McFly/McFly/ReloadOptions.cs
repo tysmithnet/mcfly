@@ -11,12 +11,13 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using CommandLine;
 
 namespace McFly
 {
     /// <summary>
-    /// Class ReloadOptions.
+    ///     Class ReloadOptions.
     /// </summary>
     [Verb("reload")]
     public class ReloadOptions

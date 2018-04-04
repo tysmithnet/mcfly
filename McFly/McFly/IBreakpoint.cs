@@ -11,15 +11,16 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace McFly
 {
     /// <summary>
-    /// Interface IBreakpoint
+    ///     Interface IBreakpoint
     /// </summary>
     public interface IBreakpoint
     {
         /// <summary>
-        /// Sets the breakpoint.
+        ///     Sets the breakpoint.
         /// </summary>
         /// <param name="breakpointFacade">The breakpoint facade.</param>
         void SetBreakpoint(IBreakpointFacade breakpointFacade);

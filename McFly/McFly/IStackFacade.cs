@@ -17,19 +17,19 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    /// Interface IStackFacade
+    ///     Interface IStackFacade
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface IStackFacade : IInjectable
     {
         /// <summary>
-        /// Gets the current stack trace.
+        ///     Gets the current stack trace.
         /// </summary>
         /// <returns>StackTrace.</returns>
         StackTrace GetCurrentStackTrace();
 
         /// <summary>
-        /// Gets the current stack trace.
+        ///     Gets the current stack trace.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>StackTrace.</returns>

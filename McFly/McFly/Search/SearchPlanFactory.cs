@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -18,14 +19,14 @@ using System.ComponentModel.Composition;
 namespace McFly.Search
 {
     /// <summary>
-    /// Class SearchPlanFactory.
+    ///     Class SearchPlanFactory.
     /// </summary>
     /// <seealso cref="McFly.Search.ISearchPlanFactory" />
     [Export(typeof(ISearchPlanFactory))]
     internal class SearchPlanFactory : ISearchPlanFactory
     {
         /// <summary>
-        /// Creates the specified arguments.
+        ///     Creates the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>ISearchPlan.</returns>

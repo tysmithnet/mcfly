@@ -17,57 +17,57 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    /// Interface ITimeTravelFacade
+    ///     Interface ITimeTravelFacade
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface ITimeTravelFacade : IInjectable
     {
         /// <summary>
-        /// Gets the current frame.
+        ///     Gets the current frame.
         /// </summary>
         /// <returns>Frame.</returns>
         Frame GetCurrentFrame();
 
         /// <summary>
-        /// Gets the current frame.
+        ///     Gets the current frame.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>Frame.</returns>
         Frame GetCurrentFrame(int threadId);
 
         /// <summary>
-        /// Sets the position.
+        ///     Sets the position.
         /// </summary>
         /// <param name="position">The position.</param>
         void SetPosition(Position position);
 
         /// <summary>
-        /// Gets the current position.
+        ///     Gets the current position.
         /// </summary>
         /// <returns>Position.</returns>
         Position GetCurrentPosition();
 
         /// <summary>
-        /// Gets the current position.
+        ///     Gets the current position.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>Position.</returns>
         Position GetCurrentPosition(int threadId);
 
         /// <summary>
-        /// Positionses this instance.
+        ///     Positionses this instance.
         /// </summary>
         /// <returns>PositionsResult.</returns>
         PositionsResult Positions();
 
         /// <summary>
-        /// Gets the starting position of the trace. Many times this is 35:0
+        ///     Gets the starting position of the trace. Many times this is 35:0
         /// </summary>
         /// <returns>Position.</returns>
         Position GetStartingPosition();
 
         /// <summary>
-        /// Gets the ending position
+        ///     Gets the ending position
         /// </summary>
         /// <returns>Position.</returns>
         Position GetEndingPosition();

@@ -15,7 +15,7 @@
 namespace McFly
 {
     /// <summary>
-    /// Interface ISettings
+    ///     Interface ISettings
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface ISettings : IInjectable
