@@ -14,6 +14,7 @@
 
 using System;
 using System.Linq.Expressions;
+using LinqKit;
 using McFly.Core;
 using McFly.Server.Data.Search;
 
@@ -52,7 +53,7 @@ namespace McFly.Server.Data.SqlServer
         ///     Visits the specified and criterion.
         /// </summary>
         /// <param name="andCriterion">The and criterion.</param>
-        public Expression Visit(AndCriterion andCriterion)
+        public FramePredicateExpression Visit(AndCriterion andCriterion)
         {
             FramePredicateExpression result = null;
             foreach (var c in andCriterion.Criteria)
@@ -64,7 +65,7 @@ namespace McFly.Server.Data.SqlServer
                     continue;
                 }
 
-                result = Expression.AndAlso(result.Body, f.Body);
+                result = result.And(f);
             }
 
             return result;
@@ -72,36 +73,36 @@ namespace McFly.Server.Data.SqlServer
 
         public Expression Visit(OrCriterion orCriterion)
         {
-            Expression result = null;
+            FramePredicateExpression result = null;
             foreach (var c in orCriterion.Criteria)
             {
-                var f = (Expression) c.Accept(this);
+                var f = (FramePredicateExpression)c.Accept(this);
                 if (result == null)
                 {
                     result = f;
                     continue;
                 }
 
-                result = Expression.OrElse(result, f);
+                result = result.Or(f);
             }
 
             return result;
         }
 
-        public Expression Visit(RegisterEqualsCriterion registerEqualsCriterion)
+        public FramePredicateExpression Visit(RegisterEqualsCriterion registerEqualsCriterion)
         {
             if (registerEqualsCriterion.Register == Register.Rax)
             {
-                Expression<Func<FrameEntity, bool>> exp = entity =>
+                FramePredicateExpression exp = entity =>
                     entity.Rax == registerEqualsCriterion.Value.ToLong();
-                return exp.Body;
+                return exp;
             }
 
             if (registerEqualsCriterion.Register == Register.Rbx)
             {
-                Expression<Func<FrameEntity, bool>> exp = entity =>
+                FramePredicateExpression exp = entity =>
                     entity.Rbx == registerEqualsCriterion.Value.ToLong();
-                return exp.Body;
+                return exp;
             }
 
             throw new IndexOutOfRangeException("Unknown register");

@@ -18,6 +18,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Linq.Expressions;
 using Common.Logging;
+using LinqKit;
 using McFly.Core;
 using McFly.Server.Data.Search;
 
@@ -93,14 +94,16 @@ namespace McFly.Server.Data.SqlServer
 
         public IEnumerable<Frame> Search(string projectName, ICriterion criterion)
         {
-            var visitor = new FrameCriterionVisitor();
-            var exp = (Expression<Func<FrameEntity, bool>>) visitor.Visit(criterion);
             using (var ctx = ContextFactory.GetContext(projectName))
             {
-                return ctx.FrameEntities.Where(exp).ToList().Select(x => x.ToFrame());
+                var query = ctx.FrameEntities.AsExpandable();
+                var visitor = new FrameCriterionVisitor();
+                var exp = (Expression<Func<FrameEntity, bool>>)visitor.Visit(criterion);
+                var frames = query.Where(exp).ToList().Select(x => x.ToFrame());
+                return frames;
             }
         }
-
+        
         /// <summary>
         ///     Copies the values.
         /// </summary>
