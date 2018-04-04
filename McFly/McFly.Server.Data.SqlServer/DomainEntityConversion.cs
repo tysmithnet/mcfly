@@ -34,11 +34,11 @@ namespace McFly.Server.Data.SqlServer
                 PosHi = frame.Position.High,
                 PosLo = frame.Position.Low,
                 ThreadId = frame.ThreadId,
-                Rax = frame.RegisterSet.Rax?.ToLong(),
-                Rbx = frame.RegisterSet.Rbx?.ToLong(),
-                Rcx = frame.RegisterSet.Rcx?.ToLong(),
-                Rdx = frame.RegisterSet.Rdx?.ToLong(),
-                Address = frame.DisassemblyLine?.InstructionAddress?.ToLong(),
+                Rax = frame.RegisterSet.Rax?.ToByteArray(),
+                Rbx = frame.RegisterSet.Rbx?.ToByteArray(),
+                Rcx = frame.RegisterSet.Rcx?.ToByteArray(),
+                Rdx = frame.RegisterSet.Rdx?.ToByteArray(),
+                Rip = frame.DisassemblyLine?.InstructionAddress?.ToByteArray(),
                 OpCode = frame.DisassemblyLine?.OpCode,
                 OpCodeMnemonic = frame.DisassemblyLine?.OpCodeMnemonic,
                 DisassemblyNote = frame.DisassemblyLine?.DisassemblyNote,
@@ -58,7 +58,7 @@ namespace McFly.Server.Data.SqlServer
             {
                 Position = new Position(entity.PosHi, entity.PosLo),
                 ThreadId = entity.ThreadId,
-                DisassemblyLine = new DisassemblyLine(entity.Address?.ToULong(), entity.OpCode, entity.OpCodeMnemonic,
+                DisassemblyLine = new DisassemblyLine(entity.Rip?.ToULong(), entity.OpCode, entity.OpCodeMnemonic,
                     entity.DisassemblyNote),
                 RegisterSet = new RegisterSet
                 {
@@ -119,11 +119,11 @@ namespace McFly.Server.Data.SqlServer
         {
             return new StackFrameEntity
             {
-                StackPointer = stackFrame.StackPointer.ToLong(),
-                ReturnAddress = stackFrame.ReturnAddress?.ToLong(),
+                StackPointer = stackFrame.StackPointer.ToByteArray(),
+                ReturnAddress = stackFrame.ReturnAddress?.ToByteArray(),
                 ModuleName = stackFrame.Module,
                 Function = stackFrame.FunctionName,
-                Offset = stackFrame.Offset?.ToLong()
+                Offset = stackFrame.Offset?.ToByteArray()
             };
         }
     }

@@ -111,20 +111,20 @@ namespace McFly.Server.Data.SqlServer
         /// <param name="target">The target.</param>
         private static void CopyValues(FrameEntity source, FrameEntity target)
         {
-            if (source.Rax.HasValue)
+            if (source.Rax != null)
                 target.Rax = source.Rax;
 
-            if (source.Rbx.HasValue)
+            if (source.Rbx != null)
                 target.Rbx = source.Rbx;
 
-            if (source.Rcx.HasValue)
+            if (source.Rcx != null)
                 target.Rcx = source.Rcx;
 
-            if (source.Rdx.HasValue)
+            if (source.Rdx != null)
                 target.Rdx = source.Rdx;
 
-            if (source.Address.HasValue)
-                target.Address = source.Address;
+            if (source.Rip != null)
+                target.Rip = source.Rip;
 
             if (source.DisassemblyNote != null)
                 target.DisassemblyNote = source.DisassemblyNote;
@@ -143,13 +143,13 @@ namespace McFly.Server.Data.SqlServer
                     if (targetStackFrame != null)
                     {
                         // copy source values to target
-                        if (sourceStackFrame.ReturnAddress.HasValue)
+                        if (sourceStackFrame.ReturnAddress != null)
                             targetStackFrame.ReturnAddress = sourceStackFrame.ReturnAddress;
                         if (sourceStackFrame.ModuleName != null)
                             targetStackFrame.ModuleName = sourceStackFrame.ModuleName;
                         if (sourceStackFrame.Function != null)
                             targetStackFrame.Function = sourceStackFrame.Function;
-                        if (sourceStackFrame.Offset.HasValue)
+                        if (sourceStackFrame.Offset != null)
                             targetStackFrame.Offset = sourceStackFrame.Offset;
                     }
                     else

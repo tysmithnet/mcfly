@@ -29,21 +29,21 @@ namespace McFly.Server.Data.SqlServer
         /// <value>The stack frame identifier.</value>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long? StackFrameId { get; set; }
+        public long StackFrameId { get; set; }
 
         /// <summary>
         ///     Gets or sets the stack pointer.
         /// </summary>
         /// <value>The stack pointer.</value>
         [Column("stack_pointer")]
-        public long StackPointer { get; set; }
+        public byte[] StackPointer { get; set; }
 
         /// <summary>
         ///     Gets or sets the return address.
         /// </summary>
         /// <value>The return address.</value>
         [Column("return_address")]
-        public long? ReturnAddress { get; set; }
+        public byte[] ReturnAddress { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the module.
@@ -64,7 +64,7 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <value>The offset.</value>
         [Column("offset")]
-        public long? Offset { get; set; }
+        public byte[] Offset { get; set; }
 
         /// <summary>
         ///     Gets or sets the frame identifier.

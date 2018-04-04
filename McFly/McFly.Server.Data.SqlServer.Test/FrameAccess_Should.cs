@@ -20,17 +20,17 @@ namespace McFly.Server.Data.SqlServer.Test
                 PosHi = 0,
                 PosLo = 0,
                 ThreadId = 1,
-                Rax = 1
+                Rax = ((ulong)1).ToByteArray()
             }).WithFrame(new FrameEntity
             {
                 PosHi = 0,
                 PosLo = 0,
                 ThreadId = 2,
-                Rax = 2
+                Rax = ((ulong)2).ToByteArray()
             });
             frameAccess.ContextFactory = builder.Build();
 
-            var results = frameAccess.Search("", new RegisterEqualsCriterion(Register.Rax, 1));
+            var results = frameAccess.Search("", new RegisterEqualsCriterion(Register.Rax, ((ulong)1).ToByteArray()));
             results.Single().RegisterSet.Rax.Should().Be(1);
         }
 
@@ -78,23 +78,23 @@ namespace McFly.Server.Data.SqlServer.Test
                 PosHi = 0,
                 PosLo = 0,
                 ThreadId = 1,
-                Rax = 1,
-                Rbx = 2,
-                Rcx = 3,
-                Rdx = 4,
+                Rax = 1.ToByteArray(),
+                Rbx = 2.ToByteArray(),
+                Rcx = 3.ToByteArray(),
+                Rdx = 4.ToByteArray(),
                 DisassemblyNote = "r9,r8",
-                Address = 90,
+                Rip = 90.ToByteArray(),
                 OpCode = new byte[] {0x10, 0x20},
                 OpCodeMnemonic = "mov",
                 StackFrames = new List<StackFrameEntity>
                 {
                     new StackFrameEntity
                     {
-                        StackPointer = 100,
-                        ReturnAddress = 700,
+                        StackPointer = 100.ToByteArray(),
+                        ReturnAddress = 700.ToByteArray(),
                         ModuleName = "mymod",
                         Function = "myfun",
-                        Offset = 30
+                        Offset = 30.ToByteArray()
                     }
                 },
                 Notes = new List<NoteEntity>

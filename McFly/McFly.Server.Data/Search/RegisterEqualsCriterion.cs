@@ -4,12 +4,12 @@ namespace McFly.Server.Data.Search
 {
     public class RegisterEqualsCriterion : RegisterCriterion
     {
-        public RegisterEqualsCriterion(Register register, ulong value) : base(register)
+        public RegisterEqualsCriterion(Register register, byte[] value) : base(register)
         {
             Value = value;
         }
 
-        public ulong Value { get; }
+        public byte[] Value { get; }
 
         public override object Accept(ICriterionVisitor visitor)
         {

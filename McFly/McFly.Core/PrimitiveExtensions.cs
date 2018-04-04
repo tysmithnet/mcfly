@@ -12,6 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
+
 namespace McFly.Core
 {
     /// <summary>
@@ -37,6 +39,62 @@ namespace McFly.Core
         public static ulong ToULong(this long longValue)
         {
             return unchecked((ulong) longValue);
+        }
+
+        public static byte[] ToByteArray(this ulong ulongValue)
+        {
+            return BitConverter.GetBytes(ulongValue);
+        }
+
+        public static byte[] ToByteArray(this long longValue)
+        {
+            return BitConverter.GetBytes(longValue);
+        }
+
+        public static byte[] ToByteArray(this uint uintValue)
+        {
+            return BitConverter.GetBytes(uintValue);
+        }
+
+        public static byte[] ToByteArray(this int intValue)
+        {
+            return BitConverter.GetBytes(intValue);
+        }
+
+        public static ulong ToULong(this byte[] bytes)
+        {
+            if (bytes == null)
+                throw new ArgumentNullException(nameof(bytes));
+            if (bytes.Length != 8)
+                throw new ArgumentOutOfRangeException($"{nameof(bytes)} must have exactly 8 bytes");
+            return BitConverter.ToUInt64(bytes, 0);
+        }
+
+        public static long ToLong(this byte[] bytes)
+        {
+            if (bytes == null)
+                throw new ArgumentNullException(nameof(bytes));
+            if (bytes.Length != 8)
+                throw new ArgumentOutOfRangeException($"{nameof(bytes)} must have exactly 8 bytes");
+            return BitConverter.ToInt64(bytes, 0);
+        }
+
+        public static uint ToUInt(this byte[] bytes)
+        {
+            if(bytes == null)
+                throw new ArgumentNullException(nameof(bytes));
+            if(bytes.Length != 4)
+                throw new ArgumentOutOfRangeException($"{nameof(bytes)} must have exactly 4 bytes");
+            return BitConverter.ToUInt32(bytes, 0);
+        }
+
+        public static int ToInt(this byte[] bytes)
+        {
+            if (bytes == null)
+                throw new ArgumentNullException(nameof(bytes));
+            if (bytes.Length != 4)
+                throw new ArgumentOutOfRangeException($"{nameof(bytes)} must have exactly 4 bytes");
+            return BitConverter.ToInt32(bytes, 0);
         }
 
         /// <summary>

@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using LinqKit;
 using McFly.Core;
@@ -71,7 +72,7 @@ namespace McFly.Server.Data.SqlServer
             return result;
         }
 
-        public Expression Visit(OrCriterion orCriterion)
+        public FramePredicateExpression Visit(OrCriterion orCriterion)
         {
             FramePredicateExpression result = null;
             foreach (var c in orCriterion.Criteria)
@@ -91,17 +92,18 @@ namespace McFly.Server.Data.SqlServer
 
         public FramePredicateExpression Visit(RegisterEqualsCriterion registerEqualsCriterion)
         {
+            var bytes = registerEqualsCriterion.Value;
             if (registerEqualsCriterion.Register == Register.Rax)
             {
                 FramePredicateExpression exp = entity =>
-                    entity.Rax == registerEqualsCriterion.Value.ToLong();
+                    entity.Rax.SequenceEqual(bytes);
                 return exp;
             }
 
             if (registerEqualsCriterion.Register == Register.Rbx)
             {
                 FramePredicateExpression exp = entity =>
-                    entity.Rbx == registerEqualsCriterion.Value.ToLong();
+                    entity.Rbx.SequenceEqual(bytes);
                 return exp;
             }
 
