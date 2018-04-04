@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-27-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="BreakpointFacadeBuilder.cs" company="">
 //     Copyright ©  2018
@@ -17,17 +17,17 @@ using Moq;
 namespace McFly.Tests.Builders
 {
     /// <summary>
-    ///     Class BreakpointFacadeBuilder.
+    /// Class BreakpointFacadeBuilder.
     /// </summary>
     internal class BreakpointFacadeBuilder
     {
         /// <summary>
-        ///     The mock
+        /// The mock
         /// </summary>
         public Mock<IBreakpointFacade> Mock = new Mock<IBreakpointFacade>();
 
         /// <summary>
-        ///     Withes the set breakpoint by mask.
+        /// Withes the set breakpoint by mask.
         /// </summary>
         /// <param name="mask">The mask.</param>
         /// <param name="function">The function.</param>
@@ -38,6 +38,10 @@ namespace McFly.Tests.Builders
             return this;
         }
 
+        /// <summary>
+        /// Withes the set breakpoint by mask.
+        /// </summary>
+        /// <returns>BreakpointFacadeBuilder.</returns>
         public BreakpointFacadeBuilder WithSetBreakpointByMask()
         {
             Mock.Setup(facade => facade.SetBreakpointByMask(It.IsAny<string>(), It.IsAny<string>()));
@@ -45,7 +49,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        ///     Withes the set read access breakpoint.
+        /// Withes the set read access breakpoint.
         /// </summary>
         /// <param name="length">The length.</param>
         /// <param name="address">The address.</param>
@@ -56,6 +60,10 @@ namespace McFly.Tests.Builders
             return this;
         }
 
+        /// <summary>
+        /// Withes the set read access breakpoint.
+        /// </summary>
+        /// <returns>BreakpointFacadeBuilder.</returns>
         public BreakpointFacadeBuilder WithSetReadAccessBreakpoint()
         {
             Mock.Setup(facade => facade.SetReadAccessBreakpoint(It.IsAny<int>(), It.IsAny<ulong>()));
@@ -63,7 +71,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        ///     Withes the set write access breakpoint.
+        /// Withes the set write access breakpoint.
         /// </summary>
         /// <param name="length">The length.</param>
         /// <param name="address">The address.</param>
@@ -74,6 +82,10 @@ namespace McFly.Tests.Builders
             return this;
         }
 
+        /// <summary>
+        /// Withes the set write access breakpoint.
+        /// </summary>
+        /// <returns>BreakpointFacadeBuilder.</returns>
         public BreakpointFacadeBuilder WithSetWriteAccessBreakpoint()
         {
             Mock.Setup(facade => facade.SetWriteAccessBreakpoint(It.IsAny<int>(), It.IsAny<ulong>()));
@@ -81,7 +93,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        ///     Builds this instance.
+        /// Builds this instance.
         /// </summary>
         /// <returns>IBreakpointFacade.</returns>
         public IBreakpointFacade Build()

@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-26-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="BreakpointFacade.cs" company="">
 //     Copyright ©  2018
@@ -19,26 +19,26 @@ using System.Linq;
 namespace McFly
 {
     /// <summary>
-    ///     Default breakpoint facade implementation
+    /// Default breakpoint facade implementation
     /// </summary>
     /// <seealso cref="McFly.IBreakpointFacade" />
     [Export(typeof(IBreakpointFacade))]
     public class BreakpointFacade : IBreakpointFacade
     {
         /// <summary>
-        ///     The valid lengths for data access breakpoints
+        /// The valid lengths for data access breakpoints
         /// </summary>
         private static readonly int[] ValidDataAccessLength = {1, 2, 4, 8};
 
         /// <summary>
-        ///     Gets or sets the debug engine proxy.
+        /// Gets or sets the debug engine proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        ///     Sets the breakpoint by mask.
+        /// Sets the breakpoint by mask.
         /// </summary>
         /// <param name="moduleMask">The module mask.</param>
         /// <param name="functionMask">The function mask.</param>
@@ -48,7 +48,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Sets the read access breakpoint.
+        /// Sets the read access breakpoint.
         /// </summary>
         /// <param name="length">The length.</param>
         /// <param name="address">The address.</param>
@@ -59,7 +59,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Sets the write access breakpoint.
+        /// Sets the write access breakpoint.
         /// </summary>
         /// <param name="length">The length.</param>
         /// <param name="address">The address.</param>
@@ -70,7 +70,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Clears the breakpoints.
+        /// Clears the breakpoints.
         /// </summary>
         public void ClearBreakpoints()
         {
@@ -78,7 +78,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Validates the length of the requested data access breakpoint
+        /// Validates the length of the requested data access breakpoint
         /// </summary>
         /// <param name="length">The length.</param>
         /// <exception cref="ArgumentOutOfRangeException">Access breakpoints can only have lengths of 1, 2, 4, or 8 bytes</exception>

@@ -4,7 +4,7 @@
 // Created          : 03-19-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="DisassemblyFacadeBuilder.cs" company="">
 //     Copyright ©  2018
@@ -19,17 +19,17 @@ using Moq;
 namespace McFly.Tests.Builders
 {
     /// <summary>
-    ///     Class DisassemblyFacadeBuilder.
+    /// Class DisassemblyFacadeBuilder.
     /// </summary>
     internal class DisassemblyFacadeBuilder
     {
         /// <summary>
-        ///     The mock
+        /// The mock
         /// </summary>
         public Mock<IDisassemblyFacade> Mock = new Mock<IDisassemblyFacade>();
 
         /// <summary>
-        ///     Withes the get disassembly lines.
+        /// Withes the get disassembly lines.
         /// </summary>
         /// <param name="num">The number.</param>
         /// <param name="result">The result.</param>
@@ -41,7 +41,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        ///     Withes the get disassembly lines.
+        /// Withes the get disassembly lines.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="num">The number.</param>
@@ -55,7 +55,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        ///     Builds this instance.
+        /// Builds this instance.
         /// </summary>
         /// <returns>IDisassemblyFacade.</returns>
         public IDisassemblyFacade Build()

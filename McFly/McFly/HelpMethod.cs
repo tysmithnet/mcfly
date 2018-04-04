@@ -4,7 +4,7 @@
 // Created          : 03-24-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="HelpMethod.cs" company="">
 //     Copyright ©  2018
@@ -19,28 +19,28 @@ using System.Text;
 namespace McFly
 {
     /// <summary>
-    ///     Class HelpMethod.
+    /// Class HelpMethod.
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
     public class HelpMethod : IMcFlyMethod // todo: rename to command
     {
         /// <summary>
-        ///     Gets or sets the methods.
+        /// Gets or sets the methods.
         /// </summary>
         /// <value>The methods.</value>
         [ImportMany]
         protected internal IMcFlyMethod[] Methods { get; set; }
 
         /// <summary>
-        ///     Gets or sets the debug engine proxy.
+        /// Gets or sets the debug engine proxy.
         /// </summary>
         /// <value>The debug engine proxy.</value>
         [Import]
         protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        ///     Gets the help information.
+        /// Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
@@ -54,7 +54,7 @@ namespace McFly
             .Build();
 
         /// <summary>
-        ///     Processes the specified arguments.
+        /// Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
@@ -75,7 +75,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the command help.
+        /// Gets the command help.
         /// </summary>
         /// <param name="command">The command.</param>
         /// <returns>System.String.</returns>
@@ -125,7 +125,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Determines whether [is single command] [the specified arguments].
+        /// Determines whether [is single command] [the specified arguments].
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns><c>true</c> if [is single command] [the specified arguments]; otherwise, <c>false</c>.</returns>
@@ -135,7 +135,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the command listing.
+        /// Gets the command listing.
         /// </summary>
         /// <returns>System.String.</returns>
         private string GetCommandListing()
@@ -156,7 +156,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Determines whether [is empty arguments] [the specified arguments].
+        /// Determines whether [is empty arguments] [the specified arguments].
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns><c>true</c> if [is empty arguments] [the specified arguments]; otherwise, <c>false</c>.</returns>

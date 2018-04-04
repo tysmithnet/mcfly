@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="McFly.cs" company="">
 //     Copyright ©  2018
@@ -39,78 +39,78 @@ namespace McFly
      * todo: add additional checks to sql
      */
     /// <summary>
-    ///     Class McFlyExtension.
+    /// Class McFlyExtension.
     /// </summary>
     [ExcludeFromCodeCoverage]
     public class McFlyExtension
     {
         /// <summary>
-        ///     The control
+        /// The control
         /// </summary>
         private static IDebugControl6 control;
 
         /// <summary>
-        ///     The client
+        /// The client
         /// </summary>
         private static IDebugClient5 client;
 
         /// <summary>
-        ///     The registers
+        /// The registers
         /// </summary>
         private static IDebugRegisters2 registers;
 
         /// <summary>
-        ///     The system objects
+        /// The system objects
         /// </summary>
         private static IDebugSystemObjects systemObjects;
 
         /// <summary>
-        ///     The symbols
+        /// The symbols
         /// </summary>
         private static IDebugSymbols5 symbols;
 
         /// <summary>
-        ///     The last hr
+        /// The last hr
         /// </summary>
         private static HRESULT LastHR;
 
         /// <summary>
-        ///     The settings
+        /// The settings
         /// </summary>
         private static Settings settings;
 
         /// <summary>
-        ///     The curr domain
+        /// The curr domain
         /// </summary>
         internal static AppDomain currDomain;
 
         /// <summary>
-        ///     The showed intro
+        /// The showed intro
         /// </summary>
         private static bool showedIntro;
 
         /// <summary>
-        ///     The p format
+        /// The p format
         /// </summary>
         private static readonly string pFormat = $":x{Marshal.SizeOf(IntPtr.Zero) * 2}";
 
         /// <summary>
-        ///     The composition container
+        /// The composition container
         /// </summary>
         private static CompositionContainer compositionContainer;
 
         /// <summary>
-        ///     The application
+        /// The application
         /// </summary>
         private static McFlyApp app;
 
         /// <summary>
-        ///     The log
+        /// The log
         /// </summary>
         private static ILog log;
 
         /// <summary>
-        ///     Create debugger interface
+        /// Create debugger interface
         /// </summary>
         /// <param name="InterfaceId">The interface identifier.</param>
         /// <param name="Interface">The interface.</param>
@@ -120,7 +120,7 @@ namespace McFly
             [MarshalAs(UnmanagedType.IUnknown)] out object Interface);
 
         /// <summary>
-        ///     Get the HRESULT code for the specified int
+        /// Get the HRESULT code for the specified int
         /// </summary>
         /// <param name="Result">The result.</param>
         /// <returns>HRESULT.</returns>
@@ -133,7 +133,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Get the HRESULT code for the specified int
+        /// Get the HRESULT code for the specified int
         /// </summary>
         /// <param name="Result">The result.</param>
         /// <returns>HRESULT.</returns>
@@ -152,7 +152,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Creates the i debug client.
+        /// Creates the i debug client.
         /// </summary>
         /// <returns>IDebugClient.</returns>
         private static IDebugClient CreateIDebugClient()
@@ -172,7 +172,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Initializes the API.
+        /// Initializes the API.
         /// </summary>
         /// <param name="log">The log.</param>
         internal static void InitApi(ILog log = null)
@@ -197,7 +197,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Debugs the extension initialize.
+        /// Debugs the extension initialize.
         /// </summary>
         /// <param name="Version">The version.</param>
         /// <param name="Flags">The flags.</param>
@@ -239,7 +239,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Handles the UnhandledException event of the CurrDomain control.
+        /// Handles the UnhandledException event of the CurrDomain control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="UnhandledExceptionEventArgs" /> instance containing the event data.</param>
@@ -262,7 +262,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Debugs the extension notify.
+        /// Debugs the extension notify.
         /// </summary>
         /// <param name="Notify">The notify.</param>
         /// <param name="Argument">The argument.</param>
@@ -294,7 +294,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Mfs the specified client.
+        /// Mfs the specified client.
         /// </summary>
         /// <param name="client">The client.</param>
         /// <param name="args">The arguments.</param>
@@ -323,6 +323,10 @@ namespace McFly
             return HRESULT.S_OK;
         }
 
+        /// <summary>
+        /// Gets the log path.
+        /// </summary>
+        /// <returns>System.String.</returns>
         internal static string GetLogPath()
         {
             var assemblyPath = Assembly.GetExecutingAssembly().Location;
@@ -331,7 +335,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Populates the settings.
+        /// Populates the settings.
         /// </summary>
         internal static void PopulateSettings()
         {
@@ -379,7 +383,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Debugs the extension uninitialize.
+        /// Debugs the extension uninitialize.
         /// </summary>
         /// <returns>HRESULT.</returns>
         [DllExport]
@@ -394,7 +398,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Uses the specified client.
+        /// Uses the specified client.
         /// </summary>
         /// <param name="client">The client.</param>
         /// <param name="args">The arguments.</param>
@@ -410,7 +414,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Uses the specified project name.
+        /// Uses the specified project name.
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         private static void Use(string projectName)
@@ -431,7 +435,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Commands the line to argv w.
+        /// Commands the line to argv w.
         /// </summary>
         /// <param name="lpCmdLine">The lp command line.</param>
         /// <param name="pNumArgs">The p number arguments.</param>
@@ -441,7 +445,7 @@ namespace McFly
             [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, out int pNumArgs);
 
         /// <summary>
-        ///     Commands the line to arguments.
+        /// Commands the line to arguments.
         /// </summary>
         /// <param name="commandLine">The command line.</param>
         /// <returns>System.String[].</returns>
@@ -470,7 +474,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Pointers the format.
+        /// Pointers the format.
         /// </summary>
         /// <param name="Message">The message.</param>
         /// <returns>System.String.</returns>
@@ -480,7 +484,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Writes the specified message.
+        /// Writes the specified message.
         /// </summary>
         /// <param name="Message">The message.</param>
         /// <param name="Params">The parameters.</param>
@@ -493,7 +497,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Writes the line.
+        /// Writes the line.
         /// </summary>
         /// <param name="Message">The message.</param>
         /// <param name="Params">The parameters.</param>
@@ -507,7 +511,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Writes the DML.
+        /// Writes the DML.
         /// </summary>
         /// <param name="Message">The message.</param>
         /// <param name="Params">The parameters.</param>
@@ -520,7 +524,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Writes the DML line.
+        /// Writes the DML line.
         /// </summary>
         /// <param name="Message">The message.</param>
         /// <param name="Params">The parameters.</param>
@@ -534,7 +538,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Outs the specified message.
+        /// Outs the specified message.
         /// </summary>
         /// <param name="Message">The message.</param>
         public static void Out(string Message)
@@ -543,7 +547,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Outs the DML.
+        /// Outs the DML.
         /// </summary>
         /// <param name="Message">The message.</param>
         public static void OutDml(string Message)
@@ -552,7 +556,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Delegate Ioctl
+        /// Delegate Ioctl
         /// </summary>
         /// <param name="IoctlType">Type of the ioctl.</param>
         /// <param name="lpvData">The LPV data.</param>

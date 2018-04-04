@@ -4,7 +4,7 @@
 // Created          : 03-23-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-27-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="HttpFacade.cs" company="">
 //     Copyright ©  2018
@@ -24,7 +24,7 @@ using Newtonsoft.Json;
 namespace McFly
 {
     /// <summary>
-    ///     Class HttpFacade.
+    /// Class HttpFacade.
     /// </summary>
     /// <seealso cref="McFly.IHttpFacade" />
     /// <seealso cref="System.IDisposable" />
@@ -32,12 +32,12 @@ namespace McFly
     public class HttpFacade : IHttpFacade
     {
         /// <summary>
-        ///     The client
+        /// The client
         /// </summary>
         private readonly HttpClient client = new HttpClient();
 
         /// <summary>
-        ///     Posts the asynchronous.
+        /// Posts the asynchronous.
         /// </summary>
         /// <param name="resourceUri">The resource URI.</param>
         /// <param name="formContent">Content of the form.</param>
@@ -54,7 +54,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Posts the asynchronous.
+        /// Posts the asynchronous.
         /// </summary>
         /// <param name="resourceUri">The resource URI.</param>
         /// <param name="content">The content.</param>
@@ -70,7 +70,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Sends a post request to a URI with the provided conent a json
+        /// Sends a post request to a URI with the provided conent a json
         /// </summary>
         /// <param name="resourceUri">The resource URI.</param>
         /// <param name="content">The content.</param>
@@ -91,7 +91,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Sets the headers.
+        /// Sets the headers.
         /// </summary>
         /// <param name="requestHeaders">The request headers.</param>
         /// <param name="client">The client.</param>

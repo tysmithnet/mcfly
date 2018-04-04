@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-18-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="RegisterFacadeBuilder.cs" company="">
 //     Copyright ©  2018
@@ -19,17 +19,17 @@ using Moq;
 namespace McFly.Tests.Builders
 {
     /// <summary>
-    ///     Class RegisterFacadeBuilder.
+    /// Class RegisterFacadeBuilder.
     /// </summary>
     internal class RegisterFacadeBuilder
     {
         /// <summary>
-        ///     The mock
+        /// The mock
         /// </summary>
         public Mock<IRegisterFacade> Mock = new Mock<IRegisterFacade>();
 
         /// <summary>
-        ///     Withes the get current register set.
+        /// Withes the get current register set.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="registers">The registers.</param>
@@ -43,7 +43,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        ///     Withes the get current register set.
+        /// Withes the get current register set.
         /// </summary>
         /// <param name="registers">The registers.</param>
         /// <param name="result">The result.</param>
@@ -56,7 +56,7 @@ namespace McFly.Tests.Builders
         }
 
         /// <summary>
-        ///     Builds this instance.
+        /// Builds this instance.
         /// </summary>
         /// <returns>IRegisterFacade.</returns>
         public IRegisterFacade Build()

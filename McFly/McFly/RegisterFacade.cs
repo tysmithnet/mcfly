@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="RegisterFacade.cs" company="">
 //     Copyright ©  2018
@@ -21,21 +21,21 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    ///     Class RegisterFacade.
+    /// Class RegisterFacade.
     /// </summary>
     /// <seealso cref="McFly.IRegisterFacade" />
     [Export(typeof(IRegisterFacade))]
     public class RegisterFacade : IRegisterFacade
     {
         /// <summary>
-        ///     Gets or sets the debug eng proxy.
+        /// Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        ///     Gets the registers.
+        /// Gets the registers.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="registers">The registers.</param>
@@ -60,7 +60,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the current register set.
+        /// Gets the current register set.
         /// </summary>
         /// <param name="registers">The registers.</param>
         /// <returns>RegisterSet.</returns>

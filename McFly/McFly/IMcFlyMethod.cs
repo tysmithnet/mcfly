@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="IMcFlyMethod.cs" company="">
 //     Copyright ©  2018
@@ -15,19 +15,19 @@
 namespace McFly
 {
     /// <summary>
-    ///     Interface IMcFlyMethod
+    /// Interface IMcFlyMethod
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface IMcFlyMethod : IInjectable
     {
         /// <summary>
-        ///     Gets the help information.
+        /// Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
         HelpInfo HelpInfo { get; }
 
         /// <summary>
-        ///     Processes the specified arguments.
+        /// Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>

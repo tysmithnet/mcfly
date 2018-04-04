@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="IndexMethod.cs" company="">
 //     Copyright ©  2018
@@ -22,61 +22,61 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    ///     Class IndexMethod.
+    /// Class IndexMethod.
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
     internal class IndexMethod : IMcFlyMethod
     {
         /// <summary>
-        ///     The is32 bit
+        /// The is32 bit
         /// </summary>
         private bool? _is32Bit;
 
         /// <summary>
-        ///     Gets or sets the log.
+        /// Gets or sets the log.
         /// </summary>
         /// <value>The log.</value>
         [Import]
         protected internal ILog Log { get; set; }
 
         /// <summary>
-        ///     Gets or sets the debug eng proxy.
+        /// Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
         protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        ///     Gets or sets the breakpoint facade.
+        /// Gets or sets the breakpoint facade.
         /// </summary>
         /// <value>The breakpoint facade.</value>
         [Import]
         protected internal IBreakpointFacade BreakpointFacade { get; set; }
 
         /// <summary>
-        ///     Gets or sets the time travel facade.
+        /// Gets or sets the time travel facade.
         /// </summary>
         /// <value>The time travel facade.</value>
         [Import]
         protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
 
         /// <summary>
-        ///     Gets or sets the settings.
+        /// Gets or sets the settings.
         /// </summary>
         /// <value>The settings.</value>
         [Import]
         protected internal Settings Settings { get; set; }
 
         /// <summary>
-        ///     Gets or sets the server client.
+        /// Gets or sets the server client.
         /// </summary>
         /// <value>The server client.</value>
         [Import]
         protected internal IServerClient ServerClient { get; set; }
 
         /// <summary>
-        ///     Gets the help information.
+        /// Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder() // todo: add thread specifier
@@ -97,7 +97,7 @@ namespace McFly
             .Build();
 
         /// <summary>
-        ///     Processes the specified arguments.
+        /// Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
@@ -110,6 +110,15 @@ namespace McFly
             ProcessInternal(startingPosition, endingPosition);
         }
 
+        /// <summary>
+        /// Extracts the index options.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>IndexOptions.</returns>
+        /// <exception cref="FormatException">
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// </exception>
         internal static IndexOptions ExtractIndexOptions(string[] args)
         {
             var options = new IndexOptions();
@@ -223,7 +232,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the starting position.
+        /// Gets the starting position.
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>Position.</returns>
@@ -236,7 +245,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the starting position.
+        /// Gets the starting position.
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>Position.</returns>
@@ -249,7 +258,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Is32s the bit.
+        /// Is32s the bit.
         /// </summary>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         protected internal bool Is32Bit()
@@ -263,7 +272,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Processes the internal.
+        /// Processes the internal.
         /// </summary>
         /// <param name="startingPosition">The starting position.</param>
         /// <param name="endingPosition">The ending position.</param>
@@ -290,7 +299,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Creates the frames for upsert.
+        /// Creates the frames for upsert.
         /// </summary>
         /// <param name="positions">The positions.</param>
         /// <param name="breakRecord">The break record.</param>
@@ -304,7 +313,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the stack frames.
+        /// Gets the stack frames.
         /// </summary>
         /// <param name="stackTrace">The stack trace.</param>
         /// <returns>List&lt;StackFrame&gt;.</returns>
@@ -323,7 +332,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Sets the breakpoints.
+        /// Sets the breakpoints.
         /// </summary>
         /// <param name="options">The options.</param>
         protected internal void SetBreakpoints(IndexOptions options)

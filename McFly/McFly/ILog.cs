@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="ILog.cs" company="">
 //     Copyright ©  2018
@@ -17,50 +17,50 @@ using System;
 namespace McFly
 {
     /// <summary>
-    ///     Interface ILog
+    /// Interface ILog
     /// </summary>
     /// <seealso cref="System.IDisposable" />
     /// <seealso cref="McFly.IInjectable" />
     public interface ILog : IDisposable, IInjectable
     {
         /// <summary>
-        ///     Verboses the specified message.
+        /// Verboses the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         void Verbose(string message);
 
         /// <summary>
-        ///     Debugs the specified message.
+        /// Debugs the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         void Debug(string message);
 
         /// <summary>
-        ///     Informations the specified messasge.
+        /// Informations the specified messasge.
         /// </summary>
         /// <param name="messasge">The messasge.</param>
         void Info(string messasge);
 
         /// <summary>
-        ///     Errors the specified message.
+        /// Errors the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         void Error(string message);
 
         /// <summary>
-        ///     Errors the specified exception.
+        /// Errors the specified exception.
         /// </summary>
         /// <param name="exception">The exception.</param>
         void Error(Exception exception);
 
         /// <summary>
-        ///     Fatals the specified message.
+        /// Fatals the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         void Fatal(string message);
 
         /// <summary>
-        ///     Fatals the specified exception.
+        /// Fatals the specified exception.
         /// </summary>
         /// <param name="exception">The exception.</param>
         void Fatal(Exception exception);

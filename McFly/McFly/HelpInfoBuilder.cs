@@ -4,7 +4,7 @@
 // Created          : 03-25-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="HelpInfoBuilder.cs" company="">
 //     Copyright ©  2018
@@ -18,17 +18,17 @@ using System.Linq;
 namespace McFly
 {
     /// <summary>
-    ///     Class HelpInfoBuilder.
+    /// Class HelpInfoBuilder.
     /// </summary>
     public class HelpInfoBuilder
     {
         /// <summary>
-        ///     The information
+        /// The information
         /// </summary>
         private readonly HelpInfo _info;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="HelpInfoBuilder" /> class.
+        /// Initializes a new instance of the <see cref="HelpInfoBuilder" /> class.
         /// </summary>
         public HelpInfoBuilder()
         {
@@ -39,7 +39,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Sets the name.
+        /// Sets the name.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>HelpInfoBuilder.</returns>
@@ -50,7 +50,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Sets the description.
+        /// Sets the description.
         /// </summary>
         /// <param name="description">The description.</param>
         /// <returns>HelpInfoBuilder.</returns>
@@ -61,7 +61,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Adds the switch.
+        /// Adds the switch.
         /// </summary>
         /// <param name="switch">The switch.</param>
         /// <param name="description">The description.</param>
@@ -76,7 +76,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Adds the subcommand.
+        /// Adds the subcommand.
         /// </summary>
         /// <param name="subcommand">The subcommand.</param>
         /// <returns>HelpInfoBuilder.</returns>
@@ -92,7 +92,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Adds the example.
+        /// Adds the example.
         /// </summary>
         /// <param name="example">The example.</param>
         /// <param name="description">The description.</param>
@@ -107,7 +107,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Builds this instance.
+        /// Builds this instance.
         /// </summary>
         /// <returns>HelpInfo.</returns>
         public HelpInfo Build()

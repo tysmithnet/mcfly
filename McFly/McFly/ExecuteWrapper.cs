@@ -4,7 +4,7 @@
 // Created          : 02-25-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="ExecuteWrapper.cs" company="">
 //     Copyright ©  2018
@@ -20,39 +20,39 @@ using McFly.Debugger;
 namespace McFly
 {
     /// <summary>
-    ///     Wrapper around the debug client such that you can execute raw commands
+    /// Wrapper around the debug client such that you can execute raw commands
     /// </summary>
     /// <seealso cref="McFly.Debugger.IDebugOutputCallbacks" />
     /// <seealso cref="System.IDisposable" />
     public class ExecuteWrapper : IDebugOutputCallbacks, IDisposable
     {
         /// <summary>
-        ///     The builder
+        /// The builder
         /// </summary>
         private readonly StringBuilder _builder = new StringBuilder();
 
         /// <summary>
-        ///     The client
+        /// The client
         /// </summary>
         private readonly IDebugClient _client;
 
         /// <summary>
-        ///     The control
+        /// The control
         /// </summary>
         private readonly IDebugControl _control;
 
         /// <summary>
-        ///     The old
+        /// The old
         /// </summary>
         private readonly IDebugOutputCallbacks _old;
 
         /// <summary>
-        ///     The disposed
+        /// The disposed
         /// </summary>
         private bool _disposed; // To detect redundant calls
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ExecuteWrapper" /> class.
+        /// Initializes a new instance of the <see cref="ExecuteWrapper" /> class.
         /// </summary>
         /// <param name="client">The client.</param>
         public ExecuteWrapper(IDebugClient client)
@@ -68,7 +68,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Outputs the specified mask.
+        /// Outputs the specified mask.
         /// </summary>
         /// <param name="mask">The mask.</param>
         /// <param name="text">The text.</param>
@@ -84,7 +84,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Disposes this instance.
+        /// Disposes this instance.
         /// </summary>
         public void Dispose()
         {
@@ -93,7 +93,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Executes the specified command.
+        /// Executes the specified command.
         /// </summary>
         /// <param name="cmd">The command.</param>
         /// <returns>System.String.</returns>
@@ -115,12 +115,10 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Releases unmanaged and - optionally - managed resources.
+        /// Releases unmanaged and - optionally - managed resources.
         /// </summary>
-        /// <param name="disposing">
-        ///     <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
-        ///     unmanaged resources.
-        /// </param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only
+        /// unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -131,7 +129,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Finalizes an instance of the <see cref="ExecuteWrapper" /> class.
+        /// Finalizes an instance of the <see cref="ExecuteWrapper" /> class.
         /// </summary>
         ~ExecuteWrapper()
         {

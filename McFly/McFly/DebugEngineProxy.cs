@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="DbgEngProxy.cs" company="">
 //     Copyright ©  2018
@@ -23,7 +23,7 @@ using McFly.Debugger;
 namespace McFly
 {
     /// <summary>
-    ///     Default implementation for interfacing with the debug engine
+    /// Default implementation for interfacing with the debug engine
     /// </summary>
     /// <seealso cref="McFly.IDebugEngineProxy" />
     /// <seealso cref="IDebugEngineProxy" />
@@ -33,7 +33,7 @@ namespace McFly
     public class DebugEngineProxy : IDebugEngineProxy, IDisposable
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DebugEngineProxy" /> class.
+        /// Initializes a new instance of the <see cref="DebugEngineProxy" /> class.
         /// </summary>
         /// <param name="control">The control.</param>
         /// <param name="client">The client.</param>
@@ -53,37 +53,37 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets or sets the system objects COM interface
+        /// Gets or sets the system objects COM interface
         /// </summary>
         /// <value>The system objects.</value>
         private IDebugSystemObjects SystemObjects { get; }
 
         /// <summary>
-        ///     Gets or sets the control COM interface
+        /// Gets or sets the control COM interface
         /// </summary>
         /// <value>The control.</value>
         private IDebugControl6 Control { get; }
 
         /// <summary>
-        ///     Gets or sets the client COM interface
+        /// Gets or sets the client COM interface
         /// </summary>
         /// <value>The client.</value>
         private IDebugClient5 Client { get; }
 
         /// <summary>
-        ///     Gets or sets the execute wrapper COM interface
+        /// Gets or sets the execute wrapper COM interface
         /// </summary>
         /// <value>The execute wrapper.</value>
         private ExecuteWrapper ExecuteWrapper { get; }
 
         /// <summary>
-        ///     Gets or sets the registers COM interface
+        /// Gets or sets the registers COM interface
         /// </summary>
         /// <value>The registers.</value>
         private IDebugRegisters2 Registers { get; }
 
         /// <summary>
-        ///     Continues execution until a breakpoint is hit or the program ends
+        /// Continues execution until a breakpoint is hit or the program ends
         /// </summary>
         public void RunUntilBreak()
         {
@@ -111,8 +111,8 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Executes the specified command
-        ///     e.g. k, bl, u
+        /// Executes the specified command
+        /// e.g. k, bl, u
         /// </summary>
         /// <param name="command">The command.</param>
         /// <returns>System.String.</returns>
@@ -122,7 +122,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Writes the text to the debuggers std out
+        /// Writes the text to the debuggers std out
         /// </summary>
         /// <param name="message">The message.</param>
         public void Write(string message)
@@ -131,7 +131,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Writes the line to debuggers std out
+        /// Writes the line to debuggers std out
         /// </summary>
         /// <param name="line">The line.</param>
         public void WriteLine(string line)
@@ -140,8 +140,8 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the current thread identifier. Whenever you executes commands, they execute under a thread context. This
-        ///     returns the thread id of that context.
+        /// Gets the current thread identifier. Whenever you executes commands, they execute under a thread context. This
+        /// returns the thread id of that context.
         /// </summary>
         /// <returns>System.Int32.</returns>
         public int GetCurrentThreadId()
@@ -151,7 +151,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Switches to a thread
+        /// Switches to a thread
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         public void SwitchToThread(int threadId)
@@ -160,7 +160,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Executes a command on the specified thread id
+        /// Executes a command on the specified thread id
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="command">The v.</param>
@@ -171,13 +171,13 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets a value indicating whether the current trace is 32 bit.
+        /// Gets a value indicating whether the current trace is 32 bit.
         /// </summary>
         /// <value><c>true</c> if 32 bit; otherwise, <c>false</c>.</value>
         public bool Is32Bit { get; }
 
         /// <summary>
-        ///     Disposes this instance.
+        /// Disposes this instance.
         /// </summary>
         public void Dispose()
         {
@@ -185,7 +185,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the last known position in the trace
+        /// Gets the last known position in the trace
         /// </summary>
         /// <returns>Position.</returns>
         public Position GetEndingPosition()

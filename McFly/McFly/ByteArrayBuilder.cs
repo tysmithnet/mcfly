@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="ByteArrayBuilder.cs" company="">
 //     Copyright ©  2018
@@ -19,17 +19,17 @@ using System.Text.RegularExpressions;
 namespace McFly
 {
     /// <summary>
-    ///     Builder object for byte arrays
+    /// Builder object for byte arrays
     /// </summary>
     public class ByteArrayBuilder
     {
         /// <summary>
-        ///     The bytes
+        /// The bytes
         /// </summary>
         private readonly List<byte> _bytes = new List<byte>();
 
         /// <summary>
-        ///     Appdends the hexadecimal string.
+        /// Appdends the hexadecimal string.
         /// </summary>
         /// <param name="hexString">The hexadecimal string.</param>
         /// <returns>ByteArrayBuilder.</returns>
@@ -40,15 +40,13 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Strings to byte array.
+        /// Strings to byte array.
         /// </summary>
         /// <param name="hex">The hexadecimal.</param>
         /// <returns>System.Byte[].</returns>
-        /// <exception cref="FormatException">
-        ///     hex
-        ///     or
-        ///     hex
-        /// </exception>
+        /// <exception cref="FormatException">hex
+        /// or
+        /// hex</exception>
         public static byte[] StringToByteArray(string hex)
         {
             if (string.IsNullOrWhiteSpace(hex))
@@ -68,7 +66,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Builds a new array based on this builders internal representation.
+        /// Builds a new array based on this builders internal representation.
         /// </summary>
         /// <returns>System.Byte[].</returns>
         public byte[] Build()
