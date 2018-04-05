@@ -14,6 +14,7 @@
 
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using LinqKit;
 using McFly.Core;
 using McFly.Server.Data.Search;
@@ -27,7 +28,8 @@ namespace McFly.Server.Data.SqlServer
     /// </summary>
     /// <seealso cref="McFly.Server.Data.Search.ICriterionVisitor" />
     /// <seealso cref="ICriterionVisitor" />
-    internal class FrameCriterionVisitor : ICriterionVisitor
+    internal class
+        FrameCriterionVisitor : ICriterionVisitor
     {
         /// <summary>
         ///     Visits the specified criterion.
@@ -42,12 +44,23 @@ namespace McFly.Server.Data.SqlServer
                     return Visit(and);
                 case OrCriterion or:
                     return Visit(or);
+                case NotCriterion not:
+                    return Visit(not);
                 case RegisterEqualsCriterion equal:
                     return Visit(equal);
             }
 
-            FramePredicateExpression identity = entity => false;
+            FramePredicateExpression identity = entity => true;
             return identity;
+        }
+                     
+        public FramePredicateExpression Visit(NotCriterion notCriterion)
+        {
+            var exp = (FramePredicateExpression) notCriterion.Criterion.Accept(this);
+            var candidateExpr = exp.Parameters[0];
+            var body = Expression.Not(exp.Body);
+
+            return Expression.Lambda<Func<FrameEntity, bool>>(body, candidateExpr);
         }
 
         /// <summary>
@@ -108,14 +121,14 @@ namespace McFly.Server.Data.SqlServer
             if (registerEqualsCriterion.Register == Register.Rax)
             {
                 FramePredicateExpression exp = entity =>
-                    entity.Rax.SequenceEqual(bytes);
+                    entity.Rax == null && bytes == null || entity.Rax != null && entity.Rax.SequenceEqual(bytes);
                 return exp;
             }
 
             if (registerEqualsCriterion.Register == Register.Rbx)
             {
                 FramePredicateExpression exp = entity =>
-                    entity.Rbx.SequenceEqual(bytes);
+                    entity.Rbx == null && bytes == null || entity.Rbx != null && entity.Rbx.SequenceEqual(bytes);
                 return exp;
             }
 
