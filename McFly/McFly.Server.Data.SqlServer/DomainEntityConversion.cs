@@ -34,11 +34,11 @@ namespace McFly.Server.Data.SqlServer
                 PosHi = frame.Position.High,
                 PosLo = frame.Position.Low,
                 ThreadId = frame.ThreadId,
-                Rax = frame.RegisterSet.Rax?.ToByteArray(),
-                Rbx = frame.RegisterSet.Rbx?.ToByteArray(),
-                Rcx = frame.RegisterSet.Rcx?.ToByteArray(),
-                Rdx = frame.RegisterSet.Rdx?.ToByteArray(),
-                Rip = frame.DisassemblyLine?.InstructionAddress?.ToByteArray(),
+                Rax = frame.RegisterSet.Rax?.ToHexString(),
+                Rbx = frame.RegisterSet.Rbx?.ToHexString(),
+                Rcx = frame.RegisterSet.Rcx?.ToHexString(),
+                Rdx = frame.RegisterSet.Rdx?.ToHexString(),
+                Rip = frame.DisassemblyLine?.InstructionAddress?.ToHexString(),
                 OpCode = frame.DisassemblyLine?.OpCode,
                 OpCodeMnemonic = frame.DisassemblyLine?.OpCodeMnemonic,
                 DisassemblyNote = frame.DisassemblyLine?.DisassemblyNote,
@@ -119,11 +119,11 @@ namespace McFly.Server.Data.SqlServer
         {
             return new StackFrameEntity
             {
-                StackPointer = stackFrame.StackPointer.ToByteArray(),
-                ReturnAddress = stackFrame.ReturnAddress?.ToByteArray(),
+                StackPointer = stackFrame.StackPointer.ToHexString(),
+                ReturnAddress = stackFrame.ReturnAddress?.ToHexString(),
                 ModuleName = stackFrame.Module,
                 Function = stackFrame.FunctionName,
-                Offset = stackFrame.Offset?.ToByteArray()
+                Offset = stackFrame.Offset?.ToLong()
             };
         }
     }

@@ -59,45 +59,45 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <value>The rax.</value>
         [Column("rax", TypeName = "binary")]
-        [MaxLength(8)]
-        [MinLength(8)]
-        public byte[] Rax { get; set; }
+        [MaxLength(16)]
+        [MinLength(16)]
+        public string Rax { get; set; }
 
         /// <summary>
         ///     Gets or sets the RBX.
         /// </summary>
         /// <value>The RBX.</value>
         [Column("rbx", TypeName = "binary")]
-        [MaxLength(8)]
-        [MinLength(8)]
-        public byte[] Rbx { get; set; }
+        [MaxLength(16)]
+        [MinLength(16)]
+        public string Rbx { get; set; }
 
         /// <summary>
         ///     Gets or sets the RCX.
         /// </summary>
         /// <value>The RCX.</value>
         [Column("rcx", TypeName = "binary")]
-        [MaxLength(8)]
-        [MinLength(8)]
-        public byte[] Rcx { get; set; }
+        [MaxLength(16)]
+        [MinLength(16)]
+        public string Rcx { get; set; }
 
         /// <summary>
         ///     Gets or sets the RDX.
         /// </summary>
         /// <value>The RDX.</value>
         [Column("rdx", TypeName = "binary")]
-        [MaxLength(8)]
-        [MinLength(8)]
-        public byte[] Rdx { get; set; }
+        [MaxLength(16)]
+        [MinLength(16)]
+        public string Rdx { get; set; }
 
         /// <summary>
         ///     Gets or sets the address.
         /// </summary>
         /// <value>The address.</value>
         [Column("address", TypeName = "binary")]
-        [MaxLength(8)]
-        [MinLength(8)]
-        public byte[] Rip { get; set; }
+        [MaxLength(16)]
+        [MinLength(16)]
+        public string Rip { get; set; }
 
         /// <summary>
         ///     Gets or sets the op code.

@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.Globalization;
 
 namespace McFly.Core
 {
@@ -21,6 +22,36 @@ namespace McFly.Core
     /// </summary>
     public static class PrimitiveExtensions
     {
+        public static ulong ToULong(this string hexString)
+        {
+            return ulong.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static long ToLong(this string hexString)
+        {
+            return long.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static string ToHexString(this ulong ulongValue)
+        {
+            return $"{ulongValue:X16}";
+        }
+
+        public static string ToHexString(this long longValue)
+        {
+            return $"{longValue:X16}";
+        }
+
+        public static string ToHexString(this ulong? ulongValue)
+        {
+            return ulongValue.HasValue ? $"{ulongValue:X16}" : null; 
+        }
+
+        public static string ToHexString(this long? longValue)
+        {
+            return longValue.HasValue ? $"{longValue:X16}" : null;
+        }
+
         /// <summary>
         ///     Interprets the value as a long
         /// </summary>

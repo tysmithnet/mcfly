@@ -36,14 +36,18 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <value>The stack pointer.</value>
         [Column("stack_pointer")]
-        public byte[] StackPointer { get; set; }
+        [MinLength(8)]
+        [MaxLength(16)]
+        public string StackPointer { get; set; }
 
         /// <summary>
         ///     Gets or sets the return address.
         /// </summary>
         /// <value>The return address.</value>
         [Column("return_address")]
-        public byte[] ReturnAddress { get; set; }
+        [MinLength(8)]
+        [MaxLength(16)]
+        public string ReturnAddress { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the module.
@@ -64,7 +68,7 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <value>The offset.</value>
         [Column("offset")]
-        public byte[] Offset { get; set; }
+        public long? Offset { get; set; }
 
         /// <summary>
         ///     Gets or sets the frame identifier.

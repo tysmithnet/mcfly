@@ -12,22 +12,22 @@ namespace McFly.Server.Data.SqlServer.Test
         public void Create_The_Correct_Expression_Tree_For_And()
         {
             var visitor = new FrameCriterionVisitor();
-            var criteria1 = new RegisterEqualsCriterion(Register.Rax, ((ulong)0).ToByteArray());
-            var criteria2 = new RegisterEqualsCriterion(Register.Rbx, ((ulong)1).ToByteArray());
+            var criteria1 = new RegisterEqualsCriterion(Register.Rax, ((ulong)0).ToHexString());
+            var criteria2 = new RegisterEqualsCriterion(Register.Rbx, ((ulong)1).ToHexString());
             var and = new AndCriterion(new[] {criteria1, criteria2});
             var f = visitor.Visit(and);
-            var builder = new ContextFactoryBuilder();
+            
             var frame = new FrameEntity
             {
-                Rax = ((ulong) 0).ToByteArray(),
-                Rbx = ((ulong) 1).ToByteArray()
+                Rax = ((ulong) 0).ToHexString(),
+                Rbx = ((ulong) 1).ToHexString()
             };
             var frame2 = new FrameEntity
             {
-                Rax = ((ulong) 1).ToByteArray(),
-                Rbx = ((ulong) 1).ToByteArray()
+                Rax = ((ulong) 1).ToHexString(),
+                Rbx = ((ulong) 1).ToHexString()
             };
-            builder.WithFrame(frame).WithFrame(frame2);
+            
             var method = f.Compile();
             new[] {frame, frame2}.Single(x => method(x)).Should().Be(frame);
         }
@@ -36,20 +36,20 @@ namespace McFly.Server.Data.SqlServer.Test
         public void Create_The_Correct_Expression_Tree_For_Or()
         {
             var visitor = new FrameCriterionVisitor();
-            var criteria1 = new RegisterEqualsCriterion(Register.Rax, ((ulong)0).ToByteArray());
-            var criteria2 = new RegisterEqualsCriterion(Register.Rbx, ((ulong)1).ToByteArray());
+            var criteria1 = new RegisterEqualsCriterion(Register.Rax, ((ulong)0).ToHexString());
+            var criteria2 = new RegisterEqualsCriterion(Register.Rbx, ((ulong)1).ToHexString());
             var and = new OrCriterion(new[] { criteria1, criteria2 });
             var f = visitor.Visit(and);
             var builder = new ContextFactoryBuilder();
             var frame = new FrameEntity
             {
-                Rax = ((ulong)0).ToByteArray(),
-                Rbx = ((ulong)1).ToByteArray()
+                Rax = ((ulong)0).ToHexString(),
+                Rbx = ((ulong)1).ToHexString()
             };
             var frame2 = new FrameEntity
             {
-                Rax = ((ulong)1).ToByteArray(),
-                Rbx = ((ulong)1).ToByteArray()
+                Rax = ((ulong)1).ToHexString(),
+                Rbx = ((ulong)1).ToHexString()
             };
             builder.WithFrame(frame).WithFrame(frame2);
             var method = f.Compile();

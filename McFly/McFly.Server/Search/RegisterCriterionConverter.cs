@@ -60,12 +60,12 @@ namespace McFly.Server.Search
             switch (args[1])
             {
                 case "-eq":
-                    return new RegisterEqualsCriterion(reg, Conv.ToUInt64(args[2]).ToByteArray());
+                    return new RegisterEqualsCriterion(reg, Conv.ToUInt64(args[2]).ToHexString());
 
                 case "-between":
                     var low = Conv.ToUInt64(args[2]);
                     var hi = Conv.ToUInt64(args[3]); // todo: check before
-                    return new RegisterBetweenCriterion(reg, low, hi);
+                    return new RegisterBetweenCriterion(reg, low.ToHexString(), hi.ToHexString());
                 default:
                     throw new Exception("change this");
             }
