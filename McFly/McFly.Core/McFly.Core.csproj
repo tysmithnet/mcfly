@@ -50,8 +50,10 @@
     <Compile Include="Position.cs" />
     <Compile Include="PrimitiveExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Register.cs" />
-    <Compile Include="RegisterSet.cs" />
+    <Compile Include="Registers\Register.cs" />
+    <Compile Include="Registers\Register64.cs" />
+    <Compile Include="Registers\Register32.cs" />
+    <Compile Include="Registers\RegisterSet.cs" />
     <Compile Include="StackFrame.cs" />
     <Compile Include="StackTrace.cs" />
   </ItemGroup>

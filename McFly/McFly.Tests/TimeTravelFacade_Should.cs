@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
 using McFly.Core;
+using McFly.Core.Registers;
 using McFly.Tests.Builders;
 using Moq;
 using Xunit;

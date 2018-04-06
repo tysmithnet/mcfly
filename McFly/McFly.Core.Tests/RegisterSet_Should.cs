@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAssertions;
+using McFly.Core.Registers;
 using Xunit;
 
 namespace McFly.Core.Tests

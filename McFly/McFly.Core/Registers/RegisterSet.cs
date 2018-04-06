@@ -16,7 +16,7 @@ using System;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace McFly.Core
+namespace McFly.Core.Registers
 {
     /// <summary>
     ///     Represents the collection of all register values at a particular instance in time for a specific thread
