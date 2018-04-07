@@ -28,7 +28,7 @@ namespace McFly.Core.Registers
         /// </summary>
         static Register()
         {
-            AllRegisters64 = new Register[] {Rax, Rbx, Rcx, Rdx};
+            AllRegisters64 = new Register[] {Rax, Rbx, Rcx, Rdx}; // todo: update
             AllRegisters32 = new Register[] {Eax, Ebx, Ecx, Edx};
             AllRegisters = AllRegisters64.Concat(AllRegisters32).ToArray();
             CoreUserRegisters64 = new Register[] {Rax, Rbx, Rcx, Rdx};

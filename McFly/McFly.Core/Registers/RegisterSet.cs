@@ -4,7 +4,7 @@
 // Created          : 02-28-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-06-2018
 // ***********************************************************************
 // <copyright file="RegisterSet.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -24,125 +24,11 @@ namespace McFly.Core.Registers
     public class RegisterSet
     {
         /// <summary>
-        ///     The rax
-        /// </summary>
-        private ulong? _rax;
-
-        /// <summary>
-        ///     The RBX
-        /// </summary>
-        private ulong? _rbx;
-
-        /// <summary>
-        ///     The RCX
-        /// </summary>
-        private ulong? _rcx;
-
-        /// <summary>
-        ///     The RDX
-        /// </summary>
-        private ulong? _rdx;
-
-        /// <summary>
-        ///     Gets or sets the rax register
-        /// </summary>
-        /// <value>The rax register</value>
-        public ulong? Rax
-        {
-            get => _rax;
-            set => _rax = value;
-        }
-
-        /// <summary>
-        ///     Gets or sets the rbx register
-        /// </summary>
-        /// <value>The rbx register</value>
-        public ulong? Rbx
-        {
-            get => _rbx;
-            set => _rbx = value;
-        }
-
-        /// <summary>
-        ///     Gets or sets the rcx register
-        /// </summary>
-        /// <value>The rcx register</value>
-        public ulong? Rcx
-        {
-            get => _rcx;
-            set => _rcx = value;
-        }
-
-        /// <summary>
-        ///     Gets or sets the rdx register
-        /// </summary>
-        /// <value>the rdx register</value>
-        public ulong? Rdx
-        {
-            get => _rdx;
-            set => _rdx = value;
-        }
-
-        /// <summary>
-        ///     Gets or sets the eax.
-        /// </summary>
-        /// <value>The eax.</value>
-        [JsonIgnore]
-        public uint? Eax
-        {
-            get => _rax?.Lo32();
-            set => _rax = _rax?.Lo32(value.GetValueOrDefault());
-        }
-
-        /// <summary>
-        ///     Gets or sets the ebx.
-        /// </summary>
-        /// <value>The ebx.</value>
-        [JsonIgnore]
-        public uint? Ebx
-        {
-            get => _rbx?.Lo32();
-            set => _rbx = _rbx?.Lo32(value.GetValueOrDefault());
-        }
-
-        /// <summary>
-        ///     Gets or sets the ecx.
-        /// </summary>
-        /// <value>The ecx.</value>
-        [JsonIgnore]
-        public uint? Ecx
-        {
-            get => _rcx?.Lo32();
-            set => _rcx = _rcx?.Lo32(value.GetValueOrDefault());
-        }
-
-        /// <summary>
-        ///     Gets or sets the edx.
-        /// </summary>
-        /// <value>The edx.</value>
-        [JsonIgnore]
-        public uint? Edx
-        {
-            get => _rdx?.Lo32();
-            set => _rdx = _rdx?.Lo32(value.GetValueOrDefault());
-        }
-
-        /// <summary>
         ///     Clears this instance.
         /// </summary>
         public void Clear()
         {
-            _rax = _rbx = _rcx = _rdx = 0;
-        }
-
-        /// <summary>
-        ///     Equalses the specified other.
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        protected bool Equals(RegisterSet other)
-        {
-            return _rax == other._rax && _rbx == other._rbx && _rcx == other._rcx && _rdx == other._rdx;
+            Rax = Rbx = Rcx = Rdx = 0;
         }
 
         /// <summary>
@@ -166,36 +52,12 @@ namespace McFly.Core.Registers
         {
             unchecked
             {
-                var hashCode = _rax.GetHashCode();
-                hashCode = (hashCode * 397) ^ _rbx.GetHashCode();
-                hashCode = (hashCode * 397) ^ _rcx.GetHashCode();
-                hashCode = (hashCode * 397) ^ _rdx.GetHashCode();
+                var hashCode = Rax.GetHashCode();
+                hashCode = (hashCode * 397) ^ Rbx.GetHashCode();
+                hashCode = (hashCode * 397) ^ Rcx.GetHashCode();
+                hashCode = (hashCode * 397) ^ Rdx.GetHashCode();
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        ///     Implements the == operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator ==(RegisterSet left, RegisterSet right)
-        {
-            if (ReferenceEquals(left, right)) return true;
-            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
-            return Equals(left, right);
-        }
-
-        /// <summary>
-        ///     Implements the != operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator !=(RegisterSet left, RegisterSet right)
-        {
-            return !Equals(left, right);
         }
 
         /// <summary>
@@ -228,33 +90,189 @@ namespace McFly.Core.Registers
             switch (first.Name.ToLower())
             {
                 case "rax":
-                    _rax = Convert.ToUInt64(input, radix);
+                    Rax = Convert.ToUInt64(input, radix);
                     break;
                 case "rbx":
-                    _rbx = Convert.ToUInt64(input, radix);
+                    Rbx = Convert.ToUInt64(input, radix);
                     break;
                 case "rcx":
-                    _rcx = Convert.ToUInt64(input, radix);
+                    Rcx = Convert.ToUInt64(input, radix);
                     break;
                 case "rdx":
-                    _rdx = Convert.ToUInt64(input, radix);
+                    Rdx = Convert.ToUInt64(input, radix);
                     break;
                 case "eax":
-                    _rax = _rax?.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    Rax = Rax?.Lo32(Convert.ToInt32(input, radix).ToUInt());
                     break;
                 case "ebx":
-                    _rbx = _rbx?.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    Rbx = Rbx?.Lo32(Convert.ToInt32(input, radix).ToUInt());
                     break;
                 case "ecx":
-                    _rcx = _rcx?.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    Rcx = Rcx?.Lo32(Convert.ToInt32(input, radix).ToUInt());
                     break;
                 case "edx":
-                    _rdx = _rdx?.Lo32(Convert.ToInt32(input, radix).ToUInt());
+                    Rdx = Rdx?.Lo32(Convert.ToInt32(input, radix).ToUInt());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException($"{nameof(register)} is not a valid register");
             }
         }
+
+        /// <summary>
+        ///     Equalses the specified other.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        protected bool Equals(RegisterSet other)
+        {
+            return Rax == other.Rax && Rbx == other.Rbx && Rcx == other.Rcx && Rdx == other.Rdx;
+        }
+
+        /// <summary>
+        ///     Implements the == operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator ==(RegisterSet left, RegisterSet right)
+        {
+            if (ReferenceEquals(left, right)) return true;
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
+            return Equals(left, right);
+        }
+
+        /// <summary>
+        ///     Implements the != operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator !=(RegisterSet left, RegisterSet right)
+        {
+            return !Equals(left, right);
+        }
+
+        /// <summary>
+        ///     Gets or sets the eax.
+        /// </summary>
+        /// <value>The eax.</value>
+        [JsonIgnore]
+        public uint? Eax
+        {
+            get => Rax?.Lo32();
+            set => Rax = Rax?.Lo32(value.GetValueOrDefault());
+        }
+
+        /// <summary>
+        ///     Gets or sets the ebx.
+        /// </summary>
+        /// <value>The ebx.</value>
+        [JsonIgnore]
+        public uint? Ebx
+        {
+            get => Rbx?.Lo32();
+            set => Rbx = Rbx?.Lo32(value.GetValueOrDefault());
+        }
+
+        /// <summary>
+        ///     Gets or sets the ecx.
+        /// </summary>
+        /// <value>The ecx.</value>
+        [JsonIgnore]
+        public uint? Ecx
+        {
+            get => Rcx?.Lo32();
+            set => Rcx = Rcx?.Lo32(value.GetValueOrDefault());
+        }
+
+        /// <summary>
+        ///     Gets or sets the edx.
+        /// </summary>
+        /// <value>The edx.</value>
+        [JsonIgnore]
+        public uint? Edx
+        {
+            get => Rdx?.Lo32();
+            set => Rdx = Rdx?.Lo32(value.GetValueOrDefault());
+        }
+
+        /// <summary>
+        ///     Gets or sets the R10.
+        /// </summary>
+        /// <value>The R10.</value>
+        public ulong? R10 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the R11.
+        /// </summary>
+        /// <value>The R11.</value>
+        public ulong? R11 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the R12.
+        /// </summary>
+        /// <value>The R12.</value>
+        public ulong? R12 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the R13.
+        /// </summary>
+        /// <value>The R13.</value>
+        public ulong? R13 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the R14.
+        /// </summary>
+        /// <value>The R14.</value>
+        public ulong? R14 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the R15.
+        /// </summary>
+        /// <value>The R15.</value>
+        public ulong? R15 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the r8.
+        /// </summary>
+        /// <value>The r8.</value>
+        public ulong? R8 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the r9.
+        /// </summary>
+        /// <value>The r9.</value>
+        public ulong? R9 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the rax register
+        /// </summary>
+        /// <value>The rax register</value>
+        public ulong? Rax { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the rbx register
+        /// </summary>
+        /// <value>The rbx register</value>
+        public ulong? Rbx { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the rcx register
+        /// </summary>
+        /// <value>The rcx register</value>
+        public ulong? Rcx { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the rdx register
+        /// </summary>
+        /// <value>the rdx register</value>
+        public ulong? Rdx { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the rip.
+        /// </summary>
+        /// <value>The rip.</value>
+        public ulong? Rip { get; set; }
     }
 }
 
