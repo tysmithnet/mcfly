@@ -73,6 +73,8 @@ namespace McFly.Core.Registers
         /// <value>The esp.</value>
         public static EspRegister Esp { get; } = new EspRegister();
 
+        public static MxcsrRegister Mxcsr { get; } = new MxcsrRegister();
+
         /// <summary>
         ///     Class EaxRegister.
         /// </summary>
@@ -265,6 +267,15 @@ namespace McFly.Core.Registers
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
+            public override int NumBits { get; } = 32;
+        }
+
+        public class MxcsrRegister : Register
+        {
+            /// <inheritdoc />
+            public override string Name { get; } = "mxcsr";
+
+            /// <inheritdoc />
             public override int NumBits { get; } = 32;
         }
     }

@@ -116,6 +116,102 @@ namespace McFly.Core.Registers
         public static Xmm9Register Xmm9 { get; } = new Xmm9Register();
 
         /// <summary>
+        ///     Gets the YMM0.
+        /// </summary>
+        /// <value>The YMM0.</value>
+        public static Ymm0Register Ymm0 { get; } = new Ymm0Register();
+
+        /// <summary>
+        ///     Gets the YMM1.
+        /// </summary>
+        /// <value>The YMM1.</value>
+        public static Ymm1Register Ymm1 { get; } = new Ymm1Register();
+
+        /// <summary>
+        ///     Gets the YMM10.
+        /// </summary>
+        /// <value>The YMM10.</value>
+        public static Ymm10Register Ymm10 { get; } = new Ymm10Register();
+
+        /// <summary>
+        ///     Gets the YMM11.
+        /// </summary>
+        /// <value>The YMM11.</value>
+        public static Ymm11Register Ymm11 { get; } = new Ymm11Register();
+
+        /// <summary>
+        ///     Gets the YMM12.
+        /// </summary>
+        /// <value>The YMM12.</value>
+        public static Ymm12Register Ymm12 { get; } = new Ymm12Register();
+
+        /// <summary>
+        ///     Gets the YMM13.
+        /// </summary>
+        /// <value>The YMM13.</value>
+        public static Ymm13Register Ymm13 { get; } = new Ymm13Register();
+
+        /// <summary>
+        ///     Gets the YMM14.
+        /// </summary>
+        /// <value>The YMM14.</value>
+        public static Ymm14Register Ymm14 { get; } = new Ymm14Register();
+
+        /// <summary>
+        ///     Gets the YMM15.
+        /// </summary>
+        /// <value>The YMM15.</value>
+        public static Ymm15Register Ymm15 { get; } = new Ymm15Register();
+
+        /// <summary>
+        ///     Gets the YMM2.
+        /// </summary>
+        /// <value>The YMM2.</value>
+        public static Ymm2Register Ymm2 { get; } = new Ymm2Register();
+
+        /// <summary>
+        ///     Gets the YMM3.
+        /// </summary>
+        /// <value>The YMM3.</value>
+        public static Ymm3Register Ymm3 { get; } = new Ymm3Register();
+
+        /// <summary>
+        ///     Gets the YMM4.
+        /// </summary>
+        /// <value>The YMM4.</value>
+        public static Ymm4Register Ymm4 { get; } = new Ymm4Register();
+
+        /// <summary>
+        ///     Gets the YMM5.
+        /// </summary>
+        /// <value>The YMM5.</value>
+        public static Ymm5Register Ymm5 { get; } = new Ymm5Register();
+
+        /// <summary>
+        ///     Gets the YMM6.
+        /// </summary>
+        /// <value>The YMM6.</value>
+        public static Ymm6Register Ymm6 { get; } = new Ymm6Register();
+
+        /// <summary>
+        ///     Gets the YMM7.
+        /// </summary>
+        /// <value>The YMM7.</value>
+        public static Ymm7Register Ymm7 { get; } = new Ymm7Register();
+
+        /// <summary>
+        ///     Gets the YMM8.
+        /// </summary>
+        /// <value>The YMM8.</value>
+        public static Ymm8Register Ymm8 { get; } = new Ymm8Register();
+
+        /// <summary>
+        ///     Gets the YMM9.
+        /// </summary>
+        /// <value>The YMM9.</value>
+        public static Ymm9Register Ymm9 { get; } = new Ymm9Register();
+
+        /// <summary>
         ///     Class Xmm0Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
@@ -442,6 +538,342 @@ namespace McFly.Core.Registers
             /// <value>The name.</value>
             /// <inheritdoc />
             public override string Name { get; } = "Xmm9";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm0Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm0Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm0";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm10Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm10Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm10";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm11Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm11Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm11";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm12Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm12Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm12";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm13Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm13Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm13";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm14Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm14Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm14";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm15Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm15Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm15";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm1Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm1Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm1";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm2Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm2Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm2";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm3Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm3Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm3";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm4Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm4Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm4";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm5Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm5Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm5";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm6Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm6Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm6";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm7Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm7Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm7";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm8Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm8Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm8";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
+        }
+
+        /// <summary>
+        ///     Class Ymm9Register.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
+        public class Ymm9Register : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "Ymm9";
 
             /// <summary>
             ///     Gets the number bits.
