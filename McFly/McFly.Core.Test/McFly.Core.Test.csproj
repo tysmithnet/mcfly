@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ByteArrayBuilder_Should.cs" />
     <Compile Include="Frame_Should.cs" />
     <Compile Include="MemoryRange_Should.cs" />
     <Compile Include="Position_Should.cs" />

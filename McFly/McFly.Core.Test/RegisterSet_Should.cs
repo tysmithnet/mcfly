@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluentAssertions;
 using McFly.Core.Registers;
 using Xunit;
@@ -7,156 +8,344 @@ namespace McFly.Core.Test
 {
     public class RegisterSet_Should
     {
-        [Theory]
-        [InlineData("rax", "10", 16, 0x10, "Base 16 means the input is interpretted as hex chars")]
-        [InlineData("rbx", "10", 10, 10, "Base 10 means the input is interpretted as dec chars")]
-        [InlineData("rcx", "10", 8, 8, "Base 8 means the input is interpretted as oct chars")]
-        [InlineData("rdx", "10", 2, 2, "Base 2 means the input is interpretted as bin chars")]
-        public void Process_64_Bit_Register_Input_Correctly(string register, string input, int radix, ulong expected,
-            string because)
-        {
-            // arrange
-            var registerSet = new RegisterSet();
-
-            // act
-            registerSet.Process(register, input, radix);
-
-            // assert
-            switch (register)
-            {
-                case "rax":
-                    registerSet.Rax.Should().Be(expected, because);
-                    break;
-                case "rbx":
-                    registerSet.Rbx.Should().Be(expected, because);
-                    break;
-                case "rcx":
-                    registerSet.Rcx.Should().Be(expected, because);
-                    break;
-                case "rdx":
-                    registerSet.Rdx.Should().Be(expected, because);
-                    break;
-            }
-        }
-
         [Fact]
-        public void Exhibit_Value_Equality()
+        public void Process_Registers_Correctly()
         {
-            var r1 = new RegisterSet();
-            var r2 = new RegisterSet();
-            (r1 == r2).Should().BeTrue();
-            r1.Equals(r2).Should().BeTrue();
-            r1.Equals(r1).Should().BeTrue();
-            r1.GetHashCode().Should().Be(r2.GetHashCode());
-        }
+            var r = new RegisterSet();
+            
+            r.Process("rax", "0x0123456789abcdef");
+            r.Rax.Should().Be(0x0123456789abcdef);
+            r.Eax.Should().Be(0x89abcdef);
+            r.Ax.Should().Be(0xcdef);
+            r.Al.Should().Be(0xef);
+            r.Ah.Should().Be(0xcd);
 
-        [Fact]
-        public void Have_Correct_Register_Num_Bits()
-        {
-            // arrange
-            // act
-            // assert
-            Register.R8.NumBits.Should().Be(64);
-            Register.R9.NumBits.Should().Be(64);
-            Register.R10.NumBits.Should().Be(64);
-            Register.R11.NumBits.Should().Be(64);
-            Register.R12.NumBits.Should().Be(64);
-            Register.R13.NumBits.Should().Be(64);
-            Register.R14.NumBits.Should().Be(64);
-            Register.R15.NumBits.Should().Be(64);
-            Register.Rax.NumBits.Should().Be(64);
-            Register.Rbp.NumBits.Should().Be(64);
-            Register.Rbx.NumBits.Should().Be(64);
-            Register.Rcx.NumBits.Should().Be(64);
-            Register.Rdi.NumBits.Should().Be(64);
-            Register.Rdx.NumBits.Should().Be(64);
-            Register.Rip.NumBits.Should().Be(64);
-            Register.Rsp.NumBits.Should().Be(64);
-            Register.Rsi.NumBits.Should().Be(64);
+            r = new RegisterSet();
+            r.Process("rbx", "0x0123456789abcdef");
+            r.Rbx.Should().Be(0x0123456789abcdef);
+            r.Ebx.Should().Be(0x89abcdef);
+            r.Bx.Should().Be(0xcdef);
+            r.Bl.Should().Be(0xef);
+            r.Bh.Should().Be(0xcd);
 
+            r = new RegisterSet();
+            r.Process("rcx", "0x0123456789abcdef");
+            r.Rcx.Should().Be(0x0123456789abcdef);
+            r.Ecx.Should().Be(0x89abcdef);
+            r.Cx.Should().Be(0xcdef);
+            r.Cl.Should().Be(0xef);
+            r.Ch.Should().Be(0xcd);
 
-            Register.Efl.NumBits.Should().Be(32);
+            r = new RegisterSet();
+            r.Process("rdx", "0x0123456789abcdef");
+            r.Rdx.Should().Be(0x0123456789abcdef);
+            r.Edx.Should().Be(0x89abcdef);
+            r.Dx.Should().Be(0xcdef);
+            r.Dl.Should().Be(0xef);
+            r.Dh.Should().Be(0xcd);
 
-        }
+            r = new RegisterSet();
+            r.Process("rsp", "0x0123456789abcdef");
+            r.Rsp.Should().Be(0x0123456789abcdef);
+            r.Esp.Should().Be(0x89abcdef);
+            r.Sp.Should().Be(0xcdef);
+            r.Spl.Should().Be(0xef);
 
-        [Fact]
-        public void Process_32_Bit_Register_Input_Correctly()
-        {
-            // arrange
-            var registerSet = new RegisterSet();
-            var ones32 = 0xffffffff;
-            var half = 0x00000000ffffffff;
+            r = new RegisterSet();
+            r.Process("rbp", "0x0123456789abcdef");
+            r.Rbp.Should().Be(0x0123456789abcdef);
+            r.Ebp.Should().Be(0x89abcdef);
+            r.Bp.Should().Be(0xcdef);
+            r.Bpl.Should().Be(0xef);
 
-            // act
-            // assert
-            registerSet.Clear();
-            registerSet.Process("eax", "-1", 10);
-            registerSet.Eax.Should().Be(ones32);
-            registerSet.Rax.Should().Be(half);
+            r = new RegisterSet();
+            r.Process("rsi", "0x0123456789abcdef");
+            r.Rsi.Should().Be(0x0123456789abcdef);
+            r.Esi.Should().Be(0x89abcdef);
+            r.Si.Should().Be(0xcdef);
+            r.Sil.Should().Be(0xef);
 
-            registerSet.Clear();
-            registerSet.Process("ebx", "-1", 10);
-            registerSet.Ebx.Should().Be(ones32);
-            registerSet.Rbx.Should().Be(half);
+            r = new RegisterSet();
+            r.Process("rdi", "0x0123456789abcdef");
+            r.Rdi.Should().Be(0x0123456789abcdef);
+            r.Edi.Should().Be(0x89abcdef);
+            r.Di.Should().Be(0xcdef);
+            r.Dil.Should().Be(0xef);
 
-            registerSet.Clear();
-            registerSet.Process("ecx", "-1", 10);
-            registerSet.Ecx.Should().Be(ones32);
-            registerSet.Rcx.Should().Be(half);
+            r = new RegisterSet();
+            r.Process("r8", "0x0123456789abcdef");
+            r.R8.Should().Be(0x0123456789abcdef);
+            r.R8d.Should().Be(0x89abcdef);
+            r.R8w.Should().Be(0xcdef);
+            r.R8b.Should().Be(0xef);
 
-            registerSet.Clear();
-            registerSet.Process("edx", "-1", 10);
-            registerSet.Edx.Should().Be(ones32);
-            registerSet.Rdx.Should().Be(half);
-        }
+            r = new RegisterSet();
+            r.Process("r9", "0x0123456789abcdef");
+            r.R9.Should().Be(0x0123456789abcdef);
+            r.R9d.Should().Be(0x89abcdef);
+            r.R9w.Should().Be(0xcdef);
+            r.R9b.Should().Be(0xef);
 
-        [Fact]
-        public void Properly_Get_And_Set_Sub_Registers()
-        {
-            // arrange
-            var reg = new RegisterSet();
+            r = new RegisterSet();
+            r.Process("r10", "0x0123456789abcdef");
+            r.R10.Should().Be(0x0123456789abcdef);
+            r.R10d.Should().Be(0x89abcdef);
+            r.R10w.Should().Be(0xcdef);
+            r.R10b.Should().Be(0xef);
 
-            var low32Before = 0x89abcdef;
-            uint high32Before = 0x01234567;
-            ulong before = 0x0123456789abcdef;
-            ulong after = 0x0123456700000000;
-            reg.Rax = reg.Rbx = reg.Rcx = reg.Rdx = before;
+            r = new RegisterSet();
+            r.Process("r11", "0x0123456789abcdef");
+            r.R11.Should().Be(0x0123456789abcdef);
+            r.R11d.Should().Be(0x89abcdef);
+            r.R11w.Should().Be(0xcdef);
+            r.R11b.Should().Be(0xef);
 
-            // act
-            // assert
-            reg.Eax.Should().Be(low32Before);
-            reg.Eax = 0x0;
-            reg.Eax.Should().Be(0);
-            reg.Rax.Should().Be(after);
+            r = new RegisterSet();
+            r.Process("r12", "0x0123456789abcdef");
+            r.R12.Should().Be(0x0123456789abcdef);
+            r.R12d.Should().Be(0x89abcdef);
+            r.R12w.Should().Be(0xcdef);
+            r.R12b.Should().Be(0xef);
 
-            reg.Ebx.Should().Be(low32Before);
-            reg.Ebx = 0x0;
-            reg.Ebx.Should().Be(0);
-            reg.Rbx.Should().Be(after);
+            r = new RegisterSet();
+            r.Process("r13", "0x0123456789abcdef");
+            r.R13.Should().Be(0x0123456789abcdef);
+            r.R13d.Should().Be(0x89abcdef);
+            r.R13w.Should().Be(0xcdef);
+            r.R13b.Should().Be(0xef);
 
-            reg.Ecx.Should().Be(low32Before);
-            reg.Ecx = 0x0;
-            reg.Ecx.Should().Be(0);
-            reg.Rcx.Should().Be(after);
+            r = new RegisterSet();
+            r.Process("r14", "0x0123456789abcdef");
+            r.R14.Should().Be(0x0123456789abcdef);
+            r.R14d.Should().Be(0x89abcdef);
+            r.R14w.Should().Be(0xcdef);
+            r.R14b.Should().Be(0xef);
 
-            reg.Edx.Should().Be(low32Before);
-            reg.Edx = 0x0;
-            reg.Edx.Should().Be(0);
-            reg.Rdx.Should().Be(after);
-        }
+            r = new RegisterSet();
+            r.Process("r15", "0x0123456789abcdef");
+            r.R15.Should().Be(0x0123456789abcdef);
+            r.R15d.Should().Be(0x89abcdef);
+            r.R15w.Should().Be(0xcdef);
+            r.R15b.Should().Be(0xef);
 
-        [Fact]
-        public void Throw_If_Passed_Bad_Values_To_Process()
-        {
-            // arrange
-            var registerSet = new RegisterSet();
-            Action throws = () => registerSet.Process(null, "0", 16);
-            Action throws2 = () => registerSet.Process("rax", "hello", 16);
+            r = new RegisterSet();
+            r.Process("rip", "0x0123456789abcdef");
+            r.Rip.Should().Be(0x0123456789abcdef);
+            r.Eip.Should().Be(0x89abcdef);
+            r.Ip.Should().Be(0xcdef);
 
-            // act
-            // assert
-            throws.Should().Throw<ArgumentNullException>("Register cannot be null");
-            throws2.Should().Throw<FormatException>("hello is not a valid hex string");
+            r = new RegisterSet();
+            r.Process("efl", "0x01234567");
+            r.Efl.Should().Be(0x01234567);
+            r.Fl.Should().Be(0x4567);
+
+            r = new RegisterSet();
+            r.Process("cs", "0x0123");
+            r.Cs.Should().Be(0x0123);
+
+            r = new RegisterSet();
+            r.Process("ds", "0x0123");
+            r.Ds.Should().Be(0x0123);
+
+            r = new RegisterSet();
+            r.Process("es", "0x0123");
+            r.Es.Should().Be(0x0123);
+
+            r = new RegisterSet();
+            r.Process("fs", "0x0123");
+            r.Fs.Should().Be(0x0123);
+
+            r = new RegisterSet();
+            r.Process("gs", "0x0123");
+            r.Gs.Should().Be(0x0123);
+
+            r = new RegisterSet();
+            r.Process("ss", "0x0123");
+            r.Ss.Should().Be(0x0123); 
+
+            r = new RegisterSet();
+            r.Process("dr0", "0x0123456789abcdef");
+            r.Dr0.Should().Be(0x0123456789abcdef);
+
+            r = new RegisterSet();
+            r.Process("dr1", "0x0123456789abcdef");
+            r.Dr1.Should().Be(0x0123456789abcdef);
+
+            r = new RegisterSet();
+            r.Process("dr2", "0x0123456789abcdef");
+            r.Dr2.Should().Be(0x0123456789abcdef);
+
+            r = new RegisterSet();
+            r.Process("dr3", "0x0123456789abcdef");
+            r.Dr3.Should().Be(0x0123456789abcdef);
+
+            r = new RegisterSet();
+            r.Process("dr6", "0x0123456789abcdef");
+            r.Dr6.Should().Be(0x0123456789abcdef);
+
+            r = new RegisterSet();
+            r.Process("dr7", "0x0123456789abcdef");
+            r.Dr7.Should().Be(0x0123456789abcdef);
+
+            r = new RegisterSet();
+            r.Process("fpcw", "0x0123");
+            r.Fpcw.Should().Be(0x0123);
+
+            r = new RegisterSet();
+            r.Process("fpsw", "0x0123");
+            r.Fpsw.Should().Be(0x123);
+
+            r = new RegisterSet();
+            r.Process("fptw", "0x0123");
+            r.Fptw.Should().Be(0x123);
+
+            r = new RegisterSet();
+            r.Process("st0", "0:1234:0123456789abcdef");
+            r.St0.Should().Equal(new[] {0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef}.Reverse());
+
+            r = new RegisterSet();
+            r.Process("st1", "0:1234:0123456789abcdef");
+            r.St1.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
+
+            r = new RegisterSet();
+            r.Process("st2", "0:1234:0123456789abcdef");
+            r.St2.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
+
+            r = new RegisterSet();
+            r.Process("st3", "0:1234:0123456789abcdef");
+            r.St3.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
+
+            r = new RegisterSet();
+            r.Process("st4", "0:1234:0123456789abcdef");
+            r.St4.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
+
+            r = new RegisterSet();
+            r.Process("st5", "0:1234:0123456789abcdef");
+            r.St5.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
+
+            r = new RegisterSet();
+            r.Process("st6", "0:1234:0123456789abcdef");
+            r.St6.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
+
+            r = new RegisterSet();
+            r.Process("st7", "0:1234:0123456789abcdef");
+            r.St7.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
+
+            r = new RegisterSet();
+            r.Process("mm0", "0xffffffffffffffff");
+            r.Mm0.Should().Be(0xffffffffffffffff);
+
+            r = new RegisterSet();
+            r.Process("mm1", "0xfedcba9876543210");
+            r.Mm1.Should().Be(0xfedcba9876543210);
+
+            r = new RegisterSet();
+            r.Process("mm2", "0xfedcba9876543210");
+            r.Mm2.Should().Be(0xfedcba9876543210);
+
+            r = new RegisterSet();
+            r.Process("mm3", "0xfedcba9876543210");
+            r.Mm3.Should().Be(0xfedcba9876543210);
+
+            r = new RegisterSet();
+            r.Process("mm4", "0xfedcba9876543210");
+            r.Mm4.Should().Be(0xfedcba9876543210);
+
+            r = new RegisterSet();
+            r.Process("mm5", "0xfedcba9876543210");
+            r.Mm5.Should().Be(0xfedcba9876543210);
+
+            r = new RegisterSet();
+            r.Process("mm6", "0xfedcba9876543210");
+            r.Mm6.Should().Be(0xfedcba9876543210);
+
+            r = new RegisterSet();
+            r.Process("mm7", "0xfedcba9876543210");
+            r.Mm7.Should().Be(0xfedcba9876543210);
+
+            r = new RegisterSet();
+            r.Process("mxcsr", "76543210");
+            r.Mxcsr.Should().Be(0x76543210);
+
+            r = new RegisterSet();
+            r.Process("ymm0", "           0            0            0            0            0            0            0            0");
+            r.Ymm0.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm0.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm1", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm1.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm1.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm2", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm2.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm2.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm3", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm3.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm3.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm4", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm4.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm4.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm5", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm5.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm5.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm6", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm6.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm6.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm7", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm7.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm7.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm8", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm8.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm8.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm9", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm9.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm9.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm10", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm10.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm10.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm11", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm11.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm11.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm12", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm12.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm12.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm13", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm13.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm13.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm14", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm14.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm14.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
+
+            r = new RegisterSet();
+            r.Process("ymm15", "    ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff     ffffffff");
+            r.Ymm15.Should().Equal(Enumerable.Range(0, 32).Select(Convert.ToByte));
+            r.Xmm15.Should().Equal(Enumerable.Range(0, 16).Select(Convert.ToByte));
         }
     }
 }

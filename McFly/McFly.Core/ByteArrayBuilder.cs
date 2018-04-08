@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace McFly
+namespace McFly.Core
 {
     /// <summary>
     ///     Builder object for byte arrays
@@ -36,6 +36,12 @@ namespace McFly
         public ByteArrayBuilder AppdendHexString(string hexString)
         {
             _bytes.AddRange(StringToByteArray(hexString));
+            return this;
+        }
+
+        public ByteArrayBuilder Reverse()
+        {
+            _bytes.Reverse();
             return this;
         }
 

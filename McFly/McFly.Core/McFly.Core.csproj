@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ByteArrayBuilder.cs" />
     <Compile Include="DisassemblyLine.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="MemoryRange.cs" />
