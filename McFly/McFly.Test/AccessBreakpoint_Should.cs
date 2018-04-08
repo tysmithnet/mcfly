@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Xunit;
 
-namespace McFly.Tests
+namespace McFly.Test
 {
     public class AccessBreakpoint_Should
     {

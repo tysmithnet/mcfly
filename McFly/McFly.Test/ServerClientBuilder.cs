@@ -18,7 +18,7 @@ using System.Linq;
 using McFly.Core;
 using Moq;
 
-namespace McFly.Tests
+namespace McFly.Test
 {
     /// <summary>
     ///     Class ServerClientBuilder.

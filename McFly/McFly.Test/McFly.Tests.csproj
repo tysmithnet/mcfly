@@ -8,8 +8,8 @@
     <ProjectGuid>{C938475F-2E8C-4DFB-8102-6FC0A7101E95}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>McFly.Tests</RootNamespace>
-    <AssemblyName>McFly.Tests</AssemblyName>
+    <RootNamespace>McFly.Test</RootNamespace>
+    <AssemblyName>McFly.Test</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>

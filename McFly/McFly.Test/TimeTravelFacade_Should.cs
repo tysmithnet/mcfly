@@ -2,11 +2,11 @@
 using FluentAssertions;
 using McFly.Core;
 using McFly.Core.Registers;
-using McFly.Tests.Builders;
+using McFly.Test.Builders;
 using Moq;
 using Xunit;
 
-namespace McFly.Tests
+namespace McFly.Test
 {
     public class TimeTravelFacade_Should
     {

@@ -1,7 +1,7 @@
 ﻿using McFly.Core;
 using McFly.Core.Registers;
 
-namespace McFly.Tests
+namespace McFly.Test
 {
     public static class MockFrames
     {

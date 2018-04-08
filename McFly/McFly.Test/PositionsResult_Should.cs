@@ -2,7 +2,7 @@
 using McFly.Core;
 using Xunit;
 
-namespace McFly.Tests
+namespace McFly.Test
 {
     public class PositionsResult_Should
     {

@@ -1,10 +1,9 @@
 ﻿using FluentAssertions;
-using McFly.Core;
 using McFly.Core.Registers;
-using McFly.Tests.Builders;
+using McFly.Test.Builders;
 using Xunit;
 
-namespace McFly.Tests
+namespace McFly.Test
 {
     public class RegisterFacade_Should
     {

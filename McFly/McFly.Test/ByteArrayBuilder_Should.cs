@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace McFly.Tests
+namespace McFly.Test
 {
     public class ByteArrayBuilder_Should
     {

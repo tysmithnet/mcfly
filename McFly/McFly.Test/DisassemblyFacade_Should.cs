@@ -1,10 +1,10 @@
 ﻿using System;
 using FluentAssertions;
 using McFly.Core;
-using McFly.Tests.Builders;
+using McFly.Test.Builders;
 using Xunit;
 
-namespace McFly.Tests
+namespace McFly.Test
 {
     public class DisassemblyFacade_Should
     {

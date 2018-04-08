@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using McFly.Tests.Builders;
+using McFly.Test.Builders;
 using Xunit;
 
-namespace McFly.Tests
+namespace McFly.Test
 {
     public class HelpMethod_Should
     {
