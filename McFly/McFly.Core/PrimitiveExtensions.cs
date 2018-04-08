@@ -159,15 +159,45 @@ namespace McFly.Core
             return (uint) ulongValue;
         }
 
+        public static ushort Lo16(this uint uintValue)
+        {
+            return (ushort) uintValue;
+        }
+
+        public static ushort Lo16(this uint uintValue, ushort ushortValue)
+        {
+            return (ushort)(((uintValue >> 16) << 16) | ushortValue);
+        }
+
+        public static byte Lo8(this ushort ushortValue)
+        {
+            return (byte)ushortValue;
+        }
+
+        public static byte Lo8(this ushort ushortValue, byte byteValue)
+        {
+            return (byte)(((ushortValue >> 8) << 8) | byteValue);
+        }
+
+        public static byte Hi8(this ushort ushortValue)
+        {
+            return (byte)(ushortValue >> 8);
+        }
+
+        public static byte Hi8(this ushort ushortValue, byte byteValue)
+        {
+            return (byte)(((ushortValue << 8) >> 16) | byteValue);
+        }
+
         /// <summary>
         ///     Returns the value resulting from using the provided value as the low 32 bits
         /// </summary>
         /// <param name="ulongValue">The ulong value.</param>
         /// <param name="lo32">The low 32 bits to use</param>
         /// <returns>System.UInt64.</returns>
-        public static ulong Lo32(this ulong ulongValue, uint lo32)
+        public static uint Lo32(this ulong ulongValue, uint lo32)
         {
-            return ((ulongValue >> 32) << 32) | lo32;
+            return (uint)((ulongValue >> 32) << 32) | lo32;
         }
 
         /// <summary>

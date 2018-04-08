@@ -308,7 +308,6 @@ namespace McFly.Core.Test
             Register.Di.NumBits.Should().Be(16);
             Register.Sp.NumBits.Should().Be(16);
             Register.Bp.NumBits.Should().Be(16);
-            Register.Ip.NumBits.Should().Be(16);
 
             Register.R8w.NumBits.Should().Be(16);
             Register.R9w.NumBits.Should().Be(16);

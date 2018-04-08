@@ -23,42 +23,46 @@ namespace McFly.Core.Registers
     /// </summary>
     public class RegisterSet
     {
-        /// <summary>
-        ///     Clears this instance.
-        /// </summary>
-        public void Clear()
-        {
-            Rax = Rbx = Rcx = Rdx = 0;
-        }
-
-        /// <summary>
-        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
-            return Equals((RegisterSet) obj);
-        }
-
-        /// <summary>
-        ///     Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = Rax.GetHashCode();
-                hashCode = (hashCode * 397) ^ Rbx.GetHashCode();
-                hashCode = (hashCode * 397) ^ Rcx.GetHashCode();
-                hashCode = (hashCode * 397) ^ Rdx.GetHashCode();
-                return hashCode;
-            }
-        }
+        private byte[] _st0;
+        private byte[] _st1;
+        private byte[] _st2;
+        private byte[] _st3;
+        private byte[] _st4;
+        private byte[] _st5;
+        private byte[] _st6;
+        private byte[] _st7;
+        private byte[] _xmm0;
+        private byte[] _xmm1;
+        private byte[] _xmm2;
+        private byte[] _xmm3;
+        private byte[] _xmm4;
+        private byte[] _xmm5;
+        private byte[] _xmm6;
+        private byte[] _xmm7;
+        private byte[] _xmm8;
+        private byte[] _xmm9;
+        private byte[] _xmm10;
+        private byte[] _xmm11;
+        private byte[] _xmm12;
+        private byte[] _xmm13;
+        private byte[] _xmm14;
+        private byte[] _xmm15;
+        private byte[] _ymm0;
+        private byte[] _ymm1;
+        private byte[] _ymm2;
+        private byte[] _ymm3;
+        private byte[] _ymm4;
+        private byte[] _ymm5;
+        private byte[] _ymm6;
+        private byte[] _ymm7;
+        private byte[] _ymm8;
+        private byte[] _ymm9;
+        private byte[] _ymm10;
+        private byte[] _ymm11;
+        private byte[] _ymm12;
+        private byte[] _ymm13;
+        private byte[] _ymm14;
+        private byte[] _ymm15;
 
         /// <summary>
         ///     Interprets the arguments as changes to the register set
@@ -117,162 +121,872 @@ namespace McFly.Core.Registers
                     throw new ArgumentOutOfRangeException($"{nameof(register)} has a value of {register} which is not a valid register");
             }
         }
-
-        /// <summary>
-        ///     Equalses the specified other.
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        protected bool Equals(RegisterSet other)
-        {
-            return Rax == other.Rax && Rbx == other.Rbx && Rcx == other.Rcx && Rdx == other.Rdx;
-        }
-
-        /// <summary>
-        ///     Implements the == operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator ==(RegisterSet left, RegisterSet right)
-        {
-            if (ReferenceEquals(left, right)) return true;
-            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
-            return Equals(left, right);
-        }
-
-        /// <summary>
-        ///     Implements the != operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator !=(RegisterSet left, RegisterSet right)
-        {
-            return !Equals(left, right);
-        }
-
-        /// <summary>
-        ///     Gets or sets the eax.
-        /// </summary>
-        /// <value>The eax.</value>
-        [JsonIgnore]
+        public ulong? Rax { get; set; }
+        public ulong? Rbx { get; set; }
+        public ulong? Rcx { get; set; }
+        public ulong? Rdx { get; set; }
+        public ulong? Rsi { get; set; }
+        public ulong? Rdi { get; set; }
+        public ulong? Rsp { get; set; }
+        public ulong? Rbp { get; set; }
+        public ulong? Rip { get; set; }
+        public uint? Efl { get; set; }
+        public ushort? Cs { get; set; }
+        public ushort? Ds { get; set; }
+        public ushort? Es { get; set; }
+        public ushort? Fs { get; set; }
+        public ushort? Gs { get; set; }
+        public ushort? Ss { get; set; }
+        public ulong? R8 { get; set; }
+        public ulong? R9 { get; set; }
+        public ulong? R10 { get; set; }
+        public ulong? R11 { get; set; }
+        public ulong? R12 { get; set; }
+        public ulong? R13 { get; set; }
+        public ulong? R14 { get; set; }
+        public ulong? R15 { get; set; }
+        public ulong? Dr0 { get; set; }
+        public ulong? Dr1 { get; set; }
+        public ulong? Dr2 { get; set; }
+        public ulong? Dr3 { get; set; }
+        public ulong? Dr6 { get; set; }
+        public ulong? Dr7 { get; set; }
+        public ulong? Exfrom { get; set; }
+        public ulong? Exto { get; set; }
+        public ulong? Brfrom { get; set; }
+        public ulong? Brto { get; set; }
         public uint? Eax
         {
             get => Rax?.Lo32();
-            set => Rax = Rax?.Lo32(value.GetValueOrDefault());
+            set
+            {
+                if (!value.HasValue) return;
+                Rax = Rax?.Lo32(value.Value);
+            }
         }
 
-        /// <summary>
-        ///     Gets or sets the ebx.
-        /// </summary>
-        /// <value>The ebx.</value>
-        [JsonIgnore]
-        public uint? Ebx
-        {
-            get => Rbx?.Lo32();
-            set => Rbx = Rbx?.Lo32(value.GetValueOrDefault());
-        }
-
-        /// <summary>
-        ///     Gets or sets the ecx.
-        /// </summary>
-        /// <value>The ecx.</value>
-        [JsonIgnore]
         public uint? Ecx
         {
             get => Rcx?.Lo32();
-            set => Rcx = Rcx?.Lo32(value.GetValueOrDefault());
+            set
+            {
+                if (!value.HasValue) return;
+                Rcx = Rcx?.Lo32(value.Value);
+            }
         }
 
-        /// <summary>
-        ///     Gets or sets the edx.
-        /// </summary>
-        /// <value>The edx.</value>
-        [JsonIgnore]
         public uint? Edx
         {
             get => Rdx?.Lo32();
-            set => Rdx = Rdx?.Lo32(value.GetValueOrDefault());
+            set
+            {
+                if (!value.HasValue) return;
+                Rdx = Rdx?.Lo32(value.Value);
+            }
         }
 
-        /// <summary>
-        ///     Gets or sets the R10.
-        /// </summary>
-        /// <value>The R10.</value>
-        public ulong? R10 { get; set; }
+        public uint? Ebx
+        {
+            get => Rbx?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                Rbx = Rbx?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the R11.
-        /// </summary>
-        /// <value>The R11.</value>
-        public ulong? R11 { get; set; }
+        public uint? Esp
+        {
+            get => Rsp?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                Rsp = Rsp?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the R12.
-        /// </summary>
-        /// <value>The R12.</value>
-        public ulong? R12 { get; set; }
+        public uint? Ebp
+        {
+            get => Rbp?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                Rbp = Rbp?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the R13.
-        /// </summary>
-        /// <value>The R13.</value>
-        public ulong? R13 { get; set; }
+        public uint? Esi
+        {
+            get => Rsi?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                Rsi = Rsi?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the R14.
-        /// </summary>
-        /// <value>The R14.</value>
-        public ulong? R14 { get; set; }
+        public uint? Edi
+        {
+            get => Rdi?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                Rdi = Rdi?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the R15.
-        /// </summary>
-        /// <value>The R15.</value>
-        public ulong? R15 { get; set; }
+        public uint? R8d
+        {
+            get => R8?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                R8 = R8?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the r8.
-        /// </summary>
-        /// <value>The r8.</value>
-        public ulong? R8 { get; set; }
+        public uint? R9d
+        {
+            get => R9?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                R9 = R9?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the r9.
-        /// </summary>
-        /// <value>The r9.</value>
-        public ulong? R9 { get; set; }
+        public uint? R10d
+        {
+            get => R10?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                R10 = R10?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the rax register
-        /// </summary>
-        /// <value>The rax register</value>
-        public ulong? Rax { get; set; }
+        public uint? R11d
+        {
+            get => Rax?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                R11 = R11?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the rbx register
-        /// </summary>
-        /// <value>The rbx register</value>
-        public ulong? Rbx { get; set; }
+        public uint? R12d
+        {
+            get => R12?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                R12 = R12?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the rcx register
-        /// </summary>
-        /// <value>The rcx register</value>
-        public ulong? Rcx { get; set; }
+        public uint? R13d
+        {
+            get => R13?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                R13 = R13?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the rdx register
-        /// </summary>
-        /// <value>the rdx register</value>
-        public ulong? Rdx { get; set; }
+        public uint? R14d
+        {
+            get => R14?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                R14 = R14?.Lo32(value.Value);
+            }
+        }
 
-        /// <summary>
-        ///     Gets or sets the rip.
-        /// </summary>
-        /// <value>The rip.</value>
-        public ulong? Rip { get; set; }
+        public uint? R15d
+        {
+            get => R15?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                R15 = R15?.Lo32(value.Value);
+            }
+        }
+
+        public uint? Eip
+        {
+            get => Rip?.Lo32();
+            set
+            {
+                if (!value.HasValue) return;
+                Rip = Rip?.Lo32(value.Value);
+            }
+        }
+
+        public ushort? Ax
+        {
+            get => Eax?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                Eax = Eax?.Lo16(value.Value);
+            }
+
+        }
+
+        public ushort? Bx
+        {
+            get => Ebx?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                Ebx = Ebx?.Lo16(value.Value);
+            }
+        }
+
+        public ushort? Cx
+        {
+            get => Ecx?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                Ecx = Ecx?.Lo16(value.Value);
+            }
+        }
+
+        public ushort? Dx
+        {
+            get => Edx?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                Edx = Edx?.Lo16(value.Value);
+            }
+        }
+
+        public ushort? Si
+        {
+            get => Esi?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                Esi = Esi?.Lo16(value.Value);
+            }
+        }
+
+        public ushort? Di
+        {
+            get => Edi?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                Edi = Eax?.Lo16(value.Value);
+            }
+        }
+
+        public ushort? Sp
+        {
+            get => Esp?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                Esp = Esp?.Lo16(value.Value);
+            }
+        }
+
+        public ushort? Bp
+        {
+            get => Ebp?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                Ebp = Ebp?.Lo16(value.Value);
+            }
+        }
+
+        public ushort? Ip
+        {
+            get => Eip?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                Eip = Eip?.Lo16(value.Value);
+            }
+        }
+
+        public ushort? R8w
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public ushort? R9w
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public ushort? R10w
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public ushort? R11w
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public ushort? R12w
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public ushort? R13w
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public ushort? R14w
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public ushort? R15w
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public ushort? Fl
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public byte? Al { get; set; }
+        public byte? Cl { get; set; }
+        public byte? Dl { get; set; }
+        public byte? Bl { get; set; }
+        public byte? Spl { get; set; }
+        public byte? Bpl { get; set; }
+        public byte? Sil { get; set; }
+        public byte? Dil { get; set; }
+        public byte? R8b { get; set; }
+        public byte? R9b { get; set; }
+        public byte? R10b { get; set; }
+        public byte? R11b { get; set; }
+        public byte? R12b { get; set; }
+        public byte? R13b { get; set; }
+        public byte? R14b { get; set; }
+        public byte? R15b { get; set; }
+        public byte? Ah { get; set; }
+        public byte? Ch { get; set; }
+        public byte? Dh { get; set; }
+        public byte? Bh { get; set; }
+        public byte? Iopl { get; set; }
+        public byte? Of { get; set; }
+        public byte? Df { get; set; }
+        public byte? If { get; set; }
+        public byte? Tf { get; set; }
+        public byte? Sf { get; set; }
+        public byte? Zf { get; set; }
+        public byte? Af { get; set; }
+        public byte? Pf { get; set; }
+        public byte? Cf { get; set; }
+        public byte? Vip { get; set; }
+        public byte? Vif { get; set; }
+        public ulong? Mm0 { get; set; }
+        public ulong? Mm1 { get; set; }
+        public ulong? Mm2 { get; set; }
+        public ulong? Mm3 { get; set; }
+        public ulong? Mm4 { get; set; }
+        public ulong? Mm5 { get; set; }
+        public ulong? Mm6 { get; set; }
+        public ulong? Mm7 { get; set; }
+        public uint? Mxcsr { get; set; }
+
+        public byte[] Xmm0
+        {
+            get => _xmm0;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm0 = value;
+            }
+        }
+
+        public byte[] Xmm1
+        {
+            get => _xmm1;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm1 = value;
+            }
+        }
+
+        public byte[] Xmm2
+        {
+            get => _xmm2;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm2 = value;
+            }
+        }
+
+        public byte[] Xmm3
+        {
+            get => _xmm3;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm3 = value;
+            }
+        }
+
+        public byte[] Xmm4
+        {
+            get => _xmm4;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm4 = value;
+            }
+        }
+
+        public byte[] Xmm5
+        {
+            get => _xmm5;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm5 = value;
+            }
+        }
+
+        public byte[] Xmm6
+        {
+            get => _xmm6;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm6 = value;
+            }
+        }
+
+        public byte[] Xmm7
+        {
+            get => _xmm7;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm7 = value;
+            }
+        }
+
+        public byte[] Xmm8
+        {
+            get => _xmm8;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm8 = value;
+            }
+        }
+
+        public byte[] Xmm9
+        {
+            get => _xmm9;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm9 = value;
+            }
+        }
+
+        public byte[] Xmm10
+        {
+            get => _xmm10;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm10 = value;
+            }
+        }
+
+        public byte[] Xmm11
+        {
+            get => _xmm11;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm11 = value;
+            }
+        }
+
+        public byte[] Xmm12
+        {
+            get => _xmm12;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm12 = value;
+            }
+        }
+
+        public byte[] Xmm13
+        {
+            get => _xmm13;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm13 = value;
+            }
+        }
+
+        public byte[] Xmm14
+        {
+            get => _xmm14;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm14 = value;
+            }
+        }
+
+        public byte[] Xmm15
+        {
+            get => _xmm15;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _xmm15 = value;
+            }
+        }
+
+        public byte[] Ymm0
+        {
+            get => _ymm0;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm0 = value;
+            }
+        }
+
+        public byte[] Ymm1
+        {
+            get => _ymm1;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm1 = value;
+            }
+        }
+
+        public byte[] Ymm2
+        {
+            get => _ymm2;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm2 = value;
+            }
+        }
+
+        public byte[] Ymm3
+        {
+            get => _ymm3;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm3 = value;
+            }
+        }
+
+        public byte[] Ymm4
+        {
+            get => _ymm4;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm4 = value;
+            }
+        }
+
+        public byte[] Ymm5
+        {
+            get => _ymm5;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm5 = value;
+            }
+        }
+
+        public byte[] Ymm6
+        {
+            get => _ymm6;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm6 = value;
+            }
+        }
+
+        public byte[] Ymm7
+        {
+            get => _ymm7;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm7 = value;
+            }
+        }
+
+        public byte[] Ymm8
+        {
+            get => _ymm8;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm8 = value;
+            }
+        }
+
+        public byte[] Ymm9
+        {
+            get => _ymm9;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm9 = value;
+            }
+        }
+
+        public byte[] Ymm10
+        {
+            get => _ymm10;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm10 = value;
+            }
+        }
+
+        public byte[] Ymm11
+        {
+            get => _ymm11;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm11 = value;
+            }
+        }
+
+        public byte[] Ymm12
+        {
+            get => _ymm12;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm12 = value;
+            }
+        }
+
+        public byte[] Ymm13
+        {
+            get => _ymm13;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm13 = value;
+            }
+        }
+
+        public byte[] Ymm14
+        {
+            get => _ymm14;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm14 = value;
+            }
+        }
+
+        public byte[] Ymm15
+        {
+            get => _ymm15;
+            set
+            {
+                if (value != null && value.Length != 16)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                _ymm15 = value;
+            }
+        }
+
+        public ulong? Xmm0l { get; set; }
+        public ulong? Xmm1l { get; set; }
+        public ulong? Xmm2l { get; set; }
+        public ulong? Xmm3l { get; set; }
+        public ulong? Xmm4l { get; set; }
+        public ulong? Xmm5l { get; set; }
+        public ulong? Xmm6l { get; set; }
+        public ulong? Xmm7l { get; set; }
+        public ulong? Xmm8l { get; set; }
+        public ulong? Xmm9l { get; set; }
+        public ulong? Xmm10l { get; set; }
+        public ulong? Xmm11l { get; set; }
+        public ulong? Xmm12l { get; set; }
+        public ulong? Xmm13l { get; set; }
+        public ulong? Xmm14l { get; set; }
+        public ulong? Xmm15l { get; set; }
+        public ulong? Ymm0l { get; set; }
+        public ulong? Ymm1l { get; set; }
+        public ulong? Ymm2l { get; set; }
+        public ulong? Ymm3l { get; set; }
+        public ulong? Ymm4l { get; set; }
+        public ulong? Ymm5l { get; set; }
+        public ulong? Ymm6l { get; set; }
+        public ulong? Ymm7l { get; set; }
+        public ulong? Ymm8l { get; set; }
+        public ulong? Ymm9l { get; set; }
+        public ulong? Ymm10l { get; set; }
+        public ulong? Ymm11l { get; set; }
+        public ulong? Ymm12l { get; set; }
+        public ulong? Ymm13l { get; set; }
+        public ulong? Ymm14l { get; set; }
+        public ulong? Ymm15l { get; set; }
+        public ushort? Fpcw { get; set; }
+        public ushort? Fpsw { get; set; }
+        public ushort? Fptw { get; set; }
+
+        public byte[] St0
+        {
+            get => _st0;
+            set
+            {
+                if(value != null && value.Length != 10)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 10");
+                _st0 = value;
+            }
+        }
+
+        public byte[] St1
+        {
+            get => _st1;
+            set
+            {
+                if (value != null && value.Length != 10)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 10");
+                _st1 = value;
+            }
+        }
+
+        public byte[] St2
+        {
+            get => _st2;
+            set
+            {
+                if (value != null && value.Length != 10)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 10");
+                _st2 = value;
+            }
+        }
+
+        public byte[] St3
+        {
+            get => _st3;
+            set
+            {
+                if (value != null && value.Length != 10)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 10");
+                _st3 = value;
+            }
+        }
+
+        public byte[] St4
+        {
+            get => _st4;
+            set
+            {
+                if (value != null && value.Length != 10)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 10");
+                _st4 = value;
+            }
+        }
+
+        public byte[] St5
+        {
+            get => _st5;
+            set
+            {
+                if (value != null && value.Length != 10)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 10");
+                _st5 = value;
+            }
+        }
+
+        public byte[] St6
+        {
+            get => _st6;
+            set
+            {
+                if (value != null && value.Length != 10)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 10");
+                _st6 = value;
+            }
+        }
+
+        public byte[] St7
+        {
+            get => _st7;
+            set
+            {
+                if (value != null && value.Length != 10)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes but must have exactly 10");
+                _st7 = value;
+            }
+        }
     }
 }
 
