@@ -56,10 +56,25 @@ namespace McFly.Core.Test
             // arrange
             // act
             // assert
+            Register.R8.NumBits.Should().Be(64);
+            Register.R9.NumBits.Should().Be(64);
+            Register.R10.NumBits.Should().Be(64);
+            Register.R11.NumBits.Should().Be(64);
+            Register.R12.NumBits.Should().Be(64);
+            Register.R13.NumBits.Should().Be(64);
+            Register.R14.NumBits.Should().Be(64);
+            Register.R15.NumBits.Should().Be(64);
             Register.Rax.NumBits.Should().Be(64);
+            Register.Rbp.NumBits.Should().Be(64);
             Register.Rbx.NumBits.Should().Be(64);
             Register.Rcx.NumBits.Should().Be(64);
+            Register.Rdi.NumBits.Should().Be(64);
             Register.Rdx.NumBits.Should().Be(64);
+            Register.Rip.NumBits.Should().Be(64);
+            Register.Rsp.NumBits.Should().Be(64);
+            Register.Rsi.NumBits.Should().Be(64);
+
+            Register.EFl.NumBits.Should().Be(32);
         }
 
         [Fact]
