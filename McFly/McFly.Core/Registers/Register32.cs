@@ -49,6 +49,8 @@ namespace McFly.Core.Registers
         /// <value>The edi.</value>
         public static EdiRegister Edi { get; } = new EdiRegister();
 
+        public static EflRegister Efl { get; } = new EflRegister();
+
         /// <summary>
         ///     Gets the Edx.
         /// </summary>

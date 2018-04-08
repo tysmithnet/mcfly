@@ -169,6 +169,16 @@ namespace McFly.Core.Registers
         /// <value>The RSP.</value>
         public static RspRegister Rsp { get; } = new RspRegister();
 
+        public static Dr0Register Dr0 { get; } = new Dr0Register();
+        public static Dr1Register Dr1 { get; } = new Dr1Register();
+        public static Dr2Register Dr2 { get; } = new Dr2Register();
+        public static Dr3Register Dr3 { get; } = new Dr3Register();
+        public static Dr4Register Dr4 { get; } = new Dr4Register();
+        public static Dr5Register Dr5 { get; } = new Dr5Register();
+        public static Dr6Register Dr6 { get; } = new Dr6Register();
+        public static Dr7Register Dr7 { get; } = new Dr7Register();
+
+
         /// <summary>
         ///     Class Mm0Register.
         /// </summary>
@@ -663,5 +673,77 @@ namespace McFly.Core.Registers
             /// <value>The number bits.</value>
             public override int NumBits { get; } = 64;
         }
+    }
+
+    public class Dr0Register : Register
+    {
+        /// <inheritdoc />
+        public override string Name { get; } = "dr0";
+
+        /// <inheritdoc />
+        public override int NumBits { get; } = 64;
+    }
+
+    public class Dr1Register : Register
+    {
+        /// <inheritdoc />
+        public override string Name { get; } = "dr1";
+
+        /// <inheritdoc />
+        public override int NumBits { get; } = 64;
+    }
+
+    public class Dr2Register : Register
+    {
+        /// <inheritdoc />
+        public override string Name { get; } = "dr2";
+
+        /// <inheritdoc />
+        public override int NumBits { get; } = 64;
+    }
+
+    public class Dr3Register : Register
+    {
+        /// <inheritdoc />
+        public override string Name { get; } = "dr3";
+
+        /// <inheritdoc />
+        public override int NumBits { get; } = 64;
+    }
+
+    public class Dr4Register : Register
+    {
+        /// <inheritdoc />
+        public override string Name { get; } = "dr4";
+
+        /// <inheritdoc />
+        public override int NumBits { get; } = 64;
+    }
+
+    public class Dr5Register : Register
+    {
+        /// <inheritdoc />
+        public override string Name { get; } = "dr5";
+
+        /// <inheritdoc />
+        public override int NumBits { get; } = 64;
+    }
+
+    public class Dr6Register : Register
+    {
+        /// <inheritdoc />
+        public override string Name { get; } = "dr6";
+
+        /// <inheritdoc />
+        public override int NumBits { get; } = 64;
+    }
+
+    public class Dr7Register : Register
+    {
+        /// <inheritdoc />
+        public override string Name { get; } = "dr7";
+
+        /// <inheritdoc />
+        public override int NumBits { get; } = 64;
     }
 }

@@ -74,7 +74,9 @@ namespace McFly.Core.Test
             Register.Rsp.NumBits.Should().Be(64);
             Register.Rsi.NumBits.Should().Be(64);
 
-            Register.EFl.NumBits.Should().Be(32);
+
+            Register.Efl.NumBits.Should().Be(32);
+
         }
 
         [Fact]
