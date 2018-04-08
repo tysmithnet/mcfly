@@ -114,7 +114,7 @@ namespace McFly.Core.Registers
                     Rdx = Rdx?.Lo32(Convert.ToInt32(input, radix).ToUInt());
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException($"{nameof(register)} is not a valid register");
+                    throw new ArgumentOutOfRangeException($"{nameof(register)} has a value of {register} which is not a valid register");
             }
         }
 

@@ -20,7 +20,7 @@ namespace McFly.Test
             facade.DebugEngineProxy = builder.Build();
 
             // act
-            var registerSet = facade.GetCurrentRegisterSet(Register.AllRegisters64);
+            var registerSet = facade.GetCurrentRegisterSet(new Register[]{Register.Rax, Register.Rbx, Register.Rcx, Register.Rdx, });
             var emptySet = facade.GetCurrentRegisterSet(new Register[0]);
 
             // assert
