@@ -418,90 +418,478 @@ namespace McFly.Core.Registers
 
         public ushort? R8w
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => R8d?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                R8d = R8d?.Lo16(value.Value);
+            }
         }
 
         public ushort? R9w
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => R9d?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                R9d = R9d?.Lo16(value.Value);
+            }
         }
 
         public ushort? R10w
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => R10d?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                R10d = R10d?.Lo16(value.Value);
+            }
         }
 
         public ushort? R11w
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => R11d?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                R11d = R11d?.Lo16(value.Value);
+            }
         }
 
         public ushort? R12w
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => R12d?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                R12d = R12d?.Lo16(value.Value);
+            }
         }
 
         public ushort? R13w
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => R13d?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                R13d = R13d?.Lo16(value.Value);
+            }
         }
 
         public ushort? R14w
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => R14d?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                R14d = R14d?.Lo16(value.Value);
+            }
         }
 
         public ushort? R15w
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => R15d?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                R15d = R15d?.Lo16(value.Value);
+            }
         }
 
         public ushort? Fl
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => Efl?.Lo16();
+            set
+            {
+                if (!value.HasValue) return;
+                Efl = Efl?.Lo16(value.Value);
+            }
         }
 
-        public byte? Al { get; set; }
-        public byte? Cl { get; set; }
-        public byte? Dl { get; set; }
-        public byte? Bl { get; set; }
-        public byte? Spl { get; set; }
-        public byte? Bpl { get; set; }
-        public byte? Sil { get; set; }
-        public byte? Dil { get; set; }
-        public byte? R8b { get; set; }
-        public byte? R9b { get; set; }
-        public byte? R10b { get; set; }
-        public byte? R11b { get; set; }
-        public byte? R12b { get; set; }
-        public byte? R13b { get; set; }
-        public byte? R14b { get; set; }
-        public byte? R15b { get; set; }
-        public byte? Ah { get; set; }
-        public byte? Ch { get; set; }
-        public byte? Dh { get; set; }
-        public byte? Bh { get; set; }
-        public byte? Iopl { get; set; }
-        public byte? Of { get; set; }
-        public byte? Df { get; set; }
-        public byte? If { get; set; }
-        public byte? Tf { get; set; }
-        public byte? Sf { get; set; }
-        public byte? Zf { get; set; }
-        public byte? Af { get; set; }
-        public byte? Pf { get; set; }
-        public byte? Cf { get; set; }
-        public byte? Vip { get; set; }
-        public byte? Vif { get; set; }
+        public byte? Al
+        {
+            get => Ax?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                Ax = Ax?.Lo8(value.Value);
+            }
+        }
+        public byte? Cl
+        {
+            get => Cx?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                Cx = Cx?.Lo8(value.Value);
+            }
+        }
+        public byte? Dl
+        {
+            get => Dx?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                Dx = Dx?.Lo8(value.Value);
+            }
+        }
+        public byte? Bl
+        {
+            get => Bx?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                Bx = Bx?.Lo8(value.Value);
+            }
+        }
+        public byte? Spl
+        {
+            get => Sp?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                Sp = Sp?.Lo8(value.Value);
+            }
+        }
+        public byte? Bpl
+        {
+            get => Bp?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                Bp = Bp?.Lo8(value.Value);
+            }
+        }
+        public byte? Sil
+        {
+            get => Si?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                Si = Si?.Lo8(value.Value);
+            }
+        }
+        public byte? Dil
+        {
+            get => Di?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                Di = Di?.Lo8(value.Value);
+            }
+        }
+        public byte? R8b
+        {
+            get => R8w?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                R8w = R8w?.Lo8(value.Value);
+            }
+        }
+
+        public byte? R9b
+        {
+            get => R9w?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                R9w = R9w?.Lo8(value.Value);
+            }
+        }
+        public byte? R10b
+        {
+            get => R10w?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                R10w = R10w?.Lo8(value.Value);
+            }
+        }
+        public byte? R11b
+        {
+            get => R11w?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                R11w = R11w?.Lo8(value.Value);
+            }
+        }
+        public byte? R12b
+        {
+            get => R12w?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                R12w = R12w?.Lo8(value.Value);
+            }
+        }
+        public byte? R13b
+        {
+            get => R13w?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                R13w = R13w?.Lo8(value.Value);
+            }
+        }
+        public byte? R14b
+        {
+            get => R14w?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                R14w = R14w?.Lo8(value.Value);
+            }
+        }
+        public byte? R15b
+        {
+            get => R15w?.Lo8();
+            set
+            {
+                if (!value.HasValue) return;
+                R15w = R15w?.Lo8(value.Value);
+            }
+        }
+        public byte? Ah
+        {
+            get => Ax?.Hi8();
+            set
+            {
+                if (!value.HasValue) return;
+                Ax = Ax?.Hi8(value.Value);
+            }
+        }
+
+        public byte? Ch
+        {
+            get => Cx?.Hi8();
+            set
+            {
+                if (!value.HasValue) return;
+                Cx = Cx?.Hi8(value.Value);
+            }
+        }
+        public byte? Dh
+        {
+            get => Dx?.Hi8();
+            set
+            {
+                if (!value.HasValue) return;
+                Dx = Dx?.Hi8(value.Value);
+            }
+        }
+        public byte? Bh
+        {
+            get => Bx?.Hi8();
+            set
+            {
+                if (!value.HasValue) return;
+                Bx = Bx?.Hi8(value.Value);
+            }
+        }
+        public byte? Iopl
+        {
+            get => Efl.HasValue ? (byte?)(Efl & 0x3000 >> 11) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                if(value > 3)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} has a value of {value} but must be in [0,4)");
+                uint mask = 0x3000;
+                Efl = Efl &= ~mask | (uint)value << 11;
+            } 
+        }
+
+        public bool? Of
+        {
+            get => Efl.HasValue ? (bool?)((Efl & 0x0800) > 0) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                uint mask = 0x0800;
+                if (value.Value)
+                {
+                    Efl = Efl |= mask;
+                }
+                else
+                {
+                    Efl = Efl &= ~mask;
+                }
+            }
+        }
+
+        public bool? Df
+        {
+            get => Efl.HasValue ? (bool?)((Efl & 0x0400) > 0) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                uint mask = 0x0400;
+                if (value.Value)
+                {
+                    Efl = Efl |= mask;
+                }
+                else
+                {
+                    Efl = Efl &= ~mask;
+                }
+            }
+        }
+
+        public bool? If
+        {
+            get => Efl.HasValue ? (bool?)((Efl & 0x0200) > 0) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                uint mask = 0x0200;
+                if (value.Value)
+                {
+                    Efl = Efl |= mask;
+                }
+                else
+                {
+                    Efl = Efl &= ~mask;
+                }
+            }
+        }
+        public bool? Tf
+        {
+            get => Efl.HasValue ? (bool?)((Efl & 0x0100) > 0) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                uint mask = 0x0100;
+                if (value.Value)
+                {
+                    Efl = Efl |= mask;
+                }
+                else
+                {
+                    Efl = Efl &= ~mask;
+                }
+            }
+        }
+        public bool? Sf
+        {
+            get => Efl.HasValue ? (bool?)((Efl & 0x0080) > 0) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                uint mask = 0x0080;
+                if (value.Value)
+                {
+                    Efl = Efl |= mask;
+                }
+                else
+                {
+                    Efl = Efl &= ~mask;
+                }
+            }
+        }
+        public bool? Zf
+        {
+            get => Efl.HasValue ? (bool?)((Efl & 0x0040) > 0) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                uint mask = 0x0040;
+                if (value.Value)
+                {
+                    Efl = Efl |= mask;
+                }
+                else
+                {
+                    Efl = Efl &= ~mask;
+                }
+            }
+        }
+        public bool? Af
+        {
+            get => Efl.HasValue ? (bool?)((Efl & 0x0010) > 0) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                uint mask = 0x0010;
+                if (value.Value)
+                {
+                    Efl = Efl |= mask;
+                }
+                else
+                {
+                    Efl = Efl &= ~mask;
+                }
+            }
+        }
+        public bool? Pf
+        {
+            get => Efl.HasValue ? (bool?)((Efl & 0x0004) > 0) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                uint mask = 0x0004;
+                if (value.Value)
+                {
+                    Efl = Efl |= mask;
+                }
+                else
+                {
+                    Efl = Efl &= ~mask;
+                }
+            }
+        }
+        public bool? Cf
+        {
+            get => Efl.HasValue ? (bool?)((Efl & 0x0001) > 0) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                uint mask = 0x0001;
+                if (value.Value)
+                {
+                    Efl = Efl |= mask;
+                }
+                else
+                {
+                    Efl = Efl &= ~mask;
+                }
+            }
+        }
+        public bool? Vip
+        {
+            get => Efl.HasValue ? (bool?)((Efl & 0x00100000) > 0) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                uint mask = 0x00100000;
+                if (value.Value)
+                {
+                    Efl = Efl |= mask;
+                }
+                else
+                {
+                    Efl = Efl &= ~mask;
+                }
+            }
+        }
+        public bool? Vif
+        {
+            get => Efl.HasValue ? (bool?)((Efl & 0x00080000) > 0) : null;
+            set
+            {
+                if (!value.HasValue) return;
+                uint mask = 0x00080000;
+                if (value.Value)
+                {
+                    Efl = Efl |= mask;
+                }
+                else
+                {
+                    Efl = Efl &= ~mask;
+                }
+            }
+        }
         public ulong? Mm0 { get; set; }
         public ulong? Mm1 { get; set; }
         public ulong? Mm2 { get; set; }
