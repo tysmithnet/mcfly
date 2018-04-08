@@ -195,9 +195,9 @@ namespace McFly.Core
         /// <param name="ulongValue">The ulong value.</param>
         /// <param name="lo32">The low 32 bits to use</param>
         /// <returns>System.UInt64.</returns>
-        public static uint Lo32(this ulong ulongValue, uint lo32)
+        public static ulong Lo32(this ulong ulongValue, uint lo32)
         {
-            return (uint)((ulongValue >> 32) << 32) | lo32;
+            return ((ulongValue >> 32) << 32) | lo32;
         }
 
         /// <summary>
