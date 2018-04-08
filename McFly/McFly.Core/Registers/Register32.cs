@@ -4,7 +4,7 @@
 // Created          : 04-06-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-06-2018
+// Last Modified On : 04-07-2018
 // ***********************************************************************
 // <copyright file="Register32.cs" company="">
 //     Copyright ©  2018
@@ -73,6 +73,10 @@ namespace McFly.Core.Registers
         /// <value>The esp.</value>
         public static EspRegister Esp { get; } = new EspRegister();
 
+        /// <summary>
+        ///     Gets the MXCSR.
+        /// </summary>
+        /// <value>The MXCSR.</value>
         public static MxcsrRegister Mxcsr { get; } = new MxcsrRegister();
 
         /// <summary>
@@ -270,11 +274,23 @@ namespace McFly.Core.Registers
             public override int NumBits { get; } = 32;
         }
 
+        /// <summary>
+        ///     Class MxcsrRegister.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Registers.Register" />
         public class MxcsrRegister : Register
         {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
             /// <inheritdoc />
             public override string Name { get; } = "mxcsr";
 
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
             /// <inheritdoc />
             public override int NumBits { get; } = 32;
         }

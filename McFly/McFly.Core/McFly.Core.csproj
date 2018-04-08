@@ -54,6 +54,7 @@
     <Compile Include="Registers\Register128.cs" />
     <Compile Include="Registers\Register64.cs" />
     <Compile Include="Registers\Register32.cs" />
+    <Compile Include="Registers\Register80.cs" />
     <Compile Include="Registers\RegisterSet.cs" />
     <Compile Include="StackFrame.cs" />
     <Compile Include="StackTrace.cs" />

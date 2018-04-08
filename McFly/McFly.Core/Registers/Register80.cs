@@ -19,15 +19,53 @@ namespace McFly.Core.Registers
     /// </summary>
     public partial class Register
     {
+        /// <summary>
+        ///     Gets the ST0.
+        /// </summary>
+        /// <value>The ST0.</value>
         public static St0Register St0 { get; } = new St0Register();
-        public static St1Register St1 { get; } = new St1Register();
-        public static St2Register St2 { get; } = new St2Register();
-        public static St3Register St3 { get; } = new St3Register();
-        public static St4Register St4 { get; } = new St4Register();
-        public static St5Register St5 { get; } = new St5Register();
-        public static St6Register St6 { get; } = new St6Register();
-        public static St7Register St7 { get; } = new St7Register();
 
+        /// <summary>
+        ///     Gets the ST1.
+        /// </summary>
+        /// <value>The ST1.</value>
+        public static St1Register St1 { get; } = new St1Register();
+
+        /// <summary>
+        ///     Gets the ST2.
+        /// </summary>
+        /// <value>The ST2.</value>
+        public static St2Register St2 { get; } = new St2Register();
+
+        /// <summary>
+        ///     Gets the ST3.
+        /// </summary>
+        /// <value>The ST3.</value>
+        public static St3Register St3 { get; } = new St3Register();
+
+        /// <summary>
+        ///     Gets the ST4.
+        /// </summary>
+        /// <value>The ST4.</value>
+        public static St4Register St4 { get; } = new St4Register();
+
+        /// <summary>
+        ///     Gets the ST5.
+        /// </summary>
+        /// <value>The ST5.</value>
+        public static St5Register St5 { get; } = new St5Register();
+
+        /// <summary>
+        ///     Gets the ST6.
+        /// </summary>
+        /// <value>The ST6.</value>
+        public static St6Register St6 { get; } = new St6Register();
+
+        /// <summary>
+        ///     Gets the ST7.
+        /// </summary>
+        /// <value>The ST7.</value>
+        public static St7Register St7 { get; } = new St7Register();
 
         /// <summary>
         ///     Class St0Register.
