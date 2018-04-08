@@ -150,14 +150,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Ah";
+            public override string Name { get; } = "ah";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -171,14 +171,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Al";
+            public override string Name { get; } = "al";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -192,14 +192,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Bh";
+            public override string Name { get; } = "bh";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -213,14 +213,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Bl";
+            public override string Name { get; } = "bl";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -234,14 +234,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Bpl";
+            public override string Name { get; } = "bpl";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -255,14 +255,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Ch";
+            public override string Name { get; } = "ch";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -276,14 +276,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Cl";
+            public override string Name { get; } = "cl";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -297,14 +297,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Dh";
+            public override string Name { get; } = "dh";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -318,14 +318,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Dil";
+            public override string Name { get; } = "dil";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -339,14 +339,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Dl";
+            public override string Name { get; } = "dl";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -360,14 +360,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R10b";
+            public override string Name { get; } = "r10b";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -381,14 +381,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R11b";
+            public override string Name { get; } = "r11b";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -402,14 +402,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R12b";
+            public override string Name { get; } = "r12b";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -423,14 +423,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R13b";
+            public override string Name { get; } = "r13b";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -444,14 +444,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R14b";
+            public override string Name { get; } = "r14b";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -465,14 +465,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R15b";
+            public override string Name { get; } = "r15b";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -486,14 +486,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R8b";
+            public override string Name { get; } = "r8b";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -507,14 +507,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R9b";
+            public override string Name { get; } = "r9b";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -528,14 +528,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Sil";
+            public override string Name { get; } = "sil";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
 
         /// <summary>
@@ -549,14 +549,14 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Spl";
+            public override string Name { get; } = "spl";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 16;
+            public override int NumBits { get; } = 8;
         }
     }
 }

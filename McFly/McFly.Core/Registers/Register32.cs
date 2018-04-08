@@ -262,7 +262,7 @@ namespace McFly.Core.Registers
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "elf";
+            public override string Name { get; } = "efl";
 
             /// <summary>
             ///     Gets the number bits.
@@ -367,7 +367,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 32;
         }
 
         /// <summary>
@@ -388,7 +388,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 32;
         }
 
         /// <summary>
@@ -409,7 +409,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 32;
         }
 
         /// <summary>
@@ -430,7 +430,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 32;
         }
 
         /// <summary>
@@ -451,7 +451,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 32;
         }
 
         /// <summary>
@@ -472,7 +472,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 32;
         }
 
         /// <summary>
@@ -493,7 +493,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 32;
         }
 
         /// <summary>
@@ -514,7 +514,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The number bits.</value>
             /// <inheritdoc />
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 32;
         }
     }
 }

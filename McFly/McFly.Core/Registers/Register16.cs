@@ -192,7 +192,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Ax";
+            public override string Name { get; } = "ax";
 
             /// <summary>
             ///     Gets the number bits.
@@ -213,7 +213,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Bp";
+            public override string Name { get; } = "bp";
 
             /// <summary>
             ///     Gets the number bits.
@@ -234,7 +234,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Bx";
+            public override string Name { get; } = "bx";
 
             /// <summary>
             ///     Gets the number bits.
@@ -276,7 +276,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Cx";
+            public override string Name { get; } = "cx";
 
             /// <summary>
             ///     Gets the number bits.
@@ -297,7 +297,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Di";
+            public override string Name { get; } = "di";
 
             /// <summary>
             ///     Gets the number bits.
@@ -339,7 +339,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Dx";
+            public override string Name { get; } = "dx";
 
             /// <summary>
             ///     Gets the number bits.
@@ -381,7 +381,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Fl";
+            public override string Name { get; } = "fl";
 
             /// <summary>
             ///     Gets the number bits.
@@ -507,7 +507,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Ip";
+            public override string Name { get; } = "ip";
 
             /// <summary>
             ///     Gets the number bits.
@@ -528,7 +528,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R10w";
+            public override string Name { get; } = "r10w";
 
             /// <summary>
             ///     Gets the number bits.
@@ -549,7 +549,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R11w";
+            public override string Name { get; } = "r11w";
 
             /// <summary>
             ///     Gets the number bits.
@@ -570,7 +570,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R12w";
+            public override string Name { get; } = "r12w";
 
             /// <summary>
             ///     Gets the number bits.
@@ -591,7 +591,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R13w";
+            public override string Name { get; } = "r13w";
 
             /// <summary>
             ///     Gets the number bits.
@@ -612,7 +612,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R14w";
+            public override string Name { get; } = "r14w";
 
             /// <summary>
             ///     Gets the number bits.
@@ -633,7 +633,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R15w";
+            public override string Name { get; } = "r15w";
 
             /// <summary>
             ///     Gets the number bits.
@@ -654,7 +654,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R8w";
+            public override string Name { get; } = "r8w";
 
             /// <summary>
             ///     Gets the number bits.
@@ -675,7 +675,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "R9w";
+            public override string Name { get; } = "r9w";
 
             /// <summary>
             ///     Gets the number bits.
@@ -696,7 +696,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Si";
+            public override string Name { get; } = "si";
 
             /// <summary>
             ///     Gets the number bits.
@@ -717,7 +717,7 @@ namespace McFly.Core.Registers
             /// </summary>
             /// <value>The name.</value>
             /// <inheritdoc />
-            public override string Name { get; } = "Sp";
+            public override string Name { get; } = "sp";
 
             /// <summary>
             ///     Gets the number bits.

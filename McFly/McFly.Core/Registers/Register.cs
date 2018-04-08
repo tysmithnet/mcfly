@@ -36,7 +36,7 @@ namespace McFly.Core.Registers
             AllRegisters80 = new Register[] {St0, St1, St2, St3, St4, St5, St6, St7};
             AllRegisters64 = new Register[]
             {
-                Brfrom, Brto, Dr0, Dr1, Dr2, Dr3, Dr4, Dr5, Dr6, Dr7, Exfrom, Exto, Mm0, Mm1, Mm2, Mm3, Mm4, Mm5, Mm6,
+                Brfrom, Brto, Dr0, Dr1, Dr2, Dr3, Dr6, Dr7, Exfrom, Exto, Mm0, Mm1, Mm2, Mm3, Mm4, Mm5, Mm6,
                 Mm7, R10, R11, R12, R13, R14, R15, R8, R9, Rax, Rbp, Rbx, Rcx, Rdi, Rdx, Rip, Rsi, Rsp, Xmm0h, Xmm0l,
                 Xmm10h, Xmm10l, Xmm11h, Xmm11l, Xmm12h, Xmm12l, Xmm13h, Xmm13l, Xmm14h, Xmm14l, Xmm15h, Xmm15l, Xmm1h,
                 Xmm1l, Xmm2h, Xmm2l, Xmm3h, Xmm3l, Xmm4h, Xmm4l, Xmm5h, Xmm5l, Xmm6h, Xmm6l, Xmm7h, Xmm7l, Xmm8h, Xmm8l,
