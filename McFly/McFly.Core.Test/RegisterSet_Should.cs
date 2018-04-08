@@ -3,7 +3,7 @@ using FluentAssertions;
 using McFly.Core.Registers;
 using Xunit;
 
-namespace McFly.Core.Tests
+namespace McFly.Core.Test
 {
     public class RegisterSet_Should
     {

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly", "McFly\McFly.csproj", "{D7EB4C59-22EF-4020-9850-CBBF6A015F80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Tests", "McFly.Tests\McFly.Tests.csproj", "{C938475F-2E8C-4DFB-8102-6FC0A7101E95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Tests", "McFly.Test\McFly.Tests.csproj", "{C938475F-2E8C-4DFB-8102-6FC0A7101E95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2DCEBBB5-D209-4F60-B1E6-74F6BA1FD913}"
 EndProject
@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{FE35C1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Core", "McFly.Core\McFly.Core.csproj", "{3243A211-CF4F-4296-BD68-2D4DD5406542}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Core.Tests", "McFly.Core.Tests\McFly.Core.Tests.csproj", "{44FAA6C1-D134-4905-A32A-B1CD0E544E77}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Core.Test", "McFly.Core.Test\McFly.Core.Test.csproj", "{44FAA6C1-D134-4905-A32A-B1CD0E544E77}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McFly.Server.Data", "McFly.Server.Data\McFly.Server.Data.csproj", "{DFDEC1CA-5A5C-4FC6-8C7B-11C777C396DC}"
 EndProject

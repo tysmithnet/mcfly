@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace McFly.Core.Tests
+namespace McFly.Core.Test
 {
     public class Position_Should
     {
