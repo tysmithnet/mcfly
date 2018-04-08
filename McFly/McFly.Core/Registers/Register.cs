@@ -36,25 +36,23 @@ namespace McFly.Core.Registers
             AllRegisters80 = new Register[] {St0, St1, St2, St3, St4, St5, St6, St7};
             AllRegisters64 = new Register[]
             {
-                Rax, Rbx, Rcx, Rdx, Rsi, Rdi, Rsp, Rbp, Rip, R8, R9, R10, R11, R12, R13, R14, R15, Dr0, Dr1, Dr2, Dr3,
-                Dr4, Dr5, Dr6, Dr7, Exfrom, Exto, Brfrom, Brto, Mm0, Mm1, Mm2, Mm3, Mm4, Mm5, Mm6, Mm7,
-                Xmm0l, Xmm1l, Xmm2l, Xmm3l, Xmm4l, Xmm5l, Xmm6l, Xmm7l, Xmm8l, Xmm9l, Xmm10l, Xmm11l, Xmm12l, Xmm13l,
-                Xmm14l, Xmm15l, Ymm0l, Ymm1l, Ymm2l, Ymm3l, Ymm4l, Ymm5l, Ymm6l, Ymm7l, Ymm8l, Ymm9l, Ymm10l, Ymm11l,
-                Ymm12l, Ymm13l, Ymm14l, Ymm15l,
-                Xmm0h, Xmm1h, Xmm2h, Xmm3h, Xmm4h, Xmm5h, Xmm6h, Xmm7h, Xmm8h, Xmm9h, Xmm10h, Xmm11h, Xmm12h, Xmm13h,
-                Xmm14h, Xmm15h, Ymm0h, Ymm1h, Ymm2h, Ymm3h, Ymm4h, Ymm5h, Ymm6h, Ymm7h, Ymm8h, Ymm9h, Ymm10h, Ymm11h,
-                Ymm12h, Ymm13h, Ymm14h, Ymm15h
+                Brfrom, Brto, Dr0, Dr1, Dr2, Dr3, Dr4, Dr5, Dr6, Dr7, Exfrom, Exto, Mm0, Mm1, Mm2, Mm3, Mm4, Mm5, Mm6,
+                Mm7, R10, R11, R12, R13, R14, R15, R8, R9, Rax, Rbp, Rbx, Rcx, Rdi, Rdx, Rip, Rsi, Rsp, Xmm0h, Xmm0l,
+                Xmm10h, Xmm10l, Xmm11h, Xmm11l, Xmm12h, Xmm12l, Xmm13h, Xmm13l, Xmm14h, Xmm14l, Xmm15h, Xmm15l, Xmm1h,
+                Xmm1l, Xmm2h, Xmm2l, Xmm3h, Xmm3l, Xmm4h, Xmm4l, Xmm5h, Xmm5l, Xmm6h, Xmm6l, Xmm7h, Xmm7l, Xmm8h, Xmm8l,
+                Xmm9h, Xmm9l, Ymm0h, Ymm0l, Ymm10h, Ymm10l, Ymm11h, Ymm11l, Ymm12h, Ymm12l, Ymm13h, Ymm13l, Ymm14h,
+                Ymm14l, Ymm15h, Ymm15l, Ymm1h, Ymm1l, Ymm2h, Ymm2l, Ymm3h, Ymm3l, Ymm4h, Ymm4l, Ymm5h, Ymm5l, Ymm6h,
+                Ymm6l, Ymm7h, Ymm7l, Ymm8h, Ymm8l, Ymm9h, Ymm9l
             };
             AllRegisters32 = new Register[]
-                {Eax, Ebx, Ecx, Edx, Efl, Esp, Ebp, Esi, Edi, R8d, R9d, R10d, R11d, R12d, R13d, R14d, R15d, Eip, Mxcsr};
+                {Eax, Ebp, Ebx, Ecx, Edi, Edx, Efl, Eip, Esi, Esp, Mxcsr, R10d, R11d, R12d, R13d, R14d, R15d, R8d, R9d};
             AllRegisters16 = new Register[]
             {
-                Cs, Ds, Es, Fs, Gs, Ss, Ax, Cx, Dx, Bx, Sp, Bp, Si, Di, R8w, R9w, R10w, R11w, R12w, R13w, R14w, R15w,
-                Ip, Fl
+                Ax, Bp, Bx, Cs, Cx, Di, Ds, Dx, Es, Fl, Fs, Gs, Ip, R10w, R11w, R12w, R13w, R14w, R15w, R8w, R9w, Si, Sp, Ss
             };
             AllRegisters8 = new Register[]
-                {Al, Cl, Dl, Bl, Spl, Bpl, Sil, Dil, Ah, Bh, Ch, Dh, R8b, R9b, R10b, R11b, R12b, R13b, R14b, R15b};
-            AllRegistersFlags = new Register[] {Iopl, Of, Df, If, Tf, Sf, Zf, Af, Pf, Cf, Vip, Vif, Fpcw, Fpsw, Fptw};
+                {Ah, Al, Bh, Bl, Bpl, Ch, Cl, Dh, Dil, Dl, R10b, R11b, R12b, R13b, R14b, R15b, R8b, R9b, Sil, Spl};
+            AllRegistersFlags = new Register[] {Af, Cf, Df, Fpcw, Fpsw, Fptw, If, Iopl, Of, Pf, Sf, Tf, Vif, Vip, Zf};
             AllRegisters = AllRegisters64.Concat(AllRegisters32).ToArray();
             CoreUserRegisters64 = new Register[] {Rax, Rbx, Rcx, Rdx};
         }
