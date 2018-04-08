@@ -48,13 +48,16 @@ namespace McFly.Core.Registers
                 {Eax, Ebp, Ebx, Ecx, Edi, Edx, Efl, Eip, Esi, Esp, Mxcsr, R10d, R11d, R12d, R13d, R14d, R15d, R8d, R9d};
             AllRegisters16 = new Register[]
             {
-                Ax, Bp, Bx, Cs, Cx, Di, Ds, Dx, Es, Fl, Fs, Gs, Ip, R10w, R11w, R12w, R13w, R14w, R15w, R8w, R9w, Si, Sp, Ss
+                Ax, Bp, Bx, Cs, Cx, Di, Ds, Dx, Es, Fl, Fs, Gs, Ip, R10w, R11w, R12w, R13w, R14w, R15w, R8w, R9w, Si,
+                Sp, Ss
             };
             AllRegisters8 = new Register[]
                 {Ah, Al, Bh, Bl, Bpl, Ch, Cl, Dh, Dil, Dl, R10b, R11b, R12b, R13b, R14b, R15b, R8b, R9b, Sil, Spl};
             AllRegistersFlags = new Register[] {Af, Cf, Df, Fpcw, Fpsw, Fptw, If, Iopl, Of, Pf, Sf, Tf, Vif, Vip, Zf};
-            AllRegisters = AllRegisters64.Concat(AllRegisters32).ToArray();
-            CoreUserRegisters64 = new Register[] {Rax, Rbx, Rcx, Rdx};
+            AllRegisters = AllRegisters128.Concat(AllRegisters80).Concat(AllRegisters64).Concat(AllRegisters32)
+                .Concat(AllRegisters16).Concat(AllRegisters8).Concat(AllRegistersFlags).OrderBy(x => x.Name).ToArray();
+
+            CoreUserRegisters64 = new Register[] {Af, Cf, Cs, Df, Ds, Efl, Es, Fs, Gs, If, Iopl, Iopl, Of, Pf, R10, R11, R12, R13, R14, R15, R8, R9, Rax, Rbp, Rbx, Rcx, Rdi, Rdx, Rip, Rsi, Rsp, Sf, Ss, Tf, Zf};
         }
 
         /// <summary>
@@ -101,7 +104,7 @@ namespace McFly.Core.Registers
         ///     Gets or sets all registers8.
         /// </summary>
         /// <value>All registers8.</value>
-        public static Register[] AllRegisters8 { get; set; }
+        public static Register[] AllRegisters8 { get; }
 
         /// <summary>
         ///     Gets all registers80.
@@ -113,7 +116,7 @@ namespace McFly.Core.Registers
         ///     Gets or sets all registers flags.
         /// </summary>
         /// <value>All registers flags.</value>
-        public static Register[] AllRegistersFlags { get; set; }
+        public static Register[] AllRegistersFlags { get; }
 
         /// <summary>
         ///     Gets the core user 64 bit registers.
