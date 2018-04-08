@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : McFly.Core
 // Author           : @tysmithnet
-// Created          : 04-06-2018
+// Created          : 04-07-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-06-2018
+// Last Modified On : 04-07-2018
 // ***********************************************************************
-// <copyright file="Register64.cs" company="">
+// <copyright file="Register128.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -17,432 +17,438 @@ namespace McFly.Core.Registers
     /// <summary>
     ///     Class Register.
     /// </summary>
-    public abstract partial class Register
+    public partial class Register
     {
         /// <summary>
-        ///     Gets the R10.
+        ///     Gets the XMM0.
         /// </summary>
-        /// <value>The R10.</value>
-        public static R10Register R10 { get; } = new R10Register();
+        /// <value>The XMM0.</value>
+        public static Xmm0Register Xmm0 { get; } = new Xmm0Register();
 
         /// <summary>
-        ///     Gets the R11.
+        ///     Gets the XMM1.
         /// </summary>
-        /// <value>The R11.</value>
-        public static R11Register R11 { get; } = new R11Register();
+        /// <value>The XMM1.</value>
+        public static Xmm1Register Xmm1 { get; } = new Xmm1Register();
 
         /// <summary>
-        ///     Gets the R12.
+        ///     Gets the XMM10.
         /// </summary>
-        /// <value>The R12.</value>
-        public static R12Register R12 { get; } = new R12Register();
+        /// <value>The XMM10.</value>
+        public static Xmm10Register Xmm10 { get; } = new Xmm10Register();
 
         /// <summary>
-        ///     Gets the R13.
+        ///     Gets the XMM11.
         /// </summary>
-        /// <value>The R13.</value>
-        public static R13Register R13 { get; } = new R13Register();
+        /// <value>The XMM11.</value>
+        public static Xmm11Register Xmm11 { get; } = new Xmm11Register();
 
         /// <summary>
-        ///     Gets the R14.
+        ///     Gets the XMM12.
         /// </summary>
-        /// <value>The R14.</value>
-        public static R14Register R14 { get; } = new R14Register();
+        /// <value>The XMM12.</value>
+        public static Xmm12Register Xmm12 { get; } = new Xmm12Register();
 
         /// <summary>
-        ///     Gets the R15.
+        ///     Gets the XMM13.
         /// </summary>
-        /// <value>The R15.</value>
-        public static R15Register R15 { get; } = new R15Register();
+        /// <value>The XMM13.</value>
+        public static Xmm13Register Xmm13 { get; } = new Xmm13Register();
 
         /// <summary>
-        ///     Gets the r8.
+        ///     Gets the XMM14.
         /// </summary>
-        /// <value>The r8.</value>
-        public static R8Register R8 { get; } = new R8Register();
+        /// <value>The XMM14.</value>
+        public static Xmm14Register Xmm14 { get; } = new Xmm14Register();
 
         /// <summary>
-        ///     Gets the r9.
+        ///     Gets the XMM15.
         /// </summary>
-        /// <value>The r9.</value>
-        public static R9Register R9 { get; } = new R9Register();
+        /// <value>The XMM15.</value>
+        public static Xmm15Register Xmm15 { get; } = new Xmm15Register();
 
         /// <summary>
-        ///     Gets the rax.
+        ///     Gets the XMM2.
         /// </summary>
-        /// <value>The rax.</value>
-        public static RaxRegister Rax { get; } = new RaxRegister();
+        /// <value>The XMM2.</value>
+        public static Xmm2Register Xmm2 { get; } = new Xmm2Register();
 
         /// <summary>
-        ///     Gets the RBP.
+        ///     Gets the XMM3.
         /// </summary>
-        /// <value>The RBP.</value>
-        public static RbpRegister Rbp { get; } = new RbpRegister();
+        /// <value>The XMM3.</value>
+        public static Xmm3Register Xmm3 { get; } = new Xmm3Register();
 
         /// <summary>
-        ///     Gets the RBX.
+        ///     Gets the XMM4.
         /// </summary>
-        /// <value>The RBX.</value>
-        public static RbxRegister Rbx { get; } = new RbxRegister();
+        /// <value>The XMM4.</value>
+        public static Xmm4Register Xmm4 { get; } = new Xmm4Register();
 
         /// <summary>
-        ///     Gets the RCX.
+        ///     Gets the XMM5.
         /// </summary>
-        /// <value>The RCX.</value>
-        public static RcxRegister Rcx { get; } = new RcxRegister();
+        /// <value>The XMM5.</value>
+        public static Xmm5Register Xmm5 { get; } = new Xmm5Register();
 
         /// <summary>
-        ///     Gets the rdi.
+        ///     Gets the XMM6.
         /// </summary>
-        /// <value>The rdi.</value>
-        public static RdiRegister Rdi { get; } = new RdiRegister();
+        /// <value>The XMM6.</value>
+        public static Xmm6Register Xmm6 { get; } = new Xmm6Register();
 
         /// <summary>
-        ///     Gets the Rbp.
+        ///     Gets the XMM7.
         /// </summary>
-        /// <value>The Rbp.</value>
-        public static RdxRegister Rdx { get; } = new RdxRegister();
-
-        public static RipRegister Rip { get; } = new RipRegister();
+        /// <value>The XMM7.</value>
+        public static Xmm7Register Xmm7 { get; } = new Xmm7Register();
 
         /// <summary>
-        ///     Gets the rsi.
+        ///     Gets the XMM8.
         /// </summary>
-        /// <value>The rsi.</value>
-        public static RsiRegister Rsi { get; } = new RsiRegister();
+        /// <value>The XMM8.</value>
+        public static Xmm8Register Xmm8 { get; } = new Xmm8Register();
 
         /// <summary>
-        ///     Gets the RSP.
+        ///     Gets the XMM9.
         /// </summary>
-        /// <value>The RSP.</value>
-        public static RspRegister Rsp { get; } = new RspRegister();
+        /// <value>The XMM9.</value>
+        public static Xmm9Register Xmm9 { get; } = new Xmm9Register();
 
         /// <summary>
-        ///     Class R10Register.
+        ///     Class Xmm0Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class R10Register : Register
+        public class Xmm0Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "r10";
+            /// <inheritdoc />
+            public override string Name { get; } = "xmm0";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class R11Register.
+        ///     Class Xmm10Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class R11Register : Register
+        public class Xmm10Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "r11";
+            /// <inheritdoc />
+            public override string Name { get; } = "Xmm10";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class R12Register.
+        ///     Class Xmm11Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class R12Register : Register
+        public class Xmm11Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "r12";
+            /// <inheritdoc />
+            public override string Name { get; } = "Xmm11";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class R13Register.
+        ///     Class Xmm12Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class R13Register : Register
+        public class Xmm12Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "r13";
+            /// <inheritdoc />
+            public override string Name { get; } = "Xmm12";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class R14Register.
+        ///     Class Xmm13Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class R14Register : Register
+        public class Xmm13Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "r14";
+            /// <inheritdoc />
+            public override string Name { get; } = "Xmm13";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class R15Register.
+        ///     Class Xmm14Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class R15Register : Register
+        public class Xmm14Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "r15";
+            /// <inheritdoc />
+            public override string Name { get; } = "Xmm14";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class R8Register.
+        ///     Class Xmm15Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class R8Register : Register
+        public class Xmm15Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "r8";
+            /// <inheritdoc />
+            public override string Name { get; } = "Xmm15";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class R9Register.
+        ///     Class Xmm1Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class R9Register : Register
+        public class Xmm1Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "r9";
+            /// <inheritdoc />
+            public override string Name { get; } = "xmm1";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class RaxRegister.
+        ///     Class Xmm2Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        /// <seealso cref="Register" />
-        public class RaxRegister : Register
+        public class Xmm2Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "rax";
+            /// <inheritdoc />
+            public override string Name { get; } = "xmm2";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class RbpRegister.
+        ///     Class Xmm3Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class RbpRegister : Register
+        public class Xmm3Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "rbp";
+            /// <inheritdoc />
+            public override string Name { get; } = "xmm3";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class RbxRegister.
+        ///     Class Xmm4Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        /// <seealso cref="Register" />
-        public class RbxRegister : Register
+        public class Xmm4Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "rbx";
+            /// <inheritdoc />
+            public override string Name { get; } = "xmm4";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class RcxRegister.
+        ///     Class Xmm5Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        /// <seealso cref="Register" />
-        public class RcxRegister : Register
+        public class Xmm5Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "rcx";
+            /// <inheritdoc />
+            public override string Name { get; } = "xmm5";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class RbpRegister.
+        ///     Class Xmm6Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        /// <seealso cref="Register" />
-        public class RdiRegister : Register
+        public class Xmm6Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "rdi";
+            /// <inheritdoc />
+            public override string Name { get; } = "xmm6";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class RdxRegister.
+        ///     Class Xmm7Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class RdxRegister : Register
+        public class Xmm7Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "rdx";
+            /// <inheritdoc />
+            public override string Name { get; } = "xmm7";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class RipRegister.
+        ///     Class Xmm8Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class RipRegister : Register
+        public class Xmm8Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "rip";
+            /// <inheritdoc />
+            public override string Name { get; } = "Xmm8";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
 
         /// <summary>
-        ///     Class RsiRegister.
+        ///     Class Xmm9Register.
         /// </summary>
         /// <seealso cref="McFly.Core.Registers.Register" />
-        public class RsiRegister : Register
+        public class Xmm9Register : Register
         {
             /// <summary>
             ///     Gets the name.
             /// </summary>
             /// <value>The name.</value>
-            public override string Name { get; } = "rsi";
+            /// <inheritdoc />
+            public override string Name { get; } = "Xmm9";
 
             /// <summary>
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
+            /// <inheritdoc />
+            public override int NumBits { get; } = 128;
         }
-
-        /// <summary>
-        ///     Class RspRegister.
-        /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
-        public class RspRegister : Register
-        {
-            /// <summary>
-            ///     Gets the name.
-            /// </summary>
-            /// <value>The name.</value>
-            public override string Name { get; } = "rsp";
-
-            /// <summary>
-            ///     Gets the number bits.
-            /// </summary>
-            /// <value>The number bits.</value>
-            public override int NumBits { get; } = 64;
-        }
-
     }
 }
