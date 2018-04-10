@@ -586,6 +586,169 @@ namespace McFly.Core.Test
                     Enumerable.Repeat<byte>(0, 24)));
             r.Xmm15.Should().Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
                 Enumerable.Repeat<byte>(0, 8)));
+
+            r = new RegisterSet();
+            r.Process("xmm0h", "deadbeeffacecafe");
+            r.Xmm0h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm0.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm0.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm0l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm1h", "deadbeeffacecafe");
+            r.Xmm1h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm1.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm1.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm1l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm2h", "deadbeeffacecafe");
+            r.Xmm2h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm2.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm2.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm2l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm3h", "deadbeeffacecafe");
+            r.Xmm3h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm3.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm3.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm3l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm4h", "deadbeeffacecafe");
+            r.Xmm4h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm4.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm4.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm4l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm5h", "deadbeeffacecafe");
+            r.Xmm5h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm5.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm5.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm5l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm6h", "deadbeeffacecafe");
+            r.Xmm6h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm6.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm6.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm6l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm7h", "deadbeeffacecafe");
+            r.Xmm7h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm7.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm7.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm7l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm8h", "deadbeeffacecafe");
+            r.Xmm8h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm8.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm8.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm8l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm9h", "deadbeeffacecafe");
+            r.Xmm9h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm9.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm9.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm9l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm10h", "deadbeeffacecafe");
+            r.Xmm10h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm10.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm10.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm10l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm11h", "deadbeeffacecafe");
+            r.Xmm11h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm11.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm11.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm11l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm12h", "deadbeeffacecafe");
+            r.Xmm12h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm12.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm12.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm12l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm13h", "deadbeeffacecafe");
+            r.Xmm13h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm13.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm13.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm13l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm14h", "deadbeeffacecafe");
+            r.Xmm14h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm14.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm14.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm14l.Should().Be(0);
+
+            r = new RegisterSet();
+            r.Process("xmm15h", "deadbeeffacecafe");
+            r.Xmm15h.Should().Be(0xdeadbeeffacecafe);
+            r.Ymm15.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
+                .Concat(Enumerable.Repeat<byte>(0, 16)));
+            r.Xmm15.Should().Equal(Enumerable.Repeat<byte>(0, 8)
+                .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }));
+            r.Xmm15l.Should().Be(0);
+
+
+
         }
     }
 }

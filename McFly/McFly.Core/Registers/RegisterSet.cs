@@ -841,6 +841,167 @@ namespace McFly.Core.Registers
                         Ymm15[i] = bytes[i];
                     break;
                 }
+
+                case "xmm0h":
+                {
+                    if (Ymm0 == null)
+                        Ymm0 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm0[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm1h":
+                {
+                    if (Ymm1 == null)
+                        Ymm1 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm1[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm2h":
+                {
+                    if (Ymm2 == null)
+                        Ymm2 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm2[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm3h":
+                {
+                    if (Ymm3 == null)
+                        Ymm3 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm3[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm4h":
+                {
+                    if (Ymm4 == null)
+                        Ymm4 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm4[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm5h":
+                {
+                    if (Ymm5 == null)
+                        Ymm5 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm5[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm6h":
+                {
+                    if (Ymm6 == null)
+                        Ymm6 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm6[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm7h":
+                {
+                    if (Ymm7 == null)
+                        Ymm7 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm7[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm8h":
+                {
+                    if (Ymm8 == null)
+                        Ymm8 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm8[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm9h":
+                {
+                    if (Ymm9 == null)
+                        Ymm9 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm9[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm10h":
+                {
+                    if (Ymm10 == null)
+                        Ymm10 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm10[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm11h":
+                {
+                    if (Ymm11 == null)
+                        Ymm11 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm11[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm12h":
+                {
+                    if (Ymm12 == null)
+                        Ymm12 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm12[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm13h":
+                {
+                    if (Ymm13 == null)
+                        Ymm13 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm13[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm14h":
+                {
+                    if (Ymm14 == null)
+                        Ymm14 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm14[8 + i] = bytes[i];
+                    break;
+                }
+
+                case "xmm15h":
+                {
+                    if (Ymm15 == null)
+                        Ymm15 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm15[8 + i] = bytes[i];
+                    break;
+                }
+
                 default:
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(register)} has a value of {register} which is not a valid register");
@@ -1727,6 +1888,249 @@ namespace McFly.Core.Registers
                     Ymm0[i] = value[i];
             }
         }
+
+        public ulong? Xmm0h
+        {
+            get => Ymm0 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm0, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm0 == null)
+                    Ymm0 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm0[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm1h
+        {
+            get => Ymm1 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm1, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm1 == null)
+                    Ymm1 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm1[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm2h
+        {
+            get => Ymm2 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm2, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm2 == null)
+                    Ymm2 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm2[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm3h
+        {
+            get => Ymm3 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm3, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm3 == null)
+                    Ymm3 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm3[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm4h
+        {
+            get => Ymm4 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm4, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm4 == null)
+                    Ymm4 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm4[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm5h
+        {
+            get => Ymm5 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm5, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm5 == null)
+                    Ymm5 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm5[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm6h
+        {
+            get => Ymm6 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm6, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm6 == null)
+                    Ymm6 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm6[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm7h
+        {
+            get => Ymm7 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm7, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm7 == null)
+                    Ymm7 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm7[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm8h
+        {
+            get => Ymm8 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm8, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm8 == null)
+                    Ymm8 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm8[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm9h
+        {
+            get => Ymm9 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm9, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm9 == null)
+                    Ymm9 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm9[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm10h
+        {
+            get => Ymm10 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm10, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm10 == null)
+                    Ymm10 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm10[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm11h
+        {
+            get => Ymm11 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm11, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm11 == null)
+                    Ymm11 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm11[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm12h
+        {
+            get => Ymm12 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm12, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm12 == null)
+                    Ymm12 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm12[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm13h
+        {
+            get => Ymm13 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm13, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm13 == null)
+                    Ymm13 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm13[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm14h
+        {
+            get => Ymm14 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm14, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm14 == null)
+                    Ymm14 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm14[8 + i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm15h
+        {
+            get => Ymm15 == null ? null : (ulong?)BitConverter.ToUInt64(Ymm15, 8);
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm15 == null)
+                    Ymm15 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++) Ymm15[8 + i] = bytes[i];
+            }
+        }
+
+
+
 
         public ulong? Xmm0l
         {
