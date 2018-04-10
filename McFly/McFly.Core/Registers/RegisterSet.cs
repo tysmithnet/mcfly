@@ -31,22 +31,6 @@ namespace McFly.Core.Registers
         private byte[] _st5;
         private byte[] _st6;
         private byte[] _st7;
-        private byte[] _xmm0;
-        private byte[] _xmm1;
-        private byte[] _xmm10;
-        private byte[] _xmm11;
-        private byte[] _xmm12;
-        private byte[] _xmm13;
-        private byte[] _xmm14;
-        private byte[] _xmm15;
-        private byte[] _xmm2;
-        private byte[] _xmm3;
-        private byte[] _xmm4;
-        private byte[] _xmm5;
-        private byte[] _xmm6;
-        private byte[] _xmm7;
-        private byte[] _xmm8;
-        private byte[] _xmm9;
         private byte[] _ymm0;
         private byte[] _ymm1;
         private byte[] _ymm10;
@@ -91,6 +75,13 @@ namespace McFly.Core.Registers
             var first = Register.AllRegisters.FirstOrDefault(x =>
                 x.Name.Equals(register, StringComparison.OrdinalIgnoreCase));
             if (first == null) return;
+            var ymmRegex = new Regex(
+                @"\s*(?<a>[a-z0-9]+)\s*(?<b>[a-z0-9]+)\s*(?<c>[a-z0-9]+)\s*(?<d>[a-z0-9]+)\s*(?<e>[a-z0-9]+)\s*(?<f>[a-z0-9]+)\s*(?<g>[a-z0-9]+)\s*(?<h>[a-z0-9]+)",
+                RegexOptions.IgnoreCase);
+            var stRegex = new Regex(@"[a-f0-9]+:(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
+            var xmmRegex = new Regex(
+                @"\s*(?<a>[a-z0-9]+)\s*(?<b>[a-z0-9]+)\s*(?<c>[a-z0-9]+)\s*(?<d>[a-z0-9]+)\s*",
+                RegexOptions.IgnoreCase);
             switch (first.Name.ToLower())
             {
                 case "rax":
@@ -194,7 +185,7 @@ namespace McFly.Core.Registers
                     break;
                 case "st0":
                 {
-                    var regex = new Regex(@"[a-f0-9]+:(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
+                    var regex = stRegex;
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
@@ -207,7 +198,7 @@ namespace McFly.Core.Registers
                 }
                 case "st1":
                 {
-                    var regex = new Regex(@"[a-f0-9]+:(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
+                    var regex = stRegex;
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
@@ -220,7 +211,7 @@ namespace McFly.Core.Registers
                 }
                 case "st2":
                 {
-                    var regex = new Regex(@"[a-f0-9]+:(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
+                    var regex = stRegex;
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
@@ -233,7 +224,7 @@ namespace McFly.Core.Registers
                 }
                 case "st3":
                 {
-                    var regex = new Regex(@"[a-f0-9]+:(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
+                    var regex = stRegex;
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
@@ -246,7 +237,7 @@ namespace McFly.Core.Registers
                 }
                 case "st4":
                 {
-                    var regex = new Regex(@"[a-f0-9]+:(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
+                    var regex = stRegex;
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
@@ -259,7 +250,7 @@ namespace McFly.Core.Registers
                 }
                 case "st5":
                 {
-                    var regex = new Regex(@"[a-f0-9]+:(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
+                    var regex = stRegex;
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
@@ -272,7 +263,7 @@ namespace McFly.Core.Registers
                 }
                 case "st6":
                 {
-                    var regex = new Regex(@"[a-f0-9]+:(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
+                    var regex = stRegex;
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
@@ -285,7 +276,7 @@ namespace McFly.Core.Registers
                 }
                 case "st7":
                 {
-                    var regex = new Regex(@"[a-f0-9]+:(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
+                    var regex = stRegex;
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
@@ -323,6 +314,374 @@ namespace McFly.Core.Registers
                 case "mxcsr":
                     Mxcsr = Convert.ToUInt32(input, radix);
                     break;
+                case "ymm0":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm0 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm1":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm1 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm2":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm2 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm3":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm3 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm4":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm4 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm5":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm5 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm6":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm6 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm7":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm7 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm8":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm8 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm9":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm9 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm10":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm10 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm11":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm11 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm12":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm12 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm13":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm13 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm14":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm14 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "ymm15":
+                {
+                    var regex = ymmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Ymm15 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+
+                case "xmm0":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm0 == null)
+                        Ymm0 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm0 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm1":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm1 == null)
+                        Ymm1 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm1 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm2":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm2 == null)
+                        Ymm2 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm2 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm3":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm3 == null)
+                        Ymm3 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm3 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm4":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm4 == null)
+                        Ymm4 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm4 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm5":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm5 == null)
+                        Ymm5 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm5 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm6":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm6 == null)
+                        Ymm6 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm6 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm7":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm7 == null)
+                        Ymm7 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm7 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm8":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm8 == null)
+                        Ymm8 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm8 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm9":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm9 == null)
+                        Ymm9 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm9 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm10":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm10 == null)
+                        Ymm10 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm10 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm11":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm11 == null)
+                        Ymm11 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm11 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm12":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm12 == null)
+                        Ymm12 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm12 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm13":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm13 == null)
+                        Ymm13 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm13 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm14":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm14 == null)
+                        Ymm14 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm14 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
+                case "xmm15":
+                {
+                    var regex = xmmRegex;
+                    var match = regex.Match(input);
+                    if (!match.Success)
+                        break;
+                    if (Ymm15 == null)
+                        Ymm15 = new byte[32];
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    Xmm15 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    break;
+                }
                 default:
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(register)} has a value of {register} which is not a valid register");
@@ -1195,226 +1554,531 @@ namespace McFly.Core.Registers
 
         public byte[] Xmm0
         {
-            get => _xmm0;
+            get => Ymm0?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm0 == null)
+                    Ymm0 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm0 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm0[i] = value[i];
             }
         }
 
-        public ulong? Xmm0l { get; set; }
+        public ulong? Xmm0l
+        {
+            get => Ymm0 != null ? (ulong?) BitConverter.ToUInt64(Ymm0, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm0 == null)
+                    Ymm0 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm0[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm1
         {
-            get => _xmm1;
+            get => Ymm1?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm1 == null)
+                    Ymm1 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm1 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm1[i] = value[i];
             }
         }
 
         public byte[] Xmm10
         {
-            get => _xmm10;
+            get => Ymm10?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm10 == null)
+                    Ymm10 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm10 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm10[i] = value[i];
             }
         }
 
-        public ulong? Xmm10l { get; set; }
+        public ulong? Xmm10l
+        {
+            get => Ymm10 != null ? (ulong?) BitConverter.ToUInt64(Ymm10, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm10 == null)
+                    Ymm10 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm10[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm11
         {
-            get => _xmm11;
+            get => Ymm11?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm11 == null)
+                    Ymm11 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm11 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm11[i] = value[i];
             }
         }
 
-        public ulong? Xmm11l { get; set; }
+        public ulong? Xmm11l
+        {
+            get => Ymm11 != null ? (ulong?) BitConverter.ToUInt64(Ymm11, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm11 == null)
+                    Ymm11 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm11[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm12
         {
-            get => _xmm12;
+            get => Ymm12?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm12 == null)
+                    Ymm12 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm12 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm12[i] = value[i];
             }
         }
 
-        public ulong? Xmm12l { get; set; }
+        public ulong? Xmm12l
+        {
+            get => Ymm12 != null ? (ulong?) BitConverter.ToUInt64(Ymm12, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm12 == null)
+                    Ymm12 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm12[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm13
         {
-            get => _xmm13;
+            get => Ymm13?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm13 == null)
+                    Ymm13 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm13 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm13[i] = value[i];
             }
         }
 
-        public ulong? Xmm13l { get; set; }
+        public ulong? Xmm13l
+        {
+            get => Ymm13 != null ? (ulong?) BitConverter.ToUInt64(Ymm13, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm13 == null)
+                    Ymm13 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm13[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm14
         {
-            get => _xmm14;
+            get => Ymm14?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm14 == null)
+                    Ymm14 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm14 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm14[i] = value[i];
             }
         }
 
-        public ulong? Xmm14l { get; set; }
+        public ulong? Xmm14l
+        {
+            get => Ymm14 != null ? (ulong?) BitConverter.ToUInt64(Ymm14, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm14 == null)
+                    Ymm14 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm14[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm15
         {
-            get => _xmm15;
+            get => Ymm15?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm15 == null)
+                    Ymm15 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm15 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm15[i] = value[i];
             }
         }
 
-        public ulong? Xmm15l { get; set; }
-        public ulong? Xmm1l { get; set; }
+        public ulong? Xmm15l
+        {
+            get => Ymm15 != null ? (ulong?) BitConverter.ToUInt64(Ymm15, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm15 == null)
+                    Ymm15 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm15[i] = bytes[i];
+            }
+        }
+
+        public ulong? Xmm1l
+        {
+            get => Ymm1 != null ? (ulong?) BitConverter.ToUInt64(Ymm1, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm1 == null)
+                    Ymm1 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm1[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm2
         {
-            get => _xmm2;
+            get => Ymm2?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm2 == null)
+                    Ymm2 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm2 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm2[i] = value[i];
             }
         }
 
-        public ulong? Xmm2l { get; set; }
+        public ulong? Xmm2l
+        {
+            get => Ymm2 != null ? (ulong?) BitConverter.ToUInt64(Ymm2, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm2 == null)
+                    Ymm2 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm2[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm3
         {
-            get => _xmm3;
+            get => Ymm3?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm3 == null)
+                    Ymm3 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm3 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm3[i] = value[i];
             }
         }
 
-        public ulong? Xmm3l { get; set; }
+        public ulong? Xmm3l
+        {
+            get => Ymm3 != null ? (ulong?) BitConverter.ToUInt64(Ymm3, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm3 == null)
+                    Ymm3 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm3[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm4
         {
-            get => _xmm4;
+            get => Ymm4?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm4 == null)
+                    Ymm4 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm4 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm4[i] = value[i];
             }
         }
 
-        public ulong? Xmm4l { get; set; }
+        public ulong? Xmm4l
+        {
+            get => Ymm4 != null ? (ulong?) BitConverter.ToUInt64(Ymm4, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm4 == null)
+                    Ymm4 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm4[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm5
         {
-            get => _xmm5;
+            get => Ymm5?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm5 == null)
+                    Ymm5 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm5 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm5[i] = value[i];
             }
         }
 
-        public ulong? Xmm5l { get; set; }
+        public ulong? Xmm5l
+        {
+            get => Ymm5 != null ? (ulong?) BitConverter.ToUInt64(Ymm5, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm5 == null)
+                    Ymm5 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm5[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm6
         {
-            get => _xmm6;
+            get => Ymm6?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm6 == null)
+                    Ymm6 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm6 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm6[i] = value[i];
             }
         }
 
-        public ulong? Xmm6l { get; set; }
+        public ulong? Xmm6l
+        {
+            get => Ymm6 != null ? (ulong?) BitConverter.ToUInt64(Ymm6, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm6 == null)
+                    Ymm6 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm6[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm7
         {
-            get => _xmm7;
+            get => Ymm7?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm7 == null)
+                    Ymm7 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm7 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm7[i] = value[i];
             }
         }
 
-        public ulong? Xmm7l { get; set; }
+        public ulong? Xmm7l
+        {
+            get => Ymm7 != null ? (ulong?) BitConverter.ToUInt64(Ymm7, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm7 == null)
+                    Ymm7 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm7[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm8
         {
-            get => _xmm8;
+            get => Ymm8?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm8 == null)
+                    Ymm8 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm8 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm8[i] = value[i];
             }
         }
 
-        public ulong? Xmm8l { get; set; }
+        public ulong? Xmm8l
+        {
+            get => Ymm8 != null ? (ulong?) BitConverter.ToUInt64(Ymm8, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm8 == null)
+                    Ymm8 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm8[i] = bytes[i];
+            }
+        }
 
         public byte[] Xmm9
         {
-            get => _xmm9;
+            get => Ymm9?.Take(16).ToArray();
             set
             {
-                if (value != null && value.Length != 16)
+                if (value == null)
+                    return;
+                if (Ymm9 == null)
+                    Ymm9 = new byte[32];
+                if (value.Length != 16)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
-                _xmm9 = value;
+                for (var i = 0; i < 16; i++)
+                    Ymm9[i] = value[i];
             }
         }
 
-        public ulong? Xmm9l { get; set; }
+        public ulong? Xmm9l
+        {
+            get => Ymm9 != null ? (ulong?) BitConverter.ToUInt64(Ymm9, 0) : null;
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm9 == null)
+                    Ymm9 = new byte[32];
+
+                var bytes = BitConverter.GetBytes(value.Value);
+                for (var i = 0; i < 8; i++)
+                    Ymm9[i] = bytes[i];
+            }
+        }
 
         public byte[] Ymm0
         {
@@ -1461,9 +2125,9 @@ namespace McFly.Core.Registers
             get => _ymm11;
             set
             {
-                if (value != null && value.Length != 16)
+                if (value != null && value.Length != 32)
                     throw new ArgumentOutOfRangeException(
-                        $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                        $"{nameof(value)} has {value.Length} bytes but must have exactly 32");
                 _ymm11 = value;
             }
         }
@@ -1475,9 +2139,9 @@ namespace McFly.Core.Registers
             get => _ymm12;
             set
             {
-                if (value != null && value.Length != 16)
+                if (value != null && value.Length != 32)
                     throw new ArgumentOutOfRangeException(
-                        $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                        $"{nameof(value)} has {value.Length} bytes but must have exactly 32");
                 _ymm12 = value;
             }
         }
@@ -1517,9 +2181,9 @@ namespace McFly.Core.Registers
             get => _ymm15;
             set
             {
-                if (value != null && value.Length != 16)
+                if (value != null && value.Length != 32)
                     throw new ArgumentOutOfRangeException(
-                        $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                        $"{nameof(value)} has {value.Length} bytes but must have exactly 32");
                 _ymm15 = value;
             }
         }
@@ -1630,9 +2294,9 @@ namespace McFly.Core.Registers
             get => _ymm9;
             set
             {
-                if (value != null && value.Length != 16)
+                if (value != null && value.Length != 32)
                     throw new ArgumentOutOfRangeException(
-                        $"{nameof(value)} has {value.Length} bytes but must have exactly 16");
+                        $"{nameof(value)} has {value.Length} bytes but must have exactly 32");
                 _ymm9 = value;
             }
         }
