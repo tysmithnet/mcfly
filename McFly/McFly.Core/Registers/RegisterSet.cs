@@ -682,6 +682,165 @@ namespace McFly.Core.Registers
                     Xmm15 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
                 }
+                case "xmm0l":
+                {
+                    if (Ymm0 == null)
+                        Ymm0 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm0[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm1l":
+                {
+                    if (Ymm1 == null)
+                        Ymm1 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm1[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm2l":
+                {
+                    if (Ymm2 == null)
+                        Ymm2 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm2[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm3l":
+                {
+                    if (Ymm3 == null)
+                        Ymm3 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm3[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm4l":
+                {
+                    if (Ymm4 == null)
+                        Ymm4 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm4[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm5l":
+                {
+                    if (Ymm5 == null)
+                        Ymm5 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm5[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm6l":
+                {
+                    if (Ymm6 == null)
+                        Ymm6 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm6[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm7l":
+                {
+                    if (Ymm7 == null)
+                        Ymm7 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm7[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm8l":
+                {
+                    if (Ymm8 == null)
+                        Ymm8 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm8[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm9l":
+                {
+                    if (Ymm9 == null)
+                        Ymm9 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm9[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm10l":
+                {
+                    if (Ymm10 == null)
+                        Ymm10 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm10[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm11l":
+                {
+                    if (Ymm11 == null)
+                        Ymm11 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm11[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm12l":
+                {
+                    if (Ymm12 == null)
+                        Ymm12 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm12[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm13l":
+                {
+                    if (Ymm13 == null)
+                        Ymm13 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm13[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm14l":
+                {
+                    if (Ymm14 == null)
+                        Ymm14 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm14[i] = bytes[i];
+                    break;
+                }
+
+                case "xmm15l":
+                {
+                    if (Ymm15 == null)
+                        Ymm15 = new byte[32];
+                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
+                    for (var i = 0; i < 8; i++)
+                        Ymm15[i] = bytes[i];
+                    break;
+                }
                 default:
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(register)} has a value of {register} which is not a valid register");
