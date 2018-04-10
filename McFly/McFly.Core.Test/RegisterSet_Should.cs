@@ -1006,6 +1006,76 @@ namespace McFly.Core.Test
             r = new RegisterSet();
             r.Process("eip", "12345678");
             r.Eip.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("ax", "1234");
+            r.Ax.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("cx", "1234");
+            r.Cx.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("dx", "1234");
+            r.Dx.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("bx", "1234");
+            r.Bx.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("sp", "1234");
+            r.Sp.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("bp", "1234");
+            r.Bp.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("si", "1234");
+            r.Si.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("di", "1234");
+            r.Di.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("r8w", "1234");
+            r.R8w.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("r9w", "1234");
+            r.R9w.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("r10w", "1234");
+            r.R10w.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("r11w", "1234");
+            r.R11w.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("r12w", "1234");
+            r.R12w.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("r13w", "1234");
+            r.R13w.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("r14w", "1234");
+            r.R14w.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("r15w", "1234");
+            r.R15w.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("ip", "1234");
+            r.Ip.Should().Be(0x1234);
+
+            // 312: fl
         }
     }
 }

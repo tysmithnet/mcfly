@@ -1346,6 +1346,76 @@ namespace McFly.Core.Registers
                     Rip = Rip.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
                     break;
                 }
+                case "ax":
+                    {
+                        Eax = Eax.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                        break;
+                    }
+                case "cx":
+                    {
+                        Ecx = Ecx.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                        break;
+                    }
+                case "dx":
+                    {
+                        Edx = Edx.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                        break;
+                    }
+                case "bx":
+                    {
+                        Ebx = 
+                            Ebx.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                        break;
+                    }
+                case "sp":
+                    {
+                        Esp = Esp.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                        break;
+                    }
+                case "bp":
+                    {
+                        Ebp = Ebp.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                        break;
+                    }
+                case "si":
+                    {
+                        Esi = Esi.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                        break;
+                    }
+                case "di":
+                    {
+                        Edi = Edi.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                        break;
+                    }
+                case "r8w":
+                    R8d = R8d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    break;
+                case "r9w":
+                    R9d = R9d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    break;
+                case "r10w":
+                    R10d = R10d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    break;
+                case "r11w":
+                    R11d = R11d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    break;
+                case "r12w":
+                    R12d = R12d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    break;
+                case "r13w":
+                    R13d = R13d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    break;
+                case "r14w":
+                    R14d = R14d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    break;
+                case "r15w":
+                    R15d = R15d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    break;
+                case "ip":
+                    {
+                        Eip = Eip.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                        break;
+                    }
                 default:
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(register)} has a value of {register} which is not a valid register");
@@ -1372,6 +1442,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rax == null)
+                    Rax = 0;
                 Ax = Ax?.Hi8(value.Value);
             }
         }
@@ -1382,6 +1454,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rax == null)
+                    Rax = 0;
                 Ax = Ax?.Lo8(value.Value);
             }
         }
@@ -1392,6 +1466,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rax == null)
+                    Rax = 0;
                 Eax = Eax?.Lo16(value.Value);
             }
         }
@@ -1402,6 +1478,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rbx == null)
+                    Rbx = 0;
                 Bx = Bx?.Hi8(value.Value);
             }
         }
@@ -1412,6 +1490,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rbx == null)
+                    Rbx = 0;
                 Bx = Bx?.Lo8(value.Value);
             }
         }
@@ -1422,6 +1502,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rbp == null)
+                    Rbp = 0;
                 Ebp = Ebp?.Lo16(value.Value);
             }
         }
@@ -1432,6 +1514,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rbp == null)
+                    Rbp = 0;
                 Bp = Bp?.Lo8(value.Value);
             }
         }
@@ -1445,6 +1529,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Ebx == null)
+                    Ebx = 0;
                 Ebx = Ebx?.Lo16(value.Value);
             }
         }
@@ -1455,6 +1541,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Efl == null)
+                    Efl = 0;
                 uint mask = 0x0001;
                 if (value.Value)
                     Efl = Efl |= mask;
@@ -1469,6 +1557,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rcx == null)
+                    Rcx = 0;
                 Cx = Cx?.Hi8(value.Value);
             }
         }
@@ -1479,6 +1569,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rcx == null)
+                    Rcx = 0;
                 Cx = Cx?.Lo8(value.Value);
             }
         }
@@ -1491,6 +1583,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rcx == null)
+                    Rcx = 0;
                 Ecx = Ecx?.Lo16(value.Value);
             }
         }
@@ -1501,6 +1595,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Efl == null)
+                    Efl = 0;
                 uint mask = 0x0400;
                 if (value.Value)
                     Efl = Efl |= mask;
@@ -1515,6 +1611,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rdx == null)
+                    Rdx = 0;
                 Dx = Dx?.Hi8(value.Value);
             }
         }
@@ -1525,6 +1623,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rdi == null)
+                    Rdi = 0;
                 Edi = Eax?.Lo16(value.Value);
             }
         }
@@ -1535,6 +1635,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rdi == null)
+                    Rdi = 0;
                 Di = Di?.Lo8(value.Value);
             }
         }
@@ -1545,6 +1647,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rdx == null)
+                    Rdx = 0;
                 Dx = Dx?.Lo8(value.Value);
             }
         }
@@ -1563,6 +1667,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rdx == null)
+                    Rdx = 0;
                 Edx = Edx?.Lo16(value.Value);
             }
         }
@@ -1573,6 +1679,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rax == null)
+                    Rax = 0;
                 Rax = Rax?.Lo32(value.Value);
             }
         }
@@ -1583,6 +1691,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rbp == null)
+                    Rbp = 0;
                 Rbp = Rbp?.Lo32(value.Value);
             }
         }
@@ -1593,6 +1703,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rbx == null)
+                    Rbx = 0;
                 Rbx = Rbx?.Lo32(value.Value);
             }
         }
@@ -1603,6 +1715,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rcx == null)
+                    Rcx = 0;
                 Rcx = Rcx?.Lo32(value.Value);
             }
         }
@@ -1613,6 +1727,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rdi == null)
+                    Rdi = 0;
                 Rdi = Rdi?.Lo32(value.Value);
             }
         }
@@ -1623,6 +1739,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rdx == null)
+                    Rdx = 0;
                 Rdx = Rdx?.Lo32(value.Value);
             }
         }
@@ -1635,6 +1753,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rip == null)
+                    Rip = 0;
                 Rip = Rip?.Lo32(value.Value);
             }
         }
@@ -1647,6 +1767,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rsi == null)
+                    Rsi = 0;
                 Rsi = Rsi?.Lo32(value.Value);
             }
         }
@@ -1657,6 +1779,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rsp == null)
+                    Rsp = 0;
                 Rsp = Rsp?.Lo32(value.Value);
             }
         }
@@ -1670,6 +1794,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Efl == null)
+                    Efl = 0;
                 Efl = Efl?.Lo16(value.Value);
             }
         }
@@ -1686,6 +1812,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Efl == null)
+                    Efl = 0;
                 uint mask = 0x0200;
                 if (value.Value)
                     Efl = Efl |= mask;
@@ -1700,6 +1828,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Efl == null)
+                    Efl = 0;
                 if (value > 3)
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has a value of {value} but must be in [0,4)");
@@ -1714,6 +1844,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rip == null)
+                    Rip = 0;
                 Eip = Eip?.Lo16(value.Value);
             }
         }
@@ -1734,6 +1866,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Efl == null)
+                    Efl = 0;
                 uint mask = 0x0800;
                 if (value.Value)
                     Efl = Efl |= mask;
@@ -1748,6 +1882,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Efl == null)
+                    Efl = 0;
                 uint mask = 0x0004;
                 if (value.Value)
                     Efl = Efl |= mask;
@@ -1764,6 +1900,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R10 == null)
+                    R10 = 0;
                 R10w = R10w?.Lo8(value.Value);
             }
         }
@@ -1774,6 +1912,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R10 == null)
+                    R10 = 0;
                 R10 = R10?.Lo32(value.Value);
             }
         }
@@ -1784,6 +1924,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R10 == null)
+                    R10 = 0;
                 R10d = R10d?.Lo16(value.Value);
             }
         }
@@ -1796,6 +1938,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R11 == null)
+                    R11 = 0;
                 R11w = R11w?.Lo8(value.Value);
             }
         }
@@ -1806,6 +1950,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R11 == null)
+                    R11 = 0;
                 R11 = R11?.Lo32(value.Value);
             }
         }
@@ -1816,6 +1962,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R11 == null)
+                    R11 = 0;
                 R11d = R11d?.Lo16(value.Value);
             }
         }
@@ -1828,6 +1976,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R12 == null)
+                    R12 = 0;
                 R12w = R12w?.Lo8(value.Value);
             }
         }
@@ -1838,6 +1988,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R12 == null)
+                    R12 = 0;
                 R12 = R12?.Lo32(value.Value);
             }
         }
@@ -1848,6 +2000,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R12 == null)
+                    R12 = 0;
                 R12d = R12d?.Lo16(value.Value);
             }
         }
@@ -1860,6 +2014,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R13 == null)
+                    R13 = 0;
                 R13w = R13w?.Lo8(value.Value);
             }
         }
@@ -1870,6 +2026,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R13 == null)
+                    R13 = 0;
                 R13 = R13?.Lo32(value.Value);
             }
         }
@@ -1880,6 +2038,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R13 == null)
+                    R13 = 0;
                 R13d = R13d?.Lo16(value.Value);
             }
         }
@@ -1892,6 +2052,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R14 == null)
+                    R14 = 0;
                 R14w = R14w?.Lo8(value.Value);
             }
         }
@@ -1902,6 +2064,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R14 == null)
+                    R14 = 0;
                 R14 = R14?.Lo32(value.Value);
             }
         }
@@ -1912,6 +2076,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R14 == null)
+                    R14 = 0;
                 R14d = R14d?.Lo16(value.Value);
             }
         }
@@ -1923,7 +2089,9 @@ namespace McFly.Core.Registers
             get => R15w?.Lo8();
             set
             {
-                if (!value.HasValue) return;
+                if(!value.HasValue) return;
+                if (R15 == null)
+                    R15 = 0;
                 R15w = R15w?.Lo8(value.Value);
             }
         }
@@ -1934,6 +2102,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R15 == null)
+                    R15 = 0;
                 R15 = R15?.Lo32(value.Value);
             }
         }
@@ -1944,6 +2114,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R15 == null)
+                    R15 = 0;
                 R15d = R15d?.Lo16(value.Value);
             }
         }
@@ -1956,6 +2128,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R8 == null)
+                    R8 = 0;
                 R8w = R8w?.Lo8(value.Value);
             }
         }
@@ -1966,6 +2140,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R8 == null)
+                    R8 = 0;
                 R8 = R8?.Lo32(value.Value);
             }
         }
@@ -1976,6 +2152,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R8 == null)
+                    R8 = 0;
                 R8d = R8d?.Lo16(value.Value);
             }
         }
@@ -1988,6 +2166,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R9 == null)
+                    R9 = 0;
                 R9w = R9w?.Lo8(value.Value);
             }
         }
@@ -1998,6 +2178,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R9 == null)
+                    R9 = 0;
                 R9 = R9?.Lo32(value.Value);
             }
         }
@@ -2008,6 +2190,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (R9 == null)
+                    R9 = 0;
                 R9d = R9d?.Lo16(value.Value);
             }
         }
@@ -2028,6 +2212,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Efl == null)
+                    Efl = 0;
                 uint mask = 0x0080;
                 if (value.Value)
                     Efl = Efl |= mask;
@@ -2042,6 +2228,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rsi == null)
+                    Rsi = 0;
                 Esi = Esi?.Lo16(value.Value);
             }
         }
@@ -2052,6 +2240,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rsi == null)
+                    Rsi = 0;
                 Si = Si?.Lo8(value.Value);
             }
         }
@@ -2062,6 +2252,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rsp == null)
+                    Rsp = 0;
                 Esp = Esp?.Lo16(value.Value);
             }
         }
@@ -2072,6 +2264,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (Rsp == null)
+                    Rsp = 0;
                 Sp = Sp?.Lo8(value.Value);
             }
         }
