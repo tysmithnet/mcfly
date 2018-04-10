@@ -939,6 +939,73 @@ namespace McFly.Core.Test
             r.Process("brto", "12345678deadbeef");
             r.Brto.Should().Be(0x12345678deadbeef);
 
+            r = new RegisterSet();
+            r.Process("eax", "12345678");
+            r.Eax.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("ecx", "12345678");
+            r.Ecx.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("edx", "12345678");
+            r.Edx.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("ebx", "12345678");
+            r.Ebx.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("esp", "12345678");
+            r.Esp.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("ebp", "12345678");
+            r.Ebp.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("esi", "12345678");
+            r.Esi.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("edi", "12345678");
+            r.Edi.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("r8d", "12345678");
+            r.R8d.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("r9d", "12345678");
+            r.R9d.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("r10d", "12345678");
+            r.R10d.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("r11d", "12345678");
+            r.R11d.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("r12d", "12345678");
+            r.R12d.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("r13d", "12345678");
+            r.R13d.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("r14d", "12345678");
+            r.R14d.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("r15d", "12345678");
+            r.R15d.Should().Be(0x12345678);
+
+            r = new RegisterSet();
+            r.Process("eip", "12345678");
+            r.Eip.Should().Be(0x12345678);
         }
     }
 }

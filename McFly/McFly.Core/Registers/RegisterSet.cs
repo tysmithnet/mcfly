@@ -1267,6 +1267,85 @@ namespace McFly.Core.Registers
                     Exto = Convert.ToUInt64(input, 16);
                     break;
                 }
+                case "brfrom":
+                {
+                    Brfrom = Convert.ToUInt64(input, 16);
+                    break;
+                }
+                case "brto":
+                {
+                    Brto = Convert.ToUInt64(input, 16);
+                    break;
+                }
+                case "eax":
+                {
+                    Rax = Rax.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                }
+                case "ecx":
+                {
+                    Rcx = Rcx.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                }
+                case "edx":
+                {
+                    Rdx = Rdx.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                }
+                case "ebx":
+                {
+                    Rbx = Rbx.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                }
+                case "esp":
+                {
+                    Rsp = Rsp.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                }
+                case "ebp":
+                {
+                    Rbp = Rbp.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                }
+                case "esi":
+                {
+                    Rsi = Rsi.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                }
+                case "edi":
+                {
+                    Rdi = Rdi.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                }
+                case "r8d":
+                    R8 = R8.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                case "r9d":
+                    R9 = R9.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                case "r10d":
+                    R10 = R10.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                case "r11d":
+                    R11 = R11.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                case "r12d":
+                    R12 = R12.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                case "r13d":
+                    R13 = R13.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                case "r14d":
+                    R14 = R14.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                case "r15d":
+                    R15 = R15.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                case "eip":
+                {
+                    Rip = Rip.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    break;
+                }
                 default:
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(register)} has a value of {register} which is not a valid register");
