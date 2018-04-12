@@ -35,4 +35,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.1.0.0")]
 [assembly: AssemblyFileVersion("1.1.0.0")]
 
-[assembly: InternalsVisibleTo("McFly.Tests")]
+[assembly: InternalsVisibleTo("McFly.Test")]

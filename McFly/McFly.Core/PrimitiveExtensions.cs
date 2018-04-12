@@ -13,6 +13,8 @@
 // ***********************************************************************
 
 using System;
+using System.Globalization;
+using System.Linq;
 
 namespace McFly.Core
 {
@@ -21,6 +23,83 @@ namespace McFly.Core
     /// </summary>
     public static class PrimitiveExtensions
     {
+        public static ulong ToULong(this string hexString)
+        {
+            return ulong.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static long ToLong(this string hexString)
+        {
+            return long.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static uint ToUInt(this string hexString)
+        {
+            return uint.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static int Toint(this string hexString)
+        {
+            return int.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static ushort ToUShort(this string hexString)
+        {
+            return ushort.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static short ToShort(this string hexString)
+        {
+            return short.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static string ToHexString(this ulong ulongValue)
+        {
+            return $"{ulongValue:X16}";
+        }
+
+        public static string ToHexString(this long longValue)
+        {
+            return $"{longValue:X16}";
+        }
+
+        public static string ToHexString(this ulong? ulongValue)
+        {
+            return ulongValue.HasValue ? $"{ulongValue:X16}" : null; 
+        }
+
+        public static string ToHexString(this long? longValue)
+        {
+            return longValue.HasValue ? $"{longValue:X16}" : null;
+        }
+
+        public static string ToHexString(this ushort? ushortValue)
+        {
+            return ushortValue.HasValue ? $"{ushortValue:X4}" : null;
+        }
+
+        public static string ToHexString(this ushort ushortValue)
+        {
+            return $"{ushortValue:X4}";
+        }
+
+        public static string ToHexString(this uint uintValue)
+        {
+            return $"{uintValue:X8}";
+        }
+
+        public static string ToHexString(this uint? uintValue)
+        {
+            return uintValue.HasValue ? $"{uintValue:X8}" : null;
+        }
+
+        public static string ToHexString(this byte[] byteArray, bool isLittleEndian = false)
+        {
+            if (byteArray == null)
+                return null;
+            return string.Join("", isLittleEndian ? byteArray.Select(x => $"{x:2}").Reverse() : byteArray.Select(x => $"{x:2}"));
+        }
+
         /// <summary>
         ///     Interprets the value as a long
         /// </summary>
@@ -126,6 +205,40 @@ namespace McFly.Core
         public static uint Lo32(this ulong ulongValue)
         {
             return (uint) ulongValue;
+        }
+
+        public static ushort Lo16(this uint uintValue)
+        {
+            return (ushort) uintValue;
+        }
+
+        public static ushort Lo16(this uint uintValue, ushort ushortValue)
+        {
+            return (ushort)(((uintValue >> 16) << 16) | ushortValue);
+        }
+
+        public static byte Lo8(this ushort ushortValue)
+        {
+            return (byte)ushortValue;
+        }
+
+        public static ushort Lo8(this ushort ushortValue, byte byteValue)
+        {
+            ushortValue &= 0x1100;
+            ushortValue |= byteValue;
+            return ushortValue;
+        }
+
+        public static byte Hi8(this ushort ushortValue)
+        {
+            return (byte)(ushortValue >> 8);
+        }
+
+        public static ushort Hi8(this ushort ushortValue, byte byteValue)
+        {
+            ushortValue &= 0x0011;
+            ushortValue |= (ushort)(byteValue << 8);
+            return ushortValue;
         }
 
         /// <summary>

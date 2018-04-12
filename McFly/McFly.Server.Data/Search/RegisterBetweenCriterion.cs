@@ -14,6 +14,7 @@
 
 using System;
 using McFly.Core;
+using McFly.Core.Registers;
 
 namespace McFly.Server.Data.Search
 {
@@ -30,9 +31,9 @@ namespace McFly.Server.Data.Search
         /// <param name="low">The low.</param>
         /// <param name="high">The high.</param>
         /// <exception cref="IndexOutOfRangeException">Low cannot be bigger than High</exception>
-        public RegisterBetweenCriterion(Register register, ulong low, ulong high) : base(register)
+        public RegisterBetweenCriterion(Register register, string low, string high) : base(register)
         {
-            if (low > high)
+            if (string.Compare(high, low, StringComparison.Ordinal) < 0)
                 throw new IndexOutOfRangeException("Low cannot be bigger than High");
             Low = low;
             High = high;
@@ -42,13 +43,13 @@ namespace McFly.Server.Data.Search
         ///     Gets the low.
         /// </summary>
         /// <value>The low.</value>
-        public ulong Low { get; }
+        public string Low { get; }
 
         /// <summary>
         ///     Gets the high.
         /// </summary>
         /// <value>The high.</value>
-        public ulong High { get; } // todo: bound checking
+        public string High { get; } // todo: bound checking
 
         /// <summary>
         ///     Accepts the specified visitor.

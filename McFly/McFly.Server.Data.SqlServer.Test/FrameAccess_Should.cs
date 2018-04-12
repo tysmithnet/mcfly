@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using McFly.Core;
+using McFly.Core.Registers;
 using McFly.Server.Data.Search;
 using Xunit;
 
@@ -20,19 +21,19 @@ namespace McFly.Server.Data.SqlServer.Test
                 PosHi = 0,
                 PosLo = 0,
                 ThreadId = 1,
-                Rax = ((ulong) 0).ToByteArray(),
-                Rbx = ((ulong) 1).ToByteArray(),
-                Rcx = ((ulong) 2).ToByteArray(),
-                Rdx = ((ulong) 3).ToByteArray()
+                Rax = ((ulong) 0).ToHexString(),
+                Rbx = ((ulong) 1).ToHexString(),
+                Rcx = ((ulong) 2).ToHexString(),
+                Rdx = ((ulong) 3).ToHexString()
             }).WithFrame(new FrameEntity
             {
                 PosHi = 0,
                 PosLo = 0,
                 ThreadId = 2,
-                Rax = ((ulong) 0).ToByteArray(),
-                Rbx = ((ulong) 2).ToByteArray(),
-                Rcx = ((ulong) 4).ToByteArray(),
-                Rdx = ((ulong) 6).ToByteArray()
+                Rax = ((ulong) 0).ToHexString(),
+                Rbx = ((ulong) 2).ToHexString(),
+                Rcx = ((ulong) 4).ToHexString(),
+                Rdx = ((ulong) 6).ToHexString()
             }).WithFrame(new FrameEntity
             {
                 PosHi = 1,
@@ -43,14 +44,14 @@ namespace McFly.Server.Data.SqlServer.Test
                 PosHi = 1,
                 PosLo = 1,
                 ThreadId = 2,
-                Rax = ((ulong) 0).ToByteArray(),
-                Rbx = ((ulong) 1).ToByteArray(),
-                Rcx = ((ulong) 2).ToByteArray(),
-                Rdx = ((ulong) 3).ToByteArray()
+                Rax = ((ulong) 0).ToHexString(),
+                Rbx = ((ulong) 1).ToHexString(),
+                Rcx = ((ulong) 2).ToHexString(),
+                Rdx = ((ulong) 3).ToHexString()
             });
             frameAccess.ContextFactory = builder.Build();
 
-            var between = new RegisterBetweenCriterion(Register.Rdx, 0, 2);
+            var between = new RegisterBetweenCriterion(Register.Rax, ((ulong)0).ToHexString(), ((ulong)2).ToHexString());
             var notBetween = new NotCriterion(between);
 
             var betweenResults = frameAccess.Search("", between);
@@ -70,31 +71,31 @@ namespace McFly.Server.Data.SqlServer.Test
                 PosHi = 0,
                 PosLo = 0,
                 ThreadId = 1,
-                Rax = ((ulong) 1).ToByteArray()
+                Rax = ((ulong) 1).ToHexString()
             }).WithFrame(new FrameEntity
             {
                 PosHi = 0,
                 PosLo = 0,
                 ThreadId = 2,
-                Rax = ((ulong) 2).ToByteArray()
+                Rax = ((ulong) 2).ToHexString()
             }).WithFrame(new FrameEntity
             {
                 PosHi = 1,
                 PosLo = 0,
                 ThreadId = 2,
-                Rax = ((ulong) 2).ToByteArray()
+                Rax = ((ulong) 2).ToHexString()
             }).WithFrame(new FrameEntity
             {
                 PosHi = 1,
                 PosLo = 1,
                 ThreadId = 2,
-                Rax = ((ulong) 1).ToByteArray(),
-                Rbx = ((ulong) 2).ToByteArray()
+                Rax = ((ulong) 1).ToHexString(),
+                Rbx = ((ulong) 2).ToHexString()
             });
             frameAccess.ContextFactory = builder.Build();
 
-            var rax = new RegisterEqualsCriterion(Register.Rax, ((ulong) 1).ToByteArray());
-            var rbx = new RegisterEqualsCriterion(Register.Rbx, ((ulong) 2).ToByteArray());
+            var rax = new RegisterEqualsCriterion(Register.Rax, ((ulong) 1).ToHexString());
+            var rbx = new RegisterEqualsCriterion(Register.Rbx, ((ulong) 2).ToHexString());
             var and = new AndCriterion(new[] {rax, rbx});
             var or = new OrCriterion(new[] {rax, rbx});
             var not = new NotCriterion(rax);
@@ -127,17 +128,17 @@ namespace McFly.Server.Data.SqlServer.Test
                 PosHi = 0,
                 PosLo = 0,
                 ThreadId = 1,
-                Rax = ((ulong) 1).ToByteArray()
+                Rax = ((ulong) 1).ToHexString()
             }).WithFrame(new FrameEntity
             {
                 PosHi = 0,
                 PosLo = 0,
                 ThreadId = 2,
-                Rax = ((ulong) 2).ToByteArray()
+                Rax = ((ulong) 2).ToHexString()
             });
             frameAccess.ContextFactory = builder.Build();
 
-            var results = frameAccess.Search("", new RegisterEqualsCriterion(Register.Rax, ((ulong) 1).ToByteArray()));
+            var results = frameAccess.Search("", new RegisterEqualsCriterion(Register.Rax, ((ulong) 1).ToHexString()));
             results.Single().RegisterSet.Rax.Should().Be(1);
         }
 
@@ -185,23 +186,23 @@ namespace McFly.Server.Data.SqlServer.Test
                 PosHi = 0,
                 PosLo = 0,
                 ThreadId = 1,
-                Rax = 1.ToByteArray(),
-                Rbx = 2.ToByteArray(),
-                Rcx = 3.ToByteArray(),
-                Rdx = 4.ToByteArray(),
+                Rax = ((ulong)1).ToHexString(),
+                Rbx = ((ulong)2).ToHexString(),
+                Rcx = ((ulong)3).ToHexString(),
+                Rdx = ((ulong)4).ToHexString(),
                 DisassemblyNote = "r9,r8",
-                Rip = 90.ToByteArray(),
-                OpCode = new byte[] {0x10, 0x20},
+                Rip = ((ulong)90).ToHexString(),
+                OpCode = "1020",
                 OpCodeMnemonic = "mov",
                 StackFrames = new List<StackFrameEntity>
                 {
                     new StackFrameEntity
                     {
-                        StackPointer = 100.ToByteArray(),
-                        ReturnAddress = 700.ToByteArray(),
+                        StackPointer = ((ulong)100).ToHexString(),
+                        ReturnAddress = ((ulong)700).ToHexString(),
                         ModuleName = "mymod",
                         Function = "myfun",
-                        Offset = 30.ToByteArray()
+                        Offset = 30
                     }
                 },
                 Notes = new List<NoteEntity>

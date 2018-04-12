@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using McFly.Core;
+using McFly.Core.Registers;
 
 namespace McFly.Server.Data.Search
 {
@@ -27,16 +28,16 @@ namespace McFly.Server.Data.Search
         /// </summary>
         /// <param name="register">The register.</param>
         /// <param name="value">The value.</param>
-        public RegisterEqualsCriterion(Register register, byte[] value) : base(register)
+        public RegisterEqualsCriterion(Register register, string hexString) : base(register)
         {
-            Value = value;
+            HexString = hexString;
         }
 
         /// <summary>
         ///     Gets the value.
         /// </summary>
         /// <value>The value.</value>
-        public byte[] Value { get; }
+        public string HexString { get; }
 
         /// <summary>
         ///     Accepts the specified visitor.

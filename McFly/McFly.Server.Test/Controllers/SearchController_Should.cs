@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FluentAssertions;
 using McFly.Core;
+using McFly.Core.Registers;
 using McFly.Server.Contract;
 using McFly.Server.Controllers;
 using McFly.Server.Data.Search;
@@ -18,7 +19,7 @@ namespace McFly.Server.Test.Controllers
         {
             var searchController = new SearchController();
             var builder = new SearchCriteriaConverterFacadeBuilder();
-            builder.WithConvert(new RegisterEqualsCriterion(Register.Rax, ((ulong)10).ToByteArray()));
+            builder.WithConvert(new RegisterEqualsCriterion(Register.Rax, ((ulong)10).ToHexString()));
             searchController.ConversionFacade = builder.Build();
             var accessBuilder = new FrameAccessBuilder();
             accessBuilder.WithSearch(new[]

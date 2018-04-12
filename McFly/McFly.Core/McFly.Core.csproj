@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ByteArrayBuilder.cs" />
     <Compile Include="DisassemblyLine.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="MemoryRange.cs" />
@@ -50,8 +51,15 @@
     <Compile Include="Position.cs" />
     <Compile Include="PrimitiveExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Register.cs" />
-    <Compile Include="RegisterSet.cs" />
+    <Compile Include="Registers\Register.cs" />
+    <Compile Include="Registers\Register128.cs" />
+    <Compile Include="Registers\Register16.cs" />
+    <Compile Include="Registers\Register64.cs" />
+    <Compile Include="Registers\Register32.cs" />
+    <Compile Include="Registers\Register8.cs" />
+    <Compile Include="Registers\Register80.cs" />
+    <Compile Include="Registers\RegisterControlFlags.cs" />
+    <Compile Include="Registers\RegisterSet.cs" />
     <Compile Include="StackFrame.cs" />
     <Compile Include="StackTrace.cs" />
   </ItemGroup>

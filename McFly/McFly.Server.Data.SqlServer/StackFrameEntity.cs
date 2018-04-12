@@ -68,7 +68,7 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <value>The offset.</value>
         [Column("offset")]
-        public long Offset { get; set; }
+        public long? Offset { get; set; }
 
         /// <summary>
         ///     Gets or sets the frame identifier.
