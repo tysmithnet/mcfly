@@ -83,14 +83,14 @@ namespace McFly.Core.Registers
                    Mm6 == other.Mm6 &&
                    Mm7 == other.Mm7 &&
                    Mxcsr == other.Mxcsr &&
-                   St0 == other.St0 || St0 != null && other.St0 != null && St0.SequenceEqual(other.St0) &&
-                   St1 == other.St1 || St1 != null && other.St1 != null && St1.SequenceEqual(other.St1) &&
-                   St2 == other.St2 || St2 != null && other.St2 != null && St2.SequenceEqual(other.St2) &&
-                   St3 == other.St3 || St3 != null && other.St3 != null && St3.SequenceEqual(other.St3) &&
-                   St4 == other.St4 || St4 != null && other.St4 != null && St4.SequenceEqual(other.St4) &&
-                   St5 == other.St5 || St5 != null && other.St5 != null && St5.SequenceEqual(other.St5) &&
-                   St6 == other.St6 || St6 != null && other.St6 != null && St6.SequenceEqual(other.St6) &&
-                   St7 == other.St7 || St7 != null && other.St7 != null && St7.SequenceEqual(other.St7) &&
+                   (St0 == other.St0 || St0 != null && other.St0 != null && St0.SequenceEqual(other.St0)) &&
+                   (St1 == other.St1 || St1 != null && other.St1 != null && St1.SequenceEqual(other.St1)) &&
+                   (St2 == other.St2 || St2 != null && other.St2 != null && St2.SequenceEqual(other.St2)) &&
+                   (St3 == other.St3 || St3 != null && other.St3 != null && St3.SequenceEqual(other.St3)) &&
+                   (St4 == other.St4 || St4 != null && other.St4 != null && St4.SequenceEqual(other.St4)) &&
+                   (St5 == other.St5 || St5 != null && other.St5 != null && St5.SequenceEqual(other.St5)) &&
+                   (St6 == other.St6 || St6 != null && other.St6 != null && St6.SequenceEqual(other.St6)) &&
+                   (St7 == other.St7 || St7 != null && other.St7 != null && St7.SequenceEqual(other.St7)) &&
                    R10 == other.R10 &&
                    R11 == other.R11 &&
                    R12 == other.R12 &&
@@ -109,22 +109,22 @@ namespace McFly.Core.Registers
                    Rsi == other.Rsi &&
                    Rsp == other.Rsp &&
                    Ss == other.Ss &&
-                   Ymm0 == other.Ymm0 || Ymm0 != null && other.Ymm0 != null && Ymm0.SequenceEqual(other.Ymm0) &&
-                   Ymm1 == other.Ymm1 || Ymm1 != null && other.Ymm1 != null && Ymm1.SequenceEqual(other.Ymm1) &&
-                   Ymm2 == other.Ymm2 || Ymm2 != null && other.Ymm2 != null && Ymm2.SequenceEqual(other.Ymm2) &&
-                   Ymm3 == other.Ymm3 || Ymm3 != null && other.Ymm3 != null && Ymm3.SequenceEqual(other.Ymm3) &&
-                   Ymm4 == other.Ymm4 || Ymm4 != null && other.Ymm4 != null && Ymm4.SequenceEqual(other.Ymm4) &&
-                   Ymm5 == other.Ymm5 || Ymm5 != null && other.Ymm5 != null && Ymm5.SequenceEqual(other.Ymm5) &&
-                   Ymm6 == other.Ymm6 || Ymm6 != null && other.Ymm6 != null && Ymm6.SequenceEqual(other.Ymm6) &&
-                   Ymm7 == other.Ymm7 || Ymm7 != null && other.Ymm7 != null && Ymm7.SequenceEqual(other.Ymm7) &&
-                   Ymm8 == other.Ymm8 || Ymm8 != null && other.Ymm8 != null && Ymm8.SequenceEqual(other.Ymm8) &&
-                   Ymm9 == other.Ymm9 || Ymm9 != null && other.Ymm9 != null && Ymm9.SequenceEqual(other.Ymm9) &&
-                   Ymm10 == other.Ymm10 || Ymm10 != null && other.Ymm10 != null && Ymm10.SequenceEqual(other.Ymm10) &&
-                   Ymm11 == other.Ymm11 || Ymm11 != null && other.Ymm11 != null && Ymm11.SequenceEqual(other.Ymm11) &&
-                   Ymm12 == other.Ymm12 || Ymm12 != null && other.Ymm12 != null && Ymm12.SequenceEqual(other.Ymm12) &&
-                   Ymm13 == other.Ymm13 || Ymm13 != null && other.Ymm13 != null && Ymm13.SequenceEqual(other.Ymm13) &&
-                   Ymm14 == other.Ymm14 || Ymm14 != null && other.Ymm14 != null && Ymm14.SequenceEqual(other.Ymm14) &&
-                   Ymm15 == other.Ymm15 || Ymm15 != null && other.Ymm15 != null && Ymm15.SequenceEqual(other.Ymm15);
+                   (Ymm0 == other.Ymm0 || Ymm0 != null && other.Ymm0 != null && Ymm0.SequenceEqual(other.Ymm0)) &&
+                   (Ymm1 == other.Ymm1 || Ymm1 != null && other.Ymm1 != null && Ymm1.SequenceEqual(other.Ymm1)) &&
+                   (Ymm2 == other.Ymm2 || Ymm2 != null && other.Ymm2 != null && Ymm2.SequenceEqual(other.Ymm2)) &&
+                   (Ymm3 == other.Ymm3 || Ymm3 != null && other.Ymm3 != null && Ymm3.SequenceEqual(other.Ymm3)) &&
+                   (Ymm4 == other.Ymm4 || Ymm4 != null && other.Ymm4 != null && Ymm4.SequenceEqual(other.Ymm4)) &&
+                   (Ymm5 == other.Ymm5 || Ymm5 != null && other.Ymm5 != null && Ymm5.SequenceEqual(other.Ymm5)) &&
+                   (Ymm6 == other.Ymm6 || Ymm6 != null && other.Ymm6 != null && Ymm6.SequenceEqual(other.Ymm6)) &&
+                   (Ymm7 == other.Ymm7 || Ymm7 != null && other.Ymm7 != null && Ymm7.SequenceEqual(other.Ymm7)) &&
+                   (Ymm8 == other.Ymm8 || Ymm8 != null && other.Ymm8 != null && Ymm8.SequenceEqual(other.Ymm8)) &&
+                   (Ymm9 == other.Ymm9 || Ymm9 != null && other.Ymm9 != null && Ymm9.SequenceEqual(other.Ymm9)) &&
+                   (Ymm10 == other.Ymm10 || Ymm10 != null && other.Ymm10 != null && Ymm10.SequenceEqual(other.Ymm10)) &&
+                   (Ymm11 == other.Ymm11 || Ymm11 != null && other.Ymm11 != null && Ymm11.SequenceEqual(other.Ymm11)) &&
+                   (Ymm12 == other.Ymm12 || Ymm12 != null && other.Ymm12 != null && Ymm12.SequenceEqual(other.Ymm12)) &&
+                   (Ymm13 == other.Ymm13 || Ymm13 != null && other.Ymm13 != null && Ymm13.SequenceEqual(other.Ymm13)) &&
+                   (Ymm14 == other.Ymm14 || Ymm14 != null && other.Ymm14 != null && Ymm14.SequenceEqual(other.Ymm14)) &&
+                   (Ymm15 == other.Ymm15 || Ymm15 != null && other.Ymm15 != null && Ymm15.SequenceEqual(other.Ymm15));
         }
 
         /// <inheritdoc />
