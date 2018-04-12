@@ -174,9 +174,11 @@ namespace McFly.Core
             return (byte)ushortValue;
         }
 
-        public static byte Lo8(this ushort ushortValue, byte byteValue)
+        public static ushort Lo8(this ushort ushortValue, byte byteValue)
         {
-            return (byte)(((ushortValue >> 8) << 8) | byteValue);
+            ushortValue &= 0x1100;
+            ushortValue |= byteValue;
+            return ushortValue;
         }
 
         public static byte Hi8(this ushort ushortValue)
@@ -184,9 +186,11 @@ namespace McFly.Core
             return (byte)(ushortValue >> 8);
         }
 
-        public static byte Hi8(this ushort ushortValue, byte byteValue)
+        public static ushort Hi8(this ushort ushortValue, byte byteValue)
         {
-            return (byte)(((ushortValue << 8) >> 16) | byteValue);
+            ushortValue &= 0x0011;
+            ushortValue |= (ushort)(byteValue << 8);
+            return ushortValue;
         }
 
         /// <summary>

@@ -683,739 +683,638 @@ namespace McFly.Core.Registers
                     break;
                 }
                 case "xmm0l":
-                {
-                    if (Ymm0 == null)
-                        Ymm0 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm0[i] = bytes[i];
+                    Xmm0l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm1l":
-                {
-                    if (Ymm1 == null)
-                        Ymm1 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm1[i] = bytes[i];
+                    Xmm1l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm2l":
-                {
-                    if (Ymm2 == null)
-                        Ymm2 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm2[i] = bytes[i];
+                    Xmm2l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm3l":
-                {
-                    if (Ymm3 == null)
-                        Ymm3 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm3[i] = bytes[i];
+                    Xmm3l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm4l":
-                {
-                    if (Ymm4 == null)
-                        Ymm4 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm4[i] = bytes[i];
+                    Xmm4l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm5l":
-                {
-                    if (Ymm5 == null)
-                        Ymm5 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm5[i] = bytes[i];
+                    Xmm5l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm6l":
-                {
-                    if (Ymm6 == null)
-                        Ymm6 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm6[i] = bytes[i];
+                    Xmm6l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm7l":
-                {
-                    if (Ymm7 == null)
-                        Ymm7 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm7[i] = bytes[i];
+                    Xmm7l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm8l":
-                {
-                    if (Ymm8 == null)
-                        Ymm8 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm8[i] = bytes[i];
+                    Xmm8l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm9l":
-                {
-                    if (Ymm9 == null)
-                        Ymm9 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm9[i] = bytes[i];
+                    Xmm9l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm10l":
-                {
-                    if (Ymm10 == null)
-                        Ymm10 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm10[i] = bytes[i];
+                    Xmm10l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm11l":
-                {
-                    if (Ymm11 == null)
-                        Ymm11 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm11[i] = bytes[i];
+                    Xmm11l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm12l":
-                {
-                    if (Ymm12 == null)
-                        Ymm12 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm12[i] = bytes[i];
+                    Xmm12l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm13l":
-                {
-                    if (Ymm13 == null)
-                        Ymm13 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm13[i] = bytes[i];
+                    Xmm13l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm14l":
-                {
-                    if (Ymm14 == null)
-                        Ymm14 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm14[i] = bytes[i];
+                    Xmm14l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm15l":
-                {
-                    if (Ymm15 == null)
-                        Ymm15 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm15[i] = bytes[i];
+                    Xmm15l = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm0h":
-                {
-                    if (Ymm0 == null)
-                        Ymm0 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm0[8 + i] = bytes[i];
+                    Xmm0h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm1h":
-                {
-                    if (Ymm1 == null)
-                        Ymm1 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm1[8 + i] = bytes[i];
+                    Xmm1h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm2h":
-                {
-                    if (Ymm2 == null)
-                        Ymm2 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm2[8 + i] = bytes[i];
+                    Xmm2h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm3h":
-                {
-                    if (Ymm3 == null)
-                        Ymm3 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm3[8 + i] = bytes[i];
+                    Xmm3h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm4h":
-                {
-                    if (Ymm4 == null)
-                        Ymm4 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm4[8 + i] = bytes[i];
+                    Xmm4h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm5h":
-                {
-                    if (Ymm5 == null)
-                        Ymm5 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm5[8 + i] = bytes[i];
+                    Xmm5h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm6h":
-                {
-                    if (Ymm6 == null)
-                        Ymm6 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm6[8 + i] = bytes[i];
+                    Xmm6h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm7h":
-                {
-                    if (Ymm7 == null)
-                        Ymm7 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm7[8 + i] = bytes[i];
+                    Xmm7h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm8h":
-                {
-                    if (Ymm8 == null)
-                        Ymm8 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm8[8 + i] = bytes[i];
+                    Xmm8h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm9h":
-                {
-                    if (Ymm9 == null)
-                        Ymm9 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm9[8 + i] = bytes[i];
+                    Xmm9h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm10h":
-                {
-                    if (Ymm10 == null)
-                        Ymm10 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm10[8 + i] = bytes[i];
+                    Xmm10h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm11h":
-                {
-                    if (Ymm11 == null)
-                        Ymm11 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm11[8 + i] = bytes[i];
+                    Xmm11h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm12h":
-                {
-                    if (Ymm12 == null)
-                        Ymm12 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm12[8 + i] = bytes[i];
+                    Xmm12h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm13h":
-                {
-                    if (Ymm13 == null)
-                        Ymm13 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm13[8 + i] = bytes[i];
+                    Xmm13h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm14h":
-                {
-                    if (Ymm14 == null)
-                        Ymm14 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm14[8 + i] = bytes[i];
+                    Xmm14h = Convert.ToUInt64(input, 16);
                     break;
-                }
 
                 case "xmm15h":
-                {
-                    if (Ymm15 == null)
-                        Ymm15 = new byte[32];
-                    var bytes = BitConverter.GetBytes(Convert.ToUInt64(input, 16));
-                    for (var i = 0; i < 8; i++)
-                        Ymm15[8 + i] = bytes[i];
+                    Xmm15h = Convert.ToUInt64(input, 16);
                     break;
-                }
-
                 case "ymm0h":
                 {
-                    if (Ymm0 == null)
-                        Ymm0 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm0[16 + i] = bytes[i];
+                    Ymm0h = bytes;
                     break;
                 }
 
                 case "ymm1h":
                 {
-                    if (Ymm1 == null)
-                        Ymm1 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm1[16 + i] = bytes[i];
+                    Ymm1h = bytes;
                     break;
                 }
 
                 case "ymm2h":
                 {
-                    if (Ymm2 == null)
-                        Ymm2 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm2[16 + i] = bytes[i];
+                    Ymm2h = bytes;
                     break;
                 }
 
                 case "ymm3h":
                 {
-                    if (Ymm3 == null)
-                        Ymm3 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm3[16 + i] = bytes[i];
+                    Ymm3h = bytes;
                     break;
                 }
 
                 case "ymm4h":
                 {
-                    if (Ymm4 == null)
-                        Ymm4 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm4[16 + i] = bytes[i];
+                    Ymm4h = bytes;
                     break;
                 }
 
                 case "ymm5h":
                 {
-                    if (Ymm5 == null)
-                        Ymm5 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm5[16 + i] = bytes[i];
+                    Ymm5h = bytes;
                     break;
                 }
 
                 case "ymm6h":
                 {
-                    if (Ymm6 == null)
-                        Ymm6 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm6[16 + i] = bytes[i];
+                    Ymm6h = bytes;
                     break;
                 }
 
                 case "ymm7h":
                 {
-                    if (Ymm7 == null)
-                        Ymm7 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm7[16 + i] = bytes[i];
+                    Ymm7h = bytes;
                     break;
                 }
 
                 case "ymm8h":
                 {
-                    if (Ymm8 == null)
-                        Ymm8 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm8[16 + i] = bytes[i];
+                    Ymm8h = bytes;
                     break;
                 }
 
                 case "ymm9h":
                 {
-                    if (Ymm9 == null)
-                        Ymm9 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm9[16 + i] = bytes[i];
+                    Ymm9h = bytes;
                     break;
                 }
 
                 case "ymm10h":
                 {
-                    if (Ymm10 == null)
-                        Ymm10 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm10[16 + i] = bytes[i];
+                    Ymm10h = bytes;
                     break;
                 }
 
                 case "ymm11h":
                 {
-                    if (Ymm11 == null)
-                        Ymm11 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm11[16 + i] = bytes[i];
+                    Ymm11h = bytes;
                     break;
                 }
 
                 case "ymm12h":
                 {
-                    if (Ymm12 == null)
-                        Ymm12 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm12[16 + i] = bytes[i];
+                    Ymm12h = bytes;
                     break;
                 }
 
                 case "ymm13h":
                 {
-                    if (Ymm13 == null)
-                        Ymm13 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm13[16 + i] = bytes[i];
+                    Ymm13h = bytes;
                     break;
                 }
 
                 case "ymm14h":
                 {
-                    if (Ymm14 == null)
-                        Ymm14 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm14[16 + i] = bytes[i];
+                    Ymm14h = bytes;
                     break;
                 }
 
                 case "ymm15h":
                 {
-                    if (Ymm15 == null)
-                        Ymm15 = new byte[32];
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                    for (var i = 0; i < 16; i++)
-                        Ymm15[16 + i] = bytes[i];
+                    Ymm15h = bytes;
                     break;
                 }
-
                 case "ymm0l":
-                {
-                    goto case "xmm0";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm0l = bytes;
+                        break;
+                    }
 
                 case "ymm1l":
-                {
-                    goto case "xmm1";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm1l = bytes;
+                        break;
+                    }
 
                 case "ymm2l":
-                {
-                    goto case "xmm2";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm2l = bytes;
+                        break;
+                    }
 
                 case "ymm3l":
-                {
-                    goto case "xmm3";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm3l = bytes;
+                        break;
+                    }
 
                 case "ymm4l":
-                {
-                    goto case "xmm4";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm4l = bytes;
+                        break;
+                    }
 
                 case "ymm5l":
-                {
-                    goto case "xmm5";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm5l = bytes;
+                        break;
+                    }
 
                 case "ymm6l":
-                {
-                    goto case "xmm6";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm6l = bytes;
+                        break;
+                    }
 
                 case "ymm7l":
-                {
-                    goto case "xmm7";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm7l = bytes;
+                        break;
+                    }
 
                 case "ymm8l":
-                {
-                    goto case "xmm8";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm8l = bytes;
+                        break;
+                    }
 
                 case "ymm9l":
-                {
-                    goto case "xmm9";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm9l = bytes;
+                        break;
+                    }
 
                 case "ymm10l":
-                {
-                    goto case "xmm10";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm10l = bytes;
+                        break;
+                    }
 
                 case "ymm11l":
-                {
-                    goto case "xmm11";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm11l = bytes;
+                        break;
+                    }
 
                 case "ymm12l":
-                {
-                    goto case "xmm12";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm12l = bytes;
+                        break;
+                    }
 
                 case "ymm13l":
-                {
-                    goto case "xmm13";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm13l = bytes;
+                        break;
+                    }
 
                 case "ymm14l":
-                {
-                    goto case "xmm14";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm14l = bytes;
+                        break;
+                    }
 
                 case "ymm15l":
-                {
-                    goto case "xmm15";
-                }
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        Ymm15l = bytes;
+                        break;
+                    }
                 case "exfrom":
-                {
+
                     Exfrom = Convert.ToUInt64(input, 16);
                     break;
-                }
+
                 case "exto":
-                {
+
                     Exto = Convert.ToUInt64(input, 16);
                     break;
-                }
+
                 case "brfrom":
-                {
+
                     Brfrom = Convert.ToUInt64(input, 16);
                     break;
-                }
+
                 case "brto":
-                {
+
                     Brto = Convert.ToUInt64(input, 16);
                     break;
-                }
+
                 case "eax":
-                {
-                    Rax = Rax.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+
+                    Eax = Convert.ToUInt32(input, 16);
                     break;
-                }
+
                 case "ecx":
-                {
-                    Rcx = Rcx.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+
+                    Ecx = Convert.ToUInt32(input, 16);
                     break;
-                }
+
                 case "edx":
-                {
-                    Rdx = Rdx.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+
+                    Edx = Convert.ToUInt32(input, 16);
                     break;
-                }
+
                 case "ebx":
-                {
-                    Rbx = Rbx.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+
+                    Ebx = Convert.ToUInt32(input, 16);
                     break;
-                }
+
                 case "esp":
-                {
-                    Rsp = Rsp.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+
+                    Esp = Convert.ToUInt32(input, 16);
                     break;
-                }
+
                 case "ebp":
-                {
-                    Rbp = Rbp.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+
+                    Ebp = Convert.ToUInt32(input, 16);
                     break;
-                }
+
                 case "esi":
-                {
-                    Rsi = Rsi.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+
+                    Esi = Convert.ToUInt32(input, 16);
                     break;
-                }
+
                 case "edi":
-                {
-                    Rdi = Rdi.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+
+                    Edi = Convert.ToUInt32(input, 16);
                     break;
-                }
+
                 case "r8d":
-                    R8 = R8.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    R8d = Convert.ToUInt32(input, 16);
                     break;
                 case "r9d":
-                    R9 = R9.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    R9d = Convert.ToUInt32(input, 16);
                     break;
                 case "r10d":
-                    R10 = R10.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    R10d = Convert.ToUInt32(input, 16);
                     break;
                 case "r11d":
-                    R11 = R11.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    R11d = Convert.ToUInt32(input, 16);
                     break;
                 case "r12d":
-                    R12 = R12.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    R12d = Convert.ToUInt32(input, 16);
                     break;
                 case "r13d":
-                    R13 = R13.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    R13d = Convert.ToUInt32(input, 16);
                     break;
                 case "r14d":
-                    R14 = R14.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    R14d = Convert.ToUInt32(input, 16);
                     break;
                 case "r15d":
-                    R15 = R15.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    R15d = Convert.ToUInt32(input, 16);
                     break;
                 case "eip":
                 {
-                    Rip = Rip.GetValueOrDefault().Lo32(Convert.ToUInt32(input, 16));
+                    Eip = Convert.ToUInt32(input, 16);
                     break;
                 }
                 case "ax":
-                    {
-                        Eax = Eax.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
-                        break;
-                    }
+                {
+                    Ax = Convert.ToUInt16(input, 16);
+                    break;
+                }
                 case "cx":
-                    {
-                        Ecx = Ecx.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
-                        break;
-                    }
+                {
+                    Cx = Convert.ToUInt16(input, 16);
+                    break;
+                }
                 case "dx":
-                    {
-                        Edx = Edx.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
-                        break;
-                    }
+                {
+                    Dx = Convert.ToUInt16(input, 16);
+                    break;
+                }
                 case "bx":
-                    {
-                        Ebx = 
-                            Ebx.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
-                        break;
-                    }
+                {
+                    Bx =
+                        Convert.ToUInt16(input, 16);
+                    break;
+                }
                 case "sp":
-                    {
-                        Esp = Esp.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
-                        break;
-                    }
+                {
+                    Sp = Convert.ToUInt16(input, 16);
+                    break;
+                }
                 case "bp":
-                    {
-                        Ebp = Ebp.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
-                        break;
-                    }
+                {
+                    Bp = Convert.ToUInt16(input, 16);
+                    break;
+                }
                 case "si":
-                    {
-                        Esi = Esi.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
-                        break;
-                    }
+                    Si = Convert.ToUInt16(input, 16);
+                    break;
                 case "di":
-                    {
-                        Edi = Edi.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
-                        break;
-                    }
+                    Di = Convert.ToUInt16(input, 16);
+                    break;
                 case "r8w":
-                    R8d = R8d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    R8w = Convert.ToUInt16(input, 16);
                     break;
                 case "r9w":
-                    R9d = R9d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    R9w = Convert.ToUInt16(input, 16);
                     break;
                 case "r10w":
-                    R10d = R10d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    R10w = Convert.ToUInt16(input, 16);
                     break;
                 case "r11w":
-                    R11d = R11d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    R11w = Convert.ToUInt16(input, 16);
                     break;
                 case "r12w":
-                    R12d = R12d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    R12w = Convert.ToUInt16(input, 16);
                     break;
                 case "r13w":
-                    R13d = R13d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    R13w = Convert.ToUInt16(input, 16);
                     break;
                 case "r14w":
-                    R14d = R14d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    R14w = Convert.ToUInt16(input, 16);
                     break;
                 case "r15w":
-                    R15d = R15d.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
+                    R15w = Convert.ToUInt16(input, 16);
                     break;
                 case "ip":
-                    {
-                        Eip = Eip.GetValueOrDefault().Lo16(Convert.ToUInt16(input, 16));
-                        break;
-                    }
+                    Ip = Convert.ToUInt16(input, 16);
+                    break;
+                case "fl":
+                    Fl = Convert.ToUInt16(input, 16);
+                    break;
+                case "al":
+                    Al = Convert.ToByte(input, 16);
+                    break;
+                case "bl":
+                    Bl = Convert.ToByte(input, 16);
+                    break;
+                case "cl":
+                    Cl = Convert.ToByte(input, 16);
+                    break;
+                case "spl":
+                    Spl = Convert.ToByte(input, 16);
+                    break;
+                case "dl":
+                    Dl = Convert.ToByte(input, 16);
+                    break;
+                case "bpl":
+                    Bpl = Convert.ToByte(input, 16);
+                    break;
+                case "sil":
+                    Sil = Convert.ToByte(input, 16);
+                    break;
+                case "dil":
+                    Dil = Convert.ToByte(input, 16);
+                    break;
+                case "r8b":
+                    R8b = Convert.ToByte(input, 16);
+                    break;
+                case "r9b":
+                    R9b = Convert.ToByte(input, 16);
+                    break;
+                case "r10b":
+                    R10b = Convert.ToByte(input, 16);
+                    break;
+                case "r11b":
+                    R11b = Convert.ToByte(input, 16);
+                    break;
+                case "r12b":
+                    R12b = Convert.ToByte(input, 16);
+                    break;
+                case "r13b":
+                    R13b = Convert.ToByte(input, 16);
+                    break;
+                case "r14b":
+                    R14b = Convert.ToByte(input, 16);
+                    break;
+                case "r15b":
+                    R15b = Convert.ToByte(input, 16);
+                    break;
+                case "ah":
+                    Ah = Convert.ToByte(input, 16);
+                    break;
+                case "bh":
+                    Bh = Convert.ToByte(input, 16);
+                    break;
+                case "ch":
+                    Ch = Convert.ToByte(input, 16);
+                    break;
+                case "dh":
+                    Dh = Convert.ToByte(input, 16);
+                    break;
+                case "iopl":
+                    Iopl = Convert.ToByte(input, 16);
+                    break;
+                case "of":
+                    Of = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "df":
+                    Df = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "if":
+                    If = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "tf":
+                    Tf = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "sf":
+                    Sf = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "zf":
+                    Zf = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "af":
+                    Af = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "pf":
+                    Pf = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "cf":
+                    Cf = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "vip":
+                    Vip = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "vif":
+                    Vif = Convert.ToUInt64(input, 16) > 0;
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(register)} has a value of {register} which is not a valid register");
@@ -1428,6 +1327,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (!Efl.HasValue)
+                    Efl = 0;
                 uint mask = 0x0010;
                 if (value.Value)
                     Efl = Efl |= mask;
@@ -1625,7 +1526,7 @@ namespace McFly.Core.Registers
                 if (!value.HasValue) return;
                 if (Rdi == null)
                     Rdi = 0;
-                Edi = Eax?.Lo16(value.Value);
+                Edi = Edi?.Lo16(value.Value);
             }
         }
 
@@ -1824,17 +1725,15 @@ namespace McFly.Core.Registers
 
         public byte? Iopl
         {
-            get => Efl.HasValue ? (byte?) (Efl & (0x3000 >> 11)) : null;
+            get => Efl.HasValue ? (byte?)((Efl & 0x3000) >> 12) : null;
             set
             {
-                if (!value.HasValue) return;
+                if (!value.HasValue)
+                    return;
                 if (Efl == null)
                     Efl = 0;
-                if (value > 3)
-                    throw new ArgumentOutOfRangeException(
-                        $"{nameof(value)} has a value of {value} but must be in [0,4)");
-                uint mask = 0x3000;
-                Efl = Efl &= ~mask | ((uint) value << 11);
+                Efl &= unchecked((uint)~12288);
+                Efl |= (uint) (value.Value << 12);
             }
         }
 
@@ -2089,7 +1988,7 @@ namespace McFly.Core.Registers
             get => R15w?.Lo8();
             set
             {
-                if(!value.HasValue) return;
+                if (!value.HasValue) return;
                 if (R15 == null)
                     R15 = 0;
                 R15w = R15w?.Lo8(value.Value);
@@ -2374,6 +2273,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (!Efl.HasValue)
+                    Efl = 0;
                 uint mask = 0x0100;
                 if (value.Value)
                     Efl = Efl |= mask;
@@ -2388,6 +2289,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (!Efl.HasValue)
+                    Efl = 0;
                 uint mask = 0x00080000;
                 if (value.Value)
                     Efl = Efl |= mask;
@@ -2402,6 +2305,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (!Efl.HasValue)
+                    Efl = 0;
                 uint mask = 0x00100000;
                 if (value.Value)
                     Efl = Efl |= mask;
@@ -3235,6 +3140,21 @@ namespace McFly.Core.Registers
             }
         }
 
+        public byte[] Ymm10h
+        {
+            get => Ymm10?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm10 == null)
+                    Ymm10 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm10[16 + i] = value[i];
+            }
+        }
+
         public byte[] Ymm10l
         {
             get => Xmm10;
@@ -3250,6 +3170,21 @@ namespace McFly.Core.Registers
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 32");
                 _ymm11 = value;
+            }
+        }
+
+        public byte[] Ymm11h
+        {
+            get => Ymm11?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm11 == null)
+                    Ymm11 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm11[16 + i] = value[i];
             }
         }
 
@@ -3271,6 +3206,21 @@ namespace McFly.Core.Registers
             }
         }
 
+        public byte[] Ymm12h
+        {
+            get => Ymm12?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm12 == null)
+                    Ymm12 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm12[16 + i] = value[i];
+            }
+        }
+
         public byte[] Ymm12l
         {
             get => Xmm12;
@@ -3286,6 +3236,21 @@ namespace McFly.Core.Registers
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 32");
                 _ymm13 = value;
+            }
+        }
+
+        public byte[] Ymm13h
+        {
+            get => Ymm13?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm13 == null)
+                    Ymm13 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm13[16 + i] = value[i];
             }
         }
 
@@ -3307,6 +3272,21 @@ namespace McFly.Core.Registers
             }
         }
 
+        public byte[] Ymm14h
+        {
+            get => Ymm14?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm14 == null)
+                    Ymm14 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm14[16 + i] = value[i];
+            }
+        }
+
         public byte[] Ymm14l
         {
             get => Xmm14;
@@ -3325,10 +3305,40 @@ namespace McFly.Core.Registers
             }
         }
 
+        public byte[] Ymm15h
+        {
+            get => Ymm15?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm15 == null)
+                    Ymm15 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm15[16 + i] = value[i];
+            }
+        }
+
         public byte[] Ymm15l
         {
             get => Xmm15;
             set => Xmm15 = value;
+        }
+
+        public byte[] Ymm1h
+        {
+            get => Ymm1?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm1 == null)
+                    Ymm1 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm1[16 + i] = value[i];
+            }
         }
 
         public byte[] Ymm1l
@@ -3346,6 +3356,21 @@ namespace McFly.Core.Registers
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 32");
                 _ymm2 = value;
+            }
+        }
+
+        public byte[] Ymm2h
+        {
+            get => Ymm2?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm2 == null)
+                    Ymm2 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm2[16 + i] = value[i];
             }
         }
 
@@ -3367,6 +3392,21 @@ namespace McFly.Core.Registers
             }
         }
 
+        public byte[] Ymm3h
+        {
+            get => Ymm3?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm3 == null)
+                    Ymm3 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm3[16 + i] = value[i];
+            }
+        }
+
         public byte[] Ymm3l
         {
             get => Xmm3;
@@ -3382,6 +3422,21 @@ namespace McFly.Core.Registers
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 32");
                 _ymm4 = value;
+            }
+        }
+
+        public byte[] Ymm4h
+        {
+            get => Ymm4?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm4 == null)
+                    Ymm4 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm4[16 + i] = value[i];
             }
         }
 
@@ -3403,6 +3458,21 @@ namespace McFly.Core.Registers
             }
         }
 
+        public byte[] Ymm5h
+        {
+            get => Ymm5?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm5 == null)
+                    Ymm5 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm5[16 + i] = value[i];
+            }
+        }
+
         public byte[] Ymm5l
         {
             get => Xmm5;
@@ -3418,6 +3488,21 @@ namespace McFly.Core.Registers
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 32");
                 _ymm6 = value;
+            }
+        }
+
+        public byte[] Ymm6h
+        {
+            get => Ymm6?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm6 == null)
+                    Ymm6 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm6[16 + i] = value[i];
             }
         }
 
@@ -3439,6 +3524,21 @@ namespace McFly.Core.Registers
             }
         }
 
+        public byte[] Ymm7h
+        {
+            get => Ymm7?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm7 == null)
+                    Ymm7 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm7[16 + i] = value[i];
+            }
+        }
+
         public byte[] Ymm7l
         {
             get => Xmm7;
@@ -3454,6 +3554,21 @@ namespace McFly.Core.Registers
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(value)} has {value.Length} bytes but must have exactly 32");
                 _ymm8 = value;
+            }
+        }
+
+        public byte[] Ymm8h
+        {
+            get => Ymm8?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm8 == null)
+                    Ymm8 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm8[16 + i] = value[i];
             }
         }
 
@@ -3475,6 +3590,21 @@ namespace McFly.Core.Registers
             }
         }
 
+        public byte[] Ymm9h
+        {
+            get => Ymm9?.Skip(16).Take(16).ToArray();
+            set
+            {
+                if (value == null)
+                    return;
+                if (Ymm9 == null)
+                    Ymm9 = new byte[32];
+
+                for (var i = 0; i < 16; i++)
+                    Ymm9[16 + i] = value[i];
+            }
+        }
+
         public byte[] Ymm9l
         {
             get => Xmm9;
@@ -3487,6 +3617,8 @@ namespace McFly.Core.Registers
             set
             {
                 if (!value.HasValue) return;
+                if (!Efl.HasValue)
+                    Efl = 0;
                 uint mask = 0x0040;
                 if (value.Value)
                     Efl = Efl |= mask;

@@ -1075,7 +1075,137 @@ namespace McFly.Core.Test
             r.Process("ip", "1234");
             r.Ip.Should().Be(0x1234);
 
-            // 312: fl
+            r = new RegisterSet();
+            r.Process("fl", "1234");
+            r.Fl.Should().Be(0x1234);
+
+            r = new RegisterSet();
+            r.Process("al", "12");
+            r.Al.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("bl", "12");
+            r.Bl.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("cl", "12");
+            r.Cl.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("dl", "12");
+            r.Dl.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("spl", "12");
+            r.Spl.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("bpl", "12");
+            r.Bpl.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("sil", "12");
+            r.Sil.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("dil", "12");
+            r.Dil.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("r8b", "12");
+            r.R8d.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("r9b", "12");
+            r.R9d.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("r10b", "12");
+            r.R10d.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("r11b", "12");
+            r.R11d.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("r12b", "12");
+            r.R12d.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("r13b", "12");
+            r.R13d.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("r14b", "12");
+            r.R14d.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("r15b", "12");
+            r.R15d.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("ah", "12");
+            r.Ah.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("bh", "12");
+            r.Bh.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("ch", "12");
+            r.Ch.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("dh", "12");
+            r.Dh.Should().Be(0x12);
+
+            r = new RegisterSet();
+            r.Process("iopl", "3");
+            r.Iopl.Should().Be(0x3);
+
+            r = new RegisterSet();
+            r.Process("of", "1");
+            r.Of.Should().BeTrue();
+
+            r = new RegisterSet();
+            r.Process("df", "1");
+            r.Df.Should().BeTrue();
+
+            r = new RegisterSet();
+            r.Process("if", "1");
+            r.If.Should().BeTrue();
+
+            r = new RegisterSet();
+            r.Process("tf", "1");
+            r.Tf.Should().BeTrue();
+
+            r = new RegisterSet();
+            r.Process("sf", "1");
+            r.Sf.Should().BeTrue();
+
+            r = new RegisterSet();
+            r.Process("zf", "1");
+            r.Zf.Should().BeTrue();
+
+            r = new RegisterSet();
+            r.Process("af", "1");
+            r.Af.Should().BeTrue();
+
+            r = new RegisterSet();
+            r.Process("pf", "1");
+            r.Pf.Should().BeTrue();
+
+            r = new RegisterSet();
+            r.Process("cf", "1");
+            r.Cf.Should().BeTrue();
+
+            r = new RegisterSet();
+            r.Process("vip", "1");
+            r.Vip.Should().BeTrue();
+
+            r = new RegisterSet();
+            r.Process("vif", "1");
+            r.Vif.Should().BeTrue();
         }
     }
 }
