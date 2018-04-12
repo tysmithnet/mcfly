@@ -23,7 +23,7 @@ namespace McFly.Core.Registers
     /// <summary>
     ///     Represents the collection of all register values at a particular instance in time for a specific thread
     /// </summary>
-    public class RegisterSet
+    public class RegisterSet : IEquatable<RegisterSet>
     {
         private byte[] _st0;
         private byte[] _st1;
@@ -49,6 +49,174 @@ namespace McFly.Core.Registers
         private byte[] _ymm7;
         private byte[] _ymm8;
         private byte[] _ymm9;
+
+        /// <inheritdoc />
+        public bool Equals(RegisterSet other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Brfrom == other.Brfrom &&
+                   Brto == other.Brto &&
+                   Cs == other.Cs &&
+                   Dr0 == other.Dr0 &&
+                   Dr1 == other.Dr1 &&
+                   Dr2 == other.Dr2 &&
+                   Dr3 == other.Dr3 &&
+                   Dr6 == other.Dr6 &&
+                   Dr7 == other.Dr7 &&
+                   Ds == other.Ds &&
+                   Efl == other.Efl &&
+                   Es == other.Es &&
+                   Exfrom == other.Exfrom &&
+                   Exto == other.Exto &&
+                   Fpcw == other.Fpcw &&
+                   Fpsw == other.Fpsw &&
+                   Fptw == other.Fptw &&
+                   Fs == other.Fs &&
+                   Gs == other.Gs &&
+                   Mm0 == other.Mm0 &&
+                   Mm1 == other.Mm1 &&
+                   Mm2 == other.Mm2 &&
+                   Mm3 == other.Mm3 &&
+                   Mm4 == other.Mm4 &&
+                   Mm5 == other.Mm5 &&
+                   Mm6 == other.Mm6 &&
+                   Mm7 == other.Mm7 &&
+                   Mxcsr == other.Mxcsr &&
+                   St0 == other.St0 || St0 != null && other.St0 != null && St0.SequenceEqual(other.St0) &&
+                   St1 == other.St1 || St1 != null && other.St1 != null && St1.SequenceEqual(other.St1) &&
+                   St2 == other.St2 || St2 != null && other.St2 != null && St2.SequenceEqual(other.St2) &&
+                   St3 == other.St3 || St3 != null && other.St3 != null && St3.SequenceEqual(other.St3) &&
+                   St4 == other.St4 || St4 != null && other.St4 != null && St4.SequenceEqual(other.St4) &&
+                   St5 == other.St5 || St5 != null && other.St5 != null && St5.SequenceEqual(other.St5) &&
+                   St6 == other.St6 || St6 != null && other.St6 != null && St6.SequenceEqual(other.St6) &&
+                   St7 == other.St7 || St7 != null && other.St7 != null && St7.SequenceEqual(other.St7) &&
+                   R10 == other.R10 &&
+                   R11 == other.R11 &&
+                   R12 == other.R12 &&
+                   R13 == other.R13 &&
+                   R14 == other.R14 &&
+                   R15 == other.R15 &&
+                   R8 == other.R8 &&
+                   R9 == other.R9 &&
+                   Rax == other.Rax &&
+                   Rbp == other.Rbp &&
+                   Rbx == other.Rbx &&
+                   Rcx == other.Rcx &&
+                   Rdi == other.Rdi &&
+                   Rdx == other.Rdx &&
+                   Rip == other.Rip &&
+                   Rsi == other.Rsi &&
+                   Rsp == other.Rsp &&
+                   Ss == other.Ss &&
+                   Ymm0 == other.Ymm0 || Ymm0 != null && other.Ymm0 != null && Ymm0.SequenceEqual(other.Ymm0) &&
+                   Ymm1 == other.Ymm1 || Ymm1 != null && other.Ymm1 != null && Ymm1.SequenceEqual(other.Ymm1) &&
+                   Ymm2 == other.Ymm2 || Ymm2 != null && other.Ymm2 != null && Ymm2.SequenceEqual(other.Ymm2) &&
+                   Ymm3 == other.Ymm3 || Ymm3 != null && other.Ymm3 != null && Ymm3.SequenceEqual(other.Ymm3) &&
+                   Ymm4 == other.Ymm4 || Ymm4 != null && other.Ymm4 != null && Ymm4.SequenceEqual(other.Ymm4) &&
+                   Ymm5 == other.Ymm5 || Ymm5 != null && other.Ymm5 != null && Ymm5.SequenceEqual(other.Ymm5) &&
+                   Ymm6 == other.Ymm6 || Ymm6 != null && other.Ymm6 != null && Ymm6.SequenceEqual(other.Ymm6) &&
+                   Ymm7 == other.Ymm7 || Ymm7 != null && other.Ymm7 != null && Ymm7.SequenceEqual(other.Ymm7) &&
+                   Ymm8 == other.Ymm8 || Ymm8 != null && other.Ymm8 != null && Ymm8.SequenceEqual(other.Ymm8) &&
+                   Ymm9 == other.Ymm9 || Ymm9 != null && other.Ymm9 != null && Ymm9.SequenceEqual(other.Ymm9) &&
+                   Ymm10 == other.Ymm10 || Ymm10 != null && other.Ymm10 != null && Ymm10.SequenceEqual(other.Ymm10) &&
+                   Ymm11 == other.Ymm11 || Ymm11 != null && other.Ymm11 != null && Ymm11.SequenceEqual(other.Ymm11) &&
+                   Ymm12 == other.Ymm12 || Ymm12 != null && other.Ymm12 != null && Ymm12.SequenceEqual(other.Ymm12) &&
+                   Ymm13 == other.Ymm13 || Ymm13 != null && other.Ymm13 != null && Ymm13.SequenceEqual(other.Ymm13) &&
+                   Ymm14 == other.Ymm14 || Ymm14 != null && other.Ymm14 != null && Ymm14.SequenceEqual(other.Ymm14) &&
+                   Ymm15 == other.Ymm15 || Ymm15 != null && other.Ymm15 != null && Ymm15.SequenceEqual(other.Ymm15);
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((RegisterSet) obj);
+        }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = 46573 ^
+                               Brfrom?.GetHashCode() ?? 0 ^
+                               Brto?.GetHashCode() ?? 0 ^
+                               Cs?.GetHashCode() ?? 0 ^
+                               Dr0?.GetHashCode() ?? 0 ^
+                               Dr1?.GetHashCode() ?? 0 ^
+                               Dr2?.GetHashCode() ?? 0 ^
+                               Dr3?.GetHashCode() ?? 0 ^
+                               Dr6?.GetHashCode() ?? 0 ^
+                               Dr7?.GetHashCode() ?? 0 ^
+                               Ds?.GetHashCode() ?? 0 ^
+                               Efl?.GetHashCode() ?? 0 ^
+                               Es?.GetHashCode() ?? 0 ^
+                               Exfrom?.GetHashCode() ?? 0 ^
+                               Exto?.GetHashCode() ?? 0 ^
+                               Fpcw?.GetHashCode() ?? 0 ^
+                               Fpsw?.GetHashCode() ?? 0 ^
+                               Fptw?.GetHashCode() ?? 0 ^
+                               Fs?.GetHashCode() ?? 0 ^
+                               Gs?.GetHashCode() ?? 0 ^
+                               Mm0?.GetHashCode() ?? 0 ^
+                               Mm1?.GetHashCode() ?? 0 ^
+                               Mm2?.GetHashCode() ?? 0 ^
+                               Mm3?.GetHashCode() ?? 0 ^
+                               Mm4?.GetHashCode() ?? 0 ^
+                               Mm5?.GetHashCode() ?? 0 ^
+                               Mm6?.GetHashCode() ?? 0 ^
+                               Mm7?.GetHashCode() ?? 0 ^
+                               Mxcsr?.GetHashCode() ?? 0 ^
+                               R10?.GetHashCode() ?? 0 ^
+                               R11?.GetHashCode() ?? 0 ^
+                               R12?.GetHashCode() ?? 0 ^
+                               R13?.GetHashCode() ?? 0 ^
+                               R14?.GetHashCode() ?? 0 ^
+                               R15?.GetHashCode() ?? 0 ^
+                               R8?.GetHashCode() ?? 0 ^
+                               R9?.GetHashCode() ?? 0 ^
+                               Rax?.GetHashCode() ?? 0 ^
+                               Rbp?.GetHashCode() ?? 0 ^
+                               Rbx?.GetHashCode() ?? 0 ^
+                               Rcx?.GetHashCode() ?? 0 ^
+                               Rdi?.GetHashCode() ?? 0 ^
+                               Rdx?.GetHashCode() ?? 0 ^
+                               Rip?.GetHashCode() ?? 0 ^
+                               Rsi?.GetHashCode() ?? 0 ^
+                               Rsp?.GetHashCode() ?? 0 ^
+                               Ss?.GetHashCode() ?? 0;
+                St0?.ToList().ForEach(b => hashCode ^= b);
+                St1?.ToList().ForEach(b => hashCode ^= b);
+                St2?.ToList().ForEach(b => hashCode ^= b);
+                St3?.ToList().ForEach(b => hashCode ^= b);
+                St4?.ToList().ForEach(b => hashCode ^= b);
+                St5?.ToList().ForEach(b => hashCode ^= b);
+                St6?.ToList().ForEach(b => hashCode ^= b);
+                St7?.ToList().ForEach(b => hashCode ^= b);
+                Ymm0?.ToList().ForEach(b => hashCode ^= b);
+                Ymm1?.ToList().ForEach(b => hashCode ^= b);
+                Ymm2?.ToList().ForEach(b => hashCode ^= b);
+                Ymm3?.ToList().ForEach(b => hashCode ^= b);
+                Ymm4?.ToList().ForEach(b => hashCode ^= b);
+                Ymm5?.ToList().ForEach(b => hashCode ^= b);
+                Ymm6?.ToList().ForEach(b => hashCode ^= b);
+                Ymm7?.ToList().ForEach(b => hashCode ^= b);
+                Ymm8?.ToList().ForEach(b => hashCode ^= b);
+                Ymm9?.ToList().ForEach(b => hashCode ^= b);
+                Ymm10?.ToList().ForEach(b => hashCode ^= b);
+                Ymm11?.ToList().ForEach(b => hashCode ^= b);
+                Ymm12?.ToList().ForEach(b => hashCode ^= b);
+                Ymm13?.ToList().ForEach(b => hashCode ^= b);
+                Ymm14?.ToList().ForEach(b => hashCode ^= b);
+                Ymm15?.ToList().ForEach(b => hashCode ^= b);
+
+
+                return hashCode;
+            }
+        }
 
         /// <summary>
         ///     Interprets the arguments as changes to the register set
@@ -939,132 +1107,132 @@ namespace McFly.Core.Registers
                     break;
                 }
                 case "ymm0l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm0l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm0l = bytes;
+                    break;
+                }
 
                 case "ymm1l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm1l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm1l = bytes;
+                    break;
+                }
 
                 case "ymm2l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm2l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm2l = bytes;
+                    break;
+                }
 
                 case "ymm3l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm3l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm3l = bytes;
+                    break;
+                }
 
                 case "ymm4l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm4l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm4l = bytes;
+                    break;
+                }
 
                 case "ymm5l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm5l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm5l = bytes;
+                    break;
+                }
 
                 case "ymm6l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm6l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm6l = bytes;
+                    break;
+                }
 
                 case "ymm7l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm7l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm7l = bytes;
+                    break;
+                }
 
                 case "ymm8l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm8l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm8l = bytes;
+                    break;
+                }
 
                 case "ymm9l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm9l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm9l = bytes;
+                    break;
+                }
 
                 case "ymm10l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm10l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm10l = bytes;
+                    break;
+                }
 
                 case "ymm11l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm11l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm11l = bytes;
+                    break;
+                }
 
                 case "ymm12l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm12l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm12l = bytes;
+                    break;
+                }
 
                 case "ymm13l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm13l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm13l = bytes;
+                    break;
+                }
 
                 case "ymm14l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm14l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm14l = bytes;
+                    break;
+                }
 
                 case "ymm15l":
-                    {
-                        var stripped = Regex.Replace(input, @"\s*", "");
-                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
-                        Ymm15l = bytes;
-                        break;
-                    }
+                {
+                    var stripped = Regex.Replace(input, @"\s*", "");
+                    var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                    Ymm15l = bytes;
+                    break;
+                }
                 case "exfrom":
 
                     Exfrom = Convert.ToUInt64(input, 16);
@@ -1322,6 +1490,7 @@ namespace McFly.Core.Registers
                         $"{nameof(register)} has a value of {register} which is not a valid register");
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1355,6 +1524,7 @@ namespace McFly.Core.Registers
                 Ax = Ax?.Hi8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1369,6 +1539,7 @@ namespace McFly.Core.Registers
                 Ax = Ax?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1383,6 +1554,7 @@ namespace McFly.Core.Registers
                 Eax = Eax?.Lo16(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1397,6 +1569,7 @@ namespace McFly.Core.Registers
                 Bx = Bx?.Hi8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1411,6 +1584,7 @@ namespace McFly.Core.Registers
                 Bx = Bx?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1425,6 +1599,7 @@ namespace McFly.Core.Registers
                 Ebp = Ebp?.Lo16(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1442,6 +1617,7 @@ namespace McFly.Core.Registers
 
         public ulong? Brfrom { get; set; }
         public ulong? Brto { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1456,6 +1632,7 @@ namespace McFly.Core.Registers
                 Ebx = Ebx?.Lo16(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1474,6 +1651,7 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1488,6 +1666,7 @@ namespace McFly.Core.Registers
                 Cx = Cx?.Hi8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1504,6 +1683,7 @@ namespace McFly.Core.Registers
         }
 
         public ushort? Cs { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1518,6 +1698,7 @@ namespace McFly.Core.Registers
                 Ecx = Ecx?.Lo16(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1536,6 +1717,7 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1550,6 +1732,7 @@ namespace McFly.Core.Registers
                 Dx = Dx?.Hi8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1564,6 +1747,7 @@ namespace McFly.Core.Registers
                 Edi = Edi?.Lo16(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1578,6 +1762,7 @@ namespace McFly.Core.Registers
                 Di = Di?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1600,6 +1785,7 @@ namespace McFly.Core.Registers
         public ulong? Dr6 { get; set; }
         public ulong? Dr7 { get; set; }
         public ushort? Ds { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1614,6 +1800,7 @@ namespace McFly.Core.Registers
                 Edx = Edx?.Lo16(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1628,6 +1815,7 @@ namespace McFly.Core.Registers
                 Rax = Rax?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1642,6 +1830,7 @@ namespace McFly.Core.Registers
                 Rbp = Rbp?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1656,6 +1845,7 @@ namespace McFly.Core.Registers
                 Rbx = Rbx?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1670,6 +1860,7 @@ namespace McFly.Core.Registers
                 Rcx = Rcx?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1684,6 +1875,7 @@ namespace McFly.Core.Registers
                 Rdi = Rdi?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1700,6 +1892,7 @@ namespace McFly.Core.Registers
         }
 
         public uint? Efl { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1716,6 +1909,7 @@ namespace McFly.Core.Registers
         }
 
         public ushort? Es { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1730,6 +1924,7 @@ namespace McFly.Core.Registers
                 Rsi = Rsi?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1747,6 +1942,7 @@ namespace McFly.Core.Registers
 
         public ulong? Exfrom { get; set; }
         public ulong? Exto { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1767,6 +1963,7 @@ namespace McFly.Core.Registers
         public ushort? Fptw { get; set; }
         public ushort? Fs { get; set; }
         public ushort? Gs { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1785,22 +1982,24 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
         public byte? Iopl
         {
-            get => Efl.HasValue ? (byte?)((Efl & 0x3000) >> 12) : null;
+            get => Efl.HasValue ? (byte?) ((Efl & 0x3000) >> 12) : null;
             set
             {
                 if (!value.HasValue)
                     return;
                 if (Efl == null)
                     Efl = 0;
-                Efl &= unchecked((uint)~12288);
+                Efl &= unchecked((uint) ~12288);
                 Efl |= (uint) (value.Value << 12);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1844,6 +2043,7 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1864,6 +2064,7 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R10 { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1878,6 +2079,7 @@ namespace McFly.Core.Registers
                 R10w = R10w?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1892,6 +2094,7 @@ namespace McFly.Core.Registers
                 R10 = R10?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1908,6 +2111,7 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R11 { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1922,6 +2126,7 @@ namespace McFly.Core.Registers
                 R11w = R11w?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1936,6 +2141,7 @@ namespace McFly.Core.Registers
                 R11 = R11?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1952,6 +2158,7 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R12 { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1966,6 +2173,7 @@ namespace McFly.Core.Registers
                 R12w = R12w?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1980,6 +2188,7 @@ namespace McFly.Core.Registers
                 R12 = R12?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1996,6 +2205,7 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R13 { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2010,6 +2220,7 @@ namespace McFly.Core.Registers
                 R13w = R13w?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2024,6 +2235,7 @@ namespace McFly.Core.Registers
                 R13 = R13?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2040,6 +2252,7 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R14 { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2054,6 +2267,7 @@ namespace McFly.Core.Registers
                 R14w = R14w?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2068,6 +2282,7 @@ namespace McFly.Core.Registers
                 R14 = R14?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2084,6 +2299,7 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R15 { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2098,6 +2314,7 @@ namespace McFly.Core.Registers
                 R15w = R15w?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2112,6 +2329,7 @@ namespace McFly.Core.Registers
                 R15 = R15?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2129,6 +2347,7 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R8 { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2143,6 +2362,7 @@ namespace McFly.Core.Registers
                 R8w = R8w?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2157,6 +2377,7 @@ namespace McFly.Core.Registers
                 R8 = R8?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2173,6 +2394,7 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R9 { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2187,6 +2409,7 @@ namespace McFly.Core.Registers
                 R9w = R9w?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2201,6 +2424,7 @@ namespace McFly.Core.Registers
                 R9 = R9?.Lo32(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2225,6 +2449,7 @@ namespace McFly.Core.Registers
         public ulong? Rip { get; set; }
         public ulong? Rsi { get; set; }
         public ulong? Rsp { get; set; }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2243,6 +2468,7 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2257,6 +2483,7 @@ namespace McFly.Core.Registers
                 Esi = Esi?.Lo16(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2271,6 +2498,7 @@ namespace McFly.Core.Registers
                 Si = Si?.Lo8(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2285,6 +2513,7 @@ namespace McFly.Core.Registers
                 Esp = Esp?.Lo16(value.Value);
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2397,6 +2626,7 @@ namespace McFly.Core.Registers
                 _st7 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2415,6 +2645,7 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2433,6 +2664,7 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2451,6 +2683,7 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2470,6 +2703,7 @@ namespace McFly.Core.Registers
                     Ymm0[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2487,6 +2721,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm0[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2505,6 +2740,7 @@ namespace McFly.Core.Registers
                     Ymm0[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2524,6 +2760,7 @@ namespace McFly.Core.Registers
                     Ymm1[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2543,6 +2780,7 @@ namespace McFly.Core.Registers
                     Ymm10[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2560,6 +2798,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm10[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2578,6 +2817,7 @@ namespace McFly.Core.Registers
                     Ymm10[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2597,6 +2837,7 @@ namespace McFly.Core.Registers
                     Ymm11[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2614,6 +2855,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm11[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2632,6 +2874,7 @@ namespace McFly.Core.Registers
                     Ymm11[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2651,6 +2894,7 @@ namespace McFly.Core.Registers
                     Ymm12[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2668,6 +2912,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm12[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2686,6 +2931,7 @@ namespace McFly.Core.Registers
                     Ymm12[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2705,6 +2951,7 @@ namespace McFly.Core.Registers
                     Ymm13[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2722,6 +2969,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm13[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2740,6 +2988,7 @@ namespace McFly.Core.Registers
                     Ymm13[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2759,6 +3008,7 @@ namespace McFly.Core.Registers
                     Ymm14[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2776,6 +3026,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm14[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2794,6 +3045,7 @@ namespace McFly.Core.Registers
                     Ymm14[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2813,6 +3065,7 @@ namespace McFly.Core.Registers
                     Ymm15[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2830,6 +3083,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm15[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2848,6 +3102,7 @@ namespace McFly.Core.Registers
                     Ymm15[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2865,6 +3120,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm1[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2883,6 +3139,7 @@ namespace McFly.Core.Registers
                     Ymm1[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2902,6 +3159,7 @@ namespace McFly.Core.Registers
                     Ymm2[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2919,6 +3177,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm2[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2937,6 +3196,7 @@ namespace McFly.Core.Registers
                     Ymm2[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2956,6 +3216,7 @@ namespace McFly.Core.Registers
                     Ymm3[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2973,6 +3234,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm3[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2991,6 +3253,7 @@ namespace McFly.Core.Registers
                     Ymm3[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3010,6 +3273,7 @@ namespace McFly.Core.Registers
                     Ymm4[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3027,6 +3291,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm4[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3045,6 +3310,7 @@ namespace McFly.Core.Registers
                     Ymm4[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3064,6 +3330,7 @@ namespace McFly.Core.Registers
                     Ymm5[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3081,6 +3348,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm5[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3099,6 +3367,7 @@ namespace McFly.Core.Registers
                     Ymm5[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3118,6 +3387,7 @@ namespace McFly.Core.Registers
                     Ymm6[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3135,6 +3405,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm6[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3153,6 +3424,7 @@ namespace McFly.Core.Registers
                     Ymm6[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3172,6 +3444,7 @@ namespace McFly.Core.Registers
                     Ymm7[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3189,6 +3462,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm7[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3207,6 +3481,7 @@ namespace McFly.Core.Registers
                     Ymm7[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3226,6 +3501,7 @@ namespace McFly.Core.Registers
                     Ymm8[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3243,6 +3519,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm8[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3261,6 +3538,7 @@ namespace McFly.Core.Registers
                     Ymm8[i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3280,6 +3558,7 @@ namespace McFly.Core.Registers
                     Ymm9[i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3297,6 +3576,7 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm9[8 + i] = bytes[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3327,6 +3607,7 @@ namespace McFly.Core.Registers
                 _ymm0 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3344,6 +3625,7 @@ namespace McFly.Core.Registers
                     Ymm0[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3376,6 +3658,7 @@ namespace McFly.Core.Registers
                 _ymm10 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3393,6 +3676,7 @@ namespace McFly.Core.Registers
                     Ymm10[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3413,6 +3697,7 @@ namespace McFly.Core.Registers
                 _ymm11 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3430,6 +3715,7 @@ namespace McFly.Core.Registers
                     Ymm11[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3450,6 +3736,7 @@ namespace McFly.Core.Registers
                 _ymm12 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3467,6 +3754,7 @@ namespace McFly.Core.Registers
                     Ymm12[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3487,6 +3775,7 @@ namespace McFly.Core.Registers
                 _ymm13 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3504,6 +3793,7 @@ namespace McFly.Core.Registers
                     Ymm13[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3524,6 +3814,7 @@ namespace McFly.Core.Registers
                 _ymm14 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3541,6 +3832,7 @@ namespace McFly.Core.Registers
                     Ymm14[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3561,6 +3853,7 @@ namespace McFly.Core.Registers
                 _ymm15 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3578,6 +3871,7 @@ namespace McFly.Core.Registers
                     Ymm15[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3586,6 +3880,7 @@ namespace McFly.Core.Registers
             get => Xmm15;
             set => Xmm15 = value;
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3603,6 +3898,7 @@ namespace McFly.Core.Registers
                     Ymm1[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3623,6 +3919,7 @@ namespace McFly.Core.Registers
                 _ymm2 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3640,6 +3937,7 @@ namespace McFly.Core.Registers
                     Ymm2[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3660,6 +3958,7 @@ namespace McFly.Core.Registers
                 _ymm3 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3677,6 +3976,7 @@ namespace McFly.Core.Registers
                     Ymm3[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3697,6 +3997,7 @@ namespace McFly.Core.Registers
                 _ymm4 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3714,6 +4015,7 @@ namespace McFly.Core.Registers
                     Ymm4[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3734,6 +4036,7 @@ namespace McFly.Core.Registers
                 _ymm5 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3751,6 +4054,7 @@ namespace McFly.Core.Registers
                     Ymm5[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3771,6 +4075,7 @@ namespace McFly.Core.Registers
                 _ymm6 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3788,6 +4093,7 @@ namespace McFly.Core.Registers
                     Ymm6[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3808,6 +4114,7 @@ namespace McFly.Core.Registers
                 _ymm7 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3825,6 +4132,7 @@ namespace McFly.Core.Registers
                     Ymm7[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3845,6 +4153,7 @@ namespace McFly.Core.Registers
                 _ymm8 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3862,6 +4171,7 @@ namespace McFly.Core.Registers
                     Ymm8[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3882,6 +4192,7 @@ namespace McFly.Core.Registers
                 _ymm9 = value;
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3899,6 +4210,7 @@ namespace McFly.Core.Registers
                     Ymm9[16 + i] = value[i];
             }
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -3907,6 +4219,7 @@ namespace McFly.Core.Registers
             get => Xmm9;
             set => Xmm9 = value;
         }
+
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
