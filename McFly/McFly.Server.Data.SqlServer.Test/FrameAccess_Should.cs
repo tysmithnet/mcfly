@@ -192,7 +192,7 @@ namespace McFly.Server.Data.SqlServer.Test
                 Rdx = ((ulong)4).ToHexString(),
                 DisassemblyNote = "r9,r8",
                 Rip = ((ulong)90).ToHexString(),
-                OpCode = new byte[] {0x10, 0x20},
+                OpCode = "1020",
                 OpCodeMnemonic = "mov",
                 StackFrames = new List<StackFrameEntity>
                 {

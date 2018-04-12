@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace McFly.Core
@@ -55,8 +56,10 @@ namespace McFly.Core
         ///     or
         ///     hex
         /// </exception>
-        public static byte[] StringToByteArray(string hex)
+        public static byte[] StringToByteArray(string hex, bool isLittleEndian = false)
         {
+            if (hex == null)
+                return null;
             if (string.IsNullOrWhiteSpace(hex))
                 return new byte[0];
             var match = Regex.Match(hex, @"^\s*(0x)?(?<bytes>[a-f0-9]+)\s*$", RegexOptions.IgnoreCase);
@@ -70,7 +73,7 @@ namespace McFly.Core
             var bytes = new byte[numberChars / 2];
             for (var i = 0; i < numberChars; i += 2)
                 bytes[i / 2] = Convert.ToByte(byteString.Substring(i, 2), 16);
-            return bytes;
+            return isLittleEndian ? bytes.Reverse().ToArray() : bytes;
         }
 
         /// <summary>

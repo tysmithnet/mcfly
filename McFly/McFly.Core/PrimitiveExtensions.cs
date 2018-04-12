@@ -14,6 +14,7 @@
 
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace McFly.Core
 {
@@ -30,6 +31,26 @@ namespace McFly.Core
         public static long ToLong(this string hexString)
         {
             return long.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static uint ToUInt(this string hexString)
+        {
+            return uint.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static int Toint(this string hexString)
+        {
+            return int.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static ushort ToUShort(this string hexString)
+        {
+            return ushort.Parse(hexString, NumberStyles.HexNumber);
+        }
+
+        public static short ToShort(this string hexString)
+        {
+            return short.Parse(hexString, NumberStyles.HexNumber);
         }
 
         public static string ToHexString(this ulong ulongValue)
@@ -50,6 +71,33 @@ namespace McFly.Core
         public static string ToHexString(this long? longValue)
         {
             return longValue.HasValue ? $"{longValue:X16}" : null;
+        }
+
+        public static string ToHexString(this ushort? ushortValue)
+        {
+            return ushortValue.HasValue ? $"{ushortValue:X4}" : null;
+        }
+
+        public static string ToHexString(this ushort ushortValue)
+        {
+            return $"{ushortValue:X4}";
+        }
+
+        public static string ToHexString(this uint uintValue)
+        {
+            return $"{uintValue:X8}";
+        }
+
+        public static string ToHexString(this uint? uintValue)
+        {
+            return uintValue.HasValue ? $"{uintValue:X8}" : null;
+        }
+
+        public static string ToHexString(this byte[] byteArray, bool isLittleEndian = false)
+        {
+            if (byteArray == null)
+                return null;
+            return string.Join("", isLittleEndian ? byteArray.Select(x => $"{x:2}").Reverse() : byteArray.Select(x => $"{x:2}"));
         }
 
         /// <summary>
