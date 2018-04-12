@@ -15,6 +15,8 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace McFly.Core.Registers
 {
@@ -1320,7 +1322,9 @@ namespace McFly.Core.Registers
                         $"{nameof(register)} has a value of {register} which is not a valid register");
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public bool? Af
         {
             get => Efl.HasValue ? (bool?) ((Efl & 0x0010) > 0) : null;
@@ -1337,6 +1341,9 @@ namespace McFly.Core.Registers
             }
         }
 
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Ah
         {
             get => Ax?.Hi8();
@@ -1348,7 +1355,9 @@ namespace McFly.Core.Registers
                 Ax = Ax?.Hi8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Al
         {
             get => Ax?.Lo8();
@@ -1360,7 +1369,9 @@ namespace McFly.Core.Registers
                 Ax = Ax?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? Ax
         {
             get => Eax?.Lo16();
@@ -1372,7 +1383,9 @@ namespace McFly.Core.Registers
                 Eax = Eax?.Lo16(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Bh
         {
             get => Bx?.Hi8();
@@ -1384,7 +1397,9 @@ namespace McFly.Core.Registers
                 Bx = Bx?.Hi8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Bl
         {
             get => Bx?.Lo8();
@@ -1396,7 +1411,9 @@ namespace McFly.Core.Registers
                 Bx = Bx?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? Bp
         {
             get => Ebp?.Lo16();
@@ -1408,7 +1425,9 @@ namespace McFly.Core.Registers
                 Ebp = Ebp?.Lo16(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Bpl
         {
             get => Bp?.Lo8();
@@ -1423,7 +1442,9 @@ namespace McFly.Core.Registers
 
         public ulong? Brfrom { get; set; }
         public ulong? Brto { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? Bx
         {
             get => Ebx?.Lo16();
@@ -1435,7 +1456,9 @@ namespace McFly.Core.Registers
                 Ebx = Ebx?.Lo16(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public bool? Cf
         {
             get => Efl.HasValue ? (bool?) ((Efl & 0x0001) > 0) : null;
@@ -1451,7 +1474,9 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Ch
         {
             get => Cx?.Hi8();
@@ -1463,7 +1488,9 @@ namespace McFly.Core.Registers
                 Cx = Cx?.Hi8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Cl
         {
             get => Cx?.Lo8();
@@ -1477,7 +1504,9 @@ namespace McFly.Core.Registers
         }
 
         public ushort? Cs { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? Cx
         {
             get => Ecx?.Lo16();
@@ -1489,7 +1518,9 @@ namespace McFly.Core.Registers
                 Ecx = Ecx?.Lo16(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public bool? Df
         {
             get => Efl.HasValue ? (bool?) ((Efl & 0x0400) > 0) : null;
@@ -1505,7 +1536,9 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Dh
         {
             get => Dx?.Hi8();
@@ -1517,7 +1550,9 @@ namespace McFly.Core.Registers
                 Dx = Dx?.Hi8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? Di
         {
             get => Edi?.Lo16();
@@ -1529,7 +1564,9 @@ namespace McFly.Core.Registers
                 Edi = Edi?.Lo16(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Dil
         {
             get => Di?.Lo8();
@@ -1541,7 +1578,9 @@ namespace McFly.Core.Registers
                 Di = Di?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Dl
         {
             get => Dx?.Lo8();
@@ -1561,7 +1600,9 @@ namespace McFly.Core.Registers
         public ulong? Dr6 { get; set; }
         public ulong? Dr7 { get; set; }
         public ushort? Ds { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? Dx
         {
             get => Edx?.Lo16();
@@ -1573,7 +1614,9 @@ namespace McFly.Core.Registers
                 Edx = Edx?.Lo16(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? Eax
         {
             get => Rax?.Lo32();
@@ -1585,7 +1628,9 @@ namespace McFly.Core.Registers
                 Rax = Rax?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? Ebp
         {
             get => Rbp?.Lo32();
@@ -1597,7 +1642,9 @@ namespace McFly.Core.Registers
                 Rbp = Rbp?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? Ebx
         {
             get => Rbx?.Lo32();
@@ -1609,7 +1656,9 @@ namespace McFly.Core.Registers
                 Rbx = Rbx?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? Ecx
         {
             get => Rcx?.Lo32();
@@ -1621,7 +1670,9 @@ namespace McFly.Core.Registers
                 Rcx = Rcx?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? Edi
         {
             get => Rdi?.Lo32();
@@ -1633,7 +1684,9 @@ namespace McFly.Core.Registers
                 Rdi = Rdi?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? Edx
         {
             get => Rdx?.Lo32();
@@ -1647,7 +1700,9 @@ namespace McFly.Core.Registers
         }
 
         public uint? Efl { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? Eip
         {
             get => Rip?.Lo32();
@@ -1661,7 +1716,9 @@ namespace McFly.Core.Registers
         }
 
         public ushort? Es { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? Esi
         {
             get => Rsi?.Lo32();
@@ -1673,7 +1730,9 @@ namespace McFly.Core.Registers
                 Rsi = Rsi?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? Esp
         {
             get => Rsp?.Lo32();
@@ -1688,7 +1747,9 @@ namespace McFly.Core.Registers
 
         public ulong? Exfrom { get; set; }
         public ulong? Exto { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? Fl
         {
             get => Efl?.Lo16();
@@ -1706,7 +1767,9 @@ namespace McFly.Core.Registers
         public ushort? Fptw { get; set; }
         public ushort? Fs { get; set; }
         public ushort? Gs { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public bool? If
         {
             get => Efl.HasValue ? (bool?) ((Efl & 0x0200) > 0) : null;
@@ -1722,7 +1785,9 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Iopl
         {
             get => Efl.HasValue ? (byte?)((Efl & 0x3000) >> 12) : null;
@@ -1736,7 +1801,9 @@ namespace McFly.Core.Registers
                 Efl |= (uint) (value.Value << 12);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? Ip
         {
             get => Eip?.Lo16();
@@ -1759,6 +1826,9 @@ namespace McFly.Core.Registers
         public ulong? Mm7 { get; set; }
         public uint? Mxcsr { get; set; }
 
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public bool? Of
         {
             get => Efl.HasValue ? (bool?) ((Efl & 0x0800) > 0) : null;
@@ -1774,7 +1844,9 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public bool? Pf
         {
             get => Efl.HasValue ? (bool?) ((Efl & 0x0004) > 0) : null;
@@ -1792,7 +1864,9 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R10 { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? R10b
         {
             get => R10w?.Lo8();
@@ -1804,7 +1878,9 @@ namespace McFly.Core.Registers
                 R10w = R10w?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? R10d
         {
             get => R10?.Lo32();
@@ -1816,7 +1892,9 @@ namespace McFly.Core.Registers
                 R10 = R10?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? R10w
         {
             get => R10d?.Lo16();
@@ -1830,7 +1908,9 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R11 { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? R11b
         {
             get => R11w?.Lo8();
@@ -1842,7 +1922,9 @@ namespace McFly.Core.Registers
                 R11w = R11w?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? R11d
         {
             get => R11?.Lo32();
@@ -1854,7 +1936,9 @@ namespace McFly.Core.Registers
                 R11 = R11?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? R11w
         {
             get => R11d?.Lo16();
@@ -1868,7 +1952,9 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R12 { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? R12b
         {
             get => R12w?.Lo8();
@@ -1880,7 +1966,9 @@ namespace McFly.Core.Registers
                 R12w = R12w?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? R12d
         {
             get => R12?.Lo32();
@@ -1892,7 +1980,9 @@ namespace McFly.Core.Registers
                 R12 = R12?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? R12w
         {
             get => R12d?.Lo16();
@@ -1906,7 +1996,9 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R13 { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? R13b
         {
             get => R13w?.Lo8();
@@ -1918,7 +2010,9 @@ namespace McFly.Core.Registers
                 R13w = R13w?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? R13d
         {
             get => R13?.Lo32();
@@ -1930,7 +2024,9 @@ namespace McFly.Core.Registers
                 R13 = R13?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? R13w
         {
             get => R13d?.Lo16();
@@ -1944,7 +2040,9 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R14 { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? R14b
         {
             get => R14w?.Lo8();
@@ -1956,7 +2054,9 @@ namespace McFly.Core.Registers
                 R14w = R14w?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? R14d
         {
             get => R14?.Lo32();
@@ -1968,7 +2068,9 @@ namespace McFly.Core.Registers
                 R14 = R14?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? R14w
         {
             get => R14d?.Lo16();
@@ -1982,7 +2084,9 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R15 { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? R15b
         {
             get => R15w?.Lo8();
@@ -1994,7 +2098,9 @@ namespace McFly.Core.Registers
                 R15w = R15w?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? R15d
         {
             get => R15?.Lo32();
@@ -2006,6 +2112,9 @@ namespace McFly.Core.Registers
                 R15 = R15?.Lo32(value.Value);
             }
         }
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
 
         public ushort? R15w
         {
@@ -2020,7 +2129,9 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R8 { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? R8b
         {
             get => R8w?.Lo8();
@@ -2032,7 +2143,9 @@ namespace McFly.Core.Registers
                 R8w = R8w?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? R8d
         {
             get => R8?.Lo32();
@@ -2044,7 +2157,9 @@ namespace McFly.Core.Registers
                 R8 = R8?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? R8w
         {
             get => R8d?.Lo16();
@@ -2058,7 +2173,9 @@ namespace McFly.Core.Registers
         }
 
         public ulong? R9 { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? R9b
         {
             get => R9w?.Lo8();
@@ -2070,7 +2187,9 @@ namespace McFly.Core.Registers
                 R9w = R9w?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public uint? R9d
         {
             get => R9?.Lo32();
@@ -2082,7 +2201,9 @@ namespace McFly.Core.Registers
                 R9 = R9?.Lo32(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? R9w
         {
             get => R9d?.Lo16();
@@ -2104,7 +2225,9 @@ namespace McFly.Core.Registers
         public ulong? Rip { get; set; }
         public ulong? Rsi { get; set; }
         public ulong? Rsp { get; set; }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public bool? Sf
         {
             get => Efl.HasValue ? (bool?) ((Efl & 0x0080) > 0) : null;
@@ -2120,7 +2243,9 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? Si
         {
             get => Esi?.Lo16();
@@ -2132,7 +2257,9 @@ namespace McFly.Core.Registers
                 Esi = Esi?.Lo16(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Sil
         {
             get => Si?.Lo8();
@@ -2144,7 +2271,9 @@ namespace McFly.Core.Registers
                 Si = Si?.Lo8(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ushort? Sp
         {
             get => Esp?.Lo16();
@@ -2156,7 +2285,9 @@ namespace McFly.Core.Registers
                 Esp = Esp?.Lo16(value.Value);
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte? Spl
         {
             get => Sp?.Lo8();
@@ -2266,7 +2397,9 @@ namespace McFly.Core.Registers
                 _st7 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public bool? Tf
         {
             get => Efl.HasValue ? (bool?) ((Efl & 0x0100) > 0) : null;
@@ -2282,7 +2415,9 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public bool? Vif
         {
             get => Efl.HasValue ? (bool?) ((Efl & 0x00080000) > 0) : null;
@@ -2298,7 +2433,9 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public bool? Vip
         {
             get => Efl.HasValue ? (bool?) ((Efl & 0x00100000) > 0) : null;
@@ -2314,7 +2451,9 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm0
         {
             get => Ymm0?.Take(16).ToArray();
@@ -2331,7 +2470,9 @@ namespace McFly.Core.Registers
                     Ymm0[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm0h
         {
             get => Ymm0 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm0, 8);
@@ -2346,7 +2487,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm0[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm0l
         {
             get => Ymm0 != null ? (ulong?) BitConverter.ToUInt64(Ymm0, 0) : null;
@@ -2362,7 +2505,9 @@ namespace McFly.Core.Registers
                     Ymm0[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm1
         {
             get => Ymm1?.Take(16).ToArray();
@@ -2379,7 +2524,9 @@ namespace McFly.Core.Registers
                     Ymm1[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm10
         {
             get => Ymm10?.Take(16).ToArray();
@@ -2396,7 +2543,9 @@ namespace McFly.Core.Registers
                     Ymm10[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm10h
         {
             get => Ymm10 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm10, 8);
@@ -2411,7 +2560,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm10[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm10l
         {
             get => Ymm10 != null ? (ulong?) BitConverter.ToUInt64(Ymm10, 0) : null;
@@ -2427,7 +2578,9 @@ namespace McFly.Core.Registers
                     Ymm10[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm11
         {
             get => Ymm11?.Take(16).ToArray();
@@ -2444,7 +2597,9 @@ namespace McFly.Core.Registers
                     Ymm11[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm11h
         {
             get => Ymm11 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm11, 8);
@@ -2459,7 +2614,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm11[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm11l
         {
             get => Ymm11 != null ? (ulong?) BitConverter.ToUInt64(Ymm11, 0) : null;
@@ -2475,7 +2632,9 @@ namespace McFly.Core.Registers
                     Ymm11[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm12
         {
             get => Ymm12?.Take(16).ToArray();
@@ -2492,7 +2651,9 @@ namespace McFly.Core.Registers
                     Ymm12[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm12h
         {
             get => Ymm12 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm12, 8);
@@ -2507,7 +2668,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm12[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm12l
         {
             get => Ymm12 != null ? (ulong?) BitConverter.ToUInt64(Ymm12, 0) : null;
@@ -2523,7 +2686,9 @@ namespace McFly.Core.Registers
                     Ymm12[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm13
         {
             get => Ymm13?.Take(16).ToArray();
@@ -2540,7 +2705,9 @@ namespace McFly.Core.Registers
                     Ymm13[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm13h
         {
             get => Ymm13 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm13, 8);
@@ -2555,7 +2722,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm13[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm13l
         {
             get => Ymm13 != null ? (ulong?) BitConverter.ToUInt64(Ymm13, 0) : null;
@@ -2571,7 +2740,9 @@ namespace McFly.Core.Registers
                     Ymm13[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm14
         {
             get => Ymm14?.Take(16).ToArray();
@@ -2588,7 +2759,9 @@ namespace McFly.Core.Registers
                     Ymm14[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm14h
         {
             get => Ymm14 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm14, 8);
@@ -2603,7 +2776,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm14[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm14l
         {
             get => Ymm14 != null ? (ulong?) BitConverter.ToUInt64(Ymm14, 0) : null;
@@ -2619,7 +2794,9 @@ namespace McFly.Core.Registers
                     Ymm14[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm15
         {
             get => Ymm15?.Take(16).ToArray();
@@ -2636,7 +2813,9 @@ namespace McFly.Core.Registers
                     Ymm15[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm15h
         {
             get => Ymm15 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm15, 8);
@@ -2651,7 +2830,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm15[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm15l
         {
             get => Ymm15 != null ? (ulong?) BitConverter.ToUInt64(Ymm15, 0) : null;
@@ -2667,7 +2848,9 @@ namespace McFly.Core.Registers
                     Ymm15[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm1h
         {
             get => Ymm1 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm1, 8);
@@ -2682,7 +2865,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm1[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm1l
         {
             get => Ymm1 != null ? (ulong?) BitConverter.ToUInt64(Ymm1, 0) : null;
@@ -2698,7 +2883,9 @@ namespace McFly.Core.Registers
                     Ymm1[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm2
         {
             get => Ymm2?.Take(16).ToArray();
@@ -2715,7 +2902,9 @@ namespace McFly.Core.Registers
                     Ymm2[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm2h
         {
             get => Ymm2 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm2, 8);
@@ -2730,7 +2919,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm2[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm2l
         {
             get => Ymm2 != null ? (ulong?) BitConverter.ToUInt64(Ymm2, 0) : null;
@@ -2746,7 +2937,9 @@ namespace McFly.Core.Registers
                     Ymm2[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm3
         {
             get => Ymm3?.Take(16).ToArray();
@@ -2763,7 +2956,9 @@ namespace McFly.Core.Registers
                     Ymm3[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm3h
         {
             get => Ymm3 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm3, 8);
@@ -2778,7 +2973,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm3[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm3l
         {
             get => Ymm3 != null ? (ulong?) BitConverter.ToUInt64(Ymm3, 0) : null;
@@ -2794,7 +2991,9 @@ namespace McFly.Core.Registers
                     Ymm3[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm4
         {
             get => Ymm4?.Take(16).ToArray();
@@ -2811,7 +3010,9 @@ namespace McFly.Core.Registers
                     Ymm4[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm4h
         {
             get => Ymm4 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm4, 8);
@@ -2826,7 +3027,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm4[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm4l
         {
             get => Ymm4 != null ? (ulong?) BitConverter.ToUInt64(Ymm4, 0) : null;
@@ -2842,7 +3045,9 @@ namespace McFly.Core.Registers
                     Ymm4[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm5
         {
             get => Ymm5?.Take(16).ToArray();
@@ -2859,7 +3064,9 @@ namespace McFly.Core.Registers
                     Ymm5[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm5h
         {
             get => Ymm5 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm5, 8);
@@ -2874,7 +3081,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm5[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm5l
         {
             get => Ymm5 != null ? (ulong?) BitConverter.ToUInt64(Ymm5, 0) : null;
@@ -2890,7 +3099,9 @@ namespace McFly.Core.Registers
                     Ymm5[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm6
         {
             get => Ymm6?.Take(16).ToArray();
@@ -2907,7 +3118,9 @@ namespace McFly.Core.Registers
                     Ymm6[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm6h
         {
             get => Ymm6 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm6, 8);
@@ -2922,7 +3135,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm6[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm6l
         {
             get => Ymm6 != null ? (ulong?) BitConverter.ToUInt64(Ymm6, 0) : null;
@@ -2938,7 +3153,9 @@ namespace McFly.Core.Registers
                     Ymm6[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm7
         {
             get => Ymm7?.Take(16).ToArray();
@@ -2955,7 +3172,9 @@ namespace McFly.Core.Registers
                     Ymm7[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm7h
         {
             get => Ymm7 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm7, 8);
@@ -2970,7 +3189,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm7[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm7l
         {
             get => Ymm7 != null ? (ulong?) BitConverter.ToUInt64(Ymm7, 0) : null;
@@ -2986,7 +3207,9 @@ namespace McFly.Core.Registers
                     Ymm7[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm8
         {
             get => Ymm8?.Take(16).ToArray();
@@ -3003,7 +3226,9 @@ namespace McFly.Core.Registers
                     Ymm8[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm8h
         {
             get => Ymm8 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm8, 8);
@@ -3018,7 +3243,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm8[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm8l
         {
             get => Ymm8 != null ? (ulong?) BitConverter.ToUInt64(Ymm8, 0) : null;
@@ -3034,7 +3261,9 @@ namespace McFly.Core.Registers
                     Ymm8[i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Xmm9
         {
             get => Ymm9?.Take(16).ToArray();
@@ -3051,7 +3280,9 @@ namespace McFly.Core.Registers
                     Ymm9[i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm9h
         {
             get => Ymm9 == null ? null : (ulong?) BitConverter.ToUInt64(Ymm9, 8);
@@ -3066,7 +3297,9 @@ namespace McFly.Core.Registers
                 for (var i = 0; i < 8; i++) Ymm9[8 + i] = bytes[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong? Xmm9l
         {
             get => Ymm9 != null ? (ulong?) BitConverter.ToUInt64(Ymm9, 0) : null;
@@ -3094,7 +3327,9 @@ namespace McFly.Core.Registers
                 _ymm0 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm0h
         {
             get => Ymm0?.Skip(16).Take(16).ToArray();
@@ -3109,7 +3344,9 @@ namespace McFly.Core.Registers
                     Ymm0[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm0l
         {
             get => Xmm0;
@@ -3139,7 +3376,9 @@ namespace McFly.Core.Registers
                 _ymm10 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm10h
         {
             get => Ymm10?.Skip(16).Take(16).ToArray();
@@ -3154,7 +3393,9 @@ namespace McFly.Core.Registers
                     Ymm10[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm10l
         {
             get => Xmm10;
@@ -3172,7 +3413,9 @@ namespace McFly.Core.Registers
                 _ymm11 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm11h
         {
             get => Ymm11?.Skip(16).Take(16).ToArray();
@@ -3187,7 +3430,9 @@ namespace McFly.Core.Registers
                     Ymm11[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm11l
         {
             get => Xmm11;
@@ -3205,7 +3450,9 @@ namespace McFly.Core.Registers
                 _ymm12 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm12h
         {
             get => Ymm12?.Skip(16).Take(16).ToArray();
@@ -3220,7 +3467,9 @@ namespace McFly.Core.Registers
                     Ymm12[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm12l
         {
             get => Xmm12;
@@ -3238,7 +3487,9 @@ namespace McFly.Core.Registers
                 _ymm13 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm13h
         {
             get => Ymm13?.Skip(16).Take(16).ToArray();
@@ -3253,7 +3504,9 @@ namespace McFly.Core.Registers
                     Ymm13[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm13l
         {
             get => Xmm13;
@@ -3271,7 +3524,9 @@ namespace McFly.Core.Registers
                 _ymm14 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm14h
         {
             get => Ymm14?.Skip(16).Take(16).ToArray();
@@ -3286,7 +3541,9 @@ namespace McFly.Core.Registers
                     Ymm14[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm14l
         {
             get => Xmm14;
@@ -3304,7 +3561,9 @@ namespace McFly.Core.Registers
                 _ymm15 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm15h
         {
             get => Ymm15?.Skip(16).Take(16).ToArray();
@@ -3319,13 +3578,17 @@ namespace McFly.Core.Registers
                     Ymm15[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm15l
         {
             get => Xmm15;
             set => Xmm15 = value;
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm1h
         {
             get => Ymm1?.Skip(16).Take(16).ToArray();
@@ -3340,7 +3603,9 @@ namespace McFly.Core.Registers
                     Ymm1[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm1l
         {
             get => Xmm1;
@@ -3358,7 +3623,9 @@ namespace McFly.Core.Registers
                 _ymm2 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm2h
         {
             get => Ymm2?.Skip(16).Take(16).ToArray();
@@ -3373,7 +3640,9 @@ namespace McFly.Core.Registers
                     Ymm2[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm2l
         {
             get => Xmm2;
@@ -3391,7 +3660,9 @@ namespace McFly.Core.Registers
                 _ymm3 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm3h
         {
             get => Ymm3?.Skip(16).Take(16).ToArray();
@@ -3406,7 +3677,9 @@ namespace McFly.Core.Registers
                     Ymm3[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm3l
         {
             get => Xmm3;
@@ -3424,7 +3697,9 @@ namespace McFly.Core.Registers
                 _ymm4 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm4h
         {
             get => Ymm4?.Skip(16).Take(16).ToArray();
@@ -3439,7 +3714,9 @@ namespace McFly.Core.Registers
                     Ymm4[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm4l
         {
             get => Xmm4;
@@ -3457,7 +3734,9 @@ namespace McFly.Core.Registers
                 _ymm5 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm5h
         {
             get => Ymm5?.Skip(16).Take(16).ToArray();
@@ -3472,7 +3751,9 @@ namespace McFly.Core.Registers
                     Ymm5[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm5l
         {
             get => Xmm5;
@@ -3490,7 +3771,9 @@ namespace McFly.Core.Registers
                 _ymm6 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm6h
         {
             get => Ymm6?.Skip(16).Take(16).ToArray();
@@ -3505,7 +3788,9 @@ namespace McFly.Core.Registers
                     Ymm6[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm6l
         {
             get => Xmm6;
@@ -3523,7 +3808,9 @@ namespace McFly.Core.Registers
                 _ymm7 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm7h
         {
             get => Ymm7?.Skip(16).Take(16).ToArray();
@@ -3538,7 +3825,9 @@ namespace McFly.Core.Registers
                     Ymm7[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm7l
         {
             get => Xmm7;
@@ -3556,7 +3845,9 @@ namespace McFly.Core.Registers
                 _ymm8 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm8h
         {
             get => Ymm8?.Skip(16).Take(16).ToArray();
@@ -3571,7 +3862,9 @@ namespace McFly.Core.Registers
                     Ymm8[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm8l
         {
             get => Xmm8;
@@ -3589,7 +3882,9 @@ namespace McFly.Core.Registers
                 _ymm9 = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm9h
         {
             get => Ymm9?.Skip(16).Take(16).ToArray();
@@ -3604,13 +3899,17 @@ namespace McFly.Core.Registers
                     Ymm9[16 + i] = value[i];
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public byte[] Ymm9l
         {
             get => Xmm9;
             set => Xmm9 = value;
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public bool? Zf
         {
             get => Efl.HasValue ? (bool?) ((Efl & 0x0040) > 0) : null;

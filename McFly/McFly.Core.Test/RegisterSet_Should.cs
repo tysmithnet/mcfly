@@ -12,7 +12,6 @@ namespace McFly.Core.Test
         public void Process_Registers_Correctly()
         {
             var r = new RegisterSet();
-            
             r.Process("rax", "0x0123456789abcdef");
             r.Rax.Should().Be(0x0123456789abcdef);
             r.Eax.Should().Be(0x89abcdef);
