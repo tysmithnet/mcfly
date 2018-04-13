@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -51,8 +52,9 @@ namespace McFly
             var registerText = DebugEngineProxy.Execute(threadId, $"r {registerNames}");
             foreach (var register in list)
             {
-                var numChars = DebugEngineProxy.Is32Bit ? 8 : 16;
-                var match = Regex.Match(registerText, $"{register.Name}=(?<val>[a-fA-F0-9]{{{numChars}}})");
+                var match = Regex.Match(registerText, $"\\b{register.Name}=(?<val>[a-fA-F0-9]+)");
+                if(!match.Success)
+                    throw new ApplicationException($"Register '{register.Name}' was requested, but was not found in the results");
                 var val = match.Groups["val"].Value;
                 registerSet.Process(register.Name, val, 16);
             }

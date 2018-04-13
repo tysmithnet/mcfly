@@ -12,6 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Text.RegularExpressions;
+
 namespace McFly.Core.Registers
 {
     /// <summary>

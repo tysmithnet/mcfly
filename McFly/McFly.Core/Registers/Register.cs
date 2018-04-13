@@ -45,13 +45,12 @@ namespace McFly.Core.Registers
             };
             X86 = new Register[]
             {
-                Eax, Ebx, Ecx, Edx, Esi, Edi, Esp, Ebp, Eip, Efl, Cs, Ds, Es, Fs, Gs, Ss, Dr0, Dr1, Dr2, Dr3, Dr6, Dr7,
-                Di, Si, Bx, Dx, Cx, Ax, Bp, Ip, Fl, Sp, Bl, Dl, Cl, Al, Bh, Dh, Ch, Ah, Iopl, Of, Df, If, Tf, Sf, Zf,
-                Af, Pf, Cf, Vip, Vif, Mxcsr, Xmm0, Xmm1, Xmm2, Xmm3, Xmm4, Xmm5, Xmm6, Xmm7, Mm0, Mm1, Mm2, Mm3, Mm4,
-                Mm5, Mm6, Mm7, Ymm0, Ymm1, Ymm2, Ymm3, Ymm4, Ymm5, Ymm6, Ymm7, Xmm0l, Xmm1l, Xmm2l, Xmm3l, Xmm4l, Xmm5l,
-                Xmm6l, Xmm7l,
-                Xmm0h, Xmm1h, Xmm2h, Xmm3h, Xmm4h, Xmm5h, Xmm6h, Xmm7h, Fpcw, Fpsw, Fptw, Fopcode, Fpip, Fpipsel, Fpdp,
-                Fpdpsel, St0, St1, St2, St3, St4, St5, St6, St7
+                Af, Ah, Al, Ax, Bh, Bl, Bp, Bx, Cf, Ch, Cl, Cs, Cx, Df, Dh, Di, Dl, Dr0, Dr1, Dr2, Dr3, Dr6, Dr7, Ds,
+                Dx, Eax, Ebp, Ebx, Ecx, Edi, Edx, Efl, Eip, Es, Esi, Esp, Fl, Fopcode, Fpcw, Fpdp, Fpdpsel, Fpip,
+                Fpipsel, Fpsw, Fptw, Fs, Gs, If, Iopl, Ip, Mm0, Mm1, Mm2, Mm3, Mm4, Mm5, Mm6, Mm7, Mxcsr, Of, Pf, Sf,
+                Si, Sp, Ss, St0, St1, St2, St3, St4, St5, St6, St7, Tf, Vif, Vip, Xmm0, Xmm0h, Xmm0l, Xmm1, Xmm1h,
+                Xmm1l, Xmm2, Xmm2h, Xmm2l, Xmm3, Xmm3h, Xmm3l, Xmm4, Xmm4h, Xmm4l, Xmm5, Xmm5h, Xmm5l, Xmm6, Xmm6h,
+                Xmm6l, Xmm7, Xmm7h, Xmm7l, Ymm0, Ymm1, Ymm2, Ymm3, Ymm4, Ymm5, Ymm6, Ymm7, Zf
             };
             All = X64.Concat(X86).Distinct().ToArray();
         }
