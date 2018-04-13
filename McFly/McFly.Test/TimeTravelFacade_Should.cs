@@ -56,7 +56,7 @@ namespace McFly.Test
 
             var registerSet = new RegisterSet();
             var registerBuilder = new RegisterFacadeBuilder();
-            registerBuilder.WithGetCurrentRegisterSet(0x6CDC, Register.AllRegisters64, registerSet);
+            registerBuilder.WithGetCurrentRegisterSet(0x6CDC, Register.X64, registerSet);
 
             var disassemblyLine = new DisassemblyLine(0x00007ffa51315595, ByteArrayBuilder.StringToByteArray("4d3bd1"),
                 "cmp", "r10,r9");
@@ -102,7 +102,7 @@ namespace McFly.Test
 
             var registerSet = new RegisterSet();
             var registerBuilder = new RegisterFacadeBuilder();
-            registerBuilder.WithGetCurrentRegisterSet(Register.AllRegisters64, registerSet);
+            registerBuilder.WithGetCurrentRegisterSet(Register.All, registerSet);
 
             var disassemblyLine = new DisassemblyLine(0x00007ffa51315595, ByteArrayBuilder.StringToByteArray("4d3bd1"),
                 "cmp", "r10,r9");

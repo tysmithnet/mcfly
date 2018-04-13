@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -28,36 +27,33 @@ namespace McFly.Core.Registers
         /// </summary>
         static Register()
         {
-            AllRegisters128 = new Register[]
+            X64 = new Register[]
             {
-                Xmm0, Xmm1, Xmm2, Xmm3, Xmm4, Xmm5, Xmm6, Xmm7, Xmm8, Xmm9, Xmm10, Xmm11, Xmm12, Xmm13, Xmm14, Xmm15,
-                Ymm0, Ymm1, Ymm2, Ymm3, Ymm4, Ymm5, Ymm6, Ymm7, Ymm8, Ymm9, Ymm10, Ymm11, Ymm12, Ymm13, Ymm14, Ymm15
+                Af, Ah, Al, Ax, Bh, Bl, Bp, Bpl, Brfrom, Brto, Bx, Cf, Ch, Cl, Cs, Cx, Df, Dh, Di, Dil, Dl, Dr0, Dr1,
+                Dr2, Dr3, Dr6, Dr7, Ds, Dx, Eax, Ebp, Ebx, Ecx, Edi, Edx, Efl, Eip, Es, Esi, Esp, Exfrom, Exto, Fl,
+                Fpcw, Fpsw, Fptw, Fs, Gs, If, Iopl, Ip, Mm0, Mm1, Mm2, Mm3, Mm4, Mm5, Mm6, Mm7, Mxcsr, Of, Pf, R10,
+                R10b, R10d, R10w, R11, R11b, R11d, R11w, R12, R12b, R12d, R12w, R13, R13b, R13d, R13w, R14, R14b, R14d,
+                R14w, R15, R15b, R15d, R15w, R8, R8b, R8d, R8w, R9, R9b, R9d, R9w, Rax, Rbp, Rbx, Rcx, Rdi, Rdx, Rip,
+                Rsi, Rsp, Sf, Si, Sil, Sp, Spl, Ss, St0, St1, St2, St3, St4, St5, St6, St7, Tf, Vif, Vip, Xmm0, Xmm0h,
+                Xmm0l, Xmm1, Xmm10, Xmm10h, Xmm10l, Xmm11, Xmm11h, Xmm11l, Xmm12, Xmm12h, Xmm12l, Xmm13, Xmm13h, Xmm13l,
+                Xmm14, Xmm14h, Xmm14l, Xmm15, Xmm15h, Xmm15l, Xmm1h, Xmm1l, Xmm2, Xmm2h, Xmm2l, Xmm3, Xmm3h, Xmm3l,
+                Xmm4, Xmm4h, Xmm4l, Xmm5, Xmm5h, Xmm5l, Xmm6, Xmm6h, Xmm6l, Xmm7, Xmm7h, Xmm7l, Xmm8, Xmm8h, Xmm8l,
+                Xmm9, Xmm9h, Xmm9l, Ymm0, Ymm0h, Ymm0l, Ymm1, Ymm10, Ymm10h, Ymm10l, Ymm11, Ymm11h, Ymm11l, Ymm12,
+                Ymm12h, Ymm12l, Ymm13, Ymm13h, Ymm13l, Ymm14, Ymm14h, Ymm14l, Ymm15, Ymm15h, Ymm15l, Ymm1h, Ymm1l, Ymm2,
+                Ymm2h, Ymm2l, Ymm3, Ymm3h, Ymm3l, Ymm4, Ymm4h, Ymm4l, Ymm5, Ymm5h, Ymm5l, Ymm6, Ymm6h, Ymm6l, Ymm7,
+                Ymm7h, Ymm7l, Ymm8, Ymm8h, Ymm8l, Ymm9, Ymm9h, Ymm9l, Zf
             };
-            AllRegisters80 = new Register[] {St0, St1, St2, St3, St4, St5, St6, St7};
-            AllRegisters64 = new Register[]
+            X86 = new Register[]
             {
-                Brfrom, Brto, Dr0, Dr1, Dr2, Dr3, Dr6, Dr7, Exfrom, Exto, Mm0, Mm1, Mm2, Mm3, Mm4, Mm5, Mm6,
-                Mm7, R10, R11, R12, R13, R14, R15, R8, R9, Rax, Rbp, Rbx, Rcx, Rdi, Rdx, Rip, Rsi, Rsp, Xmm0h, Xmm0l,
-                Xmm10h, Xmm10l, Xmm11h, Xmm11l, Xmm12h, Xmm12l, Xmm13h, Xmm13l, Xmm14h, Xmm14l, Xmm15h, Xmm15l, Xmm1h,
-                Xmm1l, Xmm2h, Xmm2l, Xmm3h, Xmm3l, Xmm4h, Xmm4l, Xmm5h, Xmm5l, Xmm6h, Xmm6l, Xmm7h, Xmm7l, Xmm8h, Xmm8l,
-                Xmm9h, Xmm9l, Ymm0h, Ymm0l, Ymm10h, Ymm10l, Ymm11h, Ymm11l, Ymm12h, Ymm12l, Ymm13h, Ymm13l, Ymm14h,
-                Ymm14l, Ymm15h, Ymm15l, Ymm1h, Ymm1l, Ymm2h, Ymm2l, Ymm3h, Ymm3l, Ymm4h, Ymm4l, Ymm5h, Ymm5l, Ymm6h,
-                Ymm6l, Ymm7h, Ymm7l, Ymm8h, Ymm8l, Ymm9h, Ymm9l
+                Eax, Ebx, Ecx, Edx, Esi, Edi, Esp, Ebp, Eip, Efl, Cs, Ds, Es, Fs, Gs, Ss, Dr0, Dr1, Dr2, Dr3, Dr6, Dr7,
+                Di, Si, Bx, Dx, Cx, Ax, Bp, Ip, Fl, Sp, Bl, Dl, Cl, Al, Bh, Dh, Ch, Ah, Iopl, Of, Df, If, Tf, Sf, Zf,
+                Af, Pf, Cf, Vip, Vif, Mxcsr, Xmm0, Xmm1, Xmm2, Xmm3, Xmm4, Xmm5, Xmm6, Xmm7, Mm0, Mm1, Mm2, Mm3, Mm4,
+                Mm5, Mm6, Mm7, Ymm0, Ymm1, Ymm2, Ymm3, Ymm4, Ymm5, Ymm6, Ymm7, Xmm0l, Xmm1l, Xmm2l, Xmm3l, Xmm4l, Xmm5l,
+                Xmm6l, Xmm7l,
+                Xmm0h, Xmm1h, Xmm2h, Xmm3h, Xmm4h, Xmm5h, Xmm6h, Xmm7h, Fpcw, Fpsw, Fptw, Fopcode, Fpip, Fpipsel, Fpdp,
+                Fpdpsel, St0, St1, St2, St3, St4, St5, St6, St7
             };
-            AllRegisters32 = new Register[]
-                {Eax, Ebp, Ebx, Ecx, Edi, Edx, Efl, Eip, Esi, Esp, Mxcsr, R10d, R11d, R12d, R13d, R14d, R15d, R8d, R9d};
-            AllRegisters16 = new Register[]
-            {
-                Ax, Bp, Bx, Cs, Cx, Di, Ds, Dx, Es, Fl, Fs, Gs, Ip, R10w, R11w, R12w, R13w, R14w, R15w, R8w, R9w, Si,
-                Sp, Ss
-            };
-            AllRegisters8 = new Register[]
-                {Ah, Al, Bh, Bl, Bpl, Ch, Cl, Dh, Dil, Dl, R10b, R11b, R12b, R13b, R14b, R15b, R8b, R9b, Sil, Spl};
-            AllRegistersFlags = new Register[] {Af, Cf, Df, Fpcw, Fpsw, Fptw, If, Iopl, Of, Pf, Sf, Tf, Vif, Vip, Zf};
-            AllRegisters = AllRegisters128.Concat(AllRegisters80).Concat(AllRegisters64).Concat(AllRegisters32)
-                .Concat(AllRegisters16).Concat(AllRegisters8).Concat(AllRegistersFlags).OrderBy(x => x.Name).ToArray();
-
-            CoreUserRegisters64 = new Register[] {Af, Cf, Cs, Df, Ds, Efl, Es, Fs, Gs, If, Iopl, Iopl, Of, Pf, R10, R11, R12, R13, R14, R15, R8, R9, Rax, Rbp, Rbx, Rcx, Rdi, Rdx, Rip, Rsi, Rsp, Sf, Ss, Tf, Zf};
+            All = X64.Concat(X86).Distinct().ToArray();
         }
 
         /// <summary>
@@ -67,62 +63,10 @@ namespace McFly.Core.Registers
         /// <returns>Register.</returns>
         public static Register Lookup(string name)
         {
-            return AllRegisters.FirstOrDefault(x => Regex.IsMatch(name, x.Name, RegexOptions.IgnoreCase));
+            return X64.FirstOrDefault(x => Regex.IsMatch(name, x.Name, RegexOptions.IgnoreCase));
         }
 
-        /// <summary>
-        ///     Gets all registers.
-        /// </summary>
-        /// <value>All registers.</value>
-        public static Register[] AllRegisters { get; }
-
-        /// <summary>
-        ///     Gets all registers128.
-        /// </summary>
-        /// <value>All registers128.</value>
-        public static Register[] AllRegisters128 { get; }
-
-        /// <summary>
-        ///     Gets all registers16.
-        /// </summary>
-        /// <value>All registers16.</value>
-        public static Register[] AllRegisters16 { get; }
-
-        /// <summary>
-        ///     Gets all 32 bit registers.
-        /// </summary>
-        /// <value>All registers32.</value>
-        public static Register[] AllRegisters32 { get; }
-
-        /// <summary>
-        ///     Gets all 64 bit registers.
-        /// </summary>
-        /// <value>All registers64.</value>
-        public static IReadOnlyCollection<Register> AllRegisters64 { get; }
-
-        /// <summary>
-        ///     Gets or sets all registers8.
-        /// </summary>
-        /// <value>All registers8.</value>
-        public static Register[] AllRegisters8 { get; }
-
-        /// <summary>
-        ///     Gets all registers80.
-        /// </summary>
-        /// <value>All registers80.</value>
-        public static Register[] AllRegisters80 { get; }
-
-        /// <summary>
-        ///     Gets or sets all registers flags.
-        /// </summary>
-        /// <value>All registers flags.</value>
-        public static Register[] AllRegistersFlags { get; }
-
-        /// <summary>
-        ///     Gets the core user 64 bit registers.
-        /// </summary>
-        /// <value>The core user registers64.</value>
-        public static IReadOnlyCollection<Register> CoreUserRegisters64 { get; }
+        public static Register[] All { get; }
 
         /// <summary>
         ///     Gets the name of the regiser, e.g. rip, rax, edi.
@@ -135,5 +79,13 @@ namespace McFly.Core.Registers
         /// </summary>
         /// <value>The number bits.</value>
         public abstract int NumBits { get; }
+
+        /// <summary>
+        ///     Gets all registers.
+        /// </summary>
+        /// <value>All registers.</value>
+        public static Register[] X64 { get; }
+
+        public static Register[] X86 { get; }
     }
 }

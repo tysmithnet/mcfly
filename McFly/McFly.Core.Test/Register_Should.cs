@@ -14,18 +14,7 @@ namespace McFly.Core.Test
         [Fact]
         public void Not_Have_Duplicates()
         {
-            Register.AllRegisters.Should().OnlyHaveUniqueItems();
-        }
-
-        [Fact]
-        public void Have_The_Correct_Num_Bits()
-        {
-            Register.AllRegisters128.Select(x => x.NumBits).Distinct().Single().Should().Be(128);
-            Register.AllRegisters80.Select(x => x.NumBits).Distinct().Single().Should().Be(80);
-            Register.AllRegisters64.Select(x => x.NumBits).Distinct().Single().Should().Be(64);
-            Register.AllRegisters32.Select(x => x.NumBits).Distinct().Single().Should().Be(32);
-            Register.AllRegisters16.Select(x => x.NumBits).Distinct().Single().Should().Be(16);
-            Register.AllRegisters8.Select(x => x.NumBits).Distinct().Single().Should().Be(8);
+            Register.X64.Should().OnlyHaveUniqueItems();
         }
 
         [Fact]

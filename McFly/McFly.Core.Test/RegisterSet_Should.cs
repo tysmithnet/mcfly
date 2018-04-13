@@ -199,6 +199,26 @@ namespace McFly.Core.Test
             r.Fptw.Should().Be(0x123);
 
             r = new RegisterSet();
+            r.Process("fopcode", "0x0123");
+            r.Fopcode.Should().Be(0x123);
+
+            r = new RegisterSet();
+            r.Process("fpip", "0x0123");
+            r.Fpip.Should().Be(0x123);
+
+            r = new RegisterSet();
+            r.Process("fpipsel", "0x0123");
+            r.Fpipsel.Should().Be(0x123);
+
+            r = new RegisterSet();
+            r.Process("fpdp", "0x0123");
+            r.Fpdp.Should().Be(0x123);
+
+            r = new RegisterSet();
+            r.Process("fpdpsel", "0x0123");
+            r.Fpdpsel.Should().Be(0x123);
+
+            r = new RegisterSet();
             r.Process("st0", "0:1234:0123456789abcdef");
             r.St0.Should().Equal(new[] {0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef}.Reverse());
 
@@ -1776,6 +1796,66 @@ namespace McFly.Core.Test
                 var r2 = new RegisterSet()
                 {
                     Fptw = ushort.MaxValue
+                };
+                r1.Equals(r2).Should().BeTrue();
+                r1.GetHashCode().Should().Be(r2.GetHashCode());
+            }
+            {
+                var r1 = new RegisterSet()
+                {
+                    Fopcode = ushort.MaxValue
+                };
+                var r2 = new RegisterSet()
+                {
+                    Fopcode = ushort.MaxValue
+                };
+                r1.Equals(r2).Should().BeTrue();
+                r1.GetHashCode().Should().Be(r2.GetHashCode());
+            }
+            {
+                var r1 = new RegisterSet()
+                {
+                    Fpip = ushort.MaxValue
+                };
+                var r2 = new RegisterSet()
+                {
+                    Fpip = ushort.MaxValue
+                };
+                r1.Equals(r2).Should().BeTrue();
+                r1.GetHashCode().Should().Be(r2.GetHashCode());
+            }
+            {
+                var r1 = new RegisterSet()
+                {
+                    Fpipsel = ushort.MaxValue
+                };
+                var r2 = new RegisterSet()
+                {
+                    Fpipsel = ushort.MaxValue
+                };
+                r1.Equals(r2).Should().BeTrue();
+                r1.GetHashCode().Should().Be(r2.GetHashCode());
+            }
+            {
+                var r1 = new RegisterSet()
+                {
+                    Fpdp = ushort.MaxValue
+                };
+                var r2 = new RegisterSet()
+                {
+                    Fpdp = ushort.MaxValue
+                };
+                r1.Equals(r2).Should().BeTrue();
+                r1.GetHashCode().Should().Be(r2.GetHashCode());
+            }
+            {
+                var r1 = new RegisterSet()
+                {
+                    Fpdpsel = ushort.MaxValue
+                };
+                var r2 = new RegisterSet()
+                {
+                    Fpdpsel = ushort.MaxValue
                 };
                 r1.Equals(r2).Should().BeTrue();
                 r1.GetHashCode().Should().Be(r2.GetHashCode());

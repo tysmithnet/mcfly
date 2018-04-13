@@ -72,6 +72,11 @@ namespace McFly.Core.Registers
                    Fpcw == other.Fpcw &&
                    Fpsw == other.Fpsw &&
                    Fptw == other.Fptw &&
+                   Fopcode == other.Fopcode &&
+                   Fpip == other.Fpip &&
+                   Fpipsel == other.Fpipsel &&
+                   Fpdp == other.Fpdp &&
+                   Fpdpsel == other.Fpdpsel &&
                    Fs == other.Fs &&
                    Gs == other.Gs &&
                    Mm0 == other.Mm0 &&
@@ -159,6 +164,11 @@ namespace McFly.Core.Registers
                                Fpcw?.GetHashCode() ?? 0 ^
                                Fpsw?.GetHashCode() ?? 0 ^
                                Fptw?.GetHashCode() ?? 0 ^
+                               Fopcode?.GetHashCode() ?? 0 ^
+                               Fpip?.GetHashCode() ?? 0 ^
+                               Fpipsel?.GetHashCode() ?? 0 ^
+                               Fpdp?.GetHashCode() ?? 0 ^
+                               Fpdpsel?.GetHashCode() ?? 0 ^
                                Fs?.GetHashCode() ?? 0 ^
                                Gs?.GetHashCode() ?? 0 ^
                                Mm0?.GetHashCode() ?? 0 ^
@@ -242,7 +252,7 @@ namespace McFly.Core.Registers
             register = register ?? throw new ArgumentNullException(nameof(register));
             input = input ?? throw new ArgumentNullException(nameof(input));
 
-            var first = Register.AllRegisters.FirstOrDefault(x =>
+            var first = Register.All.FirstOrDefault(x =>
                 x.Name.Equals(register, StringComparison.OrdinalIgnoreCase));
             if (first == null) return;
             var ymmRegex = new Regex(
@@ -352,6 +362,21 @@ namespace McFly.Core.Registers
                     break;
                 case "fptw":
                     Fptw = Convert.ToUInt16(input, radix);
+                    break;
+                case "fopcode":
+                    Fopcode = Convert.ToUInt32(input, radix);
+                    break;
+                case "fpip":
+                    Fpip = Convert.ToUInt32(input, radix);
+                    break;
+                case "fpipsel":
+                    Fpipsel = Convert.ToUInt32(input, radix);
+                    break;
+                case "fpdp":
+                    Fpdp = Convert.ToUInt32(input, radix);
+                    break;
+                case "fpdpsel":
+                    Fpdpsel = Convert.ToUInt32(input, radix);
                     break;
                 case "st0":
                 {
@@ -4238,6 +4263,12 @@ namespace McFly.Core.Registers
                     Efl = Efl &= ~mask;
             }
         }
+
+        public uint? Fopcode { get; set; }
+        public uint? Fpip { get; set; }
+        public uint? Fpipsel { get; set; }
+        public uint? Fpdp { get; set; }
+        public uint? Fpdpsel { get; set; }
     }
 }
 

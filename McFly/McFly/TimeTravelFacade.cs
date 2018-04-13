@@ -126,7 +126,7 @@ namespace McFly
         {
             var position = GetCurrentPosition();
             var currentStack = StackFacade.GetCurrentStackTrace();
-            var registers = RegisterFacade.GetCurrentRegisterSet(Register.AllRegisters64);
+            var registers = RegisterFacade.GetCurrentRegisterSet(Register.All);
             var disassembly = DisassemblyFacade.GetDisassemblyLines(1).Single();
 
             return new Frame
@@ -150,7 +150,7 @@ namespace McFly
             {
                 Position = GetCurrentPosition(threadId),
                 StackTrace = StackFacade.GetCurrentStackTrace(threadId),
-                RegisterSet = RegisterFacade.GetCurrentRegisterSet(threadId, Register.AllRegisters64),
+                RegisterSet = RegisterFacade.GetCurrentRegisterSet(threadId, DebugEngineProxy.Is32Bit ? Register.X86 : Register.X64),
                 DisassemblyLine = DisassemblyFacade.GetDisassemblyLines(threadId, 1).Single(),
                 ThreadId = threadId
             };

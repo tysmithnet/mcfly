@@ -139,6 +139,31 @@ namespace McFly.Server.Data.SqlServer
         [MinLength(4)]
         public string Fptw { get; set; }
 
+        [Column("fopcode")]
+        [MaxLength(4)]
+        [MinLength(4)]
+        public string Fopcode { get; set; }
+
+        [Column("fpip")]
+        [MaxLength(4)]
+        [MinLength(4)]
+        public string Fpip { get; set; }
+
+        [Column("fpipsel")]
+        [MaxLength(4)]
+        [MinLength(4)]
+        public string Fpipsel { get; set; }
+
+        [Column("fpdp")]
+        [MaxLength(4)]
+        [MinLength(4)]
+        public string Fpdp { get; set; }
+
+        [Column("fpdpsel")]
+        [MaxLength(4)]
+        [MinLength(4)]
+        public string Fpdpsel { get; set; }
+
         [Column("fs")]
         [MaxLength(4)]
         [MinLength(4)]

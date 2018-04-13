@@ -97,6 +97,16 @@ namespace McFly.Core.Registers
         /// <value>The FPTW.</value>
         public static FptwRegister Fptw { get; } = new FptwRegister();
 
+        public static FopcodeRegister Fopcode { get; } = new FopcodeRegister();
+
+        public static FpipRegister Fpip { get; } = new FpipRegister();
+
+        public static FpipselRegister Fpipsel { get; } = new FpipselRegister();
+
+        public static FpdpRegister Fpdp { get; } = new FpdpRegister();
+
+        public static FpdpselRegister Fpdpsel { get; } = new FpdpselRegister();
+
         /// <summary>
         ///     Gets the fs.
         /// </summary>

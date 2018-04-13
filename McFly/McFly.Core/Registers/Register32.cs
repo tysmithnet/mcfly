@@ -516,5 +516,50 @@ namespace McFly.Core.Registers
             /// <inheritdoc />
             public override int NumBits { get; } = 32;
         }
+
+        public class FopcodeRegister : Register
+        {
+            /// <inheritdoc />
+            public override string Name { get; } = "fopcode";
+
+            /// <inheritdoc />
+            public override int NumBits { get; } = 32;
+        }
+
+        public class FpipRegister : Register
+        {
+            /// <inheritdoc />
+            public override string Name { get; } = "fpip";
+
+            /// <inheritdoc />
+            public override int NumBits { get; } = 32;
+        }
+
+        public class FpipselRegister : Register
+        {
+            /// <inheritdoc />
+            public override string Name { get; } = "fpipsel";
+
+            /// <inheritdoc />
+            public override int NumBits { get; } = 32;
+        }
+
+        public class FpdpRegister : Register
+        {
+            /// <inheritdoc />
+            public override string Name { get; } = "fpdp";
+
+            /// <inheritdoc />
+            public override int NumBits { get; } = 32;
+        }
+
+        public class FpdpselRegister : Register
+        {
+            /// <inheritdoc />
+            public override string Name { get; } = "fpdpsel";
+
+            /// <inheritdoc />
+            public override int NumBits { get; } = 32;
+        }
     }
 }
