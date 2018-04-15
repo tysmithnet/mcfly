@@ -94,7 +94,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builders\RegisterFacadeBuilder.cs" />
     <Compile Include="RegisterFacade_Should.cs" />
-    <Compile Include="RegisterRegexFactory_Should.cs" />
     <Compile Include="Search\SearchPlanConverter_Should.cs" />
     <Compile Include="Search\SearchPlanFactory_Should.cs" />
     <Compile Include="ServerClientBuilder.cs" />
