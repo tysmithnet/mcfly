@@ -935,123 +935,123 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Ss.Should().Be(0x0123); 
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123456789abcdef", r);
+            rf.ProcessRegister(Dr0, "0x0123456789abcdef", r);
             r.Dr0.Should().Be(0x0123456789abcdef);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123456789abcdef", r);
+            rf.ProcessRegister(Dr1, "0x0123456789abcdef", r);
             r.Dr1.Should().Be(0x0123456789abcdef);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123456789abcdef", r);
+            rf.ProcessRegister(Dr2, "0x0123456789abcdef", r);
             r.Dr2.Should().Be(0x0123456789abcdef);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123456789abcdef", r);
+            rf.ProcessRegister(Dr3, "0x0123456789abcdef", r);
             r.Dr3.Should().Be(0x0123456789abcdef);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123456789abcdef", r);
+            rf.ProcessRegister(Dr6, "0x0123456789abcdef", r);
             r.Dr6.Should().Be(0x0123456789abcdef);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123456789abcdef", r);
+            rf.ProcessRegister(Dr7, "0x0123456789abcdef", r);
             r.Dr7.Should().Be(0x0123456789abcdef);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(Fpcw, "0x0123", r);
             r.Fpcw.Should().Be(0x0123);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(Fpsw, "0x0123", r);
             r.Fpsw.Should().Be(0x123);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(Fptw, "0x0123", r);
             r.Fptw.Should().Be(0x123);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(Fopcode, "0x0123", r);
             r.Fopcode.Should().Be(0x123);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(Fpip, "0x0123", r);
             r.Fpip.Should().Be(0x123);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(Fpipsel, "0x0123", r);
             r.Fpipsel.Should().Be(0x123);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(Fpdp, "0x0123", r);
             r.Fpdp.Should().Be(0x123);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(Fpdpsel, "0x0123", r);
             r.Fpdpsel.Should().Be(0x123);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(St0, "1234:0123456789abcdef", r);
             r.St0.Should().Equal(new[] {0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef}.Reverse());
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(St1, "1234:0123456789abcdef", r);
             r.St1.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(St2, "1234:0123456789abcdef", r);
             r.St2.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(St3, "1234:0123456789abcdef", r);
             r.St3.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(St4, "1234:0123456789abcdef", r);
             r.St4.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(St5, "1234:0123456789abcdef", r);
             r.St5.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(St6, "1234:0123456789abcdef", r);
             r.St6.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0x0123", r);
+            rf.ProcessRegister(St7, "1234:0123456789abcdef", r);
             r.St7.Should().Equal(new[] { 0x12, 0x34, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }.Reverse());
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0xffffffffffffffff", r);
+            rf.ProcessRegister(Mm0, "0xffffffffffffffff", r);
             r.Mm0.Should().Be(0xffffffffffffffff);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0xfedcba9876543210", r);
+            rf.ProcessRegister(Mm1, "0xfedcba9876543210", r);
             r.Mm1.Should().Be(0xfedcba9876543210);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0xfedcba9876543210", r);
+            rf.ProcessRegister(Mm2, "0xfedcba9876543210", r);
             r.Mm2.Should().Be(0xfedcba9876543210);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0xfedcba9876543210", r);
+            rf.ProcessRegister(Mm3, "0xfedcba9876543210", r);
             r.Mm3.Should().Be(0xfedcba9876543210);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0xfedcba9876543210", r);
+            rf.ProcessRegister(Mm4, "0xfedcba9876543210", r);
             r.Mm4.Should().Be(0xfedcba9876543210);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0xfedcba9876543210", r);
+            rf.ProcessRegister(Mm5, "0xfedcba9876543210", r);
             r.Mm5.Should().Be(0xfedcba9876543210);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0xfedcba9876543210", r);
+            rf.ProcessRegister(Mm6, "0xfedcba9876543210", r);
             r.Mm6.Should().Be(0xfedcba9876543210);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Rip, "0xfedcba9876543210", r);
+            rf.ProcessRegister(Mm7, "0xfedcba9876543210", r);
             r.Mm7.Should().Be(0xfedcba9876543210);
 
             r = new RegisterSet();
@@ -1065,91 +1065,91 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm0l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm1, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm1.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm1.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm1l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm2, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm2.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm2.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm2l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm3, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm3.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm3.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm3l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm4, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm4.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm4.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm4l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm5, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm5.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm5.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm5l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm6, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm6.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm6.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm6l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm7, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm7.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm7.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm7l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm8, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm8.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm8.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm8l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm9, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm9.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm9.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm9l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm10, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm10.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm10.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm10l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm11, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm11.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm11.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm11l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm12, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm12.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm12.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm12l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm13, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm13.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm13.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm13l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm14, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm14.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm14.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm14l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ymm0, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
+            rf.ProcessRegister(Ymm15, "    deadbeef     feedcafe     11223344     55667788     aabbccdd     facefade     deafcafe     01234567", r);
             r.Ymm15.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa, 0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0xfe, 0xca, 0xed, 0xfe, 0xef, 0xbe, 0xad, 0xde);
             r.Xmm15.Should().Equal(0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde, 0xde, 0xfa, 0xce, 0xfa, 0xdd, 0xcc, 0xbb, 0xaa);
             r.Xmm15l.Should().Be(BitConverter.ToUInt64(new byte[] { 0x67, 0x45, 0x23, 0x01, 0xfe, 0xca, 0xaf, 0xde }, 0));
@@ -1160,77 +1160,77 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Ymm0.Should().Equal(r.Xmm0.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm1, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm1.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm1.Should().Equal(r.Xmm1.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm2, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm2.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm2.Should().Equal(r.Xmm2.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm3, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm3.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm3.Should().Equal(r.Xmm3.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm4, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm4.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm4.Should().Equal(r.Xmm4.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm5, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm5.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm5.Should().Equal(r.Xmm5.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm6, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm6.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm6.Should().Equal(r.Xmm6.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm7, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm7.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm7.Should().Equal(r.Xmm7.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm8, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm8.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm8.Should().Equal(r.Xmm8.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm9, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm9.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm9.Should().Equal(r.Xmm9.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm10, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm10.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm10.Should().Equal(r.Xmm10.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm11, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm11.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm11.Should().Equal(r.Xmm11.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm12, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm12.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm12.Should().Equal(r.Xmm12.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm13, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm13.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm13.Should().Equal(r.Xmm13.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm14, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm14.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm14.Should().Equal(r.Xmm14.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Xmm15, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Xmm15.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm15.Should().Equal(r.Xmm15.Concat(Enumerable.Repeat<byte>(0, 16)));
 
@@ -1244,7 +1244,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm1l, "deadbeeffacecafe", r);
             r.Xmm1l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm1.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1253,7 +1253,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm2l, "deadbeeffacecafe", r);
             r.Xmm2l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm2.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1262,7 +1262,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm3l, "deadbeeffacecafe", r);
             r.Xmm3l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm3.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1271,7 +1271,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm4l, "deadbeeffacecafe", r);
             r.Xmm4l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm4.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1280,7 +1280,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm5l, "deadbeeffacecafe", r);
             r.Xmm5l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm5.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1289,7 +1289,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm6l, "deadbeeffacecafe", r);
             r.Xmm6l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm6.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1298,7 +1298,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm7l, "deadbeeffacecafe", r);
             r.Xmm7l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm7.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1307,7 +1307,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm8l, "deadbeeffacecafe", r);
             r.Xmm8l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm8.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1316,7 +1316,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm9l, "deadbeeffacecafe", r);
             r.Xmm9l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm9.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1325,7 +1325,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm10l, "deadbeeffacecafe", r);
             r.Xmm10l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm10.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1334,7 +1334,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm11l, "deadbeeffacecafe", r);
             r.Xmm11l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm11.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1343,7 +1343,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm12l, "deadbeeffacecafe", r);
             r.Xmm12l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm12.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1352,7 +1352,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm13l, "deadbeeffacecafe", r);
             r.Xmm13l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm13.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1361,7 +1361,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm14l, "deadbeeffacecafe", r);
             r.Xmm14l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm14.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1370,7 +1370,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm15l, "deadbeeffacecafe", r);
             r.Xmm15l.Should().Be(0xdeadbeeffacecafe);
             r.Ymm15.Should()
                 .Equal(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde }.Concat(
@@ -1379,7 +1379,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                 Enumerable.Repeat<byte>(0, 8)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm0h, "deadbeeffacecafe", r);
             r.Xmm0h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm0.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1389,7 +1389,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm0l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm1h, "deadbeeffacecafe", r);
             r.Xmm1h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm1.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1399,7 +1399,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm1l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm2h, "deadbeeffacecafe", r);
             r.Xmm2h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm2.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1409,7 +1409,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm2l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm3h, "deadbeeffacecafe", r);
             r.Xmm3h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm3.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1419,7 +1419,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm3l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm4h, "deadbeeffacecafe", r);
             r.Xmm4h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm4.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1429,7 +1429,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm4l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm5h, "deadbeeffacecafe", r);
             r.Xmm5h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm5.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1439,7 +1439,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm5l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm6h, "deadbeeffacecafe", r);
             r.Xmm6h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm6.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1449,7 +1449,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm6l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm7h, "deadbeeffacecafe", r);
             r.Xmm7h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm7.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1459,7 +1459,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm7l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm8h, "deadbeeffacecafe", r);
             r.Xmm8h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm8.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1469,7 +1469,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm8l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm9h, "deadbeeffacecafe", r);
             r.Xmm9h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm9.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1479,7 +1479,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm9l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm10h, "deadbeeffacecafe", r);
             r.Xmm10h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm10.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1489,7 +1489,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm10l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm11h, "deadbeeffacecafe", r);
             r.Xmm11h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm11.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1499,7 +1499,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm11l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm12h, "deadbeeffacecafe", r);
             r.Xmm12h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm12.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1509,7 +1509,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm12l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm13h, "deadbeeffacecafe", r);
             r.Xmm13h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm13.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1519,7 +1519,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm13l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm14h, "deadbeeffacecafe", r);
             r.Xmm14h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm14.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1529,7 +1529,7 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm14l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0l, "deadbeeffacecafe", r);
+            rf.ProcessRegister(Xmm15h, "deadbeeffacecafe", r);
             r.Xmm15h.Should().Be(0xdeadbeeffacecafe);
             r.Ymm15.Should().Equal(Enumerable.Repeat<byte>(0, 8)
                 .Concat(new byte[] { 0xfe, 0xca, 0xce, 0xfa, 0xef, 0xbe, 0xad, 0xde })
@@ -1539,177 +1539,177 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Xmm15l.Should().Be(0);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm0h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm0.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm0.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm1h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm1.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm1.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm2h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm2.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm2.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm3h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm3.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm3.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm4h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm4.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm4.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm5h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm5.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm5.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm6h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm6.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm6.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm7h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm7.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm7.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm8h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm8.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm8.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm9h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm9.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm9.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm10h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm10.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm10.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm11h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm11.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm11.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm12h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm12.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm12.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm13h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm13.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm13.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm14h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm14.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm14.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm15h, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm15.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12);
             r.Xmm15.Should().Equal(0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm0l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm0l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm0.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm0.Should().Equal(r.Xmm0.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm1l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm1l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm1.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm1.Should().Equal(r.Xmm1.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm2l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm2l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm2.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm2.Should().Equal(r.Xmm2.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm3l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm3l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm3.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm3.Should().Equal(r.Xmm3.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm4l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm4l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm4.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm4.Should().Equal(r.Xmm4.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm5l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm5l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm5.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm5.Should().Equal(r.Xmm5.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm6l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm6l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm6.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm6.Should().Equal(r.Xmm6.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm7l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm7l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm7.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm7.Should().Equal(r.Xmm7.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm8l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm8l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm8.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm8.Should().Equal(r.Xmm8.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm9l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm9l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm9.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm9.Should().Equal(r.Xmm9.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm10l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm10l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm10.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm10.Should().Equal(r.Xmm10.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm11l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm11l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm11.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm11.Should().Equal(r.Xmm11.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm12l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm12l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm12.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm12.Should().Equal(r.Xmm12.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm13l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm13l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm13.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm13.Should().Equal(r.Xmm13.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm14l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm14l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm14.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm14.Should().Equal(r.Xmm14.Concat(Enumerable.Repeat<byte>(0, 16)));
 
             r = new RegisterSet();
-            rf.ProcessRegister(Xmm0, "    12345678     deadbeef     abcdabcd     01020304", r);
+            rf.ProcessRegister(Ymm15l, "    12345678     deadbeef     abcdabcd     01020304", r);
             r.Ymm15l.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Xmm15.Should().Equal(new[] { 0x04, 0x03, 0x02, 0x01, 0xcd, 0xab, 0xcd, 0xab, 0xef, 0xbe, 0xad, 0xde, 0x78, 0x56, 0x34, 0x12 });
             r.Ymm15.Should().Equal(r.Xmm15.Concat(Enumerable.Repeat<byte>(0, 16)));
@@ -1719,15 +1719,15 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Exfrom.Should().Be(0x12345678deadbeef);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Exfrom, "12345678deadbeef", r);
+            rf.ProcessRegister(Exto, "12345678deadbeef", r);
             r.Exto.Should().Be(0x12345678deadbeef);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Exfrom, "12345678deadbeef", r);
+            rf.ProcessRegister(Brfrom, "12345678deadbeef", r);
             r.Brfrom.Should().Be(0x12345678deadbeef);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Exfrom, "12345678deadbeef", r);
+            rf.ProcessRegister(Brto, "12345678deadbeef", r);
             r.Brto.Should().Be(0x12345678deadbeef);
 
             r = new RegisterSet();
@@ -1735,67 +1735,67 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Eax.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(Ecx, "12345678", r);
             r.Ecx.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(Edx, "12345678", r);
             r.Edx.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(Ebx, "12345678", r);
             r.Ebx.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(Esp, "12345678", r);
             r.Esp.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(Ebp, "12345678", r);
             r.Ebp.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(Esi, "12345678", r);
             r.Esi.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(Edi, "12345678", r);
             r.Edi.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(R8d, "12345678", r);
             r.R8d.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(R9d, "12345678", r);
             r.R9d.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(R10d, "12345678", r);
             r.R10d.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(R11d, "12345678", r);
             r.R11d.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(R12d, "12345678", r);
             r.R12d.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(R13d, "12345678", r);
             r.R13d.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(R14d, "12345678", r);
             r.R14d.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(R15d, "12345678", r);
             r.R15d.Should().Be(0x12345678);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Eax, "12345678", r);
+            rf.ProcessRegister(Eip, "12345678", r);
             r.Eip.Should().Be(0x12345678);
 
             r = new RegisterSet();
@@ -1803,71 +1803,71 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Ax.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(Cx, "1234", r);
             r.Cx.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(Dx, "1234", r);
             r.Dx.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(Bx, "1234", r);
             r.Bx.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(Sp, "1234", r);
             r.Sp.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(Bp, "1234", r);
             r.Bp.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(Si, "1234", r);
             r.Si.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(Di, "1234", r);
             r.Di.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(R8w, "1234", r);
             r.R8w.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(R9w, "1234", r);
             r.R9w.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(R10w, "1234", r);
             r.R10w.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(R11w, "1234", r);
             r.R11w.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(R12w, "1234", r);
             r.R12w.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(R13w, "1234", r);
             r.R13w.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(R14w, "1234", r);
             r.R14w.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(R15w, "1234", r);
             r.R15w.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(Ip, "1234", r);
             r.Ip.Should().Be(0x1234);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Ax, "1234", r);
+            rf.ProcessRegister(Fl, "1234", r);
             r.Fl.Should().Be(0x1234);
 
             r = new RegisterSet();
@@ -1875,79 +1875,79 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Al.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(Bl, "12", r);
             r.Bl.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(Cl, "12", r);
             r.Cl.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(Dl, "12", r);
             r.Dl.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(Spl, "12", r);
             r.Spl.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(Bpl, "12", r);
             r.Bpl.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(Sil, "12", r);
             r.Sil.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(Dil, "12", r);
             r.Dil.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(R8d, "12", r);
             r.R8d.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(R9d, "12", r);
             r.R9d.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(R10d, "12", r);
             r.R10d.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(R11d, "12", r);
             r.R11d.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(R12d, "12", r);
             r.R12d.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(R13d, "12", r);
             r.R13d.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(R14d, "12", r);
             r.R14d.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(R15d, "12", r);
             r.R15d.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(Ah, "12", r);
             r.Ah.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(Bh, "12", r);
             r.Bh.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(Ch, "12", r);
             r.Ch.Should().Be(0x12);
 
             r = new RegisterSet();
-            rf.ProcessRegister(Al, "12", r);
+            rf.ProcessRegister(Dh, "12", r);
             r.Dh.Should().Be(0x12);
 
             r = new RegisterSet();
@@ -1959,43 +1959,43 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             r.Of.Should().BeTrue();
 
             r = new RegisterSet();
-            rf.ProcessRegister(Of, "1", r);
+            rf.ProcessRegister(Df, "1", r);
             r.Df.Should().BeTrue();
 
             r = new RegisterSet();
-            rf.ProcessRegister(Of, "1", r);
+            rf.ProcessRegister(If, "1", r);
             r.If.Should().BeTrue();
 
             r = new RegisterSet();
-            rf.ProcessRegister(Of, "1", r);
+            rf.ProcessRegister(Tf, "1", r);
             r.Tf.Should().BeTrue();
 
             r = new RegisterSet();
-            rf.ProcessRegister(Of, "1", r);
+            rf.ProcessRegister(Sf, "1", r);
             r.Sf.Should().BeTrue();
 
             r = new RegisterSet();
-            rf.ProcessRegister(Of, "1", r);
+            rf.ProcessRegister(Zf, "1", r);
             r.Zf.Should().BeTrue();
 
             r = new RegisterSet();
-            rf.ProcessRegister(Of, "1", r);
+            rf.ProcessRegister(Af, "1", r);
             r.Af.Should().BeTrue();
 
             r = new RegisterSet();
-            rf.ProcessRegister(Of, "1", r);
+            rf.ProcessRegister(Pf, "1", r);
             r.Pf.Should().BeTrue();
 
             r = new RegisterSet();
-            rf.ProcessRegister(Of, "1", r);
+            rf.ProcessRegister(Cf, "1", r);
             r.Cf.Should().BeTrue();
 
             r = new RegisterSet();
-            rf.ProcessRegister(Of, "1", r);
+            rf.ProcessRegister(Vip, "1", r);
             r.Vip.Should().BeTrue();
 
             r = new RegisterSet();
-            rf.ProcessRegister(Of, "1", r);
+            rf.ProcessRegister(Vif, "1", r);
             r.Vif.Should().BeTrue();
         }
 

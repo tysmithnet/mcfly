@@ -73,7 +73,7 @@ namespace McFly
             var ymmRegex = new Regex(
                 @"\s*(?<a>[a-z0-9]+)\s*(?<b>[a-z0-9]+)\s*(?<c>[a-z0-9]+)\s*(?<d>[a-z0-9]+)\s*(?<e>[a-z0-9]+)\s*(?<f>[a-z0-9]+)\s*(?<g>[a-z0-9]+)\s*(?<h>[a-z0-9]+)",
                 RegexOptions.IgnoreCase);
-            var stRegex = new Regex(@"[a-f0-9]+:(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
+            var stRegex = new Regex(@"(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
             var xmmRegex = new Regex(
                 @"\s*(?<a>[a-z0-9]+)\s*(?<b>[a-z0-9]+)\s*(?<c>[a-z0-9]+)\s*(?<d>[a-z0-9]+)\s*",
                 RegexOptions.IgnoreCase);
