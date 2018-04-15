@@ -472,9 +472,9 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
             fac.Get(Xmm13).Match("xmm13=           0            0            0            0").Groups["val"].Value.Should()
                 .Be("           0            0            0            0");
 
-            fac.Get(Xmm13h).IsMatch("xmm13h=FFFFFFFFFFFFFFFF").Should().BeTrue();
+            fac.Get(Xmm13h).Match("xmm13h=FFFFFFFFFFFFFFFF").Groups["val"].Value.Should().Be("FFFFFFFFFFFFFFFF");
 
-            fac.Get(Xmm13l).IsMatch("xmm13l=FFFFFFFFFFFFFFFF").Should().BeTrue();
+            fac.Get(Xmm13l).Match("xmm13l=FFFFFFFFFFFFFFFF").Groups["val"].Value.Should().Be("FFFFFFFFFFFFFFFF");
 
             fac.Get(Xmm14).Match("xmm14=           0            0            0            0").Groups["val"].Value.Should()
                 .Be("           0            0            0            0");
@@ -555,136 +555,163 @@ st7= 0.0000000000000000000000000000000000000000000000000000000000000000000000000
                     "ymm0=           0            0            0            0            0            0            0            0")
                 .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm0h).IsMatch("ymm0h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm0h).Match("ymm0h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm0l).IsMatch("ymm0l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm0l).Match("ymm0l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm1)
                             .Match(
                                 "ymm1=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm1h).IsMatch("ymm1h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm1h).Match("ymm1h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm1l).IsMatch("ymm1l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm1l).Match("ymm1l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm2)
                             .Match(
                                 "ymm2=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm2h).IsMatch("ymm2h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm2h).Match("ymm2h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm2l).IsMatch("ymm2l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm2l).Match("ymm2l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm3)
                             .Match(
                                 "ymm3=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm3h).IsMatch("ymm3h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm3h).Match("ymm3h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm3l).IsMatch("ymm3l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm3l).Match("ymm3l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm4)
                             .Match(
                                 "ymm4=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm4h).IsMatch("ymm4h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm4h).Match("ymm4h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm4l).IsMatch("ymm4l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm4l).Match("ymm4l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm5)
                             .Match(
                                 "ymm5=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm5h).IsMatch("ymm5h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm5h).Match("ymm5h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm5l).IsMatch("ymm5l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm5l).Match("ymm5l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm6)
                             .Match(
                                 "ymm6=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm6h).IsMatch("ymm6h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm6h).Match("ymm6h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm6l).IsMatch("ymm6l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm6l).Match("ymm6l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm7)
                             .Match(
                                 "ymm7=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm7h).IsMatch("ymm7h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm7h).Match("ymm7h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm7l).IsMatch("ymm7l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm7l).Match("ymm7l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm8)
                             .Match(
                                 "ymm8=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm8h).IsMatch("ymm8h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm8h).Match("ymm8h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm8l).IsMatch("ymm8l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm8l).Match("ymm8l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm9)
                             .Match(
                                 "ymm9=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm9h).IsMatch("ymm9h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm9h).Match("ymm9h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm9l).IsMatch("ymm9l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm9l).Match("ymm9l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm10)
                             .Match(
                                 "ymm10=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm10h).IsMatch("ymm10h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm10h).Match("ymm10h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm10l).IsMatch("ymm10l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm10l).Match("ymm10l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm11)
                             .Match(
                                 "ymm11=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm11h).IsMatch("ymm11h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm11h).Match("ymm11h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm11l).IsMatch("ymm11l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm11l).Match("ymm11l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm12)
                             .Match(
                                 "ymm12=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm12h).IsMatch("ymm12h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm12h).Match("ymm12h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm12l).IsMatch("ymm12l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm12l).Match("ymm12l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm13)
                             .Match(
                                 "ymm13=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm13h).IsMatch("ymm13h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm13h).Match("ymm13h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm13l).IsMatch("ymm13l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm13l).Match("ymm13l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm14)
                             .Match(
                                 "ymm14=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm14h).IsMatch("ymm14h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm14h).Match("ymm14h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm14l).IsMatch("ymm14l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm14l).Match("ymm14l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
             fac.Get(Ymm15)
                             .Match(
                                 "ymm15=           0            0            0            0            0            0            0            0")
                             .Groups["val"].Value.Should().Be("           0            0            0            0            0            0            0            0");
 
-            fac.Get(Ymm15h).IsMatch("ymm15h=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm15h).Match("ymm15h=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-            fac.Get(Ymm15l).IsMatch("ymm15l=           0            0            0            0").Should().BeTrue();
+            fac.Get(Ymm15l).Match("ymm15l=           0            0            0            0").Groups["val"].Value.Should()
+                .Be("           0            0            0            0");
 
-
-
-
-
-            fac.Get(Zf).IsMatch("zf=1").Should().BeTrue();
-            fac.Get(Zf).IsMatch("z=11").Should().BeFalse();
+            fac.Get(Zf).Match("zf=1").Groups["val"].Value.Should().Be("1");
         }
     }
 }
