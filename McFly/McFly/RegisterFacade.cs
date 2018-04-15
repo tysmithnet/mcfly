@@ -50,18 +50,1256 @@ namespace McFly
             var registerSet = new RegisterSet();
             var registerNames = string.Join(",", list.Select(x => x.Name));
             var registerText = DebugEngineProxy.Execute(threadId, $"r {registerNames}");
-            foreach (var register in list)
-            {
-                var match = Regex.Match(registerText, $"\\b{register.Name}=(?<val>[a-fA-F0-9]+)");
-                if(!match.Success)
-                    throw new ApplicationException($"Register '{register.Name}' was requested, but was not found in the results");
-                var val = match.Groups["val"].Value;
-                registerSet.Process(register.Name, val, 16);
-            }
-
+            Process(list, registerText, registerSet);
             return registerSet;
         }
-        public Regex Get(Register register)
+
+        public void Process(IEnumerable<Register> registers, string registerText, RegisterSet registerSet)
+        {
+            foreach (var register in registers)
+            {
+                var regex = GetRegisterRegex(register);
+                var match = regex.Match(registerText);
+                var value = match.Groups["val"].Value;
+                ProcessRegister(register, value, registerSet);
+            }
+        }
+
+        public void ProcessRegister(Register register, string input, RegisterSet registerSet, int radix = 16)
+        {
+            register = register ?? throw new ArgumentNullException(nameof(register));
+            input = input ?? throw new ArgumentNullException(nameof(input));
+
+            var ymmRegex = new Regex(
+                @"\s*(?<a>[a-z0-9]+)\s*(?<b>[a-z0-9]+)\s*(?<c>[a-z0-9]+)\s*(?<d>[a-z0-9]+)\s*(?<e>[a-z0-9]+)\s*(?<f>[a-z0-9]+)\s*(?<g>[a-z0-9]+)\s*(?<h>[a-z0-9]+)",
+                RegexOptions.IgnoreCase);
+            var stRegex = new Regex(@"[a-f0-9]+:(?<hi>[a-f0-9]+):(?<lo>[a-f0-9]+)", RegexOptions.IgnoreCase);
+            var xmmRegex = new Regex(
+                @"\s*(?<a>[a-z0-9]+)\s*(?<b>[a-z0-9]+)\s*(?<c>[a-z0-9]+)\s*(?<d>[a-z0-9]+)\s*",
+                RegexOptions.IgnoreCase);
+            switch (register.Name.ToLower())
+            {
+                case "rax":
+                    registerSet.Rax = Convert.ToUInt64(input, radix);
+                    break;
+                case "rbx":
+                    registerSet.Rbx = Convert.ToUInt64(input, radix);
+                    break;
+                case "rcx":
+                    registerSet.Rcx = Convert.ToUInt64(input, radix);
+                    break;
+                case "rdx":
+                    registerSet.Rdx = Convert.ToUInt64(input, radix);
+                    break;
+                case "rsp":
+                    registerSet.Rsp = Convert.ToUInt64(input, radix);
+                    break;
+                case "rbp":
+                    registerSet.Rbp = Convert.ToUInt64(input, radix);
+                    break;
+                case "rsi":
+                    registerSet.Rsi = Convert.ToUInt64(input, radix);
+                    break;
+                case "rdi":
+                    registerSet.Rdi = Convert.ToUInt64(input, radix);
+                    break;
+                case "r8":
+                    registerSet.R8 = Convert.ToUInt64(input, radix);
+                    break;
+                case "r9":
+                    registerSet.R9 = Convert.ToUInt64(input, radix);
+                    break;
+                case "r10":
+                    registerSet.R10 = Convert.ToUInt64(input, radix);
+                    break;
+                case "r11":
+                    registerSet.R11 = Convert.ToUInt64(input, radix);
+                    break;
+                case "r12":
+                    registerSet.R12 = Convert.ToUInt64(input, radix);
+                    break;
+                case "r13":
+                    registerSet.R13 = Convert.ToUInt64(input, radix);
+                    break;
+                case "r14":
+                    registerSet.R14 = Convert.ToUInt64(input, radix);
+                    break;
+                case "r15":
+                    registerSet.R15 = Convert.ToUInt64(input, radix);
+                    break;
+                case "rip":
+                    registerSet.Rip = Convert.ToUInt64(input, radix);
+                    break;
+                case "efl":
+                    registerSet.Efl = Convert.ToUInt32(input, radix);
+                    break;
+                case "cs":
+                    registerSet.Cs = Convert.ToUInt16(input, radix);
+                    break;
+                case "ds":
+                    registerSet.Ds = Convert.ToUInt16(input, radix);
+                    break;
+                case "es":
+                    registerSet.Es = Convert.ToUInt16(input, radix);
+                    break;
+                case "fs":
+                    registerSet.Fs = Convert.ToUInt16(input, radix);
+                    break;
+                case "gs":
+                    registerSet.Gs = Convert.ToUInt16(input, radix);
+                    break;
+                case "ss":
+                    registerSet.Ss = Convert.ToUInt16(input, radix);
+                    break;
+                case "dr0":
+                    registerSet.Dr0 = Convert.ToUInt64(input, radix);
+                    break;
+                case "dr1":
+                    registerSet.Dr1 = Convert.ToUInt64(input, radix);
+                    break;
+                case "dr2":
+                    registerSet.Dr2 = Convert.ToUInt64(input, radix);
+                    break;
+                case "dr3":
+                    registerSet.Dr3 = Convert.ToUInt64(input, radix);
+                    break;
+                case "dr6":
+                    registerSet.Dr6 = Convert.ToUInt64(input, radix);
+                    break;
+                case "dr7":
+                    registerSet.Dr7 = Convert.ToUInt64(input, radix);
+                    break;
+                case "fpcw":
+                    registerSet.Fpcw = Convert.ToUInt16(input, radix);
+                    break;
+                case "fpsw":
+                    registerSet.Fpsw = Convert.ToUInt16(input, radix);
+                    break;
+                case "fptw":
+                    registerSet.Fptw = Convert.ToUInt16(input, radix);
+                    break;
+                case "fopcode":
+                    registerSet.Fopcode = Convert.ToUInt32(input, radix);
+                    break;
+                case "fpip":
+                    registerSet.Fpip = Convert.ToUInt32(input, radix);
+                    break;
+                case "fpipsel":
+                    registerSet.Fpipsel = Convert.ToUInt32(input, radix);
+                    break;
+                case "fpdp":
+                    registerSet.Fpdp = Convert.ToUInt32(input, radix);
+                    break;
+                case "fpdpsel":
+                    registerSet.Fpdpsel = Convert.ToUInt32(input, radix);
+                    break;
+                case "st0":
+                    {
+                        var regex = stRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var high = match.Groups["hi"].Value;
+                        var low = match.Groups["lo"].Value;
+                        var builder = new ByteArrayBuilder();
+                        var bytes = builder.AppdendHexString(high).AppdendHexString(low).Reverse().Build();
+                        registerSet.St0 = bytes;
+                        break;
+                    }
+                case "st1":
+                    {
+                        var regex = stRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var high = match.Groups["hi"].Value;
+                        var low = match.Groups["lo"].Value;
+                        var builder = new ByteArrayBuilder();
+                        var bytes = builder.AppdendHexString(high).AppdendHexString(low).Reverse().Build();
+                        registerSet.St1 = bytes;
+                        break;
+                    }
+                case "st2":
+                    {
+                        var regex = stRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var high = match.Groups["hi"].Value;
+                        var low = match.Groups["lo"].Value;
+                        var builder = new ByteArrayBuilder();
+                        var bytes = builder.AppdendHexString(high).AppdendHexString(low).Reverse().Build();
+                        registerSet.St2 = bytes;
+                        break;
+                    }
+                case "st3":
+                    {
+                        var regex = stRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var high = match.Groups["hi"].Value;
+                        var low = match.Groups["lo"].Value;
+                        var builder = new ByteArrayBuilder();
+                        var bytes = builder.AppdendHexString(high).AppdendHexString(low).Reverse().Build();
+                        registerSet.St3 = bytes;
+                        break;
+                    }
+                case "st4":
+                    {
+                        var regex = stRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var high = match.Groups["hi"].Value;
+                        var low = match.Groups["lo"].Value;
+                        var builder = new ByteArrayBuilder();
+                        var bytes = builder.AppdendHexString(high).AppdendHexString(low).Reverse().Build();
+                        registerSet.St4 = bytes;
+                        break;
+                    }
+                case "st5":
+                    {
+                        var regex = stRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var high = match.Groups["hi"].Value;
+                        var low = match.Groups["lo"].Value;
+                        var builder = new ByteArrayBuilder();
+                        var bytes = builder.AppdendHexString(high).AppdendHexString(low).Reverse().Build();
+                        registerSet.St5 = bytes;
+                        break;
+                    }
+                case "st6":
+                    {
+                        var regex = stRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var high = match.Groups["hi"].Value;
+                        var low = match.Groups["lo"].Value;
+                        var builder = new ByteArrayBuilder();
+                        var bytes = builder.AppdendHexString(high).AppdendHexString(low).Reverse().Build();
+                        registerSet.St6 = bytes;
+                        break;
+                    }
+                case "st7":
+                    {
+                        var regex = stRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var high = match.Groups["hi"].Value;
+                        var low = match.Groups["lo"].Value;
+                        var builder = new ByteArrayBuilder();
+                        var bytes = builder.AppdendHexString(high).AppdendHexString(low).Reverse().Build();
+                        registerSet.St7 = bytes;
+                        break;
+                    }
+                case "mm0":
+                    registerSet.Mm0 = Convert.ToUInt64(input, radix);
+                    break;
+                case "mm1":
+                    registerSet.Mm1 = Convert.ToUInt64(input, radix);
+                    break;
+                case "mm2":
+                    registerSet.Mm2 = Convert.ToUInt64(input, radix);
+                    break;
+                case "mm3":
+                    registerSet.Mm3 = Convert.ToUInt64(input, radix);
+                    break;
+                case "mm4":
+                    registerSet.Mm4 = Convert.ToUInt64(input, radix);
+                    break;
+                case "mm5":
+                    registerSet.Mm5 = Convert.ToUInt64(input, radix);
+                    break;
+                case "mm6":
+                    registerSet.Mm6 = Convert.ToUInt64(input, radix);
+                    break;
+                case "mm7":
+                    registerSet.Mm7 = Convert.ToUInt64(input, radix);
+                    break;
+                case "mxcsr":
+                    registerSet.Mxcsr = Convert.ToUInt32(input, radix);
+                    break;
+                case "ymm0":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm0 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm1":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm1 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm2":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm2 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm3":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm3 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm4":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm4 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm5":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm5 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm6":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm6 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm7":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm7 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm8":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm8 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm9":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm9 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm10":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm10 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm11":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm11 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm12":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm12 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm13":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm13 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm14":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm14 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "ymm15":
+                    {
+                        var regex = ymmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Ymm15 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+
+                case "xmm0":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm0 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm1":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm1 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm2":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm2 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm3":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;                
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm3 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm4":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;              
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm4 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm5":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm5 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm6":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm6 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm7":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm7 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm8":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm8 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm9":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm9 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm10":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm10 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm11":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm11 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm12":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;                
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm12 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm13":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm13 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm14":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm14 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm15":
+                    {
+                        var regex = xmmRegex;
+                        var match = regex.Match(input);
+                        if (!match.Success)
+                            break;
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        registerSet.Xmm15 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        break;
+                    }
+                case "xmm0l":
+                    registerSet.Xmm0l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm1l":
+                    registerSet.Xmm1l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm2l":
+                    registerSet.Xmm2l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm3l":
+                    registerSet.Xmm3l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm4l":
+                    registerSet.Xmm4l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm5l":
+                    registerSet.Xmm5l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm6l":
+                    registerSet.Xmm6l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm7l":
+                    registerSet.Xmm7l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm8l":
+                    registerSet.Xmm8l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm9l":
+                    registerSet.Xmm9l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm10l":
+                    registerSet.Xmm10l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm11l":
+                    registerSet.Xmm11l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm12l":
+                    registerSet.Xmm12l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm13l":
+                    registerSet.Xmm13l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm14l":
+                    registerSet.Xmm14l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm15l":
+                    registerSet.Xmm15l = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm0h":
+                    registerSet.Xmm0h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm1h":
+                    registerSet.Xmm1h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm2h":
+                    registerSet.Xmm2h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm3h":
+                    registerSet.Xmm3h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm4h":
+                    registerSet.Xmm4h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm5h":
+                    registerSet.Xmm5h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm6h":
+                    registerSet.Xmm6h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm7h":
+                    registerSet.Xmm7h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm8h":
+                    registerSet.Xmm8h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm9h":
+                    registerSet.Xmm9h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm10h":
+                    registerSet.Xmm10h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm11h":
+                    registerSet.Xmm11h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm12h":
+                    registerSet.Xmm12h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm13h":
+                    registerSet.Xmm13h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm14h":
+                    registerSet.Xmm14h = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "xmm15h":
+                    registerSet.Xmm15h = Convert.ToUInt64(input, 16);
+                    break;
+                case "ymm0h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm0h = bytes;
+                        break;
+                    }
+
+                case "ymm1h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm1h = bytes;
+                        break;
+                    }
+
+                case "ymm2h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm2h = bytes;
+                        break;
+                    }
+
+                case "ymm3h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm3h = bytes;
+                        break;
+                    }
+
+                case "ymm4h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm4h = bytes;
+                        break;
+                    }
+
+                case "ymm5h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm5h = bytes;
+                        break;
+                    }
+
+                case "ymm6h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm6h = bytes;
+                        break;
+                    }
+
+                case "ymm7h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm7h = bytes;
+                        break;
+                    }
+
+                case "ymm8h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm8h = bytes;
+                        break;
+                    }
+
+                case "ymm9h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm9h = bytes;
+                        break;
+                    }
+
+                case "ymm10h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm10h = bytes;
+                        break;
+                    }
+
+                case "ymm11h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm11h = bytes;
+                        break;
+                    }
+
+                case "ymm12h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm12h = bytes;
+                        break;
+                    }
+
+                case "ymm13h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm13h = bytes;
+                        break;
+                    }
+
+                case "ymm14h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm14h = bytes;
+                        break;
+                    }
+
+                case "ymm15h":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm15h = bytes;
+                        break;
+                    }
+                case "ymm0l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm0l = bytes;
+                        break;
+                    }
+
+                case "ymm1l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm1l = bytes;
+                        break;
+                    }
+
+                case "ymm2l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm2l = bytes;
+                        break;
+                    }
+
+                case "ymm3l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm3l = bytes;
+                        break;
+                    }
+
+                case "ymm4l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm4l = bytes;
+                        break;
+                    }
+
+                case "ymm5l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm5l = bytes;
+                        break;
+                    }
+
+                case "ymm6l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm6l = bytes;
+                        break;
+                    }
+
+                case "ymm7l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm7l = bytes;
+                        break;
+                    }
+
+                case "ymm8l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm8l = bytes;
+                        break;
+                    }
+
+                case "ymm9l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm9l = bytes;
+                        break;
+                    }
+
+                case "ymm10l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm10l = bytes;
+                        break;
+                    }
+
+                case "ymm11l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm11l = bytes;
+                        break;
+                    }
+
+                case "ymm12l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm12l = bytes;
+                        break;
+                    }
+
+                case "ymm13l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm13l = bytes;
+                        break;
+                    }
+
+                case "ymm14l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm14l = bytes;
+                        break;
+                    }
+
+                case "ymm15l":
+                    {
+                        var stripped = Regex.Replace(input, @"\s*", "");
+                        var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
+                        registerSet.Ymm15l = bytes;
+                        break;
+                    }
+                case "exfrom":
+
+                    registerSet.Exfrom = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "exto":
+
+                    registerSet.Exto = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "brfrom":
+
+                    registerSet.Brfrom = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "brto":
+
+                    registerSet.Brto = Convert.ToUInt64(input, 16);
+                    break;
+
+                case "eax":
+
+                    registerSet.Eax = Convert.ToUInt32(input, 16);
+                    break;
+
+                case "ecx":
+
+                    registerSet.Ecx = Convert.ToUInt32(input, 16);
+                    break;
+
+                case "edx":
+
+                    registerSet.Edx = Convert.ToUInt32(input, 16);
+                    break;
+
+                case "ebx":
+
+                    registerSet.Ebx = Convert.ToUInt32(input, 16);
+                    break;
+
+                case "esp":
+
+                    registerSet.Esp = Convert.ToUInt32(input, 16);
+                    break;
+
+                case "ebp":
+
+                    registerSet.Ebp = Convert.ToUInt32(input, 16);
+                    break;
+
+                case "esi":
+
+                    registerSet.Esi = Convert.ToUInt32(input, 16);
+                    break;
+
+                case "edi":
+
+                    registerSet.Edi = Convert.ToUInt32(input, 16);
+                    break;
+
+                case "r8d":
+                    registerSet.R8d = Convert.ToUInt32(input, 16);
+                    break;
+                case "r9d":
+                    registerSet.R9d = Convert.ToUInt32(input, 16);
+                    break;
+                case "r10d":
+                    registerSet.R10d = Convert.ToUInt32(input, 16);
+                    break;
+                case "r11d":
+                    registerSet.R11d = Convert.ToUInt32(input, 16);
+                    break;
+                case "r12d":
+                    registerSet.R12d = Convert.ToUInt32(input, 16);
+                    break;
+                case "r13d":
+                    registerSet.R13d = Convert.ToUInt32(input, 16);
+                    break;
+                case "r14d":
+                    registerSet.R14d = Convert.ToUInt32(input, 16);
+                    break;
+                case "r15d":
+                    registerSet.R15d = Convert.ToUInt32(input, 16);
+                    break;
+                case "eip":
+                    {
+                        registerSet.Eip = Convert.ToUInt32(input, 16);
+                        break;
+                    }
+                case "ax":
+                    {
+                        registerSet.Ax = Convert.ToUInt16(input, 16);
+                        break;
+                    }
+                case "cx":
+                    {
+                        registerSet.Cx = Convert.ToUInt16(input, 16);
+                        break;
+                    }
+                case "dx":
+                    {
+                        registerSet.Dx = Convert.ToUInt16(input, 16);
+                        break;
+                    }
+                case "bx":
+                    {
+                        registerSet.Bx =
+                            Convert.ToUInt16(input, 16);
+                        break;
+                    }
+                case "sp":
+                    {
+                        registerSet.Sp = Convert.ToUInt16(input, 16);
+                        break;
+                    }
+                case "bp":
+                    {
+                        registerSet.Bp = Convert.ToUInt16(input, 16);
+                        break;
+                    }
+                case "si":
+                    registerSet.Si = Convert.ToUInt16(input, 16);
+                    break;
+                case "di":
+                    registerSet.Di = Convert.ToUInt16(input, 16);
+                    break;
+                case "r8w":
+                    registerSet.R8w = Convert.ToUInt16(input, 16);
+                    break;
+                case "r9w":
+                    registerSet.R9w = Convert.ToUInt16(input, 16);
+                    break;
+                case "r10w":
+                    registerSet.R10w = Convert.ToUInt16(input, 16);
+                    break;
+                case "r11w":
+                    registerSet.R11w = Convert.ToUInt16(input, 16);
+                    break;
+                case "r12w":
+                    registerSet.R12w = Convert.ToUInt16(input, 16);
+                    break;
+                case "r13w":
+                    registerSet.R13w = Convert.ToUInt16(input, 16);
+                    break;
+                case "r14w":
+                    registerSet.R14w = Convert.ToUInt16(input, 16);
+                    break;
+                case "r15w":
+                    registerSet.R15w = Convert.ToUInt16(input, 16);
+                    break;
+                case "ip":
+                    registerSet.Ip = Convert.ToUInt16(input, 16);
+                    break;
+                case "fl":
+                    registerSet.Fl = Convert.ToUInt16(input, 16);
+                    break;
+                case "al":
+                    registerSet.Al = Convert.ToByte(input, 16);
+                    break;
+                case "bl":
+                    registerSet.Bl = Convert.ToByte(input, 16);
+                    break;
+                case "cl":
+                    registerSet.Cl = Convert.ToByte(input, 16);
+                    break;
+                case "spl":
+                    registerSet.Spl = Convert.ToByte(input, 16);
+                    break;
+                case "dl":
+                    registerSet.Dl = Convert.ToByte(input, 16);
+                    break;
+                case "bpl":
+                    registerSet.Bpl = Convert.ToByte(input, 16);
+                    break;
+                case "sil":
+                    registerSet.Sil = Convert.ToByte(input, 16);
+                    break;
+                case "dil":
+                    registerSet.Dil = Convert.ToByte(input, 16);
+                    break;
+                case "r8b":
+                    registerSet.R8b = Convert.ToByte(input, 16);
+                    break;
+                case "r9b":
+                    registerSet.R9b = Convert.ToByte(input, 16);
+                    break;
+                case "r10b":
+                    registerSet.R10b = Convert.ToByte(input, 16);
+                    break;
+                case "r11b":
+                    registerSet.R11b = Convert.ToByte(input, 16);
+                    break;
+                case "r12b":
+                    registerSet.R12b = Convert.ToByte(input, 16);
+                    break;
+                case "r13b":
+                    registerSet.R13b = Convert.ToByte(input, 16);
+                    break;
+                case "r14b":
+                    registerSet.R14b = Convert.ToByte(input, 16);
+                    break;
+                case "r15b":
+                    registerSet.R15b = Convert.ToByte(input, 16);
+                    break;
+                case "ah":
+                    registerSet.Ah = Convert.ToByte(input, 16);
+                    break;
+                case "bh":
+                    registerSet.Bh = Convert.ToByte(input, 16);
+                    break;
+                case "ch":
+                    registerSet.Ch = Convert.ToByte(input, 16);
+                    break;
+                case "dh":
+                    registerSet.Dh = Convert.ToByte(input, 16);
+                    break;
+                case "iopl":
+                    registerSet.Iopl = Convert.ToByte(input, 16);
+                    break;
+                case "of":
+                    registerSet.Of = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "df":
+                    registerSet.Df = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "if":
+                    registerSet.If = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "tf":
+                    registerSet.Tf = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "sf":
+                    registerSet.Sf = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "zf":
+                    registerSet.Zf = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "af":
+                    registerSet.Af = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "pf":
+                    registerSet.Pf = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "cf":
+                    registerSet.Cf = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "vip":
+                    registerSet.Vip = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                case "vif":
+                    registerSet.Vif = Convert.ToUInt64(input, 16) > 0;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(register)} has a value of {register} which is not a valid register");
+            }
+        }
+
+        public Regex GetRegisterRegex(Register register)
         {
             if (register == Register.Af) return new Regex(@"(^|[ ,])af=(?<val>[a-f0-9]+)", RegexOptions.IgnoreCase);
             if (register == Register.Ah) return new Regex(@"(^|[ ,])ah=(?<val>[a-f0-9]+)", RegexOptions.IgnoreCase);
@@ -172,14 +1410,14 @@ namespace McFly
             if (register == Register.Sp) return new Regex(@"(^|[ ,])sp=(?<val>[a-f0-9]+)", RegexOptions.IgnoreCase);
             if (register == Register.Spl) return new Regex(@"(^|[ ,])spl=(?<val>[a-f0-9]+)", RegexOptions.IgnoreCase);
             if (register == Register.Ss) return new Regex(@"(^|[ ,])ss=(?<val>[a-f0-9]+)", RegexOptions.IgnoreCase);
-            if (register == Register.St0) return new Regex(@"(^|[ ,])st0= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<hi>[a-f0-9]{4}):(?<lo>[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
-            if (register == Register.St1) return new Regex(@"(^|[ ,])st1= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<hi>[a-f0-9]{4}):(?<lo>[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
-            if (register == Register.St2) return new Regex(@"(^|[ ,])st2= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<hi>[a-f0-9]{4}):(?<lo>[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
-            if (register == Register.St3) return new Regex(@"(^|[ ,])st3= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<hi>[a-f0-9]{4}):(?<lo>[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
-            if (register == Register.St4) return new Regex(@"(^|[ ,])st4= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<hi>[a-f0-9]{4}):(?<lo>[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
-            if (register == Register.St5) return new Regex(@"(^|[ ,])st5= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<hi>[a-f0-9]{4}):(?<lo>[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
-            if (register == Register.St6) return new Regex(@"(^|[ ,])st6= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<hi>[a-f0-9]{4}):(?<lo>[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
-            if (register == Register.St7) return new Regex(@"(^|[ ,])st7= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<hi>[a-f0-9]{4}):(?<lo>[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
+            if (register == Register.St0) return new Regex(@"(^|[ ,])st0= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<val>[a-f0-9]{4}:[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
+            if (register == Register.St1) return new Regex(@"(^|[ ,])st1= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<val>[a-f0-9]{4}:[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
+            if (register == Register.St2) return new Regex(@"(^|[ ,])st2= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<val>[a-f0-9]{4}:[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
+            if (register == Register.St3) return new Regex(@"(^|[ ,])st3= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<val>[a-f0-9]{4}:[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
+            if (register == Register.St4) return new Regex(@"(^|[ ,])st4= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<val>[a-f0-9]{4}:[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
+            if (register == Register.St5) return new Regex(@"(^|[ ,])st5= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<val>[a-f0-9]{4}:[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
+            if (register == Register.St6) return new Regex(@"(^|[ ,])st6= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<val>[a-f0-9]{4}:[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
+            if (register == Register.St7) return new Regex(@"(^|[ ,])st7= [a-f0-9-]+.[a-f0-9]+[a-f0-9]+e\+[a-f0-9]+ \(0:(?<val>[a-f0-9]{4}:[a-f0-9]{16})\)", RegexOptions.IgnoreCase);
             if (register == Register.Tf) return new Regex(@"(^|[ ,])tf=(?<val>[a-f0-9]+)", RegexOptions.IgnoreCase);
             if (register == Register.Vif) return new Regex(@"(^|[ ,])vif=(?<val>[a-f0-9]+)", RegexOptions.IgnoreCase);
             if (register == Register.Vip) return new Regex(@"(^|[ ,])vip=(?<val>[a-f0-9]+)", RegexOptions.IgnoreCase);
