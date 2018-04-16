@@ -367,7 +367,15 @@ namespace McFly
                 last = breakRecord.Position;
             }
 
-            ServerClient.UpsertFrames(frames);
+            try
+            {
+                ServerClient.UpsertFrames(frames);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error persisting frames: {e.GetType().FullName} - {e.Message}");
+                DebugEngineProxy.WriteLine($"Error persisting frames: {e.GetType().FullName} - {e.Message}");
+            }
         }
 
         /// <summary>

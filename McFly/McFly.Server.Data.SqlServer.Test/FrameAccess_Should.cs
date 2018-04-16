@@ -259,6 +259,7 @@ namespace McFly.Server.Data.SqlServer.Test
             access.GetFrame("", new Position(0, 0), 1).RegisterSet.Rbx.Should().Be(4);
             access.GetFrame("", new Position(1, 0), 1).RegisterSet.Rax.Should().Be(13);
             access.GetFrame("", new Position(1, 0), 1).RegisterSet.Rbx.Should().Be(4);
+            // todo: need more complete testing
         }
     }
 }

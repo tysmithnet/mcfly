@@ -15,8 +15,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using Common.Logging;
 using LinqKit;
 using McFly.Core;
@@ -67,7 +69,20 @@ namespace McFly.Server.Data.SqlServer
                         context.FrameEntities.Add(source);
                 }
 
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    var sb = new StringBuilder();
+                    var errors = e.EntityValidationErrors.SelectMany(x => x.ValidationErrors)
+                        .Select(x => $"Validation Error: {x.PropertyName} - {x.ErrorMessage}");
+                    sb.AppendLine($"There were validation errors when trying to persist the request:");
+                    var message = string.Join(Environment.NewLine, errors);
+                    sb.AppendLine(message);
+                    throw new ApplicationException(sb.ToString());
+                }
             }
         }
 

@@ -65,8 +65,8 @@ namespace McFly.Server.Data.SqlServer
         public string Brto { get; set; }
 
         [Column("cs")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Cs { get; set; }
 
         [Column("dr0")]
@@ -100,8 +100,8 @@ namespace McFly.Server.Data.SqlServer
         public string Dr7 { get; set; }
 
         [Column("ds")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Ds { get; set; }
 
         [Column("efl")]
@@ -110,8 +110,8 @@ namespace McFly.Server.Data.SqlServer
         public string Efl { get; set; }
 
         [Column("es")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Es { get; set; }
 
         [Column("exfrom")]
@@ -215,8 +215,8 @@ namespace McFly.Server.Data.SqlServer
         public string Mm7 { get; set; }
 
         [Column("mxcsr")]
-        [MaxLength(16)]
-        [MinLength(16)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Mxcsr { get; set; }
 
         [Column("st0")]
@@ -345,88 +345,88 @@ namespace McFly.Server.Data.SqlServer
         public string Rsp { get; set; }
 
         [Column("ss")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Ss { get; set; }
 
         [Column("ymm0")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm0 { get; set; }
 
         [Column("ymm1")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm1 { get; set; }
 
         [Column("ymm2")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm2 { get; set; }
 
         [Column("ymm3")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm3 { get; set; }
 
         [Column("ymm4")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm4 { get; set; }
 
         [Column("ymm5")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm5 { get; set; }
 
         [Column("ymm6")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm6 { get; set; }
 
         [Column("ymm7")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm7 { get; set; }
 
         [Column("ymm8")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm8 { get; set; }
 
         [Column("ymm9")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm9 { get; set; }
 
         [Column("ymm10")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm10 { get; set; }
 
         [Column("ymm11")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm11 { get; set; }
 
         [Column("ymm12")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm12 { get; set; }
 
         [Column("ymm13")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm13 { get; set; }
 
         [Column("ymm14")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm14 { get; set; }
 
         [Column("ymm15")]
-        [MaxLength(32)]
-        [MinLength(32)]
+        [MaxLength(64)]
+        [MinLength(64)]
         public string Ymm15 { get; set; }
         
 

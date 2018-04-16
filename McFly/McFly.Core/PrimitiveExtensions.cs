@@ -97,7 +97,7 @@ namespace McFly.Core
         {
             if (byteArray == null)
                 return null;
-            return string.Join("", isLittleEndian ? byteArray.Select(x => $"{x:2}").Reverse() : byteArray.Select(x => $"{x:2}"));
+            return string.Join("", isLittleEndian ? byteArray.Select(x => $"{x:X2}").Reverse() : byteArray.Select(x => $"{x:X2}"));
         }
 
         /// <summary>

@@ -419,7 +419,7 @@ namespace McFly.Core.Registers
             }
         }
 
-        public ushort? Cs { get; set; }
+        public uint? Cs { get; set; }
 
         [JsonIgnore]
         [XmlIgnore]
@@ -521,7 +521,7 @@ namespace McFly.Core.Registers
         public ulong? Dr3 { get; set; }
         public ulong? Dr6 { get; set; }
         public ulong? Dr7 { get; set; }
-        public ushort? Ds { get; set; }
+        public uint? Ds { get; set; }
 
         [JsonIgnore]
         [XmlIgnore]
@@ -645,7 +645,7 @@ namespace McFly.Core.Registers
             }
         }
 
-        public ushort? Es { get; set; }
+        public uint? Es { get; set; }
 
         [JsonIgnore]
         [XmlIgnore]
@@ -695,11 +695,11 @@ namespace McFly.Core.Registers
             }
         }
 
-        public ushort? Fpcw { get; set; }
-        public ushort? Fpsw { get; set; }
-        public ushort? Fptw { get; set; }
-        public ushort? Fs { get; set; }
-        public ushort? Gs { get; set; }
+        public uint? Fpcw { get; set; }
+        public uint? Fpsw { get; set; }
+        public uint? Fptw { get; set; }
+        public uint? Fs { get; set; }
+        public uint? Gs { get; set; }
 
         [JsonIgnore]
         [XmlIgnore]
@@ -1266,7 +1266,7 @@ namespace McFly.Core.Registers
             }
         }
 
-        public ushort? Ss { get; set; }
+        public uint? Ss { get; set; }
 
         public byte[] St0
         {
