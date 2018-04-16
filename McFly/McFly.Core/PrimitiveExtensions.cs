@@ -212,9 +212,9 @@ namespace McFly.Core
             return (ushort) uintValue;
         }
 
-        public static ushort Lo16(this uint uintValue, ushort ushortValue)
+        public static uint Lo16(this uint uintValue, ushort ushortValue)
         {
-            return (ushort)(((uintValue >> 16) << 16) | ushortValue);
+            return ((uintValue >> 16) << 16) | ushortValue;
         }
 
         public static byte Lo8(this ushort ushortValue)
@@ -224,7 +224,7 @@ namespace McFly.Core
 
         public static ushort Lo8(this ushort ushortValue, byte byteValue)
         {
-            ushortValue &= 0x1100;
+            ushortValue &= 0xFF00;
             ushortValue |= byteValue;
             return ushortValue;
         }
@@ -236,7 +236,7 @@ namespace McFly.Core
 
         public static ushort Hi8(this ushort ushortValue, byte byteValue)
         {
-            ushortValue &= 0x0011;
+            ushortValue &= 0x00FF;
             ushortValue |= (ushort)(byteValue << 8);
             return ushortValue;
         }
