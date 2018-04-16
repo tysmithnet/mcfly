@@ -125,53 +125,53 @@ namespace McFly.Server.Data.SqlServer
         public string Exto { get; set; }
 
         [Column("fpcw")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Fpcw { get; set; }
 
         [Column("fpsw")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Fpsw { get; set; }
 
         [Column("fptw")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Fptw { get; set; }
 
         [Column("fopcode")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Fopcode { get; set; }
 
         [Column("fpip")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Fpip { get; set; }
 
         [Column("fpipsel")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Fpipsel { get; set; }
 
         [Column("fpdp")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Fpdp { get; set; }
 
         [Column("fpdpsel")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Fpdpsel { get; set; }
 
         [Column("fs")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Fs { get; set; }
 
         [Column("gs")]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [MaxLength(8)]
+        [MinLength(8)]
         public string Gs { get; set; }
 
         [Column("mm0")]
