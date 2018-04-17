@@ -4,7 +4,7 @@
 // Created          : 02-28-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 04-07-2018
+// Last Modified On : 04-16-2018
 // ***********************************************************************
 // <copyright file="RegisterSet.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -22,33 +22,134 @@ namespace McFly.Core
     /// <summary>
     ///     Represents the collection of all register values at a particular instance in time for a specific thread
     /// </summary>
+    /// <seealso cref="System.IEquatable{McFly.Core.RegisterSet}" />
     public class RegisterSet : IEquatable<RegisterSet>
     {
+        /// <summary>
+        ///     The ST0
+        /// </summary>
         private byte[] _st0;
+
+        /// <summary>
+        ///     The ST1
+        /// </summary>
         private byte[] _st1;
+
+        /// <summary>
+        ///     The ST2
+        /// </summary>
         private byte[] _st2;
+
+        /// <summary>
+        ///     The ST3
+        /// </summary>
         private byte[] _st3;
+
+        /// <summary>
+        ///     The ST4
+        /// </summary>
         private byte[] _st4;
+
+        /// <summary>
+        ///     The ST5
+        /// </summary>
         private byte[] _st5;
+
+        /// <summary>
+        ///     The ST6
+        /// </summary>
         private byte[] _st6;
+
+        /// <summary>
+        ///     The ST7
+        /// </summary>
         private byte[] _st7;
+
+        /// <summary>
+        ///     The ymm0
+        /// </summary>
         private byte[] _ymm0;
+
+        /// <summary>
+        ///     The ymm1
+        /// </summary>
         private byte[] _ymm1;
+
+        /// <summary>
+        ///     The ymm10
+        /// </summary>
         private byte[] _ymm10;
+
+        /// <summary>
+        ///     The ymm11
+        /// </summary>
         private byte[] _ymm11;
+
+        /// <summary>
+        ///     The ymm12
+        /// </summary>
         private byte[] _ymm12;
+
+        /// <summary>
+        ///     The ymm13
+        /// </summary>
         private byte[] _ymm13;
+
+        /// <summary>
+        ///     The ymm14
+        /// </summary>
         private byte[] _ymm14;
+
+        /// <summary>
+        ///     The ymm15
+        /// </summary>
         private byte[] _ymm15;
+
+        /// <summary>
+        ///     The ymm2
+        /// </summary>
         private byte[] _ymm2;
+
+        /// <summary>
+        ///     The ymm3
+        /// </summary>
         private byte[] _ymm3;
+
+        /// <summary>
+        ///     The ymm4
+        /// </summary>
         private byte[] _ymm4;
+
+        /// <summary>
+        ///     The ymm5
+        /// </summary>
         private byte[] _ymm5;
+
+        /// <summary>
+        ///     The ymm6
+        /// </summary>
         private byte[] _ymm6;
+
+        /// <summary>
+        ///     The ymm7
+        /// </summary>
         private byte[] _ymm7;
+
+        /// <summary>
+        ///     The ymm8
+        /// </summary>
         private byte[] _ymm8;
+
+        /// <summary>
+        ///     The ymm9
+        /// </summary>
         private byte[] _ymm9;
 
+        /// <summary>
+        ///     Equalses the specified other.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <inheritdoc />
         public bool Equals(RegisterSet other)
         {
@@ -131,6 +232,11 @@ namespace McFly.Core
                    (Ymm15 == other.Ymm15 || Ymm15 != null && other.Ymm15 != null && Ymm15.SequenceEqual(other.Ymm15));
         }
 
+        /// <summary>
+        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         /// <inheritdoc />
         public override bool Equals(object obj)
         {
@@ -140,6 +246,10 @@ namespace McFly.Core
             return Equals((RegisterSet) obj);
         }
 
+        /// <summary>
+        ///     Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         /// <inheritdoc />
         public override int GetHashCode()
         {
@@ -222,11 +332,14 @@ namespace McFly.Core
                 Ymm14?.ToList().ForEach(b => hashCode ^= b);
                 Ymm15?.ToList().ForEach(b => hashCode ^= b);
 
-
                 return hashCode;
             }
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is af.
+        /// </summary>
+        /// <value><c>null</c> if [af] contains no value, <c>true</c> if [af]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -246,6 +359,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ah.
+        /// </summary>
+        /// <value>The ah.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -261,6 +378,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the al.
+        /// </summary>
+        /// <value>The al.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -276,6 +397,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ax.
+        /// </summary>
+        /// <value>The ax.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -291,6 +416,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the bh.
+        /// </summary>
+        /// <value>The bh.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -306,6 +435,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the bl.
+        /// </summary>
+        /// <value>The bl.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -321,6 +454,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the bp.
+        /// </summary>
+        /// <value>The bp.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -336,6 +473,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the BPL.
+        /// </summary>
+        /// <value>The BPL.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -351,9 +492,22 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the brfrom.
+        /// </summary>
+        /// <value>The brfrom.</value>
         public ulong? Brfrom { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the brto.
+        /// </summary>
+        /// <value>The brto.</value>
         public ulong? Brto { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the bx.
+        /// </summary>
+        /// <value>The bx.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -369,6 +523,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is cf.
+        /// </summary>
+        /// <value><c>null</c> if [cf] contains no value, <c>true</c> if [cf]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -388,6 +546,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ch.
+        /// </summary>
+        /// <value>The ch.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -403,6 +565,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the cl.
+        /// </summary>
+        /// <value>The cl.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -418,8 +584,16 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the cs.
+        /// </summary>
+        /// <value>The cs.</value>
         public uint? Cs { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the cx.
+        /// </summary>
+        /// <value>The cx.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -435,6 +609,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is df.
+        /// </summary>
+        /// <value><c>null</c> if [df] contains no value, <c>true</c> if [df]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -454,6 +632,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the dh.
+        /// </summary>
+        /// <value>The dh.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -469,6 +651,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the di.
+        /// </summary>
+        /// <value>The di.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -484,6 +670,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the dil.
+        /// </summary>
+        /// <value>The dil.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -499,6 +689,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the dl.
+        /// </summary>
+        /// <value>The dl.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -514,14 +708,52 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the DR0.
+        /// </summary>
+        /// <value>The DR0.</value>
         public ulong? Dr0 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the DR1.
+        /// </summary>
+        /// <value>The DR1.</value>
         public ulong? Dr1 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the DR2.
+        /// </summary>
+        /// <value>The DR2.</value>
         public ulong? Dr2 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the DR3.
+        /// </summary>
+        /// <value>The DR3.</value>
         public ulong? Dr3 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the DR6.
+        /// </summary>
+        /// <value>The DR6.</value>
         public ulong? Dr6 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the DR7.
+        /// </summary>
+        /// <value>The DR7.</value>
         public ulong? Dr7 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the ds.
+        /// </summary>
+        /// <value>The ds.</value>
         public uint? Ds { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the dx.
+        /// </summary>
+        /// <value>The dx.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -537,6 +769,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the eax.
+        /// </summary>
+        /// <value>The eax.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -552,6 +788,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ebp.
+        /// </summary>
+        /// <value>The ebp.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -567,6 +807,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ebx.
+        /// </summary>
+        /// <value>The ebx.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -582,6 +826,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ecx.
+        /// </summary>
+        /// <value>The ecx.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -597,6 +845,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the edi.
+        /// </summary>
+        /// <value>The edi.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -612,6 +864,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the edx.
+        /// </summary>
+        /// <value>The edx.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -627,8 +883,16 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the efl.
+        /// </summary>
+        /// <value>The efl.</value>
         public uint? Efl { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the eip.
+        /// </summary>
+        /// <value>The eip.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -644,8 +908,16 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the es.
+        /// </summary>
+        /// <value>The es.</value>
         public uint? Es { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the esi.
+        /// </summary>
+        /// <value>The esi.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -661,6 +933,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the esp.
+        /// </summary>
+        /// <value>The esp.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -676,9 +952,22 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the exfrom.
+        /// </summary>
+        /// <value>The exfrom.</value>
         public ulong? Exfrom { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the exto.
+        /// </summary>
+        /// <value>The exto.</value>
         public ulong? Exto { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the fl.
+        /// </summary>
+        /// <value>The fl.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -694,12 +983,70 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the fopcode.
+        /// </summary>
+        /// <value>The fopcode.</value>
+        public uint? Fopcode { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the FPCW.
+        /// </summary>
+        /// <value>The FPCW.</value>
         public uint? Fpcw { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the FPDP.
+        /// </summary>
+        /// <value>The FPDP.</value>
+        public uint? Fpdp { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the fpdpsel.
+        /// </summary>
+        /// <value>The fpdpsel.</value>
+        public uint? Fpdpsel { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the fpip.
+        /// </summary>
+        /// <value>The fpip.</value>
+        public uint? Fpip { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the fpipsel.
+        /// </summary>
+        /// <value>The fpipsel.</value>
+        public uint? Fpipsel { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the FPSW.
+        /// </summary>
+        /// <value>The FPSW.</value>
         public uint? Fpsw { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the FPTW.
+        /// </summary>
+        /// <value>The FPTW.</value>
         public uint? Fptw { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the fs.
+        /// </summary>
+        /// <value>The fs.</value>
         public uint? Fs { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the gs.
+        /// </summary>
+        /// <value>The gs.</value>
         public uint? Gs { get; set; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is if.
+        /// </summary>
+        /// <value><c>null</c> if [if] contains no value, <c>true</c> if [if]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -719,6 +1066,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the iopl.
+        /// </summary>
+        /// <value>The iopl.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -736,6 +1087,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ip.
+        /// </summary>
+        /// <value>The ip.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -751,16 +1106,64 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the MM0.
+        /// </summary>
+        /// <value>The MM0.</value>
         public ulong? Mm0 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the MM1.
+        /// </summary>
+        /// <value>The MM1.</value>
         public ulong? Mm1 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the MM2.
+        /// </summary>
+        /// <value>The MM2.</value>
         public ulong? Mm2 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the MM3.
+        /// </summary>
+        /// <value>The MM3.</value>
         public ulong? Mm3 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the MM4.
+        /// </summary>
+        /// <value>The MM4.</value>
         public ulong? Mm4 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the MM5.
+        /// </summary>
+        /// <value>The MM5.</value>
         public ulong? Mm5 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the MM6.
+        /// </summary>
+        /// <value>The MM6.</value>
         public ulong? Mm6 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the MM7.
+        /// </summary>
+        /// <value>The MM7.</value>
         public ulong? Mm7 { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the MXCSR.
+        /// </summary>
+        /// <value>The MXCSR.</value>
         public uint? Mxcsr { get; set; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is of.
+        /// </summary>
+        /// <value><c>null</c> if [of] contains no value, <c>true</c> if [of]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -780,6 +1183,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is pf.
+        /// </summary>
+        /// <value><c>null</c> if [pf] contains no value, <c>true</c> if [pf]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -799,8 +1206,16 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R10.
+        /// </summary>
+        /// <value>The R10.</value>
         public ulong? R10 { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the R10B.
+        /// </summary>
+        /// <value>The R10B.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -816,6 +1231,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R10D.
+        /// </summary>
+        /// <value>The R10D.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -831,6 +1250,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R10W.
+        /// </summary>
+        /// <value>The R10W.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -846,8 +1269,16 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R11.
+        /// </summary>
+        /// <value>The R11.</value>
         public ulong? R11 { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the R11B.
+        /// </summary>
+        /// <value>The R11B.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -863,6 +1294,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R11D.
+        /// </summary>
+        /// <value>The R11D.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -878,6 +1313,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R11W.
+        /// </summary>
+        /// <value>The R11W.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -893,8 +1332,16 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R12.
+        /// </summary>
+        /// <value>The R12.</value>
         public ulong? R12 { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the R12B.
+        /// </summary>
+        /// <value>The R12B.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -910,6 +1357,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R12D.
+        /// </summary>
+        /// <value>The R12D.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -925,6 +1376,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R12W.
+        /// </summary>
+        /// <value>The R12W.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -940,8 +1395,16 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R13.
+        /// </summary>
+        /// <value>The R13.</value>
         public ulong? R13 { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the R13B.
+        /// </summary>
+        /// <value>The R13B.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -957,6 +1420,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R13D.
+        /// </summary>
+        /// <value>The R13D.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -972,6 +1439,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R13W.
+        /// </summary>
+        /// <value>The R13W.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -987,8 +1458,16 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R14.
+        /// </summary>
+        /// <value>The R14.</value>
         public ulong? R14 { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the R14B.
+        /// </summary>
+        /// <value>The R14B.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1004,6 +1483,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R14D.
+        /// </summary>
+        /// <value>The R14D.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1019,6 +1502,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R14W.
+        /// </summary>
+        /// <value>The R14W.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1034,8 +1521,16 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R15.
+        /// </summary>
+        /// <value>The R15.</value>
         public ulong? R15 { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the R15B.
+        /// </summary>
+        /// <value>The R15B.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1051,6 +1546,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R15D.
+        /// </summary>
+        /// <value>The R15D.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1066,6 +1565,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R15W.
+        /// </summary>
+        /// <value>The R15W.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1082,8 +1585,16 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the r8.
+        /// </summary>
+        /// <value>The r8.</value>
         public ulong? R8 { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the R8B.
+        /// </summary>
+        /// <value>The R8B.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1099,6 +1610,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R8D.
+        /// </summary>
+        /// <value>The R8D.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1114,6 +1629,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R8W.
+        /// </summary>
+        /// <value>The R8W.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1129,8 +1648,16 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the r9.
+        /// </summary>
+        /// <value>The r9.</value>
         public ulong? R9 { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the R9B.
+        /// </summary>
+        /// <value>The R9B.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1146,6 +1673,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R9D.
+        /// </summary>
+        /// <value>The R9D.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1161,6 +1692,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the R9W.
+        /// </summary>
+        /// <value>The R9W.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1176,16 +1711,64 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the rax.
+        /// </summary>
+        /// <value>The rax.</value>
         public ulong? Rax { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the RBP.
+        /// </summary>
+        /// <value>The RBP.</value>
         public ulong? Rbp { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the RBX.
+        /// </summary>
+        /// <value>The RBX.</value>
         public ulong? Rbx { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the RCX.
+        /// </summary>
+        /// <value>The RCX.</value>
         public ulong? Rcx { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the rdi.
+        /// </summary>
+        /// <value>The rdi.</value>
         public ulong? Rdi { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the RDX.
+        /// </summary>
+        /// <value>The RDX.</value>
         public ulong? Rdx { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the rip.
+        /// </summary>
+        /// <value>The rip.</value>
         public ulong? Rip { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the rsi.
+        /// </summary>
+        /// <value>The rsi.</value>
         public ulong? Rsi { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the RSP.
+        /// </summary>
+        /// <value>The RSP.</value>
         public ulong? Rsp { get; set; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is sf.
+        /// </summary>
+        /// <value><c>null</c> if [sf] contains no value, <c>true</c> if [sf]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1205,6 +1788,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the si.
+        /// </summary>
+        /// <value>The si.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1220,6 +1807,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the sil.
+        /// </summary>
+        /// <value>The sil.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1235,6 +1826,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the sp.
+        /// </summary>
+        /// <value>The sp.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1250,6 +1845,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the SPL.
+        /// </summary>
+        /// <value>The SPL.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1265,8 +1864,17 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ss.
+        /// </summary>
+        /// <value>The ss.</value>
         public uint? Ss { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the ST0.
+        /// </summary>
+        /// <value>The ST0.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] St0
         {
             get => _st0;
@@ -1279,6 +1887,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ST1.
+        /// </summary>
+        /// <value>The ST1.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] St1
         {
             get => _st1;
@@ -1291,6 +1904,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ST2.
+        /// </summary>
+        /// <value>The ST2.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] St2
         {
             get => _st2;
@@ -1303,6 +1921,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ST3.
+        /// </summary>
+        /// <value>The ST3.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] St3
         {
             get => _st3;
@@ -1315,6 +1938,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ST4.
+        /// </summary>
+        /// <value>The ST4.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] St4
         {
             get => _st4;
@@ -1327,6 +1955,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ST5.
+        /// </summary>
+        /// <value>The ST5.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] St5
         {
             get => _st5;
@@ -1339,6 +1972,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ST6.
+        /// </summary>
+        /// <value>The ST6.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] St6
         {
             get => _st6;
@@ -1351,6 +1989,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ST7.
+        /// </summary>
+        /// <value>The ST7.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] St7
         {
             get => _st7;
@@ -1363,6 +2006,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is tf.
+        /// </summary>
+        /// <value><c>null</c> if [tf] contains no value, <c>true</c> if [tf]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1382,6 +2029,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is vif.
+        /// </summary>
+        /// <value><c>null</c> if [vif] contains no value, <c>true</c> if [vif]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1401,6 +2052,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is vip.
+        /// </summary>
+        /// <value><c>null</c> if [vip] contains no value, <c>true</c> if [vip]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1420,6 +2075,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM0.
+        /// </summary>
+        /// <value>The XMM0.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1440,6 +2100,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM0H.
+        /// </summary>
+        /// <value>The XMM0H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1458,6 +2122,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM0L.
+        /// </summary>
+        /// <value>The XMM0L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1477,6 +2145,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM1.
+        /// </summary>
+        /// <value>The XMM1.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1497,6 +2170,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM10.
+        /// </summary>
+        /// <value>The XMM10.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1517,6 +2195,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM10H.
+        /// </summary>
+        /// <value>The XMM10H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1535,6 +2217,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM10L.
+        /// </summary>
+        /// <value>The XMM10L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1554,6 +2240,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM11.
+        /// </summary>
+        /// <value>The XMM11.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1574,6 +2265,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM11H.
+        /// </summary>
+        /// <value>The XMM11H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1592,6 +2287,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM11L.
+        /// </summary>
+        /// <value>The XMM11L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1611,6 +2310,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM12.
+        /// </summary>
+        /// <value>The XMM12.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1631,6 +2335,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM12H.
+        /// </summary>
+        /// <value>The XMM12H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1649,6 +2357,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM12L.
+        /// </summary>
+        /// <value>The XMM12L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1668,6 +2380,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM13.
+        /// </summary>
+        /// <value>The XMM13.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1688,6 +2405,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM13H.
+        /// </summary>
+        /// <value>The XMM13H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1706,6 +2427,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM13L.
+        /// </summary>
+        /// <value>The XMM13L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1725,6 +2450,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM14.
+        /// </summary>
+        /// <value>The XMM14.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1745,6 +2475,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM14H.
+        /// </summary>
+        /// <value>The XMM14H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1763,6 +2497,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM14L.
+        /// </summary>
+        /// <value>The XMM14L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1782,6 +2520,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM15.
+        /// </summary>
+        /// <value>The XMM15.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1802,6 +2545,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM15H.
+        /// </summary>
+        /// <value>The XMM15H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1820,6 +2567,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM15L.
+        /// </summary>
+        /// <value>The XMM15L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1839,6 +2590,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM1H.
+        /// </summary>
+        /// <value>The XMM1H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1857,6 +2612,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM1L.
+        /// </summary>
+        /// <value>The XMM1L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1876,6 +2635,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM2.
+        /// </summary>
+        /// <value>The XMM2.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1896,6 +2660,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM2H.
+        /// </summary>
+        /// <value>The XMM2H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1914,6 +2682,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM2L.
+        /// </summary>
+        /// <value>The XMM2L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1933,6 +2705,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM3.
+        /// </summary>
+        /// <value>The XMM3.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1953,6 +2730,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM3H.
+        /// </summary>
+        /// <value>The XMM3H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1971,6 +2752,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM3L.
+        /// </summary>
+        /// <value>The XMM3L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -1990,6 +2775,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM4.
+        /// </summary>
+        /// <value>The XMM4.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2010,6 +2800,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM4H.
+        /// </summary>
+        /// <value>The XMM4H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2028,6 +2822,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM4L.
+        /// </summary>
+        /// <value>The XMM4L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2047,6 +2845,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM5.
+        /// </summary>
+        /// <value>The XMM5.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2067,6 +2870,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM5H.
+        /// </summary>
+        /// <value>The XMM5H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2085,6 +2892,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM5L.
+        /// </summary>
+        /// <value>The XMM5L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2104,6 +2915,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM6.
+        /// </summary>
+        /// <value>The XMM6.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2124,6 +2940,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM6H.
+        /// </summary>
+        /// <value>The XMM6H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2142,6 +2962,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM6L.
+        /// </summary>
+        /// <value>The XMM6L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2161,6 +2985,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM7.
+        /// </summary>
+        /// <value>The XMM7.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2181,6 +3010,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM7H.
+        /// </summary>
+        /// <value>The XMM7H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2199,6 +3032,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM7L.
+        /// </summary>
+        /// <value>The XMM7L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2218,6 +3055,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM8.
+        /// </summary>
+        /// <value>The XMM8.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2238,6 +3080,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM8H.
+        /// </summary>
+        /// <value>The XMM8H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2256,6 +3102,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM8L.
+        /// </summary>
+        /// <value>The XMM8L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2275,6 +3125,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM9.
+        /// </summary>
+        /// <value>The XMM9.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2295,6 +3150,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM9H.
+        /// </summary>
+        /// <value>The XMM9H.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2313,6 +3172,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the XMM9L.
+        /// </summary>
+        /// <value>The XMM9L.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2332,6 +3195,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm0.
+        /// </summary>
+        /// <value>The ymm0.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm0
         {
             get => _ymm0;
@@ -2344,6 +3212,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm0h.
+        /// </summary>
+        /// <value>The ymm0h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2362,6 +3234,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm0l.
+        /// </summary>
+        /// <value>The ymm0l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2371,6 +3247,11 @@ namespace McFly.Core
             set => Xmm0 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm1.
+        /// </summary>
+        /// <value>The ymm1.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm1
         {
             get => _ymm1;
@@ -2383,6 +3264,11 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm10.
+        /// </summary>
+        /// <value>The ymm10.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm10
         {
             get => _ymm10;
@@ -2395,6 +3281,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm10h.
+        /// </summary>
+        /// <value>The ymm10h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2413,6 +3303,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm10l.
+        /// </summary>
+        /// <value>The ymm10l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2422,6 +3316,11 @@ namespace McFly.Core
             set => Xmm10 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm11.
+        /// </summary>
+        /// <value>The ymm11.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm11
         {
             get => _ymm11;
@@ -2434,6 +3333,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm11h.
+        /// </summary>
+        /// <value>The ymm11h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2452,6 +3355,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm11l.
+        /// </summary>
+        /// <value>The ymm11l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2461,6 +3368,11 @@ namespace McFly.Core
             set => Xmm11 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm12.
+        /// </summary>
+        /// <value>The ymm12.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm12
         {
             get => _ymm12;
@@ -2473,6 +3385,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm12h.
+        /// </summary>
+        /// <value>The ymm12h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2491,6 +3407,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm12l.
+        /// </summary>
+        /// <value>The ymm12l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2500,6 +3420,11 @@ namespace McFly.Core
             set => Xmm12 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm13.
+        /// </summary>
+        /// <value>The ymm13.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm13
         {
             get => _ymm13;
@@ -2512,6 +3437,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm13h.
+        /// </summary>
+        /// <value>The ymm13h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2530,6 +3459,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm13l.
+        /// </summary>
+        /// <value>The ymm13l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2539,6 +3472,11 @@ namespace McFly.Core
             set => Xmm13 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm14.
+        /// </summary>
+        /// <value>The ymm14.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm14
         {
             get => _ymm14;
@@ -2551,6 +3489,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm14h.
+        /// </summary>
+        /// <value>The ymm14h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2569,6 +3511,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm14l.
+        /// </summary>
+        /// <value>The ymm14l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2578,6 +3524,11 @@ namespace McFly.Core
             set => Xmm14 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm15.
+        /// </summary>
+        /// <value>The ymm15.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm15
         {
             get => _ymm15;
@@ -2590,6 +3541,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm15h.
+        /// </summary>
+        /// <value>The ymm15h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2608,6 +3563,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm15l.
+        /// </summary>
+        /// <value>The ymm15l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2617,6 +3576,10 @@ namespace McFly.Core
             set => Xmm15 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm1h.
+        /// </summary>
+        /// <value>The ymm1h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2635,6 +3598,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm1l.
+        /// </summary>
+        /// <value>The ymm1l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2644,6 +3611,11 @@ namespace McFly.Core
             set => Xmm1 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm2.
+        /// </summary>
+        /// <value>The ymm2.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm2
         {
             get => _ymm2;
@@ -2656,6 +3628,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm2h.
+        /// </summary>
+        /// <value>The ymm2h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2674,6 +3650,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm2l.
+        /// </summary>
+        /// <value>The ymm2l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2683,6 +3663,11 @@ namespace McFly.Core
             set => Xmm2 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm3.
+        /// </summary>
+        /// <value>The ymm3.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm3
         {
             get => _ymm3;
@@ -2695,6 +3680,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm3h.
+        /// </summary>
+        /// <value>The ymm3h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2713,6 +3702,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm3l.
+        /// </summary>
+        /// <value>The ymm3l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2722,6 +3715,11 @@ namespace McFly.Core
             set => Xmm3 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm4.
+        /// </summary>
+        /// <value>The ymm4.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm4
         {
             get => _ymm4;
@@ -2734,6 +3732,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm4h.
+        /// </summary>
+        /// <value>The ymm4h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2752,6 +3754,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm4l.
+        /// </summary>
+        /// <value>The ymm4l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2761,6 +3767,11 @@ namespace McFly.Core
             set => Xmm4 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm5.
+        /// </summary>
+        /// <value>The ymm5.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm5
         {
             get => _ymm5;
@@ -2773,6 +3784,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm5h.
+        /// </summary>
+        /// <value>The ymm5h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2791,6 +3806,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm5l.
+        /// </summary>
+        /// <value>The ymm5l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2800,6 +3819,11 @@ namespace McFly.Core
             set => Xmm5 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm6.
+        /// </summary>
+        /// <value>The ymm6.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm6
         {
             get => _ymm6;
@@ -2812,6 +3836,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm6h.
+        /// </summary>
+        /// <value>The ymm6h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2830,6 +3858,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm6l.
+        /// </summary>
+        /// <value>The ymm6l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2839,6 +3871,11 @@ namespace McFly.Core
             set => Xmm6 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm7.
+        /// </summary>
+        /// <value>The ymm7.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm7
         {
             get => _ymm7;
@@ -2851,6 +3888,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm7h.
+        /// </summary>
+        /// <value>The ymm7h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2869,6 +3910,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm7l.
+        /// </summary>
+        /// <value>The ymm7l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2878,6 +3923,11 @@ namespace McFly.Core
             set => Xmm7 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm8.
+        /// </summary>
+        /// <value>The ymm8.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm8
         {
             get => _ymm8;
@@ -2890,6 +3940,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm8h.
+        /// </summary>
+        /// <value>The ymm8h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2908,6 +3962,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm8l.
+        /// </summary>
+        /// <value>The ymm8l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2917,6 +3975,11 @@ namespace McFly.Core
             set => Xmm8 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm9.
+        /// </summary>
+        /// <value>The ymm9.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
         public byte[] Ymm9
         {
             get => _ymm9;
@@ -2929,6 +3992,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm9h.
+        /// </summary>
+        /// <value>The ymm9h.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2947,6 +4014,10 @@ namespace McFly.Core
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the ymm9l.
+        /// </summary>
+        /// <value>The ymm9l.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2956,6 +4027,10 @@ namespace McFly.Core
             set => Xmm9 = value;
         }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is zf.
+        /// </summary>
+        /// <value><c>null</c> if [zf] contains no value, <c>true</c> if [zf]; otherwise, <c>false</c>.</value>
         [JsonIgnore]
         [XmlIgnore]
         [SoapIgnore]
@@ -2974,12 +4049,6 @@ namespace McFly.Core
                     Efl = Efl &= ~mask;
             }
         }
-
-        public uint? Fopcode { get; set; }
-        public uint? Fpip { get; set; }
-        public uint? Fpipsel { get; set; }
-        public uint? Fpdp { get; set; }
-        public uint? Fpdpsel { get; set; }
     }
 }
 
