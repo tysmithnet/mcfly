@@ -56,25 +56,25 @@ namespace McFly.Core
         ///     Gets the instruction address.
         /// </summary>
         /// <value>The instruction address.</value>
-        public ulong? InstructionAddress { get; }
+        public ulong? InstructionAddress { get; set; }
 
         /// <summary>
         ///     Gets the op code.
         /// </summary>
         /// <value>The op code.</value>
-        public byte[] OpCode { get; }
+        public byte[] OpCode { get; set; }
 
         /// <summary>
         ///     Gets the op code mnemonic.
         /// </summary>
         /// <value>The op code mnemonic.</value>
-        public string OpCodeMnemonic { get; }
+        public string OpCodeMnemonic { get; set; }
 
         /// <summary>
         ///     Gets the disassembly note.
         /// </summary>
         /// <value>The disassembly note.</value>
-        public string DisassemblyNote { get; }
+        public string DisassemblyNote { get; set; }
 
         /// <summary>
         ///     Equalses the specified other.
