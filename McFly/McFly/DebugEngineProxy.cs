@@ -16,9 +16,11 @@ using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using McFly.Core;
 using McFly.Debugger;
+using Newtonsoft.Json;
 
 namespace McFly
 {
@@ -193,6 +195,21 @@ namespace McFly
             var end = Execute("!tt 100"); // todo: get from trace_info
             var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
             return Position.Parse(endMatch.Groups["pos"].Value);
+        }
+
+        public object GetRegister(uint reg)
+        {
+            Registers.GetNumberRegisters(out var numRegisters);
+            for (int i = 0; i < numRegisters; i++)
+            {
+                var sb = new StringBuilder(1024);
+
+                
+                Registers.GetDescription(i.ToUInt(), sb, 1024, out var nameLength, out var desc);
+                Registers.GetValue(i.ToUInt(), out var val);
+                WriteLine($"{i}: {sb} - {JsonConvert.SerializeObject(val)}");
+            }
+            return null;
         }
     }
 }

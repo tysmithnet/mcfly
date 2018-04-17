@@ -96,6 +96,7 @@ namespace McFly
             .AddSwitch("--ba spec[ spec]", "Memory access breakpoints")
             .AddSwitch("--step n",
                 "Number of positions to record after a break") // todo: should allow for +/- around break
+            .AddExample("!mf index", "Record the current frame")
             .AddExample("!mf index --bm user32!*", "Record all function calls in user32")
             .AddExample("!mf index --ba rw8:abc123", "Record all read/writes to abc123:abc12b")
             .AddExample("!mf index --ba rw8:abc123 --step 3",
@@ -110,6 +111,13 @@ namespace McFly
         /// <returns>Task.</returns>
         public void Process(string[] args)
         {
+            if (args.Length == 0)
+            {
+                var start = TimeTravelFacade.GetCurrentPosition();
+                var eng = DebugEngineProxy as DebugEngineProxy;
+                eng.GetRegister(162);
+                return;
+            }
             var options = ExtractIndexOptions(args);
             var startingPosition = GetStartingPosition(options);
             var endingPosition = GetEndingPosition(options);
