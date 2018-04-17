@@ -30,13 +30,7 @@ using RGiesecke.DllExport;
 namespace McFly
 {
     /*
-     * todo: 32 and 64 bit
      * todo: .NET support
-     * todo: add dump information table (first frame, last frame, etc)
-     * todo: help
-     * todo: add simd and floating point register tables 
-     * todo: add the rest of the registers
-     * todo: add additional checks to sql
      */
     /// <summary>
     ///     Class McFlyExtension.
