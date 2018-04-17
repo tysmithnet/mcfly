@@ -890,9 +890,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm0 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -904,9 +902,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm1 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -918,9 +914,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm2 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -932,9 +926,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm3 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -946,9 +938,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm4 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -960,9 +950,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm5 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -974,9 +962,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm6 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -988,9 +974,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm7 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1002,9 +986,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm8 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1016,9 +998,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm9 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1030,9 +1010,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm10 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1044,9 +1022,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm11 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1058,9 +1034,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm12 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1072,9 +1046,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm13 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1086,9 +1058,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm14 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1100,9 +1070,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Ymm15 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1114,9 +1082,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm0 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1127,9 +1093,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm1 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1140,9 +1104,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm2 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1153,9 +1115,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm3 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1166,9 +1126,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm4 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1179,9 +1137,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm5 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1192,9 +1148,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm6 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1205,9 +1159,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm7 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1218,9 +1170,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm8 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1231,9 +1181,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm9 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1244,9 +1192,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm10 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1257,9 +1203,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm11 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1270,9 +1214,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm12 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1283,9 +1225,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm13 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1296,9 +1236,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm14 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1309,9 +1247,7 @@ namespace McFly
                     var match = regex.Match(input);
                     if (!match.Success)
                         break;
-                    input = string.Join("",
-                        Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
-                            .Select(x => x.PadLeft(8, '0')));
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     registerSet.Xmm15 = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     break;
@@ -1445,6 +1381,7 @@ namespace McFly
                     break;
                 case "ymm0h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm0h = bytes;
@@ -1453,6 +1390,7 @@ namespace McFly
 
                 case "ymm1h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm1h = bytes;
@@ -1461,6 +1399,7 @@ namespace McFly
 
                 case "ymm2h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm2h = bytes;
@@ -1469,6 +1408,7 @@ namespace McFly
 
                 case "ymm3h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm3h = bytes;
@@ -1477,6 +1417,7 @@ namespace McFly
 
                 case "ymm4h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm4h = bytes;
@@ -1485,6 +1426,7 @@ namespace McFly
 
                 case "ymm5h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm5h = bytes;
@@ -1493,6 +1435,7 @@ namespace McFly
 
                 case "ymm6h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm6h = bytes;
@@ -1501,6 +1444,7 @@ namespace McFly
 
                 case "ymm7h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm7h = bytes;
@@ -1509,6 +1453,7 @@ namespace McFly
 
                 case "ymm8h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm8h = bytes;
@@ -1517,6 +1462,7 @@ namespace McFly
 
                 case "ymm9h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm9h = bytes;
@@ -1525,6 +1471,7 @@ namespace McFly
 
                 case "ymm10h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm10h = bytes;
@@ -1533,6 +1480,7 @@ namespace McFly
 
                 case "ymm11h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm11h = bytes;
@@ -1541,6 +1489,7 @@ namespace McFly
 
                 case "ymm12h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm12h = bytes;
@@ -1549,6 +1498,7 @@ namespace McFly
 
                 case "ymm13h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm13h = bytes;
@@ -1557,6 +1507,7 @@ namespace McFly
 
                 case "ymm14h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm14h = bytes;
@@ -1565,6 +1516,7 @@ namespace McFly
 
                 case "ymm15h":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm15h = bytes;
@@ -1572,6 +1524,7 @@ namespace McFly
                 }
                 case "ymm0l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm0l = bytes;
@@ -1580,6 +1533,7 @@ namespace McFly
 
                 case "ymm1l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm1l = bytes;
@@ -1588,6 +1542,7 @@ namespace McFly
 
                 case "ymm2l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm2l = bytes;
@@ -1596,6 +1551,7 @@ namespace McFly
 
                 case "ymm3l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm3l = bytes;
@@ -1604,6 +1560,7 @@ namespace McFly
 
                 case "ymm4l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm4l = bytes;
@@ -1612,6 +1569,7 @@ namespace McFly
 
                 case "ymm5l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm5l = bytes;
@@ -1620,6 +1578,7 @@ namespace McFly
 
                 case "ymm6l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm6l = bytes;
@@ -1628,6 +1587,7 @@ namespace McFly
 
                 case "ymm7l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm7l = bytes;
@@ -1636,6 +1596,7 @@ namespace McFly
 
                 case "ymm8l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm8l = bytes;
@@ -1644,6 +1605,7 @@ namespace McFly
 
                 case "ymm9l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm9l = bytes;
@@ -1652,6 +1614,7 @@ namespace McFly
 
                 case "ymm10l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm10l = bytes;
@@ -1660,6 +1623,7 @@ namespace McFly
 
                 case "ymm11l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm11l = bytes;
@@ -1668,6 +1632,7 @@ namespace McFly
 
                 case "ymm12l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm12l = bytes;
@@ -1676,6 +1641,7 @@ namespace McFly
 
                 case "ymm13l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm13l = bytes;
@@ -1684,6 +1650,7 @@ namespace McFly
 
                 case "ymm14l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm14l = bytes;
@@ -1692,6 +1659,7 @@ namespace McFly
 
                 case "ymm15l":
                 {
+                    input = PadYmmRegister(input);
                     var stripped = Regex.Replace(input, @"\s*", "");
                     var bytes = new ByteArrayBuilder().AppdendHexString(stripped).Reverse().Build();
                     registerSet.Ymm15l = bytes;
@@ -1953,6 +1921,13 @@ namespace McFly
                     throw new ArgumentOutOfRangeException(
                         $"{nameof(register)} has a value of {register} which is not a valid register");
             }
+        }
+
+        private static string PadYmmRegister(string input)
+        {
+            return string.Join("",
+                Regex.Split(input, " ").Where(x => !string.IsNullOrWhiteSpace(x))
+                    .Select(x => x.PadLeft(8, '0')));
         }
 
         /// <summary>

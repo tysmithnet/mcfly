@@ -4,7 +4,7 @@
 // Created          : 02-27-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 04-07-2018
+// Last Modified On : 04-16-2018
 // ***********************************************************************
 // <copyright file="Register.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -65,6 +65,10 @@ namespace McFly.Core
             return X64.FirstOrDefault(x => Regex.IsMatch(name, x.Name, RegexOptions.IgnoreCase));
         }
 
+        /// <summary>
+        ///     Gets all.
+        /// </summary>
+        /// <value>All.</value>
         public static Register[] All { get; }
 
         /// <summary>
@@ -85,6 +89,10 @@ namespace McFly.Core
         /// <value>All registers.</value>
         public static Register[] X64 { get; }
 
+        /// <summary>
+        ///     Gets the X86.
+        /// </summary>
+        /// <value>The X86.</value>
         public static Register[] X86 { get; }
     }
 }
