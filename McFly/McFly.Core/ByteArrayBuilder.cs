@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-12-2018
 // ***********************************************************************
 // <copyright file="ByteArrayBuilder.cs" company="">
 //     Copyright ©  2018
@@ -40,6 +40,19 @@ namespace McFly.Core
             return this;
         }
 
+        /// <summary>
+        ///     Builds a new array based on this builders internal representation.
+        /// </summary>
+        /// <returns>System.Byte[].</returns>
+        public byte[] Build()
+        {
+            return _bytes.ToArray();
+        }
+
+        /// <summary>
+        ///     Reverses this instance.
+        /// </summary>
+        /// <returns>ByteArrayBuilder.</returns>
         public ByteArrayBuilder Reverse()
         {
             _bytes.Reverse();
@@ -50,6 +63,7 @@ namespace McFly.Core
         ///     Strings to byte array.
         /// </summary>
         /// <param name="hex">The hexadecimal.</param>
+        /// <param name="isLittleEndian">if set to <c>true</c> [is little endian].</param>
         /// <returns>System.Byte[].</returns>
         /// <exception cref="FormatException">
         ///     hex
@@ -74,15 +88,6 @@ namespace McFly.Core
             for (var i = 0; i < numberChars; i += 2)
                 bytes[i / 2] = Convert.ToByte(byteString.Substring(i, 2), 16);
             return isLittleEndian ? bytes.Reverse().ToArray() : bytes;
-        }
-
-        /// <summary>
-        ///     Builds a new array based on this builders internal representation.
-        /// </summary>
-        /// <returns>System.Byte[].</returns>
-        public byte[] Build()
-        {
-            return _bytes.ToArray();
         }
     }
 }

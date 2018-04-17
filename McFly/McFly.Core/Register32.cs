@@ -4,7 +4,7 @@
 // Created          : 04-06-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-07-2018
+// Last Modified On : 04-16-2018
 // ***********************************************************************
 // <copyright file="Register32.cs" company="">
 //     Copyright ©  2018
@@ -136,6 +136,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class EaxRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         /// <seealso cref="Register" />
         public class EaxRegister : Register
@@ -156,6 +157,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class EbpRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class EbpRegister : Register
         {
@@ -175,6 +177,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class EbxRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         /// <seealso cref="Register" />
         public class EbxRegister : Register
@@ -195,6 +198,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class EcxRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         /// <seealso cref="Register" />
         public class EcxRegister : Register
@@ -215,6 +219,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class EdiRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class EdiRegister : Register
         {
@@ -234,6 +239,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class EdxRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         /// <seealso cref="Register" />
         public class EdxRegister : Register
@@ -254,6 +260,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class EdxRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         /// <seealso cref="Register" />
         public class EflRegister : Register
@@ -274,6 +281,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class EipRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class EipRegister : Register
         {
@@ -293,6 +301,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class EsiRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class EsiRegister : Register
         {
@@ -312,6 +321,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class EspRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class EspRegister : Register
         {
@@ -329,8 +339,114 @@ namespace McFly.Core
         }
 
         /// <summary>
+        ///     Class FopcodeRegister.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
+        public class FopcodeRegister : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "fopcode";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 32;
+        }
+
+        /// <summary>
+        ///     Class FpdpRegister.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
+        public class FpdpRegister : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "fpdp";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 32;
+        }
+
+        /// <summary>
+        ///     Class FpdpselRegister.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
+        public class FpdpselRegister : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "fpdpsel";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 32;
+        }
+
+        /// <summary>
+        ///     Class FpipRegister.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
+        public class FpipRegister : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "fpip";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 32;
+        }
+
+        /// <summary>
+        ///     Class FpipselRegister.
+        /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
+        public class FpipselRegister : Register
+        {
+            /// <summary>
+            ///     Gets the name.
+            /// </summary>
+            /// <value>The name.</value>
+            /// <inheritdoc />
+            public override string Name { get; } = "fpipsel";
+
+            /// <summary>
+            ///     Gets the number bits.
+            /// </summary>
+            /// <value>The number bits.</value>
+            /// <inheritdoc />
+            public override int NumBits { get; } = 32;
+        }
+
+        /// <summary>
         ///     Class MxcsrRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class MxcsrRegister : Register
         {
@@ -352,6 +468,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class R10dRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class R10dRegister : Register
         {
@@ -373,6 +490,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class R11dRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class R11dRegister : Register
         {
@@ -394,6 +512,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class R12dRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class R12dRegister : Register
         {
@@ -415,6 +534,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class R13dRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class R13dRegister : Register
         {
@@ -436,6 +556,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class R14dRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class R14dRegister : Register
         {
@@ -457,6 +578,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class R15dRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class R15dRegister : Register
         {
@@ -478,6 +600,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class R8dRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class R8dRegister : Register
         {
@@ -499,6 +622,7 @@ namespace McFly.Core
         /// <summary>
         ///     Class R9dRegister.
         /// </summary>
+        /// <seealso cref="McFly.Core.Register" />
         /// <seealso cref="Register" />
         public class R9dRegister : Register
         {
@@ -513,51 +637,6 @@ namespace McFly.Core
             ///     Gets the number bits.
             /// </summary>
             /// <value>The number bits.</value>
-            /// <inheritdoc />
-            public override int NumBits { get; } = 32;
-        }
-
-        public class FopcodeRegister : Register
-        {
-            /// <inheritdoc />
-            public override string Name { get; } = "fopcode";
-
-            /// <inheritdoc />
-            public override int NumBits { get; } = 32;
-        }
-
-        public class FpipRegister : Register
-        {
-            /// <inheritdoc />
-            public override string Name { get; } = "fpip";
-
-            /// <inheritdoc />
-            public override int NumBits { get; } = 32;
-        }
-
-        public class FpipselRegister : Register
-        {
-            /// <inheritdoc />
-            public override string Name { get; } = "fpipsel";
-
-            /// <inheritdoc />
-            public override int NumBits { get; } = 32;
-        }
-
-        public class FpdpRegister : Register
-        {
-            /// <inheritdoc />
-            public override string Name { get; } = "fpdp";
-
-            /// <inheritdoc />
-            public override int NumBits { get; } = 32;
-        }
-
-        public class FpdpselRegister : Register
-        {
-            /// <inheritdoc />
-            public override string Name { get; } = "fpdpsel";
-
             /// <inheritdoc />
             public override int NumBits { get; } = 32;
         }

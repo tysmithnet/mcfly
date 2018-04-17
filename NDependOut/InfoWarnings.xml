@@ -53,7 +53,13 @@
   <Warning>No application or third party assembly found in directory {C:\projects\mcfly\McFly\McFly.Server.Data.SqlServer\bin\Debug}. This directory doesn't need to be referenced by the NDepend project.</Warning>
   <Warning>No application or third party assembly found in directory {C:\projects\mcfly\McFly\McFly.Server.Data.SqlServer.Test\bin\Debug}. This directory doesn't need to be referenced by the NDepend project.</Warning>
   <Warning>The source file {C:\Users\master\AppData\Local\Temp\tmp36C3\mcfly.il} contains Cil code but has an invalid file extension.</Warning>
-  <Info>235 source files parsed ; 1 source file not found ; all source files in-sync with PDB</Info>
+  <Warning>The source file {C:\projects\mcfly\McFly\McFly\RegisterFacade.cs} (last modified 4/16/2018 8:17:17 PM) and the PDB file of the assembly {mcfly} (last modified 4/16/2018 7:57:38 PM) are not in-sync.</Warning>
+  <Warning>The source file {C:\projects\mcfly\McFly\McFly.Core\ByteArrayBuilder.cs} (last modified 4/16/2018 8:18:43 PM) and the PDB file of the assembly {McFly.Core} (last modified 4/16/2018 7:56:41 PM) are not in-sync.</Warning>
+  <Warning>The source file {C:\projects\mcfly\McFly\McFly.Core\Note.cs} (last modified 4/16/2018 8:15:01 PM) and the PDB file of the assembly {McFly.Core} (last modified 4/16/2018 7:56:41 PM) are not in-sync.</Warning>
+  <Warning>The source file {C:\projects\mcfly\McFly\McFly.Core\PrimitiveExtensions.cs} (last modified 4/16/2018 8:18:54 PM) and the PDB file of the assembly {McFly.Core} (last modified 4/16/2018 7:56:41 PM) are not in-sync.</Warning>
+  <Warning>The source file {C:\projects\mcfly\McFly\McFly.Core\Register32.cs} (last modified 4/16/2018 8:19:15 PM) and the PDB file of the assembly {McFly.Core} (last modified 4/16/2018 7:56:41 PM) are not in-sync.</Warning>
+  <Warning>The source file {C:\projects\mcfly\McFly\McFly.Core\RegisterSet.cs} (last modified 4/16/2018 8:16:26 PM) and the PDB file of the assembly {McFly.Core} (last modified 4/16/2018 7:56:41 PM) are not in-sync.</Warning>
+  <Info>235 source files parsed ; 1 source file not found ; 6 source files not in-sync with PDB</Info>
   <Info>0 code rule has been extracted from code.</Info>
   <Info>No dependency cycle detected in assemblies referencement graph.</Info>
   <Info>Coverage file correctly parsed:
