@@ -203,11 +203,9 @@ namespace McFly
             for (int i = 0; i < numRegisters; i++)
             {
                 var sb = new StringBuilder(1024);
-
-                
                 Registers.GetDescription(i.ToUInt(), sb, 1024, out var nameLength, out var desc);
                 Registers.GetValue(i.ToUInt(), out var val);
-                WriteLine($"{i}: {sb} - {JsonConvert.SerializeObject(val)}");
+                WriteLine($"{i}:{sb}:{desc.Type.ToString()}:{desc.Flags}");
             }
             return null;
         }
