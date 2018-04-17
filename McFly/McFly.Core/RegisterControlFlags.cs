@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace McFly.Core.Registers
+namespace McFly.Core
 {
     /// <summary>
     ///     Class Register.
@@ -94,7 +94,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class AfRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class AfRegister : Register
         {
             /// <summary>
@@ -115,7 +115,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class CfRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class CfRegister : Register
         {
             /// <summary>
@@ -136,7 +136,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class DfRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class DfRegister : Register
         {
             /// <summary>
@@ -157,7 +157,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class IfRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class IfRegister : Register
         {
             /// <summary>
@@ -178,7 +178,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class IoplRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class IoplRegister : Register
         {
             /// <summary>
@@ -199,7 +199,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class OfRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class OfRegister : Register
         {
             /// <summary>
@@ -220,7 +220,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class PfRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class PfRegister : Register
         {
             /// <summary>
@@ -241,7 +241,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class SfRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class SfRegister : Register
         {
             /// <summary>
@@ -262,7 +262,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class TfRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class TfRegister : Register
         {
             /// <summary>
@@ -283,7 +283,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class VifRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class VifRegister : Register
         {
             /// <summary>
@@ -304,7 +304,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class VipRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class VipRegister : Register
         {
             /// <summary>
@@ -325,7 +325,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class ZfRegister.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class ZfRegister : Register
         {
             /// <summary>

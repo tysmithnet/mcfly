@@ -18,7 +18,6 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
 using McFly.Core;
-using McFly.Core.Registers;
 
 namespace McFly
 {

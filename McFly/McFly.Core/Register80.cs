@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace McFly.Core.Registers
+namespace McFly.Core
 {
     /// <summary>
     ///     Class Register.
@@ -70,7 +70,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class St0Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class St0Register : Register
         {
             /// <summary>
@@ -91,7 +91,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class St1Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class St1Register : Register
         {
             /// <summary>
@@ -112,7 +112,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class St2Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class St2Register : Register
         {
             /// <summary>
@@ -133,7 +133,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class St3Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class St3Register : Register
         {
             /// <summary>
@@ -154,7 +154,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class St4Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class St4Register : Register
         {
             /// <summary>
@@ -175,7 +175,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class St5Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class St5Register : Register
         {
             /// <summary>
@@ -196,7 +196,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class St6Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class St6Register : Register
         {
             /// <summary>
@@ -217,7 +217,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class St7Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class St7Register : Register
         {
             /// <summary>

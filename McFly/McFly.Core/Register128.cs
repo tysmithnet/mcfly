@@ -12,9 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Text.RegularExpressions;
-
-namespace McFly.Core.Registers
+namespace McFly.Core
 {
     /// <summary>
     ///     Class Register.
@@ -216,7 +214,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm0Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm0Register : Register
         {
             /// <summary>
@@ -237,7 +235,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm10Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm10Register : Register
         {
             /// <summary>
@@ -258,7 +256,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm11Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm11Register : Register
         {
             /// <summary>
@@ -279,7 +277,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm12Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm12Register : Register
         {
             /// <summary>
@@ -300,7 +298,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm13Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm13Register : Register
         {
             /// <summary>
@@ -321,7 +319,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm14Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm14Register : Register
         {
             /// <summary>
@@ -342,7 +340,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm15Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm15Register : Register
         {
             /// <summary>
@@ -363,7 +361,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm1Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm1Register : Register
         {
             /// <summary>
@@ -384,7 +382,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm2Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm2Register : Register
         {
             /// <summary>
@@ -405,7 +403,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm3Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm3Register : Register
         {
             /// <summary>
@@ -426,7 +424,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm4Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm4Register : Register
         {
             /// <summary>
@@ -447,7 +445,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm5Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm5Register : Register
         {
             /// <summary>
@@ -468,7 +466,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm6Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm6Register : Register
         {
             /// <summary>
@@ -489,7 +487,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm7Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm7Register : Register
         {
             /// <summary>
@@ -510,7 +508,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm8Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm8Register : Register
         {
             /// <summary>
@@ -531,7 +529,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Xmm9Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Xmm9Register : Register
         {
             /// <summary>
@@ -552,7 +550,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm0Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm0Register : Register
         {
             /// <summary>
@@ -573,7 +571,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm10Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm10Register : Register
         {
             /// <summary>
@@ -594,7 +592,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm11Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm11Register : Register
         {
             /// <summary>
@@ -615,7 +613,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm12Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm12Register : Register
         {
             /// <summary>
@@ -636,7 +634,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm13Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm13Register : Register
         {
             /// <summary>
@@ -657,7 +655,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm14Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm14Register : Register
         {
             /// <summary>
@@ -678,7 +676,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm15Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm15Register : Register
         {
             /// <summary>
@@ -699,7 +697,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm1Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm1Register : Register
         {
             /// <summary>
@@ -720,7 +718,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm2Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm2Register : Register
         {
             /// <summary>
@@ -741,7 +739,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm3Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm3Register : Register
         {
             /// <summary>
@@ -762,7 +760,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm4Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm4Register : Register
         {
             /// <summary>
@@ -783,7 +781,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm5Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm5Register : Register
         {
             /// <summary>
@@ -804,7 +802,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm6Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm6Register : Register
         {
             /// <summary>
@@ -825,7 +823,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm7Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm7Register : Register
         {
             /// <summary>
@@ -846,7 +844,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm8Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm8Register : Register
         {
             /// <summary>
@@ -867,7 +865,7 @@ namespace McFly.Core.Registers
         /// <summary>
         ///     Class Ymm9Register.
         /// </summary>
-        /// <seealso cref="McFly.Core.Registers.Register" />
+        /// <seealso cref="Register" />
         public class Ymm9Register : Register
         {
             /// <summary>

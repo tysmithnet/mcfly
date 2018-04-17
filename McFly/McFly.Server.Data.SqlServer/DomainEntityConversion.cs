@@ -14,7 +14,6 @@
 
 using System.Linq;
 using McFly.Core;
-using McFly.Core.Registers;
 
 namespace McFly.Server.Data.SqlServer
 {

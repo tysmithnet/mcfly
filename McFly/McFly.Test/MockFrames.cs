@@ -1,5 +1,4 @@
 ﻿using McFly.Core;
-using McFly.Core.Registers;
 
 namespace McFly.Test
 {

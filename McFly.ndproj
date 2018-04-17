@@ -1,18 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <NDepend AppName="McFly" Platform="DotNet" FileWrittenByProductVersion="2018.1.0.9030">
   <OutputDir KeepXmlFiles="False">C:\projects\mcfly\NDependOut</OutputDir>
-  <Assemblies />
-  <FrameworkAssemblies />
+  <Assemblies>
+    <Name>mcfly</Name>
+    <Name>McFly.Test</Name>
+    <Name>McFly.Core</Name>
+    <Name>McFly.Core.Test</Name>
+    <Name>McFly.Server.Data</Name>
+    <Name>McFly.Server</Name>
+    <Name>McFly.Server.Test</Name>
+    <Name>McFly.Server.Contract</Name>
+    <Name>McFly.Server.Contract.Test</Name>
+    <Name>McFly.Server.Data.SqlServer</Name>
+    <Name>McFly.Server.Data.SqlServer.Test</Name>
+  </Assemblies>
+  <FrameworkAssemblies>
+    <Name>mscorlib</Name>
+    <Name>System</Name>
+    <Name>System.ComponentModel.Composition</Name>
+    <Name>System.Net.Http</Name>
+    <Name>CommandLine</Name>
+    <Name>Newtonsoft.Json</Name>
+    <Name>System.Core</Name>
+    <Name>xunit.core</Name>
+    <Name>Moq</Name>
+    <Name>FluentAssertions</Name>
+    <Name>MoreLinq</Name>
+    <Name>System.Xml</Name>
+    <Name>WebActivatorEx</Name>
+    <Name>Swashbuckle.Core</Name>
+    <Name>Microsoft.Owin</Name>
+    <Name>Common.Logging.Core</Name>
+    <Name>System.Web.Http</Name>
+    <Name>Owin</Name>
+    <Name>System.Net.Http.Formatting</Name>
+    <Name>System.Web.Http.WebHost</Name>
+    <Name>Common.Logging</Name>
+    <Name>Microsoft.Owin.Hosting</Name>
+    <Name>System.Web.Http.Owin</Name>
+    <Name>System.Data</Name>
+    <Name>EntityFramework</Name>
+    <Name>System.ComponentModel.DataAnnotations</Name>
+    <Name>LinqKit.EntityFramework</Name>
+  </FrameworkAssemblies>
   <Dirs>
     <Dir>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319</Dir>
     <Dir>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\WPF</Dir>
     <Dir>C:\Users\master\.nuget\packages</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.Test\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.Core\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.Core.Test\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.Server.Data\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.Server\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.Server.Test\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.Server.Contract\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.Server.Contract.Test\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.Server.Data.SqlServer\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.Server.Data.SqlServer.Test\bin\Debug</Dir>
   </Dirs>
   <MergeCodeGeneratedByCompiler>True</MergeCodeGeneratedByCompiler>
   <Report Kind="0" SectionsEnabled="110591" XslPath="" Flags="261120" />
   <BuildComparisonSetting ProjectMode="CurrentProject" BuildMode="NDaysAgoAnalysisResult" ProjectFileToCompareWith="" BuildFileToCompareWith="" NDaysAgo="30" />
   <BaselineInUISetting ProjectMode="CurrentProject" BuildMode="NDaysAgoAnalysisResult" ProjectFileToCompareWith="" BuildFileToCompareWith="" NDaysAgo="30" />
-  <CoverageFiles CoverageDir="" UncoverableAttribute="" />
+  <CoverageFiles CoverageDir="" UncoverableAttribute="">
+    <CoverageFile>C:\projects\mcfly\CodeCoverage.xml</CoverageFile>
+  </CoverageFiles>
   <TrendMetrics UseCustomLog="False" LogRecurrence="3" LogLabel="2" UseCustomDir="False" CustomDir="">
     <Chart Name="Size" ShowInReport="True">
       <Serie MetricName="# Lines of Code" MetricUnit="Loc" Color="#FF00BFFF" ChartType="Line" ScaleExp="0" />
@@ -74,6 +127,14 @@
     </DebtSettings>
   </ProjectDebtSettings>
   <Queries>
+    <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Query to exclude COM types</Name>
+notmycode from ns in Namespaces
+where ns.Name == "McFly.Debugger"
+select ns]]></Query>
+    <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Exclude Test Assemblies</Name>
+notmycode from a in Assemblies
+where a.Name.EndsWith("Test")
+select a]]></Query>
     <Group Name="Quality Gates" Active="True" ShownInReport="True">
       <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Quality Gates Evolution</Name>
 from qg in QualityGates
@@ -698,6 +759,7 @@ select new {
       <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Avoid types too big</Name>
 warnif count > 0 from t in JustMyCode.Types where 
 
+   !new [] {"RegisterSet", "RegisterFacade", "Register"}.Contains(t.Name) &&
    // First filter on type to optimize 
    t.NbLinesOfCode > 200 
    // # IL Instructions is commented, because with LINQ syntax, a few lines of code can compile to hundreds of IL instructions.
@@ -705,7 +767,7 @@ warnif count > 0 from t in JustMyCode.Types where
 
    // What matters is the # lines of code in JustMyCode
    let locJustMyCode = t.MethodsAndContructors.Where(m => JustMyCode.Contains(m)).Sum(m => m.NbLinesOfCode)
-   where locJustMyCode > 200
+   where locJustMyCode > 200 
 
    let isStaticWithNoMutableState = (t.IsStatic && t.Fields.Any(f => !f.IsImmutable))
    let staticFactor = (isStaticWithNoMutableState ? 0.2 : 1)
@@ -913,7 +975,8 @@ methodsAssigningFields ,
 // to up to 10 hours for a type with 200 or more fields. 
 //</HowToFix>]]></Query>
       <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Avoid methods too big, too complex</Name>
-warnif count > 0 from m in JustMyCode.Methods where 
+warnif count > 0 from m in JustMyCode.Methods where
+   !new[] {"RegisterFacade", "RegisterSet"}.Contains(m.ParentType.Name) &&
    m.ILNestingDepth > 2 &&
   (m.NbLinesOfCode > 35 ||
    m.CyclomaticComplexity > 20 ||
@@ -5496,7 +5559,7 @@ let canTypeBeConsideredAsDeadProc = new Func<IType, bool>(
 
          // If you don't want to link NDepend.API.dll, you can use your own IsNotDeadCodeAttribute 
          // and adapt the source code of this rule.
-        !t.HasAttribute("NDepend.Attributes.IsNotDeadCodeAttribute".AllowNoMatch()) &&
+        !t.HasAttribute("System.ComponentModel.Composition.ExportAttribute".AllowNoMatch()) &&
 
          // Exclude static types that define only const fields
          // because they cannot be seen as used in IL code.
@@ -5603,6 +5666,7 @@ let canMethodBeConsideredAsDeadProc = new Func<IMethod, bool>(
          // If you don't want to link NDepend.API.dll, you can use your own IsNotDeadCodeAttribute 
          // and adapt the source code of this rule.
          !m.HasAttribute("NDepend.Attributes.IsNotDeadCodeAttribute".AllowNoMatch()) &&
+         !m.ParentType.HasAttribute("System.ComponentModel.Composition.ExportAttribute".AllowNoMatch()) &&
 
          // Don't consider public getters/setters 
          // of classes that implement INotifyPropertyChanged
@@ -11458,5 +11522,4 @@ select new {
       </Group>
     </Group>
   </Queries>
-  <WarnFilter />
 </NDepend>

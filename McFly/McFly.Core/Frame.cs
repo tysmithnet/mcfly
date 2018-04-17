@@ -14,7 +14,6 @@
 
 using System;
 using System.Collections.Generic;
-using McFly.Core.Registers;
 
 namespace McFly.Core
 {

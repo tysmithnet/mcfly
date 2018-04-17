@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using FluentAssertions;
-using McFly.Core.Registers;
+using McFly.Core;
 using McFly.Test.Builders;
 using Xunit;
-using static McFly.Core.Registers.Register;
+using static McFly.Core.Register;
 
 namespace McFly.Test
 {

@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using FluentAssertions;
 using McFly.Core;
-using McFly.Core.Registers;
 using McFly.Server.Data.Search;
 using Xunit;
 

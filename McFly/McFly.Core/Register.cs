@@ -15,7 +15,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace McFly.Core.Registers
+namespace McFly.Core
 {
     /// <summary>
     ///     Typesafe Enum for Registers in the CPU

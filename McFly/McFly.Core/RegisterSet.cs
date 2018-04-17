@@ -14,11 +14,10 @@
 
 using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
-namespace McFly.Core.Registers
+namespace McFly.Core
 {
     /// <summary>
     ///     Represents the collection of all register values at a particular instance in time for a specific thread
