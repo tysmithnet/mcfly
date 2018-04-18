@@ -773,7 +773,7 @@ namespace McFly.Core
         public class FpcwRegister : Register
         {
             public override string Name { get; } = "fpcw";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 16;
             public override int? X64Index { get; } = 30;
             public override int? X64NumBits { get; } = 16;
             public override int? X86Index { get; } = 40;
@@ -823,7 +823,7 @@ namespace McFly.Core
         public class FpswRegister : Register
         {
             public override string Name { get; } = "fpsw";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 16;
             public override int? X64Index { get; } = 31;
             public override int? X64NumBits { get; } = 16;
             public override int? X86Index { get; } = 41;
@@ -833,7 +833,7 @@ namespace McFly.Core
         public class FptwRegister : Register
         {
             public override string Name { get; } = "fptw";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 16;
             public override int? X64Index { get; } = 32;
             public override int? X64NumBits { get; } = 16;
             public override int? X86Index { get; } = 42;
@@ -1473,7 +1473,7 @@ namespace McFly.Core
         public class St0Register : Register
         {
             public override string Name { get; } = "st0";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 80;
             public override int? X64Index { get; } = 33;
             public override int? X64NumBits { get; } = 80;
             public override int? X86Index { get; } = 48;
@@ -1483,7 +1483,7 @@ namespace McFly.Core
         public class St1Register : Register
         {
             public override string Name { get; } = "st1";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 80;
             public override int? X64Index { get; } = 34;
             public override int? X64NumBits { get; } = 80;
             public override int? X86Index { get; } = 49;
@@ -1493,7 +1493,7 @@ namespace McFly.Core
         public class St2Register : Register
         {
             public override string Name { get; } = "st2";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 80;
             public override int? X64Index { get; } = 35;
             public override int? X64NumBits { get; } = 80;
             public override int? X86Index { get; } = 50;
@@ -1503,7 +1503,7 @@ namespace McFly.Core
         public class St3Register : Register
         {
             public override string Name { get; } = "st3";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 80;
             public override int? X64Index { get; } = 36;
             public override int? X64NumBits { get; } = 80;
             public override int? X86Index { get; } = 51;
@@ -1513,7 +1513,7 @@ namespace McFly.Core
         public class St4Register : Register
         {
             public override string Name { get; } = "st4";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 80;
             public override int? X64Index { get; } = 37;
             public override int? X64NumBits { get; } = 80;
             public override int? X86Index { get; } = 52;
@@ -1523,7 +1523,7 @@ namespace McFly.Core
         public class St5Register : Register
         {
             public override string Name { get; } = "st5";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 80;
             public override int? X64Index { get; } = 38;
             public override int? X64NumBits { get; } = 80;
             public override int? X86Index { get; } = 53;
@@ -1533,7 +1533,7 @@ namespace McFly.Core
         public class St6Register : Register
         {
             public override string Name { get; } = "st6";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 80;
             public override int? X64Index { get; } = 39;
             public override int? X64NumBits { get; } = 80;
             public override int? X86Index { get; } = 54;
@@ -1543,7 +1543,7 @@ namespace McFly.Core
         public class St7Register : Register
         {
             public override string Name { get; } = "st7";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 80;
             public override int? X64Index { get; } = 40;
             public override int? X64NumBits { get; } = 80;
             public override int? X86Index { get; } = 55;
@@ -2143,7 +2143,7 @@ namespace McFly.Core
         public class Ymm11Register : Register
         {
             public override string Name { get; } = "ymm11";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 256;
             public override int? X64Index { get; } = 173;
             public override int? X64NumBits { get; } = 128;
             public override int? X86Index { get; } = null;
@@ -2173,7 +2173,7 @@ namespace McFly.Core
         public class Ymm12Register : Register
         {
             public override string Name { get; } = "ymm12";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 256;
             public override int? X64Index { get; } = 174;
             public override int? X64NumBits { get; } = 128;
             public override int? X86Index { get; } = null;
@@ -2203,7 +2203,7 @@ namespace McFly.Core
         public class Ymm13Register : Register
         {
             public override string Name { get; } = "ymm13";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 256;
             public override int? X64Index { get; } = 175;
             public override int? X64NumBits { get; } = 128;
             public override int? X86Index { get; } = null;
@@ -2233,7 +2233,7 @@ namespace McFly.Core
         public class Ymm14Register : Register
         {
             public override string Name { get; } = "ymm14";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 256;
             public override int? X64Index { get; } = 176;
             public override int? X64NumBits { get; } = 128;
             public override int? X86Index { get; } = null;
@@ -2263,7 +2263,7 @@ namespace McFly.Core
         public class Ymm15Register : Register
         {
             public override string Name { get; } = "ymm15";
-            public override int NumBits { get; } = 64;
+            public override int NumBits { get; } = 256;
             public override int? X64Index { get; } = 177;
             public override int? X64NumBits { get; } = 128;
             public override int? X86Index { get; } = null;

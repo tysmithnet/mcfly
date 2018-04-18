@@ -36,7 +36,6 @@ namespace McFly
         /// <returns>RegisterSet.</returns>
         public RegisterSet GetCurrentRegisterSet(int threadId, IEnumerable<Register> registers)
         {
-            var list = registers.ToList();
             var registerSet = new RegisterSet();
             foreach (var register in registers)
             {

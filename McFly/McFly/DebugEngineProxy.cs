@@ -83,7 +83,7 @@ namespace McFly
         ///     Gets or sets the registers COM interface
         /// </summary>
         /// <value>The registers.</value>
-        private IDebugRegisters2 Registers { get; }
+        internal IDebugRegisters2 Registers { get; }
 
         /// <summary>
         ///     Continues execution until a breakpoint is hit or the program ends
