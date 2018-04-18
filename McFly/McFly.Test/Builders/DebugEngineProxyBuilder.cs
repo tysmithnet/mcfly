@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using McFly.Core;
 using Moq;
 
 namespace McFly.Test.Builders
@@ -135,6 +136,12 @@ namespace McFly.Test.Builders
         public DebugEngineProxyBuilder WithWriteLine(Action<string> action)
         {
             Mock.Setup(proxy => proxy.WriteLine(It.IsAny<string>())).Callback(action);
+            return this;
+        }
+
+        public DebugEngineProxyBuilder WithGetRegisterValue(byte[] bytes)
+        {
+            Mock.Setup(proxy => proxy.GetRegisterValue(It.IsAny<int>(), It.IsAny<Register>())).Returns(bytes);
             return this;
         }
     }
