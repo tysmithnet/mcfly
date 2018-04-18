@@ -993,11 +993,13 @@ namespace McFly.Debugger
                 for (var i = 0; i < 4; ++i)
                     pParams[i] = dsf.Params[i];
             }
+
             fixed (ulong* pReserved = Reserved)
             {
                 for (var i = 0; i < 6; ++i)
                     pReserved[i] = dsf.Reserved[i];
             }
+
             Virtual = dsf.Virtual;
             FrameNumber = dsf.FrameNumber;
             InlineFrameContext = 0xFFFFFFFF;

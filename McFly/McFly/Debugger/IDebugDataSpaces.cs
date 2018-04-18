@@ -40,7 +40,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int ReadVirtual(
             [In] ulong Offset,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint BytesRead);
 
@@ -55,7 +56,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int WriteVirtual(
             [In] ulong Offset,
-            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] buffer,
+            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint BytesWritten);
 
@@ -73,7 +75,8 @@ namespace McFly.Debugger
         int SearchVirtual(
             [In] ulong Offset,
             [In] ulong Length,
-            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] byte[] pattern,
+            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)]
+            byte[] pattern,
             [In] uint PatternSize,
             [In] uint PatternGranularity,
             [Out] out ulong MatchOffset);
@@ -89,7 +92,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int ReadVirtualUncached(
             [In] ulong Offset,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint BytesRead);
 
@@ -104,7 +108,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int WriteVirtualUncached(
             [In] ulong Offset,
-            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] buffer,
+            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint BytesWritten);
 
@@ -119,7 +124,8 @@ namespace McFly.Debugger
         int ReadPointersVirtual(
             [In] uint Count,
             [In] ulong Offset,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] ulong[] Ptrs);
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)]
+            ulong[] Ptrs);
 
         /// <summary>
         ///     Writes the pointers virtual.
@@ -132,7 +138,8 @@ namespace McFly.Debugger
         int WritePointersVirtual(
             [In] uint Count,
             [In] ulong Offset,
-            [In] [MarshalAs(UnmanagedType.LPArray)] ulong[] Ptrs);
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            ulong[] Ptrs);
 
         /// <summary>
         ///     Reads the physical.
@@ -145,7 +152,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int ReadPhysical(
             [In] ulong Offset,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint BytesRead);
 
@@ -160,7 +168,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int WritePhysical(
             [In] ulong Offset,
-            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] buffer,
+            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint BytesWritten);
 
@@ -177,7 +186,8 @@ namespace McFly.Debugger
         int ReadControl(
             [In] uint Processor,
             [In] ulong Offset,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)]
+            byte[] buffer,
             [In] int BufferSize,
             [Out] out uint BytesRead);
 
@@ -194,7 +204,8 @@ namespace McFly.Debugger
         int WriteControl(
             [In] uint Processor,
             [In] ulong Offset,
-            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] byte[] buffer,
+            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)]
+            byte[] buffer,
             [In] int BufferSize,
             [Out] out uint BytesWritten);
 
@@ -215,7 +226,8 @@ namespace McFly.Debugger
             [In] uint BusNumber,
             [In] uint AddressSpace,
             [In] ulong Offset,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint BytesRead);
 
@@ -236,7 +248,8 @@ namespace McFly.Debugger
             [In] uint BusNumber,
             [In] uint AddressSpace,
             [In] ulong Offset,
-            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)] byte[] buffer,
+            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint BytesWritten);
 
@@ -279,7 +292,8 @@ namespace McFly.Debugger
             [In] uint BusNumber,
             [In] uint SlotNumber,
             [In] uint Offset,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint BytesRead);
 
@@ -300,7 +314,8 @@ namespace McFly.Debugger
             [In] uint BusNumber,
             [In] uint SlotNumber,
             [In] uint Offset,
-            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)] byte[] buffer,
+            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint BytesWritten);
 
@@ -322,7 +337,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int ReadDebuggerData(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint DataSize);
 
@@ -339,7 +355,8 @@ namespace McFly.Debugger
         int ReadProcessorSystemData(
             [In] uint Processor,
             [In] DEBUG_DATA Index,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)]
+            byte[] buffer,
             [In] uint BufferSize,
             [Out] out uint DataSize);
     }
@@ -444,7 +461,8 @@ namespace McFly.Debugger
         int ReadPointersVirtual(
             [In] uint Count,
             [In] ulong Offset,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] ulong[] Ptrs);
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)]
+            ulong[] Ptrs);
 
         /// <summary>
         ///     Writes the pointers virtual.
@@ -457,7 +475,8 @@ namespace McFly.Debugger
         int WritePointersVirtual(
             [In] uint Count,
             [In] ulong Offset,
-            [In] [MarshalAs(UnmanagedType.LPArray)] ulong[] Ptrs);
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            ulong[] Ptrs);
 
         /// <summary>
         ///     Reads the physical.

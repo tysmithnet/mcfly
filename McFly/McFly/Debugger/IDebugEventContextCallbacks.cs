@@ -44,7 +44,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int Breakpoint(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugBreakpoint2 Bp,
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugBreakpoint2 Bp,
             [In] DEBUG_EVENT_CONTEXT* Context,
             [In] uint ContextSize);
 

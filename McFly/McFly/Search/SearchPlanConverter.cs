@@ -1,4 +1,18 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tysmithnet
+// Created          : 04-03-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 04-03-2018
+// ***********************************************************************
+// <copyright file="SearchPlanConverter.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -6,11 +20,23 @@ using McFly.Server.Contract;
 
 namespace McFly.Search
 {
+    /// <summary>
+    ///     Class SearchPlanConverter.
+    /// </summary>
+    /// <seealso cref="McFly.Search.ISearchPlanConverter" />
     [Export(typeof(ISearchPlanConverter))]
     internal class SearchPlanConverter : ISearchPlanConverter
     {
+        /// <summary>
+        ///     The separators
+        /// </summary>
         private static readonly string[] Separators = {"AND", "OR"};
 
+        /// <summary>
+        ///     Converts the specified search plan.
+        /// </summary>
+        /// <param name="searchPlan">The search plan.</param>
+        /// <returns>SearchCriterionDto.</returns>
         /// <inheritdoc />
         public SearchCriterionDto Convert(ISearchPlan searchPlan)
         {
@@ -20,11 +46,17 @@ namespace McFly.Search
             var crit = new SearchCriterionDto
             {
                 Type = "and",
-                SubCriteria =  subs
+                SubCriteria = subs
             };
             return crit;
         }
 
+        /// <summary>
+        ///     Helpers the specified filter.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        /// <returns>SearchCriterionDto.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private SearchCriterionDto Helper(SearchFilter filter)
         {
             SearchCriterionDto result;
@@ -40,6 +72,13 @@ namespace McFly.Search
             return result;
         }
 
+        /// <summary>
+        ///     Extracts the where.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="start">The start.</param>
+        /// <returns>SearchCriterionDto.</returns>
+        /// <exception cref="Exception">asabab</exception>
         private SearchCriterionDto ExtractWhere(string[] args, int start)
         {
             if (args == null || !args.Any() || start > args.Length) return null;
@@ -61,6 +100,14 @@ namespace McFly.Search
             }
         }
 
+        /// <summary>
+        ///     Extracts the compound.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="lhs">The LHS.</param>
+        /// <returns>SearchCriterionDto.</returns>
+        /// <exception cref="Exception">Aasdfj;asldkfmn</exception>
         private SearchCriterionDto ExtractCompound(string[] args, int start, SearchCriterionDto lhs)
         {
             if (args == null || !args.Any() || start > args.Length) return null;

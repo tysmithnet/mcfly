@@ -4,7 +4,7 @@
 // Created          : 03-12-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-16-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="Startup.cs" company="">
 //     Copyright ©  2018
@@ -12,20 +12,14 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
-using System.Web.Http.ModelBinding.Binders;
 using Common.Logging;
-using McFly.Server.Contract;
-using McFly.Server.Data;
 using McFly.Server.Headers;
 using Owin;
 using Swashbuckle.Application;
@@ -38,7 +32,10 @@ namespace McFly.Server
     [ExcludeFromCodeCoverage]
     public class Startup
     {
-        private ILog Log = LogManager.GetLogger<Startup>();
+        /// <summary>
+        ///     The log
+        /// </summary>
+        private readonly ILog Log = LogManager.GetLogger<Startup>();
 
         /// <summary>
         ///     Configurations the specified application builder.
@@ -48,8 +45,6 @@ namespace McFly.Server
         {
             appBuilder.Use<LoggingMiddleware>();
             var config = new HttpConfiguration();
-            //var provider = new SimpleModelBinderProvider(typeof(Criterion), new SearchRequestJsonConverter());
-            //config.Services.Insert(typeof(ModelBinderProvider), 0, provider);
             var formatters = config.Formatters;
             var jsonFormatter = formatters.JsonFormatter;
             jsonFormatter.SerializerSettings.Converters.Add(new SearchRequestJsonConverter());
@@ -66,6 +61,11 @@ namespace McFly.Server
             appBuilder.UseWebApi(config);
         }
 
+        /// <summary>
+        ///     Gets the dependency resolver.
+        /// </summary>
+        /// <param name="config">The configuration.</param>
+        /// <returns>MefDependencyResolver.</returns>
         private MefDependencyResolver GetDependencyResolver(HttpConfiguration config)
         {
             Log.Info("Looking for MEF components");

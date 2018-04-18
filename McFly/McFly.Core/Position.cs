@@ -4,7 +4,7 @@
 // Created          : 02-25-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="Position.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -28,7 +28,6 @@ namespace McFly.Core
     [DebuggerDisplay("{DebugDisplay}")]
     public class Position : IComparable<Position>, IEquatable<Position>, IComparable
     {
-        private string DebugDisplay => ToString();
         /// <summary>
         ///     The high portion of the position, e.g. abc:123 =&gt; abc
         /// </summary>
@@ -54,6 +53,12 @@ namespace McFly.Core
             High = high;
             Low = low;
         }
+
+        /// <summary>
+        ///     Gets the debug display.
+        /// </summary>
+        /// <value>The debug display.</value>
+        private string DebugDisplay => ToString();
 
         /// <summary>
         ///     Gets or sets the high portion.
@@ -162,7 +167,7 @@ namespace McFly.Core
                 throw new FormatException($"{nameof(text)} is not a valid format for Position.. must be like 1f0:df");
             return new Position(Convert.ToInt32(match.Groups["hi"].Value, 16),
                 Convert.ToInt32(match.Groups["lo"].Value, 16));
-        }  
+        }
 
         /// <summary>
         ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.

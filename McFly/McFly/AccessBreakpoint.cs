@@ -4,7 +4,7 @@
 // Created          : 03-26-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-26-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="AccessBreakpoint.cs" company="">
 //     Copyright ©  2018
@@ -21,6 +21,8 @@ namespace McFly
     /// <summary>
     ///     Class AccessBreakpoint.
     /// </summary>
+    /// <seealso cref="AccessBreakpoint" />
+    /// <seealso cref="McFly.IBreakpoint" />
     /// <seealso cref="System.IEquatable{AccessBreakpoint}" />
     public class AccessBreakpoint : IEquatable<AccessBreakpoint>, IBreakpoint
     {
@@ -80,6 +82,10 @@ namespace McFly
         /// <value><c>true</c> if this instance is write; otherwise, <c>false</c>.</value>
         public bool IsWrite { get; }
 
+        /// <summary>
+        ///     Sets the breakpoint.
+        /// </summary>
+        /// <param name="breakpointFacade">The breakpoint facade.</param>
         public void SetBreakpoint(IBreakpointFacade breakpointFacade)
         {
             if (IsRead)
@@ -101,6 +107,10 @@ namespace McFly
                    IsWrite == other.IsWrite;
         }
 
+        /// <summary>
+        ///     To the command.
+        /// </summary>
+        /// <returns>System.String.</returns>
         public string ToCommand()
         {
             return $"";

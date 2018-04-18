@@ -4,7 +4,7 @@
 // Created          : 03-06-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="StartMethod.cs" company="">
 //     Copyright ©  2018
@@ -69,6 +69,7 @@ namespace McFly
                 Log.Error("Start called but no launcher path was set. Check the settings file.");
                 return;
             }
+
             if (!File.Exists(Settings.ServerExePath))
             {
                 Log.Error($"Start called but could not find file: {Settings.ServerExePath}");

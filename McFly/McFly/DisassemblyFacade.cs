@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="DisassemblyFacade.cs" company="">
 //     Copyright ©  2018
@@ -33,7 +33,7 @@ namespace McFly
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
+        internal IDebugEngineProxy DebugEngineProxy { private get; set; }
 
         /// <summary>
         ///     Di
@@ -75,6 +75,7 @@ namespace McFly
                 var newLine = new DisassemblyLine(ip, opcode, instruction, note);
                 list.Add(newLine);
             }
+
             return list;
         }
     }

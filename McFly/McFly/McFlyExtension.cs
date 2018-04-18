@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="McFly.cs" company="">
 //     Copyright ©  2018
@@ -30,13 +30,7 @@ using RGiesecke.DllExport;
 namespace McFly
 {
     /*
-     * todo: 32 and 64 bit
      * todo: .NET support
-     * todo: add dump information table (first frame, last frame, etc)
-     * todo: help
-     * todo: add simd and floating point register tables 
-     * todo: add the rest of the registers
-     * todo: add additional checks to sql
      */
     /// <summary>
     ///     Class McFlyExtension.
@@ -147,6 +141,7 @@ namespace McFly
             catch
             {
             }
+
             return hr;
         }
 
@@ -165,6 +160,7 @@ namespace McFly
                 WriteLine("SourceFix: Unable to acquire client interface");
                 return null;
             }
+
             IDebugClient client = (IDebugClient5) obj;
             return client;
         }
@@ -321,6 +317,10 @@ namespace McFly
             return HRESULT.S_OK;
         }
 
+        /// <summary>
+        ///     Gets the log path.
+        /// </summary>
+        /// <returns>System.String.</returns>
         internal static string GetLogPath()
         {
             var assemblyPath = Assembly.GetExecutingAssembly().Location;
@@ -370,6 +370,7 @@ namespace McFly
                 JsonConvert.PopulateObject(settingsObject.ToString(), settingsInstance);
                 numProcessed++;
             }
+
             if (settingsInstances.Count() != numProcessed)
                 File.WriteAllText(filePath,
                     JsonConvert.SerializeObject(settingsInstances, Formatting.Indented, new SettingsJsonConverter()));
@@ -423,6 +424,7 @@ namespace McFly
                 WriteLine("Error: Connection string is not configured yet");
                 return;
             }
+
             settings.ProjectName = projectName;
         }
 

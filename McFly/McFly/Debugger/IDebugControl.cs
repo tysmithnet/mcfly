@@ -343,7 +343,8 @@ namespace McFly.Debugger
             [Out] out uint OffsetLine,
             [Out] out ulong StartOffset,
             [Out] out ulong EndOffset,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] ulong[] LineOffsets);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            ulong[] LineOffsets);
 
         /// <summary>
         ///     Gets the near instruction.
@@ -373,7 +374,8 @@ namespace McFly.Debugger
             [In] ulong FrameOffset,
             [In] ulong StackOffset,
             [In] ulong InstructionOffset,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_STACK_FRAME[] Frames,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_STACK_FRAME[] Frames,
             [In] int FrameSize,
             [Out] out uint FramesFilled);
 
@@ -397,7 +399,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int OutputStackTrace(
             [In] DEBUG_OUTCTL OutputControl,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_STACK_FRAME[] Frames,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_STACK_FRAME[] Frames,
             [In] int FramesSize,
             [In] DEBUG_STACK Flags);
 
@@ -450,7 +453,8 @@ namespace McFly.Debugger
         int GetPossibleExecutingProcessorTypes(
             [In] uint Start,
             [In] uint Count,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] IMAGE_FILE_MACHINE[] Types);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            IMAGE_FILE_MACHINE[] Types);
 
         /// <summary>
         ///     Gets the number processors.
@@ -541,7 +545,8 @@ namespace McFly.Debugger
         int GetSupportedProcessorTypes(
             [In] uint Start,
             [In] uint Count,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] IMAGE_FILE_MACHINE[] Types);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            IMAGE_FILE_MACHINE[] Types);
 
         /// <summary>
         ///     Gets the processor type names.
@@ -759,9 +764,12 @@ namespace McFly.Debugger
         [PreserveSig]
         int CoerceValues(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] In,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE_TYPE[] OutType,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_VALUE[] Out);
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] In,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE_TYPE[] OutType,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_VALUE[] Out);
 
         /// <summary>
         ///     Executes the specified output control.
@@ -807,7 +815,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetBreakpointByIndex(
             [In] uint Index,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugBreakpoint bp);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugBreakpoint bp);
 
         /// <summary>
         ///     Gets the breakpoint by identifier.
@@ -818,7 +827,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetBreakpointById(
             [In] uint Id,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugBreakpoint bp);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugBreakpoint bp);
 
         /// <summary>
         ///     Gets the breakpoint parameters.
@@ -831,9 +841,11 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetBreakpointParameters(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Ids,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Ids,
             [In] uint Start,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_BREAKPOINT_PARAMETERS[] Params);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_BREAKPOINT_PARAMETERS[] Params);
 
         /// <summary>
         ///     Adds the breakpoint.
@@ -846,7 +858,8 @@ namespace McFly.Debugger
         int AddBreakpoint(
             [In] DEBUG_BREAKPOINT_TYPE Type,
             [In] uint DesiredId,
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugBreakpoint Bp);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugBreakpoint Bp);
 
         /// <summary>
         ///     Removes the breakpoint.
@@ -855,7 +868,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int RemoveBreakpoint(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugBreakpoint Bp);
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugBreakpoint Bp);
 
         /// <summary>
         ///     Adds the extension.
@@ -1003,7 +1017,8 @@ namespace McFly.Debugger
         int GetSpecificFilterParameters(
             [In] uint Start,
             [In] uint Count,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_SPECIFIC_FILTER_PARAMETERS[] Params);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_SPECIFIC_FILTER_PARAMETERS[] Params);
 
         /// <summary>
         ///     Sets the specific filter parameters.
@@ -1016,7 +1031,8 @@ namespace McFly.Debugger
         int SetSpecificFilterParameters(
             [In] uint Start,
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_SPECIFIC_FILTER_PARAMETERS[] Params);
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_SPECIFIC_FILTER_PARAMETERS[] Params);
 
         /// <summary>
         ///     Gets the specific event filter argument.
@@ -1055,9 +1071,11 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetExceptionFilterParameters(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] uint[] Codes,
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Codes,
             [In] uint Start,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] DEBUG_EXCEPTION_FILTER_PARAMETERS[] Params);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_EXCEPTION_FILTER_PARAMETERS[] Params);
 
         /// <summary>
         ///     Sets the exception filter parameters.
@@ -1068,7 +1086,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int SetExceptionFilterParameters(
             [In] uint Count,
-            [In] [MarshalAs(UnmanagedType.LPArray)] DEBUG_EXCEPTION_FILTER_PARAMETERS[] Params);
+            [In] [MarshalAs(UnmanagedType.LPArray)]
+            DEBUG_EXCEPTION_FILTER_PARAMETERS[] Params);
 
         /// <summary>
         ///     Gets the exception filter second command.

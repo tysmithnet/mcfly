@@ -123,7 +123,6 @@
     <Compile Include="AddNoteOptions.cs" />
     <Compile Include="BreakpointFacade.cs" />
     <Compile Include="BreakpointMask.cs" />
-    <Compile Include="ByteArrayBuilder.cs" />
     <Compile Include="DebugEngineProxy.cs" />
     <Compile Include="Debugger\Enums.cs" />
     <Compile Include="Debugger\IDebugAdvanced.cs" />
@@ -179,6 +178,7 @@
     <Compile Include="IBreakpoint.cs" />
     <Compile Include="IBreakpointFacade.cs" />
     <Compile Include="IDebugEngineProxy.cs" />
+    <Compile Include="IRegisterEngine.cs" />
     <Compile Include="IDisassemblyFacade.cs" />
     <Compile Include="IHttpFacade.cs" />
     <Compile Include="IInjectable.cs" />
@@ -190,6 +190,7 @@
     <Compile Include="InitOptions.cs" />
     <Compile Include="ListOptions.cs" />
     <Compile Include="OpenOptions.cs" />
+    <Compile Include="RegisterEngine.cs" />
     <Compile Include="ReloadOptions.cs" />
     <Compile Include="IRegisterFacade.cs" />
     <Compile Include="Search\ISearchPlan.cs" />

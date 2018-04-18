@@ -22,7 +22,8 @@ namespace McFly.Server.Test.Controllers
             // assert
             controller.Post("testing", request);
 
-            builder.Mock.Verify(access => access.AddNote("testing", new Position(0,0), new[] {1}, "hi world"), Times.Once);
+            builder.Mock.Verify(access => access.AddNote("testing", new Position(0, 0), new[] {1}, "hi world"),
+                Times.Once);
         }
     }
 }

@@ -4,7 +4,7 @@
 // Created          : 03-11-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="NoteMethod.cs" company="">
 //     Copyright ©  2018
@@ -42,9 +42,17 @@ namespace McFly
         [Import]
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the server client.
+        /// </summary>
+        /// <value>The server client.</value>
         [Import]
         protected internal IServerClient ServerClient { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the time travel facade.
+        /// </summary>
+        /// <value>The time travel facade.</value>
         [Import]
         protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
 
@@ -68,6 +76,8 @@ namespace McFly
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
+        /// <exception cref="NullReferenceException">args</exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void Process(string[] args)
         {
             if (args == null)
@@ -91,6 +101,10 @@ namespace McFly
             }
         }
 
+        /// <summary>
+        ///     Adds the note.
+        /// </summary>
+        /// <param name="addOptions">The add options.</param>
         protected internal void AddNote(AddNoteOptions addOptions)
         {
             var positions = TimeTravelFacade.Positions();
@@ -103,9 +117,15 @@ namespace McFly
             else
             {
                 ServerClient.AddNote(current.Position, new[] {current.ThreadId}, addOptions.Text);
-            }   
+            }
         }
 
+        /// <summary>
+        ///     Extracts the add options.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>AddNoteOptions.</returns>
+        /// <exception cref="ArgumentException">Found more than 1 note body</exception>
         protected internal AddNoteOptions ExtractAddOptions(IEnumerable<string> args)
         {
             var options = new AddNoteOptions();
@@ -129,6 +149,7 @@ namespace McFly
                         break;
                 }
             }
+
             return options;
         }
     }

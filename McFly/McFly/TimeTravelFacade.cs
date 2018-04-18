@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="TimeTravelFacade.cs" company="">
 //     Copyright ©  2018
@@ -18,6 +18,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
 using McFly.Core;
+using McFly.Core.Registers;
 
 namespace McFly
 {
@@ -125,7 +126,7 @@ namespace McFly
         {
             var position = GetCurrentPosition();
             var currentStack = StackFacade.GetCurrentStackTrace();
-            var registers = RegisterFacade.GetCurrentRegisterSet(Register.AllRegisters64);
+            var registers = RegisterFacade.GetCurrentRegisterSet(Register.All);
             var disassembly = DisassemblyFacade.GetDisassemblyLines(1).Single();
 
             return new Frame
@@ -149,7 +150,7 @@ namespace McFly
             {
                 Position = GetCurrentPosition(threadId),
                 StackTrace = StackFacade.GetCurrentStackTrace(threadId),
-                RegisterSet = RegisterFacade.GetCurrentRegisterSet(threadId, Register.AllRegisters64),
+                RegisterSet = RegisterFacade.GetCurrentRegisterSet(threadId, DebugEngineProxy.Is32Bit ? Register.X86 : Register.X64),
                 DisassemblyLine = DisassemblyFacade.GetDisassemblyLines(threadId, 1).Single(),
                 ThreadId = threadId
             };

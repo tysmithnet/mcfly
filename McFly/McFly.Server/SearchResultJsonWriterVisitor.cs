@@ -1,12 +1,35 @@
-﻿using System.Linq;
+﻿// ***********************************************************************
+// Assembly         : McFly.Server
+// Author           : @tysmithnet
+// Created          : 04-03-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 04-03-2018
+// ***********************************************************************
+// <copyright file="SearchResultJsonWriterVisitor.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System.Linq;
 using McFly.Server.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace McFly.Server
 {
+    /// <summary>
+    ///     Class SearchResultJsonWriterVisitor.
+    /// </summary>
+    /// <seealso cref="McFly.Server.Contract.ISearchRequestVisitor" />
     internal class SearchResultJsonWriterVisitor : ISearchRequestVisitor
     {
+        /// <summary>
+        ///     Visits the specified search criterion dto.
+        /// </summary>
+        /// <param name="searchCriterionDto">The search criterion dto.</param>
+        /// <returns>System.Object.</returns>
         public object Visit(SearchCriterionDto searchCriterionDto)
         {
             if (searchCriterionDto is TerminalSearchCriterionDto terminal)
@@ -18,23 +41,38 @@ namespace McFly.Server
             return o;
         }
 
+        /// <summary>
+        ///     Converts to json.
+        /// </summary>
+        /// <param name="searchRequest">The search request.</param>
+        /// <returns>System.String.</returns>
         public string ConvertToJson(SearchCriterionDto searchRequest)
         {
             return ConvertToJObject(searchRequest).ToString(Formatting.Indented);
         }
 
+        /// <summary>
+        ///     Converts to j object.
+        /// </summary>
+        /// <param name="searchRequest">The search request.</param>
+        /// <returns>JObject.</returns>
         public JObject ConvertToJObject(SearchCriterionDto searchRequest)
         {
             var o = (JObject) Visit(searchRequest);
             return o;
         }
 
+        /// <summary>
+        ///     Visits the specified search criterion dto.
+        /// </summary>
+        /// <param name="searchCriterionDto">The search criterion dto.</param>
+        /// <returns>System.Object.</returns>
         public object Visit(TerminalSearchCriterionDto searchCriterionDto)
         {
             var o = new JObject
             {
                 {"Type", searchCriterionDto.Type},
-                { "Args", new JArray(searchCriterionDto.Args)}
+                {"Args", new JArray(searchCriterionDto.Args)}
             };
             return o;
         }

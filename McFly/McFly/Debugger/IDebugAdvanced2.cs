@@ -68,9 +68,11 @@ namespace McFly.Debugger
         [PreserveSig]
         int Request(
             [In] DEBUG_REQUEST Request,
-            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] byte[] inBuffer,
+            [In] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)]
+            byte[] inBuffer,
             [In] int InBufferSize,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] byte[] outBuffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)]
+            byte[] outBuffer,
             [In] int OutBufferSize,
             [Out] out int OutSize);
 
@@ -91,7 +93,8 @@ namespace McFly.Debugger
             [In] [MarshalAs(UnmanagedType.LPStr)] string SourceFile,
             [In] ulong Arg64,
             [In] uint Arg32,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)]
+            byte[] buffer,
             [In] int BufferSize,
             [Out] out int InfoSize);
 
@@ -115,7 +118,8 @@ namespace McFly.Debugger
             [In] ulong ModAddr,
             [In] [MarshalAs(UnmanagedType.LPStr)] string File,
             [In] DEBUG_FIND_SOURCE Flags,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 5)]
+            byte[] buffer,
             [In] int FileTokenSize,
             [Out] out int FoundElement,
             [Out] [MarshalAs(UnmanagedType.LPStr)] StringBuilder Buffer,
@@ -140,7 +144,8 @@ namespace McFly.Debugger
             [In] DEBUG_SYMINFO Which,
             [In] ulong Arg64,
             [In] uint Arg32,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)]
+            byte[] buffer,
             [In] int BufferSize,
             [Out] out int InfoSize,
             [Out] [MarshalAs(UnmanagedType.LPStr)] StringBuilder StringBuffer,
@@ -162,7 +167,8 @@ namespace McFly.Debugger
             [In] DEBUG_SYSOBJINFO Which,
             [In] ulong Arg64,
             [In] uint Arg32,
-            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)] byte[] buffer,
+            [Out] [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4)]
+            byte[] buffer,
             [In] int BufferSize,
             [Out] out int InfoSize);
     }

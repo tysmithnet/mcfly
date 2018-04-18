@@ -4,7 +4,7 @@
 // Created          : 03-27-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-27-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="LoggingMiddleware.cs" company="">
 //     Copyright ©  2018
@@ -62,6 +62,7 @@ namespace McFly.Server
             {
                 requestNum = _requestNum++;
             }
+
             var req = context.Request;
             var sw = Stopwatch.StartNew();
             Log.Info($"-> {requestNum} {req.Method} {req.Path}{req.QueryString}");

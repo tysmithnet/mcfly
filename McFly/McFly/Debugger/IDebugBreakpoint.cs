@@ -57,7 +57,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetAdder(
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugClient Adder);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugClient Adder);
 
         /// <summary>
         ///     Gets the flags.

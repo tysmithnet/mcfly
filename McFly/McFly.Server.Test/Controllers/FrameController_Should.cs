@@ -14,6 +14,25 @@ namespace McFly.Server.Test.Controllers
     public class FrameController_Should
     {
         [Fact]
+        public void Return_Error_Code_If_Upsert_Fails()
+        {
+            // arrange
+            var frames = new Frame[]
+            {
+            };
+            var frameController = new FrameController();
+            var builder = new FrameAccessBuilder();
+            builder.WithUpsertFrames(new Exception("oops"));
+            frameController.FrameAccess = builder.Build();
+
+            // act                                                        
+            var res = frameController.Post("test", frames) as ExceptionResult;
+
+            // assert
+            res.Should().NotBeNull();
+        }
+
+        [Fact]
         public void Upsert_Frame_On_Post()
         {
             // arrange
@@ -31,26 +50,6 @@ namespace McFly.Server.Test.Controllers
             builder.Mock.Verify(
                 access => access.UpsertFrames("testing", It.Is<IEnumerable<Frame>>(e => e.SequenceEqual(frames))),
                 Times.Once);
-        }
-
-        [Fact]
-        public void Return_Error_Code_If_Upsert_Fails()
-        {
-            // arrange
-            var frames = new Frame[]
-            {
-            };
-            var frameController = new FrameController();
-            var builder = new FrameAccessBuilder();
-            builder.WithUpsertFrames(new Exception("oops"));
-            frameController.FrameAccess = builder.Build();
-
-
-            // act                                                        
-            var res = frameController.Post("test", frames) as ExceptionResult;
-
-            // assert
-            res.Should().NotBeNull();
         }
     }
 }

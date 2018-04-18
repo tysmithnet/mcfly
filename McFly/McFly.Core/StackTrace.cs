@@ -4,7 +4,7 @@
 // Created          : 03-17-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-20-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="StackTrace.cs" company="">
 //     Copyright ©  2018
@@ -32,14 +32,13 @@ namespace McFly.Core
         public StackTrace(IEnumerable<StackFrame> stackFrames = null)
         {
             StackFrames = stackFrames?.ToList() ?? new List<StackFrame>();
-            
         }
 
         /// <summary>
         ///     Gets the stack frames.
         /// </summary>
         /// <value>The stack frames.</value>
-        public IEnumerable<StackFrame> StackFrames { get; internal set; }
+        public IEnumerable<StackFrame> StackFrames { get; }
 
         /// <summary>
         ///     Equalses the specified other.

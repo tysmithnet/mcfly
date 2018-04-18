@@ -4,7 +4,7 @@
 // Created          : 03-06-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="SettingsJsonConverter.cs" company="">
 //     Copyright ©  2018
@@ -43,6 +43,7 @@ namespace McFly
                 writer.WritePropertyName(type.FullName);
                 writer.WriteToken(new JTokenReader(settingsValue));
             }
+
             writer.WriteEndObject();
         }
 

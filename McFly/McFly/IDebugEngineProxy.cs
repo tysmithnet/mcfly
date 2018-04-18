@@ -4,13 +4,16 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="IDbgEngProxy.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
+using McFly.Core;
+using McFly.Core.Registers;
 
 namespace McFly
 {
@@ -69,5 +72,8 @@ namespace McFly
         /// <param name="command">The v.</param>
         /// <returns>System.String.</returns>
         string Execute(int threadId, string command);
+
+
+        byte[] GetRegisterValue(int threadId, Register register);
     }
 }

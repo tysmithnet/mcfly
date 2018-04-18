@@ -107,7 +107,8 @@ namespace McFly.Debugger
         [PreserveSig]
         int GetRunningProcessSystemIds(
             [In] ulong Server,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] uint[] Ids,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Ids,
             [In] uint Count,
             [Out] out uint ActualCount);
 
@@ -331,7 +332,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int ExitDispatch(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugClient Client);
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugClient Client);
 
         /// <summary>
         ///     Creates the client.
@@ -340,7 +342,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int CreateClient(
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugClient Client);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugClient Client);
 
         /// <summary>
         ///     Gets the input callbacks.
@@ -349,7 +352,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetInputCallbacks(
-            [Out] [MarshalAs(UnmanagedType.Interface)] out IDebugInputCallbacks Callbacks);
+            [Out] [MarshalAs(UnmanagedType.Interface)]
+            out IDebugInputCallbacks Callbacks);
 
         /// <summary>
         ///     Sets the input callbacks.
@@ -358,7 +362,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int SetInputCallbacks(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugInputCallbacks Callbacks);
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugInputCallbacks Callbacks);
 
         /* GetOutputCallbacks could a conversion thunk from the debugger engine so we can't specify a specific interface */
 
@@ -408,7 +413,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int GetOtherOutputMask(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugClient Client,
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugClient Client,
             [Out] out DEBUG_OUTPUT Mask);
 
         /// <summary>
@@ -419,7 +425,8 @@ namespace McFly.Debugger
         /// <returns>System.Int32.</returns>
         [PreserveSig]
         int SetOtherOutputMask(
-            [In] [MarshalAs(UnmanagedType.Interface)] IDebugClient Client,
+            [In] [MarshalAs(UnmanagedType.Interface)]
+            IDebugClient Client,
             [In] DEBUG_OUTPUT Mask);
 
         /// <summary>

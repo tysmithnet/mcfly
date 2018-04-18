@@ -4,7 +4,7 @@
 // Created          : 02-20-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-15-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="Program.cs" company="McFly.Server">
 //     Copyright (c) . All rights reserved.
@@ -15,7 +15,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Common.Logging;
-using McFly.Server.Data;
 using Microsoft.Owin.Hosting;
 
 namespace McFly.Server
@@ -26,6 +25,9 @@ namespace McFly.Server
     [ExcludeFromCodeCoverage]
     public class Program
     {
+        /// <summary>
+        ///     The log
+        /// </summary>
         private ILog Log = LogManager.GetLogger<Program>();
 
         /// <summary>

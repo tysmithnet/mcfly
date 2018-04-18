@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="PositionsResult.cs" company="">
 //     Copyright ©  2018
@@ -23,6 +23,7 @@ namespace McFly
     /// <summary>
     ///     Class PositionsResult.
     /// </summary>
+    /// <seealso cref="PositionsRecord" />
     /// <seealso cref="PositionsRecord" />
     public class PositionsResult : IEnumerable<PositionsRecord>
     {

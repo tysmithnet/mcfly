@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 03-27-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="IndexOptions.cs" company="">
 //     Copyright ©  2018
@@ -22,6 +22,7 @@ namespace McFly
     /// <summary>
     ///     Class IndexOptions.
     /// </summary>
+    /// <seealso cref="IndexOptions" />
     /// <seealso cref="IndexOptions" />
     public class IndexOptions : IEquatable<IndexOptions>
     {

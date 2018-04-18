@@ -4,7 +4,7 @@
 // Created          : 03-24-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="HttpHeaders.cs" company="">
 //     Copyright ©  2018
@@ -21,6 +21,8 @@ namespace McFly
     /// <summary>
     ///     Class HttpHeaders.
     /// </summary>
+    /// <seealso cref="string" />
+    /// <seealso cref="HttpHeaders" />
     /// <seealso cref="string" />
     /// <seealso cref="HttpHeaders" />
     public class HttpHeaders : Dictionary<string, string>, IEquatable<HttpHeaders>
@@ -63,6 +65,7 @@ namespace McFly
                     hashCode ^= keyValuePair.Value.GetHashCode();
                     hashCode *= 1331553;
                 }
+
                 return hashCode;
             }
         }

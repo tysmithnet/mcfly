@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="DbgEngProxy.cs" company="">
 //     Copyright ©  2018
@@ -13,12 +13,16 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using McFly.Core;
+using McFly.Core.Registers;
 using McFly.Debugger;
+using Newtonsoft.Json;
 
 namespace McFly
 {
@@ -80,7 +84,7 @@ namespace McFly
         ///     Gets or sets the registers COM interface
         /// </summary>
         /// <value>The registers.</value>
-        private IDebugRegisters2 Registers { get; }
+        internal IDebugRegisters2 Registers { get; }
 
         /// <summary>
         ///     Continues execution until a breakpoint is hit or the program ends
@@ -170,6 +174,48 @@ namespace McFly
             return Execute($"~~[0x{threadId:X}]e {command}");
         }
 
+        /// <inheritdoc />
+        public unsafe byte[] GetRegisterValue(int threadId, Register register)
+        {
+            SystemObjects.SetCurrentThreadId(threadId.ToUInt());
+            if (Is32Bit)
+            {
+                if(register.X86Index == null)
+                    throw new ArgumentException();
+                int hr = Registers.GetValue(register.X86Index.Value.ToUInt(), out var debugValue);
+                if (hr != 0)
+                {
+                    throw new ApplicationException("farrrttttt");
+                }
+
+                var list = new List<byte>();
+                for (int i = 0; i < register.X86NumBits / 8; i++)
+                {
+                    list.Add(debugValue.F128Bytes[i]);
+                }
+
+                return list.ToArray();
+            }
+            else
+            {
+                if (register.X64Index == null)
+                    throw new ArgumentException();
+                int hr = Registers.GetValue(register.X64Index.Value.ToUInt(), out var debugValue);
+                if (hr != 0)
+                {
+                    throw new ApplicationException("farrrttttt");
+                }
+
+                var list = new List<byte>();
+                for (int i = 0; i < register.X64NumBits / 8; i++)
+                {
+                    list.Add(debugValue.F128Bytes[i]);
+                }
+
+                return list.ToArray();
+            }
+        }
+
         /// <summary>
         ///     Gets a value indicating whether the current trace is 32 bit.
         /// </summary>
@@ -193,6 +239,19 @@ namespace McFly
             var end = Execute("!tt 100"); // todo: get from trace_info
             var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
             return Position.Parse(endMatch.Groups["pos"].Value);
+        }
+
+        public object GetRegister(uint reg)
+        {
+            Registers.GetNumberRegisters(out var numRegisters);
+            for (int i = 0; i < numRegisters; i++)
+            {
+                var sb = new StringBuilder(1024);
+                Registers.GetDescription(i.ToUInt(), sb, 1024, out var nameLength, out var desc);
+                Registers.GetValue(i.ToUInt(), out var val);
+                WriteLine($"{i}:{sb}:{desc.Type.ToString()}:{desc.Flags}");
+            }
+            return null;
         }
     }
 }

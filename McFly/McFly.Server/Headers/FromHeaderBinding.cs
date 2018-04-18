@@ -4,7 +4,7 @@
 // Created          : 03-16-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-16-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="FromHeaderBinding.cs" company="">
 //     Copyright ©  2018
@@ -93,6 +93,7 @@ namespace McFly.Server.Headers
                 throw new HttpResponseException(
                     actionContext.Request.CreateErrorResponse(HttpStatusCode.BadRequest, error));
             }
+
             return Task.FromResult<object>(null);
         }
     }

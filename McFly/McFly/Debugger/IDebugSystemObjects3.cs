@@ -116,8 +116,10 @@ namespace McFly.Debugger
         new int GetThreadIdsByIndex(
             [In] uint Start,
             [In] uint Count,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] uint[] Ids,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] uint[] SysIds);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Ids,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] SysIds);
 
         /// <summary>
         ///     Gets the thread identifier by processor.
@@ -231,8 +233,10 @@ namespace McFly.Debugger
         new int GetProcessIdsByIndex(
             [In] uint Start,
             [In] uint Count,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] uint[] Ids,
-            [Out] [MarshalAs(UnmanagedType.LPArray)] uint[] SysIds);
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Ids,
+            [Out] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] SysIds);
 
         /// <summary>
         ///     Gets the current process data offset.
@@ -415,7 +419,8 @@ namespace McFly.Debugger
         /// <param name="Ids">The ids.</param>
         /// <returns>System.Int32.</returns>
         [PreserveSig]
-        int GetSystemIdsByIndex([In] uint start, [In] uint count, [Out] [MarshalAs(UnmanagedType.LPArray)] uint[] Ids);
+        int GetSystemIdsByIndex([In] uint start, [In] uint count, [Out] [MarshalAs(UnmanagedType.LPArray)]
+            uint[] Ids);
 
         /// <summary>
         ///     Gets the total number threads and processes.

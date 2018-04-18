@@ -4,7 +4,7 @@
 // Created          : 03-15-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-25-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="IServerClient.cs" company="">
 //     Copyright ©  2018
@@ -14,7 +14,6 @@
 
 using System.Collections.Generic;
 using McFly.Core;
-using McFly.Search;
 using McFly.Server.Contract;
 
 namespace McFly
@@ -29,7 +28,7 @@ namespace McFly
         ///     Adds the note.
         /// </summary>
         /// <param name="position">The position.</param>
-        /// <param name="threadId">The thread identifier.</param>
+        /// <param name="threadIds">The thread ids.</param>
         /// <param name="text">The text.</param>
         void AddNote(Position position, IEnumerable<int> threadIds, string text);
 
@@ -47,6 +46,11 @@ namespace McFly
         /// <param name="frames">The frames.</param>
         void UpsertFrames(IEnumerable<Frame> frames);
 
+        /// <summary>
+        ///     Searches the frames.
+        /// </summary>
+        /// <param name="converted">The converted.</param>
+        /// <returns>IEnumerable&lt;Frame&gt;.</returns>
         IEnumerable<Frame> SearchFrames(SearchCriterionDto converted);
     }
 }

@@ -4,7 +4,7 @@
 // Created          : 03-26-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-26-2018
+// Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="BreakpointMask.cs" company="">
 //     Copyright ©  2018
@@ -20,6 +20,8 @@ namespace McFly
     /// <summary>
     ///     Class BreakpointMask.
     /// </summary>
+    /// <seealso cref="System.IEquatable{McFly.BreakpointMask}" />
+    /// <seealso cref="McFly.IBreakpoint" />
     /// <seealso cref="BreakpointMask" />
     public class BreakpointMask : IEquatable<BreakpointMask> // todo: move to mcfly
         , IBreakpoint
@@ -47,6 +49,10 @@ namespace McFly
         /// <value>The function mask.</value>
         public string FunctionMask { get; }
 
+        /// <summary>
+        ///     Sets the breakpoint.
+        /// </summary>
+        /// <param name="breakpointFacade">The breakpoint facade.</param>
         public void SetBreakpoint(IBreakpointFacade breakpointFacade)
         {
             breakpointFacade.SetBreakpointByMask(ModuleMask, FunctionMask);
@@ -114,6 +120,13 @@ namespace McFly
             return !Equals(left, right);
         }
 
+        /// <summary>
+        ///     Parses the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>BreakpointMask.</returns>
+        /// <exception cref="ArgumentNullException">input</exception>
+        /// <exception cref="FormatException"></exception>
         public static BreakpointMask Parse(string input)
         {
             if (input == null)

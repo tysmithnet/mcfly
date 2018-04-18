@@ -15,9 +15,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using Common.Logging;
+using LinqKit;
 using McFly.Core;
 using McFly.Server.Data.Search;
 
@@ -65,7 +68,21 @@ namespace McFly.Server.Data.SqlServer
                     else
                         context.FrameEntities.Add(source);
                 }
-                context.SaveChanges();
+
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    var sb = new StringBuilder();
+                    var errors = e.EntityValidationErrors.SelectMany(x => x.ValidationErrors)
+                        .Select(x => $"Validation Error: {x.PropertyName} - {x.ErrorMessage}");
+                    sb.AppendLine($"There were validation errors when trying to persist the request:");
+                    var message = string.Join(Environment.NewLine, errors);
+                    sb.AppendLine(message);
+                    throw new ApplicationException(sb.ToString());
+                }
             }
         }
 
@@ -92,14 +109,17 @@ namespace McFly.Server.Data.SqlServer
 
         public IEnumerable<Frame> Search(string projectName, ICriterion criterion)
         {
-            var visitor = new FrameCriterionVisitor();
-            var exp = (Expression<Func<FrameEntity, bool>>) visitor.Visit(criterion);
             using (var ctx = ContextFactory.GetContext(projectName))
             {
-                return ctx.FrameEntities.Where(exp).ToList().Select(x => x.ToFrame());
+                var query = ctx.FrameEntities.AsExpandable();
+                var visitor = new FrameCriterionVisitor();
+                var exp = (Expression<Func<FrameEntity, bool>>)visitor.Visit(criterion);
+                var frames = query.Where(exp).ToList();
+                var converted = frames.Select(x => x.ToFrame());
+                return converted;
             }
         }
-
+        
         /// <summary>
         ///     Copies the values.
         /// </summary>
@@ -107,20 +127,20 @@ namespace McFly.Server.Data.SqlServer
         /// <param name="target">The target.</param>
         private static void CopyValues(FrameEntity source, FrameEntity target)
         {
-            if (source.Rax.HasValue)
+            if (source.Rax != null)
                 target.Rax = source.Rax;
 
-            if (source.Rbx.HasValue)
+            if (source.Rbx != null)
                 target.Rbx = source.Rbx;
 
-            if (source.Rcx.HasValue)
+            if (source.Rcx != null)
                 target.Rcx = source.Rcx;
 
-            if (source.Rdx.HasValue)
+            if (source.Rdx != null)
                 target.Rdx = source.Rdx;
 
-            if (source.Address.HasValue)
-                target.Address = source.Address;
+            if (source.Rip != null)
+                target.Rip = source.Rip;
 
             if (source.DisassemblyNote != null)
                 target.DisassemblyNote = source.DisassemblyNote;
@@ -139,13 +159,13 @@ namespace McFly.Server.Data.SqlServer
                     if (targetStackFrame != null)
                     {
                         // copy source values to target
-                        if (sourceStackFrame.ReturnAddress.HasValue)
+                        if (sourceStackFrame.ReturnAddress != null)
                             targetStackFrame.ReturnAddress = sourceStackFrame.ReturnAddress;
                         if (sourceStackFrame.ModuleName != null)
                             targetStackFrame.ModuleName = sourceStackFrame.ModuleName;
                         if (sourceStackFrame.Function != null)
                             targetStackFrame.Function = sourceStackFrame.Function;
-                        if (sourceStackFrame.Offset.HasValue)
+                        if (sourceStackFrame.Offset != null)
                             targetStackFrame.Offset = sourceStackFrame.Offset;
                     }
                     else
