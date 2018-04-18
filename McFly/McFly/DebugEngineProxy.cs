@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -170,6 +171,48 @@ namespace McFly
         public string Execute(int threadId, string command)
         {
             return Execute($"~~[0x{threadId:X}]e {command}");
+        }
+
+        /// <inheritdoc />
+        public unsafe byte[] GetRegisterValue(int threadId, Register register)
+        {
+            SystemObjects.SetCurrentThreadId(threadId.ToUInt());
+            if (Is32Bit)
+            {
+                if(register.X86Index == null)
+                    throw new ArgumentException();
+                int hr = Registers.GetValue(register.X86Index.Value.ToUInt(), out var debugValue);
+                if (hr != 0)
+                {
+                    throw new ApplicationException("farrrttttt");
+                }
+
+                var list = new List<byte>();
+                for (int i = 0; i < register.X86NumBits / 8; i++)
+                {
+                    list.Add(debugValue.F128Bytes[i]);
+                }
+
+                return list.ToArray();
+            }
+            else
+            {
+                if (register.X64Index == null)
+                    throw new ArgumentException();
+                int hr = Registers.GetValue(register.X64Index.Value.ToUInt(), out var debugValue);
+                if (hr != 0)
+                {
+                    throw new ApplicationException("farrrttttt");
+                }
+
+                var list = new List<byte>();
+                for (int i = 0; i < register.X64NumBits / 8; i++)
+                {
+                    list.Add(debugValue.F128Bytes[i]);
+                }
+
+                return list.ToArray();
+            }
         }
 
         /// <summary>

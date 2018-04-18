@@ -12,6 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using McFly.Core;
+
 namespace McFly
 {
     /// <summary>
@@ -70,6 +72,7 @@ namespace McFly
         /// <returns>System.String.</returns>
         string Execute(int threadId, string command);
 
-        
+
+        byte[] GetRegisterValue(int threadId, Register register);
     }
 }

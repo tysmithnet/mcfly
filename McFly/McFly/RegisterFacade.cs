@@ -37,12 +37,13 @@ namespace McFly
         public RegisterSet GetCurrentRegisterSet(int threadId, IEnumerable<Register> registers)
         {
             var list = registers.ToList();
-            if (list.Count == 0)
-                return new RegisterSet();
             var registerSet = new RegisterSet();
-            var registerNames = string.Join(",", list.Select(x => x.Name));
-            var registerText = DebugEngineProxy.Execute(threadId, $"r {registerNames}");
-            Process(list, registerText, registerSet);
+            foreach (var register in registers)
+            {
+                var bytes = DebugEngineProxy.GetRegisterValue(threadId, register);
+                
+
+            }
             return registerSet;
         }
 
