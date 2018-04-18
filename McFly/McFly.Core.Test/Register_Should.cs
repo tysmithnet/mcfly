@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using McFly.Core.Registers;
 using Xunit;
 
 namespace McFly.Core.Test

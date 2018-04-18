@@ -16,6 +16,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Text.RegularExpressions;
 using McFly.Core;
+using McFly.Core.Registers;
 using McFly.Server.Contract;
 using McFly.Server.Data.Search;
 using Conv = System.Convert;

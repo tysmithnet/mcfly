@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using McFly.Core;
+using McFly.Core.Registers;
 using McFly.Debugger;
 using Newtonsoft.Json;
 

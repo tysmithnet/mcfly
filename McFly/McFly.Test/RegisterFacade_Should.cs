@@ -3,7 +3,7 @@ using FluentAssertions;
 using McFly.Core;
 using McFly.Test.Builders;
 using Xunit;
-using static McFly.Core.Register;
+using static McFly.Core.Registers.Register;
 
 namespace McFly.Test
 {

@@ -1,4 +1,5 @@
 ﻿using McFly.Core;
+using McFly.Core.Registers;
 using McFly.Debugger;
 
 namespace McFly

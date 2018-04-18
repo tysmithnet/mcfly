@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using McFly.Core;
+using McFly.Core.Registers;
 using McFly.Debugger;
 
 namespace McFly

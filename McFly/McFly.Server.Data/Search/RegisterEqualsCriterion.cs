@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using McFly.Core;
+using McFly.Core.Registers;
 
 namespace McFly.Server.Data.Search
 {
