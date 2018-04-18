@@ -127,7 +127,7 @@
     </DebtSettings>
   </ProjectDebtSettings>
   <Queries>
-    <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Query to exclude COM types</Name>
+    <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Exclude McFly.Debugger</Name>
 notmycode from ns in Namespaces
 where ns.Name == "McFly.Debugger"
 select ns]]></Query>
