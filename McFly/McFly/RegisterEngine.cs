@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using McFly.Core;
 using McFly.Debugger;
 
@@ -172,7 +173,7 @@ namespace McFly
                 bytes.Add(val.F128Bytes[i]);
             }
 
-            return bytes.ToArray();
+            return bytes.Take(register.NumBits / 8).ToArray();
         }
 
         private unsafe byte[] GetRegisterValue64(Register register, IDebugRegisters2 registers)
@@ -460,8 +461,8 @@ namespace McFly
             {
                 bytes.Add(val.F128Bytes[i]);
             }
-
-            return bytes.ToArray();
+            
+            return bytes.Take(register.NumBits / 8).ToArray();
         }
     }
 }

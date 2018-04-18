@@ -14,7 +14,7 @@ namespace McFly.Test
         {
             var facade = new RegisterFacade();
             facade.DebugEngineProxy = new DebugEngineProxyBuilder()
-                .WithGetRegisterValue(Enumerable.Repeat(0xff, 16).Select(x => (byte) x).ToArray())
+                .WithGetRegisterValue(Enumerable.Repeat(0xff, 32).Select(x => (byte) x).ToArray())
                 .Build();
 
             var r = facade.GetCurrentRegisterSet(X64);

@@ -498,35 +498,35 @@ namespace McFly
                 }
                 else if (register == Register.St0)
                 {
-                    registerSet.St0 = bytes;
+                    registerSet.St0 = bytes.Take(10).ToArray();
                 }
                 else if (register == Register.St1)
                 {
-                    registerSet.St1 = bytes;
+                    registerSet.St1 = bytes.Take(10).ToArray();
                 }
                 else if (register == Register.St2)
                 {
-                    registerSet.St2 = bytes;
+                    registerSet.St2 = bytes.Take(10).ToArray();
                 }
                 else if (register == Register.St3)
                 {
-                    registerSet.St3 = bytes;
+                    registerSet.St3 = bytes.Take(10).ToArray();
                 }
                 else if (register == Register.St4)
                 {
-                    registerSet.St4 = bytes;
+                    registerSet.St4 = bytes.Take(10).ToArray();
                 }
                 else if (register == Register.St5)
                 {
-                    registerSet.St5 = bytes;
+                    registerSet.St5 = bytes.Take(10).ToArray();
                 }
                 else if (register == Register.St6)
                 {
-                    registerSet.St6 = bytes;
+                    registerSet.St6 = bytes.Take(10).ToArray();
                 }
                 else if (register == Register.St7)
                 {
-                    registerSet.St7 = bytes;
+                    registerSet.St7 = bytes.Take(10).ToArray();
                 }
                 else if (register == Register.Tf)
                 {
@@ -542,7 +542,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm0)
                 {
-                    registerSet.Xmm0 = bytes;
+                    registerSet.Xmm0 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm0h)
                 {
@@ -554,11 +554,11 @@ namespace McFly
                 }
                 else if (register == Register.Xmm1)
                 {
-                    registerSet.Xmm1 = bytes;
+                    registerSet.Xmm1 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm10)
                 {
-                    registerSet.Xmm10 = bytes;
+                    registerSet.Xmm10 = bytes.Take(16).ToArray();
                 }
 
                 else if (register == Register.Xmm10h)
@@ -571,7 +571,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm11)
                 {
-                    registerSet.Xmm11 = bytes; ;
+                    registerSet.Xmm11 = bytes.Take(16).ToArray(); ;
                 }
                 else if (register == Register.Xmm11h)
                 {
@@ -583,7 +583,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm12)
                 {
-                    registerSet.Xmm12 = bytes; 
+                    registerSet.Xmm12 = bytes.Take(16).ToArray(); 
                 }
                 else if (register == Register.Xmm12h)
                 {
@@ -595,7 +595,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm13)
                 {
-                    registerSet.Xmm13 = bytes;
+                    registerSet.Xmm13 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm13h)
                 {
@@ -607,7 +607,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm14)
                 {
-                    registerSet.Xmm14 = bytes;
+                    registerSet.Xmm14 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm14h)
                 {
@@ -619,7 +619,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm15)
                 {
-                    registerSet.Xmm15 = bytes;
+                    registerSet.Xmm15 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm15h)
                 {
@@ -639,7 +639,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm2)
                 {
-                    registerSet.Xmm2 = bytes;
+                    registerSet.Xmm2 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm2h)
                 {
@@ -651,7 +651,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm3)
                 {
-                    registerSet.Xmm3 = bytes;
+                    registerSet.Xmm3 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm3h)
                 {
@@ -663,7 +663,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm4)
                 {
-                    registerSet.Xmm4 = bytes;
+                    registerSet.Xmm4 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm4h)
                 {
@@ -675,7 +675,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm5)
                 {
-                    registerSet.Xmm5 = bytes;
+                    registerSet.Xmm5 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm5h)
                 {
@@ -687,7 +687,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm6)
                 {
-                    registerSet.Xmm6 = bytes;
+                    registerSet.Xmm6 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm6h)
                 {
@@ -699,7 +699,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm7)
                 {
-                    registerSet.Xmm7 = bytes;
+                    registerSet.Xmm7 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm7h)
                 {
@@ -711,7 +711,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm8)
                 {
-                    registerSet.Xmm8 = bytes;
+                    registerSet.Xmm8 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm8h)
                 {
@@ -723,7 +723,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm9)
                 {
-                    registerSet.Xmm9 = bytes;
+                    registerSet.Xmm9 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm9h)
                 {
@@ -739,11 +739,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm0h)
                 {
-                    registerSet.Ymm0h = bytes;
+                    registerSet.Ymm0h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm0l)
                 {
-                    registerSet.Ymm0l = bytes;
+                    registerSet.Ymm0l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm1)
                 {
@@ -755,11 +755,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm10h)
                 {
-                    registerSet.Ymm10h = bytes;
+                    registerSet.Ymm10h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm10l)
                 {
-                    registerSet.Ymm10l = bytes;
+                    registerSet.Ymm10l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm11)
                 {
@@ -767,11 +767,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm11h)
                 {
-                    registerSet.Ymm11h = bytes;
+                    registerSet.Ymm11h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm11l)
                 {
-                    registerSet.Ymm11l = bytes;
+                    registerSet.Ymm11l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm12)
                 {
@@ -779,11 +779,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm12h)
                 {
-                    registerSet.Ymm12h = bytes; 
+                    registerSet.Ymm12h = bytes.Take(16).ToArray(); 
                 }
                 else if (register == Register.Ymm12l)
                 {
-                    registerSet.Ymm12l = bytes;
+                    registerSet.Ymm12l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm13)
                 {
@@ -791,11 +791,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm13h)
                 {
-                    registerSet.Ymm13h = bytes;
+                    registerSet.Ymm13h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm13l)
                 {
-                    registerSet.Ymm13l = bytes;
+                    registerSet.Ymm13l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm14)
                 {
@@ -803,11 +803,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm14h)
                 {
-                    registerSet.Ymm14h = bytes;
+                    registerSet.Ymm14h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm14l)
                 {
-                    registerSet.Ymm14l = bytes;
+                    registerSet.Ymm14l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm15)
                 {
@@ -815,19 +815,19 @@ namespace McFly
                 }
                 else if (register == Register.Ymm15h)
                 {
-                    registerSet.Ymm15h = bytes;
+                    registerSet.Ymm15h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm15l)
                 {
-                    registerSet.Ymm15l = bytes;
+                    registerSet.Ymm15l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm1h)
                 {
-                    registerSet.Ymm1h = bytes;
+                    registerSet.Ymm1h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm1l)
                 {
-                    registerSet.Ymm1l = bytes;
+                    registerSet.Ymm1l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm2)
                 {
@@ -835,11 +835,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm2h)
                 {
-                    registerSet.Ymm2h = bytes;
+                    registerSet.Ymm2h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm2l)
                 {
-                    registerSet.Ymm2l = bytes;
+                    registerSet.Ymm2l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm3)
                 {
@@ -847,11 +847,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm3h)
                 {
-                    registerSet.Ymm3h = bytes;
+                    registerSet.Ymm3h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm3l)
                 {
-                    registerSet.Ymm3l = bytes;
+                    registerSet.Ymm3l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm4)
                 {
@@ -859,11 +859,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm4h)
                 {
-                    registerSet.Ymm4h = bytes;
+                    registerSet.Ymm4h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm4l)
                 {
-                    registerSet.Ymm4l = bytes;
+                    registerSet.Ymm4l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm5)
                 {
@@ -871,11 +871,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm5h)
                 {
-                    registerSet.Ymm5h = bytes;
+                    registerSet.Ymm5h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm5l)
                 {
-                    registerSet.Ymm5l = bytes;
+                    registerSet.Ymm5l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm6)
                 {
@@ -883,11 +883,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm6h)
                 {
-                    registerSet.Ymm6h = bytes;
+                    registerSet.Ymm6h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm6l)
                 {
-                    registerSet.Ymm6l = bytes;
+                    registerSet.Ymm6l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm7)
                 {
@@ -895,11 +895,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm7h)
                 {
-                    registerSet.Ymm7h = bytes;
+                    registerSet.Ymm7h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm7l)
                 {
-                    registerSet.Ymm7l = bytes;
+                    registerSet.Ymm7l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm8)
                 {
@@ -907,11 +907,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm8h)
                 {
-                    registerSet.Ymm8h = bytes;
+                    registerSet.Ymm8h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm8l)
                 {
-                    registerSet.Ymm8l = bytes;
+                    registerSet.Ymm8l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm9)
                 {
@@ -919,11 +919,11 @@ namespace McFly
                 }
                 else if (register == Register.Ymm9h)
                 {
-                    registerSet.Ymm9h = bytes;
+                    registerSet.Ymm9h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm9l)
                 {
-                    registerSet.Ymm9l = bytes;
+                    registerSet.Ymm9l = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Zf)
                 {

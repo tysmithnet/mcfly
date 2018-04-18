@@ -113,8 +113,9 @@ namespace McFly
         {
             if (args.Length == 0)
             {
-                var start = TimeTravelFacade.GetCurrentPosition();
                 var eng = DebugEngineProxy as DebugEngineProxy;
+                eng.Registers.GetIndexByNameWide("eax", out var index);
+                var start = TimeTravelFacade.GetCurrentPosition();
                 eng.GetRegister(162);
                 return;
             }
