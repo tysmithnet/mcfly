@@ -50,6 +50,7 @@ namespace McFly
             Client = client;
             Registers = registers;
             ExecuteWrapper = new ExecuteWrapper(Client);
+            RegisterEngine = new RegisterEngine(); // todo: inject
             SystemObjects = systemObjects;
             Is32Bit =
                 Regex.Match(ExecuteWrapper.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value
@@ -79,6 +80,8 @@ namespace McFly
         /// </summary>
         /// <value>The execute wrapper.</value>
         private ExecuteWrapper ExecuteWrapper { get; }
+
+        private IRegisterEngine RegisterEngine { get; }
 
         /// <summary>
         ///     Gets or sets the registers COM interface
@@ -175,45 +178,9 @@ namespace McFly
         }
 
         /// <inheritdoc />
-        public unsafe byte[] GetRegisterValue(int threadId, Register register)
+        public byte[] GetRegisterValue(int threadId, Register register)
         {
-            SystemObjects.SetCurrentThreadId(threadId.ToUInt());
-            if (Is32Bit)
-            {
-                if(register.X86Index == null)
-                    throw new ArgumentException();
-                int hr = Registers.GetValue(register.X86Index.Value.ToUInt(), out var debugValue);
-                if (hr != 0)
-                {
-                    throw new ApplicationException("farrrttttt");
-                }
-
-                var list = new List<byte>();
-                for (int i = 0; i < register.X86NumBits / 8; i++)
-                {
-                    list.Add(debugValue.F128Bytes[i]);
-                }
-
-                return list.ToArray();
-            }
-            else
-            {
-                if (register.X64Index == null)
-                    throw new ArgumentException();
-                int hr = Registers.GetValue(register.X64Index.Value.ToUInt(), out var debugValue);
-                if (hr != 0)
-                {
-                    throw new ApplicationException("farrrttttt");
-                }
-
-                var list = new List<byte>();
-                for (int i = 0; i < register.X64NumBits / 8; i++)
-                {
-                    list.Add(debugValue.F128Bytes[i]);
-                }
-
-                return list.ToArray();
-            }
+            return RegisterEngine.GetRegisterValue(threadId, register, Registers, this);
         }
 
         /// <summary>

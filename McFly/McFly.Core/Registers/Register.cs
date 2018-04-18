@@ -64,7 +64,7 @@ namespace McFly.Core.Registers
         /// <returns>Register.</returns>
         public static Register Lookup(string name)
         {
-            return X64.FirstOrDefault(x => Regex.IsMatch(name, x.Name, RegexOptions.IgnoreCase)); // todo: uhhh x86???
+            return All.FirstOrDefault(x => Regex.IsMatch(name, x.Name, RegexOptions.IgnoreCase)); 
         }
 
         /// <summary>

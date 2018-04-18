@@ -10,17 +10,15 @@ namespace McFly
 {
     [Export(typeof(IRegisterEngine))]
     public class RegisterEngine : IRegisterEngine
-    {
-        [Import]
-        private IDebugEngineProxy DebugEngineProxy { get; set; }
-
-
+    {                                                           
         /// <inheritdoc />
-        public byte[] GetRegisterValue(int threadId, Register register, IDebugRegisters2 registers)
+        public byte[] GetRegisterValue(int threadId, Register register, IDebugRegisters2 registers, IDebugEngineProxy debugEngine)
         {
-            DebugEngineProxy.SwitchToThread(threadId);
-            if (DebugEngineProxy.Is32Bit)
+            int save = debugEngine.GetCurrentThreadId();
+            debugEngine.SwitchToThread(threadId);
+            if (debugEngine.Is32Bit)
                 return GetRegisterValue32(register, registers);
+            debugEngine.SwitchToThread(save);
             return GetRegisterValue64(register, registers);
         }
 
@@ -174,7 +172,7 @@ namespace McFly
                 bytes.Add(val.F128Bytes[i]);
             }
 
-            return bytes.Take(register.NumBits / 8).ToArray();
+            return bytes.Take(register.NumBits / 8  + Math.Min(register.NumBits % 8, 1)).ToArray();
         }
 
         private unsafe byte[] GetRegisterValue64(Register register, IDebugRegisters2 registers)
@@ -463,7 +461,7 @@ namespace McFly
                 bytes.Add(val.F128Bytes[i]);
             }
             
-            return bytes.Take(register.NumBits / 8).ToArray();
+            return bytes.Take(register.NumBits / 8 + Math.Min(register.NumBits % 8, 1)).ToArray();
         }
     }
 }

@@ -99,7 +99,7 @@ namespace McFly
                 }
                 else if (register == Register.Cs)
                 {
-                    registerSet.Cs = BitConverter.ToUInt32(bytes, 0);
+                    registerSet.Cs = BitConverter.ToUInt16(bytes, 0);
                 }
                 else if (register == Register.Cx)
                 {
@@ -127,31 +127,31 @@ namespace McFly
                 }
                 else if (register == Register.Dr0)
                 {
-                    registerSet.Dr0 = BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr0 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Dr1)
                 {
-                    registerSet.Dr1 = BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr1 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Dr2)
                 {
-                    registerSet.Dr2 = BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr2 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Dr3)
                 {
-                    registerSet.Dr3 = BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr3 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Dr6)
                 {
-                    registerSet.Dr6 = BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr6 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Dr7)
                 {
-                    registerSet.Dr7 = BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr7 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Ds)
                 {
-                    registerSet.Ds = BitConverter.ToUInt32(bytes, 0);
+                    registerSet.Ds = BitConverter.ToUInt16(bytes, 0);
                 }
                 else if (register == Register.Dx)
                 {
@@ -191,7 +191,7 @@ namespace McFly
                 }
                 else if (register == Register.Es)
                 {
-                    registerSet.Es = BitConverter.ToUInt32(bytes, 0);
+                    registerSet.Es = BitConverter.ToUInt16(bytes, 0);
                 }
                 else if (register == Register.Esi)
                 {
@@ -215,11 +215,11 @@ namespace McFly
                 }
                 else if (register == Register.Fopcode)
                 {
-                    registerSet.Fopcode = BitConverter.ToUInt32(bytes, 0);
+                    registerSet.Fopcode = BitConverter.ToUInt16(bytes, 0);
                 }
                 else if (register == Register.Fpcw)
                 {
-                    registerSet.Fpcw = BitConverter.ToUInt32(bytes, 0);
+                    registerSet.Fpcw = BitConverter.ToUInt16(bytes, 0);
                 }
                 else if (register == Register.Fpdp)
                 {
@@ -239,19 +239,19 @@ namespace McFly
                 }
                 else if (register == Register.Fpsw)
                 {
-                    registerSet.Fpsw = BitConverter.ToUInt32(bytes, 0);
+                    registerSet.Fpsw = BitConverter.ToUInt16(bytes, 0);
                 }
                 else if (register == Register.Fptw)
                 {
-                    registerSet.Fptw = BitConverter.ToUInt32(bytes, 0);
+                    registerSet.Fptw = BitConverter.ToUInt16(bytes, 0);
                 }
                 else if (register == Register.Fs)
                 {
-                    registerSet.Fs = BitConverter.ToUInt32(bytes, 0);
+                    registerSet.Fs = BitConverter.ToUInt16(bytes, 0);
                 }
                 else if (register == Register.Gs)
                 {
-                    registerSet.Gs = BitConverter.ToUInt32(bytes, 0);
+                    registerSet.Gs = BitConverter.ToUInt16(bytes, 0);
                 }
                 else if (register == Register.If)
                 {
@@ -495,7 +495,7 @@ namespace McFly
                 }
                 else if (register == Register.Ss)
                 {
-                    registerSet.Ss = BitConverter.ToUInt32(bytes, 0);
+                    registerSet.Ss = BitConverter.ToUInt16(bytes, 0);
                 }
                 else if (register == Register.St0)
                 {
