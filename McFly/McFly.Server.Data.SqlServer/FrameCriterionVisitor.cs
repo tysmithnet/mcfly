@@ -17,6 +17,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using LinqKit;
 using McFly.Core;
+using McFly.Core.Registers;
 using McFly.Server.Data.Search;
 using FramePredicateExpression =
     System.Linq.Expressions.Expression<System.Func<McFly.Server.Data.SqlServer.FrameEntity, bool>>;
