@@ -111,15 +111,13 @@ namespace McFly
         /// <returns>Task.</returns>
         public void Process(string[] args)
         {
+            var options = ExtractIndexOptions(args);
             if (args.Length == 0)
             {
-                var eng = DebugEngineProxy as DebugEngineProxy;
-                eng.Registers.GetIndexByNameWide("eax", out var index);
-                var start = TimeTravelFacade.GetCurrentPosition();
-                eng.GetRegister(162);
+                var start = GetStartingPosition(options);
+                ProcessInternal(start, start);
                 return;
             }
-            var options = ExtractIndexOptions(args);
             var startingPosition = GetStartingPosition(options);
             var endingPosition = GetEndingPosition(options);
             SetBreakpoints(options);
