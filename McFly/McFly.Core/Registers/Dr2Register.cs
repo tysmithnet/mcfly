@@ -11,41 +11,47 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace McFly.Core.Registers
 {
     /// <summary>
-    /// Class Dr2Register.
+    ///     Class Dr2Register.
     /// </summary>
     /// <seealso cref="McFly.Core.Registers.Register" />
     public class Dr2Register : Register
     {
         /// <summary>
-        /// Gets the name of the regiser, e.g. rip, rax, edi.
+        ///     Gets the name of the regiser, e.g. rip, rax, edi.
         /// </summary>
         /// <value>The name.</value>
         public override string Name { get; } = "dr2";
+
         /// <summary>
-        /// Gets the number bits.
+        ///     Gets the number bits.
         /// </summary>
         /// <value>The number bits.</value>
         public override int NumBits { get; } = 64;
+
         /// <summary>
-        /// Gets the index of the X64.
+        ///     Gets the index of the X64.
         /// </summary>
         /// <value>The index of the X64.</value>
         public override int? X64Index { get; } = 26;
+
         /// <summary>
-        /// Gets the X64 number bits.
+        ///     Gets the X64 number bits.
         /// </summary>
         /// <value>The X64 number bits.</value>
         public override int? X64NumBits { get; } = 64;
+
         /// <summary>
-        /// Gets the index of the X86.
+        ///     Gets the index of the X86.
         /// </summary>
         /// <value>The index of the X86.</value>
         public override int? X86Index { get; } = 18;
+
         /// <summary>
-        /// Gets the number bits for the register, e.g. 32, 64.
+        ///     Gets the number bits for the register, e.g. 32, 64.
         /// </summary>
         /// <value>The number bits.</value>
         public override int? X86NumBits { get; } = 32;

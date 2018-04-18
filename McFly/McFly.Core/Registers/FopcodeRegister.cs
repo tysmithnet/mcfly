@@ -11,41 +11,47 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 namespace McFly.Core.Registers
 {
     /// <summary>
-    /// Class FopcodeRegister.
+    ///     Class FopcodeRegister.
     /// </summary>
     /// <seealso cref="McFly.Core.Registers.Register" />
     public class FopcodeRegister : Register
     {
         /// <summary>
-        /// Gets the name of the regiser, e.g. rip, rax, edi.
+        ///     Gets the name of the regiser, e.g. rip, rax, edi.
         /// </summary>
         /// <value>The name.</value>
         public override string Name { get; } = "fopcode";
+
         /// <summary>
-        /// Gets the number bits.
+        ///     Gets the number bits.
         /// </summary>
         /// <value>The number bits.</value>
         public override int NumBits { get; } = 64;
+
         /// <summary>
-        /// Gets the index of the X64.
+        ///     Gets the index of the X64.
         /// </summary>
         /// <value>The index of the X64.</value>
         public override int? X64Index { get; } = null;
+
         /// <summary>
-        /// Gets the X64 number bits.
+        ///     Gets the X64 number bits.
         /// </summary>
         /// <value>The X64 number bits.</value>
         public override int? X64NumBits { get; } = null;
+
         /// <summary>
-        /// Gets the index of the X86.
+        ///     Gets the index of the X86.
         /// </summary>
         /// <value>The index of the X86.</value>
         public override int? X86Index { get; } = 43;
+
         /// <summary>
-        /// Gets the number bits for the register, e.g. 32, 64.
+        ///     Gets the number bits for the register, e.g. 32, 64.
         /// </summary>
         /// <value>The number bits.</value>
         public override int? X86NumBits { get; } = 32;
