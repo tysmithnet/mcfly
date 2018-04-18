@@ -308,6 +308,7 @@ namespace McFly.Core.Test
 
             Register.Ip.NumBits.Should().Be(16);
             Register.Fl.NumBits.Should().Be(16);
+
             Register.Al.NumBits.Should().Be(8);
             Register.Cl.NumBits.Should().Be(8);
             Register.Dl.NumBits.Should().Be(8);
@@ -372,22 +373,22 @@ namespace McFly.Core.Test
             Register.Xmm14.NumBits.Should().Be(128);
             Register.Xmm15.NumBits.Should().Be(128);
 
-            Register.Ymm0.NumBits.Should().Be(128);
-            Register.Ymm1.NumBits.Should().Be(128);
-            Register.Ymm2.NumBits.Should().Be(128);
-            Register.Ymm3.NumBits.Should().Be(128);
-            Register.Ymm4.NumBits.Should().Be(128);
-            Register.Ymm5.NumBits.Should().Be(128);
-            Register.Ymm6.NumBits.Should().Be(128);
-            Register.Ymm7.NumBits.Should().Be(128);
-            Register.Ymm8.NumBits.Should().Be(128);
-            Register.Ymm9.NumBits.Should().Be(128);
-            Register.Ymm10.NumBits.Should().Be(128);
-            Register.Ymm11.NumBits.Should().Be(128);
-            Register.Ymm12.NumBits.Should().Be(128);
-            Register.Ymm13.NumBits.Should().Be(128);
-            Register.Ymm14.NumBits.Should().Be(128);
-            Register.Ymm15.NumBits.Should().Be(128);
+            Register.Ymm0.NumBits.Should().Be(256);
+            Register.Ymm1.NumBits.Should().Be(256);
+            Register.Ymm2.NumBits.Should().Be(256);
+            Register.Ymm3.NumBits.Should().Be(256);
+            Register.Ymm4.NumBits.Should().Be(256);
+            Register.Ymm5.NumBits.Should().Be(256);
+            Register.Ymm6.NumBits.Should().Be(256);
+            Register.Ymm7.NumBits.Should().Be(256);
+            Register.Ymm8.NumBits.Should().Be(256);
+            Register.Ymm9.NumBits.Should().Be(256);
+            Register.Ymm10.NumBits.Should().Be(256);
+            Register.Ymm11.NumBits.Should().Be(256);
+            Register.Ymm12.NumBits.Should().Be(256);
+            Register.Ymm13.NumBits.Should().Be(256);
+            Register.Ymm14.NumBits.Should().Be(256);
+            Register.Ymm15.NumBits.Should().Be(256);
 
             Register.Xmm0l.NumBits.Should().Be(64);
             Register.Xmm1l.NumBits.Should().Be(64);
