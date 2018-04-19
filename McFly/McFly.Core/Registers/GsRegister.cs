@@ -42,7 +42,7 @@ namespace McFly.Core.Registers
         ///     Gets the X64 number bits.
         /// </summary>
         /// <value>The X64 number bits.</value>
-        public override int? X64NumBits { get; } = 16;
+        public override int? X64NumBits { get; } = 32;
 
         /// <summary>
         ///     Gets the index of the X86.

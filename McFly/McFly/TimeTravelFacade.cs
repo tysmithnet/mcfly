@@ -150,7 +150,7 @@ namespace McFly
             {
                 Position = GetCurrentPosition(threadId),
                 StackTrace = StackFacade.GetCurrentStackTrace(threadId),
-                RegisterSet = RegisterFacade.GetCurrentRegisterSet(threadId, DebugEngineProxy.Is32Bit ? Register.X86 : Register.X64),
+                RegisterSet = RegisterFacade.GetCurrentRegisterSet(threadId, DebugEngineProxy.Is32Bit ? Register.DefaultX86Registers : Register.DefaultX64Registers),
                 DisassemblyLine = DisassemblyFacade.GetDisassemblyLines(threadId, 1).Single(),
                 ThreadId = threadId
             };

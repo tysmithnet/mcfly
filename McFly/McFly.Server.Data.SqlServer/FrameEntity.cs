@@ -65,8 +65,8 @@ namespace McFly.Server.Data.SqlServer
         public string Brto { get; set; }
 
         [Column("cs")]
-        [MaxLength(8)]
-        [MinLength(8)]
+        [MaxLength(4)]
+        [MinLength(4)]
         public string Cs { get; set; }
 
         [Column("dr0")]
@@ -100,8 +100,8 @@ namespace McFly.Server.Data.SqlServer
         public string Dr7 { get; set; }
 
         [Column("ds")]
-        [MaxLength(8)]
-        [MinLength(8)]
+        [MaxLength(4)]
+        [MinLength(4)]
         public string Ds { get; set; }
 
         [Column("efl")]
@@ -110,8 +110,8 @@ namespace McFly.Server.Data.SqlServer
         public string Efl { get; set; }
 
         [Column("es")]
-        [MaxLength(8)]
-        [MinLength(8)]
+        [MaxLength(4)]
+        [MinLength(4)]
         public string Es { get; set; }
 
         [Column("exfrom")]
@@ -125,23 +125,23 @@ namespace McFly.Server.Data.SqlServer
         public string Exto { get; set; }
 
         [Column("fpcw")]
-        [MaxLength(8)]
-        [MinLength(8)]
+        [MaxLength(4)]
+        [MinLength(4)]
         public string Fpcw { get; set; }
 
         [Column("fpsw")]
-        [MaxLength(8)]
-        [MinLength(8)]
+        [MaxLength(4)]
+        [MinLength(4)]
         public string Fpsw { get; set; }
 
         [Column("fptw")]
-        [MaxLength(8)]
-        [MinLength(8)]
+        [MaxLength(4)]
+        [MinLength(4)]
         public string Fptw { get; set; }
 
         [Column("fopcode")]
-        [MaxLength(8)]
-        [MinLength(8)]
+        [MaxLength(4)]
+        [MinLength(4)]
         public string Fopcode { get; set; }
 
         [Column("fpip")]
@@ -165,13 +165,13 @@ namespace McFly.Server.Data.SqlServer
         public string Fpdpsel { get; set; }
 
         [Column("fs")]
-        [MaxLength(8)]
-        [MinLength(8)]
+        [MaxLength(4)]
+        [MinLength(4)]
         public string Fs { get; set; }
 
         [Column("gs")]
-        [MaxLength(8)]
-        [MinLength(8)]
+        [MaxLength(4)]
+        [MinLength(4)]
         public string Gs { get; set; }
 
         [Column("mm0")]
@@ -345,8 +345,8 @@ namespace McFly.Server.Data.SqlServer
         public string Rsp { get; set; }
 
         [Column("ss")]
-        [MaxLength(8)]
-        [MinLength(8)]
+        [MaxLength(4)]
+        [MinLength(4)]
         public string Ss { get; set; }
 
         [Column("ymm0")]

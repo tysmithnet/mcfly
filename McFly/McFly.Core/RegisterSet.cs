@@ -588,7 +588,7 @@ namespace McFly.Core
         ///     Gets or sets the cs.
         /// </summary>
         /// <value>The cs.</value>
-        public uint? Cs { get; set; }
+        public ushort? Cs { get; set; }
 
         /// <summary>
         ///     Gets or sets the cx.
@@ -748,7 +748,7 @@ namespace McFly.Core
         ///     Gets or sets the ds.
         /// </summary>
         /// <value>The ds.</value>
-        public uint? Ds { get; set; }
+        public ushort? Ds { get; set; }
 
         /// <summary>
         ///     Gets or sets the dx.
@@ -912,7 +912,7 @@ namespace McFly.Core
         ///     Gets or sets the es.
         /// </summary>
         /// <value>The es.</value>
-        public uint? Es { get; set; }
+        public ushort? Es { get; set; }
 
         /// <summary>
         ///     Gets or sets the esi.
@@ -987,13 +987,13 @@ namespace McFly.Core
         ///     Gets or sets the fopcode.
         /// </summary>
         /// <value>The fopcode.</value>
-        public uint? Fopcode { get; set; }
+        public ushort? Fopcode { get; set; }
 
         /// <summary>
         ///     Gets or sets the FPCW.
         /// </summary>
         /// <value>The FPCW.</value>
-        public uint? Fpcw { get; set; }
+        public ushort? Fpcw { get; set; }
 
         /// <summary>
         ///     Gets or sets the FPDP.
@@ -1023,25 +1023,25 @@ namespace McFly.Core
         ///     Gets or sets the FPSW.
         /// </summary>
         /// <value>The FPSW.</value>
-        public uint? Fpsw { get; set; }
+        public ushort? Fpsw { get; set; }
 
         /// <summary>
         ///     Gets or sets the FPTW.
         /// </summary>
         /// <value>The FPTW.</value>
-        public uint? Fptw { get; set; }
+        public ushort? Fptw { get; set; }
 
         /// <summary>
         ///     Gets or sets the fs.
         /// </summary>
         /// <value>The fs.</value>
-        public uint? Fs { get; set; }
+        public ushort? Fs { get; set; }
 
         /// <summary>
         ///     Gets or sets the gs.
         /// </summary>
         /// <value>The gs.</value>
-        public uint? Gs { get; set; }
+        public ushort? Gs { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this <see cref="RegisterSet" /> is if.
@@ -1868,7 +1868,7 @@ namespace McFly.Core
         ///     Gets or sets the ss.
         /// </summary>
         /// <value>The ss.</value>
-        public uint? Ss { get; set; }
+        public ushort? Ss { get; set; }
 
         /// <summary>
         ///     Gets or sets the ST0.
