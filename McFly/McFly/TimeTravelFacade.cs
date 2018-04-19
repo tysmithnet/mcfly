@@ -146,14 +146,13 @@ namespace McFly
         /// <returns>Frame.</returns>
         public Frame GetCurrentFrame(int threadId)
         {
-            return new Frame
-            {
-                Position = GetCurrentPosition(threadId),
-                StackTrace = StackFacade.GetCurrentStackTrace(threadId),
-                RegisterSet = RegisterFacade.GetCurrentRegisterSet(threadId, DebugEngineProxy.Is32Bit ? Register.DefaultX86Registers : Register.DefaultX64Registers),
-                DisassemblyLine = DisassemblyFacade.GetDisassemblyLines(threadId, 1).Single(),
-                ThreadId = threadId
-            };
+            var frame = new Frame();
+            frame.Position = GetCurrentPosition(threadId);
+            frame.StackTrace = StackFacade.GetCurrentStackTrace(threadId);
+            frame.RegisterSet = RegisterFacade.GetCurrentRegisterSet(threadId, DebugEngineProxy.Is32Bit ? Register.DefaultX86Registers : Register.DefaultX64Registers);
+            frame.DisassemblyLine = DisassemblyFacade.GetDisassemblyLines(threadId, 1).Single();
+            frame.ThreadId = threadId;
+            return frame;
         }
 
         /// <summary>

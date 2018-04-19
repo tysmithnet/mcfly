@@ -65,8 +65,9 @@ namespace McFly.Core.Registers
             {
                 Rax, Rcx, Rdx, Rbx, Rsp, Rbp, Rsi, Rdi, R8, R9, R10, R11, R12, R13, R14, R15, Rip, Efl, Cs, Ds, Es, Fs,
                 Gs, Ss, Dr0, Dr1, Dr2, Dr3, Dr6, Dr7, Fpcw, Fpsw, Fptw, St0, St1, St2, St3, St4, St5, St6, St7, Mm0,
-                Mm1, Mm2, Mm3, Mm4, Mm5, Mm6, Mm7, Mxcsr,
-                Ymm0, Ymm1, Ymm2, Ymm3, Ymm4, Ymm5, Ymm6, Ymm7, Ymm8, Ymm9, Ymm10, Ymm11, Ymm12, Ymm13, Ymm14, Ymm15
+                Mm1, Mm2, Mm3, Mm4, Mm5, Mm6, Mm7, Mxcsr, 
+                Ymm0, Ymm1, Ymm2, Ymm3, Ymm4, Ymm5, Ymm6, Ymm7, Ymm8, Ymm9, Ymm10, Ymm11, Ymm12, Ymm13, Ymm14, Ymm15,
+               Exfrom, Exto, Brfrom, Brto
             };
             All = X64.Concat(X86).Distinct().ToArray();
         }
@@ -186,6 +187,8 @@ namespace McFly.Core.Registers
         /// </summary>
         /// <value>The cx.</value>
         public static CxRegister Cx { get; } = new CxRegister();
+
+        public static Register[] DefaultX86Registers { get; }
 
         /// <summary>
         ///     Gets the df.
