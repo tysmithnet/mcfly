@@ -54,8 +54,24 @@ namespace McFly.Core.Registers
                 Ymm6, Ymm7, Ymm0l, Ymm1l, Ymm2l, Ymm3l, Ymm4l, Ymm5l, Ymm6l, Ymm7l, Ymm0h, Ymm1h, Ymm2h, Ymm3h, Ymm4h,
                 Ymm5h, Ymm6h, Ymm7h
             };
+            DefaultX86Registers = new Register[]
+            {
+                Gs, Fs, Es, Ds, Edi, Esi, Ebx, Edx, Ecx, Eax, Ebp, Eip, Cs, Efl, Esp, Ss, Dr0, Dr1, Dr2, Dr3, Dr6, Dr7,
+                Fpcw, Fpsw, Fptw, Fopcode, Fpip, Fpipsel, Fpdp, Fpdpsel, St0, St1, St2, St3, St4, St5, St6, St7, Mm0, Mm1, Mm2, Mm3, Mm4, Mm5, Mm6, Mm7,
+                Mxcsr, Ymm0, Ymm1, Ymm2, Ymm3, Ymm4, Ymm5, Ymm6, Ymm7
+            };
+            DefaultX64Registers = new Register[]
+            {
+                Rax, Rcx, Rdx, Rbx, Rsp, Rbp, Rsi, Rdi, R8, R9, R10, R11, R12, R13, R14, R15, Rip, Efl, Cs, Ds, Es, Fs,
+                Gs, Ss, Dr0, Dr1, Dr2, Dr3, Dr6, Dr7, Fpcw, Fpsw, Fptw, St0, St1, St2, St3, St4, St5, St6, St7, Mm0,
+                Mm1, Mm2, Mm3, Mm4, Mm5, Mm6, Mm7, Mxcsr, 
+                Ymm0, Ymm1, Ymm2, Ymm3, Ymm4, Ymm5, Ymm6, Ymm7, Ymm8, Ymm9, Ymm10, Ymm11, Ymm12, Ymm13, Ymm14, Ymm15,
+               Exfrom, Exto, Brfrom, Brto
+            };
             All = X64.Concat(X86).Distinct().ToArray();
         }
+
+        public static Register[] DefaultX64Registers { get; }
 
         /// <summary>
         ///     Lookups the specified name.
@@ -168,6 +184,8 @@ namespace McFly.Core.Registers
         /// </summary>
         /// <value>The cx.</value>
         public static CxRegister Cx { get; } = new CxRegister();
+
+        public static Register[] DefaultX86Registers { get; }
 
         /// <summary>
         ///     Gets the df.

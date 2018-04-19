@@ -53,6 +53,14 @@ namespace McFly.Test.Builders
             RegisterSet result)
         {
             Mock.Setup(facade => facade.GetCurrentRegisterSet(registers)).Returns(result);
+            Mock.Setup(facade => facade.GetCurrentRegisterSet(It.IsAny<int>(), registers)).Returns(result);
+            return this;
+        }
+
+        public RegisterFacadeBuilder WithGetCurrentRegisterSet(RegisterSet result)
+        {
+            Mock.Setup(facade => facade.GetCurrentRegisterSet(It.IsAny<IEnumerable<Register>>())).Returns(result);
+            Mock.Setup(facade => facade.GetCurrentRegisterSet(It.IsAny<int>(), It.IsAny<IEnumerable<Register>>())).Returns(result);
             return this;
         }
 
