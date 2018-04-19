@@ -1868,7 +1868,7 @@ namespace McFly.Core
         ///     Gets or sets the ss.
         /// </summary>
         /// <value>The ss.</value>
-        public uint? Ss { get; set; }
+        public ushort? Ss { get; set; }
 
         /// <summary>
         ///     Gets or sets the ST0.

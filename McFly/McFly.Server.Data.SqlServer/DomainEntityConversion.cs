@@ -149,7 +149,7 @@ namespace McFly.Server.Data.SqlServer
                     Fpcw = entity.Fpcw?.ToUShort(),
                     Fpsw = entity.Fpsw?.ToUShort(),
                     Fptw = entity.Fptw?.ToUShort(),
-                    Fopcode = entity.Fopcode?.ToUInt(),
+                    Fopcode = entity.Fopcode?.ToUShort(),
                     Fpip = entity.Fpip?.ToUShort(),
                     Fpipsel = entity.Fpdpsel?.ToUInt(),
                     Fpdp = entity.Fpdp?.ToUShort(),
