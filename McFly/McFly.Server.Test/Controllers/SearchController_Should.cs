@@ -5,9 +5,7 @@ using McFly.Core.Registers;
 using McFly.Server.Contract;
 using McFly.Server.Controllers;
 using McFly.Server.Data.Search;
-using McFly.Server.Search;
 using McFly.Server.Test.Builders;
-using Moq;
 using Xunit;
 
 namespace McFly.Server.Test.Controllers
@@ -42,22 +40,6 @@ namespace McFly.Server.Test.Controllers
                 Args = "rax -eq 10".Split(' ')
             });
             frames.All(x => x.RegisterSet.Rax == 10).Should().BeTrue();
-        }
-    }
-
-    public class SearchCriteriaConverterFacadeBuilder
-    {
-        public Mock<ISearchCriterionConversionFacade> Mock = new Mock<ISearchCriterionConversionFacade>();
-
-        public SearchCriteriaConverterFacadeBuilder WithConvert(ICriterion result)
-        {
-            Mock.Setup(facade => facade.Convert(It.IsAny<SearchCriterionDto>())).Returns(result);
-            return this;
-        }
-
-        public ISearchCriterionConversionFacade Build()
-        {
-            return Mock.Object;
         }
     }
 }
