@@ -14,13 +14,18 @@ namespace McFly.Test
         public void Get_Stack_Frames_Correctly()
         {
             // arrange
-            var stackTrace = @"00000000`0014d1d0 00007ffa`513138e6 KERNEL32!GetTimeFormatWWorker+0x7ed
-00000000`0014d220 00007ffa`513165ee KERNEL32!QuirkIsEnabledForPackageWorker";
+            var stackTrace = @"ChildEBP RetAddr  
+WARNING: Frame IP not in any known module. Following frames may be wrong.
+004ffc7c 77c1ea4c 0x75607000
+004ffd58 77aa3bd3 ntdll!ZwTerminateProcess+0xc
+004ffe04 00121c7d McFly_Samples_Console_HelloWorld+0x11df8";
 
             var expected = new[]
             {
-                new StackFrame(0x014d1d0, 0x0007ffa513138e6, "KERNEL32", "GetTimeFormatWWorker", 0x7ed),
-                new StackFrame(0x014d220, 0x0007ffa513165ee, "KERNEL32", "QuirkIsEnabledForPackageWorker", 0)
+                new StackFrame(0x004ffc7c, 0x77c1ea4c, null, null, 0x75607000),
+                new StackFrame(0x004ffd58, 0x77aa3bd3, "ntdll", "ZwTerminateProcess", 0xc),
+                new StackFrame(0x004ffe04, 0x00121c7d, "McFly_Samples_Console_HelloWorld", null, 0x11df8),
+
             };
 
             // act                                                                           
