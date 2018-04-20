@@ -10,28 +10,6 @@ namespace McFly.Test
 {
     public class IndexMethod_Should
     {
-        [Fact]
-        public void Get_Stack_Frames_Correctly()
-        {
-            // arrange
-            var stackTrace = @"ChildEBP RetAddr  
-WARNING: Frame IP not in any known module. Following frames may be wrong.
-004ffc7c 77c1ea4c 0x75607000
-004ffd58 77aa3bd3 ntdll!ZwTerminateProcess+0xc
-004ffe04 00121c7d McFly_Samples_Console_HelloWorld+0x11df8";
-
-            var expected = new[]
-            {
-                new StackFrame(0x004ffc7c, 0x77c1ea4c, null, null, 0x75607000),
-                new StackFrame(0x004ffd58, 0x77aa3bd3, "ntdll", "ZwTerminateProcess", 0xc),
-                new StackFrame(0x004ffe04, 0x00121c7d, "McFly_Samples_Console_HelloWorld", null, 0x11df8),
-
-            };
-
-            // act                                                                           
-            // assert
-            IndexMethod.GetStackFrames(stackTrace).Should().Equal(expected);
-        }
 
         [Fact]
         public void Identify_32_And_64_Bit_Arch()
