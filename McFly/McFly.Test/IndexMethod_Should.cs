@@ -10,23 +10,6 @@ namespace McFly.Test
 {
     public class IndexMethod_Should
     {
-        [Fact]
-        public void Get_Stack_Frames_Correctly()
-        {
-            // arrange
-            var stackTrace = @"00000000`0014d1d0 00007ffa`513138e6 KERNEL32!GetTimeFormatWWorker+0x7ed
-00000000`0014d220 00007ffa`513165ee KERNEL32!QuirkIsEnabledForPackageWorker";
-
-            var expected = new[]
-            {
-                new StackFrame(0x014d1d0, 0x0007ffa513138e6, "KERNEL32", "GetTimeFormatWWorker", 0x7ed),
-                new StackFrame(0x014d220, 0x0007ffa513165ee, "KERNEL32", "QuirkIsEnabledForPackageWorker", 0)
-            };
-
-            // act                                                                           
-            // assert
-            IndexMethod.GetStackFrames(stackTrace).Should().Equal(expected);
-        }
 
         [Fact]
         public void Identify_32_And_64_Bit_Arch()

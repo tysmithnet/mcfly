@@ -187,9 +187,7 @@ namespace McFly.Core.Registers
         /// </summary>
         /// <value>The cx.</value>
         public static CxRegister Cx { get; } = new CxRegister();
-
-        public static Register[] DefaultX86Registers { get; }
-
+                                                                
         /// <summary>
         ///     Gets the df.
         /// </summary>

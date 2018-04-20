@@ -74,17 +74,51 @@ namespace McFly
         /// </summary>
         /// <param name="stackTrace">The stack trace.</param>
         /// <returns>IEnumerable&lt;StackFrame&gt;.</returns>
-        private static IEnumerable<StackFrame> ExtractStackFrames(string stackTrace)
+        internal static IEnumerable<StackFrame> ExtractStackFrames(string stackTrace)
         {
-            var stackFrames = (from m in Regex.Matches(stackTrace,
-                        @"(?<sp>[a-fA-F0-9`]+) (?<ret>[a-fA-F0-9`]+) (?<mod>.*)!(?<fun>[^+]+)\+?(?<off>[a-fA-F0-9x]+)?")
-                    .Cast<Match>()
-                let stackPointer = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16)
-                let returnAddress = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16)
-                let module = m.Groups["mod"].Value
-                let functionName = m.Groups["fun"].Value
-                let offset = m.Groups["off"].Success ? Convert.ToUInt32(m.Groups["off"].Value, 16) : 0
-                select new StackFrame(stackPointer, returnAddress, module, functionName, offset)).ToList();
+            var stackFrames = new List<StackFrame>();
+            var lines = stackTrace.Split('\n');
+            foreach (var line in lines)
+            {
+                if (!Regex.IsMatch(line, "^([a-f0-9`]+ ){2}")) continue;
+                Match m;
+
+                m = Regex.Match(line, "^(?<sp>[a-f0-9`]+) (?<ret>[a-f0-9`]+) 0x(?<off>[a-f0-9]+)");
+                if (m.Success)
+                {
+                    var sp = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16);
+                    var ret = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16);
+                    var off = Convert.ToUInt64(m.Groups["off"].Value.Replace("`", ""), 16);
+                    var frame = new StackFrame(sp, ret, null, null, off);
+                    stackFrames.Add(frame);
+                    continue;
+                }
+
+                m = Regex.Match(line, @"^(?<sp>[a-f0-9`]+) (?<ret>[a-f0-9`]+) (?<mod>[^+]+)!(?<fun>[^\s]+)\+(?<off>[a-f0-9x]+)");
+                if (m.Success)
+                {
+                    var sp = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16);
+                    var ret = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16);
+                    var mod = m.Groups["mod"].Value;
+                    var fun = m.Groups["fun"].Value;
+                    var off = Convert.ToUInt64(m.Groups["off"].Value.Replace("`", ""), 16);
+                    var frame = new StackFrame(sp, ret, mod, fun, off);
+                    stackFrames.Add(frame);
+                    continue;
+                }
+
+                m = Regex.Match(line, @"^(?<sp>[a-f0-9`]+) (?<ret>[a-f0-9`]+) (?<mod>[^!+]+)\+(?<off>[a-f0-9x]+)");
+                if (m.Success)
+                {
+                    var sp = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16);
+                    var ret = Convert.ToUInt64(m.Groups["ret"].Value.Replace("`", ""), 16);
+                    var mod = m.Groups["mod"].Value;
+                    var off = Convert.ToUInt64(m.Groups["off"].Value.Replace("`", ""), 16);
+                    var frame = new StackFrame(sp, ret, mod, null, off);
+                    stackFrames.Add(frame);
+                    continue;
+                }
+            }
             return stackFrames;
         }
     }

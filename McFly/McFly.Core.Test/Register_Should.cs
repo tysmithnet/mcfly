@@ -428,6 +428,11 @@ namespace McFly.Core.Test
             Register.Fpcw.NumBits.Should().Be(16);
             Register.Fpsw.NumBits.Should().Be(16);
             Register.Fptw.NumBits.Should().Be(16);
+            Register.Fopcode.NumBits.Should().Be(16);
+            Register.Fpip.NumBits.Should().Be(32);
+            Register.Fpdp.NumBits.Should().Be(32);
+            Register.Fpipsel.NumBits.Should().Be(32);
+            Register.Fpdpsel.NumBits.Should().Be(32);
             Register.St0.NumBits.Should().Be(80);
             Register.St1.NumBits.Should().Be(80);
             Register.St2.NumBits.Should().Be(80);
