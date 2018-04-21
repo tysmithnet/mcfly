@@ -30,7 +30,7 @@ namespace McFly.Server.Data.SqlServer
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
-        public long StackFrameId { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the stack pointer.
