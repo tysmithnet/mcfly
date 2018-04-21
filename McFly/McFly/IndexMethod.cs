@@ -141,7 +141,8 @@ namespace McFly
                 {
                     case "-m":
                     case "--memory":
-                        ExtractMemoryRanges(args, i, arg, options);
+                        
+                        //ExtractMemoryRanges(args, i, arg, options);
                         break;
                     case "-s":
                     case "--start":

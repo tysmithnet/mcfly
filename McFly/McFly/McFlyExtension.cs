@@ -58,6 +58,8 @@ namespace McFly
         /// </summary>
         private static IDebugSystemObjects systemObjects;
 
+        private static IDebugDataSpaces debugDataSpaces;
+
         /// <summary>
         ///     The symbols
         /// </summary>
@@ -181,6 +183,7 @@ namespace McFly
                 registers = (IDebugRegisters2) client;
                 symbols = (IDebugSymbols5) client;
                 systemObjects = (IDebugSystemObjects) client;
+                debugDataSpaces = (IDebugDataSpaces) client;
             }
             catch (Exception e)
             {
