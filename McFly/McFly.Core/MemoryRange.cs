@@ -45,6 +45,8 @@ namespace McFly.Core
             High = high;
         }
 
+        public ulong Length => High - Low;
+
         /// <summary>
         ///     Gets the debugger display.
         /// </summary>

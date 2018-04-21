@@ -71,14 +71,6 @@ namespace McFly.Core
         public DisassemblyLine DisassemblyLine { get; set; } = new DisassemblyLine();
 
         /// <summary>
-        ///     Gets or sets the notes.
-        /// </summary>
-        /// <value>The notes.</value>
-        public ICollection<Note> Notes { get; set; } = new List<Note>();
-
-        public ICollection<MemoryChunk> MemoryChunks { get; set; } = new List<MemoryChunk>();
-
-        /// <summary>
         ///     Compares to.
         /// </summary>
         /// <param name="obj">The object.</param>

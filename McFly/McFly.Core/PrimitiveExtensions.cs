@@ -23,6 +23,11 @@ namespace McFly.Core
     /// </summary>
     public static class PrimitiveExtensions
     {
+        public static ulong ToULong(this int intValue)
+        {
+            return (ulong) intValue;
+        }
+
         /// <summary>
         ///     Interpets the high 32 bits as a ulong
         /// </summary>

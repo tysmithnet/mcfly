@@ -4,7 +4,7 @@
 // Created          : 03-15-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-21-2018
 // ***********************************************************************
 // <copyright file="IServerClient.cs" company="">
 //     Copyright ©  2018
@@ -25,6 +25,13 @@ namespace McFly
     public interface IServerClient : IInjectable // todo: break up into cohesive types
     {
         /// <summary>
+        ///     Adds a memory range to a position
+        /// </summary>
+        /// <param name="position">The position.</param>
+        /// <param name="memoryChunk">The memory chunk.</param>
+        void AddMemoryRange(Position position, MemoryChunk memoryChunk);
+
+        /// <summary>
         ///     Adds the note.
         /// </summary>
         /// <param name="position">The position.</param>
@@ -41,16 +48,16 @@ namespace McFly
         void InitializeProject(string projectName, Position start, Position end);
 
         /// <summary>
-        ///     Upserts the frames.
-        /// </summary>
-        /// <param name="frames">The frames.</param>
-        void UpsertFrames(IEnumerable<Frame> frames);
-
-        /// <summary>
         ///     Searches the frames.
         /// </summary>
         /// <param name="converted">The converted.</param>
         /// <returns>IEnumerable&lt;Frame&gt;.</returns>
         IEnumerable<Frame> SearchFrames(SearchCriterionDto converted);
+
+        /// <summary>
+        ///     Upserts the frames.
+        /// </summary>
+        /// <param name="frames">The frames.</param>
+        void UpsertFrames(IEnumerable<Frame> frames);
     }
 }
