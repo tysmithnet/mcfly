@@ -178,7 +178,7 @@ namespace McFly.Test
                 ServerClient = serverClient
             };
 
-            indexMethod.ProcessInternal(new Position(0, 0), MockFrames.SingleThreaded0.Max(x => x.Position));
+            indexMethod.ProcessInternal(new Position(0, 0), MockFrames.SingleThreaded0.Max(x => x.Position), new IndexOptions());
             sc.Mock.Verify(client =>
                 client.UpsertFrames(
                     It.Is<IEnumerable<Frame>>(frames => frames.SequenceEqual(MockFrames.SingleThreaded0))));

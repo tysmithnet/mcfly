@@ -115,13 +115,13 @@ namespace McFly
             if (args.Length == 0)
             {
                 var start = GetStartingPosition(options);
-                ProcessInternal(start, start);
+                ProcessInternal(start, start, options);
                 return;
             }
             var startingPosition = GetStartingPosition(options);
             var endingPosition = GetEndingPosition(options);
             SetBreakpoints(options);
-            ProcessInternal(startingPosition, endingPosition);
+            ProcessInternal(startingPosition, endingPosition, options);
         }
 
         /// <summary>
@@ -141,8 +141,7 @@ namespace McFly
                 {
                     case "-m":
                     case "--memory":
-                        
-                        //ExtractMemoryRanges(args, i, arg, options);
+                        ExtractMemoryRanges(args, i, arg, options);
                         break;
                     case "-s":
                     case "--start":
@@ -356,7 +355,8 @@ namespace McFly
         /// </summary>
         /// <param name="startingPosition">The starting position.</param>
         /// <param name="endingPosition">The ending position.</param>
-        internal void ProcessInternal(Position startingPosition, Position endingPosition)
+        /// <param name="options"></param>
+        internal void ProcessInternal(Position startingPosition, Position endingPosition, IndexOptions options)
         {
             TimeTravelFacade.SetPosition(startingPosition);
             // loop through all the set break points and record relevant values
@@ -370,7 +370,7 @@ namespace McFly
                 if (last == breakRecord.Position)
                     break;
 
-                var newFrames = CreateFramesForUpsert(positions, breakRecord);
+                var newFrames = CreateFramesForUpsert(positions, breakRecord, options);
                 frames.AddRange(newFrames);
                 last = breakRecord.Position;
             }
@@ -391,12 +391,15 @@ namespace McFly
         /// </summary>
         /// <param name="positions">The positions.</param>
         /// <param name="breakRecord">The break record.</param>
+        /// <param name="options"></param>
         /// <returns>List&lt;Frame&gt;.</returns>
         internal List<Frame> CreateFramesForUpsert(PositionsResult positions,
-            PositionsRecord breakRecord)
+            PositionsRecord breakRecord, IndexOptions options)
         {
-            var frames = positions.Where(positionRecord => positionRecord.Position == breakRecord.Position)
-                .Select(positionRecord => TimeTravelFacade.GetCurrentFrame(positionRecord.ThreadId)).ToList();
+            var frames = positions
+                .Where(positionRecord => positionRecord.Position == breakRecord.Position)
+                .Select(positionRecord => TimeTravelFacade.GetCurrentFrame(positionRecord.ThreadId))
+                .ToList();
             return frames;
         }
 
