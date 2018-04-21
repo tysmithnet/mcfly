@@ -29,6 +29,7 @@ namespace McFly.Server.Data.SqlServer
         /// <value>The stack frame identifier.</value>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id")]
         public long StackFrameId { get; set; }
 
         /// <summary>
