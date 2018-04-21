@@ -87,6 +87,7 @@
     <Compile Include="IndexMethod_Should.cs" />
     <Compile Include="IndexOptions_Should.cs" />
     <Compile Include="InitMethod_Should.cs" />
+    <Compile Include="MemoryEngineBuilder.cs" />
     <Compile Include="MemoryEngine_Should.cs" />
     <Compile Include="MockFrames.cs" />
     <Compile Include="NoteMethod_Should.cs" />

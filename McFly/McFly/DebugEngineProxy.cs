@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-21-2018
 // ***********************************************************************
 // <copyright file="DbgEngProxy.cs" company="">
 //     Copyright ©  2018
@@ -13,7 +13,6 @@
 // ***********************************************************************
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -22,7 +21,6 @@ using System.Text.RegularExpressions;
 using McFly.Core;
 using McFly.Core.Registers;
 using McFly.Debugger;
-using Newtonsoft.Json;
 
 namespace McFly
 {
@@ -51,6 +49,7 @@ namespace McFly
             Registers = registers;
             ExecuteWrapper = new ExecuteWrapper(Client);
             RegisterEngine = new RegisterEngine(); // todo: inject
+            MemoryEngine = new MemoryEngine();
             SystemObjects = systemObjects;
             Is32Bit =
                 Regex.Match(ExecuteWrapper.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value
@@ -58,36 +57,87 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets or sets the system objects COM interface
+        ///     Disposes this instance.
         /// </summary>
-        /// <value>The system objects.</value>
-        private IDebugSystemObjects SystemObjects { get; }
+        public void Dispose()
+        {
+            ExecuteWrapper?.Dispose();
+        }
 
         /// <summary>
-        ///     Gets or sets the control COM interface
+        ///     Executes the specified command
+        ///     e.g. k, bl, u
         /// </summary>
-        /// <value>The control.</value>
-        private IDebugControl6 Control { get; }
+        /// <param name="command">The command.</param>
+        /// <returns>System.String.</returns>
+        public string Execute(string command)
+        {
+            return ExecuteWrapper.Execute(command);
+        }
 
         /// <summary>
-        ///     Gets or sets the client COM interface
+        ///     Executes a command on the specified thread id
         /// </summary>
-        /// <value>The client.</value>
-        private IDebugClient5 Client { get; }
+        /// <param name="threadId">The thread identifier.</param>
+        /// <param name="command">The v.</param>
+        /// <returns>System.String.</returns>
+        public string Execute(int threadId, string command)
+        {
+            return Execute($"~~[0x{threadId:X}]e {command}");
+        }
 
         /// <summary>
-        ///     Gets or sets the execute wrapper COM interface
+        ///     Gets the current thread identifier. Whenever you executes commands, they execute under a thread context. This
+        ///     returns the thread id of that context.
         /// </summary>
-        /// <value>The execute wrapper.</value>
-        private ExecuteWrapper ExecuteWrapper { get; }
-
-        private IRegisterEngine RegisterEngine { get; }
+        /// <returns>System.Int32.</returns>
+        public int GetCurrentThreadId()
+        {
+            SystemObjects.GetCurrentThreadId(out var threadId);
+            return Convert.ToInt32(threadId);
+        }
 
         /// <summary>
-        ///     Gets or sets the registers COM interface
+        ///     Gets the last known position in the trace
         /// </summary>
-        /// <value>The registers.</value>
-        internal IDebugRegisters2 Registers { get; }
+        /// <returns>Position.</returns>
+        public Position GetEndingPosition()
+        {
+            var end = Execute("!tt 100"); // todo: get from trace_info
+            var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
+            return Position.Parse(endMatch.Groups["pos"].Value);
+        }
+
+        /// <summary>
+        ///     Gets the register.
+        /// </summary>
+        /// <param name="reg">The reg.</param>
+        /// <returns>System.Object.</returns>
+        public object GetRegister(uint reg)
+        {
+            Registers.GetNumberRegisters(out var numRegisters);
+            for (var i = 0; i < numRegisters; i++)
+            {
+                var sb = new StringBuilder(1024);
+                Registers.GetDescription(i.ToUInt(), sb, 1024, out var nameLength, out var desc);
+                Registers.GetValue(i.ToUInt(), out var val);
+                WriteLine($"{i}:{sb}:{desc.Type.ToString()}:{desc.Flags}");
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        ///     Gets the register value.
+        /// </summary>
+        /// <param name="threadId">The thread identifier.</param>
+        /// <param name="register">The register.</param>
+        /// <returns>System.Byte[].</returns>
+        /// <inheritdoc />
+        public byte[] GetRegisterValue(int threadId, Register register)
+        {
+            return RegisterEngine.GetRegisterValue(threadId, register, Registers, this);
+        }
 
         /// <summary>
         ///     Continues execution until a breakpoint is hit or the program ends
@@ -118,14 +168,12 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Executes the specified command
-        ///     e.g. k, bl, u
+        ///     Switches to a thread
         /// </summary>
-        /// <param name="command">The command.</param>
-        /// <returns>System.String.</returns>
-        public string Execute(string command)
+        /// <param name="threadId">The thread identifier.</param>
+        public void SwitchToThread(int threadId)
         {
-            return ExecuteWrapper.Execute(command);
+            SystemObjects.SetCurrentThreadId(threadId.ToUInt()); // todo: what about bad thread id?
         }
 
         /// <summary>
@@ -147,78 +195,51 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the current thread identifier. Whenever you executes commands, they execute under a thread context. This
-        ///     returns the thread id of that context.
-        /// </summary>
-        /// <returns>System.Int32.</returns>
-        public int GetCurrentThreadId()
-        {
-            SystemObjects.GetCurrentThreadId(out var threadId);
-            return Convert.ToInt32(threadId);
-        }
-
-        /// <summary>
-        ///     Switches to a thread
-        /// </summary>
-        /// <param name="threadId">The thread identifier.</param>
-        public void SwitchToThread(int threadId)
-        {
-            SystemObjects.SetCurrentThreadId(threadId.ToUInt()); // todo: what about bad thread id?
-        }
-
-        /// <summary>
-        ///     Executes a command on the specified thread id
-        /// </summary>
-        /// <param name="threadId">The thread identifier.</param>
-        /// <param name="command">The v.</param>
-        /// <returns>System.String.</returns>
-        public string Execute(int threadId, string command)
-        {
-            return Execute($"~~[0x{threadId:X}]e {command}");
-        }
-
-        /// <inheritdoc />
-        public byte[] GetRegisterValue(int threadId, Register register)
-        {
-            return RegisterEngine.GetRegisterValue(threadId, register, Registers, this);
-        }
-
-        /// <summary>
         ///     Gets a value indicating whether the current trace is 32 bit.
         /// </summary>
         /// <value><c>true</c> if 32 bit; otherwise, <c>false</c>.</value>
         public bool Is32Bit { get; }
 
         /// <summary>
-        ///     Disposes this instance.
+        ///     Gets or sets the registers COM interface
         /// </summary>
-        public void Dispose()
-        {
-            ExecuteWrapper?.Dispose();
-        }
+        /// <value>The registers.</value>
+        internal IDebugRegisters2 Registers { get; }
 
         /// <summary>
-        ///     Gets the last known position in the trace
+        ///     Gets or sets the client COM interface
         /// </summary>
-        /// <returns>Position.</returns>
-        public Position GetEndingPosition()
-        {
-            var end = Execute("!tt 100"); // todo: get from trace_info
-            var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
-            return Position.Parse(endMatch.Groups["pos"].Value);
-        }
+        /// <value>The client.</value>
+        private IDebugClient5 Client { get; }
 
-        public object GetRegister(uint reg)
-        {
-            Registers.GetNumberRegisters(out var numRegisters);
-            for (int i = 0; i < numRegisters; i++)
-            {
-                var sb = new StringBuilder(1024);
-                Registers.GetDescription(i.ToUInt(), sb, 1024, out var nameLength, out var desc);
-                Registers.GetValue(i.ToUInt(), out var val);
-                WriteLine($"{i}:{sb}:{desc.Type.ToString()}:{desc.Flags}");
-            }
-            return null;
-        }
+        /// <summary>
+        ///     Gets or sets the control COM interface
+        /// </summary>
+        /// <value>The control.</value>
+        private IDebugControl6 Control { get; }
+
+        /// <summary>
+        ///     Gets or sets the execute wrapper COM interface
+        /// </summary>
+        /// <value>The execute wrapper.</value>
+        private ExecuteWrapper ExecuteWrapper { get; }
+
+        /// <summary>
+        ///     Gets the memory engine.
+        /// </summary>
+        /// <value>The memory engine.</value>
+        private IMemoryEngine MemoryEngine { get; }
+
+        /// <summary>
+        ///     Gets the register engine.
+        /// </summary>
+        /// <value>The register engine.</value>
+        private IRegisterEngine RegisterEngine { get; }
+
+        /// <summary>
+        ///     Gets or sets the system objects COM interface
+        /// </summary>
+        /// <value>The system objects.</value>
+        private IDebugSystemObjects SystemObjects { get; }
     }
 }
