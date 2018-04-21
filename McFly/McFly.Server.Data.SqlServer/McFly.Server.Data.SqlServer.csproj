@@ -73,7 +73,7 @@
     <Compile Include="IContextFactory.cs" />
     <Compile Include="IMcFlyContext.cs" />
     <Compile Include="McFlyContext.cs" />
-    <Compile Include="MemoryRangeEntity.cs" />
+    <Compile Include="MemoryChunkEntity.cs" />
     <Compile Include="NoteAccess.cs" />
     <Compile Include="NoteEntity.cs" />
     <Compile Include="ProjectAccess.cs" />

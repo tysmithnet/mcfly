@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace McFly.Server.Data.SqlServer
 {
-    [Table("memory_range")]
-    public class MemoryRangeEntity
+    [Table("memory_chunk")]
+    public class MemoryChunkEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,7 +19,11 @@ namespace McFly.Server.Data.SqlServer
 
         [MaxLength(16)]
         [RegularExpression("^[a-fA-F0-9]+$")]
-        public string Address { get; set; }
+        public string StartAddress { get; set; }
+
+        [MaxLength(16)]
+        [RegularExpression("^[a-fA-F0-9]+$")]
+        public string EndAddress { get; set; }
 
         public virtual ByteRangeEntity ByteRange { get; set; }
     }
