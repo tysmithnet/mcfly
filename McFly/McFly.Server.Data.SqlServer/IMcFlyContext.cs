@@ -47,6 +47,8 @@ namespace McFly.Server.Data.SqlServer
         /// <value>The trace information entities.</value>
         DbSet<TraceInfoEntity> TraceInfoEntities { get; set; }
 
+        DbSet<MemoryChunkEntity> MemoryChunkEntities { get; set; }
+
         /// <summary>
         ///     Saves the changes.
         /// </summary>

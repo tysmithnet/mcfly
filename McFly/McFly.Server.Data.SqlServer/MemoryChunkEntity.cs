@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace McFly.Server.Data.SqlServer
 {
     [Table("memory_chunk")]
     public class MemoryChunkEntity
     {
+        public virtual ByteRangeEntity ByteRange { get; set; }
+
+        [MaxLength(16)]
+        [RegularExpression("^[a-fA-F0-9]+$")]
+        public string HighAddress { get; set; }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
@@ -19,12 +19,9 @@ namespace McFly.Server.Data.SqlServer
 
         [MaxLength(16)]
         [RegularExpression("^[a-fA-F0-9]+$")]
-        public string StartAddress { get; set; }
+        public string LowAddress { get; set; }
 
-        [MaxLength(16)]
-        [RegularExpression("^[a-fA-F0-9]+$")]
-        public string EndAddress { get; set; }
-
-        public virtual ByteRangeEntity ByteRange { get; set; }
+        public int PosHi { get; set; }     // todo: index over position columns
+        public int PosLo { get; set; }
     }
 }

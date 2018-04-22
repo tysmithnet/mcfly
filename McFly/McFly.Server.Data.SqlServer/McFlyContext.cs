@@ -55,6 +55,9 @@ namespace McFly.Server.Data.SqlServer
         /// <value>The trace information entities.</value>
         public DbSet<TraceInfoEntity> TraceInfoEntities { get; set; }
 
+        /// <inheritdoc />
+        public DbSet<MemoryChunkEntity> MemoryChunkEntities { get; set; }
+
         /// <summary>
         ///     This method is called when the model for a derived context has been initialized, but
         ///     before the model has been locked down and used to initialize the context.  The default

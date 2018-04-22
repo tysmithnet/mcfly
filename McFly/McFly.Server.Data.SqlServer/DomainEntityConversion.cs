@@ -177,7 +177,7 @@ namespace McFly.Server.Data.SqlServer
 
             memoryChunkEntity.ByteRange  = new ByteRangeEntity();
             memoryChunkEntity.ByteRange.Bytes = memoryChunk.Bytes.ToHexString();
-            memoryChunkEntity.StartAddress = memoryChunk.MemoryRange.
+            memoryChunkEntity.LowAddress = memoryChunk.MemoryRange.
 
             return memoryChunkEntity;
         }

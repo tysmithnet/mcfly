@@ -31,5 +31,7 @@ namespace McFly.Core
         /// </summary>
         /// <value>The memory range.</value>
         public MemoryRange MemoryRange { get; set; }
+
+        public Position Position { get; set; }
     }
 }
