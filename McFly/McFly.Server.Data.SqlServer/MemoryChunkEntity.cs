@@ -6,7 +6,17 @@ namespace McFly.Server.Data.SqlServer
     [Table("memory_chunk")]
     public class MemoryChunkEntity
     {
-        public virtual ByteRangeEntity ByteRange { get; set; }
+        public virtual ByteRangeEntity Bytes { get; set; }
+
+        /// <summary>
+        /// Gets or sets the start index of the subsection. This should be used
+        /// in conjunction with the byte range to get the memory chunks bytes.
+        /// memoryChunkBytes = entity.Bytes.Substring(SubsectionStartIndex, SubsectionLength)
+        /// </summary>
+        /// <value>The start index of the subsection.</value>
+        public long SubsectionStartIndex { get; set; }
+
+        public long SubsectionLength { get; set; }
 
         [MaxLength(16)]
         [RegularExpression("^[a-fA-F0-9]+$")]

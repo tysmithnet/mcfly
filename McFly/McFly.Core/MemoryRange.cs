@@ -32,20 +32,20 @@ namespace McFly.Core
         ///     Initializes a new instance of the <see cref="MemoryRange" /> class.
         /// </summary>
         /// <param name="lowAddress">The low.</param>
-        /// <param name="high">The high.</param>
+        /// <param name="highAddress">The high.</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="System.ArgumentOutOfRangeException">low &gt; high</exception>
-        public MemoryRange(ulong lowAddress, ulong high)
+        public MemoryRange(ulong lowAddress, ulong highAddress)
         {
-            if (lowAddress > high)
+            if (lowAddress > highAddress)
                 throw new ArgumentOutOfRangeException(
                     $"Low memory address cannot be greater than the high memory address");
 
             LowAddress = lowAddress;
-            High = high;
+            HighAddress = highAddress;
         }
 
-        public ulong Length => High - LowAddress;
+        public ulong Length => HighAddress - LowAddress;
 
         /// <summary>
         ///     Gets the debugger display.
@@ -63,7 +63,7 @@ namespace McFly.Core
         ///     Gets the high address.
         /// </summary>
         /// <value>The high.</value>
-        public ulong High { get; }
+        public ulong HighAddress { get; }
 
         /// <summary>
         ///     Compares to.
@@ -91,7 +91,7 @@ namespace McFly.Core
             if (ReferenceEquals(null, other)) return 1;
             var lowComparison = LowAddress.CompareTo(other.LowAddress);
             if (lowComparison != 0) return lowComparison;
-            return High.CompareTo(other.High);
+            return HighAddress.CompareTo(other.HighAddress);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace McFly.Core
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return LowAddress == other.LowAddress && High == other.High;
+            return LowAddress == other.LowAddress && HighAddress == other.HighAddress;
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace McFly.Core
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return $"{LowAddress:X}:{High:X}";
+            return $"{LowAddress:X}:{HighAddress:X}";
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace McFly.Core
         {
             unchecked
             {
-                return (LowAddress.GetHashCode() * 397) ^ High.GetHashCode();
+                return (LowAddress.GetHashCode() * 397) ^ HighAddress.GetHashCode();
             }
         }
 

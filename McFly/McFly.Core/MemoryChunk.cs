@@ -15,7 +15,7 @@
 namespace McFly.Core
 {
     /// <summary>
-    ///     Represents an arbitrary selection of virtual memory. What you would expect if
+    ///     Represents an arbitrary cross section of virtual memory. What you would expect if
     ///     you were to examine raw memory.
     /// </summary>
     public class MemoryChunk
