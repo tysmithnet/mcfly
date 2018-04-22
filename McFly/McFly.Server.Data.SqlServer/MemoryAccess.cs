@@ -10,11 +10,31 @@ namespace McFly.Server.Data.SqlServer
     internal class MemoryAccess : IMemoryAccess
     {
         /// <inheritdoc />
-        public void AddMemory(string projectName, MemoryChunk memoryChunk)
+        public long AddMemory(string projectName, MemoryChunk memoryChunk)
         {
             using (var context = ContextFactory.GetContext(projectName))
             {
-                
+                string newMem = memoryChunk.Bytes.ToHexString();
+                var existing = context.ByteRangeEntities.FirstOrDefault(entity => entity.Bytes.Contains(newMem));
+                int index = 0;
+                if (existing != null)
+                {
+                     index = existing.Bytes.IndexOf(newMem, StringComparison.Ordinal);
+                }
+                var loString = memoryChunk.MemoryRange.LowAddress.ToHexString();
+                var hiString = memoryChunk.MemoryRange.HighAddress.ToHexString();
+                var newEntity = new MemoryChunkEntity
+                {
+                    LowAddress = loString,
+                    Bytes = existing,
+                    HighAddress = hiString,
+                    PosHi = memoryChunk.Position.High,
+                    PosLo = memoryChunk.Position.Low,
+                    SubsectionLength = newMem.Length,
+                    SubsectionStartIndex = index
+                };
+                context.MemoryChunkEntities.Add(newEntity);
+                return newEntity.Id;
             }
         }
 

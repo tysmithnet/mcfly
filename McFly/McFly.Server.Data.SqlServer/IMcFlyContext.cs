@@ -49,6 +49,8 @@ namespace McFly.Server.Data.SqlServer
 
         DbSet<MemoryChunkEntity> MemoryChunkEntities { get; set; }
 
+        DbSet<ByteRangeEntity> ByteRangeEntities { get; set; }
+
         /// <summary>
         ///     Saves the changes.
         /// </summary>

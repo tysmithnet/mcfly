@@ -10,6 +10,6 @@ namespace McFly.Server.Data
 {
     public interface IMemoryAccess
     {
-        void AddMemory(string projectName, MemoryChunk memoryChunk);
+        long AddMemory(string projectName, MemoryChunk memoryChunk);
     }
 }
