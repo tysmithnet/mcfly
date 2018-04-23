@@ -31,6 +31,12 @@ namespace McFly
         public string ConnectionString { get; set; }
 
         /// <summary>
+        ///     Gets or sets the name of the project.
+        /// </summary>
+        /// <value>The name of the project.</value>
+        public string ProjectName { get; set; }
+
+        /// <summary>
         ///     Gets or sets the launcher path.
         /// </summary>
         /// <value>The launcher path.</value>
@@ -41,11 +47,5 @@ namespace McFly
         /// </summary>
         /// <value>The server URL.</value>
         public string ServerUrl { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the name of the project.
-        /// </summary>
-        /// <value>The name of the project.</value>
-        public string ProjectName { get; set; }
     }
 }

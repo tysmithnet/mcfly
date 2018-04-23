@@ -21,6 +21,11 @@ namespace McFly
     public interface IBreakpointFacade : IInjectable
     {
         /// <summary>
+        ///     Clears the breakpoints.
+        /// </summary>
+        void ClearBreakpoints();
+
+        /// <summary>
         ///     Sets the breakpoint by mask.
         /// </summary>
         /// <param name="moduleMask">The module mask.</param>
@@ -40,10 +45,5 @@ namespace McFly
         /// <param name="length">The length.</param>
         /// <param name="address">The address.</param>
         void SetWriteAccessBreakpoint(int length, ulong address);
-
-        /// <summary>
-        ///     Clears the breakpoints.
-        /// </summary>
-        void ClearBreakpoints();
     }
 }

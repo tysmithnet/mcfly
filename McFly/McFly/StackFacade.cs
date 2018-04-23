@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Text.RegularExpressions;
 using McFly.Core;
 
@@ -28,13 +27,6 @@ namespace McFly
     [Export(typeof(IStackFacade))]
     public class StackFacade : IStackFacade
     {
-        /// <summary>
-        ///     Gets or sets the debug eng proxy.
-        /// </summary>
-        /// <value>The debug eng proxy.</value>
-        [Import]
-        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
-
         /// <summary>
         ///     Gets the current stack trace.
         /// </summary>
@@ -94,7 +86,8 @@ namespace McFly
                     continue;
                 }
 
-                m = Regex.Match(line, @"^(?<sp>[a-f0-9`]+) (?<ret>[a-f0-9`]+) (?<mod>[^+]+)!(?<fun>[^\s]+)\+(?<off>[a-f0-9x]+)");
+                m = Regex.Match(line,
+                    @"^(?<sp>[a-f0-9`]+) (?<ret>[a-f0-9`]+) (?<mod>[^+]+)!(?<fun>[^\s]+)\+(?<off>[a-f0-9x]+)");
                 if (m.Success)
                 {
                     var sp = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16);
@@ -116,10 +109,17 @@ namespace McFly
                     var off = Convert.ToUInt64(m.Groups["off"].Value.Replace("`", ""), 16);
                     var frame = new StackFrame(sp, ret, mod, null, off);
                     stackFrames.Add(frame);
-                    continue;
                 }
             }
+
             return stackFrames;
         }
+
+        /// <summary>
+        ///     Gets or sets the debug eng proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
+        [Import]
+        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
     }
 }

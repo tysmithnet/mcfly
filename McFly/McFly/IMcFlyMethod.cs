@@ -21,16 +21,16 @@ namespace McFly
     public interface IMcFlyMethod : IInjectable
     {
         /// <summary>
-        ///     Gets the help information.
-        /// </summary>
-        /// <value>The help information.</value>
-        HelpInfo HelpInfo { get; }
-
-        /// <summary>
         ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
         void Process(string[] args);
+
+        /// <summary>
+        ///     Gets the help information.
+        /// </summary>
+        /// <value>The help information.</value>
+        HelpInfo HelpInfo { get; }
     }
 }

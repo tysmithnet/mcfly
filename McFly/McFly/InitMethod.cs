@@ -26,44 +26,6 @@ namespace McFly
     internal class InitMethod : IMcFlyMethod
     {
         /// <summary>
-        ///     Gets or sets the debug eng proxy.
-        /// </summary>
-        /// <value>The debug eng proxy.</value>
-        [Import]
-        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the settings.
-        /// </summary>
-        /// <value>The settings.</value>
-        [Import]
-        protected internal Settings Settings { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the server client.
-        /// </summary>
-        /// <value>The server client.</value>
-        [Import]
-        protected internal IServerClient ServerClient { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the time travel facade.
-        /// </summary>
-        /// <value>The time travel facade.</value>
-        [Import]
-        protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
-
-        /// <summary>
-        ///     Gets the help information.
-        /// </summary>
-        /// <value>The help information.</value>
-        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
-            .SetName("init")
-            .SetDescription("Create a new project using the loaded trace file")
-            .AddSwitch("-n, --name projectname", "Name of the project to create")
-            .Build();
-
-        /// <summary>
         ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
@@ -78,5 +40,43 @@ namespace McFly
                     ServerClient.InitializeProject(options.ProjectName, start, end);
                 });
         }
+
+        /// <summary>
+        ///     Gets the help information.
+        /// </summary>
+        /// <value>The help information.</value>
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+            .SetName("init")
+            .SetDescription("Create a new project using the loaded trace file")
+            .AddSwitch("-n, --name projectname", "Name of the project to create")
+            .Build();
+
+        /// <summary>
+        ///     Gets or sets the debug eng proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
+        [Import]
+        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the server client.
+        /// </summary>
+        /// <value>The server client.</value>
+        [Import]
+        protected internal IServerClient ServerClient { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the settings.
+        /// </summary>
+        /// <value>The settings.</value>
+        [Import]
+        protected internal Settings Settings { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the time travel facade.
+        /// </summary>
+        /// <value>The time travel facade.</value>
+        [Import]
+        protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
     }
 }

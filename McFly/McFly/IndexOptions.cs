@@ -27,42 +27,6 @@ namespace McFly
     public class IndexOptions : IEquatable<IndexOptions>
     {
         /// <summary>
-        ///     Gets or sets the memory ranges.
-        /// </summary>
-        /// <value>The memory ranges.</value>
-        public IEnumerable<MemoryRange> MemoryRanges { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the start.
-        /// </summary>
-        /// <value>The start.</value>
-        public Position Start { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the end.
-        /// </summary>
-        /// <value>The end.</value>
-        public Position End { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the breakpoint masks.
-        /// </summary>
-        /// <value>The breakpoint masks.</value>
-        public IEnumerable<BreakpointMask> BreakpointMasks { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the access breakpoints.
-        /// </summary>
-        /// <value>The access breakpoints.</value>
-        public IEnumerable<AccessBreakpoint> AccessBreakpoints { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the step.
-        /// </summary>
-        /// <value>The step.</value>
-        public int Step { get; set; }
-
-        /// <summary>
         ///     Equalses the specified other.
         /// </summary>
         /// <param name="other">The other.</param>
@@ -138,5 +102,41 @@ namespace McFly
         {
             return !Equals(left, right);
         }
+
+        /// <summary>
+        ///     Gets or sets the access breakpoints.
+        /// </summary>
+        /// <value>The access breakpoints.</value>
+        public IEnumerable<AccessBreakpoint> AccessBreakpoints { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the breakpoint masks.
+        /// </summary>
+        /// <value>The breakpoint masks.</value>
+        public IEnumerable<BreakpointMask> BreakpointMasks { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the end.
+        /// </summary>
+        /// <value>The end.</value>
+        public Position End { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the memory ranges.
+        /// </summary>
+        /// <value>The memory ranges.</value>
+        public IEnumerable<MemoryRange> MemoryRanges { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the start.
+        /// </summary>
+        /// <value>The start.</value>
+        public Position Start { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the step.
+        /// </summary>
+        /// <value>The step.</value>
+        public int Step { get; set; }
     }
 }

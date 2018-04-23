@@ -39,35 +39,6 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets or sets the thread identifier.
-        /// </summary>
-        /// <value>The thread identifier.</value>
-        public int ThreadId { get; internal set; }
-
-        /// <summary>
-        ///     Gets or sets the position.
-        /// </summary>
-        /// <value>The position.</value>
-        public Position Position { get; internal set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether this instance is thread with break.
-        /// </summary>
-        /// <value><c>true</c> if this instance is thread with break; otherwise, <c>false</c>.</value>
-        public bool IsCurrentThread { get; internal set; }
-
-        /// <summary>
-        ///     Equalses the specified other.
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        private bool Equals(PositionsRecord other)
-        {
-            return ThreadId == other.ThreadId && Position.Equals(other.Position) &&
-                   IsCurrentThread == other.IsCurrentThread;
-        }
-
-        /// <summary>
         ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
@@ -95,5 +66,34 @@ namespace McFly
                 return hashCode;
             }
         }
+
+        /// <summary>
+        ///     Equalses the specified other.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        private bool Equals(PositionsRecord other)
+        {
+            return ThreadId == other.ThreadId && Position.Equals(other.Position) &&
+                   IsCurrentThread == other.IsCurrentThread;
+        }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance is thread with break.
+        /// </summary>
+        /// <value><c>true</c> if this instance is thread with break; otherwise, <c>false</c>.</value>
+        public bool IsCurrentThread { get; internal set; }
+
+        /// <summary>
+        ///     Gets or sets the position.
+        /// </summary>
+        /// <value>The position.</value>
+        public Position Position { get; internal set; }
+
+        /// <summary>
+        ///     Gets or sets the thread identifier.
+        /// </summary>
+        /// <value>The thread identifier.</value>
+        public int ThreadId { get; internal set; }
     }
 }

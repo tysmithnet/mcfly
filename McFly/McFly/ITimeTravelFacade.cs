@@ -36,12 +36,6 @@ namespace McFly
         Frame GetCurrentFrame(int threadId);
 
         /// <summary>
-        ///     Sets the position.
-        /// </summary>
-        /// <param name="position">The position.</param>
-        void SetPosition(Position position);
-
-        /// <summary>
         ///     Gets the current position.
         /// </summary>
         /// <returns>Position.</returns>
@@ -55,10 +49,10 @@ namespace McFly
         Position GetCurrentPosition(int threadId);
 
         /// <summary>
-        ///     Positionses this instance.
+        ///     Gets the ending position
         /// </summary>
-        /// <returns>PositionsResult.</returns>
-        PositionsResult Positions();
+        /// <returns>Position.</returns>
+        Position GetEndingPosition();
 
         /// <summary>
         ///     Gets the starting position of the trace. Many times this is 35:0
@@ -67,9 +61,15 @@ namespace McFly
         Position GetStartingPosition();
 
         /// <summary>
-        ///     Gets the ending position
+        ///     Positionses this instance.
         /// </summary>
-        /// <returns>Position.</returns>
-        Position GetEndingPosition();
+        /// <returns>PositionsResult.</returns>
+        PositionsResult Positions();
+
+        /// <summary>
+        ///     Sets the position.
+        /// </summary>
+        /// <param name="position">The position.</param>
+        void SetPosition(Position position);
     }
 }

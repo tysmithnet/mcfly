@@ -28,26 +28,6 @@ namespace McFly
     internal class SettingsJsonConverter : JsonConverter<IEnumerable<ISettings>>
     {
         /// <summary>
-        ///     Writes the JSON representation of the object.
-        /// </summary>
-        /// <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter" /> to write to.</param>
-        /// <param name="value">The value.</param>
-        /// <param name="serializer">The calling serializer.</param>
-        public override void WriteJson(JsonWriter writer, IEnumerable<ISettings> value, JsonSerializer serializer)
-        {
-            writer.WriteStartObject();
-            foreach (var settings in value)
-            {
-                var type = settings.GetType();
-                var settingsValue = JObject.FromObject(settings);
-                writer.WritePropertyName(type.FullName);
-                writer.WriteToken(new JTokenReader(settingsValue));
-            }
-
-            writer.WriteEndObject();
-        }
-
-        /// <summary>
         ///     Reads the JSON representation of the object.
         /// </summary>
         /// <param name="reader">The <see cref="T:Newtonsoft.Json.JsonReader" /> to read from.</param>
@@ -66,6 +46,26 @@ namespace McFly
             JsonSerializer serializer)
         {
             throw new NotImplementedException(); // todo: implement this so we can save
+        }
+
+        /// <summary>
+        ///     Writes the JSON representation of the object.
+        /// </summary>
+        /// <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter" /> to write to.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="serializer">The calling serializer.</param>
+        public override void WriteJson(JsonWriter writer, IEnumerable<ISettings> value, JsonSerializer serializer)
+        {
+            writer.WriteStartObject();
+            foreach (var settings in value)
+            {
+                var type = settings.GetType();
+                var settingsValue = JObject.FromObject(settings);
+                writer.WritePropertyName(type.FullName);
+                writer.WriteToken(new JTokenReader(settingsValue));
+            }
+
+            writer.WriteEndObject();
         }
     }
 }

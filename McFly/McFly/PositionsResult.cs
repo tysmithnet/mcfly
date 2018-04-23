@@ -38,18 +38,6 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets or sets the positions records.
-        /// </summary>
-        /// <value>The positions records.</value>
-        private IEnumerable<PositionsRecord> PositionsRecords { get; }
-
-        /// <summary>
-        ///     Gets the current thread.
-        /// </summary>
-        /// <value>The current thread.</value>
-        public PositionsRecord CurrentThreadResult => PositionsRecords.Single(x => x.IsCurrentThread);
-
-        /// <summary>
         ///     Gets the enumerator.
         /// </summary>
         /// <returns>IEnumerator&lt;PositionsRecord&gt;.</returns>
@@ -67,5 +55,17 @@ namespace McFly
         {
             return GetEnumerator();
         }
+
+        /// <summary>
+        ///     Gets the current thread.
+        /// </summary>
+        /// <value>The current thread.</value>
+        public PositionsRecord CurrentThreadResult => PositionsRecords.Single(x => x.IsCurrentThread);
+
+        /// <summary>
+        ///     Gets or sets the positions records.
+        /// </summary>
+        /// <value>The positions records.</value>
+        private IEnumerable<PositionsRecord> PositionsRecords { get; }
     }
 }

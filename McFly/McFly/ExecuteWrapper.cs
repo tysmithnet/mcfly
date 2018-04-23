@@ -27,31 +27,6 @@ namespace McFly
     public class ExecuteWrapper : IDebugOutputCallbacks, IDisposable
     {
         /// <summary>
-        ///     The builder
-        /// </summary>
-        private readonly StringBuilder _builder = new StringBuilder();
-
-        /// <summary>
-        ///     The client
-        /// </summary>
-        private readonly IDebugClient _client;
-
-        /// <summary>
-        ///     The control
-        /// </summary>
-        private readonly IDebugControl _control;
-
-        /// <summary>
-        ///     The old
-        /// </summary>
-        private readonly IDebugOutputCallbacks _old;
-
-        /// <summary>
-        ///     The disposed
-        /// </summary>
-        private bool _disposed; // To detect redundant calls
-
-        /// <summary>
         ///     Initializes a new instance of the <see cref="ExecuteWrapper" /> class.
         /// </summary>
         /// <param name="client">The client.</param>
@@ -68,20 +43,37 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Outputs the specified mask.
+        ///     Finalizes an instance of the <see cref="ExecuteWrapper" /> class.
         /// </summary>
-        /// <param name="mask">The mask.</param>
-        /// <param name="text">The text.</param>
-        /// <returns>System.Int32.</returns>
-        int IDebugOutputCallbacks.Output(DEBUG_OUTPUT mask, string text)
+        ~ExecuteWrapper()
         {
-            lock (_builder)
-            {
-                _builder.Append(text);
-            }
-
-            return 0;
+            Dispose(false);
         }
+
+        /// <summary>
+        ///     The builder
+        /// </summary>
+        private readonly StringBuilder _builder = new StringBuilder();
+
+        /// <summary>
+        ///     The client
+        /// </summary>
+        private readonly IDebugClient _client;
+
+        /// <summary>
+        ///     The control
+        /// </summary>
+        private readonly IDebugControl _control;
+
+        /// <summary>
+        ///     The disposed
+        /// </summary>
+        private bool _disposed; // To detect redundant calls
+
+        /// <summary>
+        ///     The old
+        /// </summary>
+        private readonly IDebugOutputCallbacks _old;
 
         /// <summary>
         ///     Disposes this instance.
@@ -131,11 +123,19 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Finalizes an instance of the <see cref="ExecuteWrapper" /> class.
+        ///     Outputs the specified mask.
         /// </summary>
-        ~ExecuteWrapper()
+        /// <param name="mask">The mask.</param>
+        /// <param name="text">The text.</param>
+        /// <returns>System.Int32.</returns>
+        int IDebugOutputCallbacks.Output(DEBUG_OUTPUT mask, string text)
         {
-            Dispose(false);
+            lock (_builder)
+            {
+                _builder.Append(text);
+            }
+
+            return 0;
         }
     }
 }

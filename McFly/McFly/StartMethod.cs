@@ -27,36 +27,6 @@ namespace McFly
     public class StartMethod : IMcFlyMethod
     {
         /// <summary>
-        ///     Gets or sets the settings.
-        /// </summary>
-        /// <value>The settings.</value>
-        [Import(typeof(Settings))]
-        private Settings Settings { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the log.
-        /// </summary>
-        /// <value>The log.</value>
-        [Import(typeof(ILog))]
-        private ILog Log { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the debug eng proxy.
-        /// </summary>
-        /// <value>The debug eng proxy.</value>
-        [Import(typeof(IDebugEngineProxy))]
-        private IDebugEngineProxy DebugEngineProxy { get; set; }
-
-        /// <summary>
-        ///     Gets the help information.
-        /// </summary>
-        /// <value>The help information.</value>
-        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
-            .SetName("start")
-            .SetDescription("Start the local server")
-            .Build();
-
-        /// <summary>
         ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
@@ -85,5 +55,35 @@ namespace McFly
             };
             var p = System.Diagnostics.Process.Start(startInfo);
         }
+
+        /// <summary>
+        ///     Gets the help information.
+        /// </summary>
+        /// <value>The help information.</value>
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+            .SetName("start")
+            .SetDescription("Start the local server")
+            .Build();
+
+        /// <summary>
+        ///     Gets or sets the debug eng proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
+        [Import(typeof(IDebugEngineProxy))]
+        private IDebugEngineProxy DebugEngineProxy { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the log.
+        /// </summary>
+        /// <value>The log.</value>
+        [Import(typeof(ILog))]
+        private ILog Log { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the settings.
+        /// </summary>
+        /// <value>The settings.</value>
+        [Import(typeof(Settings))]
+        private Settings Settings { get; set; }
     }
 }

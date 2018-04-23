@@ -32,7 +32,7 @@ namespace McFly
         /// <inheritdoc />
         public void AddMemoryRange(MemoryChunk memoryChunk)
         {
-            var ub = new UriBuilder(Settings.ServerUrl) { Path = $"api/memory" };
+            var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/memory"};
             var addMemoryRequest = new AddMemoryRequeset(memoryChunk);
             var headers = new HttpHeaders
             {

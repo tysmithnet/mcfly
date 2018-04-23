@@ -29,49 +29,6 @@ namespace McFly
     internal class NoteMethod : IMcFlyMethod
     {
         /// <summary>
-        ///     Gets or sets the settings.
-        /// </summary>
-        /// <value>The settings.</value>
-        [Import]
-        public Settings Settings { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the debug eng proxy.
-        /// </summary>
-        /// <value>The debug eng proxy.</value>
-        [Import]
-        public IDebugEngineProxy DebugEngineProxy { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the server client.
-        /// </summary>
-        /// <value>The server client.</value>
-        [Import]
-        protected internal IServerClient ServerClient { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the time travel facade.
-        /// </summary>
-        /// <value>The time travel facade.</value>
-        [Import]
-        protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
-
-        /// <summary>
-        ///     Gets the help information.
-        /// </summary>
-        /// <value>The help information.</value>
-        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
-            .SetName("note")
-            .SetDescription("Take notes on the trace")
-            .AddSubcommand(new HelpInfoBuilder()
-                .SetName("add")
-                .SetDescription("Add notes")
-                .AddExample("!mf note add \"Encryption begin\"", "Adds a note to the current frame")
-                .Build())
-            .AddExample("!mf note", "Shows all notes on the current frame")
-            .Build();
-
-        /// <summary>
         ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
@@ -152,5 +109,48 @@ namespace McFly
 
             return options;
         }
+
+        /// <summary>
+        ///     Gets or sets the debug eng proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
+        [Import]
+        public IDebugEngineProxy DebugEngineProxy { get; set; }
+
+        /// <summary>
+        ///     Gets the help information.
+        /// </summary>
+        /// <value>The help information.</value>
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+            .SetName("note")
+            .SetDescription("Take notes on the trace")
+            .AddSubcommand(new HelpInfoBuilder()
+                .SetName("add")
+                .SetDescription("Add notes")
+                .AddExample("!mf note add \"Encryption begin\"", "Adds a note to the current frame")
+                .Build())
+            .AddExample("!mf note", "Shows all notes on the current frame")
+            .Build();
+
+        /// <summary>
+        ///     Gets or sets the settings.
+        /// </summary>
+        /// <value>The settings.</value>
+        [Import]
+        public Settings Settings { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the server client.
+        /// </summary>
+        /// <value>The server client.</value>
+        [Import]
+        protected internal IServerClient ServerClient { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the time travel facade.
+        /// </summary>
+        /// <value>The time travel facade.</value>
+        [Import]
+        protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
     }
 }

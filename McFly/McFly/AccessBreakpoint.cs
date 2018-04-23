@@ -27,11 +27,6 @@ namespace McFly
     public class AccessBreakpoint : IEquatable<AccessBreakpoint>, IBreakpoint
     {
         /// <summary>
-        ///     The valid length
-        /// </summary>
-        private static readonly uint[] _validLength = {1, 2, 4, 8};
-
-        /// <summary>
         ///     Initializes a new instance of the <see cref="AccessBreakpoint" /> class.
         /// </summary>
         /// <param name="address">The address.</param>
@@ -59,40 +54,9 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the address.
+        ///     The valid length
         /// </summary>
-        /// <value>The address.</value>
-        public ulong Address { get; }
-
-        /// <summary>
-        ///     Gets the length.
-        /// </summary>
-        /// <value>The length.</value>
-        public ushort Length { get; }
-
-        /// <summary>
-        ///     Gets a value indicating whether this instance is read.
-        /// </summary>
-        /// <value><c>true</c> if this instance is read; otherwise, <c>false</c>.</value>
-        public bool IsRead { get; }
-
-        /// <summary>
-        ///     Gets a value indicating whether this instance is write.
-        /// </summary>
-        /// <value><c>true</c> if this instance is write; otherwise, <c>false</c>.</value>
-        public bool IsWrite { get; }
-
-        /// <summary>
-        ///     Sets the breakpoint.
-        /// </summary>
-        /// <param name="breakpointFacade">The breakpoint facade.</param>
-        public void SetBreakpoint(IBreakpointFacade breakpointFacade)
-        {
-            if (IsRead)
-                breakpointFacade.SetReadAccessBreakpoint(Length, Address);
-            if (IsWrite)
-                breakpointFacade.SetWriteAccessBreakpoint(Length, Address);
-        }
+        private static readonly uint[] _validLength = {1, 2, 4, 8};
 
         /// <summary>
         ///     Equalses the specified other.
@@ -105,15 +69,6 @@ namespace McFly
             if (ReferenceEquals(this, other)) return true;
             return Address == other.Address && Length == other.Length && IsRead == other.IsRead &&
                    IsWrite == other.IsWrite;
-        }
-
-        /// <summary>
-        ///     To the command.
-        /// </summary>
-        /// <returns>System.String.</returns>
-        public string ToCommand()
-        {
-            return $"";
         }
 
         /// <summary>
@@ -146,6 +101,50 @@ namespace McFly
         }
 
         /// <summary>
+        ///     Parses the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>AccessBreakpoint.</returns>
+        /// <exception cref="ArgumentNullException">input</exception>
+        /// <exception cref="FormatException"></exception>
+        public static AccessBreakpoint Parse(string input)
+        {
+            if (input == null)
+                throw new ArgumentNullException(nameof(input));
+            var match = Regex.Match(input, @"(?<acc>[rw]+)(?<l>\d):(?<add>[a-f0-9]+)");
+            if (!match.Success)
+                throw new FormatException(
+                    $"Input was not in the appropriate format.. should be like r8:100, w4:abc, rw8:abc but found: {input}");
+            var address = Convert.ToUInt64(match.Groups["add"].Value, 16);
+            var length = Convert.ToUInt16(match.Groups["l"].Value, 16);
+            var access = match.Groups["acc"].Value;
+            var isRead = access.Contains("r");
+            var isWrite = access.Contains("w");
+            return new AccessBreakpoint(address, length, isRead, isWrite);
+        }
+
+        /// <summary>
+        ///     Sets the breakpoint.
+        /// </summary>
+        /// <param name="breakpointFacade">The breakpoint facade.</param>
+        public void SetBreakpoint(IBreakpointFacade breakpointFacade)
+        {
+            if (IsRead)
+                breakpointFacade.SetReadAccessBreakpoint(Length, Address);
+            if (IsWrite)
+                breakpointFacade.SetWriteAccessBreakpoint(Length, Address);
+        }
+
+        /// <summary>
+        ///     To the command.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        public string ToCommand()
+        {
+            return $"";
+        }
+
+        /// <summary>
         ///     Implements the == operator.
         /// </summary>
         /// <param name="left">The left.</param>
@@ -170,26 +169,27 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Parses the specified input.
+        ///     Gets the address.
         /// </summary>
-        /// <param name="input">The input.</param>
-        /// <returns>AccessBreakpoint.</returns>
-        /// <exception cref="ArgumentNullException">input</exception>
-        /// <exception cref="FormatException"></exception>
-        public static AccessBreakpoint Parse(string input)
-        {
-            if (input == null)
-                throw new ArgumentNullException(nameof(input));
-            var match = Regex.Match(input, @"(?<acc>[rw]+)(?<l>\d):(?<add>[a-f0-9]+)");
-            if (!match.Success)
-                throw new FormatException(
-                    $"Input was not in the appropriate format.. should be like r8:100, w4:abc, rw8:abc but found: {input}");
-            var address = Convert.ToUInt64(match.Groups["add"].Value, 16);
-            var length = Convert.ToUInt16(match.Groups["l"].Value, 16);
-            var access = match.Groups["acc"].Value;
-            var isRead = access.Contains("r");
-            var isWrite = access.Contains("w");
-            return new AccessBreakpoint(address, length, isRead, isWrite);
-        }
+        /// <value>The address.</value>
+        public ulong Address { get; }
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is read.
+        /// </summary>
+        /// <value><c>true</c> if this instance is read; otherwise, <c>false</c>.</value>
+        public bool IsRead { get; }
+
+        /// <summary>
+        ///     Gets a value indicating whether this instance is write.
+        /// </summary>
+        /// <value><c>true</c> if this instance is write; otherwise, <c>false</c>.</value>
+        public bool IsWrite { get; }
+
+        /// <summary>
+        ///     Gets the length.
+        /// </summary>
+        /// <value>The length.</value>
+        public ushort Length { get; }
     }
 }

@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text.RegularExpressions;
 using McFly.Core;
 using McFly.Core.Registers;
 
@@ -111,7 +110,7 @@ namespace McFly
                 }
                 else if (register == Register.Dh)
                 {
-                    registerSet.Dh =bytes[0];
+                    registerSet.Dh = bytes[0];
                 }
                 else if (register == Register.Di)
                 {
@@ -127,27 +126,39 @@ namespace McFly
                 }
                 else if (register == Register.Dr0)
                 {
-                    registerSet.Dr0 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr0 = DebugEngineProxy.Is32Bit
+                        ? BitConverter.ToUInt32(bytes, 0)
+                        : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Dr1)
                 {
-                    registerSet.Dr1 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr1 = DebugEngineProxy.Is32Bit
+                        ? BitConverter.ToUInt32(bytes, 0)
+                        : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Dr2)
                 {
-                    registerSet.Dr2 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr2 = DebugEngineProxy.Is32Bit
+                        ? BitConverter.ToUInt32(bytes, 0)
+                        : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Dr3)
                 {
-                    registerSet.Dr3 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr3 = DebugEngineProxy.Is32Bit
+                        ? BitConverter.ToUInt32(bytes, 0)
+                        : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Dr6)
                 {
-                    registerSet.Dr6 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr6 = DebugEngineProxy.Is32Bit
+                        ? BitConverter.ToUInt32(bytes, 0)
+                        : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Dr7)
                 {
-                    registerSet.Dr7 = DebugEngineProxy.Is32Bit ? BitConverter.ToUInt32(bytes, 0) : BitConverter.ToUInt64(bytes, 0);
+                    registerSet.Dr7 = DebugEngineProxy.Is32Bit
+                        ? BitConverter.ToUInt32(bytes, 0)
+                        : BitConverter.ToUInt64(bytes, 0);
                 }
                 else if (register == Register.Ds)
                 {
@@ -412,7 +423,7 @@ namespace McFly
                 else if (register == Register.R8b)
                 {
                     registerSet.R8b = bytes[0];
-                }                              
+                }
                 else if (register == Register.R8d)
                 {
                     registerSet.R8d = BitConverter.ToUInt32(bytes, 0);
@@ -572,7 +583,8 @@ namespace McFly
                 }
                 else if (register == Register.Xmm11)
                 {
-                    registerSet.Xmm11 = bytes.Take(16).ToArray(); ;
+                    registerSet.Xmm11 = bytes.Take(16).ToArray();
+                    ;
                 }
                 else if (register == Register.Xmm11h)
                 {
@@ -584,7 +596,7 @@ namespace McFly
                 }
                 else if (register == Register.Xmm12)
                 {
-                    registerSet.Xmm12 = bytes.Take(16).ToArray(); 
+                    registerSet.Xmm12 = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Xmm12h)
                 {
@@ -780,7 +792,7 @@ namespace McFly
                 }
                 else if (register == Register.Ymm12h)
                 {
-                    registerSet.Ymm12h = bytes.Take(16).ToArray(); 
+                    registerSet.Ymm12h = bytes.Take(16).ToArray();
                 }
                 else if (register == Register.Ymm12l)
                 {
@@ -930,8 +942,8 @@ namespace McFly
                 {
                     registerSet.Zf = Convert.ToBoolean(bytes[0]);
                 }
-
             }
+
             return registerSet;
         }
 

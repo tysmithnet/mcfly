@@ -27,6 +27,30 @@ namespace McFly
     public class SettingsMethod : IMcFlyMethod
     {
         /// <summary>
+        ///     Processes the specified arguments.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>Task.</returns>
+        [ExcludeFromCodeCoverage]
+        public void Process(string[] args)
+        {
+            Parser.Default.ParseArguments<ReloadOptions, ListOptions, OpenOptions>(args)
+                .WithParsed<ReloadOptions>(r => { McFlyExtension.PopulateSettings(); })
+                .WithParsed<ListOptions>(l =>
+                {
+                    foreach (var settings in AllSettings)
+                    {
+                        DebugEngineProxy.WriteLine(settings.GetType().FullName);
+                        DebugEngineProxy.WriteLine(JsonConvert.SerializeObject(settings, Formatting.Indented));
+                    }
+                })
+                .WithParsed<OpenOptions>(o =>
+                {
+                    var p = System.Diagnostics.Process.Start(McFlyExtension.GetLogPath());
+                });
+        }
+
+        /// <summary>
         ///     Gets or sets all settings.
         /// </summary>
         /// <value>All settings.</value>
@@ -60,29 +84,5 @@ namespace McFly
                 .SetDescription("Reload the settings from the settings file")
                 .Build())
             .Build();
-
-        /// <summary>
-        ///     Processes the specified arguments.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <returns>Task.</returns>
-        [ExcludeFromCodeCoverage]
-        public void Process(string[] args)
-        {
-            Parser.Default.ParseArguments<ReloadOptions, ListOptions, OpenOptions>(args)
-                .WithParsed<ReloadOptions>(r => { McFlyExtension.PopulateSettings(); })
-                .WithParsed<ListOptions>(l =>
-                {
-                    foreach (var settings in AllSettings)
-                    {
-                        DebugEngineProxy.WriteLine(settings.GetType().FullName);
-                        DebugEngineProxy.WriteLine(JsonConvert.SerializeObject(settings, Formatting.Indented));
-                    }
-                })
-                .WithParsed<OpenOptions>(o =>
-                {
-                    var p = System.Diagnostics.Process.Start(McFlyExtension.GetLogPath());
-                });
-        }
     }
 }

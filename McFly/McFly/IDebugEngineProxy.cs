@@ -52,6 +52,8 @@ namespace McFly
         /// <returns>System.Byte[].</returns>
         byte[] GetRegisterValue(int threadId, Register register);
 
+        byte[] ReadVirtualMemory(MemoryRange memoryRange);
+
         /// <summary>
         ///     Runs the until break.
         /// </summary>
@@ -80,7 +82,5 @@ namespace McFly
         /// </summary>
         /// <value><c>true</c> if [is32 bit]; otherwise, <c>false</c>.</value>
         bool Is32Bit { get; }
-
-        byte[] ReadVirtualMemory(MemoryRange memoryRange);
     }
 }

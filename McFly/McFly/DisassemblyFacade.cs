@@ -29,13 +29,6 @@ namespace McFly
     internal class DisassemblyFacade : IDisassemblyFacade
     {
         /// <summary>
-        ///     Gets or sets the debug engine proxy.
-        /// </summary>
-        /// <value>The debug eng proxy.</value>
-        [Import]
-        internal IDebugEngineProxy DebugEngineProxy { private get; set; }
-
-        /// <summary>
         ///     Di
         /// </summary>
         /// <param name="numInstructions">The number instructions.</param>
@@ -78,5 +71,12 @@ namespace McFly
 
             return list;
         }
+
+        /// <summary>
+        ///     Gets or sets the debug engine proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
+        [Import]
+        internal IDebugEngineProxy DebugEngineProxy { private get; set; }
     }
 }
