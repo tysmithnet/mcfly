@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-21-2018
+// Last Modified On : 04-22-2018
 // ***********************************************************************
 // <copyright file="DbgEngProxy.cs" company="">
 //     Copyright ©  2018
@@ -41,13 +41,14 @@ namespace McFly
         /// <param name="client">The client.</param>
         /// <param name="registers">The registers.</param>
         /// <param name="systemObjects">The system objects.</param>
+        /// <param name="debugDataSpaces">The debug data spaces.</param>
         public DebugEngineProxy(IDebugControl6 control, IDebugClient5 client, IDebugRegisters2 registers,
-            IDebugSystemObjects systemObjects, IDebugDataSpaces dataSpaces)
+            IDebugSystemObjects systemObjects, IDebugDataSpaces debugDataSpaces)
         {
             Control = control;
             Client = client;
             Registers = registers;
-            Dataspaces = dataSpaces;
+            Dataspaces = debugDataSpaces;
             ExecuteWrapper = new ExecuteWrapper(Client);
             RegisterEngine = new RegisterEngine(); // todo: inject
             MemoryEngine = new MemoryEngine();
@@ -56,8 +57,6 @@ namespace McFly
                 Regex.Match(ExecuteWrapper.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value
                     .Length == 8;
         }
-
-        public IDebugDataSpaces Dataspaces { get; set; }
 
         /// <summary>
         ///     Disposes this instance.
@@ -143,6 +142,17 @@ namespace McFly
         }
 
         /// <summary>
+        ///     Reads the virtual memory.
+        /// </summary>
+        /// <param name="memoryRange">The memory range.</param>
+        /// <returns>System.Byte[].</returns>
+        /// <inheritdoc />
+        public byte[] ReadVirtualMemory(MemoryRange memoryRange)
+        {
+            return MemoryEngine.ReadMemory(memoryRange.LowAddress, memoryRange.HighAddress, Dataspaces, Is32Bit);
+        }
+
+        /// <summary>
         ///     Continues execution until a breakpoint is hit or the program ends
         /// </summary>
         public void RunUntilBreak()
@@ -198,16 +208,16 @@ namespace McFly
         }
 
         /// <summary>
+        ///     Gets or sets the dataspaces.
+        /// </summary>
+        /// <value>The dataspaces.</value>
+        public IDebugDataSpaces Dataspaces { get; set; }
+
+        /// <summary>
         ///     Gets a value indicating whether the current trace is 32 bit.
         /// </summary>
         /// <value><c>true</c> if 32 bit; otherwise, <c>false</c>.</value>
         public bool Is32Bit { get; }
-
-        /// <inheritdoc />
-        public byte[] ReadVirtualMemory(MemoryRange memoryRange)
-        {
-            return MemoryEngine.ReadMemory(memoryRange.LowAddress, memoryRange.HighAddress, Dataspaces, Is32Bit);
-        }
 
         /// <summary>
         ///     Gets or sets the registers COM interface

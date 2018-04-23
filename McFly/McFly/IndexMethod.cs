@@ -373,7 +373,7 @@ namespace McFly
                 var newFrames = CreateFramesForUpsert(positions, breakRecord, options);
                 frames.AddRange(newFrames);
                 
-                foreach (var optionsMemoryRange in options.MemoryRanges)
+                foreach (var optionsMemoryRange in options?.MemoryRanges ?? new List<MemoryRange>())
                 {
                     var bytes = DebugEngineProxy.ReadVirtualMemory(optionsMemoryRange); // todo: errors?
                     ServerClient.AddMemoryRange(new MemoryChunk()

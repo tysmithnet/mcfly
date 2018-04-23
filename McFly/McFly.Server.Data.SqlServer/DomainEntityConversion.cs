@@ -114,7 +114,6 @@ namespace McFly.Server.Data.SqlServer
                     Ymm14 = ByteArrayBuilder.StringToByteArray(entity.Ymm14, true),
                     Ymm15 = ByteArrayBuilder.StringToByteArray(entity.Ymm15, true),
                 },
-                Notes = entity.Notes?.Select(x => x.ToNote()).ToList()
             };
         }
 
@@ -175,9 +174,13 @@ namespace McFly.Server.Data.SqlServer
         {
              var memoryChunkEntity = new MemoryChunkEntity();
 
-            memoryChunkEntity.ByteRange  = new ByteRangeEntity();
-            memoryChunkEntity.ByteRange.Bytes = memoryChunk.Bytes.ToHexString();
-            memoryChunkEntity.LowAddress = memoryChunk.MemoryRange.
+            //memoryChunkEntity.ByteRange  = new ByteRangeEntity();
+            //memoryChunkEntity.ByteRange.Bytes = memoryChunk.Bytes.ToHexString();
+            //memoryChunkEntity.LowAddress = memoryChunk.MemoryRange.LowAddress.ToHexString();
+            //memoryChunkEntity.HighAddress = memoryChunk.MemoryRange.HighAddress.ToHexString();
+            //memoryChunkEntity.PosHi = memoryChunk.Position.High;
+            //memoryChunkEntity.PosLo = memoryChunk.Position.Low;
+            
 
             return memoryChunkEntity;
         }

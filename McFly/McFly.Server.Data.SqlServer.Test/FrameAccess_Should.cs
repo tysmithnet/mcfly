@@ -232,15 +232,7 @@ namespace McFly.Server.Data.SqlServer.Test
                     {
                         new StackFrame(100, 700, "mymod", "myfun", 30),
                         new StackFrame(200, 900, "mymod", "myfun2", 20)
-                    }),
-                    Notes = new List<Note>
-                    {
-                        new Note
-                        {
-                            CreateDate = DateTime.MinValue,
-                            Text = "note"
-                        }
-                    }
+                    })
                 },
                 new Frame
                 {

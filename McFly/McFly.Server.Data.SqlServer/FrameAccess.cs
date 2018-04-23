@@ -139,7 +139,6 @@ namespace McFly.Server.Data.SqlServer
             entity.OpCodeMnemonic = frame.DisassemblyLine?.OpCodeMnemonic;
             entity.DisassemblyNote = frame.DisassemblyLine?.DisassemblyNote;
             entity.StackFrames = frame.StackTrace.StackFrames.Select(x => x.ToStackFrameEntity()).ToList();
-            entity.Notes = frame.Notes.Select(x => x.ToNoteEntity()).ToList();
             return entity;
         }
 

@@ -6,7 +6,7 @@ namespace McFly.Server.Data.SqlServer
     [Table("memory_chunk")]
     public class MemoryChunkEntity
     {
-        public virtual ByteRangeEntity Bytes { get; set; }
+        public virtual ByteRangeEntity ByteRange { get; set; }
 
         /// <summary>
         /// Gets or sets the start index of the subsection. This should be used

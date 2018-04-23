@@ -26,7 +26,7 @@ namespace McFly.Server.Data.SqlServer
                 var newEntity = new MemoryChunkEntity
                 {
                     LowAddress = loString,
-                    Bytes = existing,
+                    ByteRange = existing,
                     HighAddress = hiString,
                     PosHi = memoryChunk.Position.High,
                     PosLo = memoryChunk.Position.Low,

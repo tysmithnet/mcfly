@@ -22,7 +22,7 @@ namespace McFly.Server.Controllers
 
         public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] AddMemoryRequeset request)
         {
-
+            return Ok();
         }
     }
 }
