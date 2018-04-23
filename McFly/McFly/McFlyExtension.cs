@@ -22,6 +22,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
+using System.Text;
 using McFly.Debugger;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -170,9 +171,9 @@ namespace McFly
             var baseEvidence = AppDomain.CurrentDomain.Evidence;
             var evidence = new Evidence(baseEvidence);
 
-            currDomain = AppDomain.CreateDomain("wbext", AppDomain.CurrentDomain.Evidence, setup);
+            currDomain = AppDomain.CreateDomain("mcfly", AppDomain.CurrentDomain.Evidence, setup);
             currDomain.UnhandledException += CurrDomain_UnhandledException;
-
+            
             AppDomain.CurrentDomain.AssemblyResolve += resolver;
             currDomain.AssemblyResolve += resolver;
 
@@ -251,9 +252,30 @@ namespace McFly
                 return HRESULT.S_OK;
             }
 
-            first.Process(argv.Skip(1).ToArray());
-
+            try
+            {
+                first.Process(argv.Skip(1).ToArray());
+            }
+            catch (Exception e)
+            {
+                WriteLine("Unhandled exception");
+                string message = GetExceptionMessage(e);
+                WriteLine(message);
+            }
             return HRESULT.S_OK;
+        }
+
+        private static string GetExceptionMessage(Exception e)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"{e.GetType().FullName} - {e.Message}");
+            sb.AppendLine($"{e.StackTrace}");
+            if (e.InnerException != null)
+            {
+                sb.AppendLine($"Inner exception: ");
+                sb.AppendLine(GetExceptionMessage(e.InnerException));
+            }
+            return sb.ToString();
         }
 
         /// <summary>
@@ -345,7 +367,7 @@ namespace McFly
         /// </summary>
         /// <param name="Message">The message.</param>
         /// <param name="Params">The parameters.</param>
-        public static void WriteLine(string Message, params object[] Params)
+        public static void WriteLine(string Message, params object[] Params) // todo: allow for strategy pattern for different formats
         {
             if (Params == null)
                 Out(Message);
