@@ -1,8 +1,22 @@
 # McFly
-WinDbg Time Debugging Analysis Extension
+*A time travel extension for Windows*
 
 The new Windbg from Microsoft comes with a powerful extension to allow for forward stepping and backward stepping. This allows the user to effectively
-go both foward and backward through time, hence the name McFly.
+go both foward and backward through time, hence the name McFly. 
+
+### Motivation
+The introduction of time-travel debugging radically changed the capabilities of the Windows debugger. By using the existing powerful capabilities
+of Windbg along with the new time travel features, we can create a timeline of interesting changes inside the process during execution. It can help
+answer questions like:
+1. What system calls were made?
+1. What strings were in memory half way through the trace?
+1. How does a hashing algorithm work?
+1. What is throwing a null reference exception?
+
+##### Target Audiences
+1. Security researchers
+1. Application developers
+1. The curious
 
 ### Features
 1. Index register and memory values before and after any instruction
@@ -21,7 +35,6 @@ Make sure you match the build bitness to the trace file bitness. You cannot use 
 1. Open a trace file
 1. `.load c:\path\to\mcfly.dll` (see the note on matching bitness above)
 1. `!mf help`
-
 
 ##### Tools
 These are the tools I am using for development. If you use something different your mileage my vary.
