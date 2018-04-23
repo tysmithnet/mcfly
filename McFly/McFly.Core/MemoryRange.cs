@@ -16,6 +16,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace McFly.Core
 {
@@ -27,7 +29,7 @@ namespace McFly.Core
     /// <seealso cref="System.IComparable" />
     [DebuggerDisplay("{DebuggerDisplay}")]
     public class MemoryRange : IEquatable<MemoryRange>, IComparable<MemoryRange>, IComparable
-    {
+    {     
         /// <summary>
         ///     Initializes a new instance of the <see cref="MemoryRange" /> class.
         /// </summary>
@@ -238,6 +240,9 @@ namespace McFly.Core
         ///     Gets the length.
         /// </summary>
         /// <value>The length.</value>
+        [JsonIgnore]
+        [XmlIgnore]
+        [SoapIgnore]
         public ulong Length => HighAddress - LowAddress;
 
         /// <summary>
