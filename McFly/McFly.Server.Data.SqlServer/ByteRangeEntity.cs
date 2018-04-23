@@ -11,8 +11,7 @@ namespace McFly.Server.Data.SqlServer
         [Column("id")]
         public long Id { get; set; }
 
-        [RegularExpression("^[a-fA-F0-9]+$")]
-        [Index("IX_byte_range_bytes")]
+        [Column("bytes")]
         public string Bytes { get; set; }
     }
 }
