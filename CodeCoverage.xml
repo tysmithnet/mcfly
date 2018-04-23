@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root CoveredStatements="8861" TotalStatements="11304" CoveragePercent="78" ReportType="NDependXML" DotCoverVersion="2017.3.5">
-  <Assembly Name="mcfly" CoveredStatements="1661" TotalStatements="2340" CoveragePercent="71">
-    <Namespace Name="McFly" CoveredStatements="1597" TotalStatements="2192" CoveragePercent="73">
+<Root CoveredStatements="8862" TotalStatements="11300" CoveragePercent="78" ReportType="NDependXML" DotCoverVersion="2017.3.5">
+  <Assembly Name="mcfly" CoveredStatements="1662" TotalStatements="2336" CoveragePercent="71">
+    <Namespace Name="McFly" CoveredStatements="1598" TotalStatements="2188" CoveragePercent="73">
       <Type Name="AccessBreakpoint" CoveredStatements="61" TotalStatements="74" CoveragePercent="82">
-        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="32" />
-        <Method Name=".ctor(UInt64,UInt16,Boolean,Boolean)" CoveredStatements="10" TotalStatements="13" CoveragePercent="77" FirstStatementLine="47" />
-        <Method Name="Equals(AccessBreakpoint)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="103" />
-        <Method Name="Equals(Object)" CoveredStatements="7" TotalStatements="9" CoveragePercent="78" FirstStatementLine="125" />
-        <Method Name="get_Address()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="65" />
-        <Method Name="get_IsRead()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
-        <Method Name="get_IsWrite()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="83" />
-        <Method Name="get_Length()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="71" />
-        <Method Name="GetHashCode()" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="137" />
-        <Method Name="op_Equality(AccessBreakpoint,AccessBreakpoint)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="155" />
-        <Method Name="op_Inequality(AccessBreakpoint,AccessBreakpoint)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="168" />
-        <Method Name="Parse(String)" CoveredStatements="11" TotalStatements="13" CoveragePercent="85" FirstStatementLine="180" />
-        <Method Name="SetBreakpoint(IBreakpointFacade)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="90" />
-        <Method Name="ToCommand()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="115" />
+        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
+        <Method Name=".ctor(UInt64,UInt16,Boolean,Boolean)" CoveredStatements="10" TotalStatements="13" CoveragePercent="77" FirstStatementLine="42" />
+        <Method Name="Equals(AccessBreakpoint)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="67" />
+        <Method Name="Equals(Object)" CoveredStatements="7" TotalStatements="9" CoveragePercent="78" FirstStatementLine="80" />
+        <Method Name="get_Address()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="175" />
+        <Method Name="get_IsRead()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="181" />
+        <Method Name="get_IsWrite()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="187" />
+        <Method Name="get_Length()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="193" />
+        <Method Name="GetHashCode()" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="92" />
+        <Method Name="op_Equality(AccessBreakpoint,AccessBreakpoint)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="154" />
+        <Method Name="op_Inequality(AccessBreakpoint,AccessBreakpoint)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="167" />
+        <Method Name="Parse(String)" CoveredStatements="11" TotalStatements="13" CoveragePercent="85" FirstStatementLine="111" />
+        <Method Name="SetBreakpoint(IBreakpointFacade)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="131" />
+        <Method Name="ToCommand()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="143" />
       </Type>
       <Type Name="AddNoteOptions" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
         <Method Name="get_IsAllThreadsAtPosition()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="26" />
@@ -26,79 +26,79 @@
       </Type>
       <Type Name="BreakpointFacade" CoveredStatements="21" TotalStatements="21" CoveragePercent="100">
         <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="31" />
-        <Method Name="ClearBreakpoints()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="76" />
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="38" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="38" />
-        <Method Name="SetBreakpointByMask(String,String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="46" />
-        <Method Name="SetReadAccessBreakpoint(Int32,UInt64)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="56" />
-        <Method Name="SetWriteAccessBreakpoint(Int32,UInt64)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="67" />
-        <Method Name="ValidateLength(Int32)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="86" />
+        <Method Name="ClearBreakpoints()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="37" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="90" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="90" />
+        <Method Name="SetBreakpointByMask(String,String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="47" />
+        <Method Name="SetReadAccessBreakpoint(Int32,UInt64)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="57" />
+        <Method Name="SetWriteAccessBreakpoint(Int32,UInt64)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="68" />
+        <Method Name="ValidateLength(Int32)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="79" />
       </Type>
       <Type Name="BreakpointMask" CoveredStatements="43" TotalStatements="50" CoveragePercent="86">
         <Method Name=".ctor(String,String)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="34" />
-        <Method Name="Equals(BreakpointMask)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="67" />
-        <Method Name="Equals(Object)" CoveredStatements="7" TotalStatements="9" CoveragePercent="78" FirstStatementLine="79" />
-        <Method Name="get_FunctionMask()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="50" />
-        <Method Name="get_ModuleMask()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="44" />
-        <Method Name="GetHashCode()" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="91" />
-        <Method Name="op_Equality(BreakpointMask,BreakpointMask)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="106" />
-        <Method Name="op_Inequality(BreakpointMask,BreakpointMask)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="119" />
-        <Method Name="Parse(String)" CoveredStatements="8" TotalStatements="10" CoveragePercent="80" FirstStatementLine="131" />
-        <Method Name="SetBreakpoint(IBreakpointFacade)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="57" />
+        <Method Name="Equals(BreakpointMask)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="46" />
+        <Method Name="Equals(Object)" CoveredStatements="7" TotalStatements="9" CoveragePercent="78" FirstStatementLine="58" />
+        <Method Name="get_FunctionMask()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="136" />
+        <Method Name="get_ModuleMask()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="142" />
+        <Method Name="GetHashCode()" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="70" />
+        <Method Name="op_Equality(BreakpointMask,BreakpointMask)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="115" />
+        <Method Name="op_Inequality(BreakpointMask,BreakpointMask)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="128" />
+        <Method Name="Parse(String)" CoveredStatements="8" TotalStatements="10" CoveragePercent="80" FirstStatementLine="86" />
+        <Method Name="SetBreakpoint(IBreakpointFacade)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="104" />
       </Type>
       <Type Name="DisassemblyFacade" CoveredStatements="29" TotalStatements="29" CoveragePercent="100">
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="36" />
-        <Method Name="GetDisassemblyLines(Int32)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="44" />
-        <Method Name="GetDisassemblyLines(Int32,Int32)" CoveredStatements="23" TotalStatements="23" CoveragePercent="100" FirstStatementLine="57" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="36" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="80" />
+        <Method Name="GetDisassemblyLines(Int32)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="37" />
+        <Method Name="GetDisassemblyLines(Int32,Int32)" CoveredStatements="23" TotalStatements="23" CoveragePercent="100" FirstStatementLine="50" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="80" />
       </Type>
       <Type Name="HelpInfo" CoveredStatements="21" TotalStatements="21" CoveragePercent="100">
-        <Method Name=".ctor()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="28" />
-        <Method Name=".ctor(String,String,Dictionary&lt;String,String&gt;,Dictionary&lt;String,String&gt;,HelpInfo[])" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="45" />
-        <Method Name="get_Description()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="65" />
-        <Method Name="get_Examples()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
-        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
-        <Method Name="get_Subcommands()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="83" />
-        <Method Name="get_Switches()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="71" />
-        <Method Name="set_Description(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="65" />
-        <Method Name="set_Examples(Dictionary&lt;String,String&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
-        <Method Name="set_Name(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
-        <Method Name="set_Subcommands(HelpInfo[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="83" />
-        <Method Name="set_Switches(Dictionary&lt;String,String&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="71" />
+        <Method Name=".ctor()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="51" />
+        <Method Name=".ctor(String,String,Dictionary&lt;String,String&gt;,Dictionary&lt;String,String&gt;,HelpInfo[])" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="38" />
+        <Method Name="get_Description()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
+        <Method Name="get_Examples()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="65" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="71" />
+        <Method Name="get_Subcommands()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
+        <Method Name="get_Switches()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="83" />
+        <Method Name="set_Description(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
+        <Method Name="set_Examples(Dictionary&lt;String,String&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="65" />
+        <Method Name="set_Name(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="71" />
+        <Method Name="set_Subcommands(HelpInfo[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
+        <Method Name="set_Switches(Dictionary&lt;String,String&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="83" />
       </Type>
       <Type Name="HelpInfoBuilder" CoveredStatements="38" TotalStatements="41" CoveragePercent="93">
         <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;AddSubcommand&gt;b__5_1(HelpInfo)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="90" />
+          <Method Name="&lt;AddSubcommand&gt;b__3_1(HelpInfo)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="68" />
         </Type>
-        <Type Name="&lt;&gt;c__DisplayClass5_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;AddSubcommand&gt;b__0(HelpInfo)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="86" />
+        <Type Name="&lt;&gt;c__DisplayClass3_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;AddSubcommand&gt;b__0(HelpInfo)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="64" />
         </Type>
-        <Method Name=".ctor()" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="33" />
-        <Method Name="AddExample(String,String)" CoveredStatements="5" TotalStatements="6" CoveragePercent="83" FirstStatementLine="101" />
-        <Method Name="AddSubcommand(HelpInfo)" CoveredStatements="8" TotalStatements="9" CoveragePercent="89" FirstStatementLine="84" />
-        <Method Name="AddSwitch(String,String)" CoveredStatements="5" TotalStatements="6" CoveragePercent="83" FirstStatementLine="70" />
-        <Method Name="Build()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="114" />
-        <Method Name="SetDescription(String)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="58" />
-        <Method Name="SetName(String)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="47" />
+        <Method Name=".ctor()" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="28" />
+        <Method Name="AddExample(String,String)" CoveredStatements="5" TotalStatements="6" CoveragePercent="83" FirstStatementLine="48" />
+        <Method Name="AddSubcommand(HelpInfo)" CoveredStatements="8" TotalStatements="9" CoveragePercent="89" FirstStatementLine="62" />
+        <Method Name="AddSwitch(String,String)" CoveredStatements="5" TotalStatements="6" CoveragePercent="83" FirstStatementLine="79" />
+        <Method Name="Build()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="92" />
+        <Method Name="SetDescription(String)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="102" />
+        <Method Name="SetName(String)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="113" />
       </Type>
       <Type Name="HelpMethod" CoveredStatements="74" TotalStatements="74" CoveragePercent="100">
         <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;IsSingleCommand&gt;b__13_0(IMcFlyMethod)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="134" />
+          <Method Name="&lt;IsSingleCommand&gt;b__4_0(IMcFlyMethod)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="137" />
         </Type>
-        <Type Name="&lt;&gt;c__DisplayClass12_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;GetCommandHelp&gt;b__0(IMcFlyMethod)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="84" />
+        <Type Name="&lt;&gt;c__DisplayClass1_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;GetCommandHelp&gt;b__0(IMcFlyMethod)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="56" />
         </Type>
-        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="46" />
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="40" />
-        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="46" />
-        <Method Name="get_Methods()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
-        <Method Name="GetCommandHelp(String)" CoveredStatements="37" TotalStatements="37" CoveragePercent="100" FirstStatementLine="83" />
-        <Method Name="GetCommandListing()" CoveredStatements="11" TotalStatements="11" CoveragePercent="100" FirstStatementLine="142" />
-        <Method Name="IsEmptyArgs(String[])" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="164" />
-        <Method Name="IsSingleCommand(String[])" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="133" />
-        <Method Name="Process(String[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="62" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="40" />
-        <Method Name="set_Methods(IMcFlyMethod[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="144" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="159" />
+        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="144" />
+        <Method Name="get_Methods()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="166" />
+        <Method Name="GetCommandHelp(String)" CoveredStatements="37" TotalStatements="37" CoveragePercent="100" FirstStatementLine="55" />
+        <Method Name="GetCommandListing()" CoveredStatements="11" TotalStatements="11" CoveragePercent="100" FirstStatementLine="104" />
+        <Method Name="IsEmptyArgs(String[])" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="126" />
+        <Method Name="IsSingleCommand(String[])" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="136" />
+        <Method Name="Process(String[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="34" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="159" />
+        <Method Name="set_Methods(IMcFlyMethod[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="166" />
       </Type>
       <Type Name="HttpHeaders" CoveredStatements="31" TotalStatements="36" CoveragePercent="86">
         <Method Name="Equals(HttpHeaders)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="36" />
@@ -108,77 +108,77 @@
         <Method Name="op_Inequality(HttpHeaders,HttpHeaders)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="93" />
       </Type>
       <Type Name="IndexMethod" CoveredStatements="152" TotalStatements="197" CoveragePercent="77">
-        <Type Name="&lt;&gt;c__DisplayClass40_0" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
-          <Method Name="&lt;CreateFramesForUpsert&gt;b__0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="412" />
-          <Method Name="&lt;CreateFramesForUpsert&gt;b__1(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="413" />
+        <Type Name="&lt;&gt;c__DisplayClass3_0" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
+          <Method Name="&lt;CreateFramesForUpsert&gt;b__0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="68" />
+          <Method Name="&lt;CreateFramesForUpsert&gt;b__1(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="69" />
         </Type>
-        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="35" />
-        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="89" />
-        <Method Name="CreateFramesForUpsert(PositionsResult,PositionsRecord,IndexOptions)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="410" />
-        <Method Name="ExtractAccess(String[],Int32,String,IndexOptions)" CoveredStatements="17" TotalStatements="21" CoveragePercent="81" FirstStatementLine="172" />
-        <Method Name="ExtractEnd(String[],Int32,String,IndexOptions)" CoveredStatements="6" TotalStatements="10" CoveragePercent="60" FirstStatementLine="238" />
-        <Method Name="ExtractIndexOptions(String[])" CoveredStatements="21" TotalStatements="22" CoveragePercent="95" FirstStatementLine="129" />
-        <Method Name="ExtractMasks(String[],Int32,String,IndexOptions)" CoveredStatements="17" TotalStatements="21" CoveragePercent="81" FirstStatementLine="205" />
-        <Method Name="ExtractMemoryRanges(String[],Int32,String,IndexOptions)" CoveredStatements="16" TotalStatements="21" CoveragePercent="76" FirstStatementLine="284" />
-        <Method Name="ExtractStart(String[],Int32,String,IndexOptions)" CoveredStatements="6" TotalStatements="10" CoveragePercent="60" FirstStatementLine="261" />
-        <Method Name="get_BreakpointFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="62" />
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="55" />
-        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="89" />
-        <Method Name="get_Log()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="48" />
-        <Method Name="get_ServerClient()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="83" />
-        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="76" />
-        <Method Name="get_TimeTravelFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="69" />
-        <Method Name="GetEndingPosition(IndexOptions)" CoveredStatements="4" TotalStatements="5" CoveragePercent="80" FirstStatementLine="327" />
-        <Method Name="GetStartingPosition(IndexOptions)" CoveredStatements="4" TotalStatements="5" CoveragePercent="80" FirstStatementLine="314" />
-        <Method Name="Is32Bit()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="338" />
-        <Method Name="Process(String[])" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="113" />
-        <Method Name="ProcessInternal(Position,Position,IndexOptions)" CoveredStatements="23" TotalStatements="33" CoveragePercent="70" FirstStatementLine="354" />
-        <Method Name="set_BreakpointFacade(IBreakpointFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="62" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="55" />
-        <Method Name="set_Log(ILog)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="48" />
-        <Method Name="set_ServerClient(IServerClient)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="83" />
-        <Method Name="set_Settings(Settings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="76" />
-        <Method Name="set_TimeTravelFacade(ITimeTravelFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="69" />
-        <Method Name="SetBreakpoints(IndexOptions)" CoveredStatements="16" TotalStatements="16" CoveragePercent="100" FirstStatementLine="423" />
+        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="40" />
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="375" />
+        <Method Name="CreateFramesForUpsert(PositionsResult,PositionsRecord,IndexOptions)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="66" />
+        <Method Name="ExtractAccess(String[],Int32,String,IndexOptions)" CoveredStatements="17" TotalStatements="21" CoveragePercent="81" FirstStatementLine="84" />
+        <Method Name="ExtractEnd(String[],Int32,String,IndexOptions)" CoveredStatements="6" TotalStatements="10" CoveragePercent="60" FirstStatementLine="117" />
+        <Method Name="ExtractIndexOptions(String[])" CoveredStatements="21" TotalStatements="22" CoveragePercent="95" FirstStatementLine="138" />
+        <Method Name="ExtractMasks(String[],Int32,String,IndexOptions)" CoveredStatements="17" TotalStatements="21" CoveragePercent="81" FirstStatementLine="181" />
+        <Method Name="ExtractMemoryRanges(String[],Int32,String,IndexOptions)" CoveredStatements="16" TotalStatements="21" CoveragePercent="76" FirstStatementLine="214" />
+        <Method Name="ExtractStart(String[],Int32,String,IndexOptions)" CoveredStatements="6" TotalStatements="10" CoveragePercent="60" FirstStatementLine="247" />
+        <Method Name="get_BreakpointFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="398" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="405" />
+        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="375" />
+        <Method Name="get_Log()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="433" />
+        <Method Name="get_ServerClient()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="412" />
+        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="419" />
+        <Method Name="get_TimeTravelFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="426" />
+        <Method Name="GetEndingPosition(IndexOptions)" CoveredStatements="4" TotalStatements="5" CoveragePercent="80" FirstStatementLine="267" />
+        <Method Name="GetStartingPosition(IndexOptions)" CoveredStatements="4" TotalStatements="5" CoveragePercent="80" FirstStatementLine="280" />
+        <Method Name="Is32Bit()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="291" />
+        <Method Name="Process(String[])" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="49" />
+        <Method Name="ProcessInternal(Position,Position,IndexOptions)" CoveredStatements="23" TotalStatements="33" CoveragePercent="70" FirstStatementLine="307" />
+        <Method Name="set_BreakpointFacade(IBreakpointFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="398" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="405" />
+        <Method Name="set_Log(ILog)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="433" />
+        <Method Name="set_ServerClient(IServerClient)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="412" />
+        <Method Name="set_Settings(Settings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="419" />
+        <Method Name="set_TimeTravelFacade(ITimeTravelFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="426" />
+        <Method Name="SetBreakpoints(IndexOptions)" CoveredStatements="16" TotalStatements="16" CoveragePercent="100" FirstStatementLine="359" />
       </Type>
       <Type Name="IndexOptions" CoveredStatements="39" TotalStatements="52" CoveragePercent="75">
         <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
-          <Method Name="&lt;GetHashCode&gt;b__26_0(BreakpointMask)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="108" />
-          <Method Name="&lt;GetHashCode&gt;b__26_1(Int32,Int32)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="108" />
-          <Method Name="&lt;GetHashCode&gt;b__26_2(AccessBreakpoint)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="111" />
-          <Method Name="&lt;GetHashCode&gt;b__26_3(Int32,Int32)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="111" />
+          <Method Name="&lt;GetHashCode&gt;b__2_0(BreakpointMask)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="72" />
+          <Method Name="&lt;GetHashCode&gt;b__2_1(Int32,Int32)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="72" />
+          <Method Name="&lt;GetHashCode&gt;b__2_2(AccessBreakpoint)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="75" />
+          <Method Name="&lt;GetHashCode&gt;b__2_3(Int32,Int32)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="75" />
         </Type>
-        <Method Name="Equals(IndexOptions)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="71" />
-        <Method Name="Equals(Object)" CoveredStatements="6" TotalStatements="9" CoveragePercent="67" FirstStatementLine="89" />
-        <Method Name="get_AccessBreakpoints()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="57" />
-        <Method Name="get_BreakpointMasks()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="51" />
-        <Method Name="get_End()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="45" />
-        <Method Name="get_MemoryRanges()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
-        <Method Name="get_Start()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="39" />
-        <Method Name="get_Step()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="63" />
-        <Method Name="GetHashCode()" CoveredStatements="10" TotalStatements="10" CoveragePercent="100" FirstStatementLine="101" />
-        <Method Name="op_Equality(IndexOptions,IndexOptions)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="125" />
-        <Method Name="op_Inequality(IndexOptions,IndexOptions)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="138" />
-        <Method Name="set_AccessBreakpoints(IEnumerable&lt;AccessBreakpoint&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="57" />
-        <Method Name="set_BreakpointMasks(IEnumerable&lt;BreakpointMask&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="51" />
-        <Method Name="set_End(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="45" />
-        <Method Name="set_MemoryRanges(IEnumerable&lt;MemoryRange&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
-        <Method Name="set_Start(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="39" />
-        <Method Name="set_Step(Int32)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="63" />
+        <Method Name="Equals(IndexOptions)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="35" />
+        <Method Name="Equals(Object)" CoveredStatements="6" TotalStatements="9" CoveragePercent="67" FirstStatementLine="53" />
+        <Method Name="get_AccessBreakpoints()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="110" />
+        <Method Name="get_BreakpointMasks()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="116" />
+        <Method Name="get_End()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="122" />
+        <Method Name="get_MemoryRanges()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="128" />
+        <Method Name="get_Start()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="134" />
+        <Method Name="get_Step()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="140" />
+        <Method Name="GetHashCode()" CoveredStatements="10" TotalStatements="10" CoveragePercent="100" FirstStatementLine="65" />
+        <Method Name="op_Equality(IndexOptions,IndexOptions)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="89" />
+        <Method Name="op_Inequality(IndexOptions,IndexOptions)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="102" />
+        <Method Name="set_AccessBreakpoints(IEnumerable&lt;AccessBreakpoint&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="110" />
+        <Method Name="set_BreakpointMasks(IEnumerable&lt;BreakpointMask&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="116" />
+        <Method Name="set_End(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="122" />
+        <Method Name="set_MemoryRanges(IEnumerable&lt;MemoryRange&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="128" />
+        <Method Name="set_Start(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="134" />
+        <Method Name="set_Step(Int32)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="140" />
       </Type>
       <Type Name="InitMethod" CoveredStatements="15" TotalStatements="18" CoveragePercent="83">
-        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="60" />
-        <Method Name="&lt;Process&gt;b__19_0(InitOptions)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="75" />
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
-        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="60" />
-        <Method Name="get_ServerClient()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="47" />
-        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="40" />
-        <Method Name="get_TimeTravelFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="54" />
-        <Method Name="Process(String[])" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="72" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
-        <Method Name="set_ServerClient(IServerClient)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="47" />
-        <Method Name="set_Settings(Settings)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="40" />
-        <Method Name="set_TimeTravelFacade(ITimeTravelFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="54" />
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="48" />
+        <Method Name="&lt;Process&gt;b__0_0(InitOptions)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="37" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="59" />
+        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="48" />
+        <Method Name="get_ServerClient()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="66" />
+        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="73" />
+        <Method Name="get_TimeTravelFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="80" />
+        <Method Name="Process(String[])" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="34" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="59" />
+        <Method Name="set_ServerClient(IServerClient)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="66" />
+        <Method Name="set_Settings(Settings)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="73" />
+        <Method Name="set_TimeTravelFacade(ITimeTravelFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="80" />
       </Type>
       <Type Name="InitOptions" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
         <Method Name="get_ProjectName()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="29" />
@@ -191,33 +191,33 @@
       <Type Name="OpenOptions" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
       <Type Name="PositionsRecord" CoveredStatements="15" TotalStatements="15" CoveragePercent="100">
         <Method Name=".ctor(Int32,Position,Boolean)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="34" />
-        <Method Name="Equals(PositionsRecord)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="65" />
-        <Method Name="get_IsCurrentThread()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="57" />
-        <Method Name="get_Position()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="51" />
-        <Method Name="get_ThreadId()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="45" />
-        <Method Name="set_IsCurrentThread(Boolean)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="57" />
-        <Method Name="set_Position(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="51" />
-        <Method Name="set_ThreadId(Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="45" />
+        <Method Name="Equals(PositionsRecord)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="76" />
+        <Method Name="get_IsCurrentThread()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="85" />
+        <Method Name="get_Position()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="91" />
+        <Method Name="get_ThreadId()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="97" />
+        <Method Name="set_IsCurrentThread(Boolean)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="85" />
+        <Method Name="set_Position(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="91" />
+        <Method Name="set_ThreadId(Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="97" />
       </Type>
       <Type Name="PositionsResult" CoveredStatements="10" TotalStatements="10" CoveragePercent="100">
         <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;get_CurrentThreadResult&gt;b__5_0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="50" />
+          <Method Name="&lt;get_CurrentThreadResult&gt;b__4_0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="63" />
         </Type>
         <Method Name=".ctor(IEnumerable&lt;PositionsRecord&gt;)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="35" />
-        <Method Name="get_CurrentThreadResult()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="50" />
-        <Method Name="get_PositionsRecords()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="44" />
-        <Method Name="GetEnumerator()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="57" />
+        <Method Name="get_CurrentThreadResult()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="63" />
+        <Method Name="get_PositionsRecords()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="69" />
+        <Method Name="GetEnumerator()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="45" />
       </Type>
-      <Type Name="RegisterEngine" CoveredStatements="0" TotalStatements="466" CoveragePercent="0">
-        <Method Name="GetRegisterValue(Int32,Register,IDebugRegisters2,IDebugEngineProxy)" CoveredStatements="0" TotalStatements="8" CoveragePercent="0" FirstStatementLine="16" />
-        <Method Name="GetRegisterValue32(Register,IDebugRegisters2)" CoveredStatements="0" TotalStatements="157" CoveragePercent="0" FirstStatementLine="26" />
-        <Method Name="GetRegisterValue64(Register,IDebugRegisters2)" CoveredStatements="0" TotalStatements="301" CoveragePercent="0" FirstStatementLine="179" />
+      <Type Name="RegisterEngine" CoveredStatements="0" TotalStatements="462" CoveragePercent="0">
+        <Method Name="GetRegisterValue(Int32,Register,IDebugRegisters2,IDebugEngineProxy)" CoveredStatements="0" TotalStatements="8" CoveragePercent="0" FirstStatementLine="17" />
+        <Method Name="GetRegisterValue32(Register,IDebugRegisters2)" CoveredStatements="0" TotalStatements="155" CoveragePercent="0" FirstStatementLine="27" />
+        <Method Name="GetRegisterValue64(Register,IDebugRegisters2)" CoveredStatements="0" TotalStatements="299" CoveragePercent="0" FirstStatementLine="184" />
       </Type>
       <Type Name="RegisterFacade" CoveredStatements="890" TotalStatements="905" CoveragePercent="98">
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="953" />
-        <Method Name="GetCurrentRegisterSet(IEnumerable&lt;Register&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="944" />
-        <Method Name="GetCurrentRegisterSet(Int32,IEnumerable&lt;Register&gt;)" CoveredStatements="885" TotalStatements="900" CoveragePercent="98" FirstStatementLine="39" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="953" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="965" />
+        <Method Name="GetCurrentRegisterSet(IEnumerable&lt;Register&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="956" />
+        <Method Name="GetCurrentRegisterSet(Int32,IEnumerable&lt;Register&gt;)" CoveredStatements="885" TotalStatements="900" CoveragePercent="98" FirstStatementLine="38" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="965" />
       </Type>
       <Type Name="ReloadOptions" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
       <Type Name="ServerClient" CoveredStatements="20" TotalStatements="33" CoveragePercent="61">
@@ -233,58 +233,58 @@
       </Type>
       <Type Name="Settings" CoveredStatements="4" TotalStatements="8" CoveragePercent="50">
         <Method Name="get_ConnectionString()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="31" />
-        <Method Name="get_ProjectName()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
-        <Method Name="get_ServerExePath()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="37" />
-        <Method Name="get_ServerUrl()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="43" />
+        <Method Name="get_ProjectName()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="37" />
+        <Method Name="get_ServerExePath()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="43" />
+        <Method Name="get_ServerUrl()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
         <Method Name="set_ConnectionString(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="31" />
-        <Method Name="set_ProjectName(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
-        <Method Name="set_ServerExePath(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="37" />
-        <Method Name="set_ServerUrl(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="43" />
+        <Method Name="set_ProjectName(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="37" />
+        <Method Name="set_ServerExePath(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="43" />
+        <Method Name="set_ServerUrl(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
       </Type>
-      <Type Name="StackFacade" CoveredStatements="58" TotalStatements="59" CoveragePercent="98">
-        <Method Name="ExtractStackFrames(String)" CoveredStatements="42" TotalStatements="43" CoveragePercent="98" FirstStatementLine="78" />
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="36" />
-        <Method Name="GetCurrentStackTrace()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="43" />
-        <Method Name="GetCurrentStackTrace(Int32)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="55" />
-        <Method Name="GetStackFrames(Int32)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="66" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="36" />
+      <Type Name="StackFacade" CoveredStatements="59" TotalStatements="59" CoveragePercent="100">
+        <Method Name="ExtractStackFrames(String)" CoveredStatements="43" TotalStatements="43" CoveragePercent="100" FirstStatementLine="70" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="123" />
+        <Method Name="GetCurrentStackTrace()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="35" />
+        <Method Name="GetCurrentStackTrace(Int32)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="47" />
+        <Method Name="GetStackFrames(Int32)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="58" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="123" />
       </Type>
       <Type Name="StartMethod" CoveredStatements="2" TotalStatements="8" CoveragePercent="25">
-        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="54" />
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="48" />
-        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="54" />
-        <Method Name="get_Log()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="41" />
-        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="34" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="48" />
-        <Method Name="set_Log(ILog)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="41" />
-        <Method Name="set_Settings(Settings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="34" />
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="63" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="73" />
+        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="63" />
+        <Method Name="get_Log()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="80" />
+        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="87" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="73" />
+        <Method Name="set_Log(ILog)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="80" />
+        <Method Name="set_Settings(Settings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="87" />
       </Type>
       <Type Name="StartOptions" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
       <Type Name="TimeTravelFacade" CoveredStatements="61" TotalStatements="61" CoveragePercent="100">
         <Type Name="&lt;&gt;c" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
-          <Method Name="&lt;GetCurrentPosition&gt;b__17_0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="75" />
-          <Method Name="&lt;ParsePositionsCommandText&gt;b__24_0(Match)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="169" />
+          <Method Name="&lt;GetCurrentPosition&gt;b__2_0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="76" />
+          <Method Name="&lt;ParsePositionsCommandText&gt;b__8_0(Match)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="142" />
         </Type>
-        <Type Name="&lt;&gt;c__DisplayClass18_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;GetCurrentPosition&gt;b__0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="85" />
+        <Type Name="&lt;&gt;c__DisplayClass3_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;GetCurrentPosition&gt;b__0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="86" />
         </Type>
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="37" />
-        <Method Name="get_DisassemblyFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="58" />
-        <Method Name="get_RegisterFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="51" />
-        <Method Name="get_StackFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="44" />
-        <Method Name="GetCurrentFrame()" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="126" />
-        <Method Name="GetCurrentFrame(Int32)" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="148" />
-        <Method Name="GetCurrentPosition()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="74" />
-        <Method Name="GetCurrentPosition(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="84" />
-        <Method Name="GetEndingPosition()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="115" />
-        <Method Name="GetStartingPosition()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="104" />
-        <Method Name="ParsePositionsCommandText(String)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="164" />
-        <Method Name="Positions()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="93" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="37" />
-        <Method Name="set_DisassemblyFacade(IDisassemblyFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="58" />
-        <Method Name="set_RegisterFacade(IRegisterFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="51" />
-        <Method Name="set_StackFacade(IStackFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="44" />
-        <Method Name="SetPosition(Position)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="65" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="157" />
+        <Method Name="get_DisassemblyFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="164" />
+        <Method Name="get_RegisterFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="171" />
+        <Method Name="get_StackFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="178" />
+        <Method Name="GetCurrentFrame()" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="37" />
+        <Method Name="GetCurrentFrame(Int32)" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="59" />
+        <Method Name="GetCurrentPosition()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="75" />
+        <Method Name="GetCurrentPosition(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="85" />
+        <Method Name="GetEndingPosition()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="94" />
+        <Method Name="GetStartingPosition()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="105" />
+        <Method Name="ParsePositionsCommandText(String)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="137" />
+        <Method Name="Positions()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="116" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="157" />
+        <Method Name="set_DisassemblyFacade(IDisassemblyFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="164" />
+        <Method Name="set_RegisterFacade(IRegisterFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="171" />
+        <Method Name="set_StackFacade(IStackFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="178" />
+        <Method Name="SetPosition(Position)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="127" />
       </Type>
     </Namespace>
     <Namespace Name="McFly.Search" CoveredStatements="64" TotalStatements="148" CoveragePercent="43">
@@ -403,10 +403,10 @@
       <Type Name="MemoryChunk" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
         <Method Name="get_Bytes()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
         <Method Name="get_MemoryRange()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
-        <Method Name="get_Position()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="35" />
+        <Method Name="get_Position()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="set_Bytes(Byte[])" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
         <Method Name="set_MemoryRange(MemoryRange)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
-        <Method Name="set_Position(Position)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="35" />
+        <Method Name="set_Position(Position)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
       </Type>
       <Type Name="MemoryRange" CoveredStatements="85" TotalStatements="94" CoveragePercent="90">
         <Method Name=".ctor(UInt64,UInt64)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="38" />
