@@ -22,13 +22,11 @@ namespace McFly.Server.Contract
     /// </summary>
     public class AddMemoryRequeset
     {
-        public AddMemoryRequeset(Position position, MemoryChunk memoryChunk)
+        public AddMemoryRequeset(MemoryChunk memoryChunk)
         {
-            Position = position ?? throw new ArgumentNullException(nameof(position));
             MemoryChunk = memoryChunk ?? throw new ArgumentNullException(nameof(memoryChunk));
         }
 
-        public Position Position { get; private set; }
         public MemoryChunk MemoryChunk { get; private set; }
     }
 }

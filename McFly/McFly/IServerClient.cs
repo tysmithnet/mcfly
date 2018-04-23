@@ -29,7 +29,7 @@ namespace McFly
         /// </summary>
         /// <param name="position">The position.</param>
         /// <param name="memoryChunk">The memory chunk.</param>
-        void AddMemoryRange(Position position, MemoryChunk memoryChunk);
+        void AddMemoryRange(MemoryChunk memoryChunk);
 
         /// <summary>
         ///     Adds the note.

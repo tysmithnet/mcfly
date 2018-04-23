@@ -30,10 +30,10 @@ namespace McFly
     public class ServerClient : IServerClient // todo: move to McFly.Server
     {
         /// <inheritdoc />
-        public void AddMemoryRange(Position position, MemoryChunk memoryChunk)
+        public void AddMemoryRange(MemoryChunk memoryChunk)
         {
             var ub = new UriBuilder(Settings.ServerUrl) { Path = $"api/memory" };
-            var addMemoryRequest = new AddMemoryRequeset(position, memoryChunk);
+            var addMemoryRequest = new AddMemoryRequeset(memoryChunk);
             var headers = new HttpHeaders
             {
                 ["X-Project-Name"] = Settings.ProjectName

@@ -4,6 +4,6 @@ namespace McFly
 {
     public interface IMemoryEngine
     {
-        byte[] ReadMemory(ulong start, ulong end, IDebugDataSpaces dataSpaces, bool is32Bit);
+        byte[] ReadMemory(ulong low, ulong high, IDebugDataSpaces dataSpaces, bool is32Bit);
     }
 }

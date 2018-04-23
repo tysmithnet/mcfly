@@ -372,6 +372,18 @@ namespace McFly
 
                 var newFrames = CreateFramesForUpsert(positions, breakRecord, options);
                 frames.AddRange(newFrames);
+                
+                foreach (var optionsMemoryRange in options.MemoryRanges)
+                {
+                    var bytes = DebugEngineProxy.ReadVirtualMemory(optionsMemoryRange); // todo: errors?
+                    ServerClient.AddMemoryRange(new MemoryChunk()
+                    {
+                        MemoryRange = optionsMemoryRange,
+                        Bytes = bytes,
+                        Position = breakRecord.Position
+                    });
+                }
+
                 last = breakRecord.Position;
             }
 

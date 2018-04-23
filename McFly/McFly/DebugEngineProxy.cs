@@ -42,11 +42,12 @@ namespace McFly
         /// <param name="registers">The registers.</param>
         /// <param name="systemObjects">The system objects.</param>
         public DebugEngineProxy(IDebugControl6 control, IDebugClient5 client, IDebugRegisters2 registers,
-            IDebugSystemObjects systemObjects)
+            IDebugSystemObjects systemObjects, IDebugDataSpaces dataSpaces)
         {
             Control = control;
             Client = client;
             Registers = registers;
+            Dataspaces = dataSpaces;
             ExecuteWrapper = new ExecuteWrapper(Client);
             RegisterEngine = new RegisterEngine(); // todo: inject
             MemoryEngine = new MemoryEngine();
@@ -55,6 +56,8 @@ namespace McFly
                 Regex.Match(ExecuteWrapper.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value
                     .Length == 8;
         }
+
+        public IDebugDataSpaces Dataspaces { get; set; }
 
         /// <summary>
         ///     Disposes this instance.
@@ -199,6 +202,12 @@ namespace McFly
         /// </summary>
         /// <value><c>true</c> if 32 bit; otherwise, <c>false</c>.</value>
         public bool Is32Bit { get; }
+
+        /// <inheritdoc />
+        public byte[] ReadVirtualMemory(MemoryRange memoryRange)
+        {
+            return MemoryEngine.ReadMemory(memoryRange.LowAddress, memoryRange.HighAddress, Dataspaces, Is32Bit);
+        }
 
         /// <summary>
         ///     Gets or sets the registers COM interface

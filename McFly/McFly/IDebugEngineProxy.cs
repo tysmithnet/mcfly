@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using McFly.Core;
 using McFly.Core.Registers;
 
 namespace McFly
@@ -79,5 +80,7 @@ namespace McFly
         /// </summary>
         /// <value><c>true</c> if [is32 bit]; otherwise, <c>false</c>.</value>
         bool Is32Bit { get; }
+
+        byte[] ReadVirtualMemory(MemoryRange memoryRange);
     }
 }
