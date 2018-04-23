@@ -13,10 +13,6 @@ namespace McFly
         {
             var length = low < high ? high - low : low - high;
             var buffer = new byte[length];
-            if (is32Bit)
-                low = low < high ? low : high;
-            else
-                low = low < high ? high : low;
             var hr = dataSpaces.ReadVirtual(low, buffer, buffer.Length.ToUInt(), out var bytesRead);
             if (hr != 0)
                 throw new ApplicationException($"Unable to read virtual memory at {low:X16}, error code: {hr}");

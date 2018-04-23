@@ -108,10 +108,11 @@ namespace McFly.Test
                     new MemoryRange(0xabc, 0xdef)
                 }
             };
+            var index = new IndexMethod();
 
             // act
             // assert
-            IndexMethod.ExtractIndexOptions(args0).Should().Be(options0);
+            index.ExtractIndexOptions(args0).Should().Be(options0);
         }
 
         [Fact]

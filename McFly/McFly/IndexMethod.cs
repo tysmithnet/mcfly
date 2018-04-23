@@ -125,7 +125,7 @@ namespace McFly
         /// <returns>IndexOptions.</returns>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        internal static IndexOptions ExtractIndexOptions(string[] args)
+        internal IndexOptions ExtractIndexOptions(string[] args)
         {
             var options = new IndexOptions();
             for (var i = 0; i < args.Length; i++)
@@ -280,7 +280,7 @@ namespace McFly
         /// <param name="options">The options.</param>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        internal static void ExtractMemoryRanges(string[] args, int i, string arg, IndexOptions options)
+        internal void ExtractMemoryRanges(string[] args, int i, string arg, IndexOptions options)
         {
             var ranges = new List<MemoryRange>();
             for (var j = i + 1; j < args.Length; j++)

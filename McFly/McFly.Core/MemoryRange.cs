@@ -4,7 +4,7 @@
 // Created          : 03-26-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-22-2018
 // ***********************************************************************
 // <copyright file="MemoryRange.cs" company="">
 //     Copyright ©  2018
@@ -34,7 +34,7 @@ namespace McFly.Core
         /// <param name="lowAddress">The low.</param>
         /// <param name="highAddress">The high.</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="System.ArgumentOutOfRangeException">low &gt; high</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
         public MemoryRange(ulong lowAddress, ulong highAddress)
         {
             if (lowAddress > highAddress)
@@ -44,26 +44,6 @@ namespace McFly.Core
             LowAddress = lowAddress;
             HighAddress = highAddress;
         }
-
-        public ulong Length => HighAddress - LowAddress;
-
-        /// <summary>
-        ///     Gets the debugger display.
-        /// </summary>
-        /// <value>The debugger display.</value>
-        private string DebuggerDisplay => ToString();
-
-        /// <summary>
-        ///     Gets the low address.
-        /// </summary>
-        /// <value>The low.</value>
-        public ulong LowAddress { get; }
-
-        /// <summary>
-        ///     Gets the high address.
-        /// </summary>
-        /// <value>The high.</value>
-        public ulong HighAddress { get; }
 
         /// <summary>
         ///     Compares to.
@@ -107,15 +87,6 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
-        public override string ToString()
-        {
-            return $"{LowAddress:X}:{HighAddress:X}";
-        }
-
-        /// <summary>
         ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
@@ -141,85 +112,18 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Implements the == operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator ==(MemoryRange left, MemoryRange right)
-        {
-            if (ReferenceEquals(left, right)) return true;
-            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
-            return Equals(left, right);
-        }
-
-        /// <summary>
-        ///     Implements the != operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator !=(MemoryRange left, MemoryRange right)
-        {
-            return !Equals(left, right);
-        }
-
-        /// <summary>
-        ///     Implements the &lt; operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator <(MemoryRange left, MemoryRange right)
-        {
-            return Comparer<MemoryRange>.Default.Compare(left, right) < 0;
-        }
-
-        /// <summary>
-        ///     Implements the &gt; operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator >(MemoryRange left, MemoryRange right)
-        {
-            return Comparer<MemoryRange>.Default.Compare(left, right) > 0;
-        }
-
-        /// <summary>
-        ///     Implements the &lt;= operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator <=(MemoryRange left, MemoryRange right)
-        {
-            return Comparer<MemoryRange>.Default.Compare(left, right) <= 0;
-        }
-
-        /// <summary>
-        ///     Implements the &gt;= operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator >=(MemoryRange left, MemoryRange right)
-        {
-            return Comparer<MemoryRange>.Default.Compare(left, right) >= 0;
-        }
-
-        /// <summary>
         ///     Parses the specified input.
         /// </summary>
         /// <param name="input">The input.</param>
+        /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
         /// <returns>MemoryRange.</returns>
         /// <exception cref="FormatException">
         ///     Input did not match either a range+length range nor a start:end range, e.g. abcL123,
         ///     abc:def
         /// </exception>
         /// <exception cref="System.FormatException">
-        ///     Input did not match either a range+length range nor a start:end range, e.g.
-        ///     abcL123, abc:def
+        ///     Input did not match either a range+length range nor a start:end range, e.g. abcL123,
+        ///     abc:def
         /// </exception>
         public static MemoryRange Parse(string input)
         {
@@ -246,5 +150,106 @@ namespace McFly.Core
             throw new FormatException(
                 "Input did not match either a range+length range nor a start:end range, e.g. abcL123, abc:def");
         }
+
+        /// <summary>
+        ///     Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString()
+        {
+            return $"{LowAddress:X}:{HighAddress:X}";
+        }
+
+        /// <summary>
+        ///     Implements the == operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator ==(MemoryRange left, MemoryRange right)
+        {
+            if (ReferenceEquals(left, right)) return true;
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
+            return Equals(left, right);
+        }
+
+        /// <summary>
+        ///     Implements the &gt; operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator >(MemoryRange left, MemoryRange right)
+        {
+            return Comparer<MemoryRange>.Default.Compare(left, right) > 0;
+        }
+
+        /// <summary>
+        ///     Implements the &gt;= operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator >=(MemoryRange left, MemoryRange right)
+        {
+            return Comparer<MemoryRange>.Default.Compare(left, right) >= 0;
+        }
+
+        /// <summary>
+        ///     Implements the != operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator !=(MemoryRange left, MemoryRange right)
+        {
+            return !Equals(left, right);
+        }
+
+        /// <summary>
+        ///     Implements the &lt; operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator <(MemoryRange left, MemoryRange right)
+        {
+            return Comparer<MemoryRange>.Default.Compare(left, right) < 0;
+        }
+
+        /// <summary>
+        ///     Implements the &lt;= operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator <=(MemoryRange left, MemoryRange right)
+        {
+            return Comparer<MemoryRange>.Default.Compare(left, right) <= 0;
+        }
+
+        /// <summary>
+        ///     Gets the high address.
+        /// </summary>
+        /// <value>The high.</value>
+        public ulong HighAddress { get; }
+
+        /// <summary>
+        ///     Gets the length.
+        /// </summary>
+        /// <value>The length.</value>
+        public ulong Length => HighAddress - LowAddress;
+
+        /// <summary>
+        ///     Gets the low address.
+        /// </summary>
+        /// <value>The low.</value>
+        public ulong LowAddress { get; }
+
+        /// <summary>
+        ///     Gets the debugger display.
+        /// </summary>
+        /// <value>The debugger display.</value>
+        private string DebuggerDisplay => ToString();
     }
 }

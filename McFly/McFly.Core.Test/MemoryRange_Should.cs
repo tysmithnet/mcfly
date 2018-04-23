@@ -85,6 +85,8 @@ namespace McFly.Core.Test
             MemoryRange.Parse(l1).Should().Be(new MemoryRange(0xabc, 0xbbc));
             MemoryRange.Parse(s1).Should().Be(new MemoryRange(0xabc, 0xdef));
             MemoryRange.Parse(s1).Should().Be(new MemoryRange(0xabc, 0xdef));
+
+            // todo: make some 32 
         }
     }
 }
