@@ -155,7 +155,7 @@ namespace McFly.Test
             var dbg = new DebugEngineProxyBuilder();
             var tt = new TimeTravelFacadeBuilder(dbg);
             var sc = new ServerClientBuilder();
-
+            var bp = new BreakpointFacadeBuilder();
             dbg.WithRunUntilBreak();
             var count = 0;
             dbg.SetRunUntilBreakCallback(() =>
@@ -166,7 +166,7 @@ namespace McFly.Test
             var dbgEngProxy = dbg.Build();
             var timeTravelFacade = tt.Build();
             var serverClient = sc.Build();
-
+            var bpFacade = bp.Build();
             dbg.CurrentThreadId = MockFrames.SingleThreaded0.First().ThreadId;
             tt.WithFrames(MockFrames.SingleThreaded0);
             sc.WithUpsertFrames(() => { });
@@ -175,7 +175,8 @@ namespace McFly.Test
             {
                 DebugEngineProxy = dbgEngProxy,
                 TimeTravelFacade = timeTravelFacade,
-                ServerClient = serverClient
+                ServerClient = serverClient,
+                BreakpointFacade = bpFacade
             };
 
             indexMethod.ProcessInternal(new Position(0, 0), MockFrames.SingleThreaded0.Max(x => x.Position), new IndexOptions());

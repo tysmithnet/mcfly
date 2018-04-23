@@ -112,15 +112,9 @@ namespace McFly
         public void Process(string[] args)
         {
             var options = ExtractIndexOptions(args);
-            if (args.Length == 0)
-            {
-                var start = GetStartingPosition(options);
-                ProcessInternal(start, start, options);
-                return;
-            }
+            var start = GetStartingPosition(options);
             var startingPosition = GetStartingPosition(options);
             var endingPosition = GetEndingPosition(options);
-            SetBreakpoints(options);
             ProcessInternal(startingPosition, endingPosition, options);
         }
 
@@ -358,10 +352,16 @@ namespace McFly
         /// <param name="options"></param>
         internal void ProcessInternal(Position startingPosition, Position endingPosition, IndexOptions options)
         {
+            SetBreakpoints(options);
             TimeTravelFacade.SetPosition(startingPosition);
             // loop through all the set break points and record relevant values
             var frames = new List<Frame>();
             Position last = null;
+
+            /*
+             * todo: PRIORITY FIX
+             */
+
             while (true) // todo: have better abstraction... while(!TimeTravelFacade.RunTo(endingPosition))
             {
                 DebugEngineProxy.RunUntilBreak();
