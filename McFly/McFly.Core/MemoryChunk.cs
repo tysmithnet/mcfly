@@ -4,7 +4,7 @@
 // Created          : 04-21-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-21-2018
+// Last Modified On : 04-22-2018
 // ***********************************************************************
 // <copyright file="MemoryChunk.cs" company="">
 //     Copyright ©  2018
@@ -32,6 +32,10 @@ namespace McFly.Core
         /// <value>The memory range.</value>
         public MemoryRange MemoryRange { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the position.
+        /// </summary>
+        /// <value>The position.</value>
         public Position Position { get; set; }
     }
 }

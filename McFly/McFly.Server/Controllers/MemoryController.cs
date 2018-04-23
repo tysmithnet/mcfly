@@ -25,7 +25,7 @@ namespace McFly.Server.Controllers
     ///     Class MemoryController.
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
-    [Route("api/memory/")]
+    [Route("api/memory")]
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class MemoryController : ApiController
@@ -43,7 +43,7 @@ namespace McFly.Server.Controllers
         /// <returns>IHttpActionResult.</returns>
         public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] AddMemoryRequeset request)
         {
-            MemoryAccess.AddMemory(projectName, request.MemoryChunk);
+            MemoryAccess.AddMemory(projectName, request.MemoryChunk); // todo: errors
             return Ok();
         }
 
