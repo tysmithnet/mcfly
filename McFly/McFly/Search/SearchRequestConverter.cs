@@ -23,9 +23,9 @@ namespace McFly.Search
     /// <summary>
     ///     Class SearchPlanConverter.
     /// </summary>
-    /// <seealso cref="McFly.Search.ISearchPlanConverter" />
-    [Export(typeof(ISearchPlanConverter))]
-    internal class SearchPlanConverter : ISearchPlanConverter
+    /// <seealso cref="ISearchRequestConverter" />
+    [Export(typeof(ISearchRequestConverter))]
+    internal class SearchRequestConverter : ISearchRequestConverter
     {
         /// <summary>
         ///     The separators

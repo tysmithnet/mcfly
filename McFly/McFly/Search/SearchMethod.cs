@@ -30,14 +30,14 @@ namespace McFly.Search
         /// </summary>
         /// <value>The factory.</value>
         [Import]
-        internal ISearchPlanFactory Factory { get; set; }
+        internal ISearchRequestFactory Factory { get; set; }
 
         /// <summary>
         ///     Gets or sets the converter.
         /// </summary>
         /// <value>The converter.</value>
         [Import]
-        internal ISearchPlanConverter Converter { get; set; }
+        internal ISearchRequestConverter Converter { get; set; }
 
         /// <summary>
         ///     Gets or sets the search result display strategies.

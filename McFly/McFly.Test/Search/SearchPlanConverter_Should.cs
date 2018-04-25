@@ -12,7 +12,7 @@ namespace McFly.Test.Search
         [Fact]
         public void Convert_Basic_Cases()
         {
-            var searchPlanConverter = new SearchPlanConverter();
+            var searchPlanConverter = new SearchRequestConverter();
             var input = new SearchRequest("frame", new List<SearchFilter>
             {
                 new SearchFilter

@@ -196,8 +196,8 @@
     <Compile Include="ReloadOptions.cs" />
     <Compile Include="IRegisterFacade.cs" />
     <Compile Include="Search\ISearchRequest.cs" />
-    <Compile Include="Search\ISearchPlanConverter.cs" />
-    <Compile Include="Search\ISearchPlanFactory.cs" />
+    <Compile Include="Search\ISearchRequestConverter.cs" />
+    <Compile Include="Search\ISearchRequestFactory.cs" />
     <Compile Include="Search\ISearchResultDisplayStrategy.cs" />
     <Compile Include="IServerClient.cs" />
     <Compile Include="ISettings.cs" />
@@ -216,8 +216,8 @@
     <Compile Include="Search\SearchIndex.cs" />
     <Compile Include="Search\SearchMethod.cs" />
     <Compile Include="Search\SearchRequest.cs" />
-    <Compile Include="Search\SearchPlanConverter.cs" />
-    <Compile Include="Search\SearchPlanFactory.cs" />
+    <Compile Include="Search\SearchRequestConverter.cs" />
+    <Compile Include="Search\SearchRequestFactory.cs" />
     <Compile Include="ServerClient.cs" />
     <Compile Include="SettingsMethod.cs" />
     <Compile Include="Settings.cs" />

@@ -11,7 +11,7 @@ namespace McFly.Test.Search
         [Fact]
         public void Create_The_Correct_Search_Plan()
         {
-            var fac = new SearchPlanFactory();
+            var fac = new SearchRequestFactory();
 
             var res = fac.Create("frame | reg rax -eq 0 OR rbx -eq 1 | note text -contains encrypt".Split());
 

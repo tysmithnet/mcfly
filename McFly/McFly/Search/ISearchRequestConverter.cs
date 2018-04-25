@@ -4,27 +4,30 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-25-2018
 // ***********************************************************************
-// <copyright file="ISearchPlanFactory.cs" company="">
+// <copyright file="ISearchPlanConverter.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 
+using McFly.Server.Contract;
+
 namespace McFly.Search
 {
     /// <summary>
-    ///     Interface ISearchPlanFactory
+    ///     Represents something that can convert a search request into a DTO
+    ///     to send to the server
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
-    public interface ISearchPlanFactory : IInjectable
+    public interface ISearchRequestConverter : IInjectable
     {
         /// <summary>
-        ///     Creates the specified arguments.
+        ///     Converts the specified search request.
         /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <returns>ISearchPlan.</returns>
-        ISearchRequest Create(string[] args);
+        /// <param name="searchRequest">The search request.</param>
+        /// <returns>SearchCriterionDto.</returns>
+        SearchCriterionDto Convert(ISearchRequest searchRequest);
     }
 }

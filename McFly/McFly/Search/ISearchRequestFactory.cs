@@ -6,27 +6,25 @@
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-03-2018
 // ***********************************************************************
-// <copyright file="ISearchPlanConverter.cs" company="">
+// <copyright file="ISearchPlanFactory.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 
-using McFly.Server.Contract;
-
 namespace McFly.Search
 {
     /// <summary>
-    ///     Interface ISearchPlanConverter
+    ///     Something that can transform command line arguments into a search request
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
-    internal interface ISearchPlanConverter : IInjectable
+    public interface ISearchRequestFactory : IInjectable
     {
         /// <summary>
-        ///     Converts the specified search plan.
+        ///     Creates a search request from command line arguments
         /// </summary>
-        /// <param name="searchRequest">The search plan.</param>
-        /// <returns>SearchCriterionDto.</returns>
-        SearchCriterionDto Convert(ISearchRequest searchRequest);
+        /// <param name="args">The arguments.</param>
+        /// <returns>ISearchPlan.</returns>
+        ISearchRequest Create(string[] args);
     }
 }

@@ -21,9 +21,9 @@ namespace McFly.Search
     /// <summary>
     ///     Class SearchPlanFactory.
     /// </summary>
-    /// <seealso cref="McFly.Search.ISearchPlanFactory" />
-    [Export(typeof(ISearchPlanFactory))]
-    internal class SearchPlanFactory : ISearchPlanFactory
+    /// <seealso cref="ISearchRequestFactory" />
+    [Export(typeof(ISearchRequestFactory))]
+    internal class SearchRequestFactory : ISearchRequestFactory
     {
         /// <summary>
         ///     Creates the specified arguments.

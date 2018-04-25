@@ -15,7 +15,7 @@
 namespace McFly.Search
 {
     /// <summary>
-    ///     Interface ISearchResultDisplayStrategy
+    ///     Something that can display search results
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface ISearchResultDisplayStrategy : IInjectable
