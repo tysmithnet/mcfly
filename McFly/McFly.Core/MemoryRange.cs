@@ -4,7 +4,7 @@
 // Created          : 03-26-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-22-2018
+// Last Modified On : 04-24-2018
 // ***********************************************************************
 // <copyright file="MemoryRange.cs" company="">
 //     Copyright ©  2018
@@ -29,14 +29,14 @@ namespace McFly.Core
     /// <seealso cref="System.IComparable" />
     [DebuggerDisplay("{DebuggerDisplay}")]
     public class MemoryRange : IEquatable<MemoryRange>, IComparable<MemoryRange>, IComparable
-    {     
+    {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MemoryRange" /> class.
         /// </summary>
         /// <param name="lowAddress">The low.</param>
         /// <param name="highAddress">The high.</param>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="System.ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public MemoryRange(ulong lowAddress, ulong highAddress)
         {
             if (lowAddress > highAddress)
@@ -52,8 +52,8 @@ namespace McFly.Core
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>System.Int32.</returns>
-        /// <exception cref="ArgumentException">MemoryRange</exception>
         /// <exception cref="System.ArgumentException">MemoryRange</exception>
+        /// <exception cref="ArgumentException">MemoryRange</exception>
         public int CompareTo(object obj)
         {
             if (ReferenceEquals(null, obj)) return 1;
@@ -117,13 +117,12 @@ namespace McFly.Core
         ///     Parses the specified input.
         /// </summary>
         /// <param name="input">The input.</param>
-        /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
         /// <returns>MemoryRange.</returns>
-        /// <exception cref="FormatException">
+        /// <exception cref="System.FormatException">
         ///     Input did not match either a range+length range nor a start:end range, e.g. abcL123,
         ///     abc:def
         /// </exception>
-        /// <exception cref="System.FormatException">
+        /// <exception cref="FormatException">
         ///     Input did not match either a range+length range nor a start:end range, e.g. abcL123,
         ///     abc:def
         /// </exception>

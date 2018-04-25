@@ -21,6 +21,7 @@ using System.Reflection;
 using System.Web.Http;
 using Common.Logging;
 using McFly.Server.Headers;
+using McFly.Server.Conversion;
 using Owin;
 using Swashbuckle.Application;
 

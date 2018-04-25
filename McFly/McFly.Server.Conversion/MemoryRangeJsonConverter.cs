@@ -37,6 +37,11 @@ namespace McFly.Server.Conversion
         /// <param name="hasExistingValue">The existing value has a value.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
+        /// <exception cref="JsonSerializationException">
+        ///     Low must be a valid ulong
+        ///     or
+        ///     High must be a valid ulong
+        /// </exception>
         /// <inheritdoc />
         public override MemoryRange ReadJson(JsonReader reader, Type objectType, MemoryRange existingValue,
             bool hasExistingValue,
@@ -59,7 +64,6 @@ namespace McFly.Server.Conversion
             if (low == null) throw new JsonSerializationException("Low must be a valid ulong");
             if (high == null) throw new JsonSerializationException("High must be a valid ulong");
             return new MemoryRange(high.Value, low.Value);
-
         }
 
         /// <summary>

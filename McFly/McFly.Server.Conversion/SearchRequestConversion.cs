@@ -20,14 +20,14 @@ using McFly.Server.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace McFly.Server
+namespace McFly.Server.Conversion
 {
     /// <summary>
     ///     Class SearchRequestJsonConverter.
     /// </summary>
     /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Server.Contract.SearchCriterionDto}" />
     /// <seealso cref="System.Web.Http.ModelBinding.IModelBinder" />
-    internal class SearchRequestJsonConverter : JsonConverter<SearchCriterionDto>, IModelBinder
+    public class SearchRequestJsonConverter : JsonConverter<SearchCriterionDto>, IModelBinder
     {
         /// <summary>
         ///     Binds the model to a value by using the specified controller context and binding context.
@@ -41,8 +41,6 @@ namespace McFly.Server
             var val = bindingContext.ValueProvider.GetValue(
                 bindingContext.ModelName);
             if (val == null) return false;
-
-            ;
             return true;
         }
 

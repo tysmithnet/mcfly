@@ -49,9 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="MemoryRangeJsonConverter.cs" />
     <Compile Include="PositionJsonConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchRequestConversion.cs" />
+    <Compile Include="SearchResultJsonWriterVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -61,6 +63,10 @@
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
       <Project>{3243A211-CF4F-4296-BD68-2D4DD5406542}</Project>
       <Name>McFly.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\McFly.Server.Contract\McFly.Server.Contract.csproj">
+      <Project>{BCFFB741-26F9-4D12-A152-04CF601D373E}</Project>
+      <Name>McFly.Server.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
