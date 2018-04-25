@@ -41,20 +41,23 @@ namespace McFly.Core.JsonConverters
             bool hasExistingValue,
             JsonSerializer serializer)
         {
-            if (!hasExistingValue)
-                existingValue = new Position(0, 0);
             var jobj = JObject.Load(reader);
+            int? low = null;
+            int? high = null;
             foreach (var prop in jobj)
                 switch (prop.Key)
                 {
                     case "Low":
-                        existingValue.Low = prop.Value.Value<int>();
+                        low = prop.Value.Value<int>();
                         break;
                     case "High":
-                        existingValue.High = prop.Value.Value<int>();
+                        high = prop.Value.Value<int>();
                         break;
                 }
-            return existingValue;
+
+            if(low == null) throw new JsonSerializationException("Low must be a valid positive integer");
+            if(high == null) throw new JsonSerializationException("High must be a valid positive integer");
+            return new Position(high.Value, low.Value);
         }
 
         /// <summary>
