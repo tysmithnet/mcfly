@@ -24,7 +24,6 @@ namespace McFly.Server.Data.SqlServer
     [Table("frame")]
     internal class FrameEntity
     {
-        public virtual List<MemoryChunkEntity> MemoryRanges { get; set; } = new List<MemoryChunkEntity>();
         /// <summary>
         ///     Gets or sets the brfrom.
         /// </summary>

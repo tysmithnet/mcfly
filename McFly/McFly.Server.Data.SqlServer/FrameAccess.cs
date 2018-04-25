@@ -270,13 +270,6 @@ namespace McFly.Server.Data.SqlServer
                 }
             }
 
-            if (source.MemoryRanges != null)
-            {
-                foreach (var sourceMemoryRange in source.MemoryRanges)
-                {
-                      
-                }
-            }
         }
     }
 }

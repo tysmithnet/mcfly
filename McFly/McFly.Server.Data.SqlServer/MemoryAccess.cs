@@ -66,8 +66,6 @@ namespace McFly.Server.Data.SqlServer
                 context.MemoryChunkEntities.Add(newEntity);
                 context.SaveChanges(); // todo: error check
                 return newEntity.Id;
-
-
             }
         }
 
