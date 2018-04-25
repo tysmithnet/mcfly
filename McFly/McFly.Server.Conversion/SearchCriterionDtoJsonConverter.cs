@@ -27,7 +27,7 @@ namespace McFly.Server.Conversion
     /// </summary>
     /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Server.Contract.SearchCriterionDto}" />
     /// <seealso cref="System.Web.Http.ModelBinding.IModelBinder" />
-    public class SearchRequestJsonConverter : JsonConverter<SearchCriterionDto>, IModelBinder
+    public class SearchCriterionDtoJsonConverter : JsonConverter<SearchCriterionDto>, IModelBinder
     {
         /// <summary>
         ///     Binds the model to a value by using the specified controller context and binding context.

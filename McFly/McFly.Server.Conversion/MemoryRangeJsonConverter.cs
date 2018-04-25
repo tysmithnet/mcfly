@@ -13,6 +13,8 @@
 // ***********************************************************************
 
 using System;
+using System.Web.Http.Controllers;
+using System.Web.Http.ModelBinding;
 using McFly.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -23,7 +25,7 @@ namespace McFly.Server.Conversion
     ///     Class MemoryRangeJsonConverter.
     /// </summary>
     /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Core.MemoryRange}" />
-    public class MemoryRangeJsonConverter : JsonConverter<MemoryRange>
+    public class MemoryRangeJsonConverter : JsonConverter<MemoryRange>, IModelBinder
     {
         /// <summary>
         ///     Reads the JSON representation of the object.
@@ -81,6 +83,16 @@ namespace McFly.Server.Conversion
             writer.WritePropertyName("HighAddress");
             writer.WriteValue(value.HighAddress);
             writer.WriteEndObject();
+        }
+
+        /// <inheritdoc />
+        public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+        {
+            if (!typeof(MemoryRange).IsAssignableFrom(bindingContext.ModelType)) return false;
+            var val = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName);
+            if (val == null) return false;
+            return true;
         }
     }
 }
