@@ -41,15 +41,17 @@ namespace McFly.Core.JsonConverters
             bool hasExistingValue,
             JsonSerializer serializer)
         {
+            if(!hasExistingValue)
+                existingValue = new MemoryRange(0,0);
             var jobj = JObject.Load(reader);
             foreach (var prop in jobj)
                 switch (prop.Key)
                 {
                     case "LowAddress":
-                        existingValue.LowAddress = prop.Value.Value<ulong>();
+                        existingValue.LowAddress = Convert.ToUInt64(prop.Value.ToString());
                         break;
                     case "HighAddress":
-                        existingValue.HighAddress = prop.Value.Value<ulong>();
+                        existingValue.HighAddress = Convert.ToUInt64(prop.Value.ToString());
                         break;
                 }
             return existingValue;

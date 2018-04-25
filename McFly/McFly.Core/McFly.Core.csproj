@@ -48,7 +48,6 @@
     <Compile Include="Frame.cs" />
     <Compile Include="MemoryChunk.cs" />
     <Compile Include="MemoryRange.cs" />
-    <Compile Include="MemoryRangeJsonConverter.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="PrimitiveExtensions.cs" />
