@@ -29,7 +29,6 @@ namespace McFly.Server
     /// <summary>
     ///     Represents the start up logic for the application
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class Startup
     {
         /// <summary>

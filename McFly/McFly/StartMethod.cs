@@ -31,7 +31,6 @@ namespace McFly
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
-        [ExcludeFromCodeCoverage]
         public void Process(string[] args)
         {
             if (string.IsNullOrWhiteSpace(Settings.ServerExePath))

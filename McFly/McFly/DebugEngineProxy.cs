@@ -31,7 +31,6 @@ namespace McFly
     /// <seealso cref="IDebugEngineProxy" />
     /// <seealso cref="System.IDisposable" />
     [Export(typeof(IDebugEngineProxy))]
-    [ExcludeFromCodeCoverage]
     public class DebugEngineProxy : IDebugEngineProxy, IDisposable
     {
         /// <summary>

@@ -24,7 +24,6 @@ namespace McFly
     ///     Class NoteMethod.
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
-    [ExcludeFromCodeCoverage]
     [Export(typeof(IMcFlyMethod))]
     internal class NoteMethod : IMcFlyMethod
     {

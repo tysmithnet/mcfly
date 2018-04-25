@@ -22,7 +22,6 @@ namespace McFly
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     [Export]
-    [ExcludeFromCodeCoverage]
     internal class McFlyApp : IInjectable
     {
         /// <summary>

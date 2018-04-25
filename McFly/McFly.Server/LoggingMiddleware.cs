@@ -24,7 +24,6 @@ namespace McFly.Server
     ///     Class LoggingMiddleware.
     /// </summary>
     /// <seealso cref="Microsoft.Owin.OwinMiddleware" />
-    [ExcludeFromCodeCoverage]
     public class LoggingMiddleware : OwinMiddleware
     {
         /// <summary>

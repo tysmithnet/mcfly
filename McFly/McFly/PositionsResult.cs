@@ -50,7 +50,6 @@ namespace McFly
         ///     Gets the enumerator.
         /// </summary>
         /// <returns>IEnumerator.</returns>
-        [ExcludeFromCodeCoverage]
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

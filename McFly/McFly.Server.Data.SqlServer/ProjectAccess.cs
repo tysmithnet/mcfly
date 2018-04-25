@@ -31,7 +31,6 @@ namespace McFly.Server.Data.SqlServer
     /// <seealso cref="McFly.Server.Data.IProjectsAccess" />
     [Export(typeof(IProjectsAccess))]
     [Export(typeof(ProjectsAccess))]
-    [ExcludeFromCodeCoverage]
     internal class ProjectsAccess : DataAccess, IProjectsAccess
     {
         /// <summary>

@@ -36,7 +36,6 @@ namespace McFly
     /// <summary>
     ///     Class McFlyExtension.
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class McFlyExtension
     {
         /// <summary>
