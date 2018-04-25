@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root CoveredStatements="8862" TotalStatements="11300" CoveragePercent="78" ReportType="NDependXML" DotCoverVersion="2017.3.5">
-  <Assembly Name="mcfly" CoveredStatements="1662" TotalStatements="2336" CoveragePercent="71">
-    <Namespace Name="McFly" CoveredStatements="1598" TotalStatements="2188" CoveragePercent="73">
+<Root CoveredStatements="9278" TotalStatements="12547" CoveragePercent="74" ReportType="NDependXML" DotCoverVersion="2017.3.5">
+  <Assembly Name="mcfly" CoveredStatements="1730" TotalStatements="2919" CoveragePercent="59">
+    <Namespace Name="McFly" CoveredStatements="1666" TotalStatements="2771" CoveragePercent="60">
       <Type Name="AccessBreakpoint" CoveredStatements="61" TotalStatements="74" CoveragePercent="82">
         <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
         <Method Name=".ctor(UInt64,UInt16,Boolean,Boolean)" CoveredStatements="10" TotalStatements="13" CoveragePercent="77" FirstStatementLine="42" />
@@ -46,11 +46,56 @@
         <Method Name="Parse(String)" CoveredStatements="8" TotalStatements="10" CoveragePercent="80" FirstStatementLine="86" />
         <Method Name="SetBreakpoint(IBreakpointFacade)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="104" />
       </Type>
+      <Type Name="DebugEngineProxy" CoveredStatements="0" TotalStatements="82" CoveragePercent="0">
+        <Method Name=".ctor(IDebugControl6,IDebugClient5,IDebugRegisters2,IDebugSystemObjects,IDebugDataSpaces)" CoveredStatements="0" TotalStatements="12" CoveragePercent="0" FirstStatementLine="44" />
+        <Method Name="Dispose()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="64" />
+        <Method Name="Execute(Int32,String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="86" />
+        <Method Name="Execute(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="75" />
+        <Method Name="get_Client()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="231" />
+        <Method Name="get_Control()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="237" />
+        <Method Name="get_Dataspaces()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="213" />
+        <Method Name="get_ExecuteWrapper()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="243" />
+        <Method Name="get_Is32Bit()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="219" />
+        <Method Name="get_MemoryEngine()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="249" />
+        <Method Name="get_RegisterEngine()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="255" />
+        <Method Name="get_Registers()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="225" />
+        <Method Name="get_SystemObjects()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="261" />
+        <Method Name="GetCurrentThreadId()" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="96" />
+        <Method Name="GetEndingPosition()" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="106" />
+        <Method Name="GetRegister(UInt32)" CoveredStatements="0" TotalStatements="13" CoveragePercent="0" FirstStatementLine="118" />
+        <Method Name="GetRegisterValue(Int32,Register)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="139" />
+        <Method Name="ReadVirtualMemory(MemoryRange)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="150" />
+        <Method Name="RunUntilBreak()" CoveredStatements="0" TotalStatements="14" CoveragePercent="0" FirstStatementLine="158" />
+        <Method Name="set_Dataspaces(IDebugDataSpaces)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="213" />
+        <Method Name="SwitchToThread(Int32)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="187" />
+        <Method Name="Write(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="196" />
+        <Method Name="WriteLine(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="205" />
+      </Type>
+      <Type Name="DefaultLog" CoveredStatements="0" TotalStatements="39" CoveragePercent="0">
+        <Method Name=".ctor(String)" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="Debug(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="45" />
+        <Method Name="Dispose()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="53" />
+        <Method Name="Error(Exception)" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="71" />
+        <Method Name="Error(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="62" />
+        <Method Name="Fatal(Exception)" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="93" />
+        <Method Name="Fatal(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="84" />
+        <Method Name="get_StreamWriter()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="125" />
+        <Method Name="Info(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="106" />
+        <Method Name="Verbose(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="115" />
+      </Type>
       <Type Name="DisassemblyFacade" CoveredStatements="29" TotalStatements="29" CoveragePercent="100">
         <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="80" />
         <Method Name="GetDisassemblyLines(Int32)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="37" />
         <Method Name="GetDisassemblyLines(Int32,Int32)" CoveredStatements="23" TotalStatements="23" CoveragePercent="100" FirstStatementLine="50" />
         <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="80" />
+      </Type>
+      <Type Name="ExecuteWrapper" CoveredStatements="0" TotalStatements="44" CoveragePercent="0">
+        <Method Name=".ctor(IDebugClient)" CoveredStatements="0" TotalStatements="10" CoveragePercent="0" FirstStatementLine="56" />
+        <Method Name="Dispose()" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="82" />
+        <Method Name="Dispose(Boolean)" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="117" />
+        <Method Name="Execute(String)" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="93" />
+        <Method Name="Finalize()" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="49" />
+        <Method Name="McFly.Debugger.IDebugOutputCallbacks.Output(DEBUG_OUTPUT,String)" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="132" />
       </Type>
       <Type Name="HelpInfo" CoveredStatements="21" TotalStatements="21" CoveragePercent="100">
         <Method Name=".ctor()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="51" />
@@ -99,6 +144,13 @@
         <Method Name="Process(String[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="34" />
         <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="159" />
         <Method Name="set_Methods(IMcFlyMethod[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="166" />
+      </Type>
+      <Type Name="HttpFacade" CoveredStatements="0" TotalStatements="35" CoveragePercent="0">
+        <Method Name=".ctor()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="37" />
+        <Method Name="PostAsync(Uri,Byte[],HttpHeaders)" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="64" />
+        <Method Name="PostAsync(Uri,Dictionary&lt;String,String&gt;,HttpHeaders)" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="48" />
+        <Method Name="PostJsonAsync(Uri,Object,HttpHeaders)" CoveredStatements="0" TotalStatements="10" CoveragePercent="0" FirstStatementLine="81" />
+        <Method Name="SetHeaders(HttpHeaders,HttpClient)" CoveredStatements="0" TotalStatements="12" CoveragePercent="0" FirstStatementLine="100" />
       </Type>
       <Type Name="HttpHeaders" CoveredStatements="31" TotalStatements="36" CoveragePercent="86">
         <Method Name="Equals(HttpHeaders)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="36" />
@@ -185,28 +237,90 @@
         <Method Name="set_ProjectName(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="29" />
       </Type>
       <Type Name="ListOptions" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+      <Type Name="McFlyApp" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+        <Method Name="get_McFlyMethods()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="32" />
+        <Method Name="set_McFlyMethods(IMcFlyMethod[])" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="32" />
+      </Type>
+      <Type Name="McFlyExtension" CoveredStatements="0" TotalStatements="255" CoveragePercent="0">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
+          <Method Name="&lt;DebugExtensionInitialize&gt;b__15_0(Object,ResolveEventArgs)" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="155" />
+          <Method Name="&lt;DebugExtensionNotify&gt;b__16_0(Type)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="197" />
+          <Method Name="&lt;DebugExtensionNotify&gt;b__16_1(Type)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="198" />
+        </Type>
+        <Type Name="&lt;&gt;c__DisplayClass18_0" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <Method Name="&lt;mf&gt;b__0(IMcFlyMethod)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="247" />
+        </Type>
+        <Type Name="&lt;&gt;c__DisplayClass31_0" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <Method Name="&lt;PopulateSettings&gt;b__0(ISettings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="461" />
+        </Type>
+        <Type Name="Ioctl" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Method Name=".cctor()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="84" />
+        <Method Name="CommandLineToArgs(String)" CoveredStatements="0" TotalStatements="18" CoveragePercent="0" FirstStatementLine="118" />
+        <Method Name="ConvertIntToHResult(Int32)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="489" />
+        <Method Name="ConvertIntToHResult(UInt32)" CoveredStatements="0" TotalStatements="10" CoveragePercent="0" FirstStatementLine="502" />
+        <Method Name="CreateIDebugClient()" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="520" />
+        <Method Name="CurrDomain_UnhandledException(Object,UnhandledExceptionEventArgs)" CoveredStatements="0" TotalStatements="15" CoveragePercent="0" FirstStatementLine="541" />
+        <Method Name="DebugExtensionInitialize(UInt32,UInt32)" CoveredStatements="0" TotalStatements="18" CoveragePercent="0" FirstStatementLine="148" />
+        <Method Name="DebugExtensionNotify(UInt32,UInt64)" CoveredStatements="0" TotalStatements="23" CoveragePercent="0" FirstStatementLine="189" />
+        <Method Name="DebugExtensionUninitialize()" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="220" />
+        <Method Name="GetExceptionMessage(Exception)" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="268" />
+        <Method Name="GetLogPath()" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="393" />
+        <Method Name="InitApi(ILog)" CoveredStatements="0" TotalStatements="20" CoveragePercent="0" FirstStatementLine="404" />
+        <Method Name="mf(IntPtr,String)" CoveredStatements="0" TotalStatements="22" CoveragePercent="0" FirstStatementLine="237" />
+        <Method Name="Out(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="285" />
+        <Method Name="OutDml(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="294" />
+        <Method Name="pointerFormat(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="304" />
+        <Method Name="PopulateSettings()" CoveredStatements="0" TotalStatements="33" CoveragePercent="0" FirstStatementLine="429" />
+        <Method Name="use(IntPtr,String)" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="316" />
+        <Method Name="Use(String)" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="563" />
+        <Method Name="Write(String,Object[])" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="330" />
+        <Method Name="WriteDml(String,Object[])" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="343" />
+        <Method Name="WriteDmlLine(String,Object[])" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="356" />
+        <Method Name="WriteLine(String,Object[])" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="370" />
+      </Type>
       <Type Name="MemoryEngine" CoveredStatements="7" TotalStatements="8" CoveragePercent="88">
         <Method Name="ReadMemory(UInt64,UInt64,IDebugDataSpaces,Boolean)" CoveredStatements="7" TotalStatements="8" CoveragePercent="88" FirstStatementLine="13" />
       </Type>
-      <Type Name="OpenOptions" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
-      <Type Name="PositionsRecord" CoveredStatements="15" TotalStatements="15" CoveragePercent="100">
-        <Method Name=".ctor(Int32,Position,Boolean)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="34" />
-        <Method Name="Equals(PositionsRecord)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="76" />
-        <Method Name="get_IsCurrentThread()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="85" />
-        <Method Name="get_Position()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="91" />
-        <Method Name="get_ThreadId()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="97" />
-        <Method Name="set_IsCurrentThread(Boolean)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="85" />
-        <Method Name="set_Position(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="91" />
-        <Method Name="set_ThreadId(Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="97" />
-      </Type>
-      <Type Name="PositionsResult" CoveredStatements="10" TotalStatements="10" CoveragePercent="100">
+      <Type Name="NoteMethod" CoveredStatements="45" TotalStatements="56" CoveragePercent="80">
         <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;get_CurrentThreadResult&gt;b__4_0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="63" />
+          <Method Name="&lt;AddNote&gt;b__1_0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="70" />
+        </Type>
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="123" />
+        <Method Name="AddNote(AddNoteOptions)" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="65" />
+        <Method Name="ExtractAddOptions(IEnumerable&lt;String&gt;)" CoveredStatements="18" TotalStatements="18" CoveragePercent="100" FirstStatementLine="86" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="117" />
+        <Method Name="get_HelpInfo()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="123" />
+        <Method Name="get_ServerClient()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="146" />
+        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="139" />
+        <Method Name="get_TimeTravelFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="153" />
+        <Method Name="Process(String[])" CoveredStatements="8" TotalStatements="15" CoveragePercent="53" FirstStatementLine="38" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="117" />
+        <Method Name="set_ServerClient(IServerClient)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="146" />
+        <Method Name="set_Settings(Settings)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="139" />
+        <Method Name="set_TimeTravelFacade(ITimeTravelFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="153" />
+      </Type>
+      <Type Name="OpenOptions" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+      <Type Name="PositionsRecord" CoveredStatements="20" TotalStatements="29" CoveragePercent="69">
+        <Method Name=".ctor(Int32,Position,Boolean)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="34" />
+        <Method Name="Equals(Object)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="47" />
+        <Method Name="Equals(PositionsRecord)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="74" />
+        <Method Name="get_IsCurrentThread()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="83" />
+        <Method Name="get_Position()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="89" />
+        <Method Name="get_ThreadId()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="95" />
+        <Method Name="GetHashCode()" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="58" />
+        <Method Name="set_IsCurrentThread(Boolean)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="83" />
+        <Method Name="set_Position(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="89" />
+        <Method Name="set_ThreadId(Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="95" />
+      </Type>
+      <Type Name="PositionsResult" CoveredStatements="10" TotalStatements="13" CoveragePercent="77">
+        <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;get_CurrentThreadResult&gt;b__4_0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="62" />
         </Type>
         <Method Name=".ctor(IEnumerable&lt;PositionsRecord&gt;)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="35" />
-        <Method Name="get_CurrentThreadResult()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="63" />
-        <Method Name="get_PositionsRecords()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="69" />
+        <Method Name="get_CurrentThreadResult()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="62" />
+        <Method Name="get_PositionsRecords()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="68" />
         <Method Name="GetEnumerator()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="45" />
+        <Method Name="System.Collections.IEnumerable.GetEnumerator()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="54" />
       </Type>
       <Type Name="RegisterEngine" CoveredStatements="0" TotalStatements="462" CoveragePercent="0">
         <Method Name="GetRegisterValue(Int32,Register,IDebugRegisters2,IDebugEngineProxy)" CoveredStatements="0" TotalStatements="8" CoveragePercent="0" FirstStatementLine="17" />
@@ -241,6 +355,24 @@
         <Method Name="set_ServerExePath(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="43" />
         <Method Name="set_ServerUrl(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
       </Type>
+      <Type Name="SettingsJsonConverter" CoveredStatements="16" TotalStatements="16" CoveragePercent="100">
+        <Method Name="ReadJson(JsonReader,Type,IEnumerable&lt;ISettings&gt;,Boolean,JsonSerializer)" CoveredStatements="2" TotalStatements="2" CoveragePercent="100" FirstStatementLine="45" />
+        <Method Name="WriteJson(JsonWriter,IEnumerable&lt;ISettings&gt;,JsonSerializer)" CoveredStatements="14" TotalStatements="14" CoveragePercent="100" FirstStatementLine="56" />
+      </Type>
+      <Type Name="SettingsMethod" CoveredStatements="2" TotalStatements="25" CoveragePercent="8">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+          <Method Name="&lt;Process&gt;b__0_0(ReloadOptions)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="37" />
+          <Method Name="&lt;Process&gt;b__0_2(OpenOptions)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="47" />
+        </Type>
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="70" />
+        <Method Name="&lt;Process&gt;b__0_1(ListOptions)" CoveredStatements="0" TotalStatements="10" CoveragePercent="0" FirstStatementLine="39" />
+        <Method Name="get_AllSettings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="64" />
+        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="70" />
+        <Method Name="Process(String[])" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="35" />
+        <Method Name="set_AllSettings(ISettings[])" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="64" />
+      </Type>
       <Type Name="StackFacade" CoveredStatements="59" TotalStatements="59" CoveragePercent="100">
         <Method Name="ExtractStackFrames(String)" CoveredStatements="43" TotalStatements="43" CoveragePercent="100" FirstStatementLine="70" />
         <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="123" />
@@ -249,15 +381,16 @@
         <Method Name="GetStackFrames(Int32)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="58" />
         <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="123" />
       </Type>
-      <Type Name="StartMethod" CoveredStatements="2" TotalStatements="8" CoveragePercent="25">
-        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="63" />
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="73" />
-        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="63" />
-        <Method Name="get_Log()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="80" />
-        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="87" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="73" />
-        <Method Name="set_Log(ILog)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="80" />
-        <Method Name="set_Settings(Settings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="87" />
+      <Type Name="StartMethod" CoveredStatements="2" TotalStatements="20" CoveragePercent="10">
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="62" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="72" />
+        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="62" />
+        <Method Name="get_Log()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="79" />
+        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="86" />
+        <Method Name="Process(String[])" CoveredStatements="0" TotalStatements="12" CoveragePercent="0" FirstStatementLine="35" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="72" />
+        <Method Name="set_Log(ILog)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="79" />
+        <Method Name="set_Settings(Settings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="86" />
       </Type>
       <Type Name="StartOptions" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
       <Type Name="TimeTravelFacade" CoveredStatements="61" TotalStatements="61" CoveragePercent="100">
@@ -351,8 +484,8 @@
     </Namespace>
     <Type Name="&lt;PrivateImplementationDetails&gt;" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
   </Assembly>
-  <Assembly Name="McFly.Core" CoveredStatements="3972" TotalStatements="5366" CoveragePercent="74">
-    <Namespace Name="McFly.Core" CoveredStatements="1806" TotalStatements="2242" CoveragePercent="81">
+  <Assembly Name="McFly.Core" CoveredStatements="4010" TotalStatements="5439" CoveragePercent="74">
+    <Namespace Name="McFly.Core" CoveredStatements="1844" TotalStatements="2315" CoveragePercent="80">
       <Type Name="ByteArrayBuilder" CoveredStatements="27" TotalStatements="31" CoveragePercent="87">
         <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="30" />
         <Method Name="AppdendHexString(String)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="38" />
@@ -360,17 +493,19 @@
         <Method Name="Reverse()" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="57" />
         <Method Name="StringToByteArray(String,Boolean)" CoveredStatements="19" TotalStatements="19" CoveragePercent="100" FirstStatementLine="74" />
       </Type>
-      <Type Name="DisassemblyLine" CoveredStatements="26" TotalStatements="26" CoveragePercent="100">
+      <Type Name="DisassemblyLine" CoveredStatements="41" TotalStatements="43" CoveragePercent="95">
         <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;GetHashCode&gt;b__20_0(Byte,Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="117" />
+          <Method Name="&lt;GetHashCode&gt;b__20_0(Byte,Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="115" />
         </Type>
         <Method Name=".ctor()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="29" />
         <Method Name=".ctor(Nullable&lt;UInt64&gt;,Byte[],String,String)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="47" />
         <Method Name="Equals(DisassemblyLine)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="85" />
+        <Method Name="Equals(Object)" CoveredStatements="7" TotalStatements="9" CoveragePercent="78" FirstStatementLine="99" />
         <Method Name="get_DisassemblyNote()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
         <Method Name="get_InstructionAddress()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
         <Method Name="get_OpCode()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="65" />
         <Method Name="get_OpCodeMnemonic()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="71" />
+        <Method Name="GetHashCode()" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="111" />
         <Method Name="set_DisassemblyNote(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
         <Method Name="set_InstructionAddress(Nullable&lt;UInt64&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
         <Method Name="set_OpCode(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="65" />
@@ -408,25 +543,32 @@
         <Method Name="set_MemoryRange(MemoryRange)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
         <Method Name="set_Position(Position)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
       </Type>
-      <Type Name="MemoryRange" CoveredStatements="85" TotalStatements="94" CoveragePercent="90">
-        <Method Name=".ctor(UInt64,UInt64)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="38" />
-        <Method Name="CompareTo(MemoryRange)" CoveredStatements="9" TotalStatements="10" CoveragePercent="90" FirstStatementLine="69" />
-        <Method Name="CompareTo(Object)" CoveredStatements="6" TotalStatements="9" CoveragePercent="67" FirstStatementLine="56" />
-        <Method Name="Equals(MemoryRange)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="83" />
-        <Method Name="Equals(Object)" CoveredStatements="8" TotalStatements="9" CoveragePercent="89" FirstStatementLine="95" />
-        <Method Name="get_DebuggerDisplay()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="253" />
-        <Method Name="get_HighAddress()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="235" />
-        <Method Name="get_Length()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="241" />
-        <Method Name="get_LowAddress()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="247" />
-        <Method Name="GetHashCode()" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="107" />
-        <Method Name="op_Equality(MemoryRange,MemoryRange)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="170" />
-        <Method Name="op_GreaterThan(MemoryRange,MemoryRange)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="183" />
-        <Method Name="op_GreaterThanOrEqual(MemoryRange,MemoryRange)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="194" />
-        <Method Name="op_Inequality(MemoryRange,MemoryRange)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="205" />
-        <Method Name="op_LessThan(MemoryRange,MemoryRange)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="216" />
-        <Method Name="op_LessThanOrEqual(MemoryRange,MemoryRange)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="227" />
-        <Method Name="Parse(String)" CoveredStatements="19" TotalStatements="19" CoveragePercent="100" FirstStatementLine="129" />
-        <Method Name="ToString()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="159" />
+      <Type Name="MemoryRange" CoveredStatements="87" TotalStatements="96" CoveragePercent="91">
+        <Method Name=".ctor(UInt64,UInt64)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="41" />
+        <Method Name="CompareTo(MemoryRange)" CoveredStatements="9" TotalStatements="10" CoveragePercent="90" FirstStatementLine="72" />
+        <Method Name="CompareTo(Object)" CoveredStatements="6" TotalStatements="9" CoveragePercent="67" FirstStatementLine="59" />
+        <Method Name="Equals(MemoryRange)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="86" />
+        <Method Name="Equals(Object)" CoveredStatements="8" TotalStatements="9" CoveragePercent="89" FirstStatementLine="98" />
+        <Method Name="get_DebuggerDisplay()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="259" />
+        <Method Name="get_HighAddress()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="238" />
+        <Method Name="get_Length()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="247" />
+        <Method Name="get_LowAddress()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="253" />
+        <Method Name="GetHashCode()" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="110" />
+        <Method Name="op_Equality(MemoryRange,MemoryRange)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="173" />
+        <Method Name="op_GreaterThan(MemoryRange,MemoryRange)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="186" />
+        <Method Name="op_GreaterThanOrEqual(MemoryRange,MemoryRange)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="197" />
+        <Method Name="op_Inequality(MemoryRange,MemoryRange)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="208" />
+        <Method Name="op_LessThan(MemoryRange,MemoryRange)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="219" />
+        <Method Name="op_LessThanOrEqual(MemoryRange,MemoryRange)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="230" />
+        <Method Name="Parse(String)" CoveredStatements="19" TotalStatements="19" CoveragePercent="100" FirstStatementLine="132" />
+        <Method Name="set_HighAddress(UInt64)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="238" />
+        <Method Name="set_LowAddress(UInt64)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="253" />
+        <Method Name="ToString()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="162" />
+      </Type>
+      <Type Name="MemoryRangeJsonConverter" CoveredStatements="0" TotalStatements="30" CoveragePercent="0">
+        <Method Name="CanConvert(Type)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="299" />
+        <Method Name="ReadJson(JsonReader,Type,Object,JsonSerializer)" CoveredStatements="0" TotalStatements="17" CoveragePercent="0" FirstStatementLine="278" />
+        <Method Name="WriteJson(JsonWriter,Object,JsonSerializer)" CoveredStatements="0" TotalStatements="10" CoveragePercent="0" FirstStatementLine="266" />
       </Type>
       <Type Name="Note" CoveredStatements="3" TotalStatements="4" CoveragePercent="75">
         <Method Name="get_CreateDate()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="28" />
@@ -980,29 +1122,32 @@
         <Method Name="set_Ymm9l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4059" />
         <Method Name="set_Zf(Nullable&lt;Boolean&gt;)" CoveredStatements="8" TotalStatements="10" CoveragePercent="80" FirstStatementLine="4073" />
       </Type>
-      <Type Name="StackFrame" CoveredStatements="26" TotalStatements="26" CoveragePercent="100">
+      <Type Name="StackFrame" CoveredStatements="41" TotalStatements="44" CoveragePercent="93">
         <Method Name=".ctor(UInt64,Nullable&lt;UInt64&gt;,String,String,Nullable&lt;UInt64&gt;)" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="33" />
+        <Method Name="Equals(Object)" CoveredStatements="6" TotalStatements="9" CoveragePercent="67" FirstStatementLine="93" />
         <Method Name="Equals(StackFrame)" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="78" />
         <Method Name="get_FunctionName()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="64" />
         <Method Name="get_Module()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="58" />
         <Method Name="get_Offset()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="70" />
         <Method Name="get_ReturnAddress()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="52" />
         <Method Name="get_StackPointer()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="46" />
+        <Method Name="GetHashCode()" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="105" />
         <Method Name="set_FunctionName(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="64" />
         <Method Name="set_Module(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="58" />
         <Method Name="set_Offset(Nullable&lt;UInt64&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="70" />
         <Method Name="set_ReturnAddress(Nullable&lt;UInt64&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="52" />
         <Method Name="set_StackPointer(UInt64)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="46" />
       </Type>
-      <Type Name="StackTrace" CoveredStatements="17" TotalStatements="19" CoveragePercent="89">
+      <Type Name="StackTrace" CoveredStatements="23" TotalStatements="25" CoveragePercent="92">
         <Type Name="&lt;&gt;c" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
-          <Method Name="&lt;GetHashCode&gt;b__6_0(StackFrame)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
-          <Method Name="&lt;GetHashCode&gt;b__6_1(Int32,Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="78" />
+          <Method Name="&lt;GetHashCode&gt;b__6_0(StackFrame)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="76" />
+          <Method Name="&lt;GetHashCode&gt;b__6_1(Int32,Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
         </Type>
         <Method Name=".ctor(IEnumerable&lt;StackFrame&gt;)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="32" />
         <Method Name="Equals(Object)" CoveredStatements="7" TotalStatements="9" CoveragePercent="78" FirstStatementLine="59" />
         <Method Name="Equals(StackTrace)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="49" />
         <Method Name="get_StackFrames()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="41" />
+        <Method Name="GetHashCode()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="71" />
       </Type>
     </Namespace>
     <Namespace Name="McFly.Core.Registers" CoveredStatements="2166" TotalStatements="3124" CoveragePercent="69">
@@ -3450,8 +3595,30 @@
       </Type>
     </Namespace>
   </Assembly>
-  <Assembly Name="McFly.Server" CoveredStatements="58" TotalStatements="149" CoveragePercent="39">
-    <Namespace Name="McFly.Server" CoveredStatements="0" TotalStatements="65" CoveragePercent="0">
+  <Assembly Name="McFly.Server" CoveredStatements="58" TotalStatements="298" CoveragePercent="19">
+    <Namespace Name="McFly.Server" CoveredStatements="0" TotalStatements="163" CoveragePercent="0">
+      <Type Name="LoggingMiddleware" CoveredStatements="0" TotalStatements="18" CoveragePercent="0">
+        <Type Name="&lt;Invoke&gt;d__4" CoveredStatements="0" TotalStatements="13" CoveragePercent="0">
+          <Method Name="MoveNext()" CoveredStatements="0" TotalStatements="13" CoveragePercent="0" FirstStatementLine="58" />
+        </Type>
+        <Method Name=".ctor(OwinMiddleware)" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="37" />
+      </Type>
+      <Type Name="MefDependencyResolver" CoveredStatements="0" TotalStatements="29" CoveragePercent="0">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <Method Name="&lt;GetServices&gt;b__9_0(Lazy&lt;Object,Object&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="88" />
+        </Type>
+        <Method Name=".ctor(CompositionContainer,IDependencyResolver)" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="34" />
+        <Method Name="BeginScope()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="99" />
+        <Method Name="Dispose()" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" FirstStatementLine="56" />
+        <Method Name="get_CompositionContainer()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="44" />
+        <Method Name="get_Parent()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="50" />
+        <Method Name="GetService(Type)" CoveredStatements="0" TotalStatements="8" CoveragePercent="0" FirstStatementLine="66" />
+        <Method Name="GetServices(Type)" CoveredStatements="0" TotalStatements="8" CoveragePercent="0" FirstStatementLine="84" />
+      </Type>
+      <Type Name="Program" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
+        <Method Name=".ctor()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="30" />
+        <Method Name="Main(String[])" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="37" />
+      </Type>
       <Type Name="SearchRequestJsonConverter" CoveredStatements="0" TotalStatements="39" CoveragePercent="0">
         <Method Name="BindModel(HttpActionContext,ModelBindingContext)" CoveredStatements="0" TotalStatements="9" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="ExtractCriterion(JObject)" CoveredStatements="0" TotalStatements="21" CoveragePercent="0" FirstStatementLine="89" />
@@ -3469,6 +3636,23 @@
         <Method Name=".ctor()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="28" />
         <Method Name="get_ConnectionString()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="36" />
         <Method Name="set_ConnectionString(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="36" />
+      </Type>
+      <Type Name="Startup" CoveredStatements="0" TotalStatements="34" CoveragePercent="0">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+          <Method Name="&lt;Configuration&gt;b__1_0(SwaggerDocsConfig)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="55" />
+          <Method Name="&lt;Configuration&gt;b__1_1()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
+          <Method Name="&lt;GetDependencyResolver&gt;b__2_0(Assembly)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="75" />
+        </Type>
+        <Method Name=".ctor()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="37" />
+        <Method Name="Configuration(IAppBuilder)" CoveredStatements="0" TotalStatements="12" CoveragePercent="0" FirstStatementLine="44" />
+        <Method Name="GetDependencyResolver(HttpConfiguration)" CoveredStatements="0" TotalStatements="15" CoveragePercent="0" FirstStatementLine="69" />
+      </Type>
+      <Type Name="SwaggerConfig" CoveredStatements="0" TotalStatements="9" CoveragePercent="0">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="5" CoveragePercent="0">
+          <Method Name="&lt;Register&gt;b__0_0(SwaggerDocsConfig)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="38" />
+          <Method Name="&lt;Register&gt;b__0_1(SwaggerUiConfig)" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" FirstStatementLine="201" />
+        </Type>
+        <Method Name="Register()" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="33" />
       </Type>
     </Namespace>
     <Namespace Name="McFly.Server.Controllers" CoveredStatements="38" TotalStatements="57" CoveragePercent="67">
@@ -3504,6 +3688,29 @@
         <Method Name="set_FrameAccess(IFrameAccess)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="41" />
       </Type>
     </Namespace>
+    <Namespace Name="McFly.Server.Headers" CoveredStatements="0" TotalStatements="51" CoveragePercent="0">
+      <Type Name="FromHeaderAttribute" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
+        <Method Name=".ctor(String)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="30" />
+        <Method Name="get_HeaderName()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
+        <Method Name="GetBinding(HttpParameterDescriptor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="47" />
+      </Type>
+      <Type Name="FromHeaderAttributeOperationFilter" CoveredStatements="0" TotalStatements="13" CoveragePercent="0">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <Method Name="&lt;Apply&gt;b__0_0(HttpParameterDescriptor)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="36" />
+        </Type>
+        <Type Name="&lt;&gt;c__DisplayClass0_0" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <Method Name="&lt;Apply&gt;b__1(Parameter)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="38" />
+        </Type>
+        <Method Name="Apply(Operation,SchemaRegistry,ApiDescription)" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="34" />
+      </Type>
+      <Type Name="FromHeaderBinding" CoveredStatements="0" TotalStatements="27" CoveragePercent="0">
+        <Method Name=".ctor(HttpParameterDescriptor,String)" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="45" />
+        <Method Name="ExecuteBindingAsync(ModelMetadataProvider,HttpActionContext,CancellationToken)" CoveredStatements="0" TotalStatements="21" CoveragePercent="0" FirstStatementLine="66" />
+      </Type>
+      <Type Name="FromProjectNameHeaderAttribute" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+        <Method Name=".ctor(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="27" />
+      </Type>
+    </Namespace>
     <Namespace Name="McFly.Server.Search" CoveredStatements="20" TotalStatements="27" CoveragePercent="74">
       <Type Name="RegisterCriterionConverter" CoveredStatements="12" TotalStatements="18" CoveragePercent="67">
         <Method Name="CanConvert(SearchCriterionDto)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="39" />
@@ -3519,12 +3726,12 @@
       </Type>
     </Namespace>
   </Assembly>
-  <Assembly Name="McFly.Server.Contract" CoveredStatements="41" TotalStatements="59" CoveragePercent="69">
-    <Namespace Name="McFly.Server.Contract" CoveredStatements="41" TotalStatements="59" CoveragePercent="69">
-      <Type Name="AddMemoryRequeset" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
-        <Method Name=".ctor(MemoryChunk)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="25" />
-        <Method Name="get_MemoryChunk()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="30" />
-        <Method Name="set_MemoryChunk(MemoryChunk)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="30" />
+  <Assembly Name="McFly.Server.Contract" CoveredStatements="64" TotalStatements="106" CoveragePercent="60">
+    <Namespace Name="McFly.Server.Contract" CoveredStatements="64" TotalStatements="106" CoveragePercent="60">
+      <Type Name="AddMemoryRequeset" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
+        <Method Name=".ctor()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="28" />
+        <Method Name=".ctor(MemoryChunk)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="37" />
+        <Method Name="get_MemoryChunk()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="46" />
       </Type>
       <Type Name="AddNoteRequest" CoveredStatements="37" TotalStatements="41" CoveragePercent="90">
         <Method Name=".ctor(Position,IEnumerable&lt;Int32&gt;,String)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="35" />
@@ -3540,6 +3747,20 @@
         <Method Name="set_Text(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="58" />
         <Method Name="set_ThreadIds(IEnumerable&lt;Int32&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="52" />
       </Type>
+      <Type Name="NewProjectRequest" CoveredStatements="23" TotalStatements="45" CoveragePercent="51">
+        <Method Name=".ctor(String,String,String)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="46" />
+        <Method Name="Equals(NewProjectRequest)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="77" />
+        <Method Name="Equals(Object)" CoveredStatements="6" TotalStatements="9" CoveragePercent="67" FirstStatementLine="91" />
+        <Method Name="get_EndingPosition()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="69" />
+        <Method Name="get_ProjectName()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="57" />
+        <Method Name="get_StartingPosition()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="63" />
+        <Method Name="GetHashCode()" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="103" />
+        <Method Name="op_Equality(NewProjectRequest,NewProjectRequest)" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="120" />
+        <Method Name="op_Inequality(NewProjectRequest,NewProjectRequest)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="133" />
+        <Method Name="set_EndingPosition(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="69" />
+        <Method Name="set_ProjectName(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="57" />
+        <Method Name="set_StartingPosition(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="63" />
+      </Type>
       <Type Name="SearchCriterionDto" CoveredStatements="2" TotalStatements="7" CoveragePercent="29">
         <Method Name="Accept(ISearchRequestVisitor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="40" />
         <Method Name="get_SubCriteria()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="32" />
@@ -3551,6 +3772,16 @@
         <Method Name="Accept(ISearchRequestVisitor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="63" />
         <Method Name="get_Args()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="55" />
         <Method Name="set_Args(String[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="55" />
+      </Type>
+    </Namespace>
+  </Assembly>
+  <Assembly Name="McFly.Server.Contract.Test" CoveredStatements="12" TotalStatements="12" CoveragePercent="100">
+    <Namespace Name="McFly.Server.Contract.Test" CoveredStatements="12" TotalStatements="12" CoveragePercent="100">
+      <Type Name="AddNoteRequest_Should" CoveredStatements="10" TotalStatements="10" CoveragePercent="100">
+        <Method Name="Exhibit_Value_Equality()" CoveredStatements="10" TotalStatements="10" CoveragePercent="100" FirstStatementLine="11" />
+      </Type>
+      <Type Name="SearchResultJsonWriterVisitor_Should" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
+        <Method Name="Create_The_Correct_Json_Basic()" CoveredStatements="2" TotalStatements="2" CoveragePercent="100" FirstStatementLine="9" />
       </Type>
     </Namespace>
   </Assembly>
@@ -3616,12 +3847,12 @@
       </Type>
     </Namespace>
   </Assembly>
-  <Assembly Name="McFly.Server.Data.SqlServer" CoveredStatements="462" TotalStatements="613" CoveragePercent="75">
-    <Namespace Name="McFly.Server.Data.SqlServer" CoveredStatements="462" TotalStatements="613" CoveragePercent="75">
+  <Assembly Name="McFly.Server.Data.SqlServer" CoveredStatements="462" TotalStatements="638" CoveragePercent="72">
+    <Namespace Name="McFly.Server.Data.SqlServer" CoveredStatements="462" TotalStatements="638" CoveragePercent="72">
       <Type Name="ByteRangeEntity" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
-        <Method Name="get_Bytes()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="16" />
+        <Method Name="get_Bytes()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="15" />
         <Method Name="get_Id()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="12" />
-        <Method Name="set_Bytes(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="16" />
+        <Method Name="set_Bytes(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="15" />
         <Method Name="set_Id(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="12" />
       </Type>
       <Type Name="ContextFactory" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
@@ -3915,6 +4146,17 @@
         <Method Name="set_NoteId(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="34" />
         <Method Name="set_Text(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="48" />
       </Type>
+      <Type Name="ProjectsAccess" CoveredStatements="0" TotalStatements="25" CoveragePercent="0">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <Method Name="&lt;GetDatabases&gt;b__7_0(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="65" />
+        </Type>
+        <Method Name=".ctor()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="40" />
+        <Method Name="CreateProject(String,Position,Position)" CoveredStatements="0" TotalStatements="8" CoveragePercent="0" FirstStatementLine="76" />
+        <Method Name="get_ContextFactory()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="47" />
+        <Method Name="get_Log()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="40" />
+        <Method Name="GetDatabases()" CoveredStatements="0" TotalStatements="12" CoveragePercent="0" FirstStatementLine="54" />
+        <Method Name="set_ContextFactory(IContextFactory)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="47" />
+      </Type>
       <Type Name="StackFrameEntity" CoveredStatements="10" TotalStatements="16" CoveragePercent="63">
         <Method Name="get_Frame()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="86" />
         <Method Name="get_FrameId()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="79" />
@@ -3951,8 +4193,163 @@
       </Type>
     </Namespace>
   </Assembly>
-  <Assembly Name="McFly.Test" CoveredStatements="610" TotalStatements="675" CoveragePercent="90">
-    <Namespace Name="McFly.Test" CoveredStatements="431" TotalStatements="454" CoveragePercent="95">
+  <Assembly Name="McFly.Server.Data.SqlServer.Test" CoveredStatements="171" TotalStatements="235" CoveragePercent="73">
+    <Namespace Name="McFly.Server.Data.SqlServer.Test" CoveredStatements="171" TotalStatements="235" CoveragePercent="73">
+      <Type Name="ContextFactoryBuilder" CoveredStatements="13" TotalStatements="13" CoveragePercent="100">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="51" />
+        <Method Name="Build()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="66" />
+        <Method Name="WithFrame(FrameEntity)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="60" />
+      </Type>
+      <Type Name="FrameAccess_Should" CoveredStatements="77" TotalStatements="77" CoveragePercent="100">
+        <Type Name="&lt;&gt;c__DisplayClass4_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;Throw_If_Frame_Cant_Be_Found&gt;b__0()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="174" />
+        </Type>
+        <Method Name="Find_Matching_Frames_By_Register_values()" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="16" />
+        <Method Name="Find_Matching_Frames_Complex()" CoveredStatements="27" TotalStatements="27" CoveragePercent="100" FirstStatementLine="66" />
+        <Method Name="Find_Matching_Frames_When_Searched_For_Basic()" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="123" />
+        <Method Name="Get_The_Correct_Frame_If_One_Exists()" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="147" />
+        <Method Name="Throw_If_Frame_Cant_Be_Found()" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="163" />
+        <Method Name="Update_Existing_Frames_And_Insert_New_When_Upserting()" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="181" />
+      </Type>
+      <Type Name="FrameCriterionVisitor_Should" CoveredStatements="26" TotalStatements="26" CoveragePercent="100">
+        <Type Name="&lt;&gt;c__DisplayClass0_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;Create_The_Correct_Expression_Tree_For_And&gt;b__0(FrameEntity)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
+        </Type>
+        <Type Name="&lt;&gt;c__DisplayClass1_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;Create_The_Correct_Expression_Tree_For_Or&gt;b__0(FrameEntity)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="57" />
+        </Type>
+        <Method Name="Create_The_Correct_Expression_Tree_For_And()" CoveredStatements="11" TotalStatements="11" CoveragePercent="100" FirstStatementLine="14" />
+        <Method Name="Create_The_Correct_Expression_Tree_For_Or()" CoveredStatements="13" TotalStatements="13" CoveragePercent="100" FirstStatementLine="38" />
+      </Type>
+      <Type Name="NoteAccess_Should" CoveredStatements="9" TotalStatements="9" CoveragePercent="100">
+        <Method Name="Add_Note_To_Specified_Frames()" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="12" />
+      </Type>
+      <Type Name="TestDbAsyncEnumerable&lt;T&gt;" CoveredStatements="3" TotalStatements="13" CoveragePercent="23">
+        <Method Name=".ctor(Expression)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="183" />
+        <Method Name=".ctor(IEnumerable&lt;T&gt;)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="178" />
+        <Method Name="GetAsyncEnumerator()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="188" />
+        <Method Name="System.Data.Entity.Infrastructure.IDbAsyncEnumerable.GetAsyncEnumerator()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="193" />
+        <Method Name="System.Linq.IQueryable.get_Provider()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="197" />
+      </Type>
+      <Type Name="TestDbAsyncEnumerator&lt;T&gt;" CoveredStatements="0" TotalStatements="12" CoveragePercent="0">
+        <Method Name=".ctor(IEnumerator&lt;T&gt;)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="204" />
+        <Method Name="Dispose()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="210" />
+        <Method Name="get_Current()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="219" />
+        <Method Name="MoveNextAsync(CancellationToken)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="215" />
+        <Method Name="System.Data.Entity.Infrastructure.IDbAsyncEnumerator.get_Current()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="221" />
+      </Type>
+      <Type Name="TestDbAsyncQueryProvider&lt;TEntity&gt;" CoveredStatements="10" TotalStatements="22" CoveragePercent="45">
+        <Method Name=".ctor(IQueryProvider)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="139" />
+        <Method Name="CreateQuery(Expression)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="145" />
+        <Method Name="CreateQuery&lt;TElement&gt;(Expression)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="150" />
+        <Method Name="Execute(Expression)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="155" />
+        <Method Name="Execute&lt;TResult&gt;(Expression)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="160" />
+        <Method Name="ExecuteAsync(Expression,CancellationToken)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="165" />
+        <Method Name="ExecuteAsync&lt;TResult&gt;(Expression,CancellationToken)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="170" />
+      </Type>
+      <Type Name="TestDbSet&lt;TEntity&gt;" CoveredStatements="11" TotalStatements="36" CoveragePercent="31">
+        <Method Name=".ctor()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="77" />
+        <Method Name="Add(TEntity)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="107" />
+        <Method Name="Attach(TEntity)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="119" />
+        <Method Name="Create()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="125" />
+        <Method Name="Create&lt;TDerivedEntity&gt;()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="130" />
+        <Method Name="get_Local()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="83" />
+        <Method Name="Remove(TEntity)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="113" />
+        <Method Name="System.Collections.Generic.IEnumerable&lt;TEntity&gt;.GetEnumerator()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="91" />
+        <Method Name="System.Collections.IEnumerable.GetEnumerator()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="102" />
+        <Method Name="System.Data.Entity.Infrastructure.IDbAsyncEnumerable&lt;TEntity&gt;.GetAsyncEnumerator()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="86" />
+        <Method Name="System.Linq.IQueryable.get_ElementType()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="95" />
+        <Method Name="System.Linq.IQueryable.get_Expression()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="97" />
+        <Method Name="System.Linq.IQueryable.get_Provider()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="99" />
+      </Type>
+      <Type Name="TestMcFlyContext" CoveredStatements="22" TotalStatements="27" CoveragePercent="81">
+        <Method Name=".ctor()" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="17" />
+        <Method Name="Dispose()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="44" />
+        <Method Name="get_ByteRangeEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="36" />
+        <Method Name="get_FrameEntities()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_MemoryChunkEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_NoteEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="28" />
+        <Method Name="get_StackFrameEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="29" />
+        <Method Name="get_TraceInfoEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="30" />
+        <Method Name="SaveChanges()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="39" />
+        <Method Name="set_ByteRangeEntities(DbSet&lt;ByteRangeEntity&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="36" />
+        <Method Name="set_FrameEntities(DbSet&lt;FrameEntity&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="set_MemoryChunkEntities(DbSet&lt;MemoryChunkEntity&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
+        <Method Name="set_NoteEntities(DbSet&lt;NoteEntity&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="28" />
+        <Method Name="set_StackFrameEntities(DbSet&lt;StackFrameEntity&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="29" />
+        <Method Name="set_TraceInfoEntities(DbSet&lt;TraceInfoEntity&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="30" />
+      </Type>
+    </Namespace>
+  </Assembly>
+  <Assembly Name="McFly.Server.Test" CoveredStatements="86" TotalStatements="103" CoveragePercent="83">
+    <Namespace Name="McFly.Server.Test.Builders" CoveredStatements="21" TotalStatements="38" CoveragePercent="55">
+      <Type Name="FrameAccessBuilder" CoveredStatements="12" TotalStatements="12" CoveragePercent="100">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="32" />
+        <Method Name="Build()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="39" />
+        <Method Name="WithSearch(IEnumerable&lt;Frame&gt;)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="51" />
+        <Method Name="WithUpsertFrames(Exception)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="44" />
+      </Type>
+      <Type Name="NoteAccessBuilder" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="8" />
+        <Method Name="Build()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="11" />
+      </Type>
+      <Type Name="ProjectAccessBuilder" CoveredStatements="5" TotalStatements="10" CoveragePercent="50">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="30" />
+        <Method Name="Build()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="48" />
+        <Method Name="get_Mock()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="30" />
+        <Method Name="set_Mock(Mock&lt;IProjectsAccess&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="30" />
+        <Method Name="WhenGetDatabases(IEnumerable&lt;String&gt;)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="38" />
+      </Type>
+      <Type Name="SearchCriterionConverterBuilder" CoveredStatements="0" TotalStatements="12" CoveragePercent="0">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Method Name=".ctor()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="10" />
+        <Method Name="Build()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="25" />
+        <Method Name="WithCanConvert(Boolean)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="13" />
+        <Method Name="WithConvert(ICriterion)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="19" />
+      </Type>
+    </Namespace>
+    <Namespace Name="McFly.Server.Test.Controllers" CoveredStatements="56" TotalStatements="56" CoveragePercent="100">
+      <Type Name="FrameController_Should" CoveredStatements="17" TotalStatements="17" CoveragePercent="100">
+        <Type Name="&lt;&gt;c__DisplayClass1_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Method Name="Return_Error_Code_If_Upsert_Fails()" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="18" />
+        <Method Name="Upsert_Frame_On_Post()" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="37" />
+      </Type>
+      <Type Name="NoteController_Should" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Method Name="Create_Note_On_Post()" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="14" />
+      </Type>
+      <Type Name="ProjectController_Should" CoveredStatements="11" TotalStatements="11" CoveragePercent="100">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Method Name="Create_Project_From_Request()" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="15" />
+        <Method Name="Get_Return_The_Available_Database_Names()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="32" />
+      </Type>
+      <Type Name="SearchController_Should" CoveredStatements="12" TotalStatements="12" CoveragePercent="100">
+        <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;Find_Matching_Frames_When_Searched&gt;b__0_0(Frame)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="42" />
+        </Type>
+        <Method Name="Find_Matching_Frames_When_Searched()" CoveredStatements="11" TotalStatements="11" CoveragePercent="100" FirstStatementLine="17" />
+      </Type>
+      <Type Name="SearchCriteriaConverterFacadeBuilder" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="10" />
+        <Method Name="Build()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="19" />
+        <Method Name="WithConvert(ICriterion)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="13" />
+      </Type>
+    </Namespace>
+    <Namespace Name="McFly.Server.Test.Search" CoveredStatements="9" TotalStatements="9" CoveragePercent="100">
+      <Type Name="RegisterCriterionConverter_Should" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+        <Method Name="Correctly_Repond_To_Conversion_Requests()" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="12" />
+      </Type>
+      <Type Name="SearchCriterionCoversionFacade_Should" CoveredStatements="5" TotalStatements="5" CoveragePercent="100">
+        <Method Name="Use_The_First_Matching_Converter()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="13" />
+      </Type>
+    </Namespace>
+  </Assembly>
+  <Assembly Name="McFly.Test" CoveredStatements="628" TotalStatements="695" CoveragePercent="90">
+    <Namespace Name="McFly.Test" CoveredStatements="449" TotalStatements="474" CoveragePercent="95">
       <Type Name="AccessBreakpoint_Should" CoveredStatements="10" TotalStatements="10" CoveragePercent="100">
         <Method Name="Exhibit_Value_Equality()" CoveredStatements="10" TotalStatements="10" CoveragePercent="100" FirstStatementLine="10" />
       </Type>
@@ -4028,6 +4425,14 @@
       <Type Name="MockFrames" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
         <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="7" />
       </Type>
+      <Type Name="MockSettingsA" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+        <Method Name="get_A()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="36" />
+        <Method Name="set_A(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="36" />
+      </Type>
+      <Type Name="MockSettingsB" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+        <Method Name="get_B()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="41" />
+        <Method Name="set_B(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="41" />
+      </Type>
       <Type Name="NoteMethod_Should" CoveredStatements="44" TotalStatements="44" CoveragePercent="100">
         <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
         <Type Name="&lt;&gt;c__DisplayClass1_0" CoveredStatements="5" TotalStatements="5" CoveragePercent="100">
@@ -4071,6 +4476,13 @@
         <Method Name="WithAddNote(Position,IEnumerable&lt;Int32&gt;,String)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="75" />
         <Method Name="WithUpsertFrames(Action)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="39" />
         <Method Name="WithUpsertFrames(IEnumerable&lt;Frame&gt;,Action)" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="51" />
+      </Type>
+      <Type Name="SettingsJsonConverter_Should" CoveredStatements="16" TotalStatements="16" CoveragePercent="100">
+        <Type Name="&lt;&gt;c__DisplayClass0_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;Not_Implement_ReadJson&gt;b__0()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="15" />
+        </Type>
+        <Method Name="Not_Implement_ReadJson()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="13" />
+        <Method Name="Write_Json_For_All_Settings()" CoveredStatements="10" TotalStatements="10" CoveragePercent="100" FirstStatementLine="21" />
       </Type>
       <Type Name="StackFacade_Should" CoveredStatements="16" TotalStatements="16" CoveragePercent="100">
         <Method Name="Get_Stack_Frames_Correctly()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="48" />
