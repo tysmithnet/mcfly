@@ -14,12 +14,15 @@ namespace McFly.Server.Data.SqlServer
         /// memoryChunkBytes = entity.Bytes.Substring(SubsectionStartIndex, SubsectionLength)
         /// </summary>
         /// <value>The start index of the subsection.</value>
+        [Column("subsection_start_index")]
         public long SubsectionStartIndex { get; set; }
 
+        [Column("subsection_length")]
         public long SubsectionLength { get; set; }
 
         [MaxLength(16)]
         [RegularExpression("^[a-fA-F0-9]+$")]
+        [Column("high_address")]
         public string HighAddress { get; set; }
 
         [Key]
@@ -29,9 +32,13 @@ namespace McFly.Server.Data.SqlServer
 
         [MaxLength(16)]
         [RegularExpression("^[a-fA-F0-9]+$")]
+        [Column("low_address")]
         public string LowAddress { get; set; }
 
+        [Column("pos_hi")]
         public int PosHi { get; set; }     // todo: index over position columns
+
+        [Column("pos_lo")]
         public int PosLo { get; set; }
     }
 }

@@ -40,8 +40,17 @@ namespace McFly.Server.Data.SqlServer
             {
                 var newMem = memoryChunk.Bytes.ToHexString();
                 var existing = context.ByteRangeEntities.FirstOrDefault(entity => entity.Bytes.Contains(newMem));
+                if (existing == null)
+                {
+                    var newByteEntity = new ByteRangeEntity()
+                    {
+                        Bytes = newMem,
+                    };
+                    context.ByteRangeEntities.Add(newByteEntity);
+                    existing = newByteEntity;
+                }
                 var index = 0;
-                if (existing != null) index = existing.Bytes.IndexOf(newMem, StringComparison.Ordinal);
+                index = existing.Bytes.IndexOf(newMem, StringComparison.Ordinal);
                 var loString = memoryChunk.MemoryRange.LowAddress.ToHexString();
                 var hiString = memoryChunk.MemoryRange.HighAddress.ToHexString();
                 var newEntity = new MemoryChunkEntity
@@ -55,7 +64,10 @@ namespace McFly.Server.Data.SqlServer
                     SubsectionStartIndex = index
                 };
                 context.MemoryChunkEntities.Add(newEntity);
+                context.SaveChanges(); // todo: error check
                 return newEntity.Id;
+
+
             }
         }
 
