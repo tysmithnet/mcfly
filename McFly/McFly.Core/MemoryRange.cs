@@ -18,7 +18,6 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace McFly.Core
 {
@@ -257,47 +256,5 @@ namespace McFly.Core
         /// </summary>
         /// <value>The debugger display.</value>
         private string DebuggerDisplay => ToString();
-    }
-
-    public class MemoryRangeJsonConverter : JsonConverter
-    {
-        /// <inheritdoc />
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            if (!(value is MemoryRange memoryRange)) return;
-            writer.WriteStartObject();
-            writer.WritePropertyName("LowAddress");
-            writer.WriteValue(memoryRange.LowAddress);
-            writer.WritePropertyName("HighAddress");
-            writer.WriteValue(memoryRange.HighAddress);
-            writer.WriteEndObject();
-        }
-
-        /// <inheritdoc />
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            if (!(existingValue is MemoryRange memoryRange)) return existingValue;
-            var jobj = JObject.Load(reader);
-            foreach (var prop in jobj)
-            {
-                switch (prop.Key)
-                {
-                    case "LowAddress":
-                        memoryRange.LowAddress = prop.Value.Value<ulong>();
-                        break;
-                    case "HighAddress":
-                        memoryRange.HighAddress = prop.Value.Value<ulong>();
-                        break;
-                }
-            }
-
-            return existingValue;
-        }
-
-        /// <inheritdoc />
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(MemoryRange);
-        }
     }
 }
