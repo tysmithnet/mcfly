@@ -35,7 +35,7 @@ namespace McFly.Server
         /// <summary>
         ///     The log
         /// </summary>
-        private readonly ILog Log = LogManager.GetLogger<Startup>();
+        private static readonly ILog Log = LogManager.GetLogger<Startup>();
 
         /// <summary>
         ///     Configurations the specified application builder.
@@ -47,7 +47,7 @@ namespace McFly.Server
             var config = new HttpConfiguration();
             var formatters = config.Formatters;
             var jsonFormatter = formatters.JsonFormatter;
-            jsonFormatter.SerializerSettings.Converters.Add(new SearchRequestJsonConverter());
+            jsonFormatter.SerializerSettings.Converters.Add(new SearchCriterionDtoJsonConverter());
             config.MapHttpAttributeRoutes();
             // todo: extract
             var mefDependencyResolver = GetDependencyResolver(config);
