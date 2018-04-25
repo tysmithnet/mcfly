@@ -18,19 +18,12 @@ using Newtonsoft.Json;
 namespace McFly.Search
 {
     /// <summary>
-    ///     Class JsonDisplayStrategy.
+    ///     Display strategy that displays the results as formatted json
     /// </summary>
     /// <seealso cref="McFly.Search.ISearchResultDisplayStrategy" />
     [Export(typeof(ISearchResultDisplayStrategy))]
     internal class JsonDisplayStrategy : ISearchResultDisplayStrategy
     {
-        /// <summary>
-        ///     Gets or sets the debug engine proxy.
-        /// </summary>
-        /// <value>The debug engine proxy.</value>
-        [Import]
-        internal IDebugEngineProxy DebugEngineProxy { get; set; }
-
         /// <summary>
         ///     Determines whether this instance can display the specified object.
         /// </summary>
@@ -52,5 +45,12 @@ namespace McFly.Search
             var json = JsonConvert.SerializeObject(obj, Formatting.Indented);
             DebugEngineProxy.WriteLine(json);
         }
+
+        /// <summary>
+        ///     Gets or sets the debug engine proxy.
+        /// </summary>
+        /// <value>The debug engine proxy.</value>
+        [Import]
+        internal IDebugEngineProxy DebugEngineProxy { get; set; }
     }
 }

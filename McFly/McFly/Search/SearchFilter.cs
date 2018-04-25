@@ -19,14 +19,16 @@ using System.Linq;
 namespace McFly.Search
 {
     /// <summary>
-    ///     Class SearchFilter. This class cannot be inherited.
+    ///     Represents a component of a search request
+    ///     <example>reg rax -eq 1 OR rbx -neq 0</example>
     /// </summary>
     /// <seealso cref="System.IEquatable{McFly.Search.SearchFilter}" />
     public sealed class SearchFilter : IEquatable<SearchFilter>
     {
         /// <summary>
-        ///     Gets or sets the command.
+        ///     Gets or sets the command to use for searching
         /// </summary>
+        /// <example>reg</example>
         /// <value>The command.</value>
         public string Command { get; set; }
 
@@ -37,7 +39,7 @@ namespace McFly.Search
         public IList<string> Args { get; set; } = new List<string>();
 
         /// <summary>
-        ///     Equalses the specified other.
+        ///     Determine if this SearchFilter is equal to another.
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>

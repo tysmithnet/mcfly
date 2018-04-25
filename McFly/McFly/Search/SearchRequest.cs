@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-25-2018
 // ***********************************************************************
 // <copyright file="SearchPlan.cs" company="">
 //     Copyright ©  2018
@@ -18,16 +18,12 @@ using System.Linq;
 namespace McFly.Search
 {
     /// <summary>
-    ///     Class SearchPlan.
+    ///     Default implementation of search request.
     /// </summary>
+    /// <seealso cref="McFly.Search.ISearchRequest" />
     /// <seealso cref="ISearchRequest" />
     public class SearchRequest : ISearchRequest
     {
-        /// <summary>
-        ///     The search filters
-        /// </summary>
-        private readonly List<SearchFilter> _searchFilters;
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="SearchRequest" /> class.
         /// </summary>
@@ -37,6 +33,20 @@ namespace McFly.Search
         {
             Index = index;
             _searchFilters = searchFilters.ToList();
+        }
+
+        /// <summary>
+        ///     The search filters
+        /// </summary>
+        private readonly List<SearchFilter> _searchFilters;
+
+        /// <summary>
+        ///     Adds a search filter.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        public void AddSearchFilter(SearchFilter filter)
+        {
+            _searchFilters.Add(filter);
         }
 
         /// <summary>
@@ -52,14 +62,5 @@ namespace McFly.Search
         /// <value>The search filters.</value>
         /// <inheritdoc />
         public IEnumerable<SearchFilter> SearchFilters => _searchFilters;
-
-        /// <summary>
-        ///     Adds the search filter.
-        /// </summary>
-        /// <param name="filter">The filter.</param>
-        public void AddSearchFilter(SearchFilter filter)
-        {
-            _searchFilters.Add(filter);
-        }
     }
 }

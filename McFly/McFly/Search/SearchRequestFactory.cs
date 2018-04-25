@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-25-2018
 // ***********************************************************************
 // <copyright file="SearchPlanFactory.cs" company="">
 //     Copyright ©  2018
@@ -19,27 +19,27 @@ using System.ComponentModel.Composition;
 namespace McFly.Search
 {
     /// <summary>
-    ///     Class SearchPlanFactory.
+    ///     Default search request implementation
+    ///     It will split the input on | and use the parts as inputs for search filters
     /// </summary>
-    /// <seealso cref="ISearchRequestFactory" />
+    /// <seealso cref="McFly.Search.ISearchRequestFactory" />
     [Export(typeof(ISearchRequestFactory))]
     internal class SearchRequestFactory : ISearchRequestFactory
     {
         /// <summary>
-        ///     Creates the specified arguments.
+        ///     Creates a search request from command line arguments
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>ISearchPlan.</returns>
         /// <exception cref="ArgumentNullException">args</exception>
         /// <exception cref="ArgumentOutOfRangeException">You must at least specify the index to use</exception>
-        /// <inheritdoc />
         public ISearchRequest Create(string[] args)
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
 
             if (args.Length == 0)
-                throw new ArgumentOutOfRangeException("You must at least specify the index to use");
+                throw new ArgumentOutOfRangeException(nameof(args), "You must at least specify the index to use");
 
             var index = args[0];
 
