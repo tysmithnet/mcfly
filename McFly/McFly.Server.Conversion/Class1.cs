@@ -1,28 +1,29 @@
 ﻿// ***********************************************************************
 // Assembly         : McFly.Core.JsonConverters
 // Author           : @tysmithnet
-// Created          : 04-24-2018
+// Created          : 04-23-2018
 //
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-24-2018
 // ***********************************************************************
-// <copyright file="PositionJsonConverter.cs" company="">
+// <copyright file="MemoryRangeJsonConverter.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 
 using System;
+using McFly.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace McFly.Core.JsonConverters
+namespace McFly.Server.Conversion
 {
     /// <summary>
-    ///     Class PositionJsonConverter.
+    ///     Class MemoryRangeJsonConverter.
     /// </summary>
-    /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Core.Position}" />
-    public class PositionJsonConverter : JsonConverter<Position>
+    /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Core.MemoryRange}" />
+    public class MemoryRangeJsonConverter : JsonConverter<MemoryRange>
     {
         /// <summary>
         ///     Reads the JSON representation of the object.
@@ -37,27 +38,28 @@ namespace McFly.Core.JsonConverters
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
         /// <inheritdoc />
-        public override Position ReadJson(JsonReader reader, Type objectType, Position existingValue,
+        public override MemoryRange ReadJson(JsonReader reader, Type objectType, MemoryRange existingValue,
             bool hasExistingValue,
             JsonSerializer serializer)
         {
             var jobj = JObject.Load(reader);
-            int? low = null;
-            int? high = null;
+            ulong? low = null;
+            ulong? high = null;
             foreach (var prop in jobj)
                 switch (prop.Key)
                 {
-                    case "Low":
-                        low = prop.Value.Value<int>();
+                    case "LowAddress":
+                        low = Convert.ToUInt64(prop.Value.ToString());
                         break;
-                    case "High":
-                        high = prop.Value.Value<int>();
+                    case "HighAddress":
+                        high = Convert.ToUInt64(prop.Value.ToString());
                         break;
                 }
 
-            if(low == null) throw new JsonSerializationException("Low must be a valid positive integer");
-            if(high == null) throw new JsonSerializationException("High must be a valid positive integer");
-            return new Position(high.Value, low.Value);
+            if (low == null) throw new JsonSerializationException("Low must be a valid ulong");
+            if (high == null) throw new JsonSerializationException("High must be a valid ulong");
+            return new MemoryRange(high.Value, low.Value);
+
         }
 
         /// <summary>
@@ -67,13 +69,13 @@ namespace McFly.Core.JsonConverters
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <inheritdoc />
-        public override void WriteJson(JsonWriter writer, Position value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, MemoryRange value, JsonSerializer serializer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("Low");
-            writer.WriteValue(value.Low);
-            writer.WritePropertyName("High");
-            writer.WriteValue(value.High);
+            writer.WritePropertyName("LowAddress");
+            writer.WriteValue(value.LowAddress);
+            writer.WritePropertyName("HighAddress");
+            writer.WriteValue(value.HighAddress);
             writer.WriteEndObject();
         }
     }

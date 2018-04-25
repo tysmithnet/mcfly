@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("McFly.Core.JsonConverters")]
+[assembly: AssemblyTitle("McFly.Server.Conversion")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("McFly.Core.JsonConverters")]
+[assembly: AssemblyProduct("McFly.Server.Conversion")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("374fa00c-cb20-4615-9fed-ffad8c11c1e7")]
+[assembly: Guid("f0e9f834-6a52-4c1c-b956-30deb6fdf11b")]
 
 // Version information for an assembly consists of the following four values:
 //
