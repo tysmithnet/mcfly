@@ -52,7 +52,7 @@
     <Compile Include="MemoryRangeJsonConverter.cs" />
     <Compile Include="PositionJsonConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchRequestConversion.cs" />
+    <Compile Include="SearchCriterionDtoJsonConverter.cs" />
     <Compile Include="SearchResultJsonWriterVisitor.cs" />
   </ItemGroup>
   <ItemGroup>

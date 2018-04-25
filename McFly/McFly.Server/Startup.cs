@@ -14,14 +14,13 @@
 
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web.Http;
 using Common.Logging;
-using McFly.Server.Headers;
 using McFly.Server.Conversion;
+using McFly.Server.Headers;
 using Owin;
 using Swashbuckle.Application;
 
@@ -48,6 +47,9 @@ namespace McFly.Server
             var formatters = config.Formatters;
             var jsonFormatter = formatters.JsonFormatter;
             jsonFormatter.SerializerSettings.Converters.Add(new SearchCriterionDtoJsonConverter());
+            jsonFormatter.SerializerSettings.Converters.Add(new MemoryRangeJsonConverter());
+            jsonFormatter.SerializerSettings.Converters.Add(new PositionJsonConverter());
+
             config.MapHttpAttributeRoutes();
             // todo: extract
             var mefDependencyResolver = GetDependencyResolver(config);
