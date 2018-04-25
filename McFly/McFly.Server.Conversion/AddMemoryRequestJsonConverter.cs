@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
-// Assembly         : McFly.Core.JsonConverters
+// Assembly         : McFly.Server.Conversion
 // Author           : @tysmithnet
 // Created          : 04-24-2018
 //
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-25-2018
 // ***********************************************************************
-// <copyright file="PositionJsonConverter.cs" company="">
+// <copyright file="AddMemoryRequestJsonConverter.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -14,16 +14,17 @@
 
 using System;
 using McFly.Core;
+using McFly.Server.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace McFly.Server.Conversion
 {
     /// <summary>
-    ///     Class PositionJsonConverter.
+    ///     Class AddMemoryRequestJsonConverter.
     /// </summary>
-    /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Core.Position}" />
-    public class PositionJsonConverter : JsonConverter<Position>
+    /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Server.Contract.AddMemoryRequeset}" />
+    public class AddMemoryRequestJsonConverter : JsonConverter<AddMemoryRequeset>
     {
         /// <summary>
         ///     Reads the JSON representation of the object.
@@ -37,33 +38,21 @@ namespace McFly.Server.Conversion
         /// <param name="hasExistingValue">The existing value has a value.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
-        /// <exception cref="JsonSerializationException">
-        ///     Low must be a valid positive integer
-        ///     or
-        ///     High must be a valid positive integer
-        /// </exception>
         /// <inheritdoc />
-        public override Position ReadJson(JsonReader reader, Type objectType, Position existingValue,
+        public override AddMemoryRequeset ReadJson(JsonReader reader, Type objectType, AddMemoryRequeset existingValue,
             bool hasExistingValue,
             JsonSerializer serializer)
         {
             var jobj = JObject.Load(reader);
-            int? low = null;
-            int? high = null;
+            MemoryChunk memoryChunk = null;
             foreach (var prop in jobj)
                 switch (prop.Key)
                 {
-                    case "Low":
-                        low = prop.Value.Value<int>();
-                        break;
-                    case "High":
-                        high = prop.Value.Value<int>();
+                    case "MemoryChunk":
+                        memoryChunk = prop.Value.ToObject<MemoryChunk>();
                         break;
                 }
-
-            if (low == null) throw new JsonSerializationException("Low must be a valid positive integer");
-            if (high == null) throw new JsonSerializationException("High must be a valid positive integer");
-            return new Position(high.Value, low.Value);
+            return new AddMemoryRequeset(memoryChunk);
         }
 
         /// <summary>
@@ -73,14 +62,9 @@ namespace McFly.Server.Conversion
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <inheritdoc />
-        public override void WriteJson(JsonWriter writer, Position value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, AddMemoryRequeset value, JsonSerializer serializer)
         {
-            writer.WriteStartObject();
-            writer.WritePropertyName("Low");
-            writer.WriteValue(value.Low);
-            writer.WritePropertyName("High");
-            writer.WriteValue(value.High);
-            writer.WriteEndObject();
+            serializer.Serialize(writer, value);
         }
     }
 }

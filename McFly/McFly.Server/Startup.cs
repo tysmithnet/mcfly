@@ -49,6 +49,8 @@ namespace McFly.Server
             jsonFormatter.SerializerSettings.Converters.Add(new SearchCriterionDtoJsonConverter());
             jsonFormatter.SerializerSettings.Converters.Add(new MemoryRangeJsonConverter());
             jsonFormatter.SerializerSettings.Converters.Add(new PositionJsonConverter());
+            jsonFormatter.SerializerSettings.Converters.Add(new MemoryChunkJsonConverter());
+            jsonFormatter.SerializerSettings.Converters.Add(new AddMemoryRequestJsonConverter());
 
             config.MapHttpAttributeRoutes();
             // todo: extract
