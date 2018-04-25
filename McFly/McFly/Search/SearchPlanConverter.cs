@@ -35,12 +35,12 @@ namespace McFly.Search
         /// <summary>
         ///     Converts the specified search plan.
         /// </summary>
-        /// <param name="searchPlan">The search plan.</param>
+        /// <param name="searchRequest">The search plan.</param>
         /// <returns>SearchCriterionDto.</returns>
         /// <inheritdoc />
-        public SearchCriterionDto Convert(ISearchPlan searchPlan)
+        public SearchCriterionDto Convert(ISearchRequest searchRequest)
         {
-            var subs = searchPlan.SearchFilters.Select(Helper).ToArray();
+            var subs = searchRequest.SearchFilters.Select(Helper).ToArray();
             if (subs.Length == 1)
                 return subs[0];
             var crit = new SearchCriterionDto

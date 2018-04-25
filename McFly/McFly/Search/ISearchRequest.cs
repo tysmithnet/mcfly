@@ -17,18 +17,19 @@ using System.Collections.Generic;
 namespace McFly.Search
 {
     /// <summary>
-    ///     Interface ISearchPlan
+    ///     Represents a request for search results from some index
     /// </summary>
-    public interface ISearchPlan
+    public interface ISearchRequest
     {
         /// <summary>
-        ///     Gets the index.
+        ///     Gets the index to search in
         /// </summary>
+        /// <example>frame</example>
         /// <value>The index.</value>
         string Index { get; }
 
         /// <summary>
-        ///     Gets the search filters.
+        ///     Gets the search filters that make up the request. 
         /// </summary>
         /// <value>The search filters.</value>
         IEnumerable<SearchFilter> SearchFilters { get; }

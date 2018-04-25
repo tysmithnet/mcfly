@@ -33,7 +33,7 @@ namespace McFly.Search
         /// <exception cref="ArgumentNullException">args</exception>
         /// <exception cref="ArgumentOutOfRangeException">You must at least specify the index to use</exception>
         /// <inheritdoc />
-        public ISearchPlan Create(string[] args)
+        public ISearchRequest Create(string[] args)
         {
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
@@ -64,7 +64,7 @@ namespace McFly.Search
                 list.Add(filter);
             }
 
-            return new SearchPlan(index, list);
+            return new SearchRequest(index, list);
         }
     }
 }

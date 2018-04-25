@@ -20,8 +20,8 @@ namespace McFly.Search
     /// <summary>
     ///     Class SearchPlan.
     /// </summary>
-    /// <seealso cref="McFly.Search.ISearchPlan" />
-    public class SearchPlan : ISearchPlan
+    /// <seealso cref="ISearchRequest" />
+    public class SearchRequest : ISearchRequest
     {
         /// <summary>
         ///     The search filters
@@ -29,11 +29,11 @@ namespace McFly.Search
         private readonly List<SearchFilter> _searchFilters;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SearchPlan" /> class.
+        ///     Initializes a new instance of the <see cref="SearchRequest" /> class.
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="searchFilters">The search filters.</param>
-        public SearchPlan(string index, IEnumerable<SearchFilter> searchFilters)
+        public SearchRequest(string index, IEnumerable<SearchFilter> searchFilters)
         {
             Index = index;
             _searchFilters = searchFilters.ToList();

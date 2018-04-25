@@ -25,6 +25,6 @@ namespace McFly.Search
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>ISearchPlan.</returns>
-        ISearchPlan Create(string[] args);
+        ISearchRequest Create(string[] args);
     }
 }

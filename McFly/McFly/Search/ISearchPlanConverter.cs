@@ -25,8 +25,8 @@ namespace McFly.Search
         /// <summary>
         ///     Converts the specified search plan.
         /// </summary>
-        /// <param name="searchPlan">The search plan.</param>
+        /// <param name="searchRequest">The search plan.</param>
         /// <returns>SearchCriterionDto.</returns>
-        SearchCriterionDto Convert(ISearchPlan searchPlan);
+        SearchCriterionDto Convert(ISearchRequest searchRequest);
     }
 }
