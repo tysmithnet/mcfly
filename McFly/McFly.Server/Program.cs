@@ -22,7 +22,6 @@ namespace McFly.Server
     /// <summary>
     ///     Entry point into the application
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class Program
     {
         /// <summary>

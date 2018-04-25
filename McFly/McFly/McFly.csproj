@@ -178,6 +178,7 @@
     <Compile Include="IBreakpoint.cs" />
     <Compile Include="IBreakpointFacade.cs" />
     <Compile Include="IDebugEngineProxy.cs" />
+    <Compile Include="IMemoryEngine.cs" />
     <Compile Include="IRegisterEngine.cs" />
     <Compile Include="IDisassemblyFacade.cs" />
     <Compile Include="IHttpFacade.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="InitMethod.cs" />
     <Compile Include="InitOptions.cs" />
     <Compile Include="ListOptions.cs" />
+    <Compile Include="MemoryEngine.cs" />
     <Compile Include="OpenOptions.cs" />
     <Compile Include="RegisterEngine.cs" />
     <Compile Include="ReloadOptions.cs" />

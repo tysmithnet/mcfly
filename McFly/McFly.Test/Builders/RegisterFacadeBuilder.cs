@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-19-2018
 // ***********************************************************************
 // <copyright file="RegisterFacadeBuilder.cs" company="">
 //     Copyright ©  2018
@@ -28,6 +28,15 @@ namespace McFly.Test.Builders
         ///     The mock
         /// </summary>
         public Mock<IRegisterFacade> Mock = new Mock<IRegisterFacade>();
+
+        /// <summary>
+        ///     Builds this instance.
+        /// </summary>
+        /// <returns>IRegisterFacade.</returns>
+        public IRegisterFacade Build()
+        {
+            return Mock.Object;
+        }
 
         /// <summary>
         ///     Withes the get current register set.
@@ -57,20 +66,17 @@ namespace McFly.Test.Builders
             return this;
         }
 
+        /// <summary>
+        ///     Withes the get current register set.
+        /// </summary>
+        /// <param name="result">The result.</param>
+        /// <returns>RegisterFacadeBuilder.</returns>
         public RegisterFacadeBuilder WithGetCurrentRegisterSet(RegisterSet result)
         {
             Mock.Setup(facade => facade.GetCurrentRegisterSet(It.IsAny<IEnumerable<Register>>())).Returns(result);
-            Mock.Setup(facade => facade.GetCurrentRegisterSet(It.IsAny<int>(), It.IsAny<IEnumerable<Register>>())).Returns(result);
+            Mock.Setup(facade => facade.GetCurrentRegisterSet(It.IsAny<int>(), It.IsAny<IEnumerable<Register>>()))
+                .Returns(result);
             return this;
-        }
-
-        /// <summary>
-        ///     Builds this instance.
-        /// </summary>
-        /// <returns>IRegisterFacade.</returns>
-        public IRegisterFacade Build()
-        {
-            return Mock.Object;
         }
     }
 }

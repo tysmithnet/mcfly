@@ -4,7 +4,7 @@
 // Created          : 03-02-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 04-19-2018
+// Last Modified On : 04-22-2018
 // ***********************************************************************
 // <copyright file="ServerClient.cs" company="">
 //     Copyright ©  2018
@@ -29,6 +29,18 @@ namespace McFly
     [Export(typeof(IServerClient))]
     public class ServerClient : IServerClient // todo: move to McFly.Server
     {
+        /// <inheritdoc />
+        public void AddMemoryRange(MemoryChunk memoryChunk)
+        {
+            var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/memory"};
+            var addMemoryRequest = new AddMemoryRequeset(memoryChunk);
+            var headers = new HttpHeaders
+            {
+                ["X-Project-Name"] = Settings.ProjectName
+            };
+            HttpFacade.PostJsonAsync(ub.Uri, addMemoryRequest, headers).GetAwaiter().GetResult();
+        }
+
         /// <summary>
         ///     Adds the note.
         /// </summary>

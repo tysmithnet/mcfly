@@ -39,22 +39,31 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets or sets the thread identifier.
+        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
         /// </summary>
-        /// <value>The thread identifier.</value>
-        public int ThreadId { get; internal set; }
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj is PositionsRecord && Equals((PositionsRecord) obj);
+        }
 
         /// <summary>
-        ///     Gets or sets the position.
+        ///     Returns a hash code for this instance.
         /// </summary>
-        /// <value>The position.</value>
-        public Position Position { get; internal set; }
-
-        /// <summary>
-        ///     Gets or sets a value indicating whether this instance is thread with break.
-        /// </summary>
-        /// <value><c>true</c> if this instance is thread with break; otherwise, <c>false</c>.</value>
-        public bool IsCurrentThread { get; internal set; }
+        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = ThreadId;
+                hashCode = (hashCode * 397) ^ Position.GetHashCode();
+                hashCode = (hashCode * 397) ^ IsCurrentThread.GetHashCode();
+                return hashCode;
+            }
+        }
 
         /// <summary>
         ///     Equalses the specified other.
@@ -68,32 +77,21 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        ///     Gets or sets a value indicating whether this instance is thread with break.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
-        [ExcludeFromCodeCoverage]
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj is PositionsRecord && Equals((PositionsRecord) obj);
-        }
+        /// <value><c>true</c> if this instance is thread with break; otherwise, <c>false</c>.</value>
+        public bool IsCurrentThread { get; internal set; }
 
         /// <summary>
-        ///     Returns a hash code for this instance.
+        ///     Gets or sets the position.
         /// </summary>
-        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
-        [ExcludeFromCodeCoverage]
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = ThreadId;
-                hashCode = (hashCode * 397) ^ Position.GetHashCode();
-                hashCode = (hashCode * 397) ^ IsCurrentThread.GetHashCode();
-                return hashCode;
-            }
-        }
+        /// <value>The position.</value>
+        public Position Position { get; internal set; }
+
+        /// <summary>
+        ///     Gets or sets the thread identifier.
+        /// </summary>
+        /// <value>The thread identifier.</value>
+        public int ThreadId { get; internal set; }
     }
 }

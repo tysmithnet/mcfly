@@ -24,7 +24,6 @@ namespace McFly.Server
     /// <summary>
     /// Represents the Swagger configuration
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class SwaggerConfig
     {
         /// <summary>

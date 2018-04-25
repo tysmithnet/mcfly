@@ -24,22 +24,10 @@ namespace McFly
     public interface ILog : IDisposable, IInjectable
     {
         /// <summary>
-        ///     Verboses the specified message.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        void Verbose(string message);
-
-        /// <summary>
         ///     Debugs the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         void Debug(string message);
-
-        /// <summary>
-        ///     Informations the specified messasge.
-        /// </summary>
-        /// <param name="messasge">The messasge.</param>
-        void Info(string messasge);
 
         /// <summary>
         ///     Errors the specified message.
@@ -64,5 +52,17 @@ namespace McFly
         /// </summary>
         /// <param name="exception">The exception.</param>
         void Fatal(Exception exception);
+
+        /// <summary>
+        ///     Informations the specified messasge.
+        /// </summary>
+        /// <param name="messasge">The messasge.</param>
+        void Info(string messasge);
+
+        /// <summary>
+        ///     Verboses the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        void Verbose(string message);
     }
 }

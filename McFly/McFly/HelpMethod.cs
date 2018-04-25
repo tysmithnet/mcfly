@@ -26,34 +26,6 @@ namespace McFly
     public class HelpMethod : IMcFlyMethod // todo: rename to command
     {
         /// <summary>
-        ///     Gets or sets the methods.
-        /// </summary>
-        /// <value>The methods.</value>
-        [ImportMany]
-        protected internal IMcFlyMethod[] Methods { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the debug engine proxy.
-        /// </summary>
-        /// <value>The debug engine proxy.</value>
-        [Import]
-        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
-
-        /// <summary>
-        ///     Gets the help information.
-        /// </summary>
-        /// <value>The help information.</value>
-        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
-            .SetName("help")
-            .SetDescription("Get help and find commands")
-            .AddSwitch("-c, --command command", "Get help on a specific command")
-            .AddSwitch("-s, --search searchterm", "Search for commands that match the given term")
-            .AddExample("!mf help", "Get listing of commands")
-            .AddExample("!mf help -c index", "Get help for the index command")
-            .AddExample("!mf help -s breakpoint", "Find commands that match \"breakpoint\"")
-            .Build();
-
-        /// <summary>
         ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
@@ -125,16 +97,6 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Determines whether [is single command] [the specified arguments].
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <returns><c>true</c> if [is single command] [the specified arguments]; otherwise, <c>false</c>.</returns>
-        private bool IsSingleCommand(string[] args)
-        {
-            return args.Length == 1 && Methods.Select(x => x.HelpInfo.Name).Contains(args[0]);
-        }
-
-        /// <summary>
         ///     Gets the command listing.
         /// </summary>
         /// <returns>System.String.</returns>
@@ -164,5 +126,43 @@ namespace McFly
         {
             return args == null || !args.Any() || args.All(string.IsNullOrWhiteSpace);
         }
+
+        /// <summary>
+        ///     Determines whether [is single command] [the specified arguments].
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns><c>true</c> if [is single command] [the specified arguments]; otherwise, <c>false</c>.</returns>
+        private bool IsSingleCommand(string[] args)
+        {
+            return args.Length == 1 && Methods.Select(x => x.HelpInfo.Name).Contains(args[0]);
+        }
+
+        /// <summary>
+        ///     Gets the help information.
+        /// </summary>
+        /// <value>The help information.</value>
+        public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
+            .SetName("help")
+            .SetDescription("Get help and find commands")
+            .AddSwitch("-c, --command command", "Get help on a specific command")
+            .AddSwitch("-s, --search searchterm", "Search for commands that match the given term")
+            .AddExample("!mf help", "Get listing of commands")
+            .AddExample("!mf help -c index", "Get help for the index command")
+            .AddExample("!mf help -s breakpoint", "Find commands that match \"breakpoint\"")
+            .Build();
+
+        /// <summary>
+        ///     Gets or sets the debug engine proxy.
+        /// </summary>
+        /// <value>The debug engine proxy.</value>
+        [Import]
+        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the methods.
+        /// </summary>
+        /// <value>The methods.</value>
+        [ImportMany]
+        protected internal IMcFlyMethod[] Methods { get; set; }
     }
 }

@@ -23,11 +23,6 @@ namespace McFly
     public class HelpInfoBuilder
     {
         /// <summary>
-        ///     The information
-        /// </summary>
-        private readonly HelpInfo _info;
-
-        /// <summary>
         ///     Initializes a new instance of the <see cref="HelpInfoBuilder" /> class.
         /// </summary>
         public HelpInfoBuilder()
@@ -39,39 +34,22 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Sets the name.
+        ///     The information
         /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns>HelpInfoBuilder.</returns>
-        public HelpInfoBuilder SetName(string name)
-        {
-            _info.Name = name;
-            return this;
-        }
+        private readonly HelpInfo _info;
 
         /// <summary>
-        ///     Sets the description.
+        ///     Adds the example.
         /// </summary>
+        /// <param name="example">The example.</param>
         /// <param name="description">The description.</param>
         /// <returns>HelpInfoBuilder.</returns>
-        public HelpInfoBuilder SetDescription(string description)
+        public HelpInfoBuilder AddExample(string example, string description)
         {
-            _info.Description = description;
-            return this;
-        }
-
-        /// <summary>
-        ///     Adds the switch.
-        /// </summary>
-        /// <param name="switch">The switch.</param>
-        /// <param name="description">The description.</param>
-        /// <returns>HelpInfoBuilder.</returns>
-        public HelpInfoBuilder AddSwitch(string @switch, string description)
-        {
-            if (!_info.Switches.ContainsKey(@switch))
-                _info.Switches.Add(@switch, description);
+            if (!_info.Examples.ContainsKey(example))
+                _info.Examples.Add(example, description);
             else
-                _info.Switches[@switch] = description;
+                _info.Examples[example] = description;
             return this;
         }
 
@@ -92,17 +70,17 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Adds the example.
+        ///     Adds the switch.
         /// </summary>
-        /// <param name="example">The example.</param>
+        /// <param name="switch">The switch.</param>
         /// <param name="description">The description.</param>
         /// <returns>HelpInfoBuilder.</returns>
-        public HelpInfoBuilder AddExample(string example, string description)
+        public HelpInfoBuilder AddSwitch(string @switch, string description)
         {
-            if (!_info.Examples.ContainsKey(example))
-                _info.Examples.Add(example, description);
+            if (!_info.Switches.ContainsKey(@switch))
+                _info.Switches.Add(@switch, description);
             else
-                _info.Examples[example] = description;
+                _info.Switches[@switch] = description;
             return this;
         }
 
@@ -113,6 +91,28 @@ namespace McFly
         public HelpInfo Build()
         {
             return new HelpInfo(_info.Name, _info.Description, _info.Switches, _info.Examples, _info.Subcommands);
+        }
+
+        /// <summary>
+        ///     Sets the description.
+        /// </summary>
+        /// <param name="description">The description.</param>
+        /// <returns>HelpInfoBuilder.</returns>
+        public HelpInfoBuilder SetDescription(string description)
+        {
+            _info.Description = description;
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets the name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>HelpInfoBuilder.</returns>
+        public HelpInfoBuilder SetName(string name)
+        {
+            _info.Name = name;
+            return this;
         }
     }
 }

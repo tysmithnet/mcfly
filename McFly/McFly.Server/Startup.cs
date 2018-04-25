@@ -14,12 +14,12 @@
 
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web.Http;
 using Common.Logging;
+using McFly.Server.Conversion;
 using McFly.Server.Headers;
 using Owin;
 using Swashbuckle.Application;
@@ -29,13 +29,12 @@ namespace McFly.Server
     /// <summary>
     ///     Represents the start up logic for the application
     /// </summary>
-    [ExcludeFromCodeCoverage]
     public class Startup
     {
         /// <summary>
         ///     The log
         /// </summary>
-        private readonly ILog Log = LogManager.GetLogger<Startup>();
+        private static readonly ILog Log = LogManager.GetLogger<Startup>();
 
         /// <summary>
         ///     Configurations the specified application builder.
@@ -47,7 +46,12 @@ namespace McFly.Server
             var config = new HttpConfiguration();
             var formatters = config.Formatters;
             var jsonFormatter = formatters.JsonFormatter;
-            jsonFormatter.SerializerSettings.Converters.Add(new SearchRequestJsonConverter());
+            jsonFormatter.SerializerSettings.Converters.Add(new SearchCriterionDtoJsonConverter());
+            jsonFormatter.SerializerSettings.Converters.Add(new MemoryRangeJsonConverter());
+            jsonFormatter.SerializerSettings.Converters.Add(new PositionJsonConverter());
+            jsonFormatter.SerializerSettings.Converters.Add(new MemoryChunkJsonConverter());
+            jsonFormatter.SerializerSettings.Converters.Add(new AddMemoryRequestJsonConverter());
+
             config.MapHttpAttributeRoutes();
             // todo: extract
             var mefDependencyResolver = GetDependencyResolver(config);

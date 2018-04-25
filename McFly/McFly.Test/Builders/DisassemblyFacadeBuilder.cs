@@ -4,7 +4,7 @@
 // Created          : 03-19-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-18-2018
 // ***********************************************************************
 // <copyright file="DisassemblyFacadeBuilder.cs" company="">
 //     Copyright ©  2018
@@ -27,6 +27,15 @@ namespace McFly.Test.Builders
         ///     The mock
         /// </summary>
         public Mock<IDisassemblyFacade> Mock = new Mock<IDisassemblyFacade>();
+
+        /// <summary>
+        ///     Builds this instance.
+        /// </summary>
+        /// <returns>IDisassemblyFacade.</returns>
+        public IDisassemblyFacade Build()
+        {
+            return Mock.Object;
+        }
 
         /// <summary>
         ///     Withes the get disassembly lines.
@@ -52,15 +61,6 @@ namespace McFly.Test.Builders
         {
             Mock.Setup(facade => facade.GetDisassemblyLines(threadId, num)).Returns(result);
             return this;
-        }
-
-        /// <summary>
-        ///     Builds this instance.
-        /// </summary>
-        /// <returns>IDisassemblyFacade.</returns>
-        public IDisassemblyFacade Build()
-        {
-            return Mock.Object;
         }
     }
 }

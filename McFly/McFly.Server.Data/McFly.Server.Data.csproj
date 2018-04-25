@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IFrameAccess.cs" />
+    <Compile Include="IMemoryAccess.cs" />
     <Compile Include="INoteAccess.cs" />
     <Compile Include="IProjectsAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

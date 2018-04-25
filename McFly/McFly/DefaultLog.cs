@@ -37,31 +37,6 @@ namespace McFly
             StreamWriter = new StreamWriter(bs);
         }
 
-        // todo: refactor this
-
-        /// <summary>
-        ///     Gets or sets the stream writer.
-        /// </summary>
-        /// <value>The stream writer.</value>
-        private StreamWriter StreamWriter { get; }
-
-        /// <summary>
-        ///     Disposes this instance.
-        /// </summary>
-        public void Dispose()
-        {
-            StreamWriter?.Dispose();
-        }
-
-        /// <summary>
-        ///     Verboses the specified message.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        public void Verbose(string message)
-        {
-            StreamWriter.WriteLine($"[v] {DateTime.Now} {message}");
-        }
-
         /// <summary>
         ///     Debugs the specified message.
         /// </summary>
@@ -72,12 +47,11 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Informations the specified message.
+        ///     Disposes this instance.
         /// </summary>
-        /// <param name="message">The message.</param>
-        public void Info(string message)
+        public void Dispose()
         {
-            StreamWriter.WriteLine($"[i] {DateTime.Now} {message}");
+            StreamWriter?.Dispose();
         }
 
         /// <summary>
@@ -123,5 +97,31 @@ namespace McFly
                 StreamWriter.WriteLine(exception.StackTrace);
             } while ((exception = exception.InnerException) != null);
         }
+
+        /// <summary>
+        ///     Informations the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public void Info(string message)
+        {
+            StreamWriter.WriteLine($"[i] {DateTime.Now} {message}");
+        }
+
+        /// <summary>
+        ///     Verboses the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public void Verbose(string message)
+        {
+            StreamWriter.WriteLine($"[v] {DateTime.Now} {message}");
+        }
+
+        // todo: refactor this
+
+        /// <summary>
+        ///     Gets or sets the stream writer.
+        /// </summary>
+        /// <value>The stream writer.</value>
+        private StreamWriter StreamWriter { get; }
     }
 }

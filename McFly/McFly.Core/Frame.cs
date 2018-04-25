@@ -23,7 +23,7 @@ namespace McFly.Core
     /// <seealso cref="System.IComparable{McFly.Core.Frame}" />
     /// <seealso cref="System.IComparable" />
     /// <seealso cref="System.IEquatable{McFly.Core.Frame}" />
-    public class Frame : IComparable<Frame>, IComparable, IEquatable<Frame>
+    public class Frame : IComparable<Frame>, IComparable, IEquatable<Frame>      // todo: this doesn't seem like a value type.. shoudl be (position, thread) == (position, thread)
     {
         /// <summary>
         ///     The thread identifier
@@ -69,12 +69,6 @@ namespace McFly.Core
         /// </summary>
         /// <value>The disassembly line.</value>
         public DisassemblyLine DisassemblyLine { get; set; } = new DisassemblyLine();
-
-        /// <summary>
-        ///     Gets or sets the notes.
-        /// </summary>
-        /// <value>The notes.</value>
-        public ICollection<Note> Notes { get; set; } = new List<Note>();
 
         /// <summary>
         ///     Compares to.

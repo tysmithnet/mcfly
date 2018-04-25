@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-22-2018
 // ***********************************************************************
 // <copyright file="StackFacade.cs" company="">
 //     Copyright ©  2018
@@ -15,28 +15,20 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Text.RegularExpressions;
 using McFly.Core;
 
 namespace McFly
 {
     /// <summary>
-    ///     Class StackFacade.
+    /// Class StackFacade.
     /// </summary>
     /// <seealso cref="McFly.IStackFacade" />
     [Export(typeof(IStackFacade))]
     public class StackFacade : IStackFacade
     {
         /// <summary>
-        ///     Gets or sets the debug eng proxy.
-        /// </summary>
-        /// <value>The debug eng proxy.</value>
-        [Import]
-        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
-
-        /// <summary>
-        ///     Gets the current stack trace.
+        /// Gets the current stack trace.
         /// </summary>
         /// <returns>StackTrace.</returns>
         public StackTrace GetCurrentStackTrace()
@@ -47,7 +39,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the current stack trace.
+        /// Gets the current stack trace.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>StackTrace.</returns>
@@ -58,7 +50,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the stack frames.
+        /// Gets the stack frames.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>IEnumerable&lt;StackFrame&gt;.</returns>
@@ -70,7 +62,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Extracts the stack frames.
+        /// Extracts the stack frames.
         /// </summary>
         /// <param name="stackTrace">The stack trace.</param>
         /// <returns>IEnumerable&lt;StackFrame&gt;.</returns>
@@ -94,7 +86,8 @@ namespace McFly
                     continue;
                 }
 
-                m = Regex.Match(line, @"^(?<sp>[a-f0-9`]+) (?<ret>[a-f0-9`]+) (?<mod>[^+]+)!(?<fun>[^\s]+)\+(?<off>[a-f0-9x]+)");
+                m = Regex.Match(line,
+                    @"^(?<sp>[a-f0-9`]+) (?<ret>[a-f0-9`]+) (?<mod>[^+]+)!(?<fun>[^\s]+)\+(?<off>[a-f0-9x]+)");
                 if (m.Success)
                 {
                     var sp = Convert.ToUInt64(m.Groups["sp"].Value.Replace("`", ""), 16);
@@ -116,10 +109,17 @@ namespace McFly
                     var off = Convert.ToUInt64(m.Groups["off"].Value.Replace("`", ""), 16);
                     var frame = new StackFrame(sp, ret, mod, null, off);
                     stackFrames.Add(frame);
-                    continue;
                 }
             }
+
             return stackFrames;
         }
+
+        /// <summary>
+        /// Gets or sets the debug eng proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
+        [Import]
+        protected internal IDebugEngineProxy DebugEngineProxy { get; set; }
     }
 }

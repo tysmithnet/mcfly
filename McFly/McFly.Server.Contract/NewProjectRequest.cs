@@ -21,7 +21,6 @@ namespace McFly.Server.Contract
     ///     Class NewProjectRequest.
     /// </summary>
     /// <seealso cref="System.IEquatable{McFly.Server.Contract.NewProjectRequest}" />
-    [ExcludeFromCodeCoverage]
     public class NewProjectRequest : IEquatable<NewProjectRequest>
     {
         /// <summary>

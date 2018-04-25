@@ -38,27 +38,6 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the module mask.
-        /// </summary>
-        /// <value>The module mask.</value>
-        public string ModuleMask { get; }
-
-        /// <summary>
-        ///     Gets the function mask.
-        /// </summary>
-        /// <value>The function mask.</value>
-        public string FunctionMask { get; }
-
-        /// <summary>
-        ///     Sets the breakpoint.
-        /// </summary>
-        /// <param name="breakpointFacade">The breakpoint facade.</param>
-        public void SetBreakpoint(IBreakpointFacade breakpointFacade)
-        {
-            breakpointFacade.SetBreakpointByMask(ModuleMask, FunctionMask);
-        }
-
-        /// <summary>
         ///     Equalses the specified other.
         /// </summary>
         /// <param name="other">The other.</param>
@@ -97,6 +76,36 @@ namespace McFly
         }
 
         /// <summary>
+        ///     Parses the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>BreakpointMask.</returns>
+        /// <exception cref="ArgumentNullException">input</exception>
+        /// <exception cref="FormatException"></exception>
+        public static BreakpointMask Parse(string input)
+        {
+            if (input == null)
+                throw new ArgumentNullException(nameof(input));
+
+            var match = Regex.Match(input, @"(?<mod>[\w\*]+)!(?<fun>[\w\*]+)");
+            if (!match.Success)
+                throw new FormatException(
+                    $"Input could not be parsed as a breakpoint mask.. should be in form mod!fun, *!fun, *!*create* but found: {input}");
+            var mod = match.Groups["mod"].Value;
+            var fun = match.Groups["fun"].Value;
+            return new BreakpointMask(mod, fun);
+        }
+
+        /// <summary>
+        ///     Sets the breakpoint.
+        /// </summary>
+        /// <param name="breakpointFacade">The breakpoint facade.</param>
+        public void SetBreakpoint(IBreakpointFacade breakpointFacade)
+        {
+            breakpointFacade.SetBreakpointByMask(ModuleMask, FunctionMask);
+        }
+
+        /// <summary>
         ///     Implements the == operator.
         /// </summary>
         /// <param name="left">The left.</param>
@@ -121,24 +130,15 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Parses the specified input.
+        ///     Gets the function mask.
         /// </summary>
-        /// <param name="input">The input.</param>
-        /// <returns>BreakpointMask.</returns>
-        /// <exception cref="ArgumentNullException">input</exception>
-        /// <exception cref="FormatException"></exception>
-        public static BreakpointMask Parse(string input)
-        {
-            if (input == null)
-                throw new ArgumentNullException(nameof(input));
+        /// <value>The function mask.</value>
+        public string FunctionMask { get; }
 
-            var match = Regex.Match(input, @"(?<mod>[\w\*]+)!(?<fun>[\w\*]+)");
-            if (!match.Success)
-                throw new FormatException(
-                    $"Input could not be parsed as a breakpoint mask.. should be in form mod!fun, *!fun, *!*create* but found: {input}");
-            var mod = match.Groups["mod"].Value;
-            var fun = match.Groups["fun"].Value;
-            return new BreakpointMask(mod, fun);
-        }
+        /// <summary>
+        ///     Gets the module mask.
+        /// </summary>
+        /// <value>The module mask.</value>
+        public string ModuleMask { get; }
     }
 }

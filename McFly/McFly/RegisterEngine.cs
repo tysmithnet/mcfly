@@ -1,4 +1,18 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tysmithnet
+// Created          : 04-17-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 04-22-2018
+// ***********************************************************************
+// <copyright file="RegisterEngine.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -8,13 +22,26 @@ using McFly.Debugger;
 
 namespace McFly
 {
+    /// <summary>
+    ///     Class RegisterEngine.
+    /// </summary>
+    /// <seealso cref="McFly.IRegisterEngine" />
     [Export(typeof(IRegisterEngine))]
     public class RegisterEngine : IRegisterEngine
-    {                                                           
+    {
+        /// <summary>
+        ///     Gets the register value.
+        /// </summary>
+        /// <param name="threadId">The thread identifier.</param>
+        /// <param name="register">The register.</param>
+        /// <param name="registers">The registers.</param>
+        /// <param name="debugEngine">The debug engine.</param>
+        /// <returns>System.Byte[].</returns>
         /// <inheritdoc />
-        public byte[] GetRegisterValue(int threadId, Register register, IDebugRegisters2 registers, IDebugEngineProxy debugEngine)
+        public byte[] GetRegisterValue(int threadId, Register register, IDebugRegisters2 registers,
+            IDebugEngineProxy debugEngine)
         {
-            int save = debugEngine.GetCurrentThreadId();
+            var save = debugEngine.GetCurrentThreadId();
             debugEngine.SwitchToThread(threadId);
             if (debugEngine.Is32Bit)
                 return GetRegisterValue32(register, registers);
@@ -22,6 +49,14 @@ namespace McFly
             return GetRegisterValue64(register, registers);
         }
 
+        /// <summary>
+        ///     Gets the register value32.
+        /// </summary>
+        /// <param name="register">The register.</param>
+        /// <param name="registers">The registers.</param>
+        /// <returns>System.Byte[].</returns>
+        /// <exception cref="System.ApplicationException">
+        /// </exception>
         private unsafe byte[] GetRegisterValue32(Register register, IDebugRegisters2 registers)
         {
             if (register == Register.Ymm0)
@@ -35,12 +70,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm0.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm0.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm1)
             {
                 var hr = registers.GetValue(Register.Ymm1.X86Index.Value.ToUInt(), out var ymm1);
@@ -52,12 +88,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm1.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm1.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm2)
             {
                 var hr = registers.GetValue(Register.Ymm2.X86Index.Value.ToUInt(), out var ymm2);
@@ -69,12 +106,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm2.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm2.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm3)
             {
                 var hr = registers.GetValue(Register.Ymm3.X86Index.Value.ToUInt(), out var ymm3);
@@ -86,12 +124,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm3.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm3.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm4)
             {
                 var hr = registers.GetValue(Register.Ymm4.X86Index.Value.ToUInt(), out var ymm4);
@@ -103,12 +142,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm4.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm4.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm5)
             {
                 var hr = registers.GetValue(Register.Ymm5.X86Index.Value.ToUInt(), out var ymm5);
@@ -120,12 +160,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm5.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm5.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm6)
             {
                 var hr = registers.GetValue(Register.Ymm6.X86Index.Value.ToUInt(), out var ymm6);
@@ -137,12 +178,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm6.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm6.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm7)
             {
                 var hr = registers.GetValue(Register.Ymm7.X86Index.Value.ToUInt(), out var ymm7);
@@ -154,27 +196,32 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm7.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm7.F128Bytes[i]);
                 return list.ToArray();
             }
-            
+
             var bytes = new List<byte>();
             var hr3 = registers.GetValue(register.X86Index.Value.ToUInt(), out var val);
             if (hr3 != 0)
                 throw new ApplicationException(
                     $"Unable to get register value for register {register.Name}, error code is {hr3}");
 
-            for (int i = 0; i < register.X86NumBits.Value; i++)
-            {
-                bytes.Add(val.F128Bytes[i]);
-            }
+            for (var i = 0; i < register.X86NumBits.Value; i++) bytes.Add(val.F128Bytes[i]);
 
-            return bytes.Take(register.NumBits / 8  + Math.Min(register.NumBits % 8, 1)).ToArray();
+            return bytes.Take(register.NumBits / 8 + Math.Min(register.NumBits % 8, 1)).ToArray();
         }
 
+        /// <summary>
+        ///     Gets the register value64.
+        /// </summary>
+        /// <param name="register">The register.</param>
+        /// <param name="registers">The registers.</param>
+        /// <returns>System.Byte[].</returns>
+        /// <exception cref="System.ApplicationException">
+        /// </exception>
         private unsafe byte[] GetRegisterValue64(Register register, IDebugRegisters2 registers)
         {
             if (register == Register.Ymm0)
@@ -188,12 +235,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm0.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm0.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm1)
             {
                 var hr = registers.GetValue(Register.Ymm1.X64Index.Value.ToUInt(), out var ymm1);
@@ -205,12 +253,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm1.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm1.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm2)
             {
                 var hr = registers.GetValue(Register.Ymm2.X64Index.Value.ToUInt(), out var ymm2);
@@ -222,12 +271,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm2.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm2.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm3)
             {
                 var hr = registers.GetValue(Register.Ymm3.X64Index.Value.ToUInt(), out var ymm3);
@@ -239,12 +289,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm3.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm3.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm4)
             {
                 var hr = registers.GetValue(Register.Ymm4.X64Index.Value.ToUInt(), out var ymm4);
@@ -256,12 +307,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm4.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm4.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm5)
             {
                 var hr = registers.GetValue(Register.Ymm5.X64Index.Value.ToUInt(), out var ymm5);
@@ -273,12 +325,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm5.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm5.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm6)
             {
                 var hr = registers.GetValue(Register.Ymm6.X64Index.Value.ToUInt(), out var ymm6);
@@ -290,12 +343,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm6.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm6.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm7)
             {
                 var hr = registers.GetValue(Register.Ymm7.X64Index.Value.ToUInt(), out var ymm7);
@@ -307,12 +361,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm7.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm7.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm8)
             {
                 var hr = registers.GetValue(Register.Ymm8.X64Index.Value.ToUInt(), out var ymm8);
@@ -324,12 +379,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm8.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm8.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm9)
             {
                 var hr = registers.GetValue(Register.Ymm9.X64Index.Value.ToUInt(), out var ymm9);
@@ -341,12 +397,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm9.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm9.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm10)
             {
                 var hr = registers.GetValue(Register.Ymm10.X64Index.Value.ToUInt(), out var ymm10);
@@ -358,12 +415,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm10.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm10.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm11)
             {
                 var hr = registers.GetValue(Register.Ymm11.X64Index.Value.ToUInt(), out var ymm11);
@@ -375,12 +433,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm11.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm11.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm12)
             {
                 var hr = registers.GetValue(Register.Ymm12.X64Index.Value.ToUInt(), out var ymm12);
@@ -392,12 +451,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm12.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm12.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm13)
             {
                 var hr = registers.GetValue(Register.Ymm13.X64Index.Value.ToUInt(), out var ymm13);
@@ -409,12 +469,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm13.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm13.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm14)
             {
                 var hr = registers.GetValue(Register.Ymm14.X64Index.Value.ToUInt(), out var ymm14);
@@ -426,12 +487,13 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm14.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm14.F128Bytes[i]);
                 return list.ToArray();
             }
+
             if (register == Register.Ymm15)
             {
                 var hr = registers.GetValue(Register.Ymm15.X64Index.Value.ToUInt(), out var ymm15);
@@ -443,9 +505,9 @@ namespace McFly
                     throw new ApplicationException(
                         $"Unable to get register value for register {register.Name}, error code is {hr2}");
                 var list = new List<byte>();
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(xmm15.F128Bytes[i]);
-                for (int i = 0; i < 16; i++)
+                for (var i = 0; i < 16; i++)
                     list.Add(ymm15.F128Bytes[i]);
                 return list.ToArray();
             }
@@ -456,11 +518,8 @@ namespace McFly
                 throw new ApplicationException(
                     $"Unable to get register value for register {register.Name}, error code is {hr3}");
 
-            for (int i = 0; i < register.X64NumBits.Value; i++)
-            {
-                bytes.Add(val.F128Bytes[i]);
-            }
-            
+            for (var i = 0; i < register.X64NumBits.Value; i++) bytes.Add(val.F128Bytes[i]);
+
             return bytes.Take(register.NumBits / 8 + Math.Min(register.NumBits % 8, 1)).ToArray();
         }
     }

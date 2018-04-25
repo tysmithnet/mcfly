@@ -67,5 +67,8 @@ namespace McFly.Server.Data.SqlServer
         /// <value>The end position lo.</value>
         [Column("end_pos_lo")]
         public int EndPosLo { get; set; }
+
+        [Column("is_x86")]
+        public bool Is32Bit { get; set; }
     }
 }

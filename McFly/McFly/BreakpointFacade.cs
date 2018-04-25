@@ -31,11 +31,12 @@ namespace McFly
         private static readonly int[] ValidDataAccessLength = {1, 2, 4, 8};
 
         /// <summary>
-        ///     Gets or sets the debug engine proxy.
+        ///     Clears the breakpoints.
         /// </summary>
-        /// <value>The debug eng proxy.</value>
-        [Import]
-        public IDebugEngineProxy DebugEngineProxy { get; set; }
+        public void ClearBreakpoints()
+        {
+            DebugEngineProxy.Execute($"bc *");
+        }
 
         /// <summary>
         ///     Sets the breakpoint by mask.
@@ -70,14 +71,6 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Clears the breakpoints.
-        /// </summary>
-        public void ClearBreakpoints()
-        {
-            DebugEngineProxy.Execute($"bc *");
-        }
-
-        /// <summary>
         ///     Validates the length of the requested data access breakpoint
         /// </summary>
         /// <param name="length">The length.</param>
@@ -88,5 +81,12 @@ namespace McFly
                 throw new ArgumentOutOfRangeException(
                     "Access breakpoints can only have lengths of 1, 2, 4, or 8 bytes");
         }
+
+        /// <summary>
+        ///     Gets or sets the debug engine proxy.
+        /// </summary>
+        /// <value>The debug eng proxy.</value>
+        [Import]
+        public IDebugEngineProxy DebugEngineProxy { get; set; }
     }
 }

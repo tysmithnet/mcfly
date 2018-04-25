@@ -25,13 +25,6 @@ namespace McFly
         /// <summary>
         ///     Initializes a new instance of the <see cref="HelpInfo" /> class.
         /// </summary>
-        internal HelpInfo()
-        {
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="HelpInfo" /> class.
-        /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="description">The description.</param>
         /// <param name="switches">The switches.</param>
@@ -53,10 +46,11 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the name.
+        ///     Initializes a new instance of the <see cref="HelpInfo" /> class.
         /// </summary>
-        /// <value>The name.</value>
-        public string Name { get; internal set; }
+        internal HelpInfo()
+        {
+        }
 
         /// <summary>
         ///     Gets the description.
@@ -65,21 +59,27 @@ namespace McFly
         public string Description { get; internal set; }
 
         /// <summary>
-        ///     Gets the switches.
-        /// </summary>
-        /// <value>The switches.</value>
-        public Dictionary<string, string> Switches { get; internal set; }
-
-        /// <summary>
         ///     Gets the examples.
         /// </summary>
         /// <value>The examples.</value>
         public Dictionary<string, string> Examples { get; internal set; }
 
         /// <summary>
+        ///     Gets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        public string Name { get; internal set; }
+
+        /// <summary>
         ///     Gets the subcommands.
         /// </summary>
         /// <value>The subcommands.</value>
         public HelpInfo[] Subcommands { get; internal set; }
+
+        /// <summary>
+        ///     Gets the switches.
+        /// </summary>
+        /// <value>The switches.</value>
+        public Dictionary<string, string> Switches { get; internal set; }
     }
 }

@@ -214,7 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
-    <Compile Include="SearchResultJsonWriterVisitor.cs" />
+    <Compile Include="Controllers\MemoryController.cs" />
     <Compile Include="Controllers\FrameController.cs" />
     <Compile Include="Search\ISearchCriterionConversionFacade.cs" />
     <Compile Include="Search\ISearchCriterionConverter.cs" />
@@ -231,7 +231,6 @@
     <Compile Include="Headers\FromProjectNameHeaderAttribute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchRequestConversion.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -247,6 +246,10 @@
     <ProjectReference Include="..\McFly.Server.Contract\McFly.Server.Contract.csproj">
       <Project>{BCFFB741-26F9-4D12-A152-04CF601D373E}</Project>
       <Name>McFly.Server.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\McFly.Server.Conversion\McFly.Server.Conversion.csproj">
+      <Project>{f0e9f834-6a52-4c1c-b956-30deb6fdf11b}</Project>
+      <Name>McFly.Server.Conversion</Name>
     </ProjectReference>
     <ProjectReference Include="..\McFly.Server.Data\McFly.Server.Data.csproj">
       <Project>{dfdec1ca-5a5c-4fc6-8c7b-11c777c396dc}</Project>
