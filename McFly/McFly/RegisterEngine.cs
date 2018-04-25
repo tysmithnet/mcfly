@@ -1,4 +1,18 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tysmithnet
+// Created          : 04-17-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 04-22-2018
+// ***********************************************************************
+// <copyright file="RegisterEngine.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -8,9 +22,21 @@ using McFly.Debugger;
 
 namespace McFly
 {
+    /// <summary>
+    ///     Class RegisterEngine.
+    /// </summary>
+    /// <seealso cref="McFly.IRegisterEngine" />
     [Export(typeof(IRegisterEngine))]
     public class RegisterEngine : IRegisterEngine
     {
+        /// <summary>
+        ///     Gets the register value.
+        /// </summary>
+        /// <param name="threadId">The thread identifier.</param>
+        /// <param name="register">The register.</param>
+        /// <param name="registers">The registers.</param>
+        /// <param name="debugEngine">The debug engine.</param>
+        /// <returns>System.Byte[].</returns>
         /// <inheritdoc />
         public byte[] GetRegisterValue(int threadId, Register register, IDebugRegisters2 registers,
             IDebugEngineProxy debugEngine)
@@ -23,6 +49,14 @@ namespace McFly
             return GetRegisterValue64(register, registers);
         }
 
+        /// <summary>
+        ///     Gets the register value32.
+        /// </summary>
+        /// <param name="register">The register.</param>
+        /// <param name="registers">The registers.</param>
+        /// <returns>System.Byte[].</returns>
+        /// <exception cref="System.ApplicationException">
+        /// </exception>
         private unsafe byte[] GetRegisterValue32(Register register, IDebugRegisters2 registers)
         {
             if (register == Register.Ymm0)
@@ -180,6 +214,14 @@ namespace McFly
             return bytes.Take(register.NumBits / 8 + Math.Min(register.NumBits % 8, 1)).ToArray();
         }
 
+        /// <summary>
+        ///     Gets the register value64.
+        /// </summary>
+        /// <param name="register">The register.</param>
+        /// <param name="registers">The registers.</param>
+        /// <returns>System.Byte[].</returns>
+        /// <exception cref="System.ApplicationException">
+        /// </exception>
         private unsafe byte[] GetRegisterValue64(Register register, IDebugRegisters2 registers)
         {
             if (register == Register.Ymm0)

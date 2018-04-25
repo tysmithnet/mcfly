@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-18-2018
 // ***********************************************************************
 // <copyright file="StackFacadeBuilder.cs" company="">
 //     Copyright ©  2018
@@ -28,6 +28,15 @@ namespace McFly.Test.Builders
         public Mock<IStackFacade> Mock = new Mock<IStackFacade>();
 
         /// <summary>
+        ///     Builds this instance.
+        /// </summary>
+        /// <returns>IStackFacade.</returns>
+        public IStackFacade Build()
+        {
+            return Mock.Object;
+        }
+
+        /// <summary>
         ///     Withes the get current stack trace.
         /// </summary>
         /// <param name="stackTrace">The stack trace.</param>
@@ -48,15 +57,6 @@ namespace McFly.Test.Builders
         {
             Mock.Setup(facade => facade.GetCurrentStackTrace(threadId)).Returns(stackTrace);
             return this;
-        }
-
-        /// <summary>
-        ///     Builds this instance.
-        /// </summary>
-        /// <returns>IStackFacade.</returns>
-        public IStackFacade Build()
-        {
-            return Mock.Object;
         }
     }
 }

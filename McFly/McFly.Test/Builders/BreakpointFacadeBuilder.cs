@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-18-2018
 // ***********************************************************************
 // <copyright file="BreakpointFacadeBuilder.cs" company="">
 //     Copyright ©  2018
@@ -25,6 +25,15 @@ namespace McFly.Test.Builders
         ///     The mock
         /// </summary>
         public Mock<IBreakpointFacade> Mock = new Mock<IBreakpointFacade>();
+
+        /// <summary>
+        ///     Builds this instance.
+        /// </summary>
+        /// <returns>IBreakpointFacade.</returns>
+        public IBreakpointFacade Build()
+        {
+            return Mock.Object;
+        }
 
         /// <summary>
         ///     Withes the set breakpoint by mask.
@@ -90,15 +99,6 @@ namespace McFly.Test.Builders
         {
             Mock.Setup(facade => facade.SetWriteAccessBreakpoint(It.IsAny<int>(), It.IsAny<ulong>()));
             return this;
-        }
-
-        /// <summary>
-        ///     Builds this instance.
-        /// </summary>
-        /// <returns>IBreakpointFacade.</returns>
-        public IBreakpointFacade Build()
-        {
-            return Mock.Object;
         }
     }
 }

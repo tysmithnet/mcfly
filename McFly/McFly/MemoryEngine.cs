@@ -1,4 +1,18 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : mcfly
+// Author           : @tysmithnet
+// Created          : 04-20-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 04-22-2018
+// ***********************************************************************
+// <copyright file="MemoryEngine.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using McFly.Core;
@@ -6,9 +20,22 @@ using McFly.Debugger;
 
 namespace McFly
 {
+    /// <summary>
+    ///     Class MemoryEngine.
+    /// </summary>
+    /// <seealso cref="McFly.IMemoryEngine" />
     [Export(typeof(IMemoryEngine))]
     public class MemoryEngine : IMemoryEngine
     {
+        /// <summary>
+        ///     Reads the memory.
+        /// </summary>
+        /// <param name="low">The low.</param>
+        /// <param name="high">The high.</param>
+        /// <param name="dataSpaces">The data spaces.</param>
+        /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
+        /// <returns>System.Byte[].</returns>
+        /// <exception cref="System.ApplicationException"></exception>
         public byte[] ReadMemory(ulong low, ulong high, IDebugDataSpaces dataSpaces, bool is32Bit)
         {
             var length = low < high ? high - low : low - high;

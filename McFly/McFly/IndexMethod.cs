@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-04-2018
+// Last Modified On : 04-22-2018
 // ***********************************************************************
 // <copyright file="IndexMethod.cs" company="">
 //     Copyright ©  2018
@@ -59,7 +59,7 @@ namespace McFly
         /// </summary>
         /// <param name="positions">The positions.</param>
         /// <param name="breakRecord">The break record.</param>
-        /// <param name="options"></param>
+        /// <param name="options">The options.</param>
         /// <returns>List&lt;Frame&gt;.</returns>
         internal List<Frame> CreateFramesForUpsert(PositionsResult positions,
             PositionsRecord breakRecord, IndexOptions options)
@@ -78,6 +78,8 @@ namespace McFly
         /// <param name="i">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
+        /// <exception cref="System.FormatException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
         internal static void ExtractAccess(string[] args, int i, string arg, IndexOptions options)
@@ -111,6 +113,8 @@ namespace McFly
         /// <param name="i">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
+        /// <exception cref="System.ArgumentException"></exception>
+        /// <exception cref="System.FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="FormatException"></exception>
         internal static void ExtractEnd(string[] args, int i, string arg, IndexOptions options)
@@ -175,6 +179,8 @@ namespace McFly
         /// <param name="i">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
+        /// <exception cref="System.FormatException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
         internal static void ExtractMasks(string[] args, int i, string arg, IndexOptions options)
@@ -208,6 +214,8 @@ namespace McFly
         /// <param name="i">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
+        /// <exception cref="System.FormatException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
         internal void ExtractMemoryRanges(string[] args, int i, string arg, IndexOptions options)
@@ -241,6 +249,8 @@ namespace McFly
         /// <param name="i">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
+        /// <exception cref="System.ArgumentException"></exception>
+        /// <exception cref="System.FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="FormatException"></exception>
         internal static void ExtractStart(string[] args, int i, string arg, IndexOptions options)
@@ -302,7 +312,7 @@ namespace McFly
         /// </summary>
         /// <param name="startingPosition">The starting position.</param>
         /// <param name="endingPosition">The ending position.</param>
-        /// <param name="options"></param>
+        /// <param name="options">The options.</param>
         internal void ProcessInternal(Position startingPosition, Position endingPosition, IndexOptions options)
         {
             SetBreakpoints(options);

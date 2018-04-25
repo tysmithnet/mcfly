@@ -4,7 +4,7 @@
 // Created          : 03-08-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-18-2018
 // ***********************************************************************
 // <copyright file="DbgEngProxyBuilder.cs" company="">
 //     Copyright ©  2018
@@ -13,7 +13,6 @@
 // ***********************************************************************
 
 using System;
-using McFly.Core;
 using McFly.Core.Registers;
 using Moq;
 
@@ -25,16 +24,6 @@ namespace McFly.Test.Builders
     internal class DebugEngineProxyBuilder
     {
         /// <summary>
-        ///     The thread identifier
-        /// </summary>
-        private int _threadId;
-
-        /// <summary>
-        ///     The mock
-        /// </summary>
-        public Mock<IDebugEngineProxy> Mock = new Mock<IDebugEngineProxy>();
-
-        /// <summary>
         ///     Initializes a new instance of the <see cref="DebugEngineProxyBuilder" /> class.
         /// </summary>
         public DebugEngineProxyBuilder()
@@ -43,24 +32,32 @@ namespace McFly.Test.Builders
         }
 
         /// <summary>
-        ///     Gets or sets the current thread identifier.
+        ///     The mock
         /// </summary>
-        /// <value>The current thread identifier.</value>
-        public int CurrentThreadId
+        public Mock<IDebugEngineProxy> Mock = new Mock<IDebugEngineProxy>();
+
+        /// <summary>
+        ///     The thread identifier
+        /// </summary>
+        private int _threadId;
+
+        /// <summary>
+        ///     Builds this instance.
+        /// </summary>
+        /// <returns>IDbgEngProxy.</returns>
+        public IDebugEngineProxy Build()
         {
-            get => Mock.Object.GetCurrentThreadId();
-            set { Mock.Setup(proxy => proxy.GetCurrentThreadId()).Returns(value); }
+            return Mock.Object;
         }
 
         /// <summary>
-        ///     Withes the execute result.
+        ///     Sets the run until break callback.
         /// </summary>
-        /// <param name="result">The result.</param>
+        /// <param name="callback">The callback.</param>
         /// <returns>DbgEngProxyBuilder.</returns>
-        public DebugEngineProxyBuilder WithExecuteResult(string result)
+        public DebugEngineProxyBuilder SetRunUntilBreakCallback(Action callback)
         {
-            Mock.Setup(proxy => proxy.Execute(It.IsAny<string>())).Returns(result);
-            Mock.Setup(proxy => proxy.Execute(It.IsAny<int>(), It.IsAny<string>())).Returns(result);
+            Mock.Setup(proxy => proxy.RunUntilBreak()).Callback(callback);
             return this;
         }
 
@@ -78,6 +75,18 @@ namespace McFly.Test.Builders
         /// <summary>
         ///     Withes the execute result.
         /// </summary>
+        /// <param name="result">The result.</param>
+        /// <returns>DbgEngProxyBuilder.</returns>
+        public DebugEngineProxyBuilder WithExecuteResult(string result)
+        {
+            Mock.Setup(proxy => proxy.Execute(It.IsAny<string>())).Returns(result);
+            Mock.Setup(proxy => proxy.Execute(It.IsAny<int>(), It.IsAny<string>())).Returns(result);
+            return this;
+        }
+
+        /// <summary>
+        ///     Withes the execute result.
+        /// </summary>
         /// <param name="command">The command.</param>
         /// <param name="result">The result.</param>
         /// <returns>DbgEngProxyBuilder.</returns>
@@ -89,22 +98,13 @@ namespace McFly.Test.Builders
         }
 
         /// <summary>
-        ///     Builds this instance.
+        ///     Withes the get register value.
         /// </summary>
-        /// <returns>IDbgEngProxy.</returns>
-        public IDebugEngineProxy Build()
+        /// <param name="bytes">The bytes.</param>
+        /// <returns>DebugEngineProxyBuilder.</returns>
+        public DebugEngineProxyBuilder WithGetRegisterValue(byte[] bytes)
         {
-            return Mock.Object;
-        }
-
-        /// <summary>
-        ///     Withes the thread identifier.
-        /// </summary>
-        /// <param name="threadId">The thread identifier.</param>
-        /// <returns>DbgEngProxyBuilder.</returns>
-        public DebugEngineProxyBuilder WithThreadId(int threadId)
-        {
-            Mock.Setup(proxy => proxy.GetCurrentThreadId()).Returns(threadId);
+            Mock.Setup(proxy => proxy.GetRegisterValue(It.IsAny<int>(), It.IsAny<Register>())).Returns(bytes);
             return this;
         }
 
@@ -119,13 +119,13 @@ namespace McFly.Test.Builders
         }
 
         /// <summary>
-        ///     Sets the run until break callback.
+        ///     Withes the thread identifier.
         /// </summary>
-        /// <param name="callback">The callback.</param>
+        /// <param name="threadId">The thread identifier.</param>
         /// <returns>DbgEngProxyBuilder.</returns>
-        public DebugEngineProxyBuilder SetRunUntilBreakCallback(Action callback)
+        public DebugEngineProxyBuilder WithThreadId(int threadId)
         {
-            Mock.Setup(proxy => proxy.RunUntilBreak()).Callback(callback);
+            Mock.Setup(proxy => proxy.GetCurrentThreadId()).Returns(threadId);
             return this;
         }
 
@@ -140,10 +140,14 @@ namespace McFly.Test.Builders
             return this;
         }
 
-        public DebugEngineProxyBuilder WithGetRegisterValue(byte[] bytes)
+        /// <summary>
+        ///     Gets or sets the current thread identifier.
+        /// </summary>
+        /// <value>The current thread identifier.</value>
+        public int CurrentThreadId
         {
-            Mock.Setup(proxy => proxy.GetRegisterValue(It.IsAny<int>(), It.IsAny<Register>())).Returns(bytes);
-            return this;
+            get => Mock.Object.GetCurrentThreadId();
+            set { Mock.Setup(proxy => proxy.GetCurrentThreadId()).Returns(value); }
         }
     }
 }

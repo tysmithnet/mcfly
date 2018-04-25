@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-18-2018
 // ***********************************************************************
 // <copyright file="HttpFacadeBuilder.cs" company="">
 //     Copyright ©  2018
@@ -31,6 +31,15 @@ namespace McFly.Test.Builders
         public Mock<IHttpFacade> Mock = new Mock<IHttpFacade>();
 
         /// <summary>
+        ///     Builds this instance.
+        /// </summary>
+        /// <returns>IHttpFacade.</returns>
+        public IHttpFacade Build()
+        {
+            return Mock.Object;
+        }
+
+        /// <summary>
         ///     Withes the post asynchronous.
         /// </summary>
         /// <param name="result">The result.</param>
@@ -54,15 +63,6 @@ namespace McFly.Test.Builders
             Mock.Setup(facade => facade.PostJsonAsync(It.IsAny<Uri>(), It.IsAny<object>(), It.IsAny<HttpHeaders>()))
                 .Returns(Task.FromResult(result));
             return this;
-        }
-
-        /// <summary>
-        ///     Builds this instance.
-        /// </summary>
-        /// <returns>IHttpFacade.</returns>
-        public IHttpFacade Build()
-        {
-            return Mock.Object;
         }
     }
 }
