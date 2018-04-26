@@ -14,6 +14,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.Configuration;
 using System.Linq;
 
 namespace McFly.Search
@@ -30,8 +31,8 @@ namespace McFly.Search
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
-        /// <exception cref="InvalidOperationException">No display strategy is registered that can handle the search results</exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ConfigurationErrorsException">No display strategy is registered that can handle the search results</exception>
+        /// <exception cref="ArgumentOutOfRangeException">When there is no matching index</exception>
         public void Process(string[] args)
         {
             var plan = Factory.Create(args);
@@ -41,7 +42,7 @@ namespace McFly.Search
                 var searchResults = ServerClient.SearchFrames(converted);
                 var first = SearchResultDisplayStrategies.FirstOrDefault(x => x.CanDisplay(searchResults));
                 if (first == null)
-                    throw new InvalidOperationException(
+                    throw new ConfigurationErrorsException(
                         "No display strategy is registered that can handle the search results");
                 first.Display(searchResults);
             }

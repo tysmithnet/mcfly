@@ -18,7 +18,7 @@ using System.Linq;
 namespace McFly
 {
     /// <summary>
-    ///     Class HelpInfoBuilder.
+    ///     Builder type that can create HelpInfo's for use by McFly methods
     /// </summary>
     public class HelpInfoBuilder
     {

@@ -20,13 +20,13 @@ using System.Threading.Tasks;
 namespace McFly
 {
     /// <summary>
-    ///     Interface IHttpFacade
+    ///     Facade over interacting with HTTP
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface IHttpFacade : IInjectable
     {
         /// <summary>
-        ///     Posts the asynchronous.
+        ///     Issues a POST request asynchronously
         /// </summary>
         /// <param name="resourceUri">The resource URI.</param>
         /// <param name="formContent">Content of the form.</param>
@@ -36,7 +36,7 @@ namespace McFly
             HttpHeaders requestHeaders);
 
         /// <summary>
-        ///     Posts the asynchronous.
+        ///     Issues a POST request asynchronously
         /// </summary>
         /// <param name="resourceUri">The resource URI.</param>
         /// <param name="content">The content.</param>
@@ -45,7 +45,7 @@ namespace McFly
         Task<HttpResponseMessage> PostAsync(Uri resourceUri, byte[] content, HttpHeaders requestHeaders);
 
         /// <summary>
-        ///     Posts the json asynchronous.
+        ///     Issues a POST request asynchronously using the provided object's JSON representation
         /// </summary>
         /// <param name="resourceUri">The resource URI.</param>
         /// <param name="content">The content.</param>

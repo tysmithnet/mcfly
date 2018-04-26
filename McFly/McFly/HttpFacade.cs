@@ -24,7 +24,7 @@ using Newtonsoft.Json;
 namespace McFly
 {
     /// <summary>
-    ///     Class HttpFacade.
+    ///     Default implementation of IHttpFacade
     /// </summary>
     /// <seealso cref="McFly.IHttpFacade" />
     /// <seealso cref="System.IDisposable" />
@@ -34,10 +34,10 @@ namespace McFly
         /// <summary>
         ///     The client
         /// </summary>
-        private readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient Client = new HttpClient();
 
         /// <summary>
-        ///     Posts the asynchronous.
+        ///     Issues a POST request asynchronously
         /// </summary>
         /// <param name="resourceUri">The resource URI.</param>
         /// <param name="formContent">Content of the form.</param>
@@ -46,15 +46,15 @@ namespace McFly
         public Task<HttpResponseMessage> PostAsync(Uri resourceUri, Dictionary<string, string> formContent,
             HttpHeaders requestHeaders)
         {
-            lock (client)
+            lock (Client)
             {
-                SetHeaders(requestHeaders, client);
-                return client.PostAsync(resourceUri, new FormUrlEncodedContent(formContent));
+                SetHeaders(requestHeaders, Client);
+                return Client.PostAsync(resourceUri, new FormUrlEncodedContent(formContent));
             }
         }
 
         /// <summary>
-        ///     Posts the asynchronous.
+        ///     Issues a POST request asynchronously
         /// </summary>
         /// <param name="resourceUri">The resource URI.</param>
         /// <param name="content">The content.</param>
@@ -62,10 +62,10 @@ namespace McFly
         /// <returns>Task&lt;HttpResponseMessage&gt;.</returns>
         public Task<HttpResponseMessage> PostAsync(Uri resourceUri, byte[] content, HttpHeaders requestHeaders)
         {
-            lock (client)
+            lock (Client)
             {
-                SetHeaders(requestHeaders, client);
-                return client.PostAsync(resourceUri, new ByteArrayContent(content));
+                SetHeaders(requestHeaders, Client);
+                return Client.PostAsync(resourceUri, new ByteArrayContent(content));
             }
         }
 
@@ -83,10 +83,10 @@ namespace McFly
             var bytes = Encoding.UTF8.GetBytes(json);
             var c = new ByteArrayContent(bytes);
             c.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            lock (client)
+            lock (Client)
             {
-                SetHeaders(requestHeaders, client);
-                return client.PostAsync(resourceUri, c); // todo: timeout 
+                SetHeaders(requestHeaders, Client);
+                return Client.PostAsync(resourceUri, c); // todo: timeout 
             }
         }
 

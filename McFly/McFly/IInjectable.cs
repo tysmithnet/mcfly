@@ -15,7 +15,7 @@
 namespace McFly
 {
     /// <summary>
-    ///     Interface IInjectable
+    ///     Identifies objects that are intended to be used in dependency injection
     /// </summary>
     public interface IInjectable
     {

@@ -4,7 +4,7 @@
 // Created          : 03-26-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-25-2018
 // ***********************************************************************
 // <copyright file="IBreakpoint.cs" company="">
 //     Copyright ©  2018
@@ -15,14 +15,14 @@
 namespace McFly
 {
     /// <summary>
-    ///     Interface IBreakpoint
+    ///     Represents a windows breakpoint set in the debugging engine
     /// </summary>
     public interface IBreakpoint
     {
         /// <summary>
         ///     Sets the breakpoint.
         /// </summary>
-        /// <param name="breakpointFacade">The breakpoint facade.</param>
+        /// <param name="breakpointFacade">The breakpoint facade to use to set the breakpoint.</param>
         void SetBreakpoint(IBreakpointFacade breakpointFacade);
     }
 }

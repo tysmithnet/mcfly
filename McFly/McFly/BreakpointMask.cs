@@ -4,7 +4,7 @@
 // Created          : 03-26-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-25-2018
 // ***********************************************************************
 // <copyright file="BreakpointMask.cs" company="">
 //     Copyright ©  2018
@@ -20,8 +20,7 @@ namespace McFly
     /// <summary>
     ///     Class BreakpointMask.
     /// </summary>
-    /// <seealso cref="System.IEquatable{McFly.BreakpointMask}" />
-    /// <seealso cref="McFly.IBreakpoint" />
+    /// <seealso cref="IBreakpoint" />
     /// <seealso cref="BreakpointMask" />
     public class BreakpointMask : IEquatable<BreakpointMask> // todo: move to mcfly
         , IBreakpoint

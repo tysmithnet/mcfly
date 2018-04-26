@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-25-2018
 // ***********************************************************************
 // <copyright file="DisassemblyFacade.cs" company="">
 //     Copyright ©  2018
@@ -44,12 +44,12 @@ namespace McFly
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="numInstructions">The number instructions.</param>
-        /// <returns>IEnumerable&lt;DisassemblyLine&gt;.</returns>
+        /// <returns>IEnumerable&lt;DisassemblyLine&gt;</returns>
         /// <exception cref="ArgumentOutOfRangeException">Number of instructions must be &gt; 0</exception>
         public IEnumerable<DisassemblyLine> GetDisassemblyLines(int threadId, int numInstructions)
         {
             if (numInstructions <= 0)
-                throw new ArgumentOutOfRangeException("Number of instructions must be > 0");
+                throw new ArgumentOutOfRangeException(nameof(numInstructions), "Number of instructions must be > 0");
             var ipRegister = DebugEngineProxy.Is32Bit ? "eip" : "rip";
             var instructionText = DebugEngineProxy.Execute(threadId, $"u {ipRegister} L{numInstructions:X}");
             var matches = Regex.Matches(instructionText,

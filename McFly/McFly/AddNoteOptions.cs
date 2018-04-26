@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-25-2018
 // ***********************************************************************
 // <copyright file="AddNoteOptions.cs" company="">
 //     Copyright ©  2018
@@ -15,7 +15,7 @@
 namespace McFly
 {
     /// <summary>
-    ///     Class AddNoteOptions.
+    ///     Options for NoteMethod add command
     /// </summary>
     internal class AddNoteOptions
     {

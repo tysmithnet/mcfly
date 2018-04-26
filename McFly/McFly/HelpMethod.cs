@@ -19,7 +19,7 @@ using System.Text;
 namespace McFly
 {
     /// <summary>
-    ///     Class HelpMethod.
+    ///     McFly method that is capable of 
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
@@ -51,7 +51,7 @@ namespace McFly
         /// </summary>
         /// <param name="command">The command.</param>
         /// <returns>System.String.</returns>
-        private string GetCommandHelp(string command) // todo: support sub command help
+        private string GetCommandHelp(string command)
         {
             var help = Methods.Single(x => x.HelpInfo.Name == command).HelpInfo;
             var sb = new StringBuilder();

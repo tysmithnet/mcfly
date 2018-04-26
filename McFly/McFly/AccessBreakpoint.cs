@@ -107,10 +107,14 @@ namespace McFly
         /// <param name="input">The input.</param>
         /// <example>r8:100</example>
         /// <example>w4:abc</example>
-        /// <example>wr4:abc</example>
+        /// <example>wr4:abc123def4567</example>
+        /// <remarks>
+        ///     You can break on both read and write accesses by using rw as the access specifier.
+        ///     The format that is expected is as follows: <code>[rw]{1,2}(1|4|8|16)[a-fA-F0-9]{8,16}</code>
+        /// </remarks>
         /// <returns>AccessBreakpoint.</returns>
         /// <exception cref="ArgumentNullException">input</exception>
-        /// <exception cref="FormatException"></exception>
+        /// <exception cref="FormatException">input</exception>
         public static AccessBreakpoint Parse(string input)
         {
             if (input == null)
@@ -170,19 +174,20 @@ namespace McFly
         public ulong Address { get; }
 
         /// <summary>
-        ///     Gets a value indicating whether this instance is read.
+        ///     Gets a value indicating whether this instance is a read breakpoint
         /// </summary>
         /// <value><c>true</c> if this instance is read; otherwise, <c>false</c>.</value>
         public bool IsRead { get; }
 
         /// <summary>
-        ///     Gets a value indicating whether this instance is write.
+        ///     Gets a value indicating whether this instance is a write breakpoint
         /// </summary>
         /// <value><c>true</c> if this instance is write; otherwise, <c>false</c>.</value>
         public bool IsWrite { get; }
 
         /// <summary>
-        ///     Gets the length.
+        ///     Gets the length of the breakpoint in bytes
+        /// <remarks>This must be a 1,2,4,8 and is it is a byte value</remarks>
         /// </summary>
         /// <value>The length.</value>
         public ushort Length { get; }

@@ -4,7 +4,7 @@
 // Created          : 03-25-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-25-2018
 // ***********************************************************************
 // <copyright file="HelpInfo.cs" company="">
 //     Copyright ©  2018
@@ -18,9 +18,13 @@ using System.Collections.Generic;
 namespace McFly
 {
     /// <summary>
-    ///     Class HelpInfo.
+    ///     All IMcFly methods must use this type to register their help text
+    /// <remarks>
+    /// Switches are things like -a -b -c --all --basic --copy. 
+    /// Subcommands are akin to git add, git commit, git push
+    /// </remarks>
     /// </summary>
-    public class HelpInfo
+    public sealed class HelpInfo
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="HelpInfo" /> class.

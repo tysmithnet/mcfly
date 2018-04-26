@@ -4,7 +4,7 @@
 // Created          : 02-25-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-25-2018
 // ***********************************************************************
 // <copyright file="ExecuteWrapper.cs" company="">
 //     Copyright ©  2018
@@ -33,6 +33,7 @@ namespace McFly
         public ExecuteWrapper(IDebugClient client)
         {
             _client = client;
+            // ReSharper disable once SuspiciousTypeConversion.Global
             _control = (IDebugControl) client;
 
             var hr = client.GetOutputCallbacks(out _old);
@@ -56,22 +57,22 @@ namespace McFly
         private readonly StringBuilder _builder = new StringBuilder();
 
         /// <summary>
-        ///     The client
+        ///     The debug client
         /// </summary>
         private readonly IDebugClient _client;
 
         /// <summary>
-        ///     The control
+        ///     The main debug control COM server
         /// </summary>
         private readonly IDebugControl _control;
 
         /// <summary>
-        ///     The disposed
+        ///     The disposed flag
         /// </summary>
         private bool _disposed; // To detect redundant calls
 
         /// <summary>
-        ///     The old
+        ///     The old debug callbacks, this is to restore old callbacks
         /// </summary>
         private readonly IDebugOutputCallbacks _old;
 
@@ -123,7 +124,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Outputs the specified mask.
+        ///     Outputs some text using the specified mask
         /// </summary>
         /// <param name="mask">The mask.</param>
         /// <param name="text">The text.</param>

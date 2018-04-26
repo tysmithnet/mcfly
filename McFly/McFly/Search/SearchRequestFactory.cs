@@ -45,6 +45,8 @@ namespace McFly.Search
 
             var list = new List<SearchFilter>();
 
+            // split the args on |
+            // each arg in the ranges becomes filter args
             for (var i = 1; i < args.Length; i++)
             {
                 var arg = args[i];

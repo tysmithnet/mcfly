@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="IDisassemblyFacade.cs" company="">
 //     Copyright ©  2018
@@ -18,20 +18,20 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    ///     Interface IDisassemblyFacade
+    ///     Facade over getting disassembly information
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface IDisassemblyFacade : IInjectable
     {
         /// <summary>
-        ///     Gets the disassembly lines.
+        ///     Gets numInstructions lines of disassembly at the current position on the current thread
         /// </summary>
         /// <param name="numInstructions">The number instructions.</param>
         /// <returns>IEnumerable&lt;DisassemblyLine&gt;.</returns>
         IEnumerable<DisassemblyLine> GetDisassemblyLines(int numInstructions);
 
         /// <summary>
-        ///     Gets the disassembly lines.
+        ///     Gets numInstructions lines of disassembly at the current position on the specified thread
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="numInstructions">The number instructions.</param>

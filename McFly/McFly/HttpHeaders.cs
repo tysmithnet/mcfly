@@ -4,7 +4,7 @@
 // Created          : 03-24-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-25-2018
 // ***********************************************************************
 // <copyright file="HttpHeaders.cs" company="">
 //     Copyright ©  2018
@@ -19,19 +19,19 @@ using System.Linq;
 namespace McFly
 {
     /// <summary>
-    ///     Class HttpHeaders.
+    ///     Collection of HTTP headers
     /// </summary>
     /// <seealso cref="string" />
-    /// <seealso cref="HttpHeaders" />
+    /// <seealso cref="System.IEquatable{McFly.HttpHeaders}" />
     /// <seealso cref="string" />
     /// <seealso cref="HttpHeaders" />
-    public class HttpHeaders : Dictionary<string, string>, IEquatable<HttpHeaders>
+    public sealed class HttpHeaders : Dictionary<string, string>, IEquatable<HttpHeaders>
     {
         /// <summary>
         ///     Equalses the specified other.
         /// </summary>
         /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if this instance equals other, <c>false</c> otherwise.</returns>
         public bool Equals(HttpHeaders other)
         {
             return Count == other.Count && !this.Except(other).Any();
