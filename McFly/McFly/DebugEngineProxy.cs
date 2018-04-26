@@ -148,7 +148,7 @@ namespace McFly
         /// <inheritdoc />
         public byte[] ReadVirtualMemory(MemoryRange memoryRange)
         {
-            return MemoryEngine.ReadMemory(memoryRange.LowAddress, memoryRange.HighAddress, Dataspaces, Is32Bit);
+            return MemoryEngine.ReadMemory(memoryRange.LowAddress, memoryRange.HighAddress, Dataspaces);
         }
 
         /// <summary>

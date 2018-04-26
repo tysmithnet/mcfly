@@ -12,13 +12,13 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.ComponentModel.Composition;
-using CommandLine;
 
 namespace McFly
 {
     /// <summary>
-    ///     Class InitMethod.
+    ///     McFly Method that will initialize a new project
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
@@ -32,13 +32,32 @@ namespace McFly
         /// <returns>Task.</returns>
         public void Process(string[] args)
         {
-            Parser.Default.ParseArguments<InitOptions>(args)
-                .WithParsed(options =>
-                {
-                    var start = TimeTravelFacade.GetStartingPosition();
-                    var end = TimeTravelFacade.GetEndingPosition();
-                    ServerClient.InitializeProject(options.ProjectName, start, end);
-                });
+            var options = ExtractOptions(args);
+            var start = TimeTravelFacade.GetStartingPosition();
+            var end = TimeTravelFacade.GetEndingPosition();
+            ServerClient.InitializeProject(options.ProjectName, start, end);
+        }
+
+        /// <summary>
+        ///     Extracts the options from the arguments
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>InitOptions.</returns>
+        /// <exception cref="ArgumentNullException">args</exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     args - InitMethod expects exactly 2 arguments, the --name switch and the
+        ///     value
+        /// </exception>
+        internal InitOptions ExtractOptions(string[] args)
+        {
+            if (args == null) throw new ArgumentNullException(nameof(args));
+            if (args.Length != 2)
+                throw new ArgumentOutOfRangeException(nameof(args),
+                    "InitMethod expects exactly 2 arguments, the --name switch and the value");
+            return new InitOptions
+            {
+                ProjectName = args[1]
+            };
         }
 
         /// <summary>

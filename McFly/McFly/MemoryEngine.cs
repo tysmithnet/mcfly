@@ -33,10 +33,9 @@ namespace McFly
         /// <param name="low">The low.</param>
         /// <param name="high">The high.</param>
         /// <param name="dataSpaces">The data spaces.</param>
-        /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
         /// <returns>System.Byte[].</returns>
         /// <exception cref="System.ApplicationException"></exception>
-        public byte[] ReadMemory(ulong low, ulong high, IDebugDataSpaces dataSpaces, bool is32Bit)
+        public byte[] ReadMemory(ulong low, ulong high, IDebugDataSpaces dataSpaces)
         {
             var length = low < high ? high - low : low - high;
             var buffer = new byte[length];

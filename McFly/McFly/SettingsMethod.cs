@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics.CodeAnalysis;
 using CommandLine;
@@ -33,20 +34,27 @@ namespace McFly
         /// <returns>Task.</returns>
         public void Process(string[] args)
         {
-            Parser.Default.ParseArguments<ReloadOptions, ListOptions, OpenOptions>(args)
-                .WithParsed<ReloadOptions>(r => { McFlyExtension.PopulateSettings(); })
-                .WithParsed<ListOptions>(l =>
-                {
+            if(args == null) throw new ArgumentNullException(nameof(args));
+            if(args.Length != 1) throw new ArgumentOutOfRangeException(nameof(args), $"SettingsMethod expects exactly 1 argument, but was given {args.Length}");
+            switch (args[0].ToLower())
+            {
+                case "list":
                     foreach (var settings in AllSettings)
                     {
                         DebugEngineProxy.WriteLine(settings.GetType().FullName);
                         DebugEngineProxy.WriteLine(JsonConvert.SerializeObject(settings, Formatting.Indented));
                     }
-                })
-                .WithParsed<OpenOptions>(o =>
-                {
+
+                    break;
+                case "reload":
+                    McFlyExtension.PopulateSettings();
+                    break;
+                case "open":
                     var p = System.Diagnostics.Process.Start(McFlyExtension.GetLogPath());
-                });
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(args), $"Settings takes 3 commands: list, reload, or open. Found {args[0]}");
+            }
         }
 
         /// <summary>

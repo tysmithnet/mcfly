@@ -17,18 +17,17 @@ using McFly.Debugger;
 namespace McFly
 {
     /// <summary>
-    ///     Interface IMemoryEngine
+    ///     Represents an objec that is capable of performing memory related actions
     /// </summary>
-    public interface IMemoryEngine
+    internal interface IMemoryEngine
     {
         /// <summary>
-        ///     Reads the memory.
+        ///     Reads virtual memory from the trace file
         /// </summary>
-        /// <param name="low">The low.</param>
-        /// <param name="high">The high.</param>
-        /// <param name="dataSpaces">The data spaces.</param>
-        /// <param name="is32Bit">if set to <c>true</c> [is32 bit].</param>
+        /// <param name="low">The low memory address of the range</param>
+        /// <param name="high">The high memory address of the range</param>
+        /// <param name="dataSpaces">The data spaces COM interface allowing access to the memory</param>
         /// <returns>System.Byte[].</returns>
-        byte[] ReadMemory(ulong low, ulong high, IDebugDataSpaces dataSpaces, bool is32Bit);
+        byte[] ReadMemory(ulong low, ulong high, IDebugDataSpaces dataSpaces);
     }
 }

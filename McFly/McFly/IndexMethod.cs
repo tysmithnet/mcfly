@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-22-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="IndexMethod.cs" company="">
 //     Copyright ©  2018
@@ -22,7 +22,7 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    ///     Class IndexMethod.
+    ///     McFly method that will persist the state of the trace at various positions
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
@@ -48,7 +48,6 @@ namespace McFly
         public void Process(string[] args)
         {
             var options = ExtractIndexOptions(args);
-            var start = GetStartingPosition(options);
             var startingPosition = GetStartingPosition(options);
             var endingPosition = GetEndingPosition(options);
             ProcessInternal(startingPosition, endingPosition, options);
@@ -72,17 +71,17 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Extracts the access.
+        ///     Extracts the access breakpoints
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <param name="i">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
-        /// <exception cref="System.FormatException"></exception>
-        /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        internal static void ExtractAccess(string[] args, int i, string arg, IndexOptions options)
+        /// <exception cref="System.FormatException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
+        internal static void ExtractAccessBreakpoints(string[] args, int i, string arg, IndexOptions options)
         {
             var accessBreakpoints = new List<AccessBreakpoint>();
             for (var j = i + 1; j < args.Length; j++)
@@ -113,10 +112,10 @@ namespace McFly
         /// <param name="i">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
-        /// <exception cref="System.ArgumentException"></exception>
-        /// <exception cref="System.FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="FormatException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
+        /// <exception cref="System.FormatException"></exception>
         internal static void ExtractEnd(string[] args, int i, string arg, IndexOptions options)
         {
             if (i + 1 >= args.Length)
@@ -162,7 +161,7 @@ namespace McFly
                         ExtractMasks(args, i, arg, options);
                         break;
                     case "--ba":
-                        ExtractAccess(args, i, arg, options);
+                        ExtractAccessBreakpoints(args, i, arg, options);
                         break;
                     case "--step":
                         break;
@@ -179,10 +178,10 @@ namespace McFly
         /// <param name="i">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
-        /// <exception cref="System.FormatException"></exception>
-        /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="System.FormatException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
         internal static void ExtractMasks(string[] args, int i, string arg, IndexOptions options)
         {
             var breakpointMasks = new List<BreakpointMask>();
@@ -214,10 +213,10 @@ namespace McFly
         /// <param name="i">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
-        /// <exception cref="System.FormatException"></exception>
-        /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="System.FormatException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
         internal void ExtractMemoryRanges(string[] args, int i, string arg, IndexOptions options)
         {
             var ranges = new List<MemoryRange>();
@@ -249,10 +248,10 @@ namespace McFly
         /// <param name="i">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
-        /// <exception cref="System.ArgumentException"></exception>
-        /// <exception cref="System.FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="FormatException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
+        /// <exception cref="System.FormatException"></exception>
         internal static void ExtractStart(string[] args, int i, string arg, IndexOptions options)
         {
             if (i + 1 >= args.Length)

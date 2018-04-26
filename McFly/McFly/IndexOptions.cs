@@ -20,14 +20,14 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    ///     Class IndexOptions.
+    ///     Options for the index method
     /// </summary>
     /// <seealso cref="IndexOptions" />
     /// <seealso cref="IndexOptions" />
-    public class IndexOptions : IEquatable<IndexOptions>
+    internal class IndexOptions : IEquatable<IndexOptions>
     {
         /// <summary>
-        ///     Equalses the specified other.
+        ///     Determines whether the specified <see cref="IndexOptions" /> is equal to this instance.
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>

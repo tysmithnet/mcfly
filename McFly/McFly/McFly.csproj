@@ -190,11 +190,8 @@
     <Compile Include="IndexMethod.cs" />
     <Compile Include="InitMethod.cs" />
     <Compile Include="InitOptions.cs" />
-    <Compile Include="ListOptions.cs" />
     <Compile Include="MemoryEngine.cs" />
-    <Compile Include="OpenOptions.cs" />
     <Compile Include="RegisterEngine.cs" />
-    <Compile Include="ReloadOptions.cs" />
     <Compile Include="IRegisterFacade.cs" />
     <Compile Include="Search\ISearchRequest.cs" />
     <Compile Include="Search\ISearchRequestConverter.cs" />

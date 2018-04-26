@@ -17,7 +17,7 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    ///     Interface ITimeTravelFacade
+    ///     Facade over changing the time travel position of the trace
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface ITimeTravelFacade : IInjectable

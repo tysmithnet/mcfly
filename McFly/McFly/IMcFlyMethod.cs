@@ -15,13 +15,13 @@
 namespace McFly
 {
     /// <summary>
-    ///     Interface IMcFlyMethod
+    ///     Interface for all McFly extension commands
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface IMcFlyMethod : IInjectable
     {
         /// <summary>
-        ///     Processes the specified arguments.
+        ///     Perform the actions of the method using the provided arguments from the client
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>

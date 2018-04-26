@@ -12,20 +12,17 @@
 // <summary></summary>
 // ***********************************************************************
 
-using CommandLine;
-
 namespace McFly
 {
     /// <summary>
-    ///     Class InitOptions.
+    ///     Options for the index method
     /// </summary>
-    public class InitOptions
+    internal class InitOptions
     {
         /// <summary>
         ///     Gets or sets the name of the project.
         /// </summary>
         /// <value>The name of the project.</value>
-        [Option('n', "name", Required = true)]
         public string ProjectName { get; set; }
     }
 }

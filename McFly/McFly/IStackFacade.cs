@@ -17,7 +17,7 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    ///     Interface IStackFacade
+    ///     Facade over getting stack traces
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     public interface IStackFacade : IInjectable
@@ -29,7 +29,7 @@ namespace McFly
         StackTrace GetCurrentStackTrace();
 
         /// <summary>
-        ///     Gets the current stack trace.
+        ///     Gets stack trace for the specified thread id
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>StackTrace.</returns>

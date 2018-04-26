@@ -14,7 +14,7 @@ namespace McFly.Test
             uint bytesRead = 100;
             mock.Setup(spaces =>
                 spaces.ReadVirtual(It.IsAny<ulong>(), It.IsAny<byte[]>(), It.IsAny<uint>(), out bytesRead));
-            var res = memEng.ReadMemory(0x100, 0, mock.Object, false);
+            var res = memEng.ReadMemory(0x100, 0, mock.Object);
             mock.Verify(spaces => spaces.ReadVirtual(0x100, It.IsAny<byte[]>(), 0x100, out bytesRead), Times.Once);
         }
     }

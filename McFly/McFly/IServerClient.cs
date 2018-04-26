@@ -19,20 +19,20 @@ using McFly.Server.Contract;
 namespace McFly
 {
     /// <summary>
-    ///     Interface IServerClient
+    ///     Interface for communicating with the remote server
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
-    public interface IServerClient : IInjectable // todo: break up into cohesive types
+    internal interface IServerClient : IInjectable // todo: break up into cohesive types
     {
         /// <summary>
-        ///     Adds a memory range to a position
+        ///     Adds a memory chunk to a position
         /// </summary>
         /// <param name="position">The position.</param>
         /// <param name="memoryChunk">The memory chunk.</param>
         void AddMemoryRange(MemoryChunk memoryChunk);
 
         /// <summary>
-        ///     Adds the note.
+        ///     Adds a note to the threads provided at the specified position
         /// </summary>
         /// <param name="position">The position.</param>
         /// <param name="threadIds">The thread ids.</param>
