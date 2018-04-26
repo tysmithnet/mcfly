@@ -19,7 +19,7 @@ using System.Text.RegularExpressions;
 namespace McFly
 {
     /// <summary>
-    ///     Class AccessBreakpoint.
+    ///     Breakpoint that occurs when a small segment of memory is accessed
     /// </summary>
     /// <seealso cref="AccessBreakpoint" />
     /// <seealso cref="McFly.IBreakpoint" />
@@ -54,15 +54,16 @@ namespace McFly
         }
 
         /// <summary>
-        ///     The valid length
+        ///     The CPU will only allow certain lengths for access breakpoints
+        ///     This is the list of valid lengths
         /// </summary>
         private static readonly uint[] _validLength = {1, 2, 4, 8};
 
         /// <summary>
-        ///     Equalses the specified other.
+        ///     Determines if this instance is equal to another
         /// </summary>
         /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if equal, <c>false</c> otherwise.</returns>
         public bool Equals(AccessBreakpoint other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -101,9 +102,12 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Parses the specified input.
+        ///     Parses a string input as an access breakpoint
         /// </summary>
         /// <param name="input">The input.</param>
+        /// <example>r8:100</example>
+        /// <example>w4:abc</example>
+        /// <example>wr4:abc</example>
         /// <returns>AccessBreakpoint.</returns>
         /// <exception cref="ArgumentNullException">input</exception>
         /// <exception cref="FormatException"></exception>
@@ -124,7 +128,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Sets the breakpoint.
+        ///     Sets the breakpoint on the breakpoint facade
         /// </summary>
         /// <param name="breakpointFacade">The breakpoint facade.</param>
         public void SetBreakpoint(IBreakpointFacade breakpointFacade)
@@ -133,15 +137,6 @@ namespace McFly
                 breakpointFacade.SetReadAccessBreakpoint(Length, Address);
             if (IsWrite)
                 breakpointFacade.SetWriteAccessBreakpoint(Length, Address);
-        }
-
-        /// <summary>
-        ///     To the command.
-        /// </summary>
-        /// <returns>System.String.</returns>
-        public string ToCommand()
-        {
-            return $"";
         }
 
         /// <summary>
@@ -169,7 +164,7 @@ namespace McFly
         }
 
         /// <summary>
-        ///     Gets the address.
+        ///     Gets the memory address this access breakpoint is for
         /// </summary>
         /// <value>The address.</value>
         public ulong Address { get; }

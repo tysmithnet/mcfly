@@ -1,22 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root CoveredStatements="9374" TotalStatements="12660" CoveragePercent="74" ReportType="NDependXML" DotCoverVersion="2017.3.5">
-  <Assembly Name="mcfly" CoveredStatements="1730" TotalStatements="2919" CoveragePercent="59">
-    <Namespace Name="McFly" CoveredStatements="1666" TotalStatements="2771" CoveragePercent="60">
-      <Type Name="AccessBreakpoint" CoveredStatements="61" TotalStatements="74" CoveragePercent="82">
-        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
+<Root CoveredStatements="9374" TotalStatements="12657" CoveragePercent="74" ReportType="NDependXML" DotCoverVersion="2017.3.5">
+  <Assembly Name="mcfly" CoveredStatements="1730" TotalStatements="2916" CoveragePercent="59">
+    <Namespace Name="McFly" CoveredStatements="1666" TotalStatements="2768" CoveragePercent="60">
+      <Type Name="AccessBreakpoint" CoveredStatements="61" TotalStatements="71" CoveragePercent="86">
+        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="60" />
         <Method Name=".ctor(UInt64,UInt16,Boolean,Boolean)" CoveredStatements="10" TotalStatements="13" CoveragePercent="77" FirstStatementLine="42" />
-        <Method Name="Equals(AccessBreakpoint)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="67" />
-        <Method Name="Equals(Object)" CoveredStatements="7" TotalStatements="9" CoveragePercent="78" FirstStatementLine="80" />
-        <Method Name="get_Address()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="175" />
-        <Method Name="get_IsRead()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="181" />
-        <Method Name="get_IsWrite()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="187" />
-        <Method Name="get_Length()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="193" />
-        <Method Name="GetHashCode()" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="92" />
-        <Method Name="op_Equality(AccessBreakpoint,AccessBreakpoint)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="154" />
-        <Method Name="op_Inequality(AccessBreakpoint,AccessBreakpoint)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="167" />
-        <Method Name="Parse(String)" CoveredStatements="11" TotalStatements="13" CoveragePercent="85" FirstStatementLine="111" />
-        <Method Name="SetBreakpoint(IBreakpointFacade)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="131" />
-        <Method Name="ToCommand()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="143" />
+        <Method Name="Equals(AccessBreakpoint)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="68" />
+        <Method Name="Equals(Object)" CoveredStatements="7" TotalStatements="9" CoveragePercent="78" FirstStatementLine="81" />
+        <Method Name="get_Address()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="170" />
+        <Method Name="get_IsRead()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="176" />
+        <Method Name="get_IsWrite()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="182" />
+        <Method Name="get_Length()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="188" />
+        <Method Name="GetHashCode()" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="93" />
+        <Method Name="op_Equality(AccessBreakpoint,AccessBreakpoint)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="149" />
+        <Method Name="op_Inequality(AccessBreakpoint,AccessBreakpoint)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="162" />
+        <Method Name="Parse(String)" CoveredStatements="11" TotalStatements="13" CoveragePercent="85" FirstStatementLine="115" />
+        <Method Name="SetBreakpoint(IBreakpointFacade)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="135" />
       </Type>
       <Type Name="AddNoteOptions" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
         <Method Name="get_IsAllThreadsAtPosition()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="26" />
@@ -422,22 +421,22 @@
     </Namespace>
     <Namespace Name="McFly.Search" CoveredStatements="64" TotalStatements="148" CoveragePercent="43">
       <Type Name="JsonDisplayStrategy" CoveredStatements="0" TotalStatements="9" CoveragePercent="0">
-        <Method Name="CanDisplay(Object)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="41" />
-        <Method Name="Display(Object)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="51" />
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="32" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="32" />
+        <Method Name="CanDisplay(Object)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="34" />
+        <Method Name="Display(Object)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="44" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="54" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="54" />
       </Type>
       <Type Name="SearchFilter" CoveredStatements="11" TotalStatements="31" CoveragePercent="35">
-        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="37" />
-        <Method Name="Equals(Object)" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="60" />
-        <Method Name="Equals(SearchFilter)" CoveredStatements="6" TotalStatements="9" CoveragePercent="67" FirstStatementLine="45" />
-        <Method Name="get_Args()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="37" />
-        <Method Name="get_Command()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="31" />
-        <Method Name="GetHashCode()" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="71" />
-        <Method Name="op_Equality(SearchFilter,SearchFilter)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="85" />
-        <Method Name="op_Inequality(SearchFilter,SearchFilter)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="96" />
-        <Method Name="set_Args(IList&lt;String&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="37" />
-        <Method Name="set_Command(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="31" />
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="39" />
+        <Method Name="Equals(Object)" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="62" />
+        <Method Name="Equals(SearchFilter)" CoveredStatements="6" TotalStatements="9" CoveragePercent="67" FirstStatementLine="47" />
+        <Method Name="get_Args()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="39" />
+        <Method Name="get_Command()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
+        <Method Name="GetHashCode()" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="73" />
+        <Method Name="op_Equality(SearchFilter,SearchFilter)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="87" />
+        <Method Name="op_Inequality(SearchFilter,SearchFilter)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="98" />
+        <Method Name="set_Args(IList&lt;String&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="39" />
+        <Method Name="set_Command(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
       </Type>
       <Type Name="SearchIndex" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
         <Type Name="_Frame" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
@@ -447,38 +446,38 @@
         <Method Name=".cctor()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="25" />
       </Type>
       <Type Name="SearchMethod" CoveredStatements="0" TotalStatements="25" CoveragePercent="0">
-        <Type Name="&lt;&gt;c__DisplayClass19_0" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
-          <Method Name="&lt;Process&gt;b__0(ISearchResultDisplayStrategy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="81" />
+        <Type Name="&lt;&gt;c__DisplayClass0_0" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <Method Name="&lt;Process&gt;b__0(ISearchResultDisplayStrategy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="42" />
         </Type>
-        <Method Name=".ctor()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="60" />
-        <Method Name="get_Converter()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="40" />
-        <Method Name="get_Factory()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
-        <Method Name="get_HelpInfo()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="60" />
-        <Method Name="get_SearchResultDisplayStrategies()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="47" />
-        <Method Name="get_ServerClient()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="54" />
-        <Method Name="Process(String[])" CoveredStatements="0" TotalStatements="14" CoveragePercent="0" FirstStatementLine="75" />
-        <Method Name="set_Converter(ISearchPlanConverter)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="40" />
-        <Method Name="set_Factory(ISearchPlanFactory)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
-        <Method Name="set_SearchResultDisplayStrategies(ISearchResultDisplayStrategy[])" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="47" />
-        <Method Name="set_ServerClient(IServerClient)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="54" />
+        <Method Name=".ctor()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="58" />
+        <Method Name="get_Converter()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="70" />
+        <Method Name="get_Factory()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="77" />
+        <Method Name="get_HelpInfo()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="58" />
+        <Method Name="get_SearchResultDisplayStrategies()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="84" />
+        <Method Name="get_ServerClient()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="91" />
+        <Method Name="Process(String[])" CoveredStatements="0" TotalStatements="14" CoveragePercent="0" FirstStatementLine="36" />
+        <Method Name="set_Converter(ISearchRequestConverter)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="70" />
+        <Method Name="set_Factory(ISearchRequestFactory)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="77" />
+        <Method Name="set_SearchResultDisplayStrategies(ISearchResultDisplayStrategy[])" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="84" />
+        <Method Name="set_ServerClient(IServerClient)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="91" />
       </Type>
-      <Type Name="SearchPlan" CoveredStatements="7" TotalStatements="10" CoveragePercent="70">
-        <Method Name=".ctor(String,IEnumerable&lt;SearchFilter&gt;)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="36" />
-        <Method Name="AddSearchFilter(SearchFilter)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="61" />
-        <Method Name="get_Index()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="47" />
-        <Method Name="get_SearchFilters()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="54" />
+      <Type Name="SearchRequest" CoveredStatements="7" TotalStatements="10" CoveragePercent="70">
+        <Method Name=".ctor(String,IEnumerable&lt;SearchFilter&gt;)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="32" />
+        <Method Name="AddSearchFilter(SearchFilter)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="48" />
+        <Method Name="get_Index()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="57" />
+        <Method Name="get_SearchFilters()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="64" />
       </Type>
-      <Type Name="SearchPlanConverter" CoveredStatements="22" TotalStatements="44" CoveragePercent="50">
+      <Type Name="SearchRequestConverter" CoveredStatements="22" TotalStatements="44" CoveragePercent="50">
         <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;ExtractWhere&gt;b__3_0(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="90" />
+          <Method Name="&lt;ExtractWhere&gt;b__4_0(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="117" />
         </Type>
-        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
-        <Method Name="Convert(ISearchPlan)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="42" />
-        <Method Name="ExtractCompound(String[],Int32,SearchCriterionDto)" CoveredStatements="0" TotalStatements="16" CoveragePercent="0" FirstStatementLine="112" />
-        <Method Name="ExtractWhere(String[],Int32)" CoveredStatements="9" TotalStatements="12" CoveragePercent="75" FirstStatementLine="83" />
-        <Method Name="Helper(SearchFilter)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="61" />
+        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="34" />
+        <Method Name="Convert(ISearchRequest)" CoveredStatements="5" TotalStatements="7" CoveragePercent="71" FirstStatementLine="43" />
+        <Method Name="ExtractCompound(String[],Int32,SearchCriterionDto)" CoveredStatements="0" TotalStatements="16" CoveragePercent="0" FirstStatementLine="64" />
+        <Method Name="ExtractCriterion(SearchFilter)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="88" />
+        <Method Name="ExtractWhere(String[],Int32)" CoveredStatements="9" TotalStatements="12" CoveragePercent="75" FirstStatementLine="110" />
       </Type>
-      <Type Name="SearchPlanFactory" CoveredStatements="24" TotalStatements="26" CoveragePercent="92">
+      <Type Name="SearchRequestFactory" CoveredStatements="24" TotalStatements="26" CoveragePercent="92">
         <Method Name="Create(String[])" CoveredStatements="24" TotalStatements="26" CoveragePercent="92" FirstStatementLine="37" />
       </Type>
     </Namespace>
