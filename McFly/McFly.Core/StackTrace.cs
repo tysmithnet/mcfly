@@ -14,7 +14,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace McFly.Core
@@ -22,7 +21,7 @@ namespace McFly.Core
     /// <summary>
     ///     Represents the state of a threads stack at an instance in time during the trace.
     /// </summary>
-    public class StackTrace
+    public sealed class StackTrace
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="StackTrace" /> class.
@@ -32,22 +31,6 @@ namespace McFly.Core
         public StackTrace(IEnumerable<StackFrame> stackFrames = null)
         {
             StackFrames = stackFrames?.ToList() ?? new List<StackFrame>();
-        }
-
-        /// <summary>
-        ///     Gets the stack frames.
-        /// </summary>
-        /// <value>The stack frames.</value>
-        public IEnumerable<StackFrame> StackFrames { get; }
-
-        /// <summary>
-        ///     Equalses the specified other.
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        protected bool Equals(StackTrace other)
-        {
-            return StackFrames.SequenceEqual(other.StackFrames);
         }
 
         /// <summary>
@@ -79,5 +62,21 @@ namespace McFly.Core
                 return hashCode;
             }
         }
+
+        /// <summary>
+        ///     Determerines if this instance is equal to another
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if this instance is equal to another, <c>false</c> otherwise.</returns>
+        protected bool Equals(StackTrace other)
+        {
+            return StackFrames.SequenceEqual(other.StackFrames);
+        }
+
+        /// <summary>
+        ///     Gets the stack frames.
+        /// </summary>
+        /// <value>The stack frames.</value>
+        public IEnumerable<StackFrame> StackFrames { get; }
     }
 }

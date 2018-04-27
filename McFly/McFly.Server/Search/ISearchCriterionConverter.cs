@@ -18,9 +18,9 @@ using McFly.Server.Data.Search;
 namespace McFly.Server.Search
 {
     /// <summary>
-    ///     Interface ISearchCriterionConverter
+    ///     Represents objects capable of convertering search dto's into search criterion
     /// </summary>
-    internal interface ISearchCriterionConverter
+    public interface ISearchCriterionConverter
     {
         /// <summary>
         ///     Determines whether this instance can convert the specified conversion type.

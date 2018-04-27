@@ -4,7 +4,7 @@
 // Created          : 03-03-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="FrameController.cs" company="McFly.Server">
 //     Copyright (c) . All rights reserved.
@@ -32,20 +32,13 @@ namespace McFly.Server.Controllers
     [Route("api/frame/")]
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class FrameController : ApiController
+    public sealed class FrameController : ApiController
     {
         /// <summary>
         ///     Gets or sets the logger.
         /// </summary>
         /// <value>The logger.</value>
-        private readonly ILog Log = LogManager.GetLogger<FrameController>();
-
-        /// <summary>
-        ///     Gets or sets the frame access.
-        /// </summary>
-        /// <value>The frame access.</value>
-        [Import]
-        protected internal IFrameAccess FrameAccess { get; set; }
+        private static readonly ILog Log = LogManager.GetLogger<FrameController>();
 
         /// <summary>
         ///     Adds frames to a project's collection
@@ -72,5 +65,12 @@ namespace McFly.Server.Controllers
 
             return Ok();
         }
+
+        /// <summary>
+        ///     Gets or sets the frame access.
+        /// </summary>
+        /// <value>The frame access.</value>
+        [Import]
+        internal IFrameAccess FrameAccess { get; set; }
     }
 }

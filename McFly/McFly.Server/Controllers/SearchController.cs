@@ -31,14 +31,14 @@ namespace McFly.Server.Controllers
     [RoutePrefix("api/search")]
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class SearchController : ApiController
+    public sealed class SearchController : ApiController
     {
         /// <summary>
         ///     Gets or sets the frame access.
         /// </summary>
         /// <value>The frame access.</value>
         [Import]
-        protected internal IFrameAccess FrameAccess { get; set; }
+        internal IFrameAccess FrameAccess { get; set; }
 
         /// <summary>
         ///     Gets or sets the conversion facade.
@@ -48,7 +48,7 @@ namespace McFly.Server.Controllers
         internal ISearchCriterionConversionFacade ConversionFacade { get; set; }
 
         /// <summary>
-        ///     Posts the specified project name.
+        ///     Searches the requested indices for results that match the query
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="index">The index.</param>
@@ -63,7 +63,7 @@ namespace McFly.Server.Controllers
             switch (index.ToLower())
             {
                 case "frame":
-                    results = SearchFrames(projectName, searchCriterionDto);
+                    results = SearchFrames(projectName, searchCriterionDto); // todo: add the others
                     break;
                 default:
                     throw new IndexOutOfRangeException($"Uncrecognized index: {index}");
@@ -73,7 +73,7 @@ namespace McFly.Server.Controllers
         }
 
         /// <summary>
-        ///     Searches the frames.
+        ///     Searches frames for the request criteria
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="searchCriterionDto">The search criterion dto.</param>
