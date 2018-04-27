@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="SearchResultJsonWriterVisitor.cs" company="">
 //     Copyright ©  2018
@@ -17,14 +17,35 @@ using McFly.Server.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace McFly.Server
+namespace McFly.Server.Conversion
 {
     /// <summary>
-    ///     Class SearchResultJsonWriterVisitor.
+    ///     Json converter for search request criterion
     /// </summary>
     /// <seealso cref="McFly.Server.Contract.ISearchRequestVisitor" />
-    internal class SearchResultJsonWriterVisitor : ISearchRequestVisitor
+    internal class SearchRequestJsonWriterVisitor : ISearchRequestVisitor
     {
+        /// <summary>
+        ///     Converts to j object.
+        /// </summary>
+        /// <param name="searchRequest">The search request.</param>
+        /// <returns>JObject.</returns>
+        public JObject ConvertToJObject(SearchCriterionDto searchRequest)
+        {
+            var o = (JObject) Visit(searchRequest);
+            return o;
+        }
+
+        /// <summary>
+        ///    Converts the search request to JSON
+        /// </summary>
+        /// <param name="searchRequest">The search request.</param>
+        /// <returns>System.String.</returns>
+        public string ConvertToJson(SearchCriterionDto searchRequest)
+        {
+            return ConvertToJObject(searchRequest).ToString(Formatting.Indented);
+        }
+
         /// <summary>
         ///     Visits the specified search criterion dto.
         /// </summary>
@@ -38,27 +59,6 @@ namespace McFly.Server
             var childObjects = searchCriterionDto.SubCriteria.Select(c => c.Accept(this)).Cast<JObject>().ToArray();
             var arr = new JArray(childObjects);
             o.Add("SubCriteria", arr);
-            return o;
-        }
-
-        /// <summary>
-        ///     Converts to json.
-        /// </summary>
-        /// <param name="searchRequest">The search request.</param>
-        /// <returns>System.String.</returns>
-        public string ConvertToJson(SearchCriterionDto searchRequest)
-        {
-            return ConvertToJObject(searchRequest).ToString(Formatting.Indented);
-        }
-
-        /// <summary>
-        ///     Converts to j object.
-        /// </summary>
-        /// <param name="searchRequest">The search request.</param>
-        /// <returns>JObject.</returns>
-        public JObject ConvertToJObject(SearchCriterionDto searchRequest)
-        {
-            var o = (JObject) Visit(searchRequest);
             return o;
         }
 

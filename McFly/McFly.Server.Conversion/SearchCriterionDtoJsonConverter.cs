@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-25-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="SearchRequestConversion.cs" company="">
 //     Copyright ©  2018
@@ -21,7 +21,7 @@ using Newtonsoft.Json.Linq;
 namespace McFly.Server.Conversion
 {
     /// <summary>
-    ///     Class SearchRequestJsonConverter.
+    ///     Json converter for <see cref="SearchCriterionDto" />
     /// </summary>
     /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Server.Contract.SearchCriterionDto}" />
     /// <seealso cref="System.Web.Http.ModelBinding.IModelBinder" />
@@ -56,7 +56,7 @@ namespace McFly.Server.Conversion
         /// <param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, SearchCriterionDto value, JsonSerializer serializer)
         {
-            var visitor = new SearchResultJsonWriterVisitor();
+            var visitor = new SearchRequestJsonWriterVisitor();
             var o = visitor.ConvertToJObject(value);
             writer.WriteToken(o.CreateReader());
         }
