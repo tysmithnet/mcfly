@@ -17,9 +17,10 @@ using System;
 namespace McFly.Core
 {
     /// <summary>
-    ///     Class Note.
+    ///     Represents a piece of information associated with a thread/position
+    ///     in the trace
     /// </summary>
-    public class Note
+    public sealed class Note
     {
         /// <summary>
         ///     Gets or sets the create date.

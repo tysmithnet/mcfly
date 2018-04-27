@@ -36,3 +36,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.1.0.0")]
 
 [assembly: InternalsVisibleTo("McFly.Test")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly0")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly1")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly3")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly4")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly5")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly6")]

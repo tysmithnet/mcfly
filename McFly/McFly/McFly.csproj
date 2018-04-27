@@ -222,7 +222,6 @@
     <Compile Include="SettingsJsonConverter.cs" />
     <Compile Include="StackFacade.cs" />
     <Compile Include="StartMethod.cs" />
-    <Compile Include="StartOptions.cs" />
     <Compile Include="TimeTravelFacade.cs" />
   </ItemGroup>
   <ItemGroup>

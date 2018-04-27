@@ -4,7 +4,7 @@
 // Created          : 03-01-2018
 //
 // Last Modified By : @tsmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="StackFrame.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -12,15 +12,12 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Diagnostics.CodeAnalysis;
-
 namespace McFly.Core
 {
-    // todo: lock down class
     /// <summary>
     ///     Represents a single stack frame in a specific threads stack at a single instant in time during the trace
     /// </summary>
-    public class StackFrame
+    public sealed class StackFrame
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="StackFrame" /> class.
@@ -37,51 +34,6 @@ namespace McFly.Core
             Module = module;
             FunctionName = functionName;
             Offset = offset;
-        }
-
-        /// <summary>
-        ///     Gets or sets the stack pointer.
-        /// </summary>
-        /// <value>The stack pointer.</value>
-        public ulong StackPointer { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the return address.
-        /// </summary>
-        /// <value>The return address.</value>
-        public ulong? ReturnAddress { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the module.
-        /// </summary>
-        /// <value>The module.</value>
-        public string Module { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the name of the function.
-        /// </summary>
-        /// <value>The name of the function.</value>
-        public string FunctionName { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the offset.
-        /// </summary>
-        /// <value>The offset.</value>
-        public ulong? Offset { get; set; }
-
-        /// <summary>
-        ///     Is this instance equal to another stack frame
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if both are equal, <c>false</c> otherwise.</returns>
-        protected bool Equals(StackFrame other)
-        {
-            var sp = StackPointer == other.StackPointer;
-            var ret = ReturnAddress == other.ReturnAddress;
-            var mod = string.Equals(Module, other.Module);
-            var fun = string.Equals(FunctionName, other.FunctionName);
-            var off = Offset == other.Offset;
-            return sp && ret && mod && fun && off;
         }
 
         /// <summary>
@@ -113,5 +65,50 @@ namespace McFly.Core
                 return hashCode;
             }
         }
+
+        /// <summary>
+        ///     Is this instance equal to another stack frame
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if both are equal, <c>false</c> otherwise.</returns>
+        protected bool Equals(StackFrame other)
+        {
+            var sp = StackPointer == other.StackPointer;
+            var ret = ReturnAddress == other.ReturnAddress;
+            var mod = string.Equals(Module, other.Module);
+            var fun = string.Equals(FunctionName, other.FunctionName);
+            var off = Offset == other.Offset;
+            return sp && ret && mod && fun && off;
+        }
+
+        /// <summary>
+        ///     Gets or sets the name of the function.
+        /// </summary>
+        /// <value>The name of the function.</value>
+        public string FunctionName { get; internal set; }
+
+        /// <summary>
+        ///     Gets or sets the module.
+        /// </summary>
+        /// <value>The module.</value>
+        public string Module { get; internal set; }
+
+        /// <summary>
+        ///     Gets or sets the offset.
+        /// </summary>
+        /// <value>The offset.</value>
+        public ulong? Offset { get; internal set; }
+
+        /// <summary>
+        ///     Gets or sets the return address.
+        /// </summary>
+        /// <value>The return address.</value>
+        public ulong? ReturnAddress { get; internal set; }
+
+        /// <summary>
+        ///     Gets or sets the stack pointer.
+        /// </summary>
+        /// <value>The stack pointer.</value>
+        public ulong StackPointer { get; internal set; }
     }
 }

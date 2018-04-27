@@ -20,9 +20,9 @@ using System.Text.RegularExpressions;
 namespace McFly.Core
 {
     /// <summary>
-    ///     Builder object for byte arrays
+    ///     Builder of byte arrays
     /// </summary>
-    public class ByteArrayBuilder
+    public sealed class ByteArrayBuilder
     {
         /// <summary>
         ///     The bytes

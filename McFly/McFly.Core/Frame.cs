@@ -19,56 +19,20 @@ namespace McFly.Core
 {
     /// <summary>
     ///     Represents an instance in time for a thread in the trace file
+    ///     Imagine you took a time slice of the process at an exact moment of time
+    ///     and you will understand what this class represents
     /// </summary>
     /// <seealso cref="System.IComparable{McFly.Core.Frame}" />
     /// <seealso cref="System.IComparable" />
     /// <seealso cref="System.IEquatable{McFly.Core.Frame}" />
-    public class Frame : IComparable<Frame>, IComparable, IEquatable<Frame>      // todo: this doesn't seem like a value type.. shoudl be (position, thread) == (position, thread)
+    public class
+        Frame : IComparable<Frame>, IComparable,
+            IEquatable<Frame> // todo: this doesn't seem like a value type.. shoudl be (position, thread) == (position, thread)
     {
         /// <summary>
         ///     The thread identifier
         /// </summary>
         private int _threadId;
-
-        /// <summary>
-        ///     Gets or sets the position for this frame in the context of the trace
-        /// </summary>
-        /// <value>The position.</value>
-        public Position Position { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the thread identifier.
-        /// </summary>
-        /// <value>The thread identifier.</value>
-        /// <exception cref="ArgumentOutOfRangeException">value</exception>
-        public int ThreadId
-        {
-            get => _threadId;
-            set
-            {
-                if (value < 0)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
-                _threadId = value;
-            }
-        }
-
-        /// <summary>
-        ///     Gets or sets the register set.
-        /// </summary>
-        /// <value>The register set.</value>
-        public RegisterSet RegisterSet { get; set; } = new RegisterSet();
-
-        /// <summary>
-        ///     Gets or sets the stack trace.
-        /// </summary>
-        /// <value>The stack trace.</value>
-        public StackTrace StackTrace { get; set; } = new StackTrace();
-
-        /// <summary>
-        ///     Gets or sets the disassembly line.
-        /// </summary>
-        /// <value>The disassembly line.</value>
-        public DisassemblyLine DisassemblyLine { get; set; } = new DisassemblyLine();
 
         /// <summary>
         ///     Compares to.
@@ -110,50 +74,6 @@ namespace McFly.Core
             return _threadId == other._threadId && Equals(Position, other.Position) &&
                    Equals(RegisterSet, other.RegisterSet) && Equals(StackTrace, other.StackTrace) &&
                    Equals(DisassemblyLine, other.DisassemblyLine);
-        }
-
-        /// <summary>
-        ///     Implements the &lt; operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator <(Frame left, Frame right)
-        {
-            return Comparer<Frame>.Default.Compare(left, right) < 0;
-        }
-
-        /// <summary>
-        ///     Implements the &gt; operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator >(Frame left, Frame right)
-        {
-            return Comparer<Frame>.Default.Compare(left, right) > 0;
-        }
-
-        /// <summary>
-        ///     Implements the &lt;= operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator <=(Frame left, Frame right)
-        {
-            return Comparer<Frame>.Default.Compare(left, right) <= 0;
-        }
-
-        /// <summary>
-        ///     Implements the &gt;= operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator >=(Frame left, Frame right)
-        {
-            return Comparer<Frame>.Default.Compare(left, right) >= 0;
         }
 
         /// <summary>
@@ -200,6 +120,28 @@ namespace McFly.Core
         }
 
         /// <summary>
+        ///     Implements the &gt; operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator >(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) > 0;
+        }
+
+        /// <summary>
+        ///     Implements the &gt;= operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator >=(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) >= 0;
+        }
+
+        /// <summary>
         ///     Implements the != operator.
         /// </summary>
         /// <param name="left">The left.</param>
@@ -208,6 +150,68 @@ namespace McFly.Core
         public static bool operator !=(Frame left, Frame right)
         {
             return !Equals(left, right);
+        }
+
+        /// <summary>
+        ///     Implements the &lt; operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator <(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) < 0;
+        }
+
+        /// <summary>
+        ///     Implements the &lt;= operator.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <returns>The result of the operator.</returns>
+        public static bool operator <=(Frame left, Frame right)
+        {
+            return Comparer<Frame>.Default.Compare(left, right) <= 0;
+        }
+
+        /// <summary>
+        ///     Gets or sets the disassembly line.
+        /// </summary>
+        /// <value>The disassembly line.</value>
+        public DisassemblyLine DisassemblyLine { get; set; } = new DisassemblyLine();
+
+        /// <summary>
+        ///     Gets or sets the position for this frame in the context of the trace
+        /// </summary>
+        /// <value>The position.</value>
+        public Position Position { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the register set.
+        /// </summary>
+        /// <value>The register set.</value>
+        public RegisterSet RegisterSet { get; set; } = new RegisterSet();
+
+        /// <summary>
+        ///     Gets or sets the stack trace.
+        /// </summary>
+        /// <value>The stack trace.</value>
+        public StackTrace StackTrace { get; set; } = new StackTrace();
+
+        /// <summary>
+        ///     Gets or sets the thread identifier.
+        /// </summary>
+        /// <value>The thread identifier.</value>
+        /// <exception cref="ArgumentOutOfRangeException">value</exception>
+        public int ThreadId
+        {
+            get => _threadId;
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException($"{nameof(value)} must be at least 0");
+                _threadId = value;
+            }
         }
     }
 }
