@@ -41,40 +41,4 @@ namespace McFly.Server.Contract
             return visitor.Visit(this);
         }
     }
-
-    /// <summary>
-    ///     Class TerminalSearchCriterionDto.
-    /// </summary>
-    /// <seealso cref="McFly.Server.Contract.SearchCriterionDto" />
-    public class TerminalSearchCriterionDto : SearchCriterionDto
-    {
-        /// <summary>
-        ///     Gets or sets the arguments.
-        /// </summary>
-        /// <value>The arguments.</value>
-        public string[] Args { get; set; }
-
-        /// <summary>
-        ///     Accepts the specified visitor.
-        /// </summary>
-        /// <param name="visitor">The visitor.</param>
-        /// <returns>System.Object.</returns>
-        public override object Accept(ISearchRequestVisitor visitor)
-        {
-            return visitor.Visit(this);
-        }
-    }
-
-    /// <summary>
-    ///     Interface ISearchRequestVisitor
-    /// </summary>
-    public interface ISearchRequestVisitor
-    {
-        /// <summary>
-        ///     Visits the specified search criterion dto.
-        /// </summary>
-        /// <param name="searchCriterionDto">The search criterion dto.</param>
-        /// <returns>System.Object.</returns>
-        object Visit(SearchCriterionDto searchCriterionDto);
-    }
 }

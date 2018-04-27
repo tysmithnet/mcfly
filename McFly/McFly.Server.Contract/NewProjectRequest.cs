@@ -21,7 +21,7 @@ namespace McFly.Server.Contract
     ///     Class NewProjectRequest.
     /// </summary>
     /// <seealso cref="System.IEquatable{McFly.Server.Contract.NewProjectRequest}" />
-    public class NewProjectRequest : IEquatable<NewProjectRequest>
+    public sealed class NewProjectRequest : IEquatable<NewProjectRequest>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="NewProjectRequest" /> class.

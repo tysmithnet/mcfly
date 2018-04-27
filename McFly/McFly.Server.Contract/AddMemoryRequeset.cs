@@ -20,7 +20,7 @@ namespace McFly.Server.Contract
     /// <summary>
     ///     Request DTO for adding memory ranges
     /// </summary>
-    public class AddMemoryRequeset
+    public sealed class AddMemoryRequeset
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="AddMemoryRequeset" /> class.

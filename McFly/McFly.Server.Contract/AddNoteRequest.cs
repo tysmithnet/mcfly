@@ -23,7 +23,7 @@ namespace McFly.Server.Contract
     ///     Class AddNoteRequest.
     /// </summary>
     /// <seealso cref="System.IEquatable{McFly.Server.Contract.AddNoteRequest}" />
-    public class AddNoteRequest : IEquatable<AddNoteRequest>
+    public sealed class AddNoteRequest : IEquatable<AddNoteRequest>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="AddNoteRequest" /> class.
