@@ -21,14 +21,14 @@ using McFly.Core;
 namespace McFly
 {
     /// <summary>
-    /// Class StackFacade.
+    ///     Default implementation of <see cref="IStackFacade" />
     /// </summary>
     /// <seealso cref="McFly.IStackFacade" />
     [Export(typeof(IStackFacade))]
     public class StackFacade : IStackFacade
     {
         /// <summary>
-        /// Gets the current stack trace.
+        ///     Gets the current stack trace.
         /// </summary>
         /// <returns>StackTrace.</returns>
         public StackTrace GetCurrentStackTrace()
@@ -39,7 +39,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the current stack trace.
+        ///     Gets the current stack trace.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>StackTrace.</returns>
@@ -50,7 +50,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the stack frames.
+        ///     Gets the stack frames.
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <returns>IEnumerable&lt;StackFrame&gt;.</returns>
@@ -62,7 +62,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Extracts the stack frames.
+        ///     Extracts the stack frames.
         /// </summary>
         /// <param name="stackTrace">The stack trace.</param>
         /// <returns>IEnumerable&lt;StackFrame&gt;.</returns>
@@ -116,7 +116,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets or sets the debug eng proxy.
+        ///     Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]

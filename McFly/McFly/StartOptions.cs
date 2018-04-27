@@ -15,7 +15,7 @@
 namespace McFly
 {
     /// <summary>
-    /// Class StartOptions.
+    ///     Options for the start method
     /// </summary>
     public class StartOptions
     {

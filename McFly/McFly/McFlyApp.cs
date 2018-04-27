@@ -13,12 +13,11 @@
 // ***********************************************************************
 
 using System.ComponentModel.Composition;
-using System.Diagnostics.CodeAnalysis;
 
 namespace McFly
 {
     /// <summary>
-    ///     Class McFlyApp.
+    ///     The root of all client side functionality
     /// </summary>
     /// <seealso cref="McFly.IInjectable" />
     [Export]

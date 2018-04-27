@@ -14,20 +14,19 @@
 
 using System.ComponentModel.Composition;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace McFly
 {
     /// <summary>
-    /// Class StartMethod.
+    ///     Method for starting the server application
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
     public class StartMethod : IMcFlyMethod
     {
         /// <summary>
-        /// Processes the specified arguments.
+        ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
@@ -56,7 +55,7 @@ namespace McFly
         }
 
         /// <summary>
-        /// Gets the help information.
+        ///     Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
@@ -65,21 +64,21 @@ namespace McFly
             .Build();
 
         /// <summary>
-        /// Gets or sets the debug eng proxy.
+        ///     Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import(typeof(IDebugEngineProxy))]
         private IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        /// Gets or sets the log.
+        ///     Gets or sets the log.
         /// </summary>
         /// <value>The log.</value>
         [Import(typeof(ILog))]
         private ILog Log { get; set; }
 
         /// <summary>
-        /// Gets or sets the settings.
+        ///     Gets or sets the settings.
         /// </summary>
         /// <value>The settings.</value>
         [Import(typeof(Settings))]

@@ -4,7 +4,7 @@
 // Created          : 03-06-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-24-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="SettingsMethod.cs" company="">
 //     Copyright ©  2018
@@ -14,28 +14,34 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Diagnostics.CodeAnalysis;
-using CommandLine;
 using Newtonsoft.Json;
 
 namespace McFly
 {
     /// <summary>
-    /// Class SettingsMethod.
+    ///     Method for managing the extension settings
     /// </summary>
     /// <seealso cref="McFly.IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
-    public class SettingsMethod : IMcFlyMethod
+    internal class SettingsMethod : IMcFlyMethod
     {
         /// <summary>
-        /// Processes the specified arguments.
+        ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
+        /// <exception cref="ArgumentNullException">args</exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     args
+        ///     or
+        ///     args
+        /// </exception>
         public void Process(string[] args)
         {
-            if(args == null) throw new ArgumentNullException(nameof(args));
-            if(args.Length != 1) throw new ArgumentOutOfRangeException(nameof(args), $"SettingsMethod expects exactly 1 argument, but was given {args.Length}");
+            if (args == null) throw new ArgumentNullException(nameof(args));
+            if (args.Length != 1)
+                throw new ArgumentOutOfRangeException(nameof(args),
+                    $"SettingsMethod expects exactly 1 argument, but was given {args.Length}");
             switch (args[0].ToLower())
             {
                 case "list":
@@ -53,26 +59,27 @@ namespace McFly
                     var p = System.Diagnostics.Process.Start(McFlyExtension.GetLogPath());
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(args), $"Settings takes 3 commands: list, reload, or open. Found {args[0]}");
+                    throw new ArgumentOutOfRangeException(nameof(args),
+                        $"Settings takes 3 commands: list, reload, or open. Found {args[0]}");
             }
         }
 
         /// <summary>
-        /// Gets or sets all settings.
+        ///     Gets or sets all settings.
         /// </summary>
         /// <value>All settings.</value>
         [ImportMany]
         public ISettings[] AllSettings { get; set; }
 
         /// <summary>
-        /// Gets or sets the debug eng proxy.
+        ///     Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
         public IDebugEngineProxy DebugEngineProxy { get; set; }
 
         /// <summary>
-        /// Gets the help information.
+        ///     Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
