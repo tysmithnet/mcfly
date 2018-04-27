@@ -20,7 +20,8 @@ using McFly.Core;
 namespace McFly.Server.Contract
 {
     /// <summary>
-    ///     Class AddNoteRequest.
+    ///     Requests of this type will be considered for adding notes to particular places
+    ///     in the trace
     /// </summary>
     /// <seealso cref="System.IEquatable{McFly.Server.Contract.AddNoteRequest}" />
     public sealed class AddNoteRequest : IEquatable<AddNoteRequest>
@@ -38,24 +39,6 @@ namespace McFly.Server.Contract
             ThreadIds = threadIds ?? throw new ArgumentNullException(nameof(threadIds));
             Text = text;
         }
-
-        /// <summary>
-        ///     Gets or sets the position.
-        /// </summary>
-        /// <value>The position.</value>
-        public Position Position { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the thread ids.
-        /// </summary>
-        /// <value>The thread ids.</value>
-        public IEnumerable<int> ThreadIds { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the text.
-        /// </summary>
-        /// <value>The text.</value>
-        public string Text { get; set; }
 
         /// <summary>
         ///     Equalses the specified other.
@@ -119,5 +102,23 @@ namespace McFly.Server.Contract
         {
             return !Equals(left, right);
         }
+
+        /// <summary>
+        ///     Gets or sets the position.
+        /// </summary>
+        /// <value>The position.</value>
+        public Position Position { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the text.
+        /// </summary>
+        /// <value>The text.</value>
+        public string Text { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the thread ids.
+        /// </summary>
+        /// <value>The thread ids.</value>
+        public IEnumerable<int> ThreadIds { get; set; }
     }
 }

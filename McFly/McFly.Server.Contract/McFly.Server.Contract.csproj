@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddMemoryRequeset.cs" />
+    <Compile Include="AddMemoryRequest.cs" />
     <Compile Include="AddNoteRequest.cs" />
     <Compile Include="ISearchRequestVisitor.cs" />
     <Compile Include="SearchRequest.cs" />

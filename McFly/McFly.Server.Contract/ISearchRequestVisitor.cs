@@ -1,7 +1,21 @@
-﻿namespace McFly.Server.Contract
+﻿// ***********************************************************************
+// Assembly         : McFly.Server.Contract
+// Author           : @tysmithnet
+// Created          : 04-26-2018
+//
+// Last Modified By : @tysmithnet
+// Last Modified On : 04-26-2018
+// ***********************************************************************
+// <copyright file="ISearchRequestVisitor.cs" company="">
+//     Copyright ©  2018
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+namespace McFly.Server.Contract
 {
     /// <summary>
-    ///     Interface ISearchRequestVisitor
+    ///     Represents an object that is capable of processing the various kinds of search request criteria
     /// </summary>
     public interface ISearchRequestVisitor
     {

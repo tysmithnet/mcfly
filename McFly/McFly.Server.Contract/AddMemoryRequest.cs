@@ -20,21 +20,21 @@ namespace McFly.Server.Contract
     /// <summary>
     ///     Request DTO for adding memory ranges
     /// </summary>
-    public sealed class AddMemoryRequeset
+    public sealed class AddMemoryRequest
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AddMemoryRequeset" /> class.
+        ///     Initializes a new instance of the <see cref="AddMemoryRequest" /> class.
         /// </summary>
-        public AddMemoryRequeset()
+        public AddMemoryRequest()
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AddMemoryRequeset" /> class.
+        ///     Initializes a new instance of the <see cref="AddMemoryRequest" /> class.
         /// </summary>
         /// <param name="memoryChunk">The memory chunk.</param>
         /// <exception cref="ArgumentNullException">memoryChunk</exception>
-        public AddMemoryRequeset(MemoryChunk memoryChunk)
+        public AddMemoryRequest(MemoryChunk memoryChunk)
         {
             MemoryChunk = memoryChunk ?? throw new ArgumentNullException(nameof(memoryChunk));
         }

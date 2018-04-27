@@ -15,7 +15,7 @@
 namespace McFly.Server.Contract
 {
     /// <summary>
-    ///     Class SearchCriterionDto.
+    ///     Null object pattern for a search criterion
     /// </summary>
     public class SearchCriterionDto
     {

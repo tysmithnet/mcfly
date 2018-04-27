@@ -33,7 +33,7 @@ namespace McFly
         public void AddMemoryRange(MemoryChunk memoryChunk)
         {
             var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/memory"};
-            var addMemoryRequest = new AddMemoryRequeset(memoryChunk);
+            var addMemoryRequest = new AddMemoryRequest(memoryChunk);
             var headers = new HttpHeaders
             {
                 ["X-Project-Name"] = Settings.ProjectName

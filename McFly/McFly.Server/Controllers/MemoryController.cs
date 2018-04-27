@@ -42,7 +42,7 @@ namespace McFly.Server.Controllers
         /// <param name="projectName">Name of the project.</param>
         /// <param name="request">The request.</param>
         /// <returns>IHttpActionResult.</returns>
-        public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] AddMemoryRequeset request)
+        public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] AddMemoryRequest request)
         {
             MemoryAccess.AddMemory(projectName, request.MemoryChunk); // todo: errors
             return Ok();
