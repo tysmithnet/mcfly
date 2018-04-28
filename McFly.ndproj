@@ -2,22 +2,21 @@
 <NDepend AppName="McFly" Platform="DotNet" FileWrittenByProductVersion="2018.1.0.9030">
   <OutputDir KeepXmlFiles="False">C:\projects\mcfly\NDependOut</OutputDir>
   <Assemblies>
-    <Name>mcfly</Name>
     <Name>McFly.Core</Name>
     <Name>McFly.Server.Data</Name>
     <Name>McFly.Server</Name>
     <Name>McFly.Server.Contract</Name>
     <Name>McFly.Server.Data.SqlServer</Name>
+    <Name>mcfly</Name>
+    <Name>McFly.Server.Conversion</Name>
   </Assemblies>
   <FrameworkAssemblies>
     <Name>mscorlib</Name>
     <Name>System</Name>
     <Name>System.ComponentModel.Composition</Name>
     <Name>System.Net.Http</Name>
-    <Name>CommandLine</Name>
     <Name>Newtonsoft.Json</Name>
     <Name>System.Core</Name>
-    <Name>MoreLinq</Name>
     <Name>System.Xml</Name>
     <Name>WebActivatorEx</Name>
     <Name>Swashbuckle.Core</Name>
@@ -34,7 +33,7 @@
     <Name>EntityFramework</Name>
     <Name>System.ComponentModel.DataAnnotations</Name>
     <Name>LinqKit.EntityFramework</Name>
-    <Name>McFly.Server.Conversion</Name>
+    <Name>System.Configuration</Name>
   </FrameworkAssemblies>
   <Dirs>
     <Dir>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319</Dir>
@@ -51,6 +50,7 @@
     <Dir>C:\projects\mcfly\McFly\McFly.Server.Contract.Test\bin\Debug</Dir>
     <Dir>C:\projects\mcfly\McFly\McFly.Server.Data.SqlServer\bin\Debug</Dir>
     <Dir>C:\projects\mcfly\McFly\McFly.Server.Data.SqlServer.Test\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.WinDbg\bin\x64\Debug</Dir>
   </Dirs>
   <MergeCodeGeneratedByCompiler>True</MergeCodeGeneratedByCompiler>
   <Report Kind="0" SectionsEnabled="110591" XslPath="" Flags="261120" />
