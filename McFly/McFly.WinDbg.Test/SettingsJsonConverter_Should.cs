@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using FluentAssertions;
-using McFly.WinDbg;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -27,7 +26,8 @@ namespace McFly.WinDbg.Test
             {
                 sut.WriteJson(jw, settings, null);
                 tw.ToString().Should()
-                    .Be("{\"McFly.Test.MockSettingsA\":{\"A\":null},\"McFly.Test.MockSettingsB\":{\"B\":null}}");
+                    .Be(
+                        "{\"McFly.WinDbg.Test.MockSettingsA\":{\"A\":null},\"McFly.WinDbg.Test.MockSettingsB\":{\"B\":null}}");
             }
         }
     }
