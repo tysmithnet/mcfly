@@ -102,6 +102,8 @@ namespace McFly.Core.Test
             // arrange
             // act
             // assert
+            _frame1.Equals(null).Should().BeFalse();
+            _frame1.Equals(_frame1).Should().BeTrue();
             _frame1.Equals(_frame2).Should().BeTrue();
             _frame1.Equals((object) _frame2).Should().BeTrue();
             (_frame1 == _frame2).Should().BeTrue();
