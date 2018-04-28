@@ -34,7 +34,7 @@ namespace McFly.Server.Data.SqlServer
         /// <param name="memoryChunk">The memory chunk.</param>
         /// <returns>System.Int64.</returns>
         /// <inheritdoc />
-        public long AddMemory(string projectName, MemoryChunk memoryChunk)
+        public void AddMemory(string projectName, MemoryChunk memoryChunk)
         {
             using (var context = ContextFactory.GetContext(projectName))
             {
@@ -65,7 +65,6 @@ namespace McFly.Server.Data.SqlServer
                 };
                 context.MemoryChunkEntities.Add(newEntity);
                 context.SaveChanges(); // todo: error check
-                return newEntity.Id;
             }
         }
 

@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-27-2018
 // ***********************************************************************
 // <copyright file="RegisterCriterion.cs" company="">
 //     Copyright ©  2018
@@ -12,13 +12,12 @@
 // <summary></summary>
 // ***********************************************************************
 
-using McFly.Core;
 using McFly.Core.Registers;
 
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Class RegisterCriterion.
+    ///     Criterion that involves registers
     /// </summary>
     /// <seealso cref="McFly.Server.Data.Search.ICriterion" />
     public abstract class RegisterCriterion : ICriterion
@@ -33,16 +32,16 @@ namespace McFly.Server.Data.Search
         }
 
         /// <summary>
-        ///     Gets or sets the register.
-        /// </summary>
-        /// <value>The register.</value>
-        public Register Register { get; set; }
-
-        /// <summary>
         ///     Accepts the specified visitor.
         /// </summary>
         /// <param name="visitor">The visitor.</param>
         /// <returns>System.Object.</returns>
         public abstract object Accept(ICriterionVisitor visitor);
+
+        /// <summary>
+        ///     Gets or sets the register.
+        /// </summary>
+        /// <value>The register.</value>
+        public Register Register { get; set; }
     }
 }

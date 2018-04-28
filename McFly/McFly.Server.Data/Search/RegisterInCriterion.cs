@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-27-2018
 // ***********************************************************************
 // <copyright file="RegisterInCriterion.cs" company="">
 //     Copyright ©  2018
@@ -15,13 +15,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using McFly.Core;
 using McFly.Core.Registers;
 
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Class RegisterInCriterion.
+    ///     Register search criterion that resolves when a register is in the provide list
     /// </summary>
     /// <seealso cref="McFly.Server.Data.Search.RegisterCriterion" />
     public class RegisterInCriterion : RegisterCriterion
@@ -38,12 +37,6 @@ namespace McFly.Server.Data.Search
         }
 
         /// <summary>
-        ///     Gets the values.
-        /// </summary>
-        /// <value>The values.</value>
-        public IEnumerable<ulong> Values { get; }
-
-        /// <summary>
         ///     Accepts the specified visitor.
         /// </summary>
         /// <param name="visitor">The visitor.</param>
@@ -52,5 +45,11 @@ namespace McFly.Server.Data.Search
         {
             return visitor.Visit(this);
         }
+
+        /// <summary>
+        ///     Gets the values.
+        /// </summary>
+        /// <value>The values.</value>
+        public IEnumerable<ulong> Values { get; }
     }
 }

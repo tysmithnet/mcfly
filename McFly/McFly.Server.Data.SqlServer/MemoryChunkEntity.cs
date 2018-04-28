@@ -21,7 +21,7 @@ namespace McFly.Server.Data.SqlServer
     ///     Class MemoryChunkEntity.
     /// </summary>
     [Table("memory_chunk")]
-    public class MemoryChunkEntity
+    internal class MemoryChunkEntity
     {
         /// <summary>
         ///     Gets or sets the byte range.

@@ -17,16 +17,15 @@ using McFly.Core;
 namespace McFly.Server.Data
 {
     /// <summary>
-    ///     Interface IMemoryAccess
+    ///     Access layer for interacting with the virtual memory of the process during a trace
     /// </summary>
     public interface IMemoryAccess
     {
         /// <summary>
-        ///     Adds the memory.
+        ///     Indexes a <see cref="MemoryChunk"/>
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="memoryChunk">The memory chunk.</param>
-        /// <returns>System.Int64.</returns>
-        long AddMemory(string projectName, MemoryChunk memoryChunk);
+        void AddMemory(string projectName, MemoryChunk memoryChunk);
     }
 }

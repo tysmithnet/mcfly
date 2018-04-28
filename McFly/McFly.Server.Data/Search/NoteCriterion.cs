@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="NoteCriterion.cs" company="">
 //     Copyright ©  2018
@@ -15,7 +15,7 @@
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Class NoteCriterion.
+    ///     Base abstraction for a search criterion that operates on notes
     /// </summary>
     /// <seealso cref="McFly.Server.Data.Search.ICriterion" />
     public abstract class NoteCriterion : ICriterion

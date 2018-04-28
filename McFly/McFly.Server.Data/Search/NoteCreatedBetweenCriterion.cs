@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="NoteCreatedBetweenCriterion.cs" company="">
 //     Copyright ©  2018
@@ -17,10 +17,10 @@ using System;
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Class NoteCreatedBetweenCriterion.
+    ///     Search criterion for notes created between two points in time
     /// </summary>
     /// <seealso cref="McFly.Server.Data.Search.NoteCriterion" />
-    public class NoteCreatedBetweenCriterion : NoteCriterion
+    public class NoteCreatedBetweenCriterion : NoteCriterion // todo: should be the AND of 2 simpler criteria
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="NoteCreatedBetweenCriterion" /> class.
@@ -37,18 +37,6 @@ namespace McFly.Server.Data.Search
         }
 
         /// <summary>
-        ///     Gets the low.
-        /// </summary>
-        /// <value>The low.</value>
-        public DateTime Low { get; }
-
-        /// <summary>
-        ///     Gets the high.
-        /// </summary>
-        /// <value>The high.</value>
-        public DateTime High { get; }
-
-        /// <summary>
         ///     Accepts the specified visitor.
         /// </summary>
         /// <param name="visitor">The visitor.</param>
@@ -57,5 +45,17 @@ namespace McFly.Server.Data.Search
         {
             return visitor.Visit(this);
         }
+
+        /// <summary>
+        ///     Gets the high.
+        /// </summary>
+        /// <value>The high.</value>
+        public DateTime High { get; }
+
+        /// <summary>
+        ///     Gets the low.
+        /// </summary>
+        /// <value>The low.</value>
+        public DateTime Low { get; }
     }
 }
