@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using McFly.WinDbg;
 using Xunit;
 
 namespace McFly.Test

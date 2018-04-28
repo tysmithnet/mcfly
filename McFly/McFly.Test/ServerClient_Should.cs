@@ -6,6 +6,7 @@ using System.Net.Http;
 using McFly.Core;
 using McFly.Server.Contract;
 using McFly.Test.Builders;
+using McFly.WinDbg;
 using Moq;
 using Xunit;
 

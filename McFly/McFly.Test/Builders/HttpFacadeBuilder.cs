@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using McFly.WinDbg;
 using Moq;
 
 namespace McFly.Test.Builders

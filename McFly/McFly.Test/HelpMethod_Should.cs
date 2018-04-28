@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
 using McFly.Test.Builders;
+using McFly.WinDbg;
 using Xunit;
 
 namespace McFly.Test

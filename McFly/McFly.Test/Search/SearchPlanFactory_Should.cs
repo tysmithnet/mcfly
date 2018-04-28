@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using McFly.Search;
+using McFly.WinDbg.Search;
 using Xunit;
 
 namespace McFly.Test.Search

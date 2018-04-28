@@ -14,6 +14,7 @@
 
 using System;
 using McFly.Core.Registers;
+using McFly.WinDbg;
 using Moq;
 
 namespace McFly.Test.Builders

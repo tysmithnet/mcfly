@@ -2,6 +2,7 @@
 using FluentAssertions;
 using McFly.Core;
 using McFly.Test.Builders;
+using McFly.WinDbg;
 using Xunit;
 using static McFly.Core.Registers.Register;
 

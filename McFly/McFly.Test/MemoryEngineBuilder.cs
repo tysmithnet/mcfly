@@ -1,4 +1,5 @@
-﻿using McFly.Debugger;
+﻿using McFly.WinDbg;
+using McFly.WinDbg.Debugger;
 using Moq;
 
 namespace McFly.Test

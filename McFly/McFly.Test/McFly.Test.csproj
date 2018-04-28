@@ -122,9 +122,9 @@
       <Project>{BCFFB741-26F9-4D12-A152-04CF601D373E}</Project>
       <Name>McFly.Server.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\McFly\McFly.csproj">
+    <ProjectReference Include="..\McFly.WinDbg\McFly.WinDbg.csproj">
       <Project>{d7eb4c59-22ef-4020-9850-cbbf6a015f80}</Project>
-      <Name>McFly</Name>
+      <Name>McFly.WinDbg</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

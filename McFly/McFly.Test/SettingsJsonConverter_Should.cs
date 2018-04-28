@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using FluentAssertions;
+using McFly.WinDbg;
 using Newtonsoft.Json;
 using Xunit;
 

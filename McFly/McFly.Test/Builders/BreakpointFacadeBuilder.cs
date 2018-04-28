@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using McFly.WinDbg;
 using Moq;
 
 namespace McFly.Test.Builders
