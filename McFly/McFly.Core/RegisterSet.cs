@@ -1352,7 +1352,7 @@ namespace McFly.Core
             {
                 if (!value.HasValue) return;
                 if (R12 == null)
-                    R12 = 0;
+                    R12w = 0;
                 R12w = R12w?.Lo8(value.Value);
             }
         }
@@ -1389,8 +1389,8 @@ namespace McFly.Core
             set
             {
                 if (!value.HasValue) return;
-                if (R12 == null)
-                    R12 = 0;
+                if (R12d == null)
+                    R12d = 0;
                 R12d = R12d?.Lo16(value.Value);
             }
         }

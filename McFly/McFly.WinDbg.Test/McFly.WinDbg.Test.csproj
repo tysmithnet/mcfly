@@ -143,8 +143,8 @@
   </Target>
   <Import Project="..\packages\xunit.core.2.3.1\build\xunit.core.targets" Condition="Exists('..\packages\xunit.core.2.3.1\build\xunit.core.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /S /Y "$(TargetDir)*.*" "$(SolutionDir)McFly\bin\x86\Debug\"
-xcopy /S /Y "$(TargetDir)*.*" "$(SolutionDir)McFly\bin\x64\Debug\"
+    <PostBuildEvent>xcopy /S /Y "$(TargetDir)*.*" "$(SolutionDir)McFly.WinDbg\bin\x86\Debug\"
+xcopy /S /Y "$(TargetDir)*.*" "$(SolutionDir)McFly.WinDbg\bin\x64\Debug\"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

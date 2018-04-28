@@ -254,6 +254,6 @@ namespace McFly.Core
         ///     Gets the debugger display.
         /// </summary>
         /// <value>The debugger display.</value>
-        private string DebuggerDisplay => ToString();
+        internal string DebuggerDisplay => ToString();
     }
 }

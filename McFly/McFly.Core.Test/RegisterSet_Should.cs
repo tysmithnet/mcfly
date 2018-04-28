@@ -7,10 +7,1369 @@ namespace McFly.Core.Test
 {
     public class RegisterSet_Should
     {
-        
+        [Fact]
+        public void Not_Throw_When_Assigned_Null()
+        {
+            var rs = new RegisterSet();
+            {
+                Action a = () => rs.Rax = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Rcx = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Rdx = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Rbx = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Rsp = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Rbp = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Rsi = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Rdi = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R8 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R9 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R10 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R11 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R12 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R13 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R14 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R15 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Rip = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Efl = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Cs = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ds = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Es = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Fs = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Gs = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ss = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Dr0 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Dr1 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Dr2 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Dr3 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Dr6 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Dr7 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Fpcw = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Fpsw = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Fptw = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.St0 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.St1 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.St2 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.St3 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.St4 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.St5 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.St6 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.St7 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Mm0 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Mm1 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Mm2 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Mm3 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Mm4 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Mm5 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Mm6 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Mm7 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Mxcsr = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm0 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm1 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm2 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm3 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm4 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm5 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm6 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm7 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm8 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm9 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm10 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm11 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm12 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm13 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm14 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm15 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm0l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm1l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm2l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm3l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm4l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm5l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm6l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm7l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm8l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm9l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm10l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm11l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm12l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm13l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm14l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm15l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm0h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm1h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm2h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm3h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm4h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm5h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm6h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm7h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm8h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm9h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm10h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm11h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm12h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm13h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm14h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Xmm15h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm0 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm1 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm2 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm3 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm4 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm5 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm6 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm7 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm8 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm9 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm10 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm11 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm12 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm13 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm14 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm15 = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm0l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm1l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm2l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm3l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm4l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm5l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm6l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm7l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm8l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm9l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm10l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm11l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm12l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm13l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm14l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm15l = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm0h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm1h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm2h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm3h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm4h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm5h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm6h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm7h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm8h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm9h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm10h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm11h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm12h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm13h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm14h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ymm15h = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Exfrom = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Exto = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Brfrom = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Brto = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Eax = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ecx = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Edx = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ebx = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Esp = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ebp = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Esi = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Edi = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R8d = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R9d = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R10d = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R11d = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R12d = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R13d = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R14d = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R15d = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Eip = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ax = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Cx = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Dx = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Bx = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Sp = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Bp = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Si = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Di = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R8w = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R9w = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R10w = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R11w = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R12w = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R13w = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R14w = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R15w = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ip = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Fl = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Al = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Cl = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Dl = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Bl = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Spl = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Bpl = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Sil = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Dil = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R8b = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R9b = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R10b = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R11b = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R12b = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R13b = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R14b = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.R15b = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ah = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Ch = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Dh = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Bh = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Iopl = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Of = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Df = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.If = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Tf = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Sf = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Zf = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Af = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Pf = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Cf = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Vip = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Vif = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Fopcode = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Fpip = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Fpipsel = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Fpdp = null;
+                a.Should().NotThrow();
+            }
+            {
+                Action a = () => rs.Fpdpsel = null;
+                a.Should().NotThrow();
+            }
+        }
+
+        [Fact]
+        public void Throw_If_Incorrect_Num_Bytes_Assigned()
+        {
+            var rs = new RegisterSet();
+            {
+                Action a = () => rs.St0 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.St1 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.St2 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.St3 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.St4 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.St5 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.St6 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.St7 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm0 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm1 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm2 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm3 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm4 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm5 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm6 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm7 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm8 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm9 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm10 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm11 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm12 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm13 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm14 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Xmm15 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm0 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm1 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm2 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm3 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm4 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm5 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm6 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm7 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm8 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm9 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm10 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm11 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm12 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm13 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm14 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm15 = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm0h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm1h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm2h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm3h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm4h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm5h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm6h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm7h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm8h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm9h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm10h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm11h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm12h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm13h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm14h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+            {
+                Action a = () => rs.Ymm15h = new byte[0];
+                a.Should().Throw<ArgumentOutOfRangeException>();
+            }
+
+        }
+
+        [Fact]
+        public void Have_Null_Values_When_Created()
+        {
+            var rs = new RegisterSet();
+            rs.Rax.Should().BeNull();
+            rs.Rcx.Should().BeNull();
+            rs.Rdx.Should().BeNull();
+            rs.Rbx.Should().BeNull();
+            rs.Rsp.Should().BeNull();
+            rs.Rbp.Should().BeNull();
+            rs.Rsi.Should().BeNull();
+            rs.Rdi.Should().BeNull();
+            rs.R8.Should().BeNull();
+            rs.R9.Should().BeNull();
+            rs.R10.Should().BeNull();
+            rs.R11.Should().BeNull();
+            rs.R12.Should().BeNull();
+            rs.R13.Should().BeNull();
+            rs.R14.Should().BeNull();
+            rs.R15.Should().BeNull();
+            rs.Rip.Should().BeNull();
+            rs.Efl.Should().BeNull();
+            rs.Cs.Should().BeNull();
+            rs.Ds.Should().BeNull();
+            rs.Es.Should().BeNull();
+            rs.Fs.Should().BeNull();
+            rs.Gs.Should().BeNull();
+            rs.Ss.Should().BeNull();
+            rs.Dr0.Should().BeNull();
+            rs.Dr1.Should().BeNull();
+            rs.Dr2.Should().BeNull();
+            rs.Dr3.Should().BeNull();
+            rs.Dr6.Should().BeNull();
+            rs.Dr7.Should().BeNull();
+            rs.Fpcw.Should().BeNull();
+            rs.Fpsw.Should().BeNull();
+            rs.Fptw.Should().BeNull();
+            rs.St0.Should().BeNull();
+            rs.St1.Should().BeNull();
+            rs.St2.Should().BeNull();
+            rs.St3.Should().BeNull();
+            rs.St4.Should().BeNull();
+            rs.St5.Should().BeNull();
+            rs.St6.Should().BeNull();
+            rs.St7.Should().BeNull();
+            rs.Mm0.Should().BeNull();
+            rs.Mm1.Should().BeNull();
+            rs.Mm2.Should().BeNull();
+            rs.Mm3.Should().BeNull();
+            rs.Mm4.Should().BeNull();
+            rs.Mm5.Should().BeNull();
+            rs.Mm6.Should().BeNull();
+            rs.Mm7.Should().BeNull();
+            rs.Mxcsr.Should().BeNull();
+            rs.Xmm0.Should().BeNull();
+            rs.Xmm1.Should().BeNull();
+            rs.Xmm2.Should().BeNull();
+            rs.Xmm3.Should().BeNull();
+            rs.Xmm4.Should().BeNull();
+            rs.Xmm5.Should().BeNull();
+            rs.Xmm6.Should().BeNull();
+            rs.Xmm7.Should().BeNull();
+            rs.Xmm8.Should().BeNull();
+            rs.Xmm9.Should().BeNull();
+            rs.Xmm10.Should().BeNull();
+            rs.Xmm11.Should().BeNull();
+            rs.Xmm12.Should().BeNull();
+            rs.Xmm13.Should().BeNull();
+            rs.Xmm14.Should().BeNull();
+            rs.Xmm15.Should().BeNull();
+            rs.Xmm0l.Should().BeNull();
+            rs.Xmm1l.Should().BeNull();
+            rs.Xmm2l.Should().BeNull();
+            rs.Xmm3l.Should().BeNull();
+            rs.Xmm4l.Should().BeNull();
+            rs.Xmm5l.Should().BeNull();
+            rs.Xmm6l.Should().BeNull();
+            rs.Xmm7l.Should().BeNull();
+            rs.Xmm8l.Should().BeNull();
+            rs.Xmm9l.Should().BeNull();
+            rs.Xmm10l.Should().BeNull();
+            rs.Xmm11l.Should().BeNull();
+            rs.Xmm12l.Should().BeNull();
+            rs.Xmm13l.Should().BeNull();
+            rs.Xmm14l.Should().BeNull();
+            rs.Xmm15l.Should().BeNull();
+            rs.Xmm0h.Should().BeNull();
+            rs.Xmm1h.Should().BeNull();
+            rs.Xmm2h.Should().BeNull();
+            rs.Xmm3h.Should().BeNull();
+            rs.Xmm4h.Should().BeNull();
+            rs.Xmm5h.Should().BeNull();
+            rs.Xmm6h.Should().BeNull();
+            rs.Xmm7h.Should().BeNull();
+            rs.Xmm8h.Should().BeNull();
+            rs.Xmm9h.Should().BeNull();
+            rs.Xmm10h.Should().BeNull();
+            rs.Xmm11h.Should().BeNull();
+            rs.Xmm12h.Should().BeNull();
+            rs.Xmm13h.Should().BeNull();
+            rs.Xmm14h.Should().BeNull();
+            rs.Xmm15h.Should().BeNull();
+            rs.Ymm0.Should().BeNull();
+            rs.Ymm1.Should().BeNull();
+            rs.Ymm2.Should().BeNull();
+            rs.Ymm3.Should().BeNull();
+            rs.Ymm4.Should().BeNull();
+            rs.Ymm5.Should().BeNull();
+            rs.Ymm6.Should().BeNull();
+            rs.Ymm7.Should().BeNull();
+            rs.Ymm8.Should().BeNull();
+            rs.Ymm9.Should().BeNull();
+            rs.Ymm10.Should().BeNull();
+            rs.Ymm11.Should().BeNull();
+            rs.Ymm12.Should().BeNull();
+            rs.Ymm13.Should().BeNull();
+            rs.Ymm14.Should().BeNull();
+            rs.Ymm15.Should().BeNull();
+            rs.Ymm0l.Should().BeNull();
+            rs.Ymm1l.Should().BeNull();
+            rs.Ymm2l.Should().BeNull();
+            rs.Ymm3l.Should().BeNull();
+            rs.Ymm4l.Should().BeNull();
+            rs.Ymm5l.Should().BeNull();
+            rs.Ymm6l.Should().BeNull();
+            rs.Ymm7l.Should().BeNull();
+            rs.Ymm8l.Should().BeNull();
+            rs.Ymm9l.Should().BeNull();
+            rs.Ymm10l.Should().BeNull();
+            rs.Ymm11l.Should().BeNull();
+            rs.Ymm12l.Should().BeNull();
+            rs.Ymm13l.Should().BeNull();
+            rs.Ymm14l.Should().BeNull();
+            rs.Ymm15l.Should().BeNull();
+            rs.Ymm0h.Should().BeNull();
+            rs.Ymm1h.Should().BeNull();
+            rs.Ymm2h.Should().BeNull();
+            rs.Ymm3h.Should().BeNull();
+            rs.Ymm4h.Should().BeNull();
+            rs.Ymm5h.Should().BeNull();
+            rs.Ymm6h.Should().BeNull();
+            rs.Ymm7h.Should().BeNull();
+            rs.Ymm8h.Should().BeNull();
+            rs.Ymm9h.Should().BeNull();
+            rs.Ymm10h.Should().BeNull();
+            rs.Ymm11h.Should().BeNull();
+            rs.Ymm12h.Should().BeNull();
+            rs.Ymm13h.Should().BeNull();
+            rs.Ymm14h.Should().BeNull();
+            rs.Ymm15h.Should().BeNull();
+            rs.Exfrom.Should().BeNull();
+            rs.Exto.Should().BeNull();
+            rs.Brfrom.Should().BeNull();
+            rs.Brto.Should().BeNull();
+            rs.Eax.Should().BeNull();
+            rs.Ecx.Should().BeNull();
+            rs.Edx.Should().BeNull();
+            rs.Ebx.Should().BeNull();
+            rs.Esp.Should().BeNull();
+            rs.Ebp.Should().BeNull();
+            rs.Esi.Should().BeNull();
+            rs.Edi.Should().BeNull();
+            rs.R8d.Should().BeNull();
+            rs.R9d.Should().BeNull();
+            rs.R10d.Should().BeNull();
+            rs.R11d.Should().BeNull();
+            rs.R12d.Should().BeNull();
+            rs.R13d.Should().BeNull();
+            rs.R14d.Should().BeNull();
+            rs.R15d.Should().BeNull();
+            rs.Eip.Should().BeNull();
+            rs.Ax.Should().BeNull();
+            rs.Cx.Should().BeNull();
+            rs.Dx.Should().BeNull();
+            rs.Bx.Should().BeNull();
+            rs.Sp.Should().BeNull();
+            rs.Bp.Should().BeNull();
+            rs.Si.Should().BeNull();
+            rs.Di.Should().BeNull();
+            rs.R8w.Should().BeNull();
+            rs.R9w.Should().BeNull();
+            rs.R10w.Should().BeNull();
+            rs.R11w.Should().BeNull();
+            rs.R12w.Should().BeNull();
+            rs.R13w.Should().BeNull();
+            rs.R14w.Should().BeNull();
+            rs.R15w.Should().BeNull();
+            rs.Ip.Should().BeNull();
+            rs.Fl.Should().BeNull();
+            rs.Al.Should().BeNull();
+            rs.Cl.Should().BeNull();
+            rs.Dl.Should().BeNull();
+            rs.Bl.Should().BeNull();
+            rs.Spl.Should().BeNull();
+            rs.Bpl.Should().BeNull();
+            rs.Sil.Should().BeNull();
+            rs.Dil.Should().BeNull();
+            rs.R8b.Should().BeNull();
+            rs.R9b.Should().BeNull();
+            rs.R10b.Should().BeNull();
+            rs.R11b.Should().BeNull();
+            rs.R12b.Should().BeNull();
+            rs.R13b.Should().BeNull();
+            rs.R14b.Should().BeNull();
+            rs.R15b.Should().BeNull();
+            rs.Ah.Should().BeNull();
+            rs.Ch.Should().BeNull();
+            rs.Dh.Should().BeNull();
+            rs.Bh.Should().BeNull();
+            rs.Iopl.Should().BeNull();
+            rs.Of.Should().BeNull();
+            rs.Df.Should().BeNull();
+            rs.If.Should().BeNull();
+            rs.Tf.Should().BeNull();
+            rs.Sf.Should().BeNull();
+            rs.Zf.Should().BeNull();
+            rs.Af.Should().BeNull();
+            rs.Pf.Should().BeNull();
+            rs.Cf.Should().BeNull();
+            rs.Vip.Should().BeNull();
+            rs.Vif.Should().BeNull();
+            rs.Fopcode.Should().BeNull();
+            rs.Fpip.Should().BeNull();
+            rs.Fpipsel.Should().BeNull();
+            rs.Fpdp.Should().BeNull();
+            rs.Fpdpsel.Should().BeNull();
+        }
+
         [Fact]
         public void Be_Equal_When_Non_Calculated_Properties_Are_Equal()
         {
+            var rs = new RegisterSet();
+            rs.Equals(rs).Should().BeTrue();
+            rs.Equals(null).Should().BeFalse();
+            rs.Equals((object) rs).Should().BeTrue();
+            rs.Equals((object) null).Should().BeFalse();
+            rs.Equals(new object()).Should().BeFalse();
+
             {
                 var r1 = new RegisterSet();
                 var r2 = new RegisterSet();
@@ -1455,6 +2814,18 @@ namespace McFly.Core.Test
             {
                 var r1 = new RegisterSet()
                 {
+                    Vip = true
+                };
+                var r2 = new RegisterSet()
+                {
+                    Vip = true
+                };
+                r1.Equals(r2).Should().BeTrue();
+                r1.GetHashCode().Should().Be(r2.GetHashCode());
+            }
+            {
+                var r1 = new RegisterSet()
+                {
                      Xmm0 = Enumerable.Range(0, 16).Select(x => Convert.ToByte(x)).ToArray()
                 };
                 var r2 = new RegisterSet()
@@ -2644,6 +4015,51 @@ namespace McFly.Core.Test
                 r1.Equals(r2).Should().BeFalse();
                 r1.GetHashCode().Should().NotBe(r2.GetHashCode());
             }
+        }
+
+        [Fact]
+        public void Set_The_Correct_Values()
+        {
+            var rs = new RegisterSet();
+
+            rs.Af = false;
+            rs.Af.Should().BeFalse();
+
+            rs.Cf = false;
+            rs.Cf.Should().BeFalse();
+
+            rs.Df = false;
+            rs.Df.Should().BeFalse();
+
+            rs.If = false;
+            rs.If.Should().BeFalse();
+
+            rs.Of = false;
+            rs.Of.Should().BeFalse();
+
+            rs.Pf = false;
+            rs.Pf.Should().BeFalse();
+
+            rs.Sf = false;
+            rs.Sf.Should().BeFalse();
+
+            rs.Tf = false;
+            rs.Tf.Should().BeFalse();
+
+            rs.Vif = false;
+            rs.Vif.Should().BeFalse();
+
+            rs.Vip = false;
+            rs.Vip.Should().BeFalse();
+
+            rs.Zf = false;
+            rs.Zf.Should().BeFalse();
+
+            rs.Sp = ushort.MaxValue;
+            rs.Sp.Should().Be(ushort.MaxValue);
+
+            rs.R12b = byte.MaxValue;
+            rs.R12b.Should().Be(byte.MaxValue);
         }
     }
 }

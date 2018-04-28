@@ -263,7 +263,7 @@ namespace McFly.Core
         ///     Gets the debug display.
         /// </summary>
         /// <value>The debug display.</value>
-        private string DebugDisplay => ToString();
+        internal string DebugDisplay => ToString();
 
         /// <summary>
         ///     Class HighLowThreadIdEqualityComparer. This class cannot be inherited.

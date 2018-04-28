@@ -23,11 +23,6 @@ namespace McFly.Core
     /// </summary>
     public static class PrimitiveExtensions
     {
-        public static ulong ToULong(this int intValue)
-        {
-            return (ulong) intValue;
-        }
-
         /// <summary>
         ///     Interpets the high 32 bits as a ulong
         /// </summary>
@@ -387,6 +382,11 @@ namespace McFly.Core
         public static uint ToUInt(this int intValue)
         {
             return unchecked ((uint) intValue);
+        }
+
+        public static ulong ToULong(this int intValue)
+        {
+            return (ulong) intValue;
         }
 
         /// <summary>
