@@ -13,13 +13,13 @@
 // ***********************************************************************
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace McFly.Core
 {
     /// <summary>
     ///     Represents a line of disassembly
+    ///     This is what you would expect from the command "u rip L1"
     /// </summary>
     public class DisassemblyLine
     {
@@ -53,44 +53,6 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Gets the instruction address.
-        /// </summary>
-        /// <value>The instruction address.</value>
-        public ulong? InstructionAddress { get; set; }
-
-        /// <summary>
-        ///     Gets the op code.
-        /// </summary>
-        /// <value>The op code.</value>
-        public byte[] OpCode { get; set; }
-
-        /// <summary>
-        ///     Gets the op code mnemonic.
-        /// </summary>
-        /// <value>The op code mnemonic.</value>
-        public string OpCodeMnemonic { get; set; }
-
-        /// <summary>
-        ///     Gets the disassembly note.
-        /// </summary>
-        /// <value>The disassembly note.</value>
-        public string DisassemblyNote { get; set; }
-
-        /// <summary>
-        ///     Equalses the specified other.
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        protected bool Equals(DisassemblyLine other)
-        {
-            var inst = InstructionAddress == other.InstructionAddress;
-            var seq = OpCode.SequenceEqual(other.OpCode);
-            var mnem = OpCodeMnemonic == other.OpCodeMnemonic;
-            var note = DisassemblyNote == other.DisassemblyNote;
-            return inst && seq && mnem && note;
-        }
-
-        /// <summary>
         ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
@@ -118,5 +80,43 @@ namespace McFly.Core
                 return hashCode;
             }
         }
+
+        /// <summary>
+        ///    Determines whether the specified <see cref="DisassemblyLine" /> is equal to this instance.
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        protected bool Equals(DisassemblyLine other)
+        {
+            var inst = InstructionAddress == other.InstructionAddress;
+            var seq = OpCode.SequenceEqual(other.OpCode);
+            var mnem = OpCodeMnemonic == other.OpCodeMnemonic;
+            var note = DisassemblyNote == other.DisassemblyNote;
+            return inst && seq && mnem && note;
+        }
+
+        /// <summary>
+        ///     Gets the disassembly note.
+        /// </summary>
+        /// <value>The disassembly note.</value>
+        public string DisassemblyNote { get; set; }
+
+        /// <summary>
+        ///     Gets the instruction address.
+        /// </summary>
+        /// <value>The instruction address.</value>
+        public ulong? InstructionAddress { get; set; }
+
+        /// <summary>
+        ///     Gets the op code.
+        /// </summary>
+        /// <value>The op code.</value>
+        public byte[] OpCode { get; set; }
+
+        /// <summary>
+        ///     Gets the op code mnemonic.
+        /// </summary>
+        /// <value>The op code mnemonic.</value>
+        public string OpCodeMnemonic { get; set; }
     }
 }

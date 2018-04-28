@@ -19,10 +19,10 @@ using McFly.Core.Registers;
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Class RegisterBetweenCriterion.
+    ///     Criterion for a register value falling between 2 numbers
     /// </summary>
     /// <seealso cref="McFly.Server.Data.Search.RegisterCriterion" />
-    public class RegisterBetweenCriterion : RegisterCriterion
+    public sealed class RegisterBetweenCriterion : RegisterCriterion
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="RegisterBetweenCriterion" /> class.
@@ -40,13 +40,13 @@ namespace McFly.Server.Data.Search
         }
 
         /// <summary>
-        ///     Gets the low.
+        ///     Gets the low end.
         /// </summary>
         /// <value>The low.</value>
         public string Low { get; }
 
         /// <summary>
-        ///     Gets the high.
+        ///     Gets the high end (non inclusive).
         /// </summary>
         /// <value>The high.</value>
         public string High { get; } // todo: bound checking

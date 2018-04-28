@@ -29,12 +29,12 @@ namespace McFly.Server.Controllers
     [Route("api/memory")]
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class MemoryController : ApiController
+    public sealed class MemoryController : ApiController
     {
         /// <summary>
         ///     The log
         /// </summary>
-        private readonly ILog Log = LogManager.GetLogger<MemoryController>();
+        private static readonly ILog Log = LogManager.GetLogger<MemoryController>();
 
         /// <summary>
         ///     Adds raw memory to the analysis
@@ -42,7 +42,7 @@ namespace McFly.Server.Controllers
         /// <param name="projectName">Name of the project.</param>
         /// <param name="request">The request.</param>
         /// <returns>IHttpActionResult.</returns>
-        public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] AddMemoryRequeset request)
+        public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] AddMemoryRequest request)
         {
             MemoryAccess.AddMemory(projectName, request.MemoryChunk); // todo: errors
             return Ok();
@@ -53,6 +53,6 @@ namespace McFly.Server.Controllers
         /// </summary>
         /// <value>The memory access.</value>
         [Import]
-        protected internal IMemoryAccess MemoryAccess { get; set; }
+        internal IMemoryAccess MemoryAccess { get; set; }
     }
 }

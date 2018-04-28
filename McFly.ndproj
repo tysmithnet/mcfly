@@ -1,31 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <NDepend AppName="McFly" Platform="DotNet" FileWrittenByProductVersion="2018.1.0.9030">
   <OutputDir KeepXmlFiles="False">C:\projects\mcfly\NDependOut</OutputDir>
   <Assemblies>
-    <Name>mcfly</Name>
-    <Name>McFly.Test</Name>
     <Name>McFly.Core</Name>
-    <Name>McFly.Core.Test</Name>
     <Name>McFly.Server.Data</Name>
     <Name>McFly.Server</Name>
-    <Name>McFly.Server.Test</Name>
     <Name>McFly.Server.Contract</Name>
-    <Name>McFly.Server.Contract.Test</Name>
     <Name>McFly.Server.Data.SqlServer</Name>
-    <Name>McFly.Server.Data.SqlServer.Test</Name>
+    <Name>mcfly</Name>
+    <Name>McFly.Server.Conversion</Name>
   </Assemblies>
   <FrameworkAssemblies>
     <Name>mscorlib</Name>
     <Name>System</Name>
     <Name>System.ComponentModel.Composition</Name>
     <Name>System.Net.Http</Name>
-    <Name>CommandLine</Name>
     <Name>Newtonsoft.Json</Name>
     <Name>System.Core</Name>
-    <Name>xunit.core</Name>
-    <Name>Moq</Name>
-    <Name>FluentAssertions</Name>
-    <Name>MoreLinq</Name>
     <Name>System.Xml</Name>
     <Name>WebActivatorEx</Name>
     <Name>Swashbuckle.Core</Name>
@@ -42,6 +33,7 @@
     <Name>EntityFramework</Name>
     <Name>System.ComponentModel.DataAnnotations</Name>
     <Name>LinqKit.EntityFramework</Name>
+    <Name>System.Configuration</Name>
   </FrameworkAssemblies>
   <Dirs>
     <Dir>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319</Dir>
@@ -58,6 +50,7 @@
     <Dir>C:\projects\mcfly\McFly\McFly.Server.Contract.Test\bin\Debug</Dir>
     <Dir>C:\projects\mcfly\McFly\McFly.Server.Data.SqlServer\bin\Debug</Dir>
     <Dir>C:\projects\mcfly\McFly\McFly.Server.Data.SqlServer.Test\bin\Debug</Dir>
+    <Dir>C:\projects\mcfly\McFly\McFly.WinDbg\bin\x64\Debug</Dir>
   </Dirs>
   <MergeCodeGeneratedByCompiler>True</MergeCodeGeneratedByCompiler>
   <Report Kind="0" SectionsEnabled="110591" XslPath="" Flags="261120" />
@@ -125,8 +118,7 @@
       <High2Critical_SeverityThreshold>72000000000</High2Critical_SeverityThreshold>
       <Critical2Blocker_SeverityThreshold>360000000000</Critical2Blocker_SeverityThreshold>
     </DebtSettings>
-  </ProjectDebtSettings>
-  <Queries>
+  </ProjectDebtSettings><Queries>
     <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Exclude McFly.Debugger</Name>
 notmycode from ns in Namespaces
 where ns.Name == "McFly.Debugger"
@@ -11521,5 +11513,4 @@ select new {
 //</HowToFix>]]></Query>
       </Group>
     </Group>
-  </Queries>
-</NDepend>
+  </Queries></NDepend>

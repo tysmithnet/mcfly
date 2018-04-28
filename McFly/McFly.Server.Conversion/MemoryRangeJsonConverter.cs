@@ -4,7 +4,7 @@
 // Created          : 04-23-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-24-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="MemoryRangeJsonConverter.cs" company="">
 //     Copyright ©  2018
@@ -22,11 +22,28 @@ using Newtonsoft.Json.Linq;
 namespace McFly.Server.Conversion
 {
     /// <summary>
-    ///     Class MemoryRangeJsonConverter.
+    ///     Json converter for <see cref="MemoryRange" />
     /// </summary>
+    /// <seealso cref="System.Web.Http.ModelBinding.IModelBinder" />
     /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Core.MemoryRange}" />
-    public class MemoryRangeJsonConverter : JsonConverter<MemoryRange>, IModelBinder
+    public sealed class MemoryRangeJsonConverter : JsonConverter<MemoryRange>, IModelBinder
     {
+        /// <summary>
+        ///     Binds the model to a value by using the specified controller context and binding context.
+        /// </summary>
+        /// <param name="actionContext">The action context.</param>
+        /// <param name="bindingContext">The binding context.</param>
+        /// <returns>true if model binding is successful; otherwise, false.</returns>
+        /// <inheritdoc />
+        public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+        {
+            if (!typeof(MemoryRange).IsAssignableFrom(bindingContext.ModelType)) return false;
+            var val = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName);
+            if (val == null) return false;
+            return true;
+        }
+
         /// <summary>
         ///     Reads the JSON representation of the object.
         /// </summary>
@@ -83,16 +100,6 @@ namespace McFly.Server.Conversion
             writer.WritePropertyName("HighAddress");
             writer.WriteValue(value.HighAddress);
             writer.WriteEndObject();
-        }
-
-        /// <inheritdoc />
-        public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
-        {
-            if (!typeof(MemoryRange).IsAssignableFrom(bindingContext.ModelType)) return false;
-            var val = bindingContext.ValueProvider.GetValue(
-                bindingContext.ModelName);
-            if (val == null) return false;
-            return true;
         }
     }
 }

@@ -21,10 +21,10 @@ using Newtonsoft.Json.Linq;
 namespace McFly.Server.Conversion
 {
     /// <summary>
-    ///     Class AddMemoryRequestJsonConverter.
+    ///     Json converter for <see cref="AddMemoryRequest"/>
     /// </summary>
     /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Server.Contract.AddMemoryRequeset}" />
-    public class AddMemoryRequestJsonConverter : JsonConverter<AddMemoryRequeset>
+    public class AddMemoryRequestJsonConverter : JsonConverter<AddMemoryRequest>
     {
         /// <summary>
         ///     Reads the JSON representation of the object.
@@ -39,7 +39,7 @@ namespace McFly.Server.Conversion
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
         /// <inheritdoc />
-        public override AddMemoryRequeset ReadJson(JsonReader reader, Type objectType, AddMemoryRequeset existingValue,
+        public override AddMemoryRequest ReadJson(JsonReader reader, Type objectType, AddMemoryRequest existingValue,
             bool hasExistingValue,
             JsonSerializer serializer)
         {
@@ -52,7 +52,7 @@ namespace McFly.Server.Conversion
                         memoryChunk = prop.Value.ToObject<MemoryChunk>();
                         break;
                 }
-            return new AddMemoryRequeset(memoryChunk);
+            return new AddMemoryRequest(memoryChunk);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace McFly.Server.Conversion
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <inheritdoc />
-        public override void WriteJson(JsonWriter writer, AddMemoryRequeset value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, AddMemoryRequest value, JsonSerializer serializer)
         {
             serializer.Serialize(writer, value);
         }

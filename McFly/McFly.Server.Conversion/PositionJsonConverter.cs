@@ -4,7 +4,7 @@
 // Created          : 04-24-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-25-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="PositionJsonConverter.cs" company="">
 //     Copyright ©  2018
@@ -20,7 +20,7 @@ using Newtonsoft.Json.Linq;
 namespace McFly.Server.Conversion
 {
     /// <summary>
-    ///     Class PositionJsonConverter.
+    ///     Json converter for <see cref="Position" />
     /// </summary>
     /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Core.Position}" />
     public class PositionJsonConverter : JsonConverter<Position>

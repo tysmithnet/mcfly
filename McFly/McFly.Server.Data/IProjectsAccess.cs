@@ -26,7 +26,7 @@ namespace McFly.Server.Data
         ///     Gets the databases.
         /// </summary>
         /// <returns>IEnumerable&lt;System.String&gt;.</returns>
-        IEnumerable<string> GetDatabases();
+        IEnumerable<string> GetProjects();
 
         /// <summary>
         ///     Creates the project.

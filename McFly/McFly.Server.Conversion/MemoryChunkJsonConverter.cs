@@ -4,7 +4,7 @@
 // Created          : 04-24-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-25-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="MemoryChunkJsonConverter.cs" company="">
 //     Copyright ©  2018
@@ -20,7 +20,7 @@ using Newtonsoft.Json.Linq;
 namespace McFly.Server.Conversion
 {
     /// <summary>
-    ///     Class MemoryChunkJsonConverter.
+    ///     Json converter for <see cref="MemoryChunk" />
     /// </summary>
     /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Core.MemoryChunk}" />
     public class MemoryChunkJsonConverter : JsonConverter<MemoryChunk>

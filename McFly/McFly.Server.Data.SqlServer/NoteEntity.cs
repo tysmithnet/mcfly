@@ -19,7 +19,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
-    ///     Class NoteEntity.
+    ///     Entity that represents a note taken at a particular point in time
     /// </summary>
     [Table("note")]
     internal class NoteEntity

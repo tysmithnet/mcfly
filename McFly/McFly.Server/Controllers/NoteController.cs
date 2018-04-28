@@ -4,7 +4,7 @@
 // Created          : 03-12-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="NoteController.cs" company="">
 //     Copyright ©  2018
@@ -14,6 +14,7 @@
 
 using System.ComponentModel.Composition;
 using System.Web.Http;
+using Common.Logging;
 using McFly.Server.Contract;
 using McFly.Server.Data;
 using McFly.Server.Headers;
@@ -30,11 +31,9 @@ namespace McFly.Server.Controllers
     public class NoteController : ApiController
     {
         /// <summary>
-        ///     Gets or sets the note access.
+        ///     The log
         /// </summary>
-        /// <value>The note access.</value>
-        [Import]
-        protected internal INoteAccess NoteAccess { get; set; }
+        private static readonly ILog Log = LogManager.GetLogger<NoteController>();
 
         /// <summary>
         ///     Adds a note to a project at a specified position for a thread
@@ -48,5 +47,12 @@ namespace McFly.Server.Controllers
             NoteAccess.AddNote(projectName, request.Position, request.ThreadIds, request.Text);
             return Ok();
         }
+
+        /// <summary>
+        ///     Gets or sets the note access.
+        /// </summary>
+        /// <value>The note access.</value>
+        [Import]
+        protected internal INoteAccess NoteAccess { get; set; }
     }
 }

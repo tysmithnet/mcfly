@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="ICriterion.cs" company="">
 //     Copyright ©  2018
@@ -15,7 +15,11 @@
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Interface ICriterion
+    ///     Represents a singular facet of a search request
+    ///     <remarks>
+    ///         This could be a register has some value or a stack trace contains a frame or any other
+    ///         primitive search component
+    ///     </remarks>
     /// </summary>
     public interface ICriterion
     {

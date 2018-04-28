@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByteArrayBuilder_Should.cs" />
+    <Compile Include="DisassemblyLine_Should.cs" />
     <Compile Include="Frame_Should.cs" />
     <Compile Include="MemoryRange_Should.cs" />
     <Compile Include="Position_Should.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterSet_Should.cs" />
     <Compile Include="Register_Should.cs" />
+    <Compile Include="StackFrame_Should.cs" />
+    <Compile Include="StackTrace_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">

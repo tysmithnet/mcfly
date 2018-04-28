@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="AndCriterion.cs" company="">
 //     Copyright ©  2018
@@ -19,7 +19,7 @@ using System.Linq;
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Class AndCriterion. This class cannot be inherited.
+    ///     The logical AND of two or more criteria
     /// </summary>
     /// <seealso cref="McFly.Server.Data.Search.ICriterion" />
     public sealed class AndCriterion : ICriterion
@@ -35,12 +35,6 @@ namespace McFly.Server.Data.Search
         }
 
         /// <summary>
-        ///     Gets the criteria.
-        /// </summary>
-        /// <value>The criteria.</value>
-        public IEnumerable<ICriterion> Criteria { get; }
-
-        /// <summary>
         ///     Accepts the specified visitor.
         /// </summary>
         /// <param name="visitor">The visitor.</param>
@@ -49,5 +43,11 @@ namespace McFly.Server.Data.Search
         {
             return visitor.Visit(this);
         }
+
+        /// <summary>
+        ///     Gets the criteria.
+        /// </summary>
+        /// <value>The criteria.</value>
+        public IEnumerable<ICriterion> Criteria { get; }
     }
 }

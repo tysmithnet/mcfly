@@ -94,6 +94,12 @@ namespace McFly.Core.Test
             (_frame4 >= _frame3).Should().BeTrue();
             _frame1.CompareTo(_frame2).Should().Be(0);
             _frame1.CompareTo((object) _frame3).Should().Be(-1);
+            Action a = () => _frame1.CompareTo(new object());
+            a.Should().Throw<ArgumentException>();
+            _frame1.CompareTo(null).Should().Be(1);
+            _frame1.CompareTo(_frame1).Should().Be(0);
+            _frame1.CompareTo((object) _frame1).Should().Be(0);
+            _frame1.CompareTo((object) null).Should().Be(1);
         }
 
         [Fact]
@@ -102,6 +108,18 @@ namespace McFly.Core.Test
             // arrange
             // act
             // assert
+            (_frame1 == _frame1).Should().BeTrue();
+            (_frame1 == (object) _frame1).Should().BeTrue();
+            (_frame1 == null).Should().BeFalse();
+            (null == _frame1).Should().BeFalse();
+            _frame1.Equals(null).Should().BeFalse();
+            _frame1.Equals((object) null).Should().BeFalse();
+            _frame1.Equals(_frame1).Should().BeTrue();
+            _frame1.Equals((object) _frame1).Should().BeTrue();
+            _frame1.Equals(new object()).Should().BeFalse();
+            
+            _frame1.Equals(null).Should().BeFalse();
+            _frame1.Equals(_frame1).Should().BeTrue();
             _frame1.Equals(_frame2).Should().BeTrue();
             _frame1.Equals((object) _frame2).Should().BeTrue();
             (_frame1 == _frame2).Should().BeTrue();

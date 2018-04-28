@@ -24,7 +24,7 @@ namespace McFly.Server
     ///     Dependency resolver that uses MEF as its container functionality
     /// </summary>
     /// <seealso cref="System.Web.Http.Dependencies.IDependencyResolver" />
-    public class MefDependencyResolver : IDependencyResolver
+    internal sealed class MefDependencyResolver : IDependencyResolver
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="MefDependencyResolver" /> class.

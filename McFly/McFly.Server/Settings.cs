@@ -17,7 +17,7 @@ using System.ComponentModel.Composition;
 namespace McFly.Server
 {
     /// <summary>
-    ///     Class Settings. This class cannot be inherited.
+    ///     Represents the settings for this application
     /// </summary>
     [Export]
     public sealed class Settings

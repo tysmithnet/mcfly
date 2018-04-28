@@ -4,7 +4,7 @@
 // Created          : 04-01-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-01-2018
+// Last Modified On : 04-27-2018
 // ***********************************************************************
 // <copyright file="McFlyContext.cs" company="">
 //     Copyright ©  2018
@@ -17,7 +17,7 @@ using System.Data.Entity;
 namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
-    ///     Class McFlyContext.
+    ///     Default implementation of IMcFlyContext.
     /// </summary>
     /// <seealso cref="System.Data.Entity.DbContext" />
     /// <seealso cref="McFly.Server.Data.SqlServer.IMcFlyContext" />
@@ -30,36 +30,6 @@ namespace McFly.Server.Data.SqlServer
         public McFlyContext(string connectionString) : base(connectionString)
         {
         }
-
-        /// <summary>
-        ///     Gets or sets the frame entities.
-        /// </summary>
-        /// <value>The frame entities.</value>
-        public DbSet<FrameEntity> FrameEntities { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the note entities.
-        /// </summary>
-        /// <value>The note entities.</value>
-        public DbSet<NoteEntity> NoteEntities { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the stack frame entities.
-        /// </summary>
-        /// <value>The stack frame entities.</value>
-        public DbSet<StackFrameEntity> StackFrameEntities { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the trace information entities.
-        /// </summary>
-        /// <value>The trace information entities.</value>
-        public DbSet<TraceInfoEntity> TraceInfoEntities { get; set; }
-
-        /// <inheritdoc />
-        public DbSet<MemoryChunkEntity> MemoryChunkEntities { get; set; }
-
-        /// <inheritdoc />
-        public DbSet<ByteRangeEntity> ByteRangeEntities { get; set; }
 
         /// <summary>
         ///     This method is called when the model for a derived context has been initialized, but
@@ -92,5 +62,43 @@ namespace McFly.Server.Data.SqlServer
                 .HasIndex(entity => entity.Lock)
                 .IsUnique(true);
         }
+
+        /// <summary>
+        ///     Gets or sets the byte range entities.
+        /// </summary>
+        /// <value>The byte range entities.</value>
+        /// <inheritdoc />
+        public DbSet<ByteRangeEntity> ByteRangeEntities { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the frame entities.
+        /// </summary>
+        /// <value>The frame entities.</value>
+        public DbSet<FrameEntity> FrameEntities { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the memory chunk entities.
+        /// </summary>
+        /// <value>The memory chunk entities.</value>
+        /// <inheritdoc />
+        public DbSet<MemoryChunkEntity> MemoryChunkEntities { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the note entities.
+        /// </summary>
+        /// <value>The note entities.</value>
+        public DbSet<NoteEntity> NoteEntities { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the stack frame entities.
+        /// </summary>
+        /// <value>The stack frame entities.</value>
+        public DbSet<StackFrameEntity> StackFrameEntities { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the trace information entities.
+        /// </summary>
+        /// <value>The trace information entities.</value>
+        public DbSet<TraceInfoEntity> TraceInfoEntities { get; set; }
     }
 }

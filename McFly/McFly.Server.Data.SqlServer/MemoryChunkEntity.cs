@@ -18,13 +18,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
-    ///     Class MemoryChunkEntity.
+    ///     Entity that represents a slice of memory at a point in time
     /// </summary>
     [Table("memory_chunk")]
-    public class MemoryChunkEntity
+    internal class MemoryChunkEntity
     {
         /// <summary>
-        ///     Gets or sets the byte range.
+        ///     Gets or sets the byte range for this entity
         /// </summary>
         /// <value>The byte range.</value>
         [ForeignKey("ByteRangeId")]
@@ -38,7 +38,7 @@ namespace McFly.Server.Data.SqlServer
         public long ByteRangeId { get; set; }
 
         /// <summary>
-        ///     Gets or sets the high address.
+        ///     Gets or sets the high address of the position
         /// </summary>
         /// <value>The high address.</value>
         [MaxLength(16)]

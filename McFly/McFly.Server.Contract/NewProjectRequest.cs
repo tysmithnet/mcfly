@@ -18,10 +18,10 @@ using System.Diagnostics.CodeAnalysis;
 namespace McFly.Server.Contract
 {
     /// <summary>
-    ///     Class NewProjectRequest.
+    ///     Represents a request to create a new project
     /// </summary>
     /// <seealso cref="System.IEquatable{McFly.Server.Contract.NewProjectRequest}" />
-    public class NewProjectRequest : IEquatable<NewProjectRequest>
+    public sealed class NewProjectRequest : IEquatable<NewProjectRequest>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="NewProjectRequest" /> class.

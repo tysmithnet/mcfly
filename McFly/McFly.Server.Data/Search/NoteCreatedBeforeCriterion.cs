@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="NoteCreatedBeforeCriterion.cs" company="">
 //     Copyright ©  2018
@@ -17,7 +17,7 @@ using System;
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Class NoteCreatedBeforeCriterion.
+    ///     Search criterion for notes that were created before a certain point in time
     /// </summary>
     /// <seealso cref="McFly.Server.Data.Search.NoteCriterion" />
     public class NoteCreatedBeforeCriterion : NoteCriterion
@@ -32,12 +32,6 @@ namespace McFly.Server.Data.Search
         }
 
         /// <summary>
-        ///     Gets the date time.
-        /// </summary>
-        /// <value>The date time.</value>
-        public DateTime DateTime { get; }
-
-        /// <summary>
         ///     Accepts the specified visitor.
         /// </summary>
         /// <param name="visitor">The visitor.</param>
@@ -46,5 +40,11 @@ namespace McFly.Server.Data.Search
         {
             return visitor.Visit(this);
         }
+
+        /// <summary>
+        ///     Gets the date time.
+        /// </summary>
+        /// <value>The date time.</value>
+        public DateTime DateTime { get; }
     }
 }

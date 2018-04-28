@@ -21,11 +21,11 @@ using McFly.Server.Data.Search;
 namespace McFly.Server.Search
 {
     /// <summary>
-    ///     Class SearchCriterionConversionFacade.
+    ///     Default implementation of ISearchCriterionConversionFacade
     /// </summary>
     /// <seealso cref="McFly.Server.Search.ISearchCriterionConversionFacade" />
     [Export(typeof(ISearchCriterionConversionFacade))]
-    public class SearchCriterionConversionFacade : ISearchCriterionConversionFacade
+    internal sealed class SearchCriterionConversionFacade : ISearchCriterionConversionFacade
     {
         /// <summary>
         ///     Gets or sets the converters.

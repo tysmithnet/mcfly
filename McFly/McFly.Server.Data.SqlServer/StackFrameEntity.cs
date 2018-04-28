@@ -18,7 +18,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
-    ///     Class StackFrameEntity.
+    ///     Entity that reprensents a single stack frame
     /// </summary>
     [Table("stack_frame")]
     internal class StackFrameEntity

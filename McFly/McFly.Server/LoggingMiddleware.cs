@@ -21,10 +21,10 @@ using Microsoft.Owin;
 namespace McFly.Server
 {
     /// <summary>
-    ///     Class LoggingMiddleware.
+    ///    Middleware for logging request/response pairs
     /// </summary>
     /// <seealso cref="Microsoft.Owin.OwinMiddleware" />
-    public class LoggingMiddleware : OwinMiddleware
+    public sealed class LoggingMiddleware : OwinMiddleware
     {
         /// <summary>
         ///     The request number
@@ -39,7 +39,7 @@ namespace McFly.Server
         /// <summary>
         ///     The log
         /// </summary>
-        private readonly ILog Log = LogManager.GetLogger<LoggingMiddleware>();
+        private static readonly ILog Log = LogManager.GetLogger<LoggingMiddleware>();
 
         /// <summary>
         ///     Instantiates the middleware with an optional pointer to the next component.

@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="NotCriterion.cs" company="">
 //     Copyright ©  2018
@@ -17,7 +17,7 @@ using System;
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Class NotCriterion. This class cannot be inherited.
+    ///     Represents the logical negation of a search criterion
     /// </summary>
     /// <seealso cref="McFly.Server.Data.Search.ICriterion" />
     public sealed class NotCriterion : ICriterion
@@ -33,12 +33,6 @@ namespace McFly.Server.Data.Search
         }
 
         /// <summary>
-        ///     Gets the criterion.
-        /// </summary>
-        /// <value>The criterion.</value>
-        public ICriterion Criterion { get; }
-
-        /// <summary>
         ///     Accepts the specified visitor.
         /// </summary>
         /// <param name="visitor">The visitor.</param>
@@ -47,5 +41,11 @@ namespace McFly.Server.Data.Search
         {
             return visitor.Visit(this);
         }
+
+        /// <summary>
+        ///     Gets the criterion.
+        /// </summary>
+        /// <value>The criterion.</value>
+        public ICriterion Criterion { get; }
     }
 }

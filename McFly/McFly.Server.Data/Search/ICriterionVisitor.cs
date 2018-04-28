@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="ICriterionVisitor.cs" company="">
 //     Copyright ©  2018
@@ -15,7 +15,8 @@
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Interface ICriterionVisitor
+    ///     Represents an object capable of visiting types of <see cref="ICriterion" /> and performing
+    ///     some useful function
     /// </summary>
     public interface ICriterionVisitor
     {

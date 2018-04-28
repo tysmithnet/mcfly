@@ -18,7 +18,7 @@ using McFly.Server.Data.Search;
 namespace McFly.Server.Search
 {
     /// <summary>
-    ///     Interface ISearchCriterionConversionFacade
+    ///     Facade of search criteria
     /// </summary>
     public interface ISearchCriterionConversionFacade
     {

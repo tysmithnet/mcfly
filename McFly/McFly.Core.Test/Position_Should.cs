@@ -36,6 +36,14 @@ namespace McFly.Core.Test
             (left >= right).Should().Be(true, ">= operator should be overriden");
             left.CompareTo(left).Should().Be(0, "CompareTo should be implemented");
             left.CompareTo(null).Should().Be(1, "CompareTo should be implemented");
+            left.CompareTo(right).Should().Be(0, "Positions should exhibit value equality");
+            left.CompareTo(right2).Should().Be(-1, "The low portion is greater");
+            left.CompareTo((object)left).Should().Be(0, "CompareTo should be implemented");
+            left.CompareTo((object)null).Should().Be(1, "CompareTo should be implemented");
+            Action a = () => left.CompareTo(new object());
+            a.Should().Throw<ArgumentException>();
+            left.CompareTo((object)right).Should().Be(0, "Positions should exhibit value equality");
+            left.CompareTo((object)right2).Should().Be(-1, "The low portion is greater");
             comp.Equals(left, left).Should().BeTrue("IEquatable should be implemented");
             comp.GetHashCode(left).Should().Be(left.GetHashCode(), "The same object should have the same hash code");
         }
@@ -86,6 +94,7 @@ namespace McFly.Core.Test
             // assert
             zero.ToString().Should().Be("0:0", "Zeros show up as zeros");
             rand.ToString().Should().Be("123:ABC", "Positions are upper case hex pairs separated by :");
+            zero.DebugDisplay.Should().Be("0:0");
         }
     }
 }

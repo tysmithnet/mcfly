@@ -24,7 +24,7 @@ using Conv = System.Convert;
 namespace McFly.Server.Search
 {
     /// <summary>
-    ///     Class RegisterCriterionConverter.
+    ///     Default implementation of ISearchCriterionConverter
     /// </summary>
     /// <seealso cref="McFly.Server.Search.ISearchCriterionConverter" />
     [Export(typeof(ISearchCriterionConverter))]

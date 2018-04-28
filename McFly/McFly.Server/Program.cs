@@ -13,7 +13,6 @@
 // ***********************************************************************
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Common.Logging;
 using Microsoft.Owin.Hosting;
 
@@ -22,12 +21,12 @@ namespace McFly.Server
     /// <summary>
     ///     Entry point into the application
     /// </summary>
-    public class Program
+    public sealed class Program
     {
         /// <summary>
         ///     The log
         /// </summary>
-        private ILog Log = LogManager.GetLogger<Program>();
+        private static readonly ILog Log = LogManager.GetLogger<Program>();
 
         /// <summary>
         ///     Defines the entry point of the application.
@@ -41,7 +40,6 @@ namespace McFly.Server
             using (WebApp.Start<Startup>(baseAddress))
             {
                 // Create HttpCient and make a request to api/values 
-
                 Console.ReadLine();
             }
         }
