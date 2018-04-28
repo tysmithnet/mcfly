@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root CoveredStatements="9379" TotalStatements="12665" CoveragePercent="74" ReportType="NDependXML" DotCoverVersion="2017.3.5">
+<Root CoveredStatements="9403" TotalStatements="12673" CoveragePercent="74" ReportType="NDependXML" DotCoverVersion="2017.3.5">
   <Assembly Name="mcfly" CoveredStatements="1733" TotalStatements="2922" CoveragePercent="59">
     <Namespace Name="McFly" CoveredStatements="1669" TotalStatements="2774" CoveragePercent="60">
       <Type Name="AccessBreakpoint" CoveredStatements="61" TotalStatements="71" CoveragePercent="86">
@@ -3580,7 +3580,7 @@
       </Type>
     </Namespace>
   </Assembly>
-  <Assembly Name="McFly.Server" CoveredStatements="60" TotalStatements="244" CoveragePercent="25">
+  <Assembly Name="McFly.Server" CoveredStatements="76" TotalStatements="244" CoveragePercent="31">
     <Namespace Name="McFly.Server" CoveredStatements="0" TotalStatements="107" CoveragePercent="0">
       <Type Name="LoggingMiddleware" CoveredStatements="0" TotalStatements="18" CoveragePercent="0">
         <Type Name="&lt;Invoke&gt;d__4" CoveredStatements="0" TotalStatements="13" CoveragePercent="0">
@@ -3663,11 +3663,11 @@
         <Method Name="set_FrameAccess(IFrameAccess)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="41" />
       </Type>
     </Namespace>
-    <Namespace Name="McFly.Server.Headers" CoveredStatements="0" TotalStatements="51" CoveragePercent="0">
-      <Type Name="FromHeaderAttribute" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
-        <Method Name=".ctor(String)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="30" />
-        <Method Name="get_HeaderName()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
-        <Method Name="GetBinding(HttpParameterDescriptor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="47" />
+    <Namespace Name="McFly.Server.Headers" CoveredStatements="16" TotalStatements="51" CoveragePercent="31">
+      <Type Name="FromHeaderAttribute" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
+        <Method Name=".ctor(String)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="30" />
+        <Method Name="get_HeaderName()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="39" />
+        <Method Name="GetBinding(HttpParameterDescriptor)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="47" />
       </Type>
       <Type Name="FromHeaderAttributeOperationFilter" CoveredStatements="0" TotalStatements="13" CoveragePercent="0">
         <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
@@ -3678,12 +3678,12 @@
         </Type>
         <Method Name="Apply(Operation,SchemaRegistry,ApiDescription)" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="34" />
       </Type>
-      <Type Name="FromHeaderBinding" CoveredStatements="0" TotalStatements="27" CoveragePercent="0">
-        <Method Name=".ctor(HttpParameterDescriptor,String)" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="45" />
+      <Type Name="FromHeaderBinding" CoveredStatements="5" TotalStatements="27" CoveragePercent="19">
+        <Method Name=".ctor(HttpParameterDescriptor,String)" CoveredStatements="5" TotalStatements="6" CoveragePercent="83" FirstStatementLine="45" />
         <Method Name="ExecuteBindingAsync(ModelMetadataProvider,HttpActionContext,CancellationToken)" CoveredStatements="0" TotalStatements="21" CoveragePercent="0" FirstStatementLine="66" />
       </Type>
-      <Type Name="FromProjectNameHeaderAttribute" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
-        <Method Name=".ctor(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="27" />
+      <Type Name="FromProjectNameHeaderAttribute" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+        <Method Name=".ctor(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="27" />
       </Type>
     </Namespace>
     <Namespace Name="McFly.Server.Search" CoveredStatements="20" TotalStatements="27" CoveragePercent="74">
@@ -4302,7 +4302,7 @@
       </Type>
     </Namespace>
   </Assembly>
-  <Assembly Name="McFly.Server.Test" CoveredStatements="86" TotalStatements="103" CoveragePercent="83">
+  <Assembly Name="McFly.Server.Test" CoveredStatements="94" TotalStatements="111" CoveragePercent="85">
     <Namespace Name="McFly.Server.Test.Builders" CoveredStatements="21" TotalStatements="38" CoveragePercent="55">
       <Type Name="FrameAccessBuilder" CoveredStatements="12" TotalStatements="12" CoveragePercent="100">
         <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
@@ -4357,6 +4357,12 @@
         <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="10" />
         <Method Name="Build()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="19" />
         <Method Name="WithConvert(ICriterion)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="13" />
+      </Type>
+    </Namespace>
+    <Namespace Name="McFly.Server.Test.Headers" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
+      <Type Name="FromProjectNameHeaderAttribute_Should" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
+        <Method Name="Should_Get_Correct_Binding()" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="19" />
+        <Method Name="Should_Have_Correct_Name()" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="12" />
       </Type>
     </Namespace>
     <Namespace Name="McFly.Server.Test.Search" CoveredStatements="9" TotalStatements="9" CoveragePercent="100">
