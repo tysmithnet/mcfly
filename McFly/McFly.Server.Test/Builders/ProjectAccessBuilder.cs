@@ -36,7 +36,7 @@ namespace McFly.Server.Test.Builders
         /// <returns>ProjectAccessBuilder.</returns>
         public ProjectAccessBuilder WhenGetDatabases(IEnumerable<string> databases)
         {
-            Mock.Setup(access => access.GetDatabases()).Returns(databases);
+            Mock.Setup(access => access.GetProjects()).Returns(databases);
             return this;
         }
 

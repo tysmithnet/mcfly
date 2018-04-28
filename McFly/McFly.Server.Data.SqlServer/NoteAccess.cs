@@ -27,7 +27,7 @@ namespace McFly.Server.Data.SqlServer
     /// <seealso cref="DataAccess" />
     /// <seealso cref="McFly.Server.Data.INoteAccess" />
     [Export(typeof(INoteAccess))]
-    public class NoteAccess : DataAccess, INoteAccess
+    internal class NoteAccess : DataAccess, INoteAccess
     {
         /// <summary>
         ///     Gets or sets the context factory.
@@ -73,7 +73,7 @@ namespace McFly.Server.Data.SqlServer
             {
                 var frame = ctx.FrameEntities.FirstOrDefault(entity =>
                     entity.PosHi == position.High && entity.PosLo == position.Low && entity.ThreadId == threadId);
-                return frame.Notes.Select(x => x.ToNote());
+                return frame?.Notes.Select(x => x.ToNote());
             }
         }
     }

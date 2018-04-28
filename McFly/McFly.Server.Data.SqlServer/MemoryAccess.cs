@@ -4,7 +4,7 @@
 // Created          : 04-21-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-22-2018
+// Last Modified On : 04-27-2018
 // ***********************************************************************
 // <copyright file="MemoryAccess.cs" company="">
 //     Copyright ©  2018
@@ -21,14 +21,14 @@ using McFly.Core;
 namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
-    ///     Class MemoryAccess.
+    ///     Default implementation of IMemoryAccess
     /// </summary>
     /// <seealso cref="McFly.Server.Data.IMemoryAccess" />
     [Export(typeof(IMemoryAccess))]
     internal class MemoryAccess : IMemoryAccess
     {
         /// <summary>
-        ///     Adds the memory chunk to the 
+        ///     Adds the memory chunk to the
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="memoryChunk">The memory chunk.</param>
@@ -42,13 +42,14 @@ namespace McFly.Server.Data.SqlServer
                 var existing = context.ByteRangeEntities.FirstOrDefault(entity => entity.Bytes.Contains(newMem));
                 if (existing == null)
                 {
-                    var newByteEntity = new ByteRangeEntity()
+                    var newByteEntity = new ByteRangeEntity
                     {
-                        Bytes = newMem,
+                        Bytes = newMem
                     };
                     context.ByteRangeEntities.Add(newByteEntity);
                     existing = newByteEntity;
                 }
+
                 var index = 0;
                 index = existing.Bytes.IndexOf(newMem, StringComparison.Ordinal);
                 var loString = memoryChunk.MemoryRange.LowAddress.ToHexString();

@@ -45,7 +45,7 @@ namespace McFly.Server.Controllers
         [HttpGet]
         public JsonResult<IEnumerable<string>> Get()
         {
-            var j = Json(ProjectsAccess.GetDatabases());
+            var j = Json(ProjectsAccess.GetProjects());
             return j;
         }
 
