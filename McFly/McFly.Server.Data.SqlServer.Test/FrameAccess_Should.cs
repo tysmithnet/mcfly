@@ -167,7 +167,9 @@ namespace McFly.Server.Data.SqlServer.Test
             };
             builder.WithFrame(frame);
             access.ContextFactory = builder.Build();
-            access.GetFrame("anyproject", new Position(0, 0), 1).Should().Be(frame.ToFrame());
+            var converter = new FrameDomainEntityConverter();
+            var domain = converter.ToDomain(frame, access.ContextFactory.GetContext(""));
+            access.GetFrame("anyproject", new Position(0, 0), 1).Should().Be(domain);
         }
 
         [Fact]

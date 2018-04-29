@@ -62,7 +62,8 @@ namespace McFly.Server.Data.SqlServer
             {
                 foreach (var frame in frames)
                 {
-                    var source = frame.ToFrameEntity();
+                    var converter = new FrameDomainEntityConverter();
+                    var source = converter.ToEntity(frame, context);
                     var target = context.FrameEntities.FirstOrDefault(x =>
                         x.PosHi == source.PosHi && x.PosLo == source.PosLo && x.ThreadId == source.ThreadId);
                     if (target != null)
@@ -105,19 +106,22 @@ namespace McFly.Server.Data.SqlServer
                 if (first == null)
                     throw new IndexOutOfRangeException(
                         $"Count not find a frame with position: {position} and threadid: {threadId}");
-                return first.ToFrame();
+                var converter = new FrameDomainEntityConverter();
+                return converter.ToDomain(first, context);
             }
         }
 
         public IEnumerable<Frame> Search(string projectName, ICriterion criterion)
         {
-            using (var ctx = ContextFactory.GetContext(projectName))
+            var converter = new FrameDomainEntityConverter();
+
+            using (var context = ContextFactory.GetContext(projectName))
             {
-                var query = ctx.FrameEntities.AsExpandable();
+                var query = context.FrameEntities.AsExpandable();
                 var visitor = new FrameCriterionVisitor();
                 var exp = (Expression<Func<FrameEntity, bool>>)criterion.Accept(visitor);
                 var frames = query.Where(exp).ToList();
-                var converted = frames.Select(x => x.ToFrame());
+                var converted = frames.Select(x => converter.ToDomain(x, context)).ToList();
                 return converted;
             }
         }

@@ -70,6 +70,7 @@
     <Compile Include="DomainEntityExtensions.cs" />
     <Compile Include="FrameAccess.cs" />
     <Compile Include="FrameCriterionVisitor.cs" />
+    <Compile Include="FrameDomainEntityConverter.cs" />
     <Compile Include="FrameEntity.cs" />
     <Compile Include="IContextFactory.cs" />
     <Compile Include="IDomainEntityConverter.cs" />
