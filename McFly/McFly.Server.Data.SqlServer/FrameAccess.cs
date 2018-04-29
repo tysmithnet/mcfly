@@ -207,7 +207,7 @@ namespace McFly.Server.Data.SqlServer
             {
                 var query = ctx.FrameEntities.AsExpandable();
                 var visitor = new FrameCriterionVisitor();
-                var exp = (Expression<Func<FrameEntity, bool>>)visitor.Visit(criterion);
+                var exp = (Expression<Func<FrameEntity, bool>>)criterion.Accept(visitor);
                 var frames = query.Where(exp).ToList();
                 var converted = frames.Select(x => x.ToFrame());
                 return converted;

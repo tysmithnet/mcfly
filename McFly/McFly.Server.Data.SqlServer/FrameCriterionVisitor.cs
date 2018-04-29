@@ -30,29 +30,11 @@ namespace McFly.Server.Data.SqlServer
     internal class
         FrameCriterionVisitor : ICriterionVisitor
     {
-        /// <summary>
-        ///     Visits the specified criterion.
-        /// </summary>
-        /// <param name="criterion">The criterion.</param>
-        /// <returns>System.Object.</returns>
-        public object Visit(ICriterion criterion)
-        {
-            switch (criterion)
-            {
-                case AndCriterion and:
-                    return Visit(and);
-                case OrCriterion or:
-                    return Visit(or);
-                case NotCriterion not:
-                    return Visit(not);
-                case RegisterEqualsCriterion equal:
-                    return Visit(equal);
-                case RegisterBetweenCriterion between:
-                    return Visit(between);
-            }
 
-            FramePredicateExpression identity = entity => true;
-            return identity;
+        /// <inheritdoc />
+        public object Visit(RegisterInCriterion registerInCriterion)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -60,7 +42,7 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <param name="registerBetweenCriterion">The register between criterion.</param>
         /// <returns>FramePredicateExpression.</returns>
-        public FramePredicateExpression Visit(RegisterBetweenCriterion registerBetweenCriterion)
+        public object Visit(RegisterBetweenCriterion registerBetweenCriterion)
         {
             if (registerBetweenCriterion.Register == Register.Rax)
             {
@@ -106,12 +88,37 @@ namespace McFly.Server.Data.SqlServer
             return ret;
         }
 
+
+        /// <inheritdoc />
+        public object Visit(NoteCreatedAfterCriterion noteCreatedAfterCriterion)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public object Visit(NoteCreatedBeforeCriterion noteCreatedBeforeCriterion)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public object Visit(NoteCreatedBetweenCriterion noteCreatedBetweenCriterion)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public object Visit(NoteTextContainsCriterion noteTextContainsCriterion)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Visits the specified not criterion.
         /// </summary>
         /// <param name="notCriterion">The not criterion.</param>
         /// <returns>FramePredicateExpression.</returns>
-        public FramePredicateExpression Visit(NotCriterion notCriterion)
+        public object Visit(NotCriterion notCriterion)
         {
             var exp = (FramePredicateExpression) notCriterion.Criterion.Accept(this);
             var candidateExpr = exp.Parameters[0];
@@ -125,7 +132,7 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <param name="andCriterion">The and criterion.</param>
         /// <returns>FramePredicateExpression.</returns>
-        public FramePredicateExpression Visit(AndCriterion andCriterion)
+        public object Visit(AndCriterion andCriterion)
         {
             FramePredicateExpression result = null;
             foreach (var c in andCriterion.Criteria)
@@ -148,7 +155,7 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <param name="orCriterion">The or criterion.</param>
         /// <returns>FramePredicateExpression.</returns>
-        public FramePredicateExpression Visit(OrCriterion orCriterion)
+        public object Visit(OrCriterion orCriterion)
         {
             FramePredicateExpression result = null;
             foreach (var c in orCriterion.Criteria)
@@ -172,7 +179,7 @@ namespace McFly.Server.Data.SqlServer
         /// <param name="registerEqualsCriterion">The register equals criterion.</param>
         /// <returns>FramePredicateExpression.</returns>
         /// <exception cref="IndexOutOfRangeException">Unknown register</exception>
-        public FramePredicateExpression Visit(RegisterEqualsCriterion registerEqualsCriterion)
+        public object Visit(RegisterEqualsCriterion registerEqualsCriterion)
         {
             var bytes = registerEqualsCriterion.HexString;
             if (registerEqualsCriterion.Register == Register.Rax)

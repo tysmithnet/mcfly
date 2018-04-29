@@ -5,7 +5,8 @@ using McFly.Core.Registers;
 using McFly.Server.Data.Search;
 using McFly.Server.Data.SqlServer.Test.Builders;
 using Xunit;
-
+using FramePredicateExpression =
+    System.Linq.Expressions.Expression<System.Func<McFly.Server.Data.SqlServer.FrameEntity, bool>>;
 namespace McFly.Server.Data.SqlServer.Test
 {
     public class FrameCriterionVisitor_Should
@@ -30,7 +31,7 @@ namespace McFly.Server.Data.SqlServer.Test
                 Rbx = ((ulong) 1).ToHexString()
             };
             
-            var method = f.Compile();
+            var method = ((FramePredicateExpression)f).Compile();
             new[] {frame, frame2}.Single(x => method(x)).Should().Be(frame);
         }
 
@@ -54,7 +55,7 @@ namespace McFly.Server.Data.SqlServer.Test
                 Rbx = ((ulong)1).ToHexString()
             };
             builder.WithFrame(frame).WithFrame(frame2);
-            var method = f.Compile();
+            var method = ((FramePredicateExpression)f).Compile();
             new[] {frame, frame2}.Where(x => method(x)).SequenceEqual(new[] {frame, frame2}).Should().BeTrue();
         }
     }
