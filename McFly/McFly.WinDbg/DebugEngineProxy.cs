@@ -30,7 +30,7 @@ namespace McFly.WinDbg
     /// <seealso cref="IDebugEngineProxy" />
     /// <seealso cref="System.IDisposable" />
     [Export(typeof(IDebugEngineProxy))]
-    public class DebugEngineProxy : IDebugEngineProxy, IDisposable
+    internal sealed class DebugEngineProxy : IDebugEngineProxy, IDisposable
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="DebugEngineProxy" /> class.

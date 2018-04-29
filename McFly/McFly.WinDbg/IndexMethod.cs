@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-26-2018
+// Last Modified On : 04-28-2018
 // ***********************************************************************
 // <copyright file="IndexMethod.cs" company="">
 //     Copyright ©  2018
@@ -24,6 +24,7 @@ namespace McFly.WinDbg
     /// <summary>
     ///     McFly method that will persist the state of the trace at various positions
     /// </summary>
+    /// <seealso cref="McFly.WinDbg.IMcFlyMethod" />
     /// <seealso cref="IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
     [Export(typeof(IndexMethod))]
@@ -74,17 +75,18 @@ namespace McFly.WinDbg
         ///     Extracts the access breakpoints
         /// </summary>
         /// <param name="args">The arguments.</param>
-        /// <param name="i">The i.</param>
+        /// <param name="startingIndex">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="System.FormatException"></exception>
         /// <exception cref="System.ArgumentException"></exception>
-        internal static void ExtractAccessBreakpoints(string[] args, int i, string arg, IndexOptions options)
+        internal static void ExtractAccessBreakpoints(string[] args, int startingIndex, string arg,
+            IndexOptions options)
         {
             var accessBreakpoints = new List<AccessBreakpoint>();
-            for (var j = i + 1; j < args.Length; j++)
+            for (var j = startingIndex + 1; j < args.Length; j++)
             {
                 var ptr = args[j];
                 if (Switches.Contains(ptr))

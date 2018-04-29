@@ -103,12 +103,31 @@ namespace McFly.Core.Test
         }
 
         [Fact]
+        public void Convert_Between_HexString_And_ByteArray()
+        {
+            var random = new byte[] {0xef, 0xcd, 0xab, 0x89, 0x67, 0x45, 0x23, 0x01};
+            random.ToHexString(true).Should().Be("0123456789ABCDEF");
+            random.Reverse().ToArray().ToHexString().Should().Be("0123456789ABCDEF");
+
+        }
+
+
+        [Fact]
         public void Convert_Between_HexString_And_Uint()
         {
             uint random = 0x01234567;
             uint? random2 = 0x01234567;
             random.ToHexString().Should().Be("01234567");
             random2.ToHexString().Should().Be("01234567");
+        }
+
+        [Fact]
+        public void Convert_Between_HexString_And_UShort()
+        {
+            ushort random = 0x0123;
+            ushort? random2 = 0x0123;
+            random.ToHexString().Should().Be("0123");
+            random2.ToHexString().Should().Be("0123");
         }
     }
 }
