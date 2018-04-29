@@ -85,6 +85,7 @@
     <Compile Include="Builders\TestDbAsyncQueryProvider.cs" />
     <Compile Include="Builders\TestDbSet.cs" />
     <Compile Include="Builders\TestMcFlyContext.cs" />
+    <Compile Include="DomainEntityExtensions_Should.cs" />
     <Compile Include="FrameAccess_Should.cs" />
     <Compile Include="FrameCriterionVisitor_Should.cs" />
     <Compile Include="NoteAccess_Should.cs" />

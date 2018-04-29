@@ -20,7 +20,7 @@ namespace McFly.Server.Data.SqlServer
     /// <summary>
     ///     Class DomainEntityConversion.
     /// </summary>
-    internal static class DomainEntityConversion
+    internal static class DomainEntityExtensions
     {
         
         /// <summary>
@@ -122,7 +122,7 @@ namespace McFly.Server.Data.SqlServer
         public static Note ToNote(this NoteEntity entity)
         {
             var note = new Note();
-            note.CreateDate = entity.CreateDate;
+            note.CreateDateUtc = entity.CreateDate;
             note.Text = entity.Text;
             return note;
         }
@@ -135,7 +135,7 @@ namespace McFly.Server.Data.SqlServer
         public static NoteEntity ToNoteEntity(this Note note)
         {
             var entity = new NoteEntity();
-            entity.CreateDate = note.CreateDate;
+            entity.CreateDate = note.CreateDateUtc;
             entity.Text = note.Text;
             return entity;
         }
@@ -274,6 +274,14 @@ namespace McFly.Server.Data.SqlServer
             
 
             return memoryChunkEntity;
+        }
+
+        public static MemoryChunk ToMemoryChunk(this MemoryChunkEntity entity)
+        {
+            return new MemoryChunk
+            {
+                
+            };
         }
     }
 }

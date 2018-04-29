@@ -26,7 +26,7 @@ namespace McFly.Core
         ///     Gets or sets the create date.
         /// </summary>
         /// <value>The create date.</value>
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDateUtc { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         ///     Gets or sets the text.
