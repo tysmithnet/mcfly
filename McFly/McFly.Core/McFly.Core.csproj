@@ -45,8 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByteArrayBuilder.cs" />
+    <Compile Include="ByteArrayExtensions.cs" />
     <Compile Include="DisassemblyLine.cs" />
     <Compile Include="Frame.cs" />
+    <Compile Include="HexStringExtensions.cs" />
     <Compile Include="MemoryChunk.cs" />
     <Compile Include="MemoryRange.cs" />
     <Compile Include="Note.cs" />
