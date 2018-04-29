@@ -13,7 +13,6 @@
 // ***********************************************************************
 
 using System;
-using System.Globalization;
 using System.Linq;
 
 namespace McFly.Core
@@ -173,13 +172,33 @@ namespace McFly.Core
         }
 
         /// <summary>
+        ///     To the byte array.
+        /// </summary>
+        /// <param name="shortValue">The short value.</param>
+        /// <returns>System.Byte[].</returns>
+        public static byte[] ToByteArray(this short shortValue)
+        {
+            return BitConverter.GetBytes(shortValue);
+        }
+
+        /// <summary>
+        ///     To the byte array.
+        /// </summary>
+        /// <param name="ushortValue">The ushort value.</param>
+        /// <returns>System.Byte[].</returns>
+        public static byte[] ToByteArray(this ushort ushortValue)
+        {
+            return BitConverter.GetBytes(ushortValue);
+        }
+
+        /// <summary>
         ///     To the hexadecimal string.
         /// </summary>
         /// <param name="ulongValue">The ulong value.</param>
         /// <returns>System.String.</returns>
         public static string ToHexString(this ulong ulongValue)
         {
-            return $"{ulongValue:X16}";
+            return BitConverter.GetBytes(ulongValue).ToHexString();
         }
 
         /// <summary>
@@ -189,7 +208,7 @@ namespace McFly.Core
         /// <returns>System.String.</returns>
         public static string ToHexString(this long longValue)
         {
-            return $"{longValue:X16}";
+            return BitConverter.GetBytes(longValue).ToHexString();
         }
 
         /// <summary>
@@ -199,7 +218,7 @@ namespace McFly.Core
         /// <returns>System.String.</returns>
         public static string ToHexString(this ulong? ulongValue)
         {
-            return ulongValue.HasValue ? $"{ulongValue:X16}" : null;
+            return ulongValue.HasValue ? BitConverter.GetBytes(ulongValue.Value).ToHexString() : null;
         }
 
         /// <summary>
@@ -209,7 +228,7 @@ namespace McFly.Core
         /// <returns>System.String.</returns>
         public static string ToHexString(this long? longValue)
         {
-            return longValue.HasValue ? $"{longValue:X16}" : null;
+            return longValue.HasValue ? BitConverter.GetBytes(longValue.Value).ToHexString() : null;
         }
 
         /// <summary>
@@ -219,7 +238,7 @@ namespace McFly.Core
         /// <returns>System.String.</returns>
         public static string ToHexString(this ushort? ushortValue)
         {
-            return ushortValue.HasValue ? $"{ushortValue:X4}" : null;
+            return ushortValue.HasValue ? BitConverter.GetBytes(ushortValue.Value).ToHexString() : null;
         }
 
         /// <summary>
@@ -229,7 +248,7 @@ namespace McFly.Core
         /// <returns>System.String.</returns>
         public static string ToHexString(this ushort ushortValue)
         {
-            return $"{ushortValue:X4}";
+            return BitConverter.GetBytes(ushortValue).ToHexString();
         }
 
         /// <summary>
@@ -239,7 +258,7 @@ namespace McFly.Core
         /// <returns>System.String.</returns>
         public static string ToHexString(this uint uintValue)
         {
-            return $"{uintValue:X8}";
+            return BitConverter.GetBytes(uintValue).ToHexString();
         }
 
         /// <summary>
@@ -249,7 +268,7 @@ namespace McFly.Core
         /// <returns>System.String.</returns>
         public static string ToHexString(this uint? uintValue)
         {
-            return uintValue.HasValue ? $"{uintValue:X8}" : null;
+            return uintValue.HasValue ? BitConverter.GetBytes(uintValue.Value).ToHexString() : null;
         }
 
         /// <summary>
@@ -277,13 +296,23 @@ namespace McFly.Core
         }
 
         /// <summary>
+        ///     To the hexadecimal string.
+        /// </summary>
+        /// <param name="shortValue">The short value.</param>
+        /// <returns>System.String.</returns>
+        public static string ToHexString(this short shortValue)
+        {
+            return BitConverter.GetBytes(shortValue).ToHexString();
+        }
+
+        /// <summary>
         ///     Toints the specified hexadecimal string.
         /// </summary>
         /// <param name="hexString">The hexadecimal string.</param>
         /// <returns>System.Int32.</returns>
         public static int ToInt(this string hexString)
         {
-            return int.Parse(hexString, NumberStyles.HexNumber);
+            return ByteArrayBuilder.StringToByteArray(hexString).ToInt();
         }
 
         /// <summary>
@@ -319,7 +348,7 @@ namespace McFly.Core
         /// <returns>System.Int64.</returns>
         public static long ToLong(this string hexString)
         {
-            return long.Parse(hexString, NumberStyles.HexNumber);
+            return ByteArrayBuilder.StringToByteArray(hexString).ToLong();
         }
 
         /// <summary>
@@ -333,7 +362,7 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     To the long.
+        ///     Converts bytes to an Int64
         /// </summary>
         /// <param name="bytes">The bytes.</param>
         /// <returns>System.Int64.</returns>
@@ -349,27 +378,45 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     To the short.
+        ///     Converts a hex string to a Int16
         /// </summary>
         /// <param name="hexString">The hexadecimal string.</param>
         /// <returns>System.Int16.</returns>
         public static short ToShort(this string hexString)
         {
-            return short.Parse(hexString, NumberStyles.HexNumber);
+            return ByteArrayBuilder.StringToByteArray(hexString).ToShort();
         }
 
         /// <summary>
-        ///     To the u int.
+        ///     Converts a byte array to an Int16
+        /// </summary>
+        /// <param name="bytes">The bytes.</param>
+        /// <returns>System.Int16.</returns>
+        /// <exception cref="ArgumentNullException">bytes</exception>
+        /// <exception cref="ArgumentOutOfRangeException">bytes</exception>
+        /// <example>"cdab" =&gt; 0xabcd</example>
+        public static short ToShort(this byte[] bytes)
+        {
+            if (bytes == null)
+                throw new ArgumentNullException(nameof(bytes));
+            if (bytes.Length != 2)
+                throw new ArgumentOutOfRangeException(nameof(bytes),
+                    $"Must have exactly 2 bytes but found ${bytes.Length} bytes");
+            return BitConverter.ToInt16(bytes, 0);
+        }
+
+        /// <summary>
+        ///     Converts a hex string to a UInt64
         /// </summary>
         /// <param name="hexString">The hexadecimal string.</param>
         /// <returns>System.UInt32.</returns>
         public static uint ToUInt(this string hexString)
         {
-            return uint.Parse(hexString, NumberStyles.HexNumber);
+            return ByteArrayBuilder.StringToByteArray(hexString).ToUInt();
         }
 
         /// <summary>
-        ///     To the u int.
+        ///     Converts bytes to a UInt32
         /// </summary>
         /// <param name="bytes">The bytes.</param>
         /// <returns>System.UInt32.</returns>
@@ -385,7 +432,7 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     To the u int.
+        ///     Converts an Int32 to a UInt32
         /// </summary>
         /// <param name="intValue">The int value.</param>
         /// <returns>System.UInt32.</returns>
@@ -395,7 +442,7 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     To the u long.
+        ///     Converts an Int32 to a UInt64
         /// </summary>
         /// <param name="intValue">The int value.</param>
         /// <returns>System.UInt64.</returns>
@@ -405,13 +452,13 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     To the u long.
+        ///     Converts a hex string to a UInt64
         /// </summary>
         /// <param name="hexString">The hexadecimal string.</param>
         /// <returns>System.UInt64.</returns>
         public static ulong ToULong(this string hexString)
         {
-            return ulong.Parse(hexString, NumberStyles.HexNumber);
+            return ByteArrayBuilder.StringToByteArray(hexString).ToULong();
         }
 
         /// <summary>
@@ -425,7 +472,7 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     To the u long.
+        ///     Converts bytes to a UInt64
         /// </summary>
         /// <param name="bytes">The bytes.</param>
         /// <returns>System.UInt64.</returns>
@@ -441,13 +488,31 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     To the u short.
+        ///     Converts a hex string to a UInt16
         /// </summary>
         /// <param name="hexString">The hexadecimal string.</param>
         /// <returns>System.UInt16.</returns>
+        /// <example>"cdab" =&gt; 0xabcd</example>
         public static ushort ToUShort(this string hexString)
         {
-            return ushort.Parse(hexString, NumberStyles.HexNumber);
+            return ByteArrayBuilder.StringToByteArray(hexString).ToUShort();
+        }
+
+        /// <summary>
+        ///     Converts a byte array to UInt16
+        /// </summary>
+        /// <param name="bytes">The bytes.</param>
+        /// <returns>System.UInt16.</returns>
+        /// <exception cref="ArgumentNullException">bytes</exception>
+        /// <exception cref="ArgumentOutOfRangeException">bytes</exception>
+        public static ushort ToUShort(this byte[] bytes)
+        {
+            if (bytes == null)
+                throw new ArgumentNullException(nameof(bytes));
+            if (bytes.Length != 2)
+                throw new ArgumentOutOfRangeException(nameof(bytes),
+                    $"Must have exactly 2 bytes, but had {bytes.Length} bytes");
+            return BitConverter.ToUInt16(bytes, 0);
         }
     }
 }

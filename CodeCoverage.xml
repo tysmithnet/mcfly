@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root CoveredStatements="6823" TotalStatements="10323" CoveragePercent="66" ReportType="NDependXML" DotCoverVersion="2017.3.5">
+<Root CoveredStatements="6896" TotalStatements="10349" CoveragePercent="67" ReportType="NDependXML" DotCoverVersion="2017.3.5">
   <Assembly Name="mcfly" CoveredStatements="1733" TotalStatements="2992" CoveragePercent="58">
     <Namespace Name="McFly.WinDbg" CoveredStatements="1669" TotalStatements="2774" CoveragePercent="60">
       <Type Name="AccessBreakpoint" CoveredStatements="61" TotalStatements="71" CoveragePercent="86">
@@ -160,37 +160,37 @@
       </Type>
       <Type Name="IndexMethod" CoveredStatements="152" TotalStatements="196" CoveragePercent="78">
         <Type Name="&lt;&gt;c__DisplayClass3_0" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
-          <Method Name="&lt;CreateFramesForUpsert&gt;b__0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="67" />
-          <Method Name="&lt;CreateFramesForUpsert&gt;b__1(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="68" />
+          <Method Name="&lt;CreateFramesForUpsert&gt;b__0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="68" />
+          <Method Name="&lt;CreateFramesForUpsert&gt;b__1(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="69" />
         </Type>
-        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="40" />
-        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="384" />
-        <Method Name="CreateFramesForUpsert(PositionsResult,PositionsRecord,IndexOptions)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="65" />
-        <Method Name="ExtractAccessBreakpoints(String[],Int32,String,IndexOptions)" CoveredStatements="17" TotalStatements="21" CoveragePercent="81" FirstStatementLine="85" />
-        <Method Name="ExtractEnd(String[],Int32,String,IndexOptions)" CoveredStatements="6" TotalStatements="10" CoveragePercent="60" FirstStatementLine="120" />
-        <Method Name="ExtractIndexOptions(String[])" CoveredStatements="21" TotalStatements="22" CoveragePercent="95" FirstStatementLine="141" />
-        <Method Name="ExtractMasks(String[],Int32,String,IndexOptions)" CoveredStatements="17" TotalStatements="21" CoveragePercent="81" FirstStatementLine="186" />
-        <Method Name="ExtractMemoryRanges(String[],Int32,String,IndexOptions)" CoveredStatements="16" TotalStatements="21" CoveragePercent="76" FirstStatementLine="221" />
-        <Method Name="ExtractStart(String[],Int32,String,IndexOptions)" CoveredStatements="6" TotalStatements="10" CoveragePercent="60" FirstStatementLine="256" />
-        <Method Name="get_BreakpointFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="407" />
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="414" />
-        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="384" />
-        <Method Name="get_Log()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="442" />
-        <Method Name="get_ServerClient()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="421" />
-        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="428" />
-        <Method Name="get_TimeTravelFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="435" />
-        <Method Name="GetEndingPosition(IndexOptions)" CoveredStatements="4" TotalStatements="5" CoveragePercent="80" FirstStatementLine="276" />
-        <Method Name="GetStartingPosition(IndexOptions)" CoveredStatements="4" TotalStatements="5" CoveragePercent="80" FirstStatementLine="289" />
-        <Method Name="Is32Bit()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="300" />
-        <Method Name="Process(String[])" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="49" />
-        <Method Name="ProcessInternal(Position,Position,IndexOptions)" CoveredStatements="23" TotalStatements="33" CoveragePercent="70" FirstStatementLine="316" />
-        <Method Name="set_BreakpointFacade(IBreakpointFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="407" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="414" />
-        <Method Name="set_Log(ILog)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="442" />
-        <Method Name="set_ServerClient(IServerClient)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="421" />
-        <Method Name="set_Settings(Settings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="428" />
-        <Method Name="set_TimeTravelFacade(ITimeTravelFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="435" />
-        <Method Name="SetBreakpoints(IndexOptions)" CoveredStatements="16" TotalStatements="16" CoveragePercent="100" FirstStatementLine="368" />
+        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="41" />
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="386" />
+        <Method Name="CreateFramesForUpsert(PositionsResult,PositionsRecord,IndexOptions)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="66" />
+        <Method Name="ExtractAccessBreakpoints(String[],Int32,String,IndexOptions)" CoveredStatements="17" TotalStatements="21" CoveragePercent="81" FirstStatementLine="87" />
+        <Method Name="ExtractEnd(String[],Int32,String,IndexOptions)" CoveredStatements="6" TotalStatements="10" CoveragePercent="60" FirstStatementLine="122" />
+        <Method Name="ExtractIndexOptions(String[])" CoveredStatements="21" TotalStatements="22" CoveragePercent="95" FirstStatementLine="143" />
+        <Method Name="ExtractMasks(String[],Int32,String,IndexOptions)" CoveredStatements="17" TotalStatements="21" CoveragePercent="81" FirstStatementLine="188" />
+        <Method Name="ExtractMemoryRanges(String[],Int32,String,IndexOptions)" CoveredStatements="16" TotalStatements="21" CoveragePercent="76" FirstStatementLine="223" />
+        <Method Name="ExtractStart(String[],Int32,String,IndexOptions)" CoveredStatements="6" TotalStatements="10" CoveragePercent="60" FirstStatementLine="258" />
+        <Method Name="get_BreakpointFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="409" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="416" />
+        <Method Name="get_HelpInfo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="386" />
+        <Method Name="get_Log()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="444" />
+        <Method Name="get_ServerClient()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="423" />
+        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="430" />
+        <Method Name="get_TimeTravelFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="437" />
+        <Method Name="GetEndingPosition(IndexOptions)" CoveredStatements="4" TotalStatements="5" CoveragePercent="80" FirstStatementLine="278" />
+        <Method Name="GetStartingPosition(IndexOptions)" CoveredStatements="4" TotalStatements="5" CoveragePercent="80" FirstStatementLine="291" />
+        <Method Name="Is32Bit()" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="302" />
+        <Method Name="Process(String[])" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="50" />
+        <Method Name="ProcessInternal(Position,Position,IndexOptions)" CoveredStatements="23" TotalStatements="33" CoveragePercent="70" FirstStatementLine="318" />
+        <Method Name="set_BreakpointFacade(IBreakpointFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="409" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="416" />
+        <Method Name="set_Log(ILog)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="444" />
+        <Method Name="set_ServerClient(IServerClient)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="423" />
+        <Method Name="set_Settings(Settings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="430" />
+        <Method Name="set_TimeTravelFacade(ITimeTravelFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="437" />
+        <Method Name="SetBreakpoints(IndexOptions)" CoveredStatements="16" TotalStatements="16" CoveragePercent="100" FirstStatementLine="370" />
       </Type>
       <Type Name="IndexOptions" CoveredStatements="39" TotalStatements="52" CoveragePercent="75">
         <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
@@ -510,8 +510,8 @@
     </Namespace>
     <Type Name="&lt;PrivateImplementationDetails&gt;" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
   </Assembly>
-  <Assembly Name="McFly.Core" CoveredStatements="4397" TotalStatements="5409" CoveragePercent="81">
-    <Namespace Name="McFly.Core" CoveredStatements="2231" TotalStatements="2285" CoveragePercent="98">
+  <Assembly Name="McFly.Core" CoveredStatements="4470" TotalStatements="5435" CoveragePercent="82">
+    <Namespace Name="McFly.Core" CoveredStatements="2304" TotalStatements="2311" CoveragePercent="99">
       <Type Name="ByteArrayBuilder" CoveredStatements="31" TotalStatements="31" CoveragePercent="100">
         <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="30" />
         <Method Name="AppdendHexString(String)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="38" />
@@ -624,9 +624,9 @@
         <Method Name="set_Low(Int32)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="255" />
         <Method Name="ToString()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="149" />
       </Type>
-      <Type Name="PrimitiveExtensions" CoveredStatements="91" TotalStatements="138" CoveragePercent="66">
-        <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
-          <Method Name="&lt;ToHexString&gt;b__22_0(Byte)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="266" />
+      <Type Name="PrimitiveExtensions" CoveredStatements="164" TotalStatements="164" CoveragePercent="100">
+        <Type Name="&lt;&gt;c" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
+          <Method Name="&lt;ToHexString&gt;b__22_0(Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="266" />
           <Method Name="&lt;ToHexString&gt;b__22_1(Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="266" />
         </Type>
         <Method Name="Hi32(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="32" />
@@ -639,34 +639,40 @@
         <Method Name="Lo32(UInt64,UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="108" />
         <Method Name="Lo8(UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="118" />
         <Method Name="Lo8(UInt16,Byte)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="129" />
+        <Method Name="ToByteArray(Int16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="362" />
         <Method Name="ToByteArray(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="171" />
         <Method Name="ToByteArray(Int64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="151" />
+        <Method Name="ToByteArray(UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="499" />
         <Method Name="ToByteArray(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="161" />
         <Method Name="ToByteArray(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="141" />
         <Method Name="ToHexString(Byte[],Boolean)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="262" />
+        <Method Name="ToHexString(Int16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="367" />
+        <Method Name="ToHexString(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="275" />
         <Method Name="ToHexString(Int64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="191" />
         <Method Name="ToHexString(Nullable&lt;Int64&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="211" />
         <Method Name="ToHexString(Nullable&lt;UInt16&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="221" />
         <Method Name="ToHexString(Nullable&lt;UInt32&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="251" />
         <Method Name="ToHexString(Nullable&lt;UInt64&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="201" />
-        <Method Name="ToHexString(UInt16)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="231" />
+        <Method Name="ToHexString(UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="231" />
         <Method Name="ToHexString(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="241" />
         <Method Name="ToHexString(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="181" />
-        <Method Name="ToInt(Byte[])" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="287" />
-        <Method Name="Toint(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="275" />
-        <Method Name="ToInt(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="301" />
-        <Method Name="ToLong(Byte[])" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="333" />
-        <Method Name="ToLong(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="311" />
-        <Method Name="ToLong(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="321" />
-        <Method Name="ToShort(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="347" />
-        <Method Name="ToUInt(Byte[])" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="369" />
-        <Method Name="ToUInt(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="383" />
-        <Method Name="ToUInt(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="357" />
-        <Method Name="ToULong(Byte[])" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="420" />
-        <Method Name="ToULong(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="388" />
-        <Method Name="ToULong(Int64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="408" />
-        <Method Name="ToULong(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="398" />
-        <Method Name="ToUShort(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="434" />
+        <Method Name="ToInt(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="297" />
+        <Method Name="ToInt(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="285" />
+        <Method Name="ToInt(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="311" />
+        <Method Name="ToLong(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="343" />
+        <Method Name="ToLong(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="321" />
+        <Method Name="ToLong(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="331" />
+        <Method Name="ToShort(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="380" />
+        <Method Name="ToShort(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="357" />
+        <Method Name="ToUInt(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="406" />
+        <Method Name="ToUInt(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="420" />
+        <Method Name="ToUInt(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="394" />
+        <Method Name="ToULong(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="462" />
+        <Method Name="ToULong(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="430" />
+        <Method Name="ToULong(Int64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="450" />
+        <Method Name="ToULong(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="440" />
+        <Method Name="ToUShort(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="489" />
+        <Method Name="ToUShort(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="477" />
       </Type>
       <Type Name="RegisterSet" CoveredStatements="1717" TotalStatements="1717" CoveragePercent="100">
         <Type Name="&lt;&gt;c__DisplayClass26_0" CoveredStatements="24" TotalStatements="24" CoveragePercent="100">
