@@ -53,8 +53,8 @@ namespace McFly.Server.Data.SqlServer
                 foreach (var frameEntity in frames)
                     frameEntity.Tags.Add(new TagEntity
                     {
-                        CreateDate = DateTime.UtcNow,
-                        Text = text
+                        CreateDateUtc = DateTime.UtcNow,
+                        Title = text
                     });
                 ctx.SaveChanges();
             }

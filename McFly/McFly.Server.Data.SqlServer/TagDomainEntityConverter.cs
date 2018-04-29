@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System.Linq;
 using McFly.Core;
 
 namespace McFly.Server.Data.SqlServer
@@ -34,8 +35,10 @@ namespace McFly.Server.Data.SqlServer
         {
             return new Tag
             {
-                CreateDateUtc = entity.CreateDate.ToUniversalTime(),
-                Title = entity.Text
+                Body = entity.Body,
+                Title = entity.Title,
+                CreateDateUtc = entity.CreateDateUtc,
+                TagId = entity.TagId
             };
         }
 
@@ -48,7 +51,14 @@ namespace McFly.Server.Data.SqlServer
         /// <inheritdoc />
         public TagEntity ToEntity(Tag domainObject, IMcFlyContext context)
         {
-            return null;
+            var first = context.TagEntities.FirstOrDefault(t => t.TagId == domainObject.TagId);
+            if (first != null)
+                return first;
+            var newTag = context.TagEntities.Create();
+            newTag.Body = domainObject.Body;
+            newTag.Title = domainObject.Title;
+            newTag.CreateDateUtc = domainObject.CreateDateUtc;
+            return newTag;
         }
     }
 }

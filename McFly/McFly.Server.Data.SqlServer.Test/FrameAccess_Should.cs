@@ -234,8 +234,8 @@ namespace McFly.Server.Data.SqlServer.Test
                 {
                     new TagEntity
                     {
-                        CreateDate = DateTime.MinValue,
-                        Text = "note"
+                        CreateDateUtc = DateTime.MinValue,
+                        Title = "note"
                     }
                 }
             });

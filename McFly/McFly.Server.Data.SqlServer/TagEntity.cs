@@ -28,24 +28,8 @@ namespace McFly.Server.Data.SqlServer
         ///     Gets or sets the create date.
         /// </summary>
         /// <value>The create date.</value>
-        [Column("create_date")]
-        public DateTime CreateDate { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the frame.
-        /// </summary>
-        /// <value>The frame.</value>
-        [ForeignKey("FrameId")]
-        public FrameEntity Frame { get; set; }
-
-        // todo: add title/description
-
-        /// <summary>
-        ///     Gets or sets the frame identifier.
-        /// </summary>
-        /// <value>The frame identifier.</value>
-        [Column("frame_id")]
-        public long FrameId { get; set; }
+        [Column("create_date_utc")]
+        public DateTime CreateDateUtc { get; set; }
 
         /// <summary>
         ///     Gets or sets the tag identifier.
@@ -57,10 +41,17 @@ namespace McFly.Server.Data.SqlServer
         public long TagId { get; set; }
 
         /// <summary>
-        ///     Gets or sets the text.
+        ///     Gets or sets the title of the tag
         /// </summary>
         /// <value>The text.</value>
-        [Column("text")]
-        public string Text { get; set; }
+        [Column("title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the body of the tag
+        /// </summary>
+        /// <value>The body.</value>
+        [Column("body")]
+        public string Body { get; set; }
     }
 }
