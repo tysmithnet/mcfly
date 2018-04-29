@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-16-2018
+// Last Modified On : 04-28-2018
 // ***********************************************************************
 // <copyright file="PrimitiveExtensions.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -267,11 +267,21 @@ namespace McFly.Core
         }
 
         /// <summary>
+        ///     To the hexadecimal string.
+        /// </summary>
+        /// <param name="intValue">The int value.</param>
+        /// <returns>System.String.</returns>
+        public static string ToHexString(this int intValue)
+        {
+            return BitConverter.GetBytes(intValue).ToHexString();
+        }
+
+        /// <summary>
         ///     Toints the specified hexadecimal string.
         /// </summary>
         /// <param name="hexString">The hexadecimal string.</param>
         /// <returns>System.Int32.</returns>
-        public static int Toint(this string hexString)
+        public static int ToInt(this string hexString)
         {
             return int.Parse(hexString, NumberStyles.HexNumber);
         }
@@ -384,6 +394,11 @@ namespace McFly.Core
             return unchecked ((uint) intValue);
         }
 
+        /// <summary>
+        ///     To the u long.
+        /// </summary>
+        /// <param name="intValue">The int value.</param>
+        /// <returns>System.UInt64.</returns>
         public static ulong ToULong(this int intValue)
         {
             return (ulong) intValue;

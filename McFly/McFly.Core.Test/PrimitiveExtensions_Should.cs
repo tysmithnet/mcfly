@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -128,6 +129,13 @@ namespace McFly.Core.Test
             ushort? random2 = 0x0123;
             random.ToHexString().Should().Be("0123");
             random2.ToHexString().Should().Be("0123");
+        }
+
+        [Fact]
+        public void Convert_Between_HexString_And_Int()
+        {
+            "ABC123".ToInt().Should().Be(0xabc123);
+            Convert.ToInt32(0xabc123).ToHexString().Should().Be("23C1AB00");
         }
     }
 }
