@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FluentAssertions;
 using McFly.Core;
+using McFly.Server.Data.SqlServer.Test.Builders;
 using Xunit;
 
 namespace McFly.Server.Data.SqlServer.Test

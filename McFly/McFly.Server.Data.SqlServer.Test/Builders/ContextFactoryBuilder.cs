@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 
-namespace McFly.Server.Data.SqlServer.Test
+namespace McFly.Server.Data.SqlServer.Test.Builders
 {
     internal class TestMcFlyContext : IMcFlyContext
     {

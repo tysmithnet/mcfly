@@ -5,6 +5,7 @@ using FluentAssertions;
 using McFly.Core;
 using McFly.Core.Registers;
 using McFly.Server.Data.Search;
+using McFly.Server.Data.SqlServer.Test.Builders;
 using Xunit;
 
 namespace McFly.Server.Data.SqlServer.Test
@@ -119,6 +120,14 @@ namespace McFly.Server.Data.SqlServer.Test
         }
 
         [Fact]
+        public void Throw_Application_Exception_If_Save_Fails()
+        {
+            var frameAccess = new FrameAccess();
+            var builder = new ContextFactoryBuilder();
+            
+        }
+
+        [Fact]
         public void Find_Matching_Frames_When_Searched_For_Basic()
         {
             var frameAccess = new FrameAccess();
@@ -225,7 +234,8 @@ namespace McFly.Server.Data.SqlServer.Test
                         Rax = 2,
                         Rbx = 4,
                         Rcx = 6,
-                        Rdx = 8
+                        Rdx = 8,
+                        Rip = 0x90
                     },
                     DisassemblyLine = new DisassemblyLine(90, new byte[] {0x10, 0x20}, "mov", "r9,r8"),
                     StackTrace = new StackTrace(new[]

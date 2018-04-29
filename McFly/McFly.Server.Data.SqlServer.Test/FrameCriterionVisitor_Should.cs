@@ -3,6 +3,7 @@ using FluentAssertions;
 using McFly.Core;
 using McFly.Core.Registers;
 using McFly.Server.Data.Search;
+using McFly.Server.Data.SqlServer.Test.Builders;
 using Xunit;
 
 namespace McFly.Server.Data.SqlServer.Test
