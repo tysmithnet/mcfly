@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
 using FluentAssertions;
@@ -8,13 +7,21 @@ using McFly.Core;
 using McFly.Core.Registers;
 using McFly.Server.Data.Search;
 using McFly.Server.Data.SqlServer.Test.Builders;
-using Moq;
 using Xunit;
 
 namespace McFly.Server.Data.SqlServer.Test
 {
     public class FrameAccess_Should
     {
+        private class CantSaveContext : TestMcFlyContext
+        {
+            /// <inheritdoc />
+            public override int SaveChanges()
+            {
+                throw new DbEntityValidationException("fail", new List<DbEntityValidationResult>());
+            }
+        }
+
         [Fact]
         public void Find_Matching_Frames_By_Register_values()
         {
@@ -55,7 +62,8 @@ namespace McFly.Server.Data.SqlServer.Test
             });
             frameAccess.ContextFactory = builder.Build();
 
-            var between = new RegisterBetweenCriterion(Register.Rax, ((ulong)0).ToHexString(), ((ulong)2).ToHexString());
+            var between =
+                new RegisterBetweenCriterion(Register.Rax, ((ulong) 0).ToHexString(), ((ulong) 2).ToHexString());
             var notBetween = new NotCriterion(between);
 
             var betweenResults = frameAccess.Search("", between);
@@ -123,28 +131,6 @@ namespace McFly.Server.Data.SqlServer.Test
         }
 
         [Fact]
-        public void Throw_Application_Exception_If_Save_Fails()
-        {
-            var frameAccess = new FrameAccess();
-            var builder = new ContextFactoryBuilder();
-            builder.WithContext(new CantSaveContext());
-            frameAccess.ContextFactory = builder.Build();
-            Action a = () => frameAccess.UpsertFrames("", new List<Frame>());
-            a.Should().Throw<ApplicationException>();
-        }
-
-        private class CantSaveContext : TestMcFlyContext
-        {
-            /// <inheritdoc />
-            public override int SaveChanges()
-            {
-                throw new DbEntityValidationException("poop", new List<DbEntityValidationResult>()
-                {
-                });
-            }
-        }
-
-        [Fact]
         public void Find_Matching_Frames_When_Searched_For_Basic()
         {
             var frameAccess = new FrameAccess();
@@ -185,6 +171,17 @@ namespace McFly.Server.Data.SqlServer.Test
         }
 
         [Fact]
+        public void Throw_Application_Exception_If_Save_Fails()
+        {
+            var frameAccess = new FrameAccess();
+            var builder = new ContextFactoryBuilder();
+            builder.WithContext(new CantSaveContext());
+            frameAccess.ContextFactory = builder.Build();
+            Action a = () => frameAccess.UpsertFrames("", new List<Frame>());
+            a.Should().Throw<ApplicationException>();
+        }
+
+        [Fact]
         public void Throw_If_Frame_Cant_Be_Found()
         {
             var access = new FrameAccess();
@@ -212,20 +209,20 @@ namespace McFly.Server.Data.SqlServer.Test
                 PosHi = 0,
                 PosLo = 0,
                 ThreadId = 1,
-                Rax = ((ulong)1).ToHexString(),
-                Rbx = ((ulong)2).ToHexString(),
-                Rcx = ((ulong)3).ToHexString(),
-                Rdx = ((ulong)4).ToHexString(),
+                Rax = ((ulong) 1).ToHexString(),
+                Rbx = ((ulong) 2).ToHexString(),
+                Rcx = ((ulong) 3).ToHexString(),
+                Rdx = ((ulong) 4).ToHexString(),
                 DisassemblyNote = "r9,r8",
-                Rip = ((ulong)90).ToHexString(),
+                Rip = ((ulong) 90).ToHexString(),
                 OpCode = "1020",
                 OpCodeMnemonic = "mov",
                 StackFrames = new List<StackFrameEntity>
                 {
                     new StackFrameEntity
                     {
-                        StackPointer = ((ulong)100).ToHexString(),
-                        ReturnAddress = ((ulong)700).ToHexString(),
+                        StackPointer = ((ulong) 100).ToHexString(),
+                        ReturnAddress = ((ulong) 700).ToHexString(),
                         ModuleName = "mymod",
                         Function = "myfun",
                         Offset = 30
@@ -279,6 +276,93 @@ namespace McFly.Server.Data.SqlServer.Test
             access.GetFrame("", new Position(1, 0), 1).RegisterSet.Rax.Should().Be(13);
             access.GetFrame("", new Position(1, 0), 1).RegisterSet.Rbx.Should().Be(4);
             // todo: need more complete testing
+        }
+
+        [Fact]
+        public void Convert_Between_Frame_And_FrameEntity_Correctly()
+        {
+            var frame = new Frame();
+
+            {
+                frame = new Frame();
+                frame.RegisterSet.Af = true;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Af.Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                frame.RegisterSet.Cf = true;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Cf.Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                frame.RegisterSet.Df = true;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Df.Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                frame.RegisterSet.If = true;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.If.Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                frame.RegisterSet.Of = true;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Of.Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                frame.RegisterSet.Pf = true;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Pf.Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                frame.RegisterSet.Sf = true;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Sf.Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                frame.RegisterSet.Tf = true;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Tf.Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                frame.RegisterSet.Vif = true;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Vif.Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                frame.RegisterSet.Vip = true;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Vip.Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                frame.RegisterSet.Zf = true;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Zf.Should().BeTrue();
+            }
+
+
+
         }
     }
 }
