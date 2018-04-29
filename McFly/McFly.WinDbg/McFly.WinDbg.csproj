@@ -122,7 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessBreakpoint.cs" />
-    <Compile Include="AddNoteOptions.cs" />
+    <Compile Include="AddTagOptions.cs" />
     <Compile Include="BreakpointFacade.cs" />
     <Compile Include="BreakpointMask.cs" />
     <Compile Include="DebugEngineProxy.cs" />
@@ -205,7 +205,7 @@
     <Compile Include="McFlyApp.cs" />
     <Compile Include="McFlyExtension.cs" />
     <Compile Include="IndexOptions.cs" />
-    <Compile Include="NoteMethod.cs" />
+    <Compile Include="TagMethod.cs" />
     <Compile Include="PositionsRecord.cs" />
     <Compile Include="PositionsResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,7 +6,7 @@
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-25-2018
 // ***********************************************************************
-// <copyright file="AddNoteOptions.cs" company="">
+// <copyright file="AddTagOptions.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -15,9 +15,9 @@
 namespace McFly.WinDbg
 {
     /// <summary>
-    ///     Options for NoteMethod add command
+    ///     Options for TagMethod add command
     /// </summary>
-    internal class AddNoteOptions
+    internal class AddTagOptions
     {
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is all threads at position.

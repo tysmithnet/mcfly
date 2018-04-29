@@ -6,7 +6,7 @@
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-03-2018
 // ***********************************************************************
-// <copyright file="AddNoteRequest.cs" company="">
+// <copyright file="AddTagRequest.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -20,20 +20,20 @@ using McFly.Core;
 namespace McFly.Server.Contract
 {
     /// <summary>
-    ///     Requests of this type will be considered for adding notes to particular places
+    ///     Requests of this type will be considered for adding tags to particular places
     ///     in the trace
     /// </summary>
-    /// <seealso cref="System.IEquatable{McFly.Server.Contract.AddNoteRequest}" />
-    public sealed class AddNoteRequest : IEquatable<AddNoteRequest>
+    /// <seealso cref="System.IEquatable{McFly.Server.Contract.AddTagRequest}" />
+    public sealed class AddTagRequest : IEquatable<AddTagRequest>
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AddNoteRequest" /> class.
+        ///     Initializes a new instance of the <see cref="AddTagRequest" /> class.
         /// </summary>
         /// <param name="position">The position.</param>
         /// <param name="threadIds">The thread ids.</param>
         /// <param name="text">The text.</param>
         /// <exception cref="ArgumentNullException">threadIds</exception>
-        public AddNoteRequest(Position position, IEnumerable<int> threadIds, string text)
+        public AddTagRequest(Position position, IEnumerable<int> threadIds, string text)
         {
             Position = position;
             ThreadIds = threadIds ?? throw new ArgumentNullException(nameof(threadIds));
@@ -45,7 +45,7 @@ namespace McFly.Server.Contract
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool Equals(AddNoteRequest other)
+        public bool Equals(AddTagRequest other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -63,7 +63,7 @@ namespace McFly.Server.Contract
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((AddNoteRequest) obj);
+            return Equals((AddTagRequest) obj);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace McFly.Server.Contract
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator ==(AddNoteRequest left, AddNoteRequest right)
+        public static bool operator ==(AddTagRequest left, AddTagRequest right)
         {
             return Equals(left, right);
         }
@@ -98,7 +98,7 @@ namespace McFly.Server.Contract
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator !=(AddNoteRequest left, AddNoteRequest right)
+        public static bool operator !=(AddTagRequest left, AddTagRequest right)
         {
             return !Equals(left, right);
         }

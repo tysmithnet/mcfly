@@ -230,9 +230,9 @@ namespace McFly.Server.Data.SqlServer.Test
                         Offset = 30
                     }
                 },
-                Notes = new List<NoteEntity>
+                Tags = new List<TagEntity>
                 {
-                    new NoteEntity
+                    new TagEntity
                     {
                         CreateDate = DateTime.MinValue,
                         Text = "note"

@@ -23,34 +23,6 @@ namespace McFly.Server.Data.SqlServer
     internal static class DomainEntityExtensions
     {
         
-
-
-        /// <summary>
-        ///     To the note.
-        /// </summary>
-        /// <param name="entity">The entity.</param>
-        /// <returns>Note.</returns>
-        public static Note ToNote(this NoteEntity entity)
-        {
-            var note = new Note();
-            note.CreateDateUtc = entity.CreateDate;
-            note.Text = entity.Text;
-            return note;
-        }
-
-        /// <summary>
-        ///     To the note entity.
-        /// </summary>
-        /// <param name="note">The note.</param>
-        /// <returns>NoteEntity.</returns>
-        public static NoteEntity ToNoteEntity(this Note note)
-        {
-            var entity = new NoteEntity();
-            entity.CreateDate = note.CreateDateUtc;
-            entity.Text = note.Text;
-            return entity;
-        }
-
         /// <summary>
         ///     To the stack frame.
         /// </summary>

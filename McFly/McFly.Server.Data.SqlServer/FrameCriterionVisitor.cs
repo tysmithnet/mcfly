@@ -90,25 +90,25 @@ namespace McFly.Server.Data.SqlServer
 
 
         /// <inheritdoc />
-        public object Visit(NoteCreatedAfterCriterion noteCreatedAfterCriterion)
+        public object Visit(TagCreatedAfterCriterion tagCreatedAfterCriterion)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public object Visit(NoteCreatedBeforeCriterion noteCreatedBeforeCriterion)
+        public object Visit(TagCreatedBeforeCriterion tagCreatedBeforeCriterion)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public object Visit(NoteCreatedBetweenCriterion noteCreatedBetweenCriterion)
+        public object Visit(TagCreatedBetweenCriterion tagCreatedBetweenCriterion)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public object Visit(NoteTextContainsCriterion noteTextContainsCriterion)
+        public object Visit(TagTextContainsCriterion tagTextContainsCriterion)
         {
             throw new NotImplementedException();
         }

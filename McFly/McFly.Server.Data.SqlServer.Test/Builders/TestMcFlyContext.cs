@@ -28,7 +28,7 @@ namespace McFly.Server.Data.SqlServer.Test.Builders
         public TestMcFlyContext()
         {
             FrameEntities = new TestDbSet<FrameEntity>();
-            NoteEntities = new TestDbSet<NoteEntity>();
+            TagEntities = new TestDbSet<TagEntity>();
             StackFrameEntities = new TestDbSet<StackFrameEntity>();
             TraceInfoEntities = new TestDbSet<TraceInfoEntity>();
             MemoryChunkEntities = new TestDbSet<MemoryChunkEntity>();
@@ -73,10 +73,10 @@ namespace McFly.Server.Data.SqlServer.Test.Builders
         public DbSet<MemoryChunkEntity> MemoryChunkEntities { get; set; }
 
         /// <summary>
-        ///     Gets or sets the note entities.
+        ///     Gets or sets the tag entities.
         /// </summary>
-        /// <value>The note entities.</value>
-        public DbSet<NoteEntity> NoteEntities { get; set; }
+        /// <value>The tag entities.</value>
+        public DbSet<TagEntity> TagEntities { get; set; }
 
         /// <summary>
         ///     Gets or sets the stack frame entities.

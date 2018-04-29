@@ -107,8 +107,8 @@
   <ItemGroup>
     <Compile Include="Builders\FrameAccessBuilder.cs" />
     <Compile Include="Controllers\FrameController_Should.cs" />
-    <Compile Include="Builders\NoteAccessBuilder.cs" />
-    <Compile Include="Controllers\NoteController_Should.cs" />
+    <Compile Include="Builders\TagAccessBuilder.cs" />
+    <Compile Include="Controllers\TagController_Should.cs" />
     <Compile Include="Builders\ProjectAccessBuilder.cs" />
     <Compile Include="Controllers\ProjectController_Should.cs" />
     <Compile Include="Controllers\SearchCriteriaConverterFacadeBuilder.cs" />

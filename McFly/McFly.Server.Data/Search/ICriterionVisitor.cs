@@ -22,10 +22,10 @@ namespace McFly.Server.Data.Search
     {
         object Visit(AndCriterion andCriterion);
         object Visit(NotCriterion notCriterion);
-        object Visit(NoteCreatedAfterCriterion noteCreatedAfterCriterion);
-        object Visit(NoteCreatedBeforeCriterion noteCreatedBeforeCriterion);
-        object Visit(NoteCreatedBetweenCriterion noteCreatedBetweenCriterion);
-        object Visit(NoteTextContainsCriterion noteTextContainsCriterion);
+        object Visit(TagCreatedAfterCriterion tagCreatedAfterCriterion);
+        object Visit(TagCreatedBeforeCriterion tagCreatedBeforeCriterion);
+        object Visit(TagCreatedBetweenCriterion tagCreatedBetweenCriterion);
+        object Visit(TagTextContainsCriterion tagTextContainsCriterion);
         object Visit(OrCriterion orCriterion);
         object Visit(RegisterBetweenCriterion registerBetweenCriterion);
         object Visit(RegisterEqualsCriterion registerEqualsCriterion);

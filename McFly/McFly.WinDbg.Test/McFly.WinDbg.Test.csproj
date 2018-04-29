@@ -95,7 +95,7 @@
     <Compile Include="MemoryEngineBuilder.cs" />
     <Compile Include="MemoryEngine_Should.cs" />
     <Compile Include="MockFrames.cs" />
-    <Compile Include="NoteMethod_Should.cs" />
+    <Compile Include="TagMethod_Should.cs" />
     <Compile Include="PositionsRecord_Should.cs" />
     <Compile Include="PositionsResult_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

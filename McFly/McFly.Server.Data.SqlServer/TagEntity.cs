@@ -6,7 +6,7 @@
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-01-2018
 // ***********************************************************************
-// <copyright file="NoteEntity.cs" company="">
+// <copyright file="TagEntity.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -19,20 +19,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
-    ///     Entity that represents a note taken at a particular point in time
+    ///     Entity that represents a tag taken at a particular point in time
     /// </summary>
-    [Table("note")]
-    internal class NoteEntity
+    [Table("tag")]
+    internal class TagEntity
     {
-        /// <summary>
-        ///     Gets or sets the note identifier.
-        /// </summary>
-        /// <value>The note identifier.</value>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("note_id")]
-        public long NoteId { get; set; }
-
         /// <summary>
         ///     Gets or sets the create date.
         /// </summary>
@@ -41,11 +32,13 @@ namespace McFly.Server.Data.SqlServer
         public DateTime CreateDate { get; set; }
 
         /// <summary>
-        ///     Gets or sets the text.
+        ///     Gets or sets the frame.
         /// </summary>
-        /// <value>The text.</value>
-        [Column("text")]
-        public string Text { get; set; }
+        /// <value>The frame.</value>
+        [ForeignKey("FrameId")]
+        public FrameEntity Frame { get; set; }
+
+        // todo: add title/description
 
         /// <summary>
         ///     Gets or sets the frame identifier.
@@ -55,10 +48,19 @@ namespace McFly.Server.Data.SqlServer
         public long FrameId { get; set; }
 
         /// <summary>
-        ///     Gets or sets the frame.
+        ///     Gets or sets the tag identifier.
         /// </summary>
-        /// <value>The frame.</value>
-        [ForeignKey("FrameId")]
-        public FrameEntity Frame { get; set; }
+        /// <value>The tag identifier.</value>
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("tag_id")]
+        public long TagId { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the text.
+        /// </summary>
+        /// <value>The text.</value>
+        [Column("text")]
+        public string Text { get; set; }
     }
 }

@@ -338,10 +338,10 @@ namespace McFly.Server.Data.SqlServer
         public string Mxcsr { get; set; }
 
         /// <summary>
-        ///     Gets or sets the notes.
+        ///     Gets or sets the tags.
         /// </summary>
-        /// <value>The notes.</value>
-        public virtual List<NoteEntity> Notes { get; set; } = new List<NoteEntity>();
+        /// <value>The tags.</value>
+        public virtual List<TagEntity> Tags { get; set; } = new List<TagEntity>();
 
         /// <summary>
         ///     Gets or sets the op code.

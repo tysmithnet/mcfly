@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddMemoryRequest.cs" />
-    <Compile Include="AddNoteRequest.cs" />
+    <Compile Include="AddTagRequest.cs" />
     <Compile Include="ISearchRequestVisitor.cs" />
     <Compile Include="SearchRequest.cs" />
     <Compile Include="NewProjectRequest.cs" />

@@ -6,7 +6,7 @@
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-03-2018
 // ***********************************************************************
-// <copyright file="Note.cs" company="">
+// <copyright file="Tag.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -20,8 +20,14 @@ namespace McFly.Core
     ///     Represents a piece of information associated with a thread/position
     ///     in the trace
     /// </summary>
-    public sealed class Note
+    public sealed class Tag
     {
+        /// <summary>
+        ///     Gets or sets the body.
+        /// </summary>
+        /// <value>The body.</value>
+        public string Body { get; set; }
+
         /// <summary>
         ///     Gets or sets the create date.
         /// </summary>
@@ -29,9 +35,9 @@ namespace McFly.Core
         public DateTime CreateDateUtc { get; set; } = DateTime.UtcNow;
 
         /// <summary>
-        ///     Gets or sets the text.
+        ///     Gets or sets the title of this tag
         /// </summary>
         /// <value>The text.</value>
-        public string Text { get; set; }
+        public string Title { get; set; }
     }
 }

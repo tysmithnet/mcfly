@@ -1656,14 +1656,16 @@ namespace McFly.Server.Data.SqlServer.Test
         }
 
         [Fact]
-        public void Convert_Between_Note_And_NoteEntity()
+        public void Convert_Between_Tag_And_TagEntity()
         {
-            var note = new Note();
-            note.CreateDateUtc = DateTime.MinValue;
-            note.Text = "hello there";
-            var entity = note.ToNoteEntity();
-            var convertedBack = entity.ToNote();
-            convertedBack.Text.Should().Be("hello there");
+            var mock = new Mock<IMcFlyContext>();
+            var tag = new Tag();
+            tag.CreateDateUtc = DateTime.MinValue;
+            tag.Title = "hello there";
+            var converter = new TagDomainEntityConverter();
+            var converted = converter.ToEntity(tag, mock.Object);
+            var convertedBack = converter.ToDomain(converted, mock.Object);
+            convertedBack.Title.Should().Be("hello there");
             convertedBack.CreateDateUtc.Should().Be(DateTime.MinValue);
         }
 

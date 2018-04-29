@@ -51,7 +51,7 @@
     <Compile Include="HexStringExtensions.cs" />
     <Compile Include="MemoryChunk.cs" />
     <Compile Include="MemoryRange.cs" />
-    <Compile Include="Note.cs" />
+    <Compile Include="Tag.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="PrimitiveExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

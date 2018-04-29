@@ -31,12 +31,12 @@ namespace McFly.WinDbg.Test
             headers.Add("X-Project-Name", "testing");
 
             // act
-            serverClient.AddNote(new Position(0xabc, 0x123), new[] {1}, "hello world");
+            serverClient.AddTag(new Position(0xabc, 0x123), new[] {1}, "hello world");
 
             // assert
             httpBuilder.Mock.Verify(
                 facade => facade.PostJsonAsync(new Uri("https://some.server.net/api/note"),
-                    new AddNoteRequest(new Position(0xabc, 0x123), new[] {1}, "hello world"), headers), Times.Once);
+                    new AddTagRequest(new Position(0xabc, 0x123), new[] {1}, "hello world"), headers), Times.Once);
         }
 
         [Fact]

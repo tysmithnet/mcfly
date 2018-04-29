@@ -6,7 +6,7 @@
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-26-2018
 // ***********************************************************************
-// <copyright file="NoteCriterion.cs" company="">
+// <copyright file="TagCriterion.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -15,10 +15,10 @@
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Base abstraction for a search criterion that operates on notes
+    ///     Base abstraction for a search criterion that operates on tags
     /// </summary>
     /// <seealso cref="McFly.Server.Data.Search.ICriterion" />
-    public abstract class NoteCriterion : ICriterion
+    public abstract class TagCriterion : ICriterion
     {
         /// <summary>
         ///     Accepts the specified visitor.
