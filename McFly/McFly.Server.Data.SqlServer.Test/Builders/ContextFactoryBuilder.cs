@@ -49,6 +49,17 @@ namespace McFly.Server.Data.SqlServer.Test.Builders
         }
 
         /// <summary>
+        ///     Withes the context.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <returns>ContextFactoryBuilder.</returns>
+        public ContextFactoryBuilder WithContext(IMcFlyContext context)
+        {
+            Mock.Setup(factory => factory.GetContext(It.IsAny<string>())).Returns(context);
+            return this;
+        }
+
+        /// <summary>
         ///     Adds a frame to the collection of frames
         /// </summary>
         /// <param name="frame">The frame.</param>

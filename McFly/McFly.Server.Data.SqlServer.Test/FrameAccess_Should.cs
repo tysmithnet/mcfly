@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using FluentAssertions;
 using McFly.Core;
 using McFly.Core.Registers;
 using McFly.Server.Data.Search;
 using McFly.Server.Data.SqlServer.Test.Builders;
+using Moq;
 using Xunit;
 
 namespace McFly.Server.Data.SqlServer.Test
@@ -124,7 +127,21 @@ namespace McFly.Server.Data.SqlServer.Test
         {
             var frameAccess = new FrameAccess();
             var builder = new ContextFactoryBuilder();
-            
+            builder.WithContext(new CantSaveContext());
+            frameAccess.ContextFactory = builder.Build();
+            Action a = () => frameAccess.UpsertFrames("", new List<Frame>());
+            a.Should().Throw<ApplicationException>();
+        }
+
+        private class CantSaveContext : TestMcFlyContext
+        {
+            /// <inheritdoc />
+            public override int SaveChanges()
+            {
+                throw new DbEntityValidationException("poop", new List<DbEntityValidationResult>()
+                {
+                });
+            }
         }
 
         [Fact]

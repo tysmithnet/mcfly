@@ -47,7 +47,7 @@ namespace McFly.Server.Data.SqlServer.Test.Builders
         ///     Saves the changes.
         /// </summary>
         /// <returns>System.Int32.</returns>
-        public int SaveChanges()
+        public virtual int SaveChanges()
         {
             return 0;
         }
