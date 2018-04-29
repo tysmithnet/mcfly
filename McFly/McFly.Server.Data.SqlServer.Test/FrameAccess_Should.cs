@@ -1333,6 +1333,582 @@ namespace McFly.Server.Data.SqlServer.Test
                 var convertedBack = entity.ToFrame();
                 convertedBack.RegisterSet.Xmm9l.Should().Be(ulong.MaxValue);
             }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 10).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.St0 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.St0.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 10).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.St1 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.St1.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 10).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.St2 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.St2.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 10).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.St3 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.St3.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 10).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.St4 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.St4.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 10).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.St5 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.St5.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 10).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.St6 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.St6.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 10).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.St7 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.St7.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm0 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm0.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm1 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm1.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm10 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm10.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm11 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm11.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm12 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm12.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm13 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm13.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm14 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm14.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm15 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm15.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm2 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm2.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm3 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm3.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm4 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm4.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm5 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm5.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm6 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm6.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm7 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm7.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm8 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm8.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Xmm9 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Xmm9.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm0 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm0.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm0h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm0h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm0l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm0l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm1 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm1.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm10 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm10.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm10h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm10h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm10l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm10l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm11 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm11.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm11h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm11h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm11l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm11l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm12 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm12.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm12h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm12h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm12l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm12l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm13 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm13.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm13h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm13h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm13l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm13l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm14 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm14.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm14h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm14h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm14l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm14l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm15 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm15.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm15h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm15h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm15l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm15l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm1h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm1h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm1l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm1l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm2 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm2.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm2h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm2h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm2l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm2l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm3 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm3.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm3h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm3h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm3l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm3l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm4 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm4.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm4h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm4h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm4l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm4l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm5 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm5.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm5h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm5h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm5l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm5l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm6 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm6.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm6h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm6h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm6l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm6l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm7 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm7.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm7h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm7h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm7l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm7l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm8 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm8.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm8h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm8h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm8l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm8l.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 32).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm9 = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm9.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm9h = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm9h.SequenceEqual(bytes).Should().BeTrue();
+            }
+            {
+                frame = new Frame();
+                var bytes = Enumerable.Range(1, 16).Select(x => (byte)x).ToArray();
+                frame.RegisterSet.Ymm9l = bytes;
+                var entity = frame.ToFrameEntity();
+                var convertedBack = entity.ToFrame();
+                convertedBack.RegisterSet.Ymm9l.SequenceEqual(bytes).Should().BeTrue();
+            }
         }
     }
 }
