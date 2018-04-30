@@ -12,14 +12,17 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
+
 namespace McFly.Core
 {
     /// <summary>
     ///     Represents an arbitrary cross section of virtual memory. What you would expect if
     ///     you were to examine raw memory.
     /// </summary>
-    public class MemoryChunk
+    public class MemoryChunk // todo: entity equality
     {
+        public Guid Id { get; set; }
         /// <summary>
         ///     Gets or sets the bytes.
         /// </summary>

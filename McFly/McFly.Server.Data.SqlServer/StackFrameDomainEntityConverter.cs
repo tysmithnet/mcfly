@@ -6,7 +6,7 @@
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-29-2018
 // ***********************************************************************
-// <copyright file="TagDomainEntityConverter.cs" company="">
+// <copyright file="StackFrameDomainEntityConverter.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -18,11 +18,11 @@ using McFly.Core;
 namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
-    ///     Domain converter for tags
+    ///     Domain entity converter for <see cref="StackFrame"/> and <see cref="StackFrameEntity"/>
     /// </summary>
     /// <seealso
-    ///     cref="McFly.Server.Data.SqlServer.IDomainEntityConverter{McFly.Core.Tag, McFly.Server.Data.SqlServer.TagEntity}" />
-    internal class TagDomainEntityConverter : IDomainEntityConverter<Tag, TagEntity>
+    ///     cref="McFly.Server.Data.SqlServer.IDomainEntityConverter{McFly.Core.StackFrame, McFly.Server.Data.SqlServer.StackFrameEntity}" />
+    internal class StackFrameDomainEntityConverter : IDomainEntityConverter<StackFrame, StackFrameEntity>
     {
         /// <summary>
         ///     Convert an entity to a domain object.
@@ -31,15 +31,9 @@ namespace McFly.Server.Data.SqlServer
         /// <param name="context">The context.</param>
         /// <returns>The corresponding domain object for the provided entity</returns>
         /// <inheritdoc />
-        public Tag ToDomain(TagEntity entity, IMcFlyContext context)
+        public StackFrame ToDomain(StackFrameEntity entity, IMcFlyContext context)
         {
-            return new Tag
-            {
-                Body = entity.Body,
-                Title = entity.Title,
-                CreateDateUtc = entity.CreateDateUtc,
-                Id = entity.TagId
-            };
+            return new StackFrame(entity.StackPointer.ToULong(), entity.ReturnAddress?.ToULong(), entity.ModuleName, entity.Function, entity.Offset?.ToULong());
         }
 
         /// <summary>
@@ -49,16 +43,10 @@ namespace McFly.Server.Data.SqlServer
         /// <param name="context">The context.</param>
         /// <returns>The corresponding database entity for the provided domain object</returns>
         /// <inheritdoc />
-        public TagEntity ToEntity(Tag domainObject, IMcFlyContext context)
+        public StackFrameEntity ToEntity(StackFrame domainObject, IMcFlyContext context)
         {
-            var first = context.TagEntities.FirstOrDefault(t => t.TagId == domainObject.Id);
-            if (first != null)
-                return first;
-            var newTag = context.TagEntities.Create();
-            newTag.Body = domainObject.Body;
-            newTag.Title = domainObject.Title;
-            newTag.CreateDateUtc = domainObject.CreateDateUtc;
-            return newTag;
+            
+            
         }
     }
 }

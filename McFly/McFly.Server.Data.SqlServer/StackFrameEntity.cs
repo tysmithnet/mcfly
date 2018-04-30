@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,7 +31,7 @@ namespace McFly.Server.Data.SqlServer
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
-        public long Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the stack pointer.

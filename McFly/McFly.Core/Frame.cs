@@ -29,6 +29,8 @@ namespace McFly.Core
         Frame : IComparable<Frame>, IComparable,
             IEquatable<Frame> // todo: this doesn't seem like a value type.. shoudl be (position, thread) == (position, thread)
     {
+        public Guid Id { get; set; } // todo: lock down?
+
         /// <summary>
         ///     The thread identifier
         /// </summary>

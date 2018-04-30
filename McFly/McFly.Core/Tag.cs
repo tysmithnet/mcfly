@@ -33,7 +33,7 @@ namespace McFly.Core
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return TagId == other.TagId;
+            return Id == other.Id;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace McFly.Core
         /// <inheritdoc />
         public override int GetHashCode()
         {
-            return TagId.GetHashCode();
+            return Id.GetHashCode();
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace McFly.Core
         ///     Gets or sets the tag identifier.
         /// </summary>
         /// <value>The tag identifier.</value>
-        public long TagId { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the title of this tag

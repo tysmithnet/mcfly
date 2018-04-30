@@ -12,6 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
+
 namespace McFly.Core
 {
     /// <summary>
@@ -110,5 +112,7 @@ namespace McFly.Core
         /// </summary>
         /// <value>The stack pointer.</value>
         public ulong StackPointer { get; internal set; }
+
+        public Guid Id { get; set; }
     }
 }

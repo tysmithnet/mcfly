@@ -23,6 +23,8 @@ namespace McFly.Core
     /// </summary>
     public sealed class StackTrace
     {
+        public Guid Id { get; set; }
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="StackTrace" /> class.
         /// </summary>
