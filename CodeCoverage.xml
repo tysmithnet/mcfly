@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root CoveredStatements="7092" TotalStatements="10826" CoveragePercent="66" ReportType="NDependXML" DotCoverVersion="2017.3.5">
-  <Assembly Name="mcfly" CoveredStatements="1733" TotalStatements="2992" CoveragePercent="58">
-    <Namespace Name="McFly.WinDbg" CoveredStatements="1669" TotalStatements="2774" CoveragePercent="60">
+<Root CoveredStatements="7139" TotalStatements="10826" CoveragePercent="66" ReportType="NDependXML" DotCoverVersion="2017.3.5">
+  <Assembly Name="mcfly" CoveredStatements="1748" TotalStatements="2992" CoveragePercent="58">
+    <Namespace Name="McFly.WinDbg" CoveredStatements="1684" TotalStatements="2774" CoveragePercent="61">
       <Type Name="AccessBreakpoint" CoveredStatements="61" TotalStatements="71" CoveragePercent="86">
         <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="60" />
         <Method Name=".ctor(UInt64,UInt16,Boolean,Boolean)" CoveredStatements="10" TotalStatements="13" CoveragePercent="77" FirstStatementLine="42" />
@@ -306,10 +306,10 @@
         <Method Name="GetRegisterValue32(Register,IDebugRegisters2)" CoveredStatements="0" TotalStatements="155" CoveragePercent="0" FirstStatementLine="61" />
         <Method Name="GetRegisterValue64(Register,IDebugRegisters2)" CoveredStatements="0" TotalStatements="299" CoveragePercent="0" FirstStatementLine="226" />
       </Type>
-      <Type Name="RegisterFacade" CoveredStatements="890" TotalStatements="905" CoveragePercent="98">
+      <Type Name="RegisterFacade" CoveredStatements="905" TotalStatements="905" CoveragePercent="100">
         <Method Name="get_DebugEngineProxy()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="965" />
         <Method Name="GetCurrentRegisterSet(IEnumerable&lt;Register&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="956" />
-        <Method Name="GetCurrentRegisterSet(Int32,IEnumerable&lt;Register&gt;)" CoveredStatements="885" TotalStatements="900" CoveragePercent="98" FirstStatementLine="38" />
+        <Method Name="GetCurrentRegisterSet(Int32,IEnumerable&lt;Register&gt;)" CoveredStatements="900" TotalStatements="900" CoveragePercent="100" FirstStatementLine="38" />
         <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="965" />
       </Type>
       <Type Name="ServerClient" CoveredStatements="20" TotalStatements="33" CoveragePercent="61">
@@ -510,7 +510,7 @@
     </Namespace>
     <Type Name="&lt;PrivateImplementationDetails&gt;" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
   </Assembly>
-  <Assembly Name="McFly.Core" CoveredStatements="4558" TotalStatements="5516" CoveragePercent="83">
+  <Assembly Name="McFly.Core" CoveredStatements="4590" TotalStatements="5516" CoveragePercent="83">
     <Namespace Name="McFly.Core" CoveredStatements="2392" TotalStatements="2392" CoveragePercent="100">
       <Type Name="ByteArrayBuilder" CoveredStatements="31" TotalStatements="31" CoveragePercent="100">
         <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="30" />
@@ -1190,7 +1190,7 @@
         <Method Name="set_Title(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="84" />
       </Type>
     </Namespace>
-    <Namespace Name="McFly.Core.Registers" CoveredStatements="2166" TotalStatements="3124" CoveragePercent="69">
+    <Namespace Name="McFly.Core.Registers" CoveredStatements="2198" TotalStatements="3124" CoveragePercent="70">
       <Type Name="AfRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
         <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
@@ -2982,14 +2982,14 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm0hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
-        <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="5" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="5" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="6" />
-        <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="7" />
-        <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="8" />
-        <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="9" />
-        <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="10" />
+      <Type Name="Ymm0hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
+        <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
+        <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
+        <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
+        <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
+        <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
       <Type Name="Ymm0lRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
@@ -3009,10 +3009,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm10hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm10hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3036,10 +3036,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm11hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm11hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3063,10 +3063,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm12hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm12hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3090,10 +3090,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm13hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm13hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3117,10 +3117,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm14hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm14hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3144,10 +3144,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm15hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm15hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3171,10 +3171,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm1hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm1hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3198,10 +3198,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm2hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm2hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3225,10 +3225,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm3HRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm3HRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3252,10 +3252,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm4hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm4hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3279,10 +3279,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm5hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm5hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3306,10 +3306,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm6hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm6hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3333,10 +3333,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm7hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm7hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3360,10 +3360,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm8hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm8hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
@@ -3387,10 +3387,10 @@
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
         <Method Name="get_X86NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="57" />
       </Type>
-      <Type Name="Ymm9hRegister" CoveredStatements="6" TotalStatements="12" CoveragePercent="50">
+      <Type Name="Ymm9hRegister" CoveredStatements="8" TotalStatements="12" CoveragePercent="67">
         <Method Name=".ctor()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="27" />
-        <Method Name="get_Name()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
+        <Method Name="get_Name()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="27" />
+        <Method Name="get_NumBits()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
         <Method Name="get_X64Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
         <Method Name="get_X64NumBits()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_X86Index()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="51" />
