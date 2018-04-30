@@ -35,20 +35,14 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///     Equalses the specified other.
-        /// </summary>
+        ///     Determines whether the specified <see cref="StackTrace" /> is equal to this         /// </summary>
         /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if both StackTrace are equal, <c>false</c> otherwise.</returns>
         /// <inheritdoc />
         public bool Equals(StackTrace other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            var bothNull = StackFrames == null && other.StackFrames == null;
-            if (bothNull) return true;
-            var mixOfNull = Convert.ToBoolean(StackFrames == null) ^ Convert.ToBoolean(other.StackFrames == null);
-            if (mixOfNull) return false;
-
             var diffLength = StackFrames.Count != other.StackFrames.Count;
             if (diffLength) return false;
             for (var i = 0; i < StackFrames.Count; i++)
@@ -82,7 +76,15 @@ namespace McFly.Core
         /// <inheritdoc />
         public override int GetHashCode()
         {
-            return StackFrames != null ? StackFrames.GetHashCode() : 0;
+            int hashCode = 331;
+            if (StackFrames != null)
+            {
+                foreach (var stackFrame in StackFrames)
+                {
+                    hashCode ^= stackFrame.GetHashCode();
+                }
+            }
+            return hashCode;
         }
 
         /// <summary>

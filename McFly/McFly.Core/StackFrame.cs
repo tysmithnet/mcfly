@@ -59,11 +59,21 @@ namespace McFly.Core
             if (other == null) return false;
             if (ReferenceEquals(this, other)) return true;
             var sp = StackPointer == other.StackPointer;
+            if (!sp)
+                return false;
             var ret = ReturnAddress == other.ReturnAddress;
+            if (!ret)
+                return false;
             var mod = string.Equals(Module, other.Module);
+            if (!mod)
+                return false;
             var fun = string.Equals(FunctionName, other.FunctionName);
+            if (!fun)
+                return false;
             var off = Offset == other.Offset;
-            return sp && ret && mod && fun && off;
+            if (!off)
+                return false;
+            return true;
         }
 
         /// <summary>

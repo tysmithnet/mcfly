@@ -74,7 +74,8 @@ namespace McFly.Core
             unchecked
             {
                 var hashCode = InstructionAddress.GetHashCode();
-                hashCode = (hashCode * 397) ^ (OpCode != null ? OpCode.Aggregate((b, b1) => (byte) (b ^ b1)) : 0);
+                if (OpCode.Any())
+                    hashCode = (hashCode * 397) ^ (OpCode != null ? OpCode.Aggregate((b, b1) => (byte) (b ^ b1)) : 0);
                 hashCode = (hashCode * 397) ^ (OpCodeMnemonic != null ? OpCodeMnemonic.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (DisassemblyNote != null ? DisassemblyNote.GetHashCode() : 0);
                 return hashCode;
