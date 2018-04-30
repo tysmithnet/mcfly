@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root CoveredStatements="6896" TotalStatements="10349" CoveragePercent="67" ReportType="NDependXML" DotCoverVersion="2017.3.5">
+<Root CoveredStatements="7017" TotalStatements="10808" CoveragePercent="65" ReportType="NDependXML" DotCoverVersion="2017.3.5">
   <Assembly Name="mcfly" CoveredStatements="1733" TotalStatements="2992" CoveragePercent="58">
     <Namespace Name="McFly.WinDbg" CoveredStatements="1669" TotalStatements="2774" CoveragePercent="60">
       <Type Name="AccessBreakpoint" CoveredStatements="61" TotalStatements="71" CoveragePercent="86">
@@ -17,7 +17,7 @@
         <Method Name="Parse(String)" CoveredStatements="11" TotalStatements="13" CoveragePercent="85" FirstStatementLine="119" />
         <Method Name="SetBreakpoint(IBreakpointFacade)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="139" />
       </Type>
-      <Type Name="AddNoteOptions" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
+      <Type Name="AddTagOptions" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
         <Method Name="get_IsAllThreadsAtPosition()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="26" />
         <Method Name="get_Text()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="32" />
         <Method Name="set_IsAllThreadsAtPosition(Boolean)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="26" />
@@ -248,54 +248,36 @@
         <Type Name="&lt;&gt;c__DisplayClass18_0" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
           <Method Name="&lt;mf&gt;b__0(IMcFlyMethod)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="246" />
         </Type>
-        <Type Name="&lt;&gt;c__DisplayClass31_0" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
-          <Method Name="&lt;PopulateSettings&gt;b__0(ISettings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="460" />
+        <Type Name="&lt;&gt;c__DisplayClass30_0" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <Method Name="&lt;PopulateSettings&gt;b__0(ISettings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="449" />
         </Type>
         <Type Name="Ioctl" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
         <Method Name=".cctor()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="83" />
         <Method Name="CommandLineToArgs(String)" CoveredStatements="0" TotalStatements="18" CoveragePercent="0" FirstStatementLine="117" />
-        <Method Name="ConvertIntToHResult(Int32)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="488" />
-        <Method Name="ConvertIntToHResult(UInt32)" CoveredStatements="0" TotalStatements="10" CoveragePercent="0" FirstStatementLine="501" />
-        <Method Name="CreateIDebugClient()" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="519" />
-        <Method Name="CurrDomain_UnhandledException(Object,UnhandledExceptionEventArgs)" CoveredStatements="0" TotalStatements="15" CoveragePercent="0" FirstStatementLine="540" />
+        <Method Name="ConvertIntToHResult(Int32)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="477" />
+        <Method Name="ConvertIntToHResult(UInt32)" CoveredStatements="0" TotalStatements="10" CoveragePercent="0" FirstStatementLine="490" />
+        <Method Name="CreateIDebugClient()" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="508" />
+        <Method Name="CurrDomain_UnhandledException(Object,UnhandledExceptionEventArgs)" CoveredStatements="0" TotalStatements="15" CoveragePercent="0" FirstStatementLine="529" />
         <Method Name="DebugExtensionInitialize(UInt32,UInt32)" CoveredStatements="0" TotalStatements="18" CoveragePercent="0" FirstStatementLine="147" />
         <Method Name="DebugExtensionNotify(UInt32,UInt64)" CoveredStatements="0" TotalStatements="23" CoveragePercent="0" FirstStatementLine="188" />
         <Method Name="DebugExtensionUninitialize()" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="219" />
-        <Method Name="GetExceptionMessage(Exception)" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="267" />
-        <Method Name="GetLogPath()" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="392" />
-        <Method Name="InitApi(ILog)" CoveredStatements="0" TotalStatements="20" CoveragePercent="0" FirstStatementLine="403" />
+        <Method Name="GetExceptionMessage(Exception)" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="547" />
+        <Method Name="GetLogPath()" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="381" />
+        <Method Name="InitApi(ILog)" CoveredStatements="0" TotalStatements="20" CoveragePercent="0" FirstStatementLine="392" />
         <Method Name="mf(IntPtr,String)" CoveredStatements="0" TotalStatements="22" CoveragePercent="0" FirstStatementLine="236" />
-        <Method Name="Out(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="284" />
-        <Method Name="OutDml(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="293" />
-        <Method Name="pointerFormat(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="303" />
-        <Method Name="PopulateSettings()" CoveredStatements="0" TotalStatements="33" CoveragePercent="0" FirstStatementLine="428" />
-        <Method Name="use(IntPtr,String)" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="315" />
-        <Method Name="Use(String)" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="562" />
-        <Method Name="Write(String,Object[])" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="329" />
-        <Method Name="WriteDml(String,Object[])" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="342" />
-        <Method Name="WriteDmlLine(String,Object[])" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="355" />
-        <Method Name="WriteLine(String,Object[])" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="369" />
+        <Method Name="Out(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="272" />
+        <Method Name="OutDml(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="281" />
+        <Method Name="pointerFormat(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="291" />
+        <Method Name="PopulateSettings()" CoveredStatements="0" TotalStatements="33" CoveragePercent="0" FirstStatementLine="417" />
+        <Method Name="use(IntPtr,String)" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="303" />
+        <Method Name="Use(String)" CoveredStatements="0" TotalStatements="11" CoveragePercent="0" FirstStatementLine="565" />
+        <Method Name="Write(String,Object[])" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="317" />
+        <Method Name="WriteDml(String,Object[])" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="330" />
+        <Method Name="WriteDmlLine(String,Object[])" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="343" />
+        <Method Name="WriteLine(String,Object[])" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="358" />
       </Type>
       <Type Name="MemoryEngine" CoveredStatements="7" TotalStatements="8" CoveragePercent="88">
         <Method Name="ReadMemory(UInt64,UInt64,IDebugDataSpaces)" CoveredStatements="7" TotalStatements="8" CoveragePercent="88" FirstStatementLine="39" />
-      </Type>
-      <Type Name="NoteMethod" CoveredStatements="45" TotalStatements="56" CoveragePercent="80">
-        <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;AddNote&gt;b__1_0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="69" />
-        </Type>
-        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="122" />
-        <Method Name="AddNote(AddNoteOptions)" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="64" />
-        <Method Name="ExtractAddOptions(IEnumerable&lt;String&gt;)" CoveredStatements="18" TotalStatements="18" CoveragePercent="100" FirstStatementLine="85" />
-        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="116" />
-        <Method Name="get_HelpInfo()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="122" />
-        <Method Name="get_ServerClient()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="145" />
-        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="138" />
-        <Method Name="get_TimeTravelFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="152" />
-        <Method Name="Process(String[])" CoveredStatements="8" TotalStatements="15" CoveragePercent="53" FirstStatementLine="37" />
-        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="116" />
-        <Method Name="set_ServerClient(IServerClient)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="145" />
-        <Method Name="set_Settings(Settings)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="138" />
-        <Method Name="set_TimeTravelFacade(ITimeTravelFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="152" />
       </Type>
       <Type Name="PositionsRecord" CoveredStatements="20" TotalStatements="29" CoveragePercent="69">
         <Method Name=".ctor(Int32,Position,Boolean)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="33" />
@@ -332,7 +314,7 @@
       </Type>
       <Type Name="ServerClient" CoveredStatements="20" TotalStatements="33" CoveragePercent="61">
         <Method Name="AddMemoryRange(MemoryChunk)" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="34" />
-        <Method Name="AddNote(Position,IEnumerable&lt;Int32&gt;,String)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="51" />
+        <Method Name="AddTag(Position,IEnumerable&lt;Int32&gt;,String)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="51" />
         <Method Name="get_HttpFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="111" />
         <Method Name="get_Settings()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="118" />
         <Method Name="InitializeProject(String,Position,Position)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="68" />
@@ -352,8 +334,8 @@
         <Method Name="set_ServerUrl(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
       </Type>
       <Type Name="SettingsJsonConverter" CoveredStatements="16" TotalStatements="16" CoveragePercent="100">
-        <Method Name="ReadJson(JsonReader,Type,IEnumerable&lt;ISettings&gt;,Boolean,JsonSerializer)" CoveredStatements="2" TotalStatements="2" CoveragePercent="100" FirstStatementLine="43" />
-        <Method Name="WriteJson(JsonWriter,IEnumerable&lt;ISettings&gt;,JsonSerializer)" CoveredStatements="14" TotalStatements="14" CoveragePercent="100" FirstStatementLine="54" />
+        <Method Name="ReadJson(JsonReader,Type,IEnumerable&lt;ISettings&gt;,Boolean,JsonSerializer)" CoveredStatements="2" TotalStatements="2" CoveragePercent="100" FirstStatementLine="45" />
+        <Method Name="WriteJson(JsonWriter,IEnumerable&lt;ISettings&gt;,JsonSerializer)" CoveredStatements="14" TotalStatements="14" CoveragePercent="100" FirstStatementLine="56" />
       </Type>
       <Type Name="SettingsMethod" CoveredStatements="2" TotalStatements="27" CoveragePercent="7">
         <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="85" />
@@ -382,6 +364,24 @@
         <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="71" />
         <Method Name="set_Log(ILog)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="78" />
         <Method Name="set_Settings(Settings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="85" />
+      </Type>
+      <Type Name="TagMethod" CoveredStatements="45" TotalStatements="56" CoveragePercent="80">
+        <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;AddTag&gt;b__1_0(PositionsRecord)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="70" />
+        </Type>
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="123" />
+        <Method Name="AddTag(AddTagOptions)" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="65" />
+        <Method Name="ExtractAddOptions(IEnumerable&lt;String&gt;)" CoveredStatements="18" TotalStatements="18" CoveragePercent="100" FirstStatementLine="86" />
+        <Method Name="get_DebugEngineProxy()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="117" />
+        <Method Name="get_HelpInfo()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="123" />
+        <Method Name="get_ServerClient()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="146" />
+        <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="139" />
+        <Method Name="get_TimeTravelFacade()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="153" />
+        <Method Name="Process(String[])" CoveredStatements="8" TotalStatements="15" CoveragePercent="53" FirstStatementLine="38" />
+        <Method Name="set_DebugEngineProxy(IDebugEngineProxy)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="117" />
+        <Method Name="set_ServerClient(IServerClient)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="146" />
+        <Method Name="set_Settings(Settings)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="139" />
+        <Method Name="set_TimeTravelFacade(ITimeTravelFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="153" />
       </Type>
       <Type Name="TimeTravelFacade" CoveredStatements="61" TotalStatements="61" CoveragePercent="100">
         <Type Name="&lt;&gt;c" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
@@ -510,8 +510,8 @@
     </Namespace>
     <Type Name="&lt;PrivateImplementationDetails&gt;" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
   </Assembly>
-  <Assembly Name="McFly.Core" CoveredStatements="4470" TotalStatements="5435" CoveragePercent="82">
-    <Namespace Name="McFly.Core" CoveredStatements="2304" TotalStatements="2311" CoveragePercent="99">
+  <Assembly Name="McFly.Core" CoveredStatements="4483" TotalStatements="5498" CoveragePercent="82">
+    <Namespace Name="McFly.Core" CoveredStatements="2317" TotalStatements="2374" CoveragePercent="98">
       <Type Name="ByteArrayBuilder" CoveredStatements="31" TotalStatements="31" CoveragePercent="100">
         <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="30" />
         <Method Name="AppdendHexString(String)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="38" />
@@ -519,9 +519,23 @@
         <Method Name="Reverse()" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="57" />
         <Method Name="StringToByteArray(String,Boolean)" CoveredStatements="19" TotalStatements="19" CoveragePercent="100" FirstStatementLine="74" />
       </Type>
-      <Type Name="DisassemblyLine" CoveredStatements="43" TotalStatements="43" CoveragePercent="100">
-        <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;GetHashCode&gt;b__3_0(Byte,Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
+      <Type Name="ByteArrayExtensions" CoveredStatements="60" TotalStatements="60" CoveragePercent="100">
+        <Method Name="ToByteArray(Int16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="70" />
+        <Method Name="ToByteArray(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="60" />
+        <Method Name="ToByteArray(Int64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="40" />
+        <Method Name="ToByteArray(UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="80" />
+        <Method Name="ToByteArray(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="50" />
+        <Method Name="ToByteArray(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="30" />
+        <Method Name="ToInt(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="92" />
+        <Method Name="ToLong(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="108" />
+        <Method Name="ToShort(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="125" />
+        <Method Name="ToUInt(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="142" />
+        <Method Name="ToULong(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="158" />
+        <Method Name="ToUShort(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="174" />
+      </Type>
+      <Type Name="DisassemblyLine" CoveredStatements="34" TotalStatements="43" CoveragePercent="79">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <Method Name="&lt;GetHashCode&gt;b__3_0(Byte,Byte)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="77" />
         </Type>
         <Method Name=".ctor()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="29" />
         <Method Name=".ctor(Nullable&lt;UInt64&gt;,Byte[],String,String)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="47" />
@@ -531,43 +545,71 @@
         <Method Name="get_InstructionAddress()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="108" />
         <Method Name="get_OpCode()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="114" />
         <Method Name="get_OpCodeMnemonic()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="120" />
-        <Method Name="GetHashCode()" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="73" />
+        <Method Name="GetHashCode()" CoveredStatements="0" TotalStatements="8" CoveragePercent="0" FirstStatementLine="73" />
         <Method Name="set_DisassemblyNote(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="102" />
         <Method Name="set_InstructionAddress(Nullable&lt;UInt64&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="108" />
         <Method Name="set_OpCode(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="114" />
         <Method Name="set_OpCodeMnemonic(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="120" />
       </Type>
-      <Type Name="Frame" CoveredStatements="83" TotalStatements="83" CoveragePercent="100">
-        <Method Name=".ctor()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="181" />
-        <Method Name="CompareTo(Frame)" CoveredStatements="10" TotalStatements="10" CoveragePercent="100" FirstStatementLine="57" />
-        <Method Name="CompareTo(Object)" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="44" />
-        <Method Name="Equals(Frame)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="71" />
-        <Method Name="Equals(Object)" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="85" />
-        <Method Name="get_DisassemblyLine()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="181" />
-        <Method Name="get_Position()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="187" />
-        <Method Name="get_RegisterSet()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="193" />
-        <Method Name="get_StackTrace()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="199" />
-        <Method Name="get_ThreadId()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="208" />
-        <Method Name="GetHashCode()" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="97" />
-        <Method Name="op_Equality(Frame,Frame)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="116" />
-        <Method Name="op_GreaterThan(Frame,Frame)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="129" />
-        <Method Name="op_GreaterThanOrEqual(Frame,Frame)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="140" />
-        <Method Name="op_Inequality(Frame,Frame)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="151" />
-        <Method Name="op_LessThan(Frame,Frame)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="162" />
-        <Method Name="op_LessThanOrEqual(Frame,Frame)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="173" />
-        <Method Name="set_DisassemblyLine(DisassemblyLine)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="181" />
-        <Method Name="set_Position(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="187" />
-        <Method Name="set_RegisterSet(RegisterSet)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="193" />
-        <Method Name="set_StackTrace(StackTrace)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="199" />
-        <Method Name="set_ThreadId(Int32)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="210" />
+      <Type Name="DomainEntity&lt;TSelf&gt;" CoveredStatements="13" TotalStatements="22" CoveragePercent="59">
+        <Method Name="Equals(DomainEntity&lt;TSelf&gt;)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="40" />
+        <Method Name="Equals(Object)" CoveredStatements="6" TotalStatements="9" CoveragePercent="67" FirstStatementLine="53" />
+        <Method Name="get_Id()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="82" />
+        <Method Name="get_IsIdSet()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="88" />
+        <Method Name="GetHashCode()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="66" />
+        <Method Name="set_Id(Guid)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="82" />
       </Type>
-      <Type Name="MemoryChunk" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
-        <Method Name="get_Bytes()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="get_MemoryRange()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
-        <Method Name="get_Position()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
-        <Method Name="set_Bytes(Byte[])" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="27" />
-        <Method Name="set_MemoryRange(MemoryRange)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
-        <Method Name="set_Position(Position)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="39" />
+      <Type Name="Frame" CoveredStatements="66" TotalStatements="70" CoveragePercent="94">
+        <Method Name=".ctor()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="130" />
+        <Method Name="CompareTo(Frame)" CoveredStatements="10" TotalStatements="10" CoveragePercent="100" FirstStatementLine="56" />
+        <Method Name="CompareTo(Object)" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="43" />
+        <Method Name="get_DisassemblyLine()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="130" />
+        <Method Name="get_Position()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="136" />
+        <Method Name="get_RegisterSet()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="142" />
+        <Method Name="get_StackTrace()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="148" />
+        <Method Name="get_ThreadId()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="157" />
+        <Method Name="op_GreaterThan(Frame,Frame)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="89" />
+        <Method Name="op_GreaterThanOrEqual(Frame,Frame)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="100" />
+        <Method Name="op_LessThan(Frame,Frame)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="111" />
+        <Method Name="op_LessThanOrEqual(Frame,Frame)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="122" />
+        <Method Name="set_DisassemblyLine(DisassemblyLine)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="130" />
+        <Method Name="set_Position(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="136" />
+        <Method Name="set_RegisterSet(RegisterSet)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="142" />
+        <Method Name="set_StackTrace(StackTrace)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="148" />
+        <Method Name="set_ThreadId(Int32)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="159" />
+        <Method Name="ValueEquals(Frame)" CoveredStatements="18" TotalStatements="22" CoveragePercent="82" FirstStatementLine="66" />
+      </Type>
+      <Type Name="HexStringExtensions" CoveredStatements="55" TotalStatements="55" CoveragePercent="100">
+        <Type Name="&lt;&gt;c" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
+          <Method Name="&lt;ToHexString&gt;b__8_0(Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="116" />
+          <Method Name="&lt;ToHexString&gt;b__8_1(Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="116" />
+        </Type>
+        <Method Name="ToHexString(Byte[],Boolean)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="112" />
+        <Method Name="ToHexString(Int16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="135" />
+        <Method Name="ToHexString(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="125" />
+        <Method Name="ToHexString(Int64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="41" />
+        <Method Name="ToHexString(Nullable&lt;Int64&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="61" />
+        <Method Name="ToHexString(Nullable&lt;UInt16&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="71" />
+        <Method Name="ToHexString(Nullable&lt;UInt32&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="101" />
+        <Method Name="ToHexString(Nullable&lt;UInt64&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="51" />
+        <Method Name="ToHexString(UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="81" />
+        <Method Name="ToHexString(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="91" />
+        <Method Name="ToHexString(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="31" />
+        <Method Name="ToInt(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="145" />
+        <Method Name="ToLong(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="155" />
+        <Method Name="ToShort(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="165" />
+        <Method Name="ToUInt(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="175" />
+        <Method Name="ToULong(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="185" />
+        <Method Name="ToUShort(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="196" />
+      </Type>
+      <Type Name="MemoryChunk" CoveredStatements="3" TotalStatements="19" CoveragePercent="16">
+        <Method Name="get_Bytes()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="49" />
+        <Method Name="get_MemoryRange()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="55" />
+        <Method Name="get_Position()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="61" />
+        <Method Name="set_Bytes(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
+        <Method Name="set_MemoryRange(MemoryRange)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="55" />
+        <Method Name="set_Position(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="61" />
+        <Method Name="ValueEquals(MemoryChunk)" CoveredStatements="0" TotalStatements="13" CoveragePercent="0" FirstStatementLine="34" />
       </Type>
       <Type Name="MemoryRange" CoveredStatements="96" TotalStatements="96" CoveragePercent="100">
         <Method Name=".ctor(UInt64,UInt64)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="40" />
@@ -590,12 +632,6 @@
         <Method Name="set_HighAddress(UInt64)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="236" />
         <Method Name="set_LowAddress(UInt64)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="251" />
         <Method Name="ToString()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="160" />
-      </Type>
-      <Type Name="Note" CoveredStatements="3" TotalStatements="4" CoveragePercent="75">
-        <Method Name="get_CreateDate()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="29" />
-        <Method Name="get_Text()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="35" />
-        <Method Name="set_CreateDate(DateTime)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="29" />
-        <Method Name="set_Text(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="35" />
       </Type>
       <Type Name="Position" CoveredStatements="98" TotalStatements="98" CoveragePercent="100">
         <Type Name="HighLowEqualityComparer" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
@@ -624,57 +660,24 @@
         <Method Name="set_Low(Int32)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="255" />
         <Method Name="ToString()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="149" />
       </Type>
-      <Type Name="PrimitiveExtensions" CoveredStatements="164" TotalStatements="164" CoveragePercent="100">
-        <Type Name="&lt;&gt;c" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
-          <Method Name="&lt;ToHexString&gt;b__22_0(Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="266" />
-          <Method Name="&lt;ToHexString&gt;b__22_1(Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="266" />
-        </Type>
-        <Method Name="Hi32(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="32" />
-        <Method Name="Hi32(UInt64,UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="43" />
-        <Method Name="Hi8(UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="53" />
-        <Method Name="Hi8(UInt16,Byte)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="64" />
-        <Method Name="Lo16(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="76" />
-        <Method Name="Lo16(UInt32,UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="87" />
-        <Method Name="Lo32(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="97" />
-        <Method Name="Lo32(UInt64,UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="108" />
-        <Method Name="Lo8(UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="118" />
-        <Method Name="Lo8(UInt16,Byte)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="129" />
-        <Method Name="ToByteArray(Int16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="362" />
-        <Method Name="ToByteArray(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="171" />
-        <Method Name="ToByteArray(Int64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="151" />
-        <Method Name="ToByteArray(UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="499" />
-        <Method Name="ToByteArray(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="161" />
-        <Method Name="ToByteArray(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="141" />
-        <Method Name="ToHexString(Byte[],Boolean)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="262" />
-        <Method Name="ToHexString(Int16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="367" />
-        <Method Name="ToHexString(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="275" />
-        <Method Name="ToHexString(Int64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="191" />
-        <Method Name="ToHexString(Nullable&lt;Int64&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="211" />
-        <Method Name="ToHexString(Nullable&lt;UInt16&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="221" />
-        <Method Name="ToHexString(Nullable&lt;UInt32&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="251" />
-        <Method Name="ToHexString(Nullable&lt;UInt64&gt;)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="201" />
-        <Method Name="ToHexString(UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="231" />
-        <Method Name="ToHexString(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="241" />
-        <Method Name="ToHexString(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="181" />
-        <Method Name="ToInt(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="297" />
-        <Method Name="ToInt(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="285" />
-        <Method Name="ToInt(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="311" />
-        <Method Name="ToLong(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="343" />
-        <Method Name="ToLong(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="321" />
-        <Method Name="ToLong(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="331" />
-        <Method Name="ToShort(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="380" />
-        <Method Name="ToShort(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="357" />
-        <Method Name="ToUInt(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="406" />
-        <Method Name="ToUInt(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="420" />
-        <Method Name="ToUInt(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="394" />
-        <Method Name="ToULong(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="462" />
-        <Method Name="ToULong(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="430" />
-        <Method Name="ToULong(Int64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="450" />
-        <Method Name="ToULong(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="440" />
-        <Method Name="ToUShort(Byte[])" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="489" />
-        <Method Name="ToUShort(String)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="477" />
+      <Type Name="PrimitiveExtensions" CoveredStatements="49" TotalStatements="49" CoveragePercent="100">
+        <Method Name="Hi32(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="28" />
+        <Method Name="Hi32(UInt64,UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="39" />
+        <Method Name="Hi8(UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="49" />
+        <Method Name="Hi8(UInt16,Byte)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="60" />
+        <Method Name="Lo16(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="72" />
+        <Method Name="Lo16(UInt32,UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="83" />
+        <Method Name="Lo32(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="93" />
+        <Method Name="Lo32(UInt64,UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="104" />
+        <Method Name="Lo8(UInt16)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="114" />
+        <Method Name="Lo8(UInt16,Byte)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="125" />
+        <Method Name="ToInt(UInt32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="137" />
+        <Method Name="ToLong(UInt64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="147" />
+        <Method Name="ToUInt(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="157" />
+        <Method Name="ToULong(Int32)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="167" />
+        <Method Name="ToULong(Int64)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="177" />
       </Type>
-      <Type Name="RegisterSet" CoveredStatements="1717" TotalStatements="1717" CoveragePercent="100">
+      <Type Name="RegisterSet" CoveredStatements="1716" TotalStatements="1717" CoveragePercent="99">
         <Type Name="&lt;&gt;c__DisplayClass26_0" CoveredStatements="24" TotalStatements="24" CoveragePercent="100">
           <Method Name="&lt;GetHashCode&gt;b__0(Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="310" />
           <Method Name="&lt;GetHashCode&gt;b__1(Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="311" />
@@ -701,7 +704,7 @@
           <Method Name="&lt;GetHashCode&gt;b__8(Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="318" />
           <Method Name="&lt;GetHashCode&gt;b__9(Byte)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="319" />
         </Type>
-        <Method Name="Equals(Object)" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="242" />
+        <Method Name="Equals(Object)" CoveredStatements="8" TotalStatements="9" CoveragePercent="89" FirstStatementLine="242" />
         <Method Name="Equals(RegisterSet)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="155" />
         <Method Name="get_Af()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="348" />
         <Method Name="get_Ah()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="371" />
@@ -878,53 +881,53 @@
         <Method Name="get_Xmm9l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3184" />
         <Method Name="get_Ymm0()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3205" />
         <Method Name="get_Ymm0h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3224" />
-        <Method Name="get_Ymm0l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3248" />
-        <Method Name="get_Ymm1()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3259" />
-        <Method Name="get_Ymm10()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3276" />
-        <Method Name="get_Ymm10h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3295" />
-        <Method Name="get_Ymm10l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3319" />
-        <Method Name="get_Ymm11()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3330" />
-        <Method Name="get_Ymm11h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3349" />
-        <Method Name="get_Ymm11l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3373" />
-        <Method Name="get_Ymm12()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3384" />
-        <Method Name="get_Ymm12h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3403" />
-        <Method Name="get_Ymm12l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3427" />
-        <Method Name="get_Ymm13()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3438" />
-        <Method Name="get_Ymm13h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3457" />
-        <Method Name="get_Ymm13l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3481" />
-        <Method Name="get_Ymm14()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3492" />
-        <Method Name="get_Ymm14h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3511" />
-        <Method Name="get_Ymm14l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3535" />
-        <Method Name="get_Ymm15()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3546" />
-        <Method Name="get_Ymm15h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3565" />
-        <Method Name="get_Ymm15l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3589" />
-        <Method Name="get_Ymm1h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3602" />
-        <Method Name="get_Ymm1l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3626" />
-        <Method Name="get_Ymm2()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3637" />
-        <Method Name="get_Ymm2h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3656" />
-        <Method Name="get_Ymm2l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3680" />
-        <Method Name="get_Ymm3()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3691" />
-        <Method Name="get_Ymm3h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3710" />
-        <Method Name="get_Ymm3l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3734" />
-        <Method Name="get_Ymm4()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3745" />
-        <Method Name="get_Ymm4h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3764" />
-        <Method Name="get_Ymm4l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3788" />
-        <Method Name="get_Ymm5()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3799" />
-        <Method Name="get_Ymm5h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3818" />
-        <Method Name="get_Ymm5l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3842" />
-        <Method Name="get_Ymm6()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3853" />
-        <Method Name="get_Ymm6h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3872" />
-        <Method Name="get_Ymm6l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3896" />
-        <Method Name="get_Ymm7()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3907" />
-        <Method Name="get_Ymm7h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3926" />
-        <Method Name="get_Ymm7l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3950" />
-        <Method Name="get_Ymm8()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3961" />
-        <Method Name="get_Ymm8h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3980" />
-        <Method Name="get_Ymm8l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4004" />
-        <Method Name="get_Ymm9()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4015" />
-        <Method Name="get_Ymm9h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4034" />
-        <Method Name="get_Ymm9l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4058" />
-        <Method Name="get_Zf()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4071" />
+        <Method Name="get_Ymm0l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3249" />
+        <Method Name="get_Ymm1()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3260" />
+        <Method Name="get_Ymm10()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3277" />
+        <Method Name="get_Ymm10h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3296" />
+        <Method Name="get_Ymm10l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3321" />
+        <Method Name="get_Ymm11()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3332" />
+        <Method Name="get_Ymm11h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3351" />
+        <Method Name="get_Ymm11l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3376" />
+        <Method Name="get_Ymm12()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3387" />
+        <Method Name="get_Ymm12h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3406" />
+        <Method Name="get_Ymm12l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3431" />
+        <Method Name="get_Ymm13()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3442" />
+        <Method Name="get_Ymm13h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3461" />
+        <Method Name="get_Ymm13l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3486" />
+        <Method Name="get_Ymm14()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3497" />
+        <Method Name="get_Ymm14h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3516" />
+        <Method Name="get_Ymm14l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3541" />
+        <Method Name="get_Ymm15()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3552" />
+        <Method Name="get_Ymm15h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3571" />
+        <Method Name="get_Ymm15l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3596" />
+        <Method Name="get_Ymm1h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3609" />
+        <Method Name="get_Ymm1l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3634" />
+        <Method Name="get_Ymm2()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3645" />
+        <Method Name="get_Ymm2h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3664" />
+        <Method Name="get_Ymm2l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3689" />
+        <Method Name="get_Ymm3()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3700" />
+        <Method Name="get_Ymm3h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3719" />
+        <Method Name="get_Ymm3l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3744" />
+        <Method Name="get_Ymm4()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3755" />
+        <Method Name="get_Ymm4h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3774" />
+        <Method Name="get_Ymm4l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3799" />
+        <Method Name="get_Ymm5()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3810" />
+        <Method Name="get_Ymm5h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3829" />
+        <Method Name="get_Ymm5l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3854" />
+        <Method Name="get_Ymm6()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3865" />
+        <Method Name="get_Ymm6h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3884" />
+        <Method Name="get_Ymm6l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3909" />
+        <Method Name="get_Ymm7()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3920" />
+        <Method Name="get_Ymm7h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3939" />
+        <Method Name="get_Ymm7l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3964" />
+        <Method Name="get_Ymm8()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3975" />
+        <Method Name="get_Ymm8h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3994" />
+        <Method Name="get_Ymm8l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4019" />
+        <Method Name="get_Ymm9()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4030" />
+        <Method Name="get_Ymm9h()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4049" />
+        <Method Name="get_Ymm9l()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4074" />
+        <Method Name="get_Zf()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4087" />
         <Method Name="GetHashCode()" CoveredStatements="29" TotalStatements="29" CoveragePercent="100" FirstStatementLine="255" />
         <Method Name="set_Af(Nullable&lt;Boolean&gt;)" CoveredStatements="10" TotalStatements="10" CoveragePercent="100" FirstStatementLine="350" />
         <Method Name="set_Ah(Nullable&lt;Byte&gt;)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="373" />
@@ -1101,80 +1104,90 @@
         <Method Name="set_Xmm9l(Nullable&lt;UInt64&gt;)" CoveredStatements="11" TotalStatements="11" CoveragePercent="100" FirstStatementLine="3186" />
         <Method Name="set_Ymm0(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3207" />
         <Method Name="set_Ymm0h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3226" />
-        <Method Name="set_Ymm0l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3249" />
-        <Method Name="set_Ymm1(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3261" />
-        <Method Name="set_Ymm10(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3278" />
-        <Method Name="set_Ymm10h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3297" />
-        <Method Name="set_Ymm10l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3320" />
-        <Method Name="set_Ymm11(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3332" />
-        <Method Name="set_Ymm11h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3351" />
-        <Method Name="set_Ymm11l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3374" />
-        <Method Name="set_Ymm12(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3386" />
-        <Method Name="set_Ymm12h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3405" />
-        <Method Name="set_Ymm12l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3428" />
-        <Method Name="set_Ymm13(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3440" />
-        <Method Name="set_Ymm13h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3459" />
-        <Method Name="set_Ymm13l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3482" />
-        <Method Name="set_Ymm14(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3494" />
-        <Method Name="set_Ymm14h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3513" />
-        <Method Name="set_Ymm14l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3536" />
-        <Method Name="set_Ymm15(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3548" />
-        <Method Name="set_Ymm15h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3567" />
-        <Method Name="set_Ymm15l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3590" />
-        <Method Name="set_Ymm1h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3604" />
-        <Method Name="set_Ymm1l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3627" />
-        <Method Name="set_Ymm2(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3639" />
-        <Method Name="set_Ymm2h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3658" />
-        <Method Name="set_Ymm2l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3681" />
-        <Method Name="set_Ymm3(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3693" />
-        <Method Name="set_Ymm3h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3712" />
-        <Method Name="set_Ymm3l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3735" />
-        <Method Name="set_Ymm4(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3747" />
-        <Method Name="set_Ymm4h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3766" />
-        <Method Name="set_Ymm4l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3789" />
-        <Method Name="set_Ymm5(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3801" />
-        <Method Name="set_Ymm5h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3820" />
-        <Method Name="set_Ymm5l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3843" />
-        <Method Name="set_Ymm6(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3855" />
-        <Method Name="set_Ymm6h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3874" />
-        <Method Name="set_Ymm6l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3897" />
-        <Method Name="set_Ymm7(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3909" />
-        <Method Name="set_Ymm7h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3928" />
-        <Method Name="set_Ymm7l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3951" />
-        <Method Name="set_Ymm8(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3963" />
-        <Method Name="set_Ymm8h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3982" />
-        <Method Name="set_Ymm8l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4005" />
-        <Method Name="set_Ymm9(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="4017" />
-        <Method Name="set_Ymm9h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="4036" />
-        <Method Name="set_Ymm9l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4059" />
-        <Method Name="set_Zf(Nullable&lt;Boolean&gt;)" CoveredStatements="10" TotalStatements="10" CoveragePercent="100" FirstStatementLine="4073" />
+        <Method Name="set_Ymm0l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3250" />
+        <Method Name="set_Ymm1(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3262" />
+        <Method Name="set_Ymm10(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3279" />
+        <Method Name="set_Ymm10h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3298" />
+        <Method Name="set_Ymm10l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3322" />
+        <Method Name="set_Ymm11(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3334" />
+        <Method Name="set_Ymm11h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3353" />
+        <Method Name="set_Ymm11l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3377" />
+        <Method Name="set_Ymm12(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3389" />
+        <Method Name="set_Ymm12h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3408" />
+        <Method Name="set_Ymm12l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3432" />
+        <Method Name="set_Ymm13(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3444" />
+        <Method Name="set_Ymm13h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3463" />
+        <Method Name="set_Ymm13l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3487" />
+        <Method Name="set_Ymm14(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3499" />
+        <Method Name="set_Ymm14h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3518" />
+        <Method Name="set_Ymm14l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3542" />
+        <Method Name="set_Ymm15(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3554" />
+        <Method Name="set_Ymm15h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3573" />
+        <Method Name="set_Ymm15l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3597" />
+        <Method Name="set_Ymm1h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3611" />
+        <Method Name="set_Ymm1l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3635" />
+        <Method Name="set_Ymm2(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3647" />
+        <Method Name="set_Ymm2h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3666" />
+        <Method Name="set_Ymm2l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3690" />
+        <Method Name="set_Ymm3(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3702" />
+        <Method Name="set_Ymm3h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3721" />
+        <Method Name="set_Ymm3l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3745" />
+        <Method Name="set_Ymm4(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3757" />
+        <Method Name="set_Ymm4h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3776" />
+        <Method Name="set_Ymm4l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3800" />
+        <Method Name="set_Ymm5(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3812" />
+        <Method Name="set_Ymm5h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3831" />
+        <Method Name="set_Ymm5l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3855" />
+        <Method Name="set_Ymm6(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3867" />
+        <Method Name="set_Ymm6h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3886" />
+        <Method Name="set_Ymm6l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3910" />
+        <Method Name="set_Ymm7(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3922" />
+        <Method Name="set_Ymm7h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3941" />
+        <Method Name="set_Ymm7l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="3965" />
+        <Method Name="set_Ymm8(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="3977" />
+        <Method Name="set_Ymm8h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="3996" />
+        <Method Name="set_Ymm8l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4020" />
+        <Method Name="set_Ymm9(Byte[])" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="4032" />
+        <Method Name="set_Ymm9h(Byte[])" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="4051" />
+        <Method Name="set_Ymm9l(Byte[])" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="4075" />
+        <Method Name="set_Zf(Nullable&lt;Boolean&gt;)" CoveredStatements="10" TotalStatements="10" CoveragePercent="100" FirstStatementLine="4089" />
       </Type>
-      <Type Name="StackFrame" CoveredStatements="44" TotalStatements="44" CoveragePercent="100">
+      <Type Name="StackFrame" CoveredStatements="37" TotalStatements="48" CoveragePercent="77">
         <Method Name=".ctor(UInt64,Nullable&lt;UInt64&gt;,String,String,Nullable&lt;UInt64&gt;)" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="30" />
-        <Method Name="Equals(Object)" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="45" />
-        <Method Name="Equals(StackFrame)" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="75" />
-        <Method Name="get_FunctionName()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="88" />
-        <Method Name="get_Module()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="94" />
-        <Method Name="get_Offset()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="100" />
-        <Method Name="get_ReturnAddress()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="106" />
-        <Method Name="get_StackPointer()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="112" />
-        <Method Name="GetHashCode()" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="57" />
-        <Method Name="set_FunctionName(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="88" />
-        <Method Name="set_Module(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="94" />
-        <Method Name="set_Offset(Nullable&lt;UInt64&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="100" />
-        <Method Name="set_ReturnAddress(Nullable&lt;UInt64&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="106" />
-        <Method Name="set_StackPointer(UInt64)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="112" />
+        <Method Name="Equals(Object)" CoveredStatements="7" TotalStatements="9" CoveragePercent="78" FirstStatementLine="45" />
+        <Method Name="Equals(StackFrame)" CoveredStatements="12" TotalStatements="12" CoveragePercent="100" FirstStatementLine="58" />
+        <Method Name="get_FunctionName()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="90" />
+        <Method Name="get_Module()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="96" />
+        <Method Name="get_Offset()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="102" />
+        <Method Name="get_ReturnAddress()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="108" />
+        <Method Name="get_StackPointer()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="114" />
+        <Method Name="GetHashCode()" CoveredStatements="0" TotalStatements="9" CoveragePercent="0" FirstStatementLine="74" />
+        <Method Name="set_FunctionName(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="90" />
+        <Method Name="set_Module(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="96" />
+        <Method Name="set_Offset(Nullable&lt;UInt64&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="102" />
+        <Method Name="set_ReturnAddress(Nullable&lt;UInt64&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="108" />
+        <Method Name="set_StackPointer(UInt64)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="114" />
       </Type>
-      <Type Name="StackTrace" CoveredStatements="25" TotalStatements="25" CoveragePercent="100">
-        <Type Name="&lt;&gt;c" CoveredStatements="2" TotalStatements="2" CoveragePercent="100">
-          <Method Name="&lt;GetHashCode&gt;b__2_0(StackFrame)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
-          <Method Name="&lt;GetHashCode&gt;b__2_1(Int32,Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="60" />
-        </Type>
-        <Method Name=".ctor(IEnumerable&lt;StackFrame&gt;)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="31" />
-        <Method Name="Equals(Object)" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="42" />
-        <Method Name="Equals(StackTrace)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="72" />
-        <Method Name="get_StackFrames()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="80" />
-        <Method Name="GetHashCode()" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="54" />
+      <Type Name="StackTrace" CoveredStatements="33" TotalStatements="40" CoveragePercent="83">
+        <Method Name=".ctor(IEnumerable&lt;StackFrame&gt;)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="32" />
+        <Method Name="Equals(Object)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="72" />
+        <Method Name="Equals(StackTrace)" CoveredStatements="22" TotalStatements="25" CoveragePercent="88" FirstStatementLine="44" />
+        <Method Name="get_StackFrames()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="92" />
+        <Method Name="GetHashCode()" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="84" />
+      </Type>
+      <Type Name="Tag" CoveredStatements="26" TotalStatements="26" CoveragePercent="100">
+        <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="72" />
+        <Method Name="Equals(Object)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="46" />
+        <Method Name="Equals(Tag)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="33" />
+        <Method Name="get_Body()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="66" />
+        <Method Name="get_CreateDateUtc()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="72" />
+        <Method Name="get_Id()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="78" />
+        <Method Name="get_Title()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="84" />
+        <Method Name="GetHashCode()" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="58" />
+        <Method Name="set_Body(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="66" />
+        <Method Name="set_CreateDateUtc(DateTime)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="72" />
+        <Method Name="set_Id(Guid)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="78" />
+        <Method Name="set_Title(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="84" />
       </Type>
     </Namespace>
     <Namespace Name="McFly.Core.Registers" CoveredStatements="2166" TotalStatements="3124" CoveragePercent="69">
@@ -3473,12 +3486,6 @@
         <Method Name="Post(String,AddMemoryRequest)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="46" />
         <Method Name="set_MemoryAccess(IMemoryAccess)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="56" />
       </Type>
-      <Type Name="NoteController" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
-        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="36" />
-        <Method Name="get_NoteAccess()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="56" />
-        <Method Name="Post(String,AddNoteRequest)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="46" />
-        <Method Name="set_NoteAccess(INoteAccess)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="56" />
-      </Type>
       <Type Name="ProjectController" CoveredStatements="7" TotalStatements="11" CoveragePercent="64">
         <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="39" />
         <Method Name="Get()" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="47" />
@@ -3493,6 +3500,12 @@
         <Method Name="SearchFrames(String,SearchCriterionDto)" CoveredStatements="5" TotalStatements="5" CoveragePercent="100" FirstStatementLine="82" />
         <Method Name="set_ConversionFacade(ISearchCriterionConversionFacade)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="48" />
         <Method Name="set_FrameAccess(IFrameAccess)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="41" />
+      </Type>
+      <Type Name="TagController" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+        <Method Name=".cctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="36" />
+        <Method Name="get_TagAccess()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="56" />
+        <Method Name="Post(String,AddTagRequest)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="46" />
+        <Method Name="set_TagAccess(ITagAccess)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="56" />
       </Type>
     </Namespace>
     <Namespace Name="McFly.Server.Headers" CoveredStatements="16" TotalStatements="51" CoveragePercent="31">
@@ -3540,16 +3553,16 @@
         <Method Name=".ctor(MemoryChunk)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="37" />
         <Method Name="get_MemoryChunk()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="46" />
       </Type>
-      <Type Name="AddNoteRequest" CoveredStatements="37" TotalStatements="41" CoveragePercent="90">
+      <Type Name="AddTagRequest" CoveredStatements="37" TotalStatements="41" CoveragePercent="90">
         <Method Name=".ctor(Position,IEnumerable&lt;Int32&gt;,String)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="36" />
-        <Method Name="Equals(AddNoteRequest)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="49" />
+        <Method Name="Equals(AddTagRequest)" CoveredStatements="6" TotalStatements="7" CoveragePercent="86" FirstStatementLine="49" />
         <Method Name="Equals(Object)" CoveredStatements="6" TotalStatements="9" CoveragePercent="67" FirstStatementLine="62" />
         <Method Name="get_Position()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="110" />
         <Method Name="get_Text()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="116" />
         <Method Name="get_ThreadIds()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="122" />
         <Method Name="GetHashCode()" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="74" />
-        <Method Name="op_Equality(AddNoteRequest,AddNoteRequest)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="91" />
-        <Method Name="op_Inequality(AddNoteRequest,AddNoteRequest)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="102" />
+        <Method Name="op_Equality(AddTagRequest,AddTagRequest)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="91" />
+        <Method Name="op_Inequality(AddTagRequest,AddTagRequest)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="102" />
         <Method Name="set_Position(Position)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="110" />
         <Method Name="set_Text(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="116" />
         <Method Name="set_ThreadIds(IEnumerable&lt;Int32&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="122" />
@@ -3627,28 +3640,6 @@
         <Method Name="Accept(ICriterionVisitor)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="41" />
         <Method Name="get_Criterion()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
       </Type>
-      <Type Name="NoteCreatedAfterCriterion" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
-        <Method Name=".ctor(DateTime)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="29" />
-        <Method Name="Accept(ICriterionVisitor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="40" />
-        <Method Name="get_DateTime()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="48" />
-      </Type>
-      <Type Name="NoteCreatedBeforeCriterion" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
-        <Method Name=".ctor(DateTime)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="29" />
-        <Method Name="Accept(ICriterionVisitor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="40" />
-        <Method Name="get_DateTime()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="48" />
-      </Type>
-      <Type Name="NoteCreatedBetweenCriterion" CoveredStatements="0" TotalStatements="12" CoveragePercent="0">
-        <Method Name=".ctor(DateTime,DateTime)" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="31" />
-        <Method Name="Accept(ICriterionVisitor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="45" />
-        <Method Name="get_High()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="53" />
-        <Method Name="get_Low()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="59" />
-      </Type>
-      <Type Name="NoteCriterion" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
-      <Type Name="NoteTextContainsCriterion" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
-        <Method Name=".ctor(String)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="30" />
-        <Method Name="Accept(ICriterionVisitor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="41" />
-        <Method Name="get_Substring()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="49" />
-      </Type>
       <Type Name="OrCriterion" CoveredStatements="8" TotalStatements="8" CoveragePercent="100">
         <Method Name=".ctor(IEnumerable&lt;ICriterion&gt;)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="32" />
         <Method Name="Accept(ICriterionVisitor)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="43" />
@@ -3675,15 +3666,37 @@
         <Method Name="Accept(ICriterionVisitor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="45" />
         <Method Name="get_Values()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="53" />
       </Type>
+      <Type Name="TagCreatedAfterCriterion" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
+        <Method Name=".ctor(DateTime)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="29" />
+        <Method Name="Accept(ICriterionVisitor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="40" />
+        <Method Name="get_DateTime()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="48" />
+      </Type>
+      <Type Name="TagCreatedBeforeCriterion" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
+        <Method Name=".ctor(DateTime)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="29" />
+        <Method Name="Accept(ICriterionVisitor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="40" />
+        <Method Name="get_DateTime()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="48" />
+      </Type>
+      <Type Name="TagCreatedBetweenCriterion" CoveredStatements="0" TotalStatements="12" CoveragePercent="0">
+        <Method Name=".ctor(DateTime,DateTime)" CoveredStatements="0" TotalStatements="7" CoveragePercent="0" FirstStatementLine="31" />
+        <Method Name="Accept(ICriterionVisitor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="45" />
+        <Method Name="get_High()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="53" />
+        <Method Name="get_Low()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="59" />
+      </Type>
+      <Type Name="TagCriterion" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+      <Type Name="TagTextContainsCriterion" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
+        <Method Name=".ctor(String)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="30" />
+        <Method Name="Accept(ICriterionVisitor)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="41" />
+        <Method Name="get_Substring()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="49" />
+      </Type>
     </Namespace>
   </Assembly>
-  <Assembly Name="McFly.Server.Data.SqlServer" CoveredStatements="454" TotalStatements="634" CoveragePercent="72">
-    <Namespace Name="McFly.Server.Data.SqlServer" CoveredStatements="454" TotalStatements="634" CoveragePercent="72">
+  <Assembly Name="McFly.Server.Data.SqlServer" CoveredStatements="562" TotalStatements="1030" CoveragePercent="55">
+    <Namespace Name="McFly.Server.Data.SqlServer" CoveredStatements="562" TotalStatements="1030" CoveragePercent="55">
       <Type Name="ByteRangeEntity" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
-        <Method Name="get_Bytes()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="31" />
-        <Method Name="get_Id()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="40" />
-        <Method Name="set_Bytes(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="31" />
-        <Method Name="set_Id(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="40" />
+        <Method Name="get_Bytes()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="32" />
+        <Method Name="get_Id()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="41" />
+        <Method Name="set_Bytes(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="32" />
+        <Method Name="set_Id(Guid)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="41" />
       </Type>
       <Type Name="ContextFactory" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
         <Method Name="get_Settings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="32" />
@@ -3695,233 +3708,255 @@
         <Method Name="GetProjectConnectionString(String)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="38" />
         <Method Name="set_Settings(Settings)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="30" />
       </Type>
-      <Type Name="DomainEntityConversion" CoveredStatements="18" TotalStatements="31" CoveragePercent="58">
-        <Method Name="ToFrame(FrameEntity)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="32" />
-        <Method Name="ToMemoryChunkEntity(MemoryChunk)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" FirstStatementLine="174" />
-        <Method Name="ToNote(NoteEntity)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="126" />
-        <Method Name="ToNoteEntity(Note)" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" FirstStatementLine="139" />
-        <Method Name="ToStackFrame(StackFrameEntity)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="152" />
-        <Method Name="ToStackFrameEntity(StackFrame)" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="163" />
+      <Type Name="DomainEntityExtensions" CoveredStatements="19" TotalStatements="19" CoveragePercent="100">
+        <Method Name="ToMemoryChunk(MemoryChunkEntity)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="70" />
+        <Method Name="ToMemoryChunkEntity(MemoryChunk)" CoveredStatements="4" TotalStatements="4" CoveragePercent="100" FirstStatementLine="55" />
+        <Method Name="ToStackFrame(StackFrameEntity)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="32" />
+        <Method Name="ToStackFrameEntity(StackFrame)" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="44" />
       </Type>
-      <Type Name="FrameAccess" CoveredStatements="171" TotalStatements="182" CoveragePercent="94">
-        <Type Name="&lt;&gt;c" CoveredStatements="2" TotalStatements="4" CoveragePercent="50">
-          <Method Name="&lt;ConvertFrameToEntity&gt;b__5_0(StackFrame)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="141" />
-          <Method Name="&lt;Search&gt;b__8_0(FrameEntity)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="212" />
-          <Method Name="&lt;UpsertFrames&gt;b__6_1(DbEntityValidationResult)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="173" />
-          <Method Name="&lt;UpsertFrames&gt;b__6_2(DbValidationError)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="174" />
+      <Type Name="FrameAccess" CoveredStatements="96" TotalStatements="98" CoveragePercent="98">
+        <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <Method Name="&lt;UpsertFrames&gt;b__5_1(DbEntityValidationResult)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="82" />
+          <Method Name="&lt;UpsertFrames&gt;b__5_2(DbValidationError)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="83" />
         </Type>
+        <Type Name="&lt;&gt;c__DisplayClass5_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
         <Type Name="&lt;&gt;c__DisplayClass6_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
         <Type Name="&lt;&gt;c__DisplayClass7_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
-        <Type Name="&lt;&gt;c__DisplayClass9_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;CopyValues&gt;b__0(StackFrameEntity)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="253" />
+        <Type Name="&lt;&gt;c__DisplayClass7_1" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;Search&gt;b__0(FrameEntity)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="124" />
+        </Type>
+        <Type Name="&lt;&gt;c__DisplayClass8_0" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;CopyValues&gt;b__0(StackFrameEntity)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="169" />
         </Type>
         <Method Name=".ctor()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="42" />
-        <Method Name="ConvertFrameToEntity(Frame,IMcFlyContext)" CoveredStatements="86" TotalStatements="86" CoveragePercent="100" FirstStatementLine="58" />
-        <Method Name="CopyValues(FrameEntity,FrameEntity)" CoveredStatements="41" TotalStatements="42" CoveragePercent="98" FirstStatementLine="223" />
+        <Method Name="CopyValues(FrameEntity,FrameEntity)" CoveredStatements="42" TotalStatements="42" CoveragePercent="100" FirstStatementLine="135" />
         <Method Name="get_ContextFactory()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
-        <Method Name="GetFrame(String,Position,Int32)" CoveredStatements="8" TotalStatements="8" CoveragePercent="100" FirstStatementLine="192" />
-        <Method Name="Search(String,ICriterion)" CoveredStatements="10" TotalStatements="10" CoveragePercent="100" FirstStatementLine="205" />
+        <Method Name="GetFrame(String,Position,Int32)" CoveredStatements="9" TotalStatements="9" CoveragePercent="100" FirstStatementLine="101" />
+        <Method Name="Search(String,ICriterion)" CoveredStatements="11" TotalStatements="11" CoveragePercent="100" FirstStatementLine="115" />
         <Method Name="set_ContextFactory(IContextFactory)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
-        <Method Name="UpsertFrames(String,IEnumerable&lt;Frame&gt;)" CoveredStatements="20" TotalStatements="28" CoveragePercent="71" FirstStatementLine="151" />
+        <Method Name="UpsertFrames(String,IEnumerable&lt;Frame&gt;)" CoveredStatements="29" TotalStatements="29" CoveragePercent="100" FirstStatementLine="59" />
       </Type>
-      <Type Name="FrameCriterionVisitor" CoveredStatements="63" TotalStatements="80" CoveragePercent="79">
+      <Type Name="FrameCriterionVisitor" CoveredStatements="57" TotalStatements="372" CoveragePercent="15">
         <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
         <Type Name="&lt;&gt;c__DisplayClass1_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
-        <Type Name="&lt;&gt;c__DisplayClass5_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
-        <Method Name="Visit(AndCriterion)" CoveredStatements="16" TotalStatements="16" CoveragePercent="100" FirstStatementLine="129" />
-        <Method Name="Visit(ICriterion)" CoveredStatements="8" TotalStatements="10" CoveragePercent="80" FirstStatementLine="39" />
-        <Method Name="Visit(NotCriterion)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="115" />
-        <Method Name="Visit(OrCriterion)" CoveredStatements="16" TotalStatements="16" CoveragePercent="100" FirstStatementLine="152" />
-        <Method Name="Visit(RegisterBetweenCriterion)" CoveredStatements="6" TotalStatements="20" CoveragePercent="30" FirstStatementLine="64" />
-        <Method Name="Visit(RegisterEqualsCriterion)" CoveredStatements="11" TotalStatements="12" CoveragePercent="92" FirstStatementLine="176" />
+        <Type Name="&lt;&gt;c__DisplayClass9_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Method Name="Visit(AndCriterion)" CoveredStatements="16" TotalStatements="16" CoveragePercent="100" FirstStatementLine="136" />
+        <Method Name="Visit(NotCriterion)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="122" />
+        <Method Name="Visit(OrCriterion)" CoveredStatements="16" TotalStatements="16" CoveragePercent="100" FirstStatementLine="159" />
+        <Method Name="Visit(RegisterBetweenCriterion)" CoveredStatements="6" TotalStatements="20" CoveragePercent="30" FirstStatementLine="46" />
+        <Method Name="Visit(RegisterEqualsCriterion)" CoveredStatements="13" TotalStatements="304" CoveragePercent="4" FirstStatementLine="183" />
+        <Method Name="Visit(RegisterInCriterion)" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" FirstStatementLine="36" />
+        <Method Name="Visit(TagCreatedAfterCriterion)" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" FirstStatementLine="94" />
+        <Method Name="Visit(TagCreatedBeforeCriterion)" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" FirstStatementLine="100" />
+        <Method Name="Visit(TagCreatedBetweenCriterion)" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" FirstStatementLine="106" />
+        <Method Name="Visit(TagTextContainsCriterion)" CoveredStatements="0" TotalStatements="2" CoveragePercent="0" FirstStatementLine="112" />
       </Type>
-      <Type Name="FrameEntity" CoveredStatements="166" TotalStatements="170" CoveragePercent="98">
-        <Method Name=".ctor()" CoveredStatements="2" TotalStatements="2" CoveragePercent="100" FirstStatementLine="344" />
-        <Method Name="get_Brfrom()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="34" />
-        <Method Name="get_Brto()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="43" />
-        <Method Name="get_Cs()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="52" />
-        <Method Name="get_DisassemblyNote()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
-        <Method Name="get_Dr0()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="68" />
-        <Method Name="get_Dr1()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
-        <Method Name="get_Dr2()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="86" />
-        <Method Name="get_Dr3()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="95" />
-        <Method Name="get_Dr6()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="104" />
-        <Method Name="get_Dr7()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="113" />
-        <Method Name="get_Ds()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="122" />
-        <Method Name="get_Efl()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="131" />
-        <Method Name="get_Es()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="140" />
-        <Method Name="get_Exfrom()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="149" />
-        <Method Name="get_Exto()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="158" />
-        <Method Name="get_Fopcode()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="167" />
-        <Method Name="get_Fpcw()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="176" />
-        <Method Name="get_Fpdp()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="185" />
-        <Method Name="get_Fpdpsel()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="194" />
-        <Method Name="get_Fpip()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="203" />
-        <Method Name="get_Fpipsel()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="212" />
-        <Method Name="get_Fpsw()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="221" />
-        <Method Name="get_Fptw()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="230" />
-        <Method Name="get_Fs()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="239" />
-        <Method Name="get_Gs()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="248" />
-        <Method Name="get_Id()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="257" />
-        <Method Name="get_Mm0()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="266" />
-        <Method Name="get_Mm1()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="275" />
-        <Method Name="get_Mm2()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="284" />
-        <Method Name="get_Mm3()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="293" />
-        <Method Name="get_Mm4()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="302" />
-        <Method Name="get_Mm5()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="311" />
-        <Method Name="get_Mm6()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="320" />
-        <Method Name="get_Mm7()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="329" />
-        <Method Name="get_Mxcsr()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="338" />
-        <Method Name="get_Notes()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="344" />
-        <Method Name="get_OpCode()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="351" />
-        <Method Name="get_OpCodeMnemonic()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="358" />
-        <Method Name="get_PosHi()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="365" />
-        <Method Name="get_PosLo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="372" />
-        <Method Name="get_R10()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="381" />
-        <Method Name="get_R11()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="390" />
-        <Method Name="get_R12()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="399" />
-        <Method Name="get_R13()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="408" />
-        <Method Name="get_R14()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="417" />
-        <Method Name="get_R15()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="426" />
-        <Method Name="get_R8()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="435" />
-        <Method Name="get_R9()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="444" />
-        <Method Name="get_Rax()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="453" />
-        <Method Name="get_Rbp()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="462" />
-        <Method Name="get_Rbx()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="471" />
-        <Method Name="get_Rcx()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="480" />
-        <Method Name="get_Rdi()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="489" />
-        <Method Name="get_Rdx()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="498" />
-        <Method Name="get_Rip()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="507" />
-        <Method Name="get_Rsi()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="516" />
-        <Method Name="get_Rsp()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="525" />
-        <Method Name="get_Ss()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="534" />
-        <Method Name="get_St0()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="543" />
-        <Method Name="get_St1()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="552" />
-        <Method Name="get_St2()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="561" />
-        <Method Name="get_St3()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="570" />
-        <Method Name="get_St4()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="579" />
-        <Method Name="get_St5()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="588" />
-        <Method Name="get_St6()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="597" />
-        <Method Name="get_St7()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="606" />
-        <Method Name="get_StackFrames()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="612" />
-        <Method Name="get_ThreadId()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="619" />
-        <Method Name="get_Ymm0()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="628" />
-        <Method Name="get_Ymm1()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="637" />
-        <Method Name="get_Ymm10()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="646" />
-        <Method Name="get_Ymm11()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="655" />
-        <Method Name="get_Ymm12()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="664" />
-        <Method Name="get_Ymm13()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="673" />
-        <Method Name="get_Ymm14()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="682" />
-        <Method Name="get_Ymm15()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="691" />
-        <Method Name="get_Ymm2()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="700" />
-        <Method Name="get_Ymm3()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="709" />
-        <Method Name="get_Ymm4()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="718" />
-        <Method Name="get_Ymm5()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="727" />
-        <Method Name="get_Ymm6()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="736" />
-        <Method Name="get_Ymm7()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="745" />
-        <Method Name="get_Ymm8()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="754" />
-        <Method Name="get_Ymm9()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="763" />
-        <Method Name="set_Brfrom(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="34" />
-        <Method Name="set_Brto(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="43" />
-        <Method Name="set_Cs(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="52" />
-        <Method Name="set_DisassemblyNote(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
-        <Method Name="set_Dr0(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="68" />
-        <Method Name="set_Dr1(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
-        <Method Name="set_Dr2(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="86" />
-        <Method Name="set_Dr3(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="95" />
-        <Method Name="set_Dr6(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="104" />
-        <Method Name="set_Dr7(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="113" />
-        <Method Name="set_Ds(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="122" />
-        <Method Name="set_Efl(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="131" />
-        <Method Name="set_Es(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="140" />
-        <Method Name="set_Exfrom(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="149" />
-        <Method Name="set_Exto(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="158" />
-        <Method Name="set_Fopcode(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="167" />
-        <Method Name="set_Fpcw(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="176" />
-        <Method Name="set_Fpdp(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="185" />
-        <Method Name="set_Fpdpsel(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="194" />
-        <Method Name="set_Fpip(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="203" />
-        <Method Name="set_Fpipsel(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="212" />
-        <Method Name="set_Fpsw(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="221" />
-        <Method Name="set_Fptw(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="230" />
-        <Method Name="set_Fs(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="239" />
-        <Method Name="set_Gs(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="248" />
-        <Method Name="set_Id(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="257" />
-        <Method Name="set_Mm0(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="266" />
-        <Method Name="set_Mm1(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="275" />
-        <Method Name="set_Mm2(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="284" />
-        <Method Name="set_Mm3(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="293" />
-        <Method Name="set_Mm4(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="302" />
-        <Method Name="set_Mm5(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="311" />
-        <Method Name="set_Mm6(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="320" />
-        <Method Name="set_Mm7(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="329" />
-        <Method Name="set_Mxcsr(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="338" />
-        <Method Name="set_Notes(List&lt;NoteEntity&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="344" />
-        <Method Name="set_OpCode(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="351" />
-        <Method Name="set_OpCodeMnemonic(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="358" />
-        <Method Name="set_PosHi(Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="365" />
-        <Method Name="set_PosLo(Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="372" />
-        <Method Name="set_R10(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="381" />
-        <Method Name="set_R11(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="390" />
-        <Method Name="set_R12(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="399" />
-        <Method Name="set_R13(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="408" />
-        <Method Name="set_R14(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="417" />
-        <Method Name="set_R15(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="426" />
-        <Method Name="set_R8(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="435" />
-        <Method Name="set_R9(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="444" />
-        <Method Name="set_Rax(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="453" />
-        <Method Name="set_Rbp(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="462" />
-        <Method Name="set_Rbx(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="471" />
-        <Method Name="set_Rcx(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="480" />
-        <Method Name="set_Rdi(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="489" />
-        <Method Name="set_Rdx(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="498" />
-        <Method Name="set_Rip(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="507" />
-        <Method Name="set_Rsi(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="516" />
-        <Method Name="set_Rsp(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="525" />
-        <Method Name="set_Ss(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="534" />
-        <Method Name="set_St0(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="543" />
-        <Method Name="set_St1(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="552" />
-        <Method Name="set_St2(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="561" />
-        <Method Name="set_St3(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="570" />
-        <Method Name="set_St4(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="579" />
-        <Method Name="set_St5(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="588" />
-        <Method Name="set_St6(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="597" />
-        <Method Name="set_St7(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="606" />
-        <Method Name="set_StackFrames(List&lt;StackFrameEntity&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="612" />
-        <Method Name="set_ThreadId(Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="619" />
-        <Method Name="set_Ymm0(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="628" />
-        <Method Name="set_Ymm1(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="637" />
-        <Method Name="set_Ymm10(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="646" />
-        <Method Name="set_Ymm11(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="655" />
-        <Method Name="set_Ymm12(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="664" />
-        <Method Name="set_Ymm13(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="673" />
-        <Method Name="set_Ymm14(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="682" />
-        <Method Name="set_Ymm15(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="691" />
-        <Method Name="set_Ymm2(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="700" />
-        <Method Name="set_Ymm3(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="709" />
-        <Method Name="set_Ymm4(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="718" />
-        <Method Name="set_Ymm5(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="727" />
-        <Method Name="set_Ymm6(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="736" />
-        <Method Name="set_Ymm7(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="745" />
-        <Method Name="set_Ymm8(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="754" />
-        <Method Name="set_Ymm9(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="763" />
+      <Type Name="FrameDomainEntityConverter" CoveredStatements="170" TotalStatements="170" CoveragePercent="100">
+        <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;ToEntity&gt;b__1_0(StackFrame)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="213" />
+        </Type>
+        <Method Name="ToDomain(FrameEntity,IMcFlyContext)" CoveredStatements="83" TotalStatements="83" CoveragePercent="100" FirstStatementLine="36" />
+        <Method Name="ToEntity(Frame,IMcFlyContext)" CoveredStatements="86" TotalStatements="86" CoveragePercent="100" FirstStatementLine="130" />
       </Type>
-      <Type Name="McFlyContext" CoveredStatements="0" TotalStatements="20" CoveragePercent="0">
+      <Type Name="FrameEntity" CoveredStatements="168" TotalStatements="170" CoveragePercent="99">
+        <Method Name=".ctor()" CoveredStatements="2" TotalStatements="2" CoveragePercent="100" FirstStatementLine="341" />
+        <Method Name="get_Brfrom()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="40" />
+        <Method Name="get_Brto()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
+        <Method Name="get_Cs()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="58" />
+        <Method Name="get_DisassemblyNote()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="65" />
+        <Method Name="get_Dr0()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="74" />
+        <Method Name="get_Dr1()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="83" />
+        <Method Name="get_Dr2()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="92" />
+        <Method Name="get_Dr3()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="101" />
+        <Method Name="get_Dr6()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="110" />
+        <Method Name="get_Dr7()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="119" />
+        <Method Name="get_Ds()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="128" />
+        <Method Name="get_Efl()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="137" />
+        <Method Name="get_Es()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="146" />
+        <Method Name="get_Exfrom()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="155" />
+        <Method Name="get_Exto()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="164" />
+        <Method Name="get_Fopcode()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="173" />
+        <Method Name="get_Fpcw()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="182" />
+        <Method Name="get_Fpdp()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="191" />
+        <Method Name="get_Fpdpsel()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="200" />
+        <Method Name="get_Fpip()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="209" />
+        <Method Name="get_Fpipsel()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="218" />
+        <Method Name="get_Fpsw()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="227" />
+        <Method Name="get_Fptw()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="236" />
+        <Method Name="get_Fs()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="245" />
+        <Method Name="get_Gs()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="254" />
+        <Method Name="get_Id()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="31" />
+        <Method Name="get_Mm0()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="263" />
+        <Method Name="get_Mm1()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="272" />
+        <Method Name="get_Mm2()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="281" />
+        <Method Name="get_Mm3()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="290" />
+        <Method Name="get_Mm4()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="299" />
+        <Method Name="get_Mm5()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="308" />
+        <Method Name="get_Mm6()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="317" />
+        <Method Name="get_Mm7()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="326" />
+        <Method Name="get_Mxcsr()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="335" />
+        <Method Name="get_OpCode()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="348" />
+        <Method Name="get_OpCodeMnemonic()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="355" />
+        <Method Name="get_PosHi()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="362" />
+        <Method Name="get_PosLo()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="369" />
+        <Method Name="get_R10()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="378" />
+        <Method Name="get_R11()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="387" />
+        <Method Name="get_R12()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="396" />
+        <Method Name="get_R13()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="405" />
+        <Method Name="get_R14()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="414" />
+        <Method Name="get_R15()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="423" />
+        <Method Name="get_R8()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="432" />
+        <Method Name="get_R9()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="441" />
+        <Method Name="get_Rax()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="450" />
+        <Method Name="get_Rbp()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="459" />
+        <Method Name="get_Rbx()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="468" />
+        <Method Name="get_Rcx()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="477" />
+        <Method Name="get_Rdi()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="486" />
+        <Method Name="get_Rdx()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="495" />
+        <Method Name="get_Rip()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="504" />
+        <Method Name="get_Rsi()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="513" />
+        <Method Name="get_Rsp()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="522" />
+        <Method Name="get_Ss()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="531" />
+        <Method Name="get_St0()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="540" />
+        <Method Name="get_St1()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="549" />
+        <Method Name="get_St2()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="558" />
+        <Method Name="get_St3()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="567" />
+        <Method Name="get_St4()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="576" />
+        <Method Name="get_St5()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="585" />
+        <Method Name="get_St6()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="594" />
+        <Method Name="get_St7()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="603" />
+        <Method Name="get_StackFrames()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="609" />
+        <Method Name="get_Tags()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="341" />
+        <Method Name="get_ThreadId()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="616" />
+        <Method Name="get_Ymm0()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="625" />
+        <Method Name="get_Ymm1()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="634" />
+        <Method Name="get_Ymm10()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="643" />
+        <Method Name="get_Ymm11()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="652" />
+        <Method Name="get_Ymm12()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="661" />
+        <Method Name="get_Ymm13()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="670" />
+        <Method Name="get_Ymm14()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="679" />
+        <Method Name="get_Ymm15()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="688" />
+        <Method Name="get_Ymm2()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="697" />
+        <Method Name="get_Ymm3()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="706" />
+        <Method Name="get_Ymm4()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="715" />
+        <Method Name="get_Ymm5()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="724" />
+        <Method Name="get_Ymm6()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="733" />
+        <Method Name="get_Ymm7()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="742" />
+        <Method Name="get_Ymm8()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="751" />
+        <Method Name="get_Ymm9()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="760" />
+        <Method Name="set_Brfrom(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="40" />
+        <Method Name="set_Brto(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="49" />
+        <Method Name="set_Cs(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="58" />
+        <Method Name="set_DisassemblyNote(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="65" />
+        <Method Name="set_Dr0(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="74" />
+        <Method Name="set_Dr1(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="83" />
+        <Method Name="set_Dr2(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="92" />
+        <Method Name="set_Dr3(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="101" />
+        <Method Name="set_Dr6(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="110" />
+        <Method Name="set_Dr7(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="119" />
+        <Method Name="set_Ds(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="128" />
+        <Method Name="set_Efl(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="137" />
+        <Method Name="set_Es(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="146" />
+        <Method Name="set_Exfrom(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="155" />
+        <Method Name="set_Exto(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="164" />
+        <Method Name="set_Fopcode(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="173" />
+        <Method Name="set_Fpcw(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="182" />
+        <Method Name="set_Fpdp(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="191" />
+        <Method Name="set_Fpdpsel(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="200" />
+        <Method Name="set_Fpip(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="209" />
+        <Method Name="set_Fpipsel(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="218" />
+        <Method Name="set_Fpsw(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="227" />
+        <Method Name="set_Fptw(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="236" />
+        <Method Name="set_Fs(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="245" />
+        <Method Name="set_Gs(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="254" />
+        <Method Name="set_Id(Guid)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="31" />
+        <Method Name="set_Mm0(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="263" />
+        <Method Name="set_Mm1(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="272" />
+        <Method Name="set_Mm2(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="281" />
+        <Method Name="set_Mm3(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="290" />
+        <Method Name="set_Mm4(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="299" />
+        <Method Name="set_Mm5(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="308" />
+        <Method Name="set_Mm6(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="317" />
+        <Method Name="set_Mm7(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="326" />
+        <Method Name="set_Mxcsr(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="335" />
+        <Method Name="set_OpCode(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="348" />
+        <Method Name="set_OpCodeMnemonic(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="355" />
+        <Method Name="set_PosHi(Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="362" />
+        <Method Name="set_PosLo(Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="369" />
+        <Method Name="set_R10(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="378" />
+        <Method Name="set_R11(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="387" />
+        <Method Name="set_R12(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="396" />
+        <Method Name="set_R13(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="405" />
+        <Method Name="set_R14(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="414" />
+        <Method Name="set_R15(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="423" />
+        <Method Name="set_R8(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="432" />
+        <Method Name="set_R9(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="441" />
+        <Method Name="set_Rax(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="450" />
+        <Method Name="set_Rbp(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="459" />
+        <Method Name="set_Rbx(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="468" />
+        <Method Name="set_Rcx(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="477" />
+        <Method Name="set_Rdi(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="486" />
+        <Method Name="set_Rdx(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="495" />
+        <Method Name="set_Rip(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="504" />
+        <Method Name="set_Rsi(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="513" />
+        <Method Name="set_Rsp(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="522" />
+        <Method Name="set_Ss(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="531" />
+        <Method Name="set_St0(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="540" />
+        <Method Name="set_St1(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="549" />
+        <Method Name="set_St2(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="558" />
+        <Method Name="set_St3(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="567" />
+        <Method Name="set_St4(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="576" />
+        <Method Name="set_St5(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="585" />
+        <Method Name="set_St6(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="594" />
+        <Method Name="set_St7(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="603" />
+        <Method Name="set_StackFrames(List&lt;StackFrameEntity&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="609" />
+        <Method Name="set_Tags(List&lt;TagEntity&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="341" />
+        <Method Name="set_ThreadId(Int32)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="616" />
+        <Method Name="set_Ymm0(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="625" />
+        <Method Name="set_Ymm1(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="634" />
+        <Method Name="set_Ymm10(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="643" />
+        <Method Name="set_Ymm11(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="652" />
+        <Method Name="set_Ymm12(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="661" />
+        <Method Name="set_Ymm13(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="670" />
+        <Method Name="set_Ymm14(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="679" />
+        <Method Name="set_Ymm15(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="688" />
+        <Method Name="set_Ymm2(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="697" />
+        <Method Name="set_Ymm3(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="706" />
+        <Method Name="set_Ymm4(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="715" />
+        <Method Name="set_Ymm5(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="724" />
+        <Method Name="set_Ymm6(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="733" />
+        <Method Name="set_Ymm7(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="742" />
+        <Method Name="set_Ymm8(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="751" />
+        <Method Name="set_Ymm9(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="760" />
+      </Type>
+      <Type Name="FrameTagMapping" CoveredStatements="0" TotalStatements="8" CoveragePercent="0">
+        <Method Name="get_Frame()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="29" />
+        <Method Name="get_FrameId()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="36" />
+        <Method Name="get_Tag()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="42" />
+        <Method Name="get_TagId()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="49" />
+        <Method Name="set_Frame(FrameEntity)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="29" />
+        <Method Name="set_FrameId(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="36" />
+        <Method Name="set_Tag(TagEntity)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="42" />
+        <Method Name="set_TagId(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="49" />
+      </Type>
+      <Type Name="McFlyContext" CoveredStatements="0" TotalStatements="22" CoveragePercent="0">
         <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
         <Method Name=".ctor(String)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="30" />
         <Method Name="get_ByteRangeEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="71" />
         <Method Name="get_FrameEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="77" />
-        <Method Name="get_MemoryChunkEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="84" />
-        <Method Name="get_NoteEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="90" />
-        <Method Name="get_StackFrameEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="96" />
-        <Method Name="get_TraceInfoEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="102" />
+        <Method Name="get_FrameTagMappings()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="80" />
+        <Method Name="get_MemoryChunkEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="87" />
+        <Method Name="get_StackFrameEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="99" />
+        <Method Name="get_TagEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="93" />
+        <Method Name="get_TraceInfoEntities()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="105" />
         <Method Name="OnModelCreating(DbModelBuilder)" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" FirstStatementLine="50" />
         <Method Name="set_ByteRangeEntities(DbSet&lt;ByteRangeEntity&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="71" />
         <Method Name="set_FrameEntities(DbSet&lt;FrameEntity&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="77" />
-        <Method Name="set_MemoryChunkEntities(DbSet&lt;MemoryChunkEntity&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="84" />
-        <Method Name="set_NoteEntities(DbSet&lt;NoteEntity&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="90" />
-        <Method Name="set_StackFrameEntities(DbSet&lt;StackFrameEntity&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="96" />
-        <Method Name="set_TraceInfoEntities(DbSet&lt;TraceInfoEntity&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="102" />
+        <Method Name="set_FrameTagMappings(DbSet&lt;FrameTagMapping&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="80" />
+        <Method Name="set_MemoryChunkEntities(DbSet&lt;MemoryChunkEntity&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="87" />
+        <Method Name="set_StackFrameEntities(DbSet&lt;StackFrameEntity&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="99" />
+        <Method Name="set_TagEntities(DbSet&lt;TagEntity&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="93" />
+        <Method Name="set_TraceInfoEntities(DbSet&lt;TraceInfoEntity&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="105" />
       </Type>
       <Type Name="MemoryAccess" CoveredStatements="0" TotalStatements="30" CoveragePercent="0">
         <Type Name="&lt;&gt;c__DisplayClass0_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
@@ -3934,47 +3969,24 @@
         <Method Name="set_ContextFactory(IContextFactory)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="109" />
       </Type>
       <Type Name="MemoryChunkEntity" CoveredStatements="0" TotalStatements="18" CoveragePercent="0">
-        <Method Name="get_ByteRange()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="31" />
-        <Method Name="get_ByteRangeId()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="38" />
-        <Method Name="get_HighAddress()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="47" />
-        <Method Name="get_Id()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="56" />
-        <Method Name="get_LowAddress()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="65" />
-        <Method Name="get_PosHi()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="72" />
-        <Method Name="get_PosLo()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="79" />
-        <Method Name="get_SubsectionLength()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="86" />
-        <Method Name="get_SubsectionStartIndex()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="95" />
-        <Method Name="set_ByteRange(ByteRangeEntity)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="31" />
-        <Method Name="set_ByteRangeId(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="38" />
-        <Method Name="set_HighAddress(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="47" />
-        <Method Name="set_Id(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="56" />
-        <Method Name="set_LowAddress(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="65" />
-        <Method Name="set_PosHi(Int32)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="72" />
-        <Method Name="set_PosLo(Int32)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="79" />
-        <Method Name="set_SubsectionLength(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="86" />
-        <Method Name="set_SubsectionStartIndex(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="95" />
-      </Type>
-      <Type Name="NoteAccess" CoveredStatements="22" TotalStatements="22" CoveragePercent="100">
-        <Type Name="&lt;&gt;c" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
-          <Method Name="&lt;GetNotes&gt;b__5_1(NoteEntity)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="76" />
-        </Type>
-        <Type Name="&lt;&gt;c__DisplayClass4_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
-        <Type Name="&lt;&gt;c__DisplayClass5_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
-        <Method Name="AddNote(String,Position,IEnumerable&lt;Int32&gt;,String)" CoveredStatements="13" TotalStatements="13" CoveragePercent="100" FirstStatementLine="47" />
-        <Method Name="get_ContextFactory()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="37" />
-        <Method Name="GetNotes(String,Position,Int32)" CoveredStatements="6" TotalStatements="6" CoveragePercent="100" FirstStatementLine="71" />
-        <Method Name="set_ContextFactory(IContextFactory)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="37" />
-      </Type>
-      <Type Name="NoteEntity" CoveredStatements="4" TotalStatements="10" CoveragePercent="40">
-        <Method Name="get_CreateDate()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="41" />
-        <Method Name="get_Frame()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="62" />
-        <Method Name="get_FrameId()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="55" />
-        <Method Name="get_NoteId()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="34" />
-        <Method Name="get_Text()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="48" />
-        <Method Name="set_CreateDate(DateTime)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="41" />
-        <Method Name="set_Frame(FrameEntity)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="62" />
-        <Method Name="set_FrameId(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="55" />
-        <Method Name="set_NoteId(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="34" />
-        <Method Name="set_Text(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="48" />
+        <Method Name="get_ByteRange()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="37" />
+        <Method Name="get_ByteRangeId()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="44" />
+        <Method Name="get_HighAddress()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="53" />
+        <Method Name="get_Id()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="30" />
+        <Method Name="get_LowAddress()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="63" />
+        <Method Name="get_PosHi()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="70" />
+        <Method Name="get_PosLo()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="77" />
+        <Method Name="get_SubsectionLength()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="84" />
+        <Method Name="get_SubsectionStartIndex()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="93" />
+        <Method Name="set_ByteRange(ByteRangeEntity)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="37" />
+        <Method Name="set_ByteRangeId(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="44" />
+        <Method Name="set_HighAddress(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="53" />
+        <Method Name="set_Id(Guid)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="30" />
+        <Method Name="set_LowAddress(String)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="63" />
+        <Method Name="set_PosHi(Int32)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="70" />
+        <Method Name="set_PosLo(Int32)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="77" />
+        <Method Name="set_SubsectionLength(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="84" />
+        <Method Name="set_SubsectionStartIndex(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="93" />
       </Type>
       <Type Name="ProjectsAccess" CoveredStatements="0" TotalStatements="25" CoveragePercent="0">
         <Type Name="&lt;&gt;c" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
@@ -3987,23 +3999,55 @@
         <Method Name="GetProjects()" CoveredStatements="0" TotalStatements="12" CoveragePercent="0" FirstStatementLine="65" />
         <Method Name="set_ContextFactory(IContextFactory)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="85" />
       </Type>
+      <Type Name="StackFrameDomainEntityConverter" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+        <Method Name="ToDomain(StackFrameEntity,IMcFlyContext)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="34" />
+        <Method Name="ToEntity(StackFrame,IMcFlyContext)" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" FirstStatementLine="47" />
+      </Type>
       <Type Name="StackFrameEntity" CoveredStatements="10" TotalStatements="16" CoveragePercent="63">
-        <Method Name="get_Frame()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="86" />
-        <Method Name="get_FrameId()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="79" />
-        <Method Name="get_Function()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="65" />
-        <Method Name="get_Id()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
-        <Method Name="get_ModuleName()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="58" />
-        <Method Name="get_Offset()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="72" />
-        <Method Name="get_ReturnAddress()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="51" />
-        <Method Name="get_StackPointer()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="42" />
-        <Method Name="set_Frame(FrameEntity)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="86" />
-        <Method Name="set_FrameId(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="79" />
-        <Method Name="set_Function(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="65" />
-        <Method Name="set_Id(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="33" />
-        <Method Name="set_ModuleName(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="58" />
-        <Method Name="set_Offset(Nullable&lt;Int64&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="72" />
-        <Method Name="set_ReturnAddress(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="51" />
-        <Method Name="set_StackPointer(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="42" />
+        <Method Name="get_Frame()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="87" />
+        <Method Name="get_FrameId()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="80" />
+        <Method Name="get_Function()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="66" />
+        <Method Name="get_Id()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="34" />
+        <Method Name="get_ModuleName()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
+        <Method Name="get_Offset()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="73" />
+        <Method Name="get_ReturnAddress()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="52" />
+        <Method Name="get_StackPointer()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="43" />
+        <Method Name="set_Frame(FrameEntity)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="87" />
+        <Method Name="set_FrameId(Int64)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="80" />
+        <Method Name="set_Function(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="66" />
+        <Method Name="set_Id(Guid)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="34" />
+        <Method Name="set_ModuleName(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="59" />
+        <Method Name="set_Offset(Nullable&lt;Int64&gt;)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="73" />
+        <Method Name="set_ReturnAddress(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="52" />
+        <Method Name="set_StackPointer(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="43" />
+      </Type>
+      <Type Name="TagAccess" CoveredStatements="23" TotalStatements="23" CoveragePercent="100">
+        <Type Name="&lt;&gt;c__DisplayClass4_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Type Name="&lt;&gt;c__DisplayClass5_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Type Name="&lt;&gt;c__DisplayClass5_1" CoveredStatements="1" TotalStatements="1" CoveragePercent="100">
+          <Method Name="&lt;GetTags&gt;b__1(TagEntity)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="77" />
+        </Type>
+        <Method Name="AddTag(String,Position,IEnumerable&lt;Int32&gt;,String)" CoveredStatements="13" TotalStatements="13" CoveragePercent="100" FirstStatementLine="47" />
+        <Method Name="get_ContextFactory()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="37" />
+        <Method Name="GetTags(String,Position,Int32)" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" FirstStatementLine="71" />
+        <Method Name="set_ContextFactory(IContextFactory)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="37" />
+      </Type>
+      <Type Name="TagDomainEntityConverter" CoveredStatements="12" TotalStatements="13" CoveragePercent="92">
+        <Type Name="&lt;&gt;c__DisplayClass1_0" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
+        <Method Name="ToDomain(TagEntity,IMcFlyContext)" CoveredStatements="3" TotalStatements="3" CoveragePercent="100" FirstStatementLine="35" />
+        <Method Name="ToEntity(Tag,IMcFlyContext)" CoveredStatements="9" TotalStatements="10" CoveragePercent="90" FirstStatementLine="53" />
+      </Type>
+      <Type Name="TagEntity" CoveredStatements="7" TotalStatements="10" CoveragePercent="70">
+        <Method Name="get_Body()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
+        <Method Name="get_CreateDateUtc()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="40" />
+        <Method Name="get_Frames()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="46" />
+        <Method Name="get_Id()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="55" />
+        <Method Name="get_Title()" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="62" />
+        <Method Name="set_Body(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="33" />
+        <Method Name="set_CreateDateUtc(DateTime)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="40" />
+        <Method Name="set_Frames(ICollection&lt;FrameEntity&gt;)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="46" />
+        <Method Name="set_Id(Guid)" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="55" />
+        <Method Name="set_Title(String)" CoveredStatements="1" TotalStatements="1" CoveragePercent="100" FirstStatementLine="62" />
       </Type>
       <Type Name="TraceInfoEntity" CoveredStatements="0" TotalStatements="14" CoveragePercent="0">
         <Method Name="get_CreateDate()" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" FirstStatementLine="32" />
