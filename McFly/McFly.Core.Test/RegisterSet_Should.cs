@@ -1365,6 +1365,7 @@ namespace McFly.Core.Test
         {
             var rs = new RegisterSet();
             rs.Equals(rs).Should().BeTrue();
+            rs.Equals((object) rs).Should().BeTrue();
             rs.Equals(null).Should().BeFalse();
             rs.Equals((object) rs).Should().BeTrue();
             rs.Equals((object) null).Should().BeFalse();
@@ -1375,6 +1376,7 @@ namespace McFly.Core.Test
                 var r2 = new RegisterSet();
                 r1.Equals(r1).Should().BeTrue();
                 r1.Equals(r2).Should().BeTrue();
+                r1.Equals((object) r2).Should().BeTrue();
                 r1.GetHashCode().Should().Be(r2.GetHashCode());
             }
 

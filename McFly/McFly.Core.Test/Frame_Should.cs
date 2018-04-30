@@ -84,6 +84,82 @@ namespace McFly.Core.Test
             })
         };
 
+        private readonly Frame _frame5 = new Frame
+        {
+            Position = new Position(11, 11),
+            ThreadId = 401,
+            DisassemblyLine = new DisassemblyLine(0x100, new byte[] { 0x10, 0x11 }, "mov", "r8,r9"),
+            RegisterSet = new RegisterSet
+            {
+                Rax = 2,
+                Rbx = 4,
+                Rcx = 6,
+                Rdx = 8
+            },
+            StackTrace = new StackTrace(new[]
+            {
+                new StackFrame(0x400, 0x700, "mod", "helloworld", 0x12),
+                new StackFrame(0x420, 0x701, "mod", "helloworld", 0x13)
+            })
+        };
+
+        private readonly Frame _frame6 = new Frame
+        {
+            Position = new Position(11, 11),
+            ThreadId = 401,
+            DisassemblyLine = new DisassemblyLine(0x100, new byte[] { 0x10, 0x11 }, "mov", "r8,r9"),
+            RegisterSet = new RegisterSet
+            {
+                Rax = 2,
+                Rbx = 4,
+                Rcx = 6,
+                Rdx = 8
+            },
+            StackTrace = new StackTrace(new[]
+            {
+                new StackFrame(0x400, 0x700, "mod", "helloworld2", 0x12),
+                new StackFrame(0x420, 0x701, "mod", "helloworld2", 0x13)
+            })
+        };
+
+        private readonly Frame _frame7 = new Frame
+        {
+            Position = new Position(11, 11),
+            ThreadId = 402,
+            DisassemblyLine = new DisassemblyLine(0x100, new byte[] { 0x10, 0x11 }, "mov", "r8,r9"),
+            RegisterSet = new RegisterSet
+            {
+                Rax = 2,
+                Rbx = 4,
+                Rcx = 6,
+                Rdx = 8
+            },
+            StackTrace = new StackTrace(new[]
+            {
+                new StackFrame(0x400, 0x700, "mod", "helloworld2", 0x12),
+                new StackFrame(0x420, 0x701, "mod", "helloworld2", 0x13)
+            })
+        };
+
+        private readonly Frame _frame8 = new Frame
+        {
+            Position = new Position(11, 11),
+            ThreadId = 402,
+            DisassemblyLine = new DisassemblyLine(0x100, new byte[] { 0x10, 0x11, 0x12 }, "mov", "r8,r9"),
+            RegisterSet = new RegisterSet
+            {
+                Rax = 2,
+                Rbx = 4,
+                Rcx = 6,
+                Rdx = 8
+            },
+            StackTrace = new StackTrace(new[]
+            {
+                new StackFrame(0x400, 0x700, "mod", "helloworld2", 0x12),
+                new StackFrame(0x420, 0x701, "mod", "helloworld2", 0x13)
+            })
+        };
+
         [Fact]
         public void Be_Comparable_By_Position_Then_Frame()
         {
@@ -132,6 +208,10 @@ namespace McFly.Core.Test
             _frame1.ValueEquals(_frame1).Should().BeTrue();
             _frame1.ValueEquals(_frame2).Should().BeTrue();
             _frame1.ValueEquals(_frame3).Should().BeFalse();
+            _frame4.ValueEquals(_frame5).Should().BeFalse();
+            _frame5.ValueEquals(_frame6).Should().BeFalse();
+            _frame6.ValueEquals(_frame7).Should().BeFalse();
+            _frame7.ValueEquals(_frame8).Should().BeFalse();
         }
     }
 }

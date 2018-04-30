@@ -4,7 +4,7 @@
 // Created          : 02-28-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-29-2018
 // ***********************************************************************
 // <copyright file="Frame.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -22,6 +22,7 @@ namespace McFly.Core
     ///     Imagine you took a time slice of the process at an exact moment of time
     ///     and you will understand what this class represents
     /// </summary>
+    /// <seealso cref="McFly.Core.DomainEntity{McFly.Core.Frame}" />
     /// <seealso cref="System.IComparable{McFly.Core.Frame}" />
     /// <seealso cref="System.IComparable" />
     /// <seealso cref="System.IEquatable{McFly.Core.Frame}" />
@@ -61,21 +62,34 @@ namespace McFly.Core
             return _threadId.CompareTo(other._threadId);
         }
 
+        /// <summary>
+        ///     Determines if this instance is value-type equal with another instance.
+        /// </summary>
+        /// <param name="other">The other instance.</param>
+        /// <returns><c>true</c> if this instance is value-type equal with the other instance, <c>false</c> otherwise.</returns>
         /// <inheritdoc />
+        /// <remarks>Typically this is a field by field equality operation, but does NOT consider the ID</remarks>
         public override bool ValueEquals(Frame other)
         {
-            if (other == null) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if (other == null)
+                return false;
+            if (ReferenceEquals(this, other))
+                return true;
             var positionEqual = Position.Equals(other.Position);
-            if (!positionEqual) return false;
+            if (!positionEqual)
+                return false;
             var registerEqual = RegisterSet.Equals(other.RegisterSet);
-            if (!registerEqual) return false;
+            if (!registerEqual)
+                return false;
             var stackFramesEqual = StackTrace.Equals(other.StackTrace);
-            if (!stackFramesEqual) return false;
+            if (!stackFramesEqual)
+                return false;
             var threadEqual = ThreadId.Equals(other.ThreadId);
-            if (!threadEqual) return false;
+            if (!threadEqual)
+                return false;
             var disassemblyLineEqual = DisassemblyLine.Equals(other.DisassemblyLine);
-            if (!disassemblyLineEqual) return false;
+            if (!disassemblyLineEqual)
+                return false;
             return true;
         }
 
