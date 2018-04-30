@@ -38,7 +38,7 @@ namespace McFly.Server.Data.SqlServer
                 Body = entity.Body,
                 Title = entity.Title,
                 CreateDateUtc = entity.CreateDateUtc,
-                Id = entity.TagId
+                Id = entity.Id
             };
         }
 
@@ -51,7 +51,7 @@ namespace McFly.Server.Data.SqlServer
         /// <inheritdoc />
         public TagEntity ToEntity(Tag domainObject, IMcFlyContext context)
         {
-            var first = context.TagEntities.FirstOrDefault(t => t.TagId == domainObject.Id);
+            var first = context.TagEntities.FirstOrDefault(t => t.Id == domainObject.Id);
             if (first != null)
                 return first;
             var newTag = context.TagEntities.Create();

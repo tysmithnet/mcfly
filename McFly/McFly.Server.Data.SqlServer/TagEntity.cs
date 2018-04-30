@@ -51,8 +51,8 @@ namespace McFly.Server.Data.SqlServer
         /// <value>The tag identifier.</value>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("tag_id")]
-        public long TagId { get; set; }
+        [Column("id")]
+        public Guid Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the title of the tag

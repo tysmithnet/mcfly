@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,6 +25,11 @@ namespace McFly.Server.Data.SqlServer
     [Table("frame")]
     internal class FrameEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id")]
+        public Guid Id { get; set; }
+
         /// <summary>
         ///     Gets or sets the brfrom.
         /// </summary>
@@ -246,15 +252,6 @@ namespace McFly.Server.Data.SqlServer
         [MaxLength(4)]
         [MinLength(4)]
         public string Gs { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the frame identifier.
-        /// </summary>
-        /// <value>The frame identifier.</value>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public long Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the MM0.

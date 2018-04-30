@@ -12,13 +12,12 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.Linq;
 using McFly.Core;
 
 namespace McFly.Server.Data.SqlServer
 {
     /// <summary>
-    ///     Domain entity converter for <see cref="StackFrame"/> and <see cref="StackFrameEntity"/>
+    ///     Domain entity converter for <see cref="StackFrame" /> and <see cref="StackFrameEntity" />
     /// </summary>
     /// <seealso
     ///     cref="McFly.Server.Data.SqlServer.IDomainEntityConverter{McFly.Core.StackFrame, McFly.Server.Data.SqlServer.StackFrameEntity}" />
@@ -33,7 +32,8 @@ namespace McFly.Server.Data.SqlServer
         /// <inheritdoc />
         public StackFrame ToDomain(StackFrameEntity entity, IMcFlyContext context)
         {
-            return new StackFrame(entity.StackPointer.ToULong(), entity.ReturnAddress?.ToULong(), entity.ModuleName, entity.Function, entity.Offset?.ToULong());
+            return new StackFrame(entity.StackPointer.ToULong(), entity.ReturnAddress?.ToULong(), entity.ModuleName,
+                entity.Function, entity.Offset?.ToULong());
         }
 
         /// <summary>
@@ -45,8 +45,7 @@ namespace McFly.Server.Data.SqlServer
         /// <inheritdoc />
         public StackFrameEntity ToEntity(StackFrame domainObject, IMcFlyContext context)
         {
-            
-            
+            return null;
         }
     }
 }

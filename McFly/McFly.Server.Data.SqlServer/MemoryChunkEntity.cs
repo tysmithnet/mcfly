@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,6 +24,11 @@ namespace McFly.Server.Data.SqlServer
     [Table("memory_chunk")]
     internal class MemoryChunkEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id")]
+        public Guid Id { get; set; }
+
         /// <summary>
         ///     Gets or sets the byte range for this entity
         /// </summary>
@@ -46,14 +52,6 @@ namespace McFly.Server.Data.SqlServer
         [Column("high_address")]
         public string HighAddress { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the identifier.
-        /// </summary>
-        /// <value>The identifier.</value>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public long Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the low address.
