@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : @tsmithnet
+// Author           : @tysmithnet
 // Created          : 03-02-2018
 //
-// Last Modified By : @tsmithnet
+// Last Modified By : @tysmithnet
 // Last Modified On : 04-22-2018
 // ***********************************************************************
 // <copyright file="ServerClient.cs" company="">

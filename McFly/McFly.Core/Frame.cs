@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : McFly.Core
-// Author           : @tsmithnet
+// Author           : @tysmithnet
 // Created          : 02-28-2018
 //
-// Last Modified By : @tsmithnet
+// Last Modified By : @tysmithnet
 // Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="Frame.cs" company="McFly.Core">

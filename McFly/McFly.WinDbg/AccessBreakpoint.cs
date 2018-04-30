@@ -187,7 +187,7 @@ namespace McFly.WinDbg
 
         /// <summary>
         ///     Gets the length of the breakpoint in bytes
-        /// <remarks>This must be a 1,2,4,8 and is it is a byte value</remarks>
+        ///     <remarks>This must be a 1,2,4,8 and is it is a byte value</remarks>
         /// </summary>
         /// <value>The length.</value>
         public ushort Length { get; }

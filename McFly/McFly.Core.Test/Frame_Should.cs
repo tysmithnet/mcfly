@@ -114,15 +114,6 @@ namespace McFly.Core.Test
         }
 
         [Fact]
-        public void Offer_Value_Equality()
-        {
-            _frame1.ValueEquals(null).Should().BeFalse();
-            _frame1.ValueEquals(_frame1).Should().BeTrue();
-            _frame1.ValueEquals(_frame2).Should().BeTrue();
-            _frame1.ValueEquals(_frame3).Should().BeFalse();
-        }
-
-        [Fact]
         public void Not_Allow_Invalid_Thread_Ids()
         {
             // arrange
@@ -132,6 +123,15 @@ namespace McFly.Core.Test
             // assert
             frame.Invoking(f => f.ThreadId = -1).Should()
                 .Throw<ArgumentOutOfRangeException>("Thread ids are non negative");
+        }
+
+        [Fact]
+        public void Offer_Value_Equality()
+        {
+            _frame1.ValueEquals(null).Should().BeFalse();
+            _frame1.ValueEquals(_frame1).Should().BeTrue();
+            _frame1.ValueEquals(_frame2).Should().BeTrue();
+            _frame1.ValueEquals(_frame3).Should().BeFalse();
         }
     }
 }

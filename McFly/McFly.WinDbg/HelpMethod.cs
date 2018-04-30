@@ -19,7 +19,7 @@ using System.Text;
 namespace McFly.WinDbg
 {
     /// <summary>
-    ///     McFly method that is capable of 
+    ///     McFly method that is capable of
     /// </summary>
     /// <seealso cref="IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]

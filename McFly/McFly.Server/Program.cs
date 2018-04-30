@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : McFly.Server
-// Author           : @tsmithnet
+// Author           : @tysmithnet
 // Created          : 02-20-2018
 //
-// Last Modified By : @tsmithnet
+// Last Modified By : @tysmithnet
 // Last Modified On : 04-03-2018
 // ***********************************************************************
 // <copyright file="Program.cs" company="McFly.Server">

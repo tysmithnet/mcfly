@@ -10,7 +10,7 @@ namespace McFly.Core.Test
         [Fact]
         public void Convert_Between_ByteArray_And_Int()
         {
-            int random = 0x01234567;
+            var random = 0x01234567;
             random.ToByteArray().SequenceEqual(new byte[] {0x67, 0x45, 0x23, 0x01}).Should()
                 .BeTrue();
 
@@ -27,7 +27,7 @@ namespace McFly.Core.Test
         [Fact]
         public void Convert_Between_ByteArray_And_Long()
         {
-            long random = 0x0123456789abcdef;
+            var random = 0x0123456789abcdef;
             random.ToByteArray().SequenceEqual(new byte[] {0xef, 0xcd, 0xab, 0x89, 0x67, 0x45, 0x23, 0x01}).Should()
                 .BeTrue();
             var bytes = BitConverter.GetBytes(random);
@@ -44,31 +44,15 @@ namespace McFly.Core.Test
         public void Convert_Between_ByteArray_And_Short()
         {
             short random = 0x0123;
-            random.ToByteArray().SequenceEqual(new byte[] { 0x23, 0x01 }).Should()
+            random.ToByteArray().SequenceEqual(new byte[] {0x23, 0x01}).Should()
                 .BeTrue();
             var bytes = BitConverter.GetBytes((short) 0x1234);
-            bytes.ToShort().Should().Be((short)0x1234);
+            bytes.ToShort().Should().Be(0x1234);
             byte[] nullBytes = null;
             Action a = () => nullBytes.ToShort();
             a.Should().Throw<ArgumentNullException>();
             var empty = new byte[0];
             Action a2 = () => empty.ToShort();
-            a2.Should().Throw<ArgumentOutOfRangeException>();
-        }
-
-        [Fact]
-        public void Convert_Between_ByteArray_And_UShort()
-        {
-            ushort random = 0x0123;
-            random.ToByteArray().SequenceEqual(new byte[] { 0x23, 0x01 }).Should()
-                .BeTrue();
-            var bytes = BitConverter.GetBytes((ushort)0x1234);
-            bytes.ToUShort().Should().Be((ushort)0x1234);
-            byte[] nullBytes = null;
-            Action a = () => nullBytes.ToUShort();
-            a.Should().Throw<ArgumentNullException>();
-            var empty = new byte[0];
-            Action a2 = () => empty.ToUShort();
             a2.Should().Throw<ArgumentOutOfRangeException>();
         }
 
@@ -80,7 +64,7 @@ namespace McFly.Core.Test
                 .BeTrue();
             new byte[] {0x67, 0x45, 0x23, 0x01}.ToUInt().Should().Be(random);
             byte[] nullBytes = null;
-            byte[] emptyBytes = new byte[0];
+            var emptyBytes = new byte[0];
 
             Action a = () => nullBytes.ToUInt();
             Action a2 = () => emptyBytes.ToUInt();
@@ -97,12 +81,28 @@ namespace McFly.Core.Test
                 .BeTrue();
 
             byte[] nullBytes = null;
-            byte[] emptyBytes = new byte[0];
+            var emptyBytes = new byte[0];
 
             Action a = () => nullBytes.ToULong();
             Action a2 = () => emptyBytes.ToULong();
 
             a.Should().Throw<ArgumentNullException>();
+            a2.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public void Convert_Between_ByteArray_And_UShort()
+        {
+            ushort random = 0x0123;
+            random.ToByteArray().SequenceEqual(new byte[] {0x23, 0x01}).Should()
+                .BeTrue();
+            var bytes = BitConverter.GetBytes((ushort) 0x1234);
+            bytes.ToUShort().Should().Be(0x1234);
+            byte[] nullBytes = null;
+            Action a = () => nullBytes.ToUShort();
+            a.Should().Throw<ArgumentNullException>();
+            var empty = new byte[0];
+            Action a2 = () => empty.ToUShort();
             a2.Should().Throw<ArgumentOutOfRangeException>();
         }
 
@@ -133,6 +133,15 @@ namespace McFly.Core.Test
         }
 
         [Fact]
+        public void Convert_Between_HexString_And_Short()
+        {
+            short s = 0x1234;
+            var hex = "3412";
+            hex.ToShort().Should().Be(s);
+            s.ToHexString().Should().Be(hex);
+        }
+
+        [Fact]
         public void Convert_Between_HexString_And_UInt()
         {
             uint random = 0x01234567;
@@ -159,15 +168,6 @@ namespace McFly.Core.Test
             random.ToHexString().Should().Be("2301");
             random2.ToHexString().Should().Be("2301");
             "2301".ToUShort().Should().Be(0x0123);
-        }
-
-        [Fact]
-        public void Convert_Between_HexString_And_Short()
-        {
-            short s = 0x1234;
-            string hex = "3412";
-            hex.ToShort().Should().Be(s);
-            s.ToHexString().Should().Be(hex);
         }
 
         [Fact]

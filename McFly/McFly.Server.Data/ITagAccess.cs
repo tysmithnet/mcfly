@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : McFly.Server.Data
-// Author           : @tsmithnet
+// Author           : @tysmithnet
 // Created          : 02-20-2018
 //
-// Last Modified By : @tsmithnet
+// Last Modified By : @tysmithnet
 // Last Modified On : 04-29-2018
 // ***********************************************************************
 // <copyright file="ITagAccess.cs" company="McFly.Server.Data">

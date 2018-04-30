@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using McFly.Core.Registers;
 using Xunit;
 
@@ -11,222 +6,6 @@ namespace McFly.Core.Test
 {
     public class Register_Should
     {
-        [Fact]
-        public void Not_Have_Duplicates()
-        {
-            Register.X64.Should().OnlyHaveUniqueItems();
-        }
-
-        [Fact]
-        public void Have_The_Correct_Register_Names()
-        {
-            Register.Rax.Name.Should().Be("rax");
-            Register.Rbx.Name.Should().Be("rbx");
-            Register.Rcx.Name.Should().Be("rcx");
-            Register.Rdx.Name.Should().Be("rdx");
-            Register.Rsi.Name.Should().Be("rsi");
-            Register.Rdi.Name.Should().Be("rdi");
-            Register.Rsp.Name.Should().Be("rsp");
-            Register.Rbp.Name.Should().Be("rbp");
-            Register.Rip.Name.Should().Be("rip");
-
-            Register.Efl.Name.Should().Be("efl");
-            Register.Cs.Name.Should().Be("cs");
-            Register.Ds.Name.Should().Be("ds");
-            Register.Es.Name.Should().Be("es");
-            Register.Fs.Name.Should().Be("fs");
-            Register.Gs.Name.Should().Be("gs");
-            Register.Ss.Name.Should().Be("ss");
-
-            Register.R8.Name.Should().Be("r8");
-            Register.R9.Name.Should().Be("r9");
-            Register.R10.Name.Should().Be("r10");
-            Register.R11.Name.Should().Be("r11");
-            Register.R12.Name.Should().Be("r12");
-            Register.R13.Name.Should().Be("r13");
-            Register.R14.Name.Should().Be("r14");
-            Register.R15.Name.Should().Be("r15");
-
-            Register.Dr0.Name.Should().Be("dr0");
-            Register.Dr1.Name.Should().Be("dr1");
-            Register.Dr2.Name.Should().Be("dr2");
-            Register.Dr3.Name.Should().Be("dr3");
-            Register.Dr6.Name.Should().Be("dr6");
-            Register.Dr7.Name.Should().Be("dr7");
-
-            Register.Exfrom.Name.Should().Be("exfrom");
-            Register.Exto.Name.Should().Be("exto");
-            Register.Brfrom.Name.Should().Be("brfrom");
-            Register.Brto.Name.Should().Be("brto");
-
-            Register.Eax.Name.Should().Be("eax");
-            Register.Ecx.Name.Should().Be("ecx");
-            Register.Edx.Name.Should().Be("edx");
-            Register.Ebx.Name.Should().Be("ebx");
-            Register.Esp.Name.Should().Be("esp");
-            Register.Ebp.Name.Should().Be("ebp");
-            Register.Esi.Name.Should().Be("esi");
-            Register.Edi.Name.Should().Be("edi");
-
-            Register.R8d.Name.Should().Be("r8d");
-            Register.R9d.Name.Should().Be("r9d");
-            Register.R10d.Name.Should().Be("r10d");
-            Register.R11d.Name.Should().Be("r11d");
-            Register.R12d.Name.Should().Be("r12d");
-            Register.R13d.Name.Should().Be("r13d");
-            Register.R14d.Name.Should().Be("r14d");
-            Register.R15d.Name.Should().Be("r15d");
-            Register.Eip.Name.Should().Be("eip");
-
-            Register.Ax.Name.Should().Be("ax");
-            Register.Bx.Name.Should().Be("bx");
-            Register.Cx.Name.Should().Be("cx");
-            Register.Dx.Name.Should().Be("dx");
-            Register.Si.Name.Should().Be("si");
-            Register.Di.Name.Should().Be("di");
-            Register.Sp.Name.Should().Be("sp");
-            Register.Bp.Name.Should().Be("bp");
-            Register.Ip.Name.Should().Be("ip");
-
-            Register.R8w.Name.Should().Be("r8w");
-            Register.R9w.Name.Should().Be("r9w");
-            Register.R10w.Name.Should().Be("r10w");
-            Register.R11w.Name.Should().Be("r11w");
-            Register.R12w.Name.Should().Be("r12w");
-            Register.R13w.Name.Should().Be("r13w");
-            Register.R14w.Name.Should().Be("r14w");
-            Register.R15w.Name.Should().Be("r15w");
-
-            Register.Ip.Name.Should().Be("ip");
-            Register.Fl.Name.Should().Be("fl");
-            Register.Al.Name.Should().Be("al");
-            Register.Cl.Name.Should().Be("cl");
-            Register.Dl.Name.Should().Be("dl");
-            Register.Bl.Name.Should().Be("bl");
-            Register.Spl.Name.Should().Be("spl");
-            Register.Bpl.Name.Should().Be("bpl");
-            Register.Sil.Name.Should().Be("sil");
-            Register.Dil.Name.Should().Be("dil");
-
-            Register.R8b.Name.Should().Be("r8b");
-            Register.R9b.Name.Should().Be("r9b");
-            Register.R10b.Name.Should().Be("r10b");
-            Register.R11b.Name.Should().Be("r11b");
-            Register.R12b.Name.Should().Be("r12b");
-            Register.R13b.Name.Should().Be("r13b");
-            Register.R14b.Name.Should().Be("r14b");
-            Register.R15b.Name.Should().Be("r15b");
-
-            Register.Ah.Name.Should().Be("ah");
-            Register.Ch.Name.Should().Be("ch");
-            Register.Dh.Name.Should().Be("dh");
-            Register.Bh.Name.Should().Be("bh");
-
-            Register.Iopl.Name.Should().Be("iopl");
-            Register.Of.Name.Should().Be("of");
-            Register.Df.Name.Should().Be("df");
-            Register.If.Name.Should().Be("if");
-            Register.Tf.Name.Should().Be("tf");
-            Register.Sf.Name.Should().Be("sf");
-            Register.Zf.Name.Should().Be("zf");
-            Register.Af.Name.Should().Be("af");
-            Register.Pf.Name.Should().Be("pf");
-            Register.Cf.Name.Should().Be("cf");
-            Register.Vip.Name.Should().Be("vip");
-            Register.Vif.Name.Should().Be("vif");
-
-            Register.Mm0.Name.Should().Be("mm0");
-            Register.Mm1.Name.Should().Be("mm1");
-            Register.Mm2.Name.Should().Be("mm2");
-            Register.Mm3.Name.Should().Be("mm3");
-            Register.Mm4.Name.Should().Be("mm4");
-            Register.Mm5.Name.Should().Be("mm5");
-            Register.Mm6.Name.Should().Be("mm6");
-            Register.Mm7.Name.Should().Be("mm7");
-
-            Register.Mxcsr.Name.Should().Be("mxcsr");
-
-            Register.Xmm0.Name.Should().Be("xmm0");
-            Register.Xmm1.Name.Should().Be("xmm1");
-            Register.Xmm2.Name.Should().Be("xmm2");
-            Register.Xmm3.Name.Should().Be("xmm3");
-            Register.Xmm4.Name.Should().Be("xmm4");
-            Register.Xmm5.Name.Should().Be("xmm5");
-            Register.Xmm6.Name.Should().Be("xmm6");
-            Register.Xmm7.Name.Should().Be("xmm7");
-            Register.Xmm8.Name.Should().Be("xmm8");
-            Register.Xmm9.Name.Should().Be("xmm9");
-            Register.Xmm10.Name.Should().Be("xmm10");
-            Register.Xmm11.Name.Should().Be("xmm11");
-            Register.Xmm12.Name.Should().Be("xmm12");
-            Register.Xmm13.Name.Should().Be("xmm13");
-            Register.Xmm14.Name.Should().Be("xmm14");
-            Register.Xmm15.Name.Should().Be("xmm15");
-
-            Register.Ymm0.Name.Should().Be("ymm0");
-            Register.Ymm1.Name.Should().Be("ymm1");
-            Register.Ymm2.Name.Should().Be("ymm2");
-            Register.Ymm3.Name.Should().Be("ymm3");
-            Register.Ymm4.Name.Should().Be("ymm4");
-            Register.Ymm5.Name.Should().Be("ymm5");
-            Register.Ymm6.Name.Should().Be("ymm6");
-            Register.Ymm7.Name.Should().Be("ymm7");
-            Register.Ymm8.Name.Should().Be("ymm8");
-            Register.Ymm9.Name.Should().Be("ymm9");
-            Register.Ymm10.Name.Should().Be("ymm10");
-            Register.Ymm11.Name.Should().Be("ymm11");
-            Register.Ymm12.Name.Should().Be("ymm12");
-            Register.Ymm13.Name.Should().Be("ymm13");
-            Register.Ymm14.Name.Should().Be("ymm14");
-            Register.Ymm15.Name.Should().Be("ymm15");
-
-            Register.Xmm0l.Name.Should().Be("xmm0l");
-            Register.Xmm1l.Name.Should().Be("xmm1l");
-            Register.Xmm2l.Name.Should().Be("xmm2l");
-            Register.Xmm3l.Name.Should().Be("xmm3l");
-            Register.Xmm4l.Name.Should().Be("xmm4l");
-            Register.Xmm5l.Name.Should().Be("xmm5l");
-            Register.Xmm6l.Name.Should().Be("xmm6l");
-            Register.Xmm7l.Name.Should().Be("xmm7l");
-            Register.Xmm8l.Name.Should().Be("xmm8l");
-            Register.Xmm9l.Name.Should().Be("xmm9l");
-            Register.Xmm10l.Name.Should().Be("xmm10l");
-            Register.Xmm11l.Name.Should().Be("xmm11l");
-            Register.Xmm12l.Name.Should().Be("xmm12l");
-            Register.Xmm13l.Name.Should().Be("xmm13l");
-            Register.Xmm14l.Name.Should().Be("xmm14l");
-            Register.Xmm15l.Name.Should().Be("xmm15l");
-
-            Register.Ymm0l.Name.Should().Be("ymm0l");
-            Register.Ymm1l.Name.Should().Be("ymm1l");
-            Register.Ymm2l.Name.Should().Be("ymm2l");
-            Register.Ymm3l.Name.Should().Be("ymm3l");
-            Register.Ymm4l.Name.Should().Be("ymm4l");
-            Register.Ymm5l.Name.Should().Be("ymm5l");
-            Register.Ymm6l.Name.Should().Be("ymm6l");
-            Register.Ymm7l.Name.Should().Be("ymm7l");
-            Register.Ymm8l.Name.Should().Be("ymm8l");
-            Register.Ymm9l.Name.Should().Be("ymm9l");
-            Register.Ymm10l.Name.Should().Be("ymm10l");
-            Register.Ymm11l.Name.Should().Be("ymm11l");
-            Register.Ymm12l.Name.Should().Be("ymm12l");
-            Register.Ymm13l.Name.Should().Be("ymm13l");
-            Register.Ymm14l.Name.Should().Be("ymm14l");
-            Register.Ymm15l.Name.Should().Be("ymm15l");
-
-            Register.Fpcw.Name.Should().Be("fpcw");
-            Register.Fpsw.Name.Should().Be("fpsw");
-            Register.Fptw.Name.Should().Be("fptw");
-            Register.St0.Name.Should().Be("st0");
-            Register.St1.Name.Should().Be("st1");
-            Register.St2.Name.Should().Be("st2");
-            Register.St3.Name.Should().Be("st3");
-            Register.St4.Name.Should().Be("st4");
-            Register.St5.Name.Should().Be("st5");
-            Register.St6.Name.Should().Be("st6");
-            Register.St7.Name.Should().Be("st7");
-        }
-
         [Fact]
         public void Have_Correct_Register_Num_Bits()
         {
@@ -441,6 +220,222 @@ namespace McFly.Core.Test
             Register.St5.NumBits.Should().Be(80);
             Register.St6.NumBits.Should().Be(80);
             Register.St7.NumBits.Should().Be(80);
+        }
+
+        [Fact]
+        public void Have_The_Correct_Register_Names()
+        {
+            Register.Rax.Name.Should().Be("rax");
+            Register.Rbx.Name.Should().Be("rbx");
+            Register.Rcx.Name.Should().Be("rcx");
+            Register.Rdx.Name.Should().Be("rdx");
+            Register.Rsi.Name.Should().Be("rsi");
+            Register.Rdi.Name.Should().Be("rdi");
+            Register.Rsp.Name.Should().Be("rsp");
+            Register.Rbp.Name.Should().Be("rbp");
+            Register.Rip.Name.Should().Be("rip");
+
+            Register.Efl.Name.Should().Be("efl");
+            Register.Cs.Name.Should().Be("cs");
+            Register.Ds.Name.Should().Be("ds");
+            Register.Es.Name.Should().Be("es");
+            Register.Fs.Name.Should().Be("fs");
+            Register.Gs.Name.Should().Be("gs");
+            Register.Ss.Name.Should().Be("ss");
+
+            Register.R8.Name.Should().Be("r8");
+            Register.R9.Name.Should().Be("r9");
+            Register.R10.Name.Should().Be("r10");
+            Register.R11.Name.Should().Be("r11");
+            Register.R12.Name.Should().Be("r12");
+            Register.R13.Name.Should().Be("r13");
+            Register.R14.Name.Should().Be("r14");
+            Register.R15.Name.Should().Be("r15");
+
+            Register.Dr0.Name.Should().Be("dr0");
+            Register.Dr1.Name.Should().Be("dr1");
+            Register.Dr2.Name.Should().Be("dr2");
+            Register.Dr3.Name.Should().Be("dr3");
+            Register.Dr6.Name.Should().Be("dr6");
+            Register.Dr7.Name.Should().Be("dr7");
+
+            Register.Exfrom.Name.Should().Be("exfrom");
+            Register.Exto.Name.Should().Be("exto");
+            Register.Brfrom.Name.Should().Be("brfrom");
+            Register.Brto.Name.Should().Be("brto");
+
+            Register.Eax.Name.Should().Be("eax");
+            Register.Ecx.Name.Should().Be("ecx");
+            Register.Edx.Name.Should().Be("edx");
+            Register.Ebx.Name.Should().Be("ebx");
+            Register.Esp.Name.Should().Be("esp");
+            Register.Ebp.Name.Should().Be("ebp");
+            Register.Esi.Name.Should().Be("esi");
+            Register.Edi.Name.Should().Be("edi");
+
+            Register.R8d.Name.Should().Be("r8d");
+            Register.R9d.Name.Should().Be("r9d");
+            Register.R10d.Name.Should().Be("r10d");
+            Register.R11d.Name.Should().Be("r11d");
+            Register.R12d.Name.Should().Be("r12d");
+            Register.R13d.Name.Should().Be("r13d");
+            Register.R14d.Name.Should().Be("r14d");
+            Register.R15d.Name.Should().Be("r15d");
+            Register.Eip.Name.Should().Be("eip");
+
+            Register.Ax.Name.Should().Be("ax");
+            Register.Bx.Name.Should().Be("bx");
+            Register.Cx.Name.Should().Be("cx");
+            Register.Dx.Name.Should().Be("dx");
+            Register.Si.Name.Should().Be("si");
+            Register.Di.Name.Should().Be("di");
+            Register.Sp.Name.Should().Be("sp");
+            Register.Bp.Name.Should().Be("bp");
+            Register.Ip.Name.Should().Be("ip");
+
+            Register.R8w.Name.Should().Be("r8w");
+            Register.R9w.Name.Should().Be("r9w");
+            Register.R10w.Name.Should().Be("r10w");
+            Register.R11w.Name.Should().Be("r11w");
+            Register.R12w.Name.Should().Be("r12w");
+            Register.R13w.Name.Should().Be("r13w");
+            Register.R14w.Name.Should().Be("r14w");
+            Register.R15w.Name.Should().Be("r15w");
+
+            Register.Ip.Name.Should().Be("ip");
+            Register.Fl.Name.Should().Be("fl");
+            Register.Al.Name.Should().Be("al");
+            Register.Cl.Name.Should().Be("cl");
+            Register.Dl.Name.Should().Be("dl");
+            Register.Bl.Name.Should().Be("bl");
+            Register.Spl.Name.Should().Be("spl");
+            Register.Bpl.Name.Should().Be("bpl");
+            Register.Sil.Name.Should().Be("sil");
+            Register.Dil.Name.Should().Be("dil");
+
+            Register.R8b.Name.Should().Be("r8b");
+            Register.R9b.Name.Should().Be("r9b");
+            Register.R10b.Name.Should().Be("r10b");
+            Register.R11b.Name.Should().Be("r11b");
+            Register.R12b.Name.Should().Be("r12b");
+            Register.R13b.Name.Should().Be("r13b");
+            Register.R14b.Name.Should().Be("r14b");
+            Register.R15b.Name.Should().Be("r15b");
+
+            Register.Ah.Name.Should().Be("ah");
+            Register.Ch.Name.Should().Be("ch");
+            Register.Dh.Name.Should().Be("dh");
+            Register.Bh.Name.Should().Be("bh");
+
+            Register.Iopl.Name.Should().Be("iopl");
+            Register.Of.Name.Should().Be("of");
+            Register.Df.Name.Should().Be("df");
+            Register.If.Name.Should().Be("if");
+            Register.Tf.Name.Should().Be("tf");
+            Register.Sf.Name.Should().Be("sf");
+            Register.Zf.Name.Should().Be("zf");
+            Register.Af.Name.Should().Be("af");
+            Register.Pf.Name.Should().Be("pf");
+            Register.Cf.Name.Should().Be("cf");
+            Register.Vip.Name.Should().Be("vip");
+            Register.Vif.Name.Should().Be("vif");
+
+            Register.Mm0.Name.Should().Be("mm0");
+            Register.Mm1.Name.Should().Be("mm1");
+            Register.Mm2.Name.Should().Be("mm2");
+            Register.Mm3.Name.Should().Be("mm3");
+            Register.Mm4.Name.Should().Be("mm4");
+            Register.Mm5.Name.Should().Be("mm5");
+            Register.Mm6.Name.Should().Be("mm6");
+            Register.Mm7.Name.Should().Be("mm7");
+
+            Register.Mxcsr.Name.Should().Be("mxcsr");
+
+            Register.Xmm0.Name.Should().Be("xmm0");
+            Register.Xmm1.Name.Should().Be("xmm1");
+            Register.Xmm2.Name.Should().Be("xmm2");
+            Register.Xmm3.Name.Should().Be("xmm3");
+            Register.Xmm4.Name.Should().Be("xmm4");
+            Register.Xmm5.Name.Should().Be("xmm5");
+            Register.Xmm6.Name.Should().Be("xmm6");
+            Register.Xmm7.Name.Should().Be("xmm7");
+            Register.Xmm8.Name.Should().Be("xmm8");
+            Register.Xmm9.Name.Should().Be("xmm9");
+            Register.Xmm10.Name.Should().Be("xmm10");
+            Register.Xmm11.Name.Should().Be("xmm11");
+            Register.Xmm12.Name.Should().Be("xmm12");
+            Register.Xmm13.Name.Should().Be("xmm13");
+            Register.Xmm14.Name.Should().Be("xmm14");
+            Register.Xmm15.Name.Should().Be("xmm15");
+
+            Register.Ymm0.Name.Should().Be("ymm0");
+            Register.Ymm1.Name.Should().Be("ymm1");
+            Register.Ymm2.Name.Should().Be("ymm2");
+            Register.Ymm3.Name.Should().Be("ymm3");
+            Register.Ymm4.Name.Should().Be("ymm4");
+            Register.Ymm5.Name.Should().Be("ymm5");
+            Register.Ymm6.Name.Should().Be("ymm6");
+            Register.Ymm7.Name.Should().Be("ymm7");
+            Register.Ymm8.Name.Should().Be("ymm8");
+            Register.Ymm9.Name.Should().Be("ymm9");
+            Register.Ymm10.Name.Should().Be("ymm10");
+            Register.Ymm11.Name.Should().Be("ymm11");
+            Register.Ymm12.Name.Should().Be("ymm12");
+            Register.Ymm13.Name.Should().Be("ymm13");
+            Register.Ymm14.Name.Should().Be("ymm14");
+            Register.Ymm15.Name.Should().Be("ymm15");
+
+            Register.Xmm0l.Name.Should().Be("xmm0l");
+            Register.Xmm1l.Name.Should().Be("xmm1l");
+            Register.Xmm2l.Name.Should().Be("xmm2l");
+            Register.Xmm3l.Name.Should().Be("xmm3l");
+            Register.Xmm4l.Name.Should().Be("xmm4l");
+            Register.Xmm5l.Name.Should().Be("xmm5l");
+            Register.Xmm6l.Name.Should().Be("xmm6l");
+            Register.Xmm7l.Name.Should().Be("xmm7l");
+            Register.Xmm8l.Name.Should().Be("xmm8l");
+            Register.Xmm9l.Name.Should().Be("xmm9l");
+            Register.Xmm10l.Name.Should().Be("xmm10l");
+            Register.Xmm11l.Name.Should().Be("xmm11l");
+            Register.Xmm12l.Name.Should().Be("xmm12l");
+            Register.Xmm13l.Name.Should().Be("xmm13l");
+            Register.Xmm14l.Name.Should().Be("xmm14l");
+            Register.Xmm15l.Name.Should().Be("xmm15l");
+
+            Register.Ymm0l.Name.Should().Be("ymm0l");
+            Register.Ymm1l.Name.Should().Be("ymm1l");
+            Register.Ymm2l.Name.Should().Be("ymm2l");
+            Register.Ymm3l.Name.Should().Be("ymm3l");
+            Register.Ymm4l.Name.Should().Be("ymm4l");
+            Register.Ymm5l.Name.Should().Be("ymm5l");
+            Register.Ymm6l.Name.Should().Be("ymm6l");
+            Register.Ymm7l.Name.Should().Be("ymm7l");
+            Register.Ymm8l.Name.Should().Be("ymm8l");
+            Register.Ymm9l.Name.Should().Be("ymm9l");
+            Register.Ymm10l.Name.Should().Be("ymm10l");
+            Register.Ymm11l.Name.Should().Be("ymm11l");
+            Register.Ymm12l.Name.Should().Be("ymm12l");
+            Register.Ymm13l.Name.Should().Be("ymm13l");
+            Register.Ymm14l.Name.Should().Be("ymm14l");
+            Register.Ymm15l.Name.Should().Be("ymm15l");
+
+            Register.Fpcw.Name.Should().Be("fpcw");
+            Register.Fpsw.Name.Should().Be("fpsw");
+            Register.Fptw.Name.Should().Be("fptw");
+            Register.St0.Name.Should().Be("st0");
+            Register.St1.Name.Should().Be("st1");
+            Register.St2.Name.Should().Be("st2");
+            Register.St3.Name.Should().Be("st3");
+            Register.St4.Name.Should().Be("st4");
+            Register.St5.Name.Should().Be("st5");
+            Register.St6.Name.Should().Be("st6");
+            Register.St7.Name.Should().Be("st7");
+        }
+
+        [Fact]
+        public void Not_Have_Duplicates()
+        {
+            Register.X64.Should().OnlyHaveUniqueItems();
         }
     }
 }

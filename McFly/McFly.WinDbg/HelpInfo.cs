@@ -19,10 +19,10 @@ namespace McFly.WinDbg
 {
     /// <summary>
     ///     All IMcFly methods must use this type to register their help text
-    /// <remarks>
-    /// Switches are things like -a -b -c --all --basic --copy. 
-    /// Subcommands are akin to git add, git commit, git push
-    /// </remarks>
+    ///     <remarks>
+    ///         Switches are things like -a -b -c --all --basic --copy.
+    ///         Subcommands are akin to git add, git commit, git push
+    ///     </remarks>
     /// </summary>
     public sealed class HelpInfo
     {

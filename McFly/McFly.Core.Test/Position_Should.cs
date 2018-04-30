@@ -38,12 +38,12 @@ namespace McFly.Core.Test
             left.CompareTo(null).Should().Be(1, "CompareTo should be implemented");
             left.CompareTo(right).Should().Be(0, "Positions should exhibit value equality");
             left.CompareTo(right2).Should().Be(-1, "The low portion is greater");
-            left.CompareTo((object)left).Should().Be(0, "CompareTo should be implemented");
-            left.CompareTo((object)null).Should().Be(1, "CompareTo should be implemented");
+            left.CompareTo((object) left).Should().Be(0, "CompareTo should be implemented");
+            left.CompareTo((object) null).Should().Be(1, "CompareTo should be implemented");
             Action a = () => left.CompareTo(new object());
             a.Should().Throw<ArgumentException>();
-            left.CompareTo((object)right).Should().Be(0, "Positions should exhibit value equality");
-            left.CompareTo((object)right2).Should().Be(-1, "The low portion is greater");
+            left.CompareTo((object) right).Should().Be(0, "Positions should exhibit value equality");
+            left.CompareTo((object) right2).Should().Be(-1, "The low portion is greater");
             comp.Equals(left, left).Should().BeTrue("IEquatable should be implemented");
             comp.GetHashCode(left).Should().Be(left.GetHashCode(), "The same object should have the same hash code");
         }

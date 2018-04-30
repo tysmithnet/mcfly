@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : @tsmithnet
+// Author           : @tysmithnet
 // Created          : 03-03-2018
 //
-// Last Modified By : @tsmithnet
+// Last Modified By : @tysmithnet
 // Last Modified On : 03-03-2018
 // ***********************************************************************
 // <copyright file="IDebugEventContextCallbacks.cs" company="">

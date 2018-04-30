@@ -82,7 +82,7 @@ namespace McFly.Core
         }
 
         /// <summary>
-        ///    Determines whether the specified <see cref="DisassemblyLine" /> is equal to this instance.
+        ///     Determines whether the specified <see cref="DisassemblyLine" /> is equal to this instance.
         /// </summary>
         /// <param name="other">The other.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
