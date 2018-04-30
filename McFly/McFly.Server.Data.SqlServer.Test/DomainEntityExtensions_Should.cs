@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using McFly.Core;
+using McFly.Server.Data.SqlServer.Test.Builders;
 using Moq;
 using Xunit;
 
@@ -1658,13 +1659,15 @@ namespace McFly.Server.Data.SqlServer.Test
         [Fact]
         public void Convert_Between_Tag_And_TagEntity()
         {
-            var mock = new Mock<IMcFlyContext>();
+            var builder = new ContextFactoryBuilder();
+            var fac = builder.Build();
+            var context = fac.GetContext("");
             var tag = new Tag();
             tag.CreateDateUtc = DateTime.MinValue;
             tag.Title = "hello there";
             var converter = new TagDomainEntityConverter();
-            var converted = converter.ToEntity(tag, mock.Object);
-            var convertedBack = converter.ToDomain(converted, mock.Object);
+            var converted = converter.ToEntity(tag, context);
+            var convertedBack = converter.ToDomain(converted, context);
             convertedBack.Title.Should().Be("hello there");
             convertedBack.CreateDateUtc.Should().Be(DateTime.MinValue);
         }

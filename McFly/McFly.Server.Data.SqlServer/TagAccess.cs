@@ -69,11 +69,12 @@ namespace McFly.Server.Data.SqlServer
         /// <returns>IEnumerable&lt;Tag&gt;.</returns>
         public IEnumerable<Tag> GetTags(string projectName, Position position, int threadId)
         {
-            using (var ctx = ContextFactory.GetContext(projectName))
+            var converter = new TagDomainEntityConverter();
+            using (var context = ContextFactory.GetContext(projectName))
             {
-                var frame = ctx.FrameEntities.FirstOrDefault(entity =>
+                var frame = context.FrameEntities.FirstOrDefault(entity =>
                     entity.PosHi == position.High && entity.PosLo == position.Low && entity.ThreadId == threadId);
-                return null;
+                return frame?.Tags.Select(x => converter.ToDomain(x, context)).ToList() ?? Enumerable.Empty<Tag>();
             }
         }
     }

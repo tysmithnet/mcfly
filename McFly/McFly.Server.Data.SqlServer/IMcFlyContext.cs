@@ -4,7 +4,7 @@
 // Created          : 04-01-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-25-2018
+// Last Modified On : 04-29-2018
 // ***********************************************************************
 // <copyright file="IMcFlyContext.cs" company="">
 //     Copyright ©  2018
@@ -42,22 +42,28 @@ namespace McFly.Server.Data.SqlServer
         DbSet<FrameEntity> FrameEntities { get; set; }
 
         /// <summary>
+        ///     Gets or sets the frame tag mappings.
+        /// </summary>
+        /// <value>The frame tag mappings.</value>
+        DbSet<FrameTagMapping> FrameTagMappings { get; set; }
+
+        /// <summary>
         ///     Gets or sets the memory chunk entities.
         /// </summary>
         /// <value>The memory chunk entities.</value>
         DbSet<MemoryChunkEntity> MemoryChunkEntities { get; set; }
 
         /// <summary>
-        ///     Gets or sets the tag entities.
-        /// </summary>
-        /// <value>The tag entities.</value>
-        DbSet<TagEntity> TagEntities { get; set; }
-
-        /// <summary>
         ///     Gets or sets the stack frame entities.
         /// </summary>
         /// <value>The stack frame entities.</value>
         DbSet<StackFrameEntity> StackFrameEntities { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the tag entities.
+        /// </summary>
+        /// <value>The tag entities.</value>
+        DbSet<TagEntity> TagEntities { get; set; }
 
         /// <summary>
         ///     Gets or sets the trace information entities.

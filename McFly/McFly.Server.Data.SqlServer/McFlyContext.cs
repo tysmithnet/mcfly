@@ -76,6 +76,9 @@ namespace McFly.Server.Data.SqlServer
         /// <value>The frame entities.</value>
         public DbSet<FrameEntity> FrameEntities { get; set; }
 
+        /// <inheritdoc />
+        public DbSet<FrameTagMapping> FrameTagMappings { get; set; }
+
         /// <summary>
         ///     Gets or sets the memory chunk entities.
         /// </summary>

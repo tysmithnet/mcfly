@@ -33,6 +33,7 @@ namespace McFly.Server.Data.SqlServer.Test.Builders
             TraceInfoEntities = new TestDbSet<TraceInfoEntity>();
             MemoryChunkEntities = new TestDbSet<MemoryChunkEntity>();
             ByteRangeEntities = new TestDbSet<ByteRangeEntity>();
+            FrameTagMappings = new TestDbSet<FrameTagMapping>();
         }
 
         /// <summary>
@@ -64,6 +65,9 @@ namespace McFly.Server.Data.SqlServer.Test.Builders
         /// </summary>
         /// <value>The frame entities.</value>
         public DbSet<FrameEntity> FrameEntities { get; set; }
+
+        /// <inheritdoc />
+        public DbSet<FrameTagMapping> FrameTagMappings { get; set; }
 
         /// <summary>
         ///     Gets or sets the memory chunk entities.

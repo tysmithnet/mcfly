@@ -35,7 +35,7 @@ namespace McFly.WinDbg.Test
 
             // assert
             httpBuilder.Mock.Verify(
-                facade => facade.PostJsonAsync(new Uri("https://some.server.net/api/note"),
+                facade => facade.PostJsonAsync(new Uri("https://some.server.net/api/tag"),
                     new AddTagRequest(new Position(0xabc, 0x123), new[] {1}, "hello world"), headers), Times.Once);
         }
 
