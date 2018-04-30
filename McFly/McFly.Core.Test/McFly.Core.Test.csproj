@@ -83,6 +83,7 @@
     <Compile Include="Register_Should.cs" />
     <Compile Include="StackFrame_Should.cs" />
     <Compile Include="StackTrace_Should.cs" />
+    <Compile Include="Tag_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">
