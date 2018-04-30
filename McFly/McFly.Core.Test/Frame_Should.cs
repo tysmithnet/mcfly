@@ -8,6 +8,7 @@ namespace McFly.Core.Test
     {
         private readonly Frame _frame1 = new Frame
         {
+            Id = Guid.Parse("dc2ee39a-23e6-4090-a4f4-e62377c42087"),
             Position = new Position(10, 11),
             ThreadId = 400,
             DisassemblyLine = new DisassemblyLine(0x100, new byte[] {0x10, 0x11}, "mov", "r8,r9"),
@@ -27,6 +28,7 @@ namespace McFly.Core.Test
 
         private readonly Frame _frame2 = new Frame
         {
+            Id = Guid.Parse("dc2ee39a-23e6-4090-a4f4-e62377c42087"),
             Position = new Position(10, 11),
             ThreadId = 400,
             DisassemblyLine = new DisassemblyLine(0x100, new byte[] {0x10, 0x11}, "mov", "r8,r9"),
@@ -103,27 +105,21 @@ namespace McFly.Core.Test
         }
 
         [Fact]
-        public void Exhibit_Value_Equality()
+        public void Exhibit_Entity_Equality_By_Default()
         {
-            // arrange
-            // act
-            // assert
-            (_frame1 == _frame1).Should().BeTrue();
-            (_frame1 == (object) _frame1).Should().BeTrue();
-            (_frame1 == null).Should().BeFalse();
-            (null == _frame1).Should().BeFalse();
             _frame1.Equals(null).Should().BeFalse();
             _frame1.Equals((object) null).Should().BeFalse();
             _frame1.Equals(_frame1).Should().BeTrue();
             _frame1.Equals((object) _frame1).Should().BeTrue();
-            _frame1.Equals(new object()).Should().BeFalse();
-            
-            _frame1.Equals(null).Should().BeFalse();
-            _frame1.Equals(_frame1).Should().BeTrue();
-            _frame1.Equals(_frame2).Should().BeTrue();
-            _frame1.Equals((object) _frame2).Should().BeTrue();
-            (_frame1 == _frame2).Should().BeTrue();
-            _frame1.GetHashCode().Should().Be(_frame2.GetHashCode());
+        }
+
+        [Fact]
+        public void Offer_Value_Equality()
+        {
+            _frame1.ValueEquals(null).Should().BeFalse();
+            _frame1.ValueEquals(_frame1).Should().BeTrue();
+            _frame1.ValueEquals(_frame2).Should().BeTrue();
+            _frame1.ValueEquals(_frame3).Should().BeFalse();
         }
 
         [Fact]

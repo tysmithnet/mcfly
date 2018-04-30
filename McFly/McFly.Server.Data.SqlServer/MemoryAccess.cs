@@ -28,7 +28,7 @@ namespace McFly.Server.Data.SqlServer
     internal class MemoryAccess : IMemoryAccess
     {
         /// <summary>
-        ///     Adds the memory chunk to the
+        ///     Adds the memory chunk to the project
         /// </summary>
         /// <param name="projectName">Name of the project.</param>
         /// <param name="memoryChunk">The memory chunk.</param>

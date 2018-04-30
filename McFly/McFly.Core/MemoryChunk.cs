@@ -4,7 +4,7 @@
 // Created          : 04-21-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-22-2018
+// Last Modified On : 04-29-2018
 // ***********************************************************************
 // <copyright file="MemoryChunk.cs" company="">
 //     Copyright ©  2018
@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
+using System.Linq;
 
 namespace McFly.Core
 {
@@ -20,9 +20,28 @@ namespace McFly.Core
     ///     Represents an arbitrary cross section of virtual memory. What you would expect if
     ///     you were to examine raw memory.
     /// </summary>
-    public class MemoryChunk // todo: entity equality
+    /// <seealso cref="McFly.Core.DomainEntity{McFly.Core.MemoryChunk}" />
+    public class MemoryChunk : DomainEntity<MemoryChunk>
     {
-        public Guid Id { get; set; }
+        /// <summary>
+        ///     Determines if this instance is value-type equal with another instance.
+        /// </summary>
+        /// <param name="other">The other instance.</param>
+        /// <returns><c>true</c> if this instance is value-type equal with the other instance, <c>false</c> otherwise.</returns>
+        /// <inheritdoc />
+        /// <remarks>Typically this is a field by field equality operation, but does NOT consider the ID</remarks>
+        public override bool ValueEquals(MemoryChunk other)
+        {
+            var memRangeSame = MemoryRange.Equals(other.MemoryRange);
+            if (!memRangeSame) return false;
+            var positionSame = Position.Equals(other.Position);
+            if (!positionSame) return false;
+            var bytesBothNull = Bytes == null && other.Bytes == null;
+            var bytesSame = Bytes != null && other.Bytes != null && Bytes.SequenceEqual(other.Bytes);
+            if (!bytesSame && !bytesBothNull) return false;
+            return true;
+        }
+
         /// <summary>
         ///     Gets or sets the bytes.
         /// </summary>

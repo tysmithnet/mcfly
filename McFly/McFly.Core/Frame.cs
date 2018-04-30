@@ -26,11 +26,8 @@ namespace McFly.Core
     /// <seealso cref="System.IComparable" />
     /// <seealso cref="System.IEquatable{McFly.Core.Frame}" />
     public class
-        Frame : IComparable<Frame>, IComparable,
-            IEquatable<Frame> // todo: this doesn't seem like a value type.. shoudl be (position, thread) == (position, thread)
+        Frame : DomainEntity<Frame>, IComparable<Frame>
     {
-        public Guid Id { get; set; } // todo: lock down?
-
         /// <summary>
         ///     The thread identifier
         /// </summary>
@@ -64,61 +61,22 @@ namespace McFly.Core
             return _threadId.CompareTo(other._threadId);
         }
 
-        /// <summary>
-        ///     Equalses the specified other.
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool Equals(Frame other)
+        /// <inheritdoc />
+        public override bool ValueEquals(Frame other)
         {
-            if (ReferenceEquals(null, other)) return false;
+            if (other == null) return false;
             if (ReferenceEquals(this, other)) return true;
-            return _threadId == other._threadId && Equals(Position, other.Position) &&
-                   Equals(RegisterSet, other.RegisterSet) && Equals(StackTrace, other.StackTrace) &&
-                   Equals(DisassemblyLine, other.DisassemblyLine);
-        }
-
-        /// <summary>
-        ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
-        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
-            return Equals((Frame) obj);
-        }
-
-        /// <summary>
-        ///     Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = _threadId;
-                hashCode = (hashCode * 397) ^ (Position != null ? Position.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (RegisterSet != null ? RegisterSet.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (StackTrace != null ? StackTrace.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DisassemblyLine != null ? DisassemblyLine.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-
-        /// <summary>
-        ///     Implements the == operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator ==(Frame left, Frame right)
-        {
-            if (ReferenceEquals(left, right)) return true;
-            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
-            return Equals(left, right);
+            var positionEqual = Position.Equals(other.Position);
+            if (!positionEqual) return false;
+            var registerEqual = RegisterSet.Equals(other.RegisterSet);
+            if (!registerEqual) return false;
+            var stackFramesEqual = StackTrace.Equals(other.StackTrace);
+            if (!stackFramesEqual) return false;
+            var threadEqual = ThreadId.Equals(other.ThreadId);
+            if (!threadEqual) return false;
+            var disassemblyLineEqual = DisassemblyLine.Equals(other.DisassemblyLine);
+            if (!disassemblyLineEqual) return false;
+            return true;
         }
 
         /// <summary>
@@ -141,17 +99,6 @@ namespace McFly.Core
         public static bool operator >=(Frame left, Frame right)
         {
             return Comparer<Frame>.Default.Compare(left, right) >= 0;
-        }
-
-        /// <summary>
-        ///     Implements the != operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator !=(Frame left, Frame right)
-        {
-            return !Equals(left, right);
         }
 
         /// <summary>
