@@ -75,6 +75,7 @@
     <Compile Include="ByteArrayBuilder_Should.cs" />
     <Compile Include="DisassemblyLine_Should.cs" />
     <Compile Include="Frame_Should.cs" />
+    <Compile Include="MemoryChunk_Should.cs" />
     <Compile Include="MemoryRange_Should.cs" />
     <Compile Include="Position_Should.cs" />
     <Compile Include="PrimitiveExtensions_Should.cs" />

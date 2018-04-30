@@ -180,52 +180,6 @@ codeBase.PercentageCoverage
 // low risk, make sure that new and refactored classes gets 100% covered by tests and that
 // the application and test code contains as many checks/assertions as possible.
 //</Description>]]></Query>
-      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="Percentage Coverage on New Code" Unit="%" />
-failif value < 70%
-warnif value < 80%
-let newMethods = Application.Methods.Where(m => m.WasAdded() && m.NbLinesOfCode > 0)
-let locCovered = newMethods.Sum(m => m.NbLinesOfCodeCovered)
-let loc = newMethods.Sum(m => m.NbLinesOfCode)
-select 100d * locCovered / loc
-
-//<Description>
-// *New Code* is defined as methods added since the baseline.
-//
-// To achieve high code coverage it is essential that new code gets properly
-// tested and covered by tests. It is advised that all non-UI new classes gets
-// 100% covered.
-//
-// Typically 90% of a class is easy to cover by tests and 10% is hard to reach 
-// through tests. It means that this 10% remaining is not easily testable, which 
-// means it is not well designed, which often means that this code is especially 
-// **error-prone**. This is the reason why it is important to reach 100% coverage
-// for a class, to make sure that potentially *error-prone* code gets tested.
-//</Description>
-]]></Query>
-      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="Percentage Coverage on Refactored Code" Unit="%" />
-failif value < 70%
-warnif value < 80%
-let newMethods = Application.Methods.Where(m => m.CodeWasChanged() && m.NbLinesOfCode > 0)
-let locCovered = newMethods.Sum(m => m.NbLinesOfCodeCovered)
-let loc = newMethods.Sum(m => m.NbLinesOfCode)
-select 100d * locCovered / loc
-
-//<Description>
-// *Refactored Code* is defined as methods where *code was changed* since the baseline.
-//
-// Comment changes and formatting changes are not considerd as refactoring.
-//
-// To achieve high code coverage it is essential that refactored code gets properly
-// tested and covered by tests. It is advised that when refactoring a class
-// or a method, it is important to also write tests to make sure it gets 100% covered.
-//
-// Typically 90% of a class is easy to cover by tests and 10% is hard to reach 
-// through tests. It means that this 10% remaining is not easily testable, which 
-// means it is not well designed, which often means that this code is especially 
-// **error-prone**. This is the reason why it is important to reach 100% coverage
-// for a class, to make sure that potentially *error-prone* code gets tested.
-//</Description>
-]]></Query>
       <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="Blocker Issues" Unit="issues" />
 failif count > 0 issues
 from i in Issues
@@ -342,23 +296,6 @@ Issues.Sum(i => i.Debt).ToManDay()
 // The Debt is defined as the sum of estimated effort to fix all issues.
 // Debt documentation: https://www.ndepend.com/docs/technical-debt#Debt
 //</Description>]]></Query>
-      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="New Debt since Baseline" Unit="man-days" />
-failif value > 2 man-days
-warnif value > 0 man-days
-let debt = Issues.Sum(i => i.Debt)
-let debtInBaseline = IssuesInBaseline.Sum(i => i.Debt)
-select (debt - debtInBaseline).ToManDay()
-
-
-//<Description>
-// This Quality Gate fails if the estimated effort to fix new or worsened
-// issues (what is called the *New Debt since Baseline*) is higher
-// than 2 man-days.
-//
-// This Quality Gate warns if this estimated effort is positive.
-//
-// Debt documentation: https://www.ndepend.com/docs/technical-debt#Debt
-//</Description>]]></Query>
       <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="Debt Rating per Namespace" Unit="namespaces" />
 failif count > 0 namespaces
 
@@ -409,27 +346,6 @@ Issues.Sum(i => i.AnnualInterest).ToManDay()
 //
 // The Annual-Interest is defined as the sum of estimated annual cost
 // in man-days, to leave all issues unfixed.
-//
-// Each rule can either provide a formula to compute the Annual-Interest 
-// per issue, or assign a **Severity** level for each issue. Some thresholds
-// defined in *Project Properties > Issue and Debt > Annual Interest* are
-// used to infer an Annual-Interest value from a Severity level.
-// Annual Interest documentation: https://www.ndepend.com/docs/technical-debt#AnnualInterest
-//</Description>]]></Query>
-      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="New Annual Interest since Baseline" Unit="man-days" />
-failif value > 2 man-days
-warnif value > 0 man-days
-let ai = Issues.Sum(i => i.AnnualInterest)
-let aiInBaseline = IssuesInBaseline.Sum(i => i.AnnualInterest)
-select (ai - aiInBaseline).ToManDay()
-
-//<Description>
-// This Quality Gate fails if the estimated annual cost to leave all issues
-// unfixed, increased from more than 2 man-days since the baseline.
-//
-// This Quality Gate warns if this estimated annual cost is positive.
-//
-// This estimated annual cost is named the **Annual-Interest**.
 //
 // Each rule can either provide a formula to compute the Annual-Interest 
 // per issue, or assign a **Severity** level for each issue. Some thresholds

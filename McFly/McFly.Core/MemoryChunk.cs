@@ -32,13 +32,18 @@ namespace McFly.Core
         /// <remarks>Typically this is a field by field equality operation, but does NOT consider the ID</remarks>
         public override bool ValueEquals(MemoryChunk other)
         {
+            if (other == null)
+                return false;
             var memRangeSame = MemoryRange.Equals(other.MemoryRange);
-            if (!memRangeSame) return false;
+            if (!memRangeSame)
+                return false;
             var positionSame = Position.Equals(other.Position);
-            if (!positionSame) return false;
+            if (!positionSame)
+                return false;
             var bytesBothNull = Bytes == null && other.Bytes == null;
             var bytesSame = Bytes != null && other.Bytes != null && Bytes.SequenceEqual(other.Bytes);
-            if (!bytesSame && !bytesBothNull) return false;
+            if (!bytesSame && !bytesBothNull)
+                return false;
             return true;
         }
 

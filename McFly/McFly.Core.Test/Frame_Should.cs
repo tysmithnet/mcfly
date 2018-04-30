@@ -187,6 +187,18 @@ namespace McFly.Core.Test
             _frame1.Equals((object) null).Should().BeFalse();
             _frame1.Equals(_frame1).Should().BeTrue();
             _frame1.Equals((object) _frame1).Should().BeTrue();
+            _frame1.Equals(_frame2).Should().BeTrue();
+            _frame1.Equals((object)_frame2).Should().BeTrue();
+            _frame1.Equals(new object()).Should().BeFalse();
+            _frame1.GetHashCode().Should().Be(_frame2.GetHashCode());
+            _frame1.GetHashCode().Should().NotBe(_frame3.GetHashCode());
+        }
+
+        [Fact]
+        public void Indicate_Id_Is_Set_When_Id_Is_Not_Empty()
+        {
+            _frame1.IsIdSet.Should().BeTrue();
+            new Frame().IsIdSet.Should().BeFalse();
         }
 
         [Fact]
