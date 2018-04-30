@@ -70,14 +70,14 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <value>The offset.</value>
         [Column("offset")]
-        public long? Offset { get; set; }
+        public string Offset { get; set; }
 
         /// <summary>
         ///     Gets or sets the frame identifier.
         /// </summary>
         /// <value>The frame identifier.</value>
         [Column("frame_id")]
-        public long FrameId { get; set; }
+        public Guid FrameId { get; set; }
 
         /// <summary>
         ///     Gets or sets the frame.

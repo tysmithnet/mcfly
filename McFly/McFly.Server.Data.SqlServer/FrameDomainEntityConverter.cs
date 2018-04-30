@@ -4,7 +4,7 @@
 // Created          : 04-29-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-29-2018
+// Last Modified On : 04-30-2018
 // ***********************************************************************
 // <copyright file="FrameDomainEntityConverter.cs" company="">
 //     Copyright ©  2018
@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
 using System.Linq;
 using McFly.Core;
 
@@ -22,7 +21,8 @@ namespace McFly.Server.Data.SqlServer
     ///     Domain entity converter for frames and frameenities
     /// </summary>
     /// <seealso
-    ///     cref="FrameEntity" />
+    ///     cref="McFly.Server.Data.SqlServer.IDomainEntityConverter{McFly.Core.Frame, McFly.Server.Data.SqlServer.FrameEntity}" />
+    /// <seealso cref="FrameEntity" />
     internal sealed class FrameDomainEntityConverter : IDomainEntityConverter<Frame, FrameEntity>
     {
         /// <summary>
@@ -37,9 +37,8 @@ namespace McFly.Server.Data.SqlServer
             var frame = new Frame();
             frame.Position = new Position(entity.PosHi, entity.PosLo);
             frame.ThreadId = entity.ThreadId;
-            frame.DisassemblyLine = new DisassemblyLine(entity.Rip?.ToULong(),
-                ByteArrayBuilder.StringToByteArray(entity.OpCode), entity.OpCodeMnemonic,
-                entity.DisassemblyNote);
+            frame.DisassemblyLine = ExtractDisassemblyLine(entity);
+            frame.StackTrace = ExtractStackTrace(entity);
             frame.RegisterSet = new RegisterSet();
             frame.RegisterSet.Brfrom = entity.Brfrom?.ToULong();
             frame.RegisterSet.Brto = entity.Brto?.ToULong();
@@ -128,6 +127,11 @@ namespace McFly.Server.Data.SqlServer
         /// <inheritdoc />
         public FrameEntity ToEntity(Frame frame, IMcFlyContext context)
         {
+            var first = context.FrameEntities.First(x => x.Id == frame.Id); // todo: what about Guid.Empty?
+            if (first != null)
+                return first;
+
+            // note: Don't use object initializer here because it throws off code coverage
             var entity = new FrameEntity();
             entity.PosHi = frame.Position?.High ?? 0;
             entity.PosLo = frame.Position?.Low ?? 0;
@@ -212,6 +216,43 @@ namespace McFly.Server.Data.SqlServer
             entity.DisassemblyNote = frame.DisassemblyLine?.DisassemblyNote;
             entity.StackFrames = frame.StackTrace.StackFrames.Select(x => x.ToStackFrameEntity()).ToList();
             return entity;
+        }
+
+        /// <summary>
+        ///     Extracts the disassembly line.
+        /// </summary>
+        /// <param name="entity">The entity.</param>
+        /// <returns>DisassemblyLine.</returns>
+        private DisassemblyLine ExtractDisassemblyLine(FrameEntity entity)
+        {
+            return new DisassemblyLine(entity.Rip?.ToULong(),
+                ByteArrayBuilder.StringToByteArray(entity.OpCode), entity.OpCodeMnemonic,
+                entity.DisassemblyNote);
+        }
+
+        /// <summary>
+        ///     Extracts the stack frame.
+        /// </summary>
+        /// <param name="stackFrameEntity">The stack frame entity.</param>
+        /// <returns>StackFrame.</returns>
+        private StackFrame ExtractStackFrame(StackFrameEntity stackFrameEntity)
+        {
+            var stackFrame = new StackFrame(stackFrameEntity.StackPointer.ToULong(),
+                stackFrameEntity.ReturnAddress?.ToULong(), stackFrameEntity.ModuleName, stackFrameEntity.Function,
+                stackFrameEntity.Offset?.ToULong());
+            return stackFrame;
+        }
+
+        /// <summary>
+        ///     Extracts the stack trace.
+        /// </summary>
+        /// <param name="entity">The entity.</param>
+        /// <returns>StackTrace.</returns>
+        private StackTrace ExtractStackTrace(FrameEntity entity)
+        {
+            var stackFrames = entity.StackFrames.Select(ExtractStackFrame);
+            var stackTrace = new StackTrace(stackFrames);
+            return stackTrace;
         }
     }
 }

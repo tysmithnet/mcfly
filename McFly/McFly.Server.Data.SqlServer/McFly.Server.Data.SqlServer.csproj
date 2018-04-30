@@ -79,7 +79,6 @@
     <Compile Include="McFlyContext.cs" />
     <Compile Include="MemoryAccess.cs" />
     <Compile Include="MemoryChunkEntity.cs" />
-    <Compile Include="StackFrameDomainEntityConverter.cs" />
     <Compile Include="TagAccess.cs" />
     <Compile Include="TagDomainEntityConverter.cs" />
     <Compile Include="TagEntity.cs" />

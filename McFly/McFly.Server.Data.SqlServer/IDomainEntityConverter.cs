@@ -12,6 +12,8 @@
 // <summary></summary>
 // ***********************************************************************
 
+using McFly.Core;
+
 namespace McFly.Server.Data.SqlServer
 {
     /// <summary>

@@ -47,7 +47,7 @@ namespace McFly.Server.Data.SqlServer
             entity.ReturnAddress = stackFrame.ReturnAddress?.ToHexString();
             entity.ModuleName = stackFrame.Module;
             entity.Function = stackFrame.FunctionName;
-            entity.Offset = stackFrame.Offset?.ToLong();
+            entity.Offset = stackFrame.Offset?.ToHexString();
             return entity;
         }
 
