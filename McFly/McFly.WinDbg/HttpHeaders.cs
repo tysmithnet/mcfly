@@ -22,8 +22,6 @@ namespace McFly.WinDbg
     ///     Collection of HTTP headers
     /// </summary>
     /// <seealso cref="string" />
-    /// <seealso cref="System.IEquatable{McFly.HttpHeaders}" />
-    /// <seealso cref="string" />
     /// <seealso cref="HttpHeaders" />
     public sealed class HttpHeaders : Dictionary<string, string>, IEquatable<HttpHeaders>
     {
@@ -34,6 +32,7 @@ namespace McFly.WinDbg
         /// <returns><c>true</c> if this instance equals other, <c>false</c> otherwise.</returns>
         public bool Equals(HttpHeaders other)
         {
+            if (ReferenceEquals(other, null)) return false;
             return Count == other.Count && !this.Except(other).Any();
         }
 
@@ -68,30 +67,6 @@ namespace McFly.WinDbg
 
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        ///     Implements the == operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator ==(HttpHeaders left, HttpHeaders right)
-        {
-            if (ReferenceEquals(left, right)) return true;
-            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
-            return Equals(left, right);
-        }
-
-        /// <summary>
-        ///     Implements the != operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator !=(HttpHeaders left, HttpHeaders right)
-        {
-            return !Equals(left, right);
         }
     }
 }

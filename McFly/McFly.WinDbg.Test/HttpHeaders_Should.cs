@@ -9,7 +9,6 @@ namespace McFly.WinDbg.Test
         public void Exhibit_Value_Equality()
         {
             // arrange
-            var empty = new HttpHeaders();
             var one = new HttpHeaders();
             one.Add("a", "1");
             one.Add("b", "2");
@@ -21,13 +20,16 @@ namespace McFly.WinDbg.Test
 
             // act
             // assert
-            empty.GetHashCode().Should().Be(new HttpHeaders().GetHashCode());
-            empty.Should().Equal(new HttpHeaders());
-            one.Should().Equal(two);
-            two.Should().NotEqual(three);
-            (one == two).Should().BeTrue();
-            (two != three).Should().BeTrue();
+            one.Equals(null).Should().BeFalse();
+            one.Equals((object) null).Should().BeFalse();
+            one.Equals(new object()).Should().BeFalse();
+            one.Equals(one).Should().BeTrue();
+            one.Equals(two).Should().BeTrue();
+            one.Equals((object)one).Should().BeTrue();
+            one.Equals((object)two).Should().BeTrue();
             one.GetHashCode().Should().Be(two.GetHashCode());
+            one.Equals(three).Should().BeFalse();
+            two.Equals(three).Should().BeFalse();
         }
     }
 }
