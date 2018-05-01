@@ -22,7 +22,7 @@ namespace McFly.WinDbg
     /// </summary>
     /// <seealso cref="IBreakpoint" />
     /// <seealso cref="BreakpointMask" />
-    public class BreakpointMask : IEquatable<BreakpointMask> // todo: move to mcfly
+    public class BreakpointMask : IEquatable<BreakpointMask>
         , IBreakpoint
     {
         /// <summary>
@@ -102,30 +102,6 @@ namespace McFly.WinDbg
         public void SetBreakpoint(IBreakpointFacade breakpointFacade)
         {
             breakpointFacade.SetBreakpointByMask(ModuleMask, FunctionMask);
-        }
-
-        /// <summary>
-        ///     Implements the == operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator ==(BreakpointMask left, BreakpointMask right)
-        {
-            if (ReferenceEquals(left, right)) return true;
-            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
-            return Equals(left, right);
-        }
-
-        /// <summary>
-        ///     Implements the != operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator !=(BreakpointMask left, BreakpointMask right)
-        {
-            return !Equals(left, right);
         }
 
         /// <summary>
