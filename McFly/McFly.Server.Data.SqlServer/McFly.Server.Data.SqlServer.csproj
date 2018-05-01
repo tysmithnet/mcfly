@@ -67,7 +67,6 @@
     <Compile Include="ByteRangeEntity.cs" />
     <Compile Include="ContextFactory.cs" />
     <Compile Include="DataAccess.cs" />
-    <Compile Include="DomainEntityExtensions.cs" />
     <Compile Include="FrameAccess.cs" />
     <Compile Include="FrameCriterionVisitor.cs" />
     <Compile Include="FrameDomainEntityConverter.cs" />

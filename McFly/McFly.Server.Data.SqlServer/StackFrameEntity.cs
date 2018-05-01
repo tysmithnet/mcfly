@@ -70,6 +70,8 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <value>The offset.</value>
         [Column("offset")]
+        [MinLength(16)]
+        [MaxLength(16)]
         public string Offset { get; set; }
 
         /// <summary>

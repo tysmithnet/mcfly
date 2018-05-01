@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.Linq;
 using McFly.Core;
 
@@ -127,7 +128,7 @@ namespace McFly.Server.Data.SqlServer
         /// <inheritdoc />
         public FrameEntity ToEntity(Frame frame, IMcFlyContext context)
         {
-            var first = context.FrameEntities.First(x => x.Id == frame.Id); // todo: what about Guid.Empty?
+            var first = context.FrameEntities.FirstOrDefault(x => x.Id == frame.Id && x.Id != Guid.Empty); 
             if (first != null)
                 return first;
 
@@ -214,7 +215,8 @@ namespace McFly.Server.Data.SqlServer
             entity.OpCode = frame.DisassemblyLine?.OpCode.ToHexString();
             entity.OpCodeMnemonic = frame.DisassemblyLine?.OpCodeMnemonic;
             entity.DisassemblyNote = frame.DisassemblyLine?.DisassemblyNote;
-            entity.StackFrames = frame.StackTrace.StackFrames.Select(x => x.ToStackFrameEntity()).ToList();
+            entity.StackFrames = frame.StackTrace.StackFrames
+                .Select(x => ExtractStackFrameEntity(entity.Id, x, context)).ToList();
             return entity;
         }
 
@@ -223,7 +225,7 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>DisassemblyLine.</returns>
-        private DisassemblyLine ExtractDisassemblyLine(FrameEntity entity)
+        internal DisassemblyLine ExtractDisassemblyLine(FrameEntity entity)
         {
             return new DisassemblyLine(entity.Rip?.ToULong(),
                 ByteArrayBuilder.StringToByteArray(entity.OpCode), entity.OpCodeMnemonic,
@@ -235,12 +237,34 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <param name="stackFrameEntity">The stack frame entity.</param>
         /// <returns>StackFrame.</returns>
-        private StackFrame ExtractStackFrame(StackFrameEntity stackFrameEntity)
+        internal StackFrame ExtractStackFrame(StackFrameEntity stackFrameEntity)
         {
-            var stackFrame = new StackFrame(stackFrameEntity.StackPointer.ToULong(),
-                stackFrameEntity.ReturnAddress?.ToULong(), stackFrameEntity.ModuleName, stackFrameEntity.Function,
-                stackFrameEntity.Offset?.ToULong());
-            return stackFrame;
+            var stackPointer = stackFrameEntity.StackPointer.ToULong();
+            var returnAddress = stackFrameEntity.ReturnAddress?.ToULong();
+            var module = stackFrameEntity.ModuleName;
+            var function = stackFrameEntity.Function;
+            var offset = stackFrameEntity.Offset?.ToULong();
+
+            return new StackFrame(stackPointer, returnAddress, module, function, offset);
+        }
+
+        /// <summary>
+        ///     Extracts the stack frame entity.
+        /// </summary>
+        /// <param name="ownerId">The owner identifier.</param>
+        /// <param name="stackFrame">The stack frame.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>StackFrameEntity.</returns>
+        internal StackFrameEntity ExtractStackFrameEntity(Guid ownerId, StackFrame stackFrame, IMcFlyContext context)
+        {
+            var entity = context.StackFrameEntities.Create<StackFrameEntity>();
+            entity.StackPointer = stackFrame.StackPointer.ToHexString();
+            entity.Function = stackFrame.FunctionName;
+            entity.ModuleName = stackFrame.Module;
+            entity.Offset = stackFrame.Offset.ToHexString();
+            entity.ReturnAddress = stackFrame.ReturnAddress.ToHexString();
+            entity.FrameId = ownerId;
+            return entity;
         }
 
         /// <summary>
@@ -248,7 +272,7 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>StackTrace.</returns>
-        private StackTrace ExtractStackTrace(FrameEntity entity)
+        internal StackTrace ExtractStackTrace(FrameEntity entity)
         {
             var stackFrames = entity.StackFrames.Select(ExtractStackFrame);
             var stackTrace = new StackTrace(stackFrames);
