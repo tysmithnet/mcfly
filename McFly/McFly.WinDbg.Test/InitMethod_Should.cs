@@ -1,5 +1,6 @@
-﻿using McFly.Core;
-using McFly.WinDbg;
+﻿using System;
+using FluentAssertions;
+using McFly.Core;
 using McFly.WinDbg.Test.Builders;
 using Moq;
 using Xunit;
@@ -8,6 +9,20 @@ namespace McFly.WinDbg.Test
 {
     public class InitMethod_Should
     {
+        [Fact]
+        public void Correctly_Extract_Options_From_String_Array()
+        {
+            var initMethod = new InitMethod();
+            Action a = () => initMethod.ExtractOptions(null);
+            a.Should().Throw<ArgumentNullException>();
+            a = () => initMethod.ExtractOptions(new[] {""});
+            a.Should().Throw<ArgumentOutOfRangeException>();
+            var one = initMethod.ExtractOptions(new[] {"--name", "test"});
+            one.ProjectName.Should().Be("test");
+            var two = initMethod.ExtractOptions(new[] {"-n", "test"});
+            two.ProjectName.Should().Be("test");
+        }
+
         [Fact]
         public void Pass_Correct_Values_To_Server_Client()
         {
