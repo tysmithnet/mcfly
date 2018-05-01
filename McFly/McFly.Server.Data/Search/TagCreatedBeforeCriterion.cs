@@ -6,7 +6,7 @@
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-26-2018
 // ***********************************************************************
-// <copyright file="NoteCreatedBeforeCriterion.cs" company="">
+// <copyright file="TagCreatedBeforeCriterion.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -17,16 +17,16 @@ using System;
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Search criterion for notes that were created before a certain point in time
+    ///     Search criterion for tags that were created before a certain point in time
     /// </summary>
-    /// <seealso cref="McFly.Server.Data.Search.NoteCriterion" />
-    public class NoteCreatedBeforeCriterion : NoteCriterion
+    /// <seealso cref="TagCriterion" />
+    public class TagCreatedBeforeCriterion : TagCriterion
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="NoteCreatedBeforeCriterion" /> class.
+        ///     Initializes a new instance of the <see cref="TagCreatedBeforeCriterion" /> class.
         /// </summary>
         /// <param name="dateTime">The date time.</param>
-        public NoteCreatedBeforeCriterion(DateTime dateTime)
+        public TagCreatedBeforeCriterion(DateTime dateTime)
         {
             DateTime = dateTime;
         }

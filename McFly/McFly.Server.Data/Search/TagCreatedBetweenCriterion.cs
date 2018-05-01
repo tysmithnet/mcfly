@@ -6,7 +6,7 @@
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-26-2018
 // ***********************************************************************
-// <copyright file="NoteCreatedBetweenCriterion.cs" company="">
+// <copyright file="TagCreatedBetweenCriterion.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -17,18 +17,18 @@ using System;
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Search criterion for notes created between two points in time
+    ///     Search criterion for tags created between two points in time
     /// </summary>
-    /// <seealso cref="McFly.Server.Data.Search.NoteCriterion" />
-    public class NoteCreatedBetweenCriterion : NoteCriterion // todo: should be the AND of 2 simpler criteria
+    /// <seealso cref="TagCriterion" />
+    public class TagCreatedBetweenCriterion : TagCriterion // todo: should be the AND of 2 simpler criteria
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="NoteCreatedBetweenCriterion" /> class.
+        ///     Initializes a new instance of the <see cref="TagCreatedBetweenCriterion" /> class.
         /// </summary>
         /// <param name="low">The low.</param>
         /// <param name="high">The high.</param>
         /// <exception cref="ArgumentOutOfRangeException">Low cannot be after High</exception>
-        public NoteCreatedBetweenCriterion(DateTime low, DateTime high)
+        public TagCreatedBetweenCriterion(DateTime low, DateTime high)
         {
             if (low > high)
                 throw new ArgumentOutOfRangeException("Low cannot be after High");

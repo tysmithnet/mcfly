@@ -8,6 +8,7 @@ namespace McFly.Core.Test
     {
         private readonly Frame _frame1 = new Frame
         {
+            Id = Guid.Parse("dc2ee39a-23e6-4090-a4f4-e62377c42087"),
             Position = new Position(10, 11),
             ThreadId = 400,
             DisassemblyLine = new DisassemblyLine(0x100, new byte[] {0x10, 0x11}, "mov", "r8,r9"),
@@ -27,6 +28,7 @@ namespace McFly.Core.Test
 
         private readonly Frame _frame2 = new Frame
         {
+            Id = Guid.Parse("dc2ee39a-23e6-4090-a4f4-e62377c42087"),
             Position = new Position(10, 11),
             ThreadId = 400,
             DisassemblyLine = new DisassemblyLine(0x100, new byte[] {0x10, 0x11}, "mov", "r8,r9"),
@@ -82,6 +84,82 @@ namespace McFly.Core.Test
             })
         };
 
+        private readonly Frame _frame5 = new Frame
+        {
+            Position = new Position(11, 11),
+            ThreadId = 401,
+            DisassemblyLine = new DisassemblyLine(0x100, new byte[] { 0x10, 0x11 }, "mov", "r8,r9"),
+            RegisterSet = new RegisterSet
+            {
+                Rax = 2,
+                Rbx = 4,
+                Rcx = 6,
+                Rdx = 8
+            },
+            StackTrace = new StackTrace(new[]
+            {
+                new StackFrame(0x400, 0x700, "mod", "helloworld", 0x12),
+                new StackFrame(0x420, 0x701, "mod", "helloworld", 0x13)
+            })
+        };
+
+        private readonly Frame _frame6 = new Frame
+        {
+            Position = new Position(11, 11),
+            ThreadId = 401,
+            DisassemblyLine = new DisassemblyLine(0x100, new byte[] { 0x10, 0x11 }, "mov", "r8,r9"),
+            RegisterSet = new RegisterSet
+            {
+                Rax = 2,
+                Rbx = 4,
+                Rcx = 6,
+                Rdx = 8
+            },
+            StackTrace = new StackTrace(new[]
+            {
+                new StackFrame(0x400, 0x700, "mod", "helloworld2", 0x12),
+                new StackFrame(0x420, 0x701, "mod", "helloworld2", 0x13)
+            })
+        };
+
+        private readonly Frame _frame7 = new Frame
+        {
+            Position = new Position(11, 11),
+            ThreadId = 402,
+            DisassemblyLine = new DisassemblyLine(0x100, new byte[] { 0x10, 0x11 }, "mov", "r8,r9"),
+            RegisterSet = new RegisterSet
+            {
+                Rax = 2,
+                Rbx = 4,
+                Rcx = 6,
+                Rdx = 8
+            },
+            StackTrace = new StackTrace(new[]
+            {
+                new StackFrame(0x400, 0x700, "mod", "helloworld2", 0x12),
+                new StackFrame(0x420, 0x701, "mod", "helloworld2", 0x13)
+            })
+        };
+
+        private readonly Frame _frame8 = new Frame
+        {
+            Position = new Position(11, 11),
+            ThreadId = 402,
+            DisassemblyLine = new DisassemblyLine(0x100, new byte[] { 0x10, 0x11, 0x12 }, "mov", "r8,r9"),
+            RegisterSet = new RegisterSet
+            {
+                Rax = 2,
+                Rbx = 4,
+                Rcx = 6,
+                Rdx = 8
+            },
+            StackTrace = new StackTrace(new[]
+            {
+                new StackFrame(0x400, 0x700, "mod", "helloworld2", 0x12),
+                new StackFrame(0x420, 0x701, "mod", "helloworld2", 0x13)
+            })
+        };
+
         [Fact]
         public void Be_Comparable_By_Position_Then_Frame()
         {
@@ -103,27 +181,24 @@ namespace McFly.Core.Test
         }
 
         [Fact]
-        public void Exhibit_Value_Equality()
+        public void Exhibit_Entity_Equality_By_Default()
         {
-            // arrange
-            // act
-            // assert
-            (_frame1 == _frame1).Should().BeTrue();
-            (_frame1 == (object) _frame1).Should().BeTrue();
-            (_frame1 == null).Should().BeFalse();
-            (null == _frame1).Should().BeFalse();
             _frame1.Equals(null).Should().BeFalse();
             _frame1.Equals((object) null).Should().BeFalse();
             _frame1.Equals(_frame1).Should().BeTrue();
             _frame1.Equals((object) _frame1).Should().BeTrue();
-            _frame1.Equals(new object()).Should().BeFalse();
-            
-            _frame1.Equals(null).Should().BeFalse();
-            _frame1.Equals(_frame1).Should().BeTrue();
             _frame1.Equals(_frame2).Should().BeTrue();
-            _frame1.Equals((object) _frame2).Should().BeTrue();
-            (_frame1 == _frame2).Should().BeTrue();
+            _frame1.Equals((object)_frame2).Should().BeTrue();
+            _frame1.Equals(new object()).Should().BeFalse();
             _frame1.GetHashCode().Should().Be(_frame2.GetHashCode());
+            _frame1.GetHashCode().Should().NotBe(_frame3.GetHashCode());
+        }
+
+        [Fact]
+        public void Indicate_Id_Is_Set_When_Id_Is_Not_Empty()
+        {
+            _frame1.IsIdSet.Should().BeTrue();
+            new Frame().IsIdSet.Should().BeFalse();
         }
 
         [Fact]
@@ -136,6 +211,19 @@ namespace McFly.Core.Test
             // assert
             frame.Invoking(f => f.ThreadId = -1).Should()
                 .Throw<ArgumentOutOfRangeException>("Thread ids are non negative");
+        }
+
+        [Fact]
+        public void Offer_Value_Equality()
+        {
+            _frame1.ValueEquals(null).Should().BeFalse();
+            _frame1.ValueEquals(_frame1).Should().BeTrue();
+            _frame1.ValueEquals(_frame2).Should().BeTrue();
+            _frame1.ValueEquals(_frame3).Should().BeFalse();
+            _frame4.ValueEquals(_frame5).Should().BeFalse();
+            _frame5.ValueEquals(_frame6).Should().BeFalse();
+            _frame6.ValueEquals(_frame7).Should().BeFalse();
+            _frame7.ValueEquals(_frame8).Should().BeFalse();
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : @tsmithnet
+// Author           : @tysmithnet
 // Created          : 02-19-2018
 //
-// Last Modified By : @tsmithnet
+// Last Modified By : @tysmithnet
 // Last Modified On : 04-22-2018
 // ***********************************************************************
 // <copyright file="McFly.cs" company="">
@@ -171,7 +171,7 @@ namespace McFly.WinDbg
 
             currDomain = AppDomain.CreateDomain("mcfly", AppDomain.CurrentDomain.Evidence, setup);
             currDomain.UnhandledException += CurrDomain_UnhandledException;
-            
+
             AppDomain.CurrentDomain.AssemblyResolve += resolver;
             currDomain.AssemblyResolve += resolver;
 
@@ -257,23 +257,11 @@ namespace McFly.WinDbg
             catch (Exception e)
             {
                 WriteLine("Unhandled exception");
-                string message = GetExceptionMessage(e);
+                var message = GetExceptionMessage(e);
                 WriteLine(message);
             }
-            return HRESULT.S_OK;
-        }
 
-        private static string GetExceptionMessage(Exception e)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"{e.GetType().FullName} - {e.Message}");
-            sb.AppendLine($"{e.StackTrace}");
-            if (e.InnerException != null)
-            {
-                sb.AppendLine($"Inner exception: ");
-                sb.AppendLine(GetExceptionMessage(e.InnerException));
-            }
-            return sb.ToString();
+            return HRESULT.S_OK;
         }
 
         /// <summary>
@@ -365,7 +353,8 @@ namespace McFly.WinDbg
         /// </summary>
         /// <param name="Message">The message.</param>
         /// <param name="Params">The parameters.</param>
-        public static void WriteLine(string Message, params object[] Params) // todo: allow for strategy pattern for different formats
+        public static void
+            WriteLine(string Message, params object[] Params) // todo: allow for strategy pattern for different formats
         {
             if (Params == null)
                 Out(Message);
@@ -552,6 +541,20 @@ namespace McFly.WinDbg
                 if (ex != null)
                     WriteLine("\n----- Inner Exception -----------");
             }
+        }
+
+        private static string GetExceptionMessage(Exception e)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"{e.GetType().FullName} - {e.Message}");
+            sb.AppendLine($"{e.StackTrace}");
+            if (e.InnerException != null)
+            {
+                sb.AppendLine($"Inner exception: ");
+                sb.AppendLine(GetExceptionMessage(e.InnerException));
+            }
+
+            return sb.ToString();
         }
 
         /// <summary>

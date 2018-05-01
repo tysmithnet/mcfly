@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>McFly.Server</RootNamespace>
     <AssemblyName>McFly.Server</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -28,6 +28,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -218,7 +219,7 @@
     <Compile Include="Controllers\FrameController.cs" />
     <Compile Include="Search\ISearchCriterionConversionFacade.cs" />
     <Compile Include="Search\ISearchCriterionConverter.cs" />
-    <Compile Include="Controllers\NoteController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Search\RegisterCriterionConverter.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -236,7 +237,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">

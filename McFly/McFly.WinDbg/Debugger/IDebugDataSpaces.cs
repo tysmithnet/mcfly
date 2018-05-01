@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : @tsmithnet
+// Author           : @tysmithnet
 // Created          : 03-03-2018
 //
-// Last Modified By : @tsmithnet
+// Last Modified By : @tysmithnet
 // Last Modified On : 03-03-2018
 // ***********************************************************************
 // <copyright file="IDebugDataSpaces.cs" company="">
@@ -27,10 +27,8 @@ namespace McFly.WinDbg.Debugger
     [Guid("88f7dfab-3ea7-4c3a-aefb-c4e8106173aa")]
     public interface IDebugDataSpaces
     {
-        /* IDebugDataSpaces */
-
         /// <summary>
-        ///     Reads the virtual.
+        ///     Reads virtual memory
         /// </summary>
         /// <param name="Offset">The offset.</param>
         /// <param name="buffer">The buffer.</param>
@@ -46,7 +44,7 @@ namespace McFly.WinDbg.Debugger
             [Out] out uint BytesRead);
 
         /// <summary>
-        ///     Writes the virtual.
+        ///     Writes virtual memory
         /// </summary>
         /// <param name="Offset">The offset.</param>
         /// <param name="buffer">The buffer.</param>
@@ -62,7 +60,7 @@ namespace McFly.WinDbg.Debugger
             [Out] out uint BytesWritten);
 
         /// <summary>
-        ///     Searches the virtual.
+        ///     Searches virtual memory
         /// </summary>
         /// <param name="Offset">The offset.</param>
         /// <param name="Length">The length.</param>
@@ -82,7 +80,7 @@ namespace McFly.WinDbg.Debugger
             [Out] out ulong MatchOffset);
 
         /// <summary>
-        ///     Reads the virtual uncached.
+        ///     Reads virtual memory while bypassing the cache
         /// </summary>
         /// <param name="Offset">The offset.</param>
         /// <param name="buffer">The buffer.</param>
@@ -98,7 +96,7 @@ namespace McFly.WinDbg.Debugger
             [Out] out uint BytesRead);
 
         /// <summary>
-        ///     Writes the virtual uncached.
+        ///     Writes virtual memory while bypassing the cache
         /// </summary>
         /// <param name="Offset">The offset.</param>
         /// <param name="buffer">The buffer.</param>
@@ -114,7 +112,7 @@ namespace McFly.WinDbg.Debugger
             [Out] out uint BytesWritten);
 
         /// <summary>
-        ///     Reads the pointers virtual.
+        ///     Looks for pointers in the specified range?
         /// </summary>
         /// <param name="Count">The count.</param>
         /// <param name="Offset">The offset.</param>

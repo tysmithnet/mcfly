@@ -1,16 +1,17 @@
 ﻿using System.Linq;
 using FluentAssertions;
 using McFly.Core;
+using McFly.Server.Data.SqlServer.Test.Builders;
 using Xunit;
 
 namespace McFly.Server.Data.SqlServer.Test
 {
-    public class NoteAccess_Should
+    public class TagAccess_Should
     {
         [Fact]
-        public void Add_Note_To_Specified_Frames()
+        public void Add_Tag_To_Specified_Frames()
         {
-            var noteAccess = new NoteAccess();
+            var tagAccess = new TagAccess();
             var builder = new ContextFactoryBuilder();
             builder.WithFrame(new FrameEntity
             {
@@ -23,11 +24,11 @@ namespace McFly.Server.Data.SqlServer.Test
                 PosLo = 0,
                 ThreadId = 2
             });
-            noteAccess.ContextFactory = builder.Build();
+            tagAccess.ContextFactory = builder.Build();
 
-            noteAccess.AddNote("", new Position(0, 0), new[] {1, 2}, "test note");
-            noteAccess.GetNotes("", new Position(0, 0), 1).Single().Text.Should().Be("test note");
-            noteAccess.GetNotes("", new Position(0, 0), 2).Single().Text.Should().Be("test note");
+            tagAccess.AddTag("", new Position(0, 0), new[] {1, 2}, "test tag");
+            tagAccess.GetTags("", new Position(0, 0), 1).Single().Title.Should().Be("test tag");
+            tagAccess.GetTags("", new Position(0, 0), 2).Single().Title.Should().Be("test tag");
         }
     }
 }

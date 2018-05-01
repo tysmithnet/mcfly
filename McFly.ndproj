@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <NDepend AppName="McFly" Platform="DotNet" FileWrittenByProductVersion="2018.1.0.9030">
   <OutputDir KeepXmlFiles="False">C:\projects\mcfly\NDependOut</OutputDir>
   <Assemblies>
@@ -118,7 +118,8 @@
       <High2Critical_SeverityThreshold>72000000000</High2Critical_SeverityThreshold>
       <Critical2Blocker_SeverityThreshold>360000000000</Critical2Blocker_SeverityThreshold>
     </DebtSettings>
-  </ProjectDebtSettings><Queries>
+  </ProjectDebtSettings>
+  <Queries>
     <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Exclude McFly.Debugger</Name>
 notmycode from ns in Namespaces
 where ns.Name == "McFly.Debugger"
@@ -179,52 +180,6 @@ codeBase.PercentageCoverage
 // low risk, make sure that new and refactored classes gets 100% covered by tests and that
 // the application and test code contains as many checks/assertions as possible.
 //</Description>]]></Query>
-      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="Percentage Coverage on New Code" Unit="%" />
-failif value < 70%
-warnif value < 80%
-let newMethods = Application.Methods.Where(m => m.WasAdded() && m.NbLinesOfCode > 0)
-let locCovered = newMethods.Sum(m => m.NbLinesOfCodeCovered)
-let loc = newMethods.Sum(m => m.NbLinesOfCode)
-select 100d * locCovered / loc
-
-//<Description>
-// *New Code* is defined as methods added since the baseline.
-//
-// To achieve high code coverage it is essential that new code gets properly
-// tested and covered by tests. It is advised that all non-UI new classes gets
-// 100% covered.
-//
-// Typically 90% of a class is easy to cover by tests and 10% is hard to reach 
-// through tests. It means that this 10% remaining is not easily testable, which 
-// means it is not well designed, which often means that this code is especially 
-// **error-prone**. This is the reason why it is important to reach 100% coverage
-// for a class, to make sure that potentially *error-prone* code gets tested.
-//</Description>
-]]></Query>
-      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="Percentage Coverage on Refactored Code" Unit="%" />
-failif value < 70%
-warnif value < 80%
-let newMethods = Application.Methods.Where(m => m.CodeWasChanged() && m.NbLinesOfCode > 0)
-let locCovered = newMethods.Sum(m => m.NbLinesOfCodeCovered)
-let loc = newMethods.Sum(m => m.NbLinesOfCode)
-select 100d * locCovered / loc
-
-//<Description>
-// *Refactored Code* is defined as methods where *code was changed* since the baseline.
-//
-// Comment changes and formatting changes are not considerd as refactoring.
-//
-// To achieve high code coverage it is essential that refactored code gets properly
-// tested and covered by tests. It is advised that when refactoring a class
-// or a method, it is important to also write tests to make sure it gets 100% covered.
-//
-// Typically 90% of a class is easy to cover by tests and 10% is hard to reach 
-// through tests. It means that this 10% remaining is not easily testable, which 
-// means it is not well designed, which often means that this code is especially 
-// **error-prone**. This is the reason why it is important to reach 100% coverage
-// for a class, to make sure that potentially *error-prone* code gets tested.
-//</Description>
-]]></Query>
       <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="Blocker Issues" Unit="issues" />
 failif count > 0 issues
 from i in Issues
@@ -341,23 +296,6 @@ Issues.Sum(i => i.Debt).ToManDay()
 // The Debt is defined as the sum of estimated effort to fix all issues.
 // Debt documentation: https://www.ndepend.com/docs/technical-debt#Debt
 //</Description>]]></Query>
-      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="New Debt since Baseline" Unit="man-days" />
-failif value > 2 man-days
-warnif value > 0 man-days
-let debt = Issues.Sum(i => i.Debt)
-let debtInBaseline = IssuesInBaseline.Sum(i => i.Debt)
-select (debt - debtInBaseline).ToManDay()
-
-
-//<Description>
-// This Quality Gate fails if the estimated effort to fix new or worsened
-// issues (what is called the *New Debt since Baseline*) is higher
-// than 2 man-days.
-//
-// This Quality Gate warns if this estimated effort is positive.
-//
-// Debt documentation: https://www.ndepend.com/docs/technical-debt#Debt
-//</Description>]]></Query>
       <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="Debt Rating per Namespace" Unit="namespaces" />
 failif count > 0 namespaces
 
@@ -408,27 +346,6 @@ Issues.Sum(i => i.AnnualInterest).ToManDay()
 //
 // The Annual-Interest is defined as the sum of estimated annual cost
 // in man-days, to leave all issues unfixed.
-//
-// Each rule can either provide a formula to compute the Annual-Interest 
-// per issue, or assign a **Severity** level for each issue. Some thresholds
-// defined in *Project Properties > Issue and Debt > Annual Interest* are
-// used to infer an Annual-Interest value from a Severity level.
-// Annual Interest documentation: https://www.ndepend.com/docs/technical-debt#AnnualInterest
-//</Description>]]></Query>
-      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <QualityGate Name="New Annual Interest since Baseline" Unit="man-days" />
-failif value > 2 man-days
-warnif value > 0 man-days
-let ai = Issues.Sum(i => i.AnnualInterest)
-let aiInBaseline = IssuesInBaseline.Sum(i => i.AnnualInterest)
-select (ai - aiInBaseline).ToManDay()
-
-//<Description>
-// This Quality Gate fails if the estimated annual cost to leave all issues
-// unfixed, increased from more than 2 man-days since the baseline.
-//
-// This Quality Gate warns if this estimated annual cost is positive.
-//
-// This estimated annual cost is named the **Annual-Interest**.
 //
 // Each rule can either provide a formula to compute the Annual-Interest 
 // per issue, or assign a **Severity** level for each issue. Some thresholds
@@ -1192,7 +1109,8 @@ select new {
 // up to 20 minutes for 200 or more, lines of code not commented.
 //</HowToFix>]]></Query>
       <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid types with poor cohesion</Name>
-warnif count > 0 from t in JustMyCode.Types where 
+warnif count > 0 from t in JustMyCode.Types where
+  t.FullName != "McFly.Core.RegisterSet" && 
   t.LCOM > 0.8  && 
   t.NbFields > 10 && 
   t.NbMethods >10 
@@ -1286,252 +1204,6 @@ select new {
 //</HowToFix>]]></Query>
     </Group>
     <Group Name="Code Smells Regression" Active="True" ShownInReport="False">
-      <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>From now, all types added should respect basic quality principles</Name>
-warnif count > 0 from t in JustMyCode.Types where
-
-// Only match types added since Baseline.
-// Uncomment this line to match also refactored types since Baseline.
-// (t.WasAdded() || t.CodeWasChanged()) &&
-   t.WasAdded() &&
-
-// Eliminate interfaces, enumerations or types only with constant fields
-// by making sure we are matching type with code.
-t.NbLinesOfCode > 10 &&
-
-// Optimization: Fast discard of non-relevant types 
-(t.Fields.Count() > 20 || t.Methods.Count() > 20)
-      
-// Count instance fields and non-constant static fields
-let fields = t.Fields.Where(f => 
-      !f.IsLiteral &&
-      !(f.IsStatic && f.IsInitOnly))
-
-// Don't match these methods
-let methods = t.Methods.Where(
-   m => !(m.IsConstructor || m.IsClassConstructor ||
-          m.IsGeneratedByCompiler ||
-          m.IsPropertyGetter || m.IsPropertySetter ||
-          m.IsEventAdder || m.IsEventRemover))
-  
-where 
-
-// Low Quality types     Metrics' definitions are available here:
-//     https://www.ndepend.com/docs/code-metrics#MetricsOnTypes
-(  // Types with too many methods
-   fields.Count() > 20 ||
-
-   methods.Count() > 20 ||
-               
-   // Complex Types that use more than 50 other types
-   t.NbTypesUsed > 50
-)
-select new { 
-   t, 
-   t.NbLinesOfCode, 
-
-   instanceMethods = methods.Where(m => !m.IsStatic), 
-   staticMethods = methods.Where(m => m.IsStatic),
-  
-   instanceFields = fields.Where(f => !f.IsStatic),
-   staticFields = fields.Where(f => f.IsStatic),
-  
-   t.TypesUsed,
-
-   // Constant Debt estimation, since for such type rules in category "Code Smells" 
-   // accurately estimate the Debt.
-   Debt     = 10.ToMinutes().ToDebt(),
-
-   // The Severity is higher for new types than for refactored types 
-   AnnualInterest= (t.WasAdded() ? 3 : 1) *
-                    Severity.High.AnnualInterestThreshold()
-}
-
-//<Description>
-// This rule is executed only if a *baseline for comparison* is defined (*diff mode*).
-// This rule operates only on types added since baseline.
-//
-// This rule can be easily modified to also match types refactored since baseline,
-// that don't satisfy all quality criterions.
-//
-// Types matched by this rule not only have been recently added or refactored,
-// but also somehow violate one or several basic quality principles,
-// whether it has too many methods,
-// it has too many fields,
-// or is using too many types.
-// Any of these criterions is often a symptom of a type with too many responsibilities.
-//
-// Notice that to count methods and fields, methods like constructors 
-// or property and event accessors are not taken account.
-// Notice that constants fields and static-readonly fields are not counted.
-// Enumerations types are not counted also.
-//</Description>
-
-//<HowToFix>
-// To refactor such type and increase code quality and maintainability,
-// certainly you'll have to split the type into several smaller types
-// that together, implement the same logic.
-//
-// Issues of this rule have a constant 10 minutes Debt, because the Debt,
-// which means the effort to fix such issue, is already estimated for issues
-// of rules in the category **Code Smells**.
-//
-// However issues of this rule have a **High** severity, with even more 
-// interests for issues on new types since baseline, because the proper time 
-// to increase the quality of these types is **now**, before they get commited 
-// in the next production release.
-//</HowToFix>]]></Query>
-      <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>From now, all types added should be 100% covered by tests</Name>
-warnif count > 0 from t in JustMyCode.Types where
-
-// Only match types added since Baseline.
-// Uncomment this line to match also refactored types since Baseline.
-// (t.WasAdded() || t.CodeWasChanged()) &&
-   t.WasAdded() &&
-
-  // …that are not 100% covered by tests
-  t.PercentageCoverage < 100
-
-  let methodsCulprit = t.Methods.Where(m => m.PercentageCoverage < 100)
-
-select new { 
-   t, 
-   t.PercentageCoverage, 
-   methodsCulprit,
-   t.NbLinesOfCode,
-
-   // Constant Debt estimation, since for such type rules in category "Coverage" 
-   // accurately estimate the untested code Debt.
-   Debt     = 10.ToMinutes().ToDebt(),
-
-   // The Severity is higher for new types than for refactored types 
-   AnnualInterest= (t.WasAdded() ? 3 : 1) *
-                    Severity.High.AnnualInterestThreshold()
-}
-
-//<Description>
-// This rule is executed only if a *baseline for comparison* is defined (*diff mode*).
-// This rule operates only on types added since baseline.
-//
-// This rule can be easily modified to also match types refactored since baseline,
-// that are not 100% covered by tests.
-//
-// This rule is executed only if some code coverage data is imported
-// from some code coverage files.
-//
-// Often covering 10% of remaining uncovered code of a class, 
-// requires as much work as covering the first 90%.
-// For this reason, typically teams estimate that 90% coverage is enough.
-// However *untestable code* usually means *poorly written code* 
-// which usually leads to *error prone code*.
-// So it might be worth refactoring and making sure to cover the 10% remaining code
-// because **most tricky bugs might come from this small portion of hard-to-test code**.
-//
-// Not all classes should be 100% covered by tests (like UI code can be hard to test)
-// but you should make sure that most of the logic of your application
-// is defined in some *easy-to-test classes*, 100% covered by tests.
-//
-// In this context, this rule warns when a type added or refactored since the baseline,
-// is not fully covered by tests.
-//</Description>
-
-//<HowToFix>
-// Write more unit-tests dedicated to cover code not covered yet.
-// If you find some *hard-to-test code*, it is certainly a sign that this code
-// is not *well designed* and hence, needs refactoring.
-//
-// You'll find code impossible to cover by unit-tests, like calls to *MessageBox.Show()*.
-// An infrastructure must be defined to be able to *mock* such code at test-time.
-//
-// Issues of this rule have a constant 10 minutes Debt, because the Debt,
-// which means the effort to write tests for the culprit type, is already 
-// estimated for issues in the category **Code Coverage**. 
-//
-// However issues of this rule have a **High** severity, with even more 
-// interests for issues on new types since baseline, because the proper time 
-// to write tests for these types is **now**, before they get commited 
-// in the next production release.
-//</HowToFix>]]></Query>
-      <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>From now, all methods added should respect basic quality principles</Name>
-warnif count > 0 from m in JustMyCode.Methods where
-
-   // Only match methods added since Baseline.
-   // Uncomment this line to match also refactored methods since Baseline.
-   // (m.WasAdded() || m.CodeWasChanged()) &&
-   m.WasAdded() &&
-
-  // Don't match async methods here to avoid 
-  // false positives because of special compiler tricks.
-  !m.IsAsync &&
- 
-// Low Quality methods// Metrics' definitions
-(  m.NbLinesOfCode > 30 ||          // https://www.ndepend.com/docs/code-metrics#NbLinesOfCode
-   m.NbILInstructions > 200 ||      // https://www.ndepend.com/docs/code-metrics#NbILInstructions
-   m.CyclomaticComplexity > 20 ||   // https://www.ndepend.com/docs/code-metrics#CC
-   m.ILCyclomaticComplexity > 50 || // https://www.ndepend.com/docs/code-metrics#ILCC
-   m.ILNestingDepth > 4 ||          // https://www.ndepend.com/docs/code-metrics#ILNestingDepth
-   m.NbParameters > 5 ||            // https://www.ndepend.com/docs/code-metrics#NbParameters
-   m.NbVariables > 8 ||             // https://www.ndepend.com/docs/code-metrics#NbVariables
-   m.NbOverloads > 6 )
-select new { 
-   m, 
-   m.NbLinesOfCode,
-   m.NbILInstructions,
-   m.CyclomaticComplexity, 
-   m.ILCyclomaticComplexity,
-   m.ILNestingDepth, 
-   m.NbParameters, 
-   m.NbVariables, 
-   m.NbOverloads, // https://www.ndepend.com/docs/code-metrics#NbOverloads
-
-   // Constant Debt estimation, since for such method rules in category "Code Smells" 
-   // accurately estimate the Debt.
-   Debt     = 5.ToMinutes().ToDebt(),
-
-   // The Severity is higher for new methods than for refactored methods
-   AnnualInterest= (m.WasAdded() ? 3 : 1) *
-                   Severity.High.AnnualInterestThreshold()
-}  
-
-//<Description>
-// This rule is executed only if a *baseline for comparison* is defined (*diff mode*).
-// This rule operates only on methods added or refactored since the baseline.
-//
-// This rule can be easily modified to also match methods refactored since baseline,
-// that don't satisfy all quality criterions.
-//
-// Methods matched by this rule not only have been recently added or refactored,
-// but also somehow violate one or several basic quality principles,
-// whether it is too large (too many *lines of code*), 
-// too complex (too many *if*, *switch case*, loops…)
-// has too many variables, too many parameters
-// or has too many overloads.
-//</Description>
-
-//<HowToFix>
-// To refactor such method and increase code quality and maintainability,
-// certainly you'll have to split the method into several smaller methods
-// or even create one or several classes to implement the logic.
-//
-// During this process it is important to question the scope of each
-// variable local to the method. This can be an indication if
-// such local variable will become an instance field of the newly created class(es).
-//
-// Large *switch…case* structures might be refactored through the help
-// of a set of types that implement a common interface, the interface polymorphism
-// playing the role of the *switch cases tests*.
-//
-// Unit Tests can help: write tests for each method before extracting it 
-// to ensure you don't break functionality.
-//
-// Issues of this rule have a constant 5 minutes Debt, because the Debt,
-// which means the effort to fix such issue, is already estimated for issues
-// of rules in the category **Code Smells**.
-// 
-// However issues of this rule have a **High** severity, with even more 
-// interests for issues on new methods since baseline, because the proper time 
-// to increase the quality of these methods is **now**, before they get commited 
-// in the next production release.
-//</HowToFix>]]></Query>
       <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid decreasing code coverage by tests of types</Name>
 warnif count > 0 
 from t in JustMyCode.Types where
@@ -9765,6 +9437,7 @@ select f
 //</Description>]]></Query>
       <Query Active="False" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>JustMyCode code elements</Name>
 from elem in JustMyCode.CodeElements
+where !elem.FullName.StartsWith("McFly.WinDbg.Debugger")
 select new { 
   elem,
   loc = elem.IsMethod? elem.AsMethod.NbLinesOfCode : null
@@ -9805,6 +9478,10 @@ select new {
 // These code elements are the ones matched by queries prefixed with 
 // **notmycode**.
 //</Description>]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>McFly.WinDbg.Debugger Types</Name>
+notmycode from type in Types
+where type.FullName.StartsWith("McFly.WinDbg.Debugger")
+select type]]></Query>
     </Group>
     <Group Name="Trend Metrics" Active="True" ShownInReport="False">
       <Group Name="Issues" Active="True" ShownInReport="False">
@@ -11513,4 +11190,5 @@ select new {
 //</HowToFix>]]></Query>
       </Group>
     </Group>
-  </Queries></NDepend>
+  </Queries>
+</NDepend>

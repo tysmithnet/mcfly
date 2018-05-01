@@ -24,6 +24,32 @@ answer questions like:
 1. Find most commonly used modules/functions/instructions
 1. Get statistical analysis on memory, syscalls, function calls, etc
 
+### Examples
+    # load the extension
+    .load C:\users\you\Downloads\mcfly.dll
+
+    # get help
+    !mf help
+    !mf help init
+    !mf help start
+    !mf help index
+
+    # add settings
+    !mf settings list
+    !mf settings open
+    !mf settings list
+    !mf settings reload
+    !mf settings list
+
+    # start the server
+    !mf start
+
+    # index all kernel32 calls
+    !mf index --bm kernel32!*
+
+    # index all reads/writes to abc123 through abc12b
+    !mf index --ba rw8:abc123
+
 ### Developer Notes
 This application is written for cutting edge Microsoft systems, which should be obvious based on the requirement of having the latest Windbg release.
 

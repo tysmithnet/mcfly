@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>McFly.Server.Contract</RootNamespace>
     <AssemblyName>McFly.Server.Contract</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddMemoryRequest.cs" />
-    <Compile Include="AddNoteRequest.cs" />
+    <Compile Include="AddTagRequest.cs" />
     <Compile Include="ISearchRequestVisitor.cs" />
     <Compile Include="SearchRequest.cs" />
     <Compile Include="NewProjectRequest.cs" />

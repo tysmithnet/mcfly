@@ -3,11 +3,11 @@ using Moq;
 
 namespace McFly.Server.Test.Builders
 {
-    public class NoteAccessBuilder
+    public class TagAccessBuilder
     {
-        public Mock<INoteAccess> Mock = new Mock<INoteAccess>();
+        public Mock<ITagAccess> Mock = new Mock<ITagAccess>();
 
-        public INoteAccess Build()
+        public ITagAccess Build()
         {
             return Mock.Object;
         }

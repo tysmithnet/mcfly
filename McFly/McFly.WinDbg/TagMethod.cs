@@ -4,9 +4,9 @@
 // Created          : 03-11-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-29-2018
 // ***********************************************************************
-// <copyright file="NoteMethod.cs" company="">
+// <copyright file="TagMethod.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -20,11 +20,12 @@ using System.Linq;
 namespace McFly.WinDbg
 {
     /// <summary>
-    ///     Class NoteMethod.
+    ///     McFly method for tagging frames with helpful information
     /// </summary>
+    /// <seealso cref="McFly.WinDbg.IMcFlyMethod" />
     /// <seealso cref="IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
-    internal class NoteMethod : IMcFlyMethod
+    internal sealed class TagMethod : IMcFlyMethod
     {
         /// <summary>
         ///     Processes the specified arguments.
@@ -39,7 +40,7 @@ namespace McFly.WinDbg
                 throw new NullReferenceException(nameof(args));
             if (!args.Any())
             {
-                // list notes
+                // list tags
             }
             else
             {
@@ -48,7 +49,7 @@ namespace McFly.WinDbg
                 {
                     case "add":
                         var addOptions = ExtractAddOptions(args.Skip(1));
-                        AddNote(addOptions);
+                        AddTag(addOptions);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException($"Unknown subcommand {command}");
@@ -57,21 +58,21 @@ namespace McFly.WinDbg
         }
 
         /// <summary>
-        ///     Adds the note.
+        ///     Adds the tag.
         /// </summary>
         /// <param name="addOptions">The add options.</param>
-        protected internal void AddNote(AddNoteOptions addOptions)
+        internal void AddTag(AddTagOptions addOptions)
         {
             var positions = TimeTravelFacade.Positions();
             var current = positions.CurrentThreadResult;
             if (addOptions.IsAllThreadsAtPosition) // todo: extract methods
             {
                 var threadIds = positions.Select(x => x.ThreadId);
-                ServerClient.AddNote(current.Position, threadIds, addOptions.Text);
+                ServerClient.AddTag(current.Position, threadIds, addOptions.Text);
             }
             else
             {
-                ServerClient.AddNote(current.Position, new[] {current.ThreadId}, addOptions.Text);
+                ServerClient.AddTag(current.Position, new[] {current.ThreadId}, addOptions.Text);
             }
         }
 
@@ -80,10 +81,10 @@ namespace McFly.WinDbg
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>AddNoteOptions.</returns>
-        /// <exception cref="ArgumentException">Found more than 1 note body</exception>
-        protected internal AddNoteOptions ExtractAddOptions(IEnumerable<string> args)
+        /// <exception cref="ArgumentException">Found more than 1 tag body</exception>
+        internal AddTagOptions ExtractAddOptions(IEnumerable<string> args)
         {
-            var options = new AddNoteOptions();
+            var options = new AddTagOptions();
             var arr = args.ToArray();
 
             for (var i = 0; i < arr.Length; i++)
@@ -100,7 +101,7 @@ namespace McFly.WinDbg
                         if (options.Text == null)
                             options.Text = ptr;
                         else
-                            throw new ArgumentException("Found more than 1 note body");
+                            throw new ArgumentException("Found more than 1 tag body");
                         break;
                 }
             }
@@ -120,14 +121,14 @@ namespace McFly.WinDbg
         /// </summary>
         /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder()
-            .SetName("note")
-            .SetDescription("Take notes on the trace")
+            .SetName("tag")
+            .SetDescription("Place tags on the trace")
             .AddSubcommand(new HelpInfoBuilder()
                 .SetName("add")
-                .SetDescription("Add notes")
-                .AddExample("!mf note add \"Encryption begin\"", "Adds a note to the current frame")
+                .SetDescription("Add tags")
+                .AddExample("!mf tag add \"Encryption begin\"", "Adds a tag to the current frame")
                 .Build())
-            .AddExample("!mf note", "Shows all notes on the current frame")
+            .AddExample("!mf tag", "Shows all tags on the current frame")
             .Build();
 
         /// <summary>
@@ -142,13 +143,13 @@ namespace McFly.WinDbg
         /// </summary>
         /// <value>The server client.</value>
         [Import]
-        protected internal IServerClient ServerClient { get; set; }
+        internal IServerClient ServerClient { get; set; }
 
         /// <summary>
         ///     Gets or sets the time travel facade.
         /// </summary>
         /// <value>The time travel facade.</value>
         [Import]
-        protected internal ITimeTravelFacade TimeTravelFacade { get; set; }
+        internal ITimeTravelFacade TimeTravelFacade { get; set; }
     }
 }

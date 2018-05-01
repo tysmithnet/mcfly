@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : mcfly
-// Author           : @tsmithnet
+// Author           : @tysmithnet
 // Created          : 03-02-2018
 //
-// Last Modified By : @tsmithnet
+// Last Modified By : @tysmithnet
 // Last Modified On : 04-22-2018
 // ***********************************************************************
 // <copyright file="ServerClient.cs" company="">
@@ -42,15 +42,15 @@ namespace McFly.WinDbg
         }
 
         /// <summary>
-        ///     Adds the note.
+        ///     Adds the tag.
         /// </summary>
         /// <param name="position">The position.</param>
         /// <param name="threadIds">The thread ids.</param>
         /// <param name="text">The text.</param>
-        public void AddNote(Position position, IEnumerable<int> threadIds, string text)
+        public void AddTag(Position position, IEnumerable<int> threadIds, string text)
         {
-            var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/note"};
-            var addNoteRequest = new AddNoteRequest(position, threadIds, text);
+            var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/tag"};
+            var addNoteRequest = new AddTagRequest(position, threadIds, text);
             var headers = new HttpHeaders
             {
                 ["X-Project-Name"] = Settings.ProjectName

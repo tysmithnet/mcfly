@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,6 +25,11 @@ namespace McFly.Server.Data.SqlServer
     [Table("frame")]
     internal class FrameEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id")]
+        public Guid Id { get; set; }
+
         /// <summary>
         ///     Gets or sets the brfrom.
         /// </summary>
@@ -248,15 +254,6 @@ namespace McFly.Server.Data.SqlServer
         public string Gs { get; set; }
 
         /// <summary>
-        ///     Gets or sets the frame identifier.
-        /// </summary>
-        /// <value>The frame identifier.</value>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public long Id { get; set; }
-
-        /// <summary>
         ///     Gets or sets the MM0.
         /// </summary>
         /// <value>The MM0.</value>
@@ -338,10 +335,10 @@ namespace McFly.Server.Data.SqlServer
         public string Mxcsr { get; set; }
 
         /// <summary>
-        ///     Gets or sets the notes.
+        ///     Gets or sets the tags.
         /// </summary>
-        /// <value>The notes.</value>
-        public virtual List<NoteEntity> Notes { get; set; } = new List<NoteEntity>();
+        /// <value>The tags.</value>
+        public virtual List<TagEntity> Tags { get; set; } = new List<TagEntity>();
 
         /// <summary>
         ///     Gets or sets the op code.

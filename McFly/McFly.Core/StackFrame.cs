@@ -1,10 +1,10 @@
 ﻿// ***********************************************************************
 // Assembly         : McFly.Core
-// Author           : @tsmithnet
+// Author           : @tysmithnet
 // Created          : 03-01-2018
 //
-// Last Modified By : @tsmithnet
-// Last Modified On : 04-26-2018
+// Last Modified By : @tysmithnet
+// Last Modified On : 04-29-2018
 // ***********************************************************************
 // <copyright file="StackFrame.cs" company="McFly.Core">
 //     Copyright (c) . All rights reserved.
@@ -50,6 +50,33 @@ namespace McFly.Core
         }
 
         /// <summary>
+        ///     Is this instance equal to another stack frame
+        /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if both are equal, <c>false</c> otherwise.</returns>
+        public bool Equals(StackFrame other)
+        {
+            if (other == null) return false;
+            if (ReferenceEquals(this, other)) return true;
+            var sp = StackPointer == other.StackPointer;
+            if (!sp)
+                return false;
+            var ret = ReturnAddress == other.ReturnAddress;
+            if (!ret)
+                return false;
+            var mod = string.Equals(Module, other.Module);
+            if (!mod)
+                return false;
+            var fun = string.Equals(FunctionName, other.FunctionName);
+            if (!fun)
+                return false;
+            var off = Offset == other.Offset;
+            if (!off)
+                return false;
+            return true;
+        }
+
+        /// <summary>
         ///     Returns a hash code for this instance.
         /// </summary>
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
@@ -64,21 +91,6 @@ namespace McFly.Core
                 hashCode = (hashCode * 397) ^ (int) Offset;
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        ///     Is this instance equal to another stack frame
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if both are equal, <c>false</c> otherwise.</returns>
-        protected bool Equals(StackFrame other)
-        {
-            var sp = StackPointer == other.StackPointer;
-            var ret = ReturnAddress == other.ReturnAddress;
-            var mod = string.Equals(Module, other.Module);
-            var fun = string.Equals(FunctionName, other.FunctionName);
-            var off = Offset == other.Offset;
-            return sp && ret && mod && fun && off;
         }
 
         /// <summary>

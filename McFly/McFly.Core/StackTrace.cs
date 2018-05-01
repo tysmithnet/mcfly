@@ -4,7 +4,7 @@
 // Created          : 03-17-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 04-29-2018
 // ***********************************************************************
 // <copyright file="StackTrace.cs" company="">
 //     Copyright ©  2018
@@ -21,7 +21,8 @@ namespace McFly.Core
     /// <summary>
     ///     Represents the state of a threads stack at an instance in time during the trace.
     /// </summary>
-    public sealed class StackTrace
+    /// <seealso cref="System.IEquatable{McFly.Core.StackTrace}" />
+    public sealed class StackTrace : IEquatable<StackTrace>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="StackTrace" /> class.
@@ -34,49 +35,62 @@ namespace McFly.Core
         }
 
         /// <summary>
+        ///     Determines whether the specified <see cref="StackTrace" /> is equal to this         /// </summary>
+        /// <param name="other">The other.</param>
+        /// <returns><c>true</c> if both StackTrace are equal, <c>false</c> otherwise.</returns>
+        /// <inheritdoc />
+        public bool Equals(StackTrace other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            var diffLength = StackFrames.Count != other.StackFrames.Count;
+            if (diffLength) return false;
+            for (var i = 0; i < StackFrames.Count; i++)
+            {
+                var lhs = StackFrames[i];
+                var rhs = other.StackFrames[i];
+                if (!lhs.Equals(rhs))
+                    return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
         /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        /// <inheritdoc />
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
-            return Equals((StackTrace) obj);
+            return obj is StackTrace && Equals((StackTrace) obj);
         }
 
         /// <summary>
         ///     Returns a hash code for this instance.
         /// </summary>
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        /// <inheritdoc />
         public override int GetHashCode()
         {
-            unchecked
+            int hashCode = 331;
+            if (StackFrames != null)
             {
-                var hashCode = 455627;
-                hashCode = (hashCode * 397) ^ (StackFrames != null
-                               ? StackFrames.Select(x => x.GetHashCode())
-                                   .Aggregate((l, r) => l.GetHashCode() ^ r.GetHashCode())
-                               : 0);
-                return hashCode;
+                foreach (var stackFrame in StackFrames)
+                {
+                    hashCode ^= stackFrame.GetHashCode();
+                }
             }
-        }
-
-        /// <summary>
-        ///     Determerines if this instance is equal to another
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns><c>true</c> if this instance is equal to another, <c>false</c> otherwise.</returns>
-        protected bool Equals(StackTrace other)
-        {
-            return StackFrames.SequenceEqual(other.StackFrames);
+            return hashCode;
         }
 
         /// <summary>
         ///     Gets the stack frames.
         /// </summary>
         /// <value>The stack frames.</value>
-        public IEnumerable<StackFrame> StackFrames { get; }
+        public IList<StackFrame> StackFrames { get; }
     }
 }

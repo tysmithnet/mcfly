@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : McFly.Core
-// Author           : @tsmithnet
+// Author           : @tysmithnet
 // Created          : 02-28-2018
 //
-// Last Modified By : @tsmithnet
+// Last Modified By : @tysmithnet
 // Last Modified On : 04-16-2018
 // ***********************************************************************
 // <copyright file="RegisterSet.cs" company="McFly.Core">
@@ -3226,8 +3226,9 @@ namespace McFly.Core
             {
                 if (value == null)
                     return;
-                if(value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm0h requires 16");
+                if (value.Length != 16)
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm0h requires 16");
                 if (Ymm0 == null)
                     Ymm0 = new byte[32];
 
@@ -3298,7 +3299,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm10h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm10h requires 16");
                 if (Ymm10 == null)
                     Ymm10 = new byte[32];
 
@@ -3352,7 +3354,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm11h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm11h requires 16");
                 if (Ymm11 == null)
                     Ymm11 = new byte[32];
 
@@ -3406,7 +3409,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm12h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm12h requires 16");
                 if (Ymm12 == null)
                     Ymm12 = new byte[32];
 
@@ -3460,7 +3464,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm13h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm13h requires 16");
                 if (Ymm13 == null)
                     Ymm13 = new byte[32];
 
@@ -3514,7 +3519,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm14h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm14h requires 16");
                 if (Ymm14 == null)
                     Ymm14 = new byte[32];
 
@@ -3568,7 +3574,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm15h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm15h requires 16");
                 if (Ymm15 == null)
                     Ymm15 = new byte[32];
 
@@ -3605,7 +3612,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm1h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm1h requires 16");
                 if (Ymm1 == null)
                     Ymm1 = new byte[32];
 
@@ -3659,7 +3667,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm2h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm2h requires 16");
                 if (Ymm2 == null)
                     Ymm2 = new byte[32];
 
@@ -3713,7 +3722,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm3h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm3h requires 16");
                 if (Ymm3 == null)
                     Ymm3 = new byte[32];
 
@@ -3767,7 +3777,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm4h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm4h requires 16");
                 if (Ymm4 == null)
                     Ymm4 = new byte[32];
 
@@ -3821,7 +3832,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm5h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm5h requires 16");
                 if (Ymm5 == null)
                     Ymm5 = new byte[32];
 
@@ -3875,7 +3887,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm6h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm6h requires 16");
                 if (Ymm6 == null)
                     Ymm6 = new byte[32];
 
@@ -3929,7 +3942,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm7h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm7h requires 16");
                 if (Ymm7 == null)
                     Ymm7 = new byte[32];
 
@@ -3983,7 +3997,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm8h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm8h requires 16");
                 if (Ymm8 == null)
                     Ymm8 = new byte[32];
 
@@ -4037,7 +4052,8 @@ namespace McFly.Core
                 if (value == null)
                     return;
                 if (value.Length != 16)
-                    throw new ArgumentOutOfRangeException($"{nameof(value)} has {value.Length} bytes, but Ymm9h requires 16");
+                    throw new ArgumentOutOfRangeException(
+                        $"{nameof(value)} has {value.Length} bytes, but Ymm9h requires 16");
                 if (Ymm9 == null)
                     Ymm9 = new byte[32];
 

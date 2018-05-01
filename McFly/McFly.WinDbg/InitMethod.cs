@@ -50,7 +50,8 @@ namespace McFly.WinDbg
         /// </exception>
         internal InitOptions ExtractOptions(string[] args)
         {
-            if (args == null) throw new ArgumentNullException(nameof(args));
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
             if (args.Length != 2)
                 throw new ArgumentOutOfRangeException(nameof(args),
                     "InitMethod expects exactly 2 arguments, the --name switch and the value");

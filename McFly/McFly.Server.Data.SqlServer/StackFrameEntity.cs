@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,7 +31,7 @@ namespace McFly.Server.Data.SqlServer
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
-        public long Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         ///     Gets or sets the stack pointer.
@@ -69,14 +70,16 @@ namespace McFly.Server.Data.SqlServer
         /// </summary>
         /// <value>The offset.</value>
         [Column("offset")]
-        public long? Offset { get; set; }
+        [MinLength(16)]
+        [MaxLength(16)]
+        public string Offset { get; set; }
 
         /// <summary>
         ///     Gets or sets the frame identifier.
         /// </summary>
         /// <value>The frame identifier.</value>
         [Column("frame_id")]
-        public long FrameId { get; set; }
+        public Guid FrameId { get; set; }
 
         /// <summary>
         ///     Gets or sets the frame.

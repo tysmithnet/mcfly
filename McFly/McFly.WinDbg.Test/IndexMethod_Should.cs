@@ -2,7 +2,6 @@
 using System.Linq;
 using FluentAssertions;
 using McFly.Core;
-using McFly.WinDbg;
 using McFly.WinDbg.Test.Builders;
 using Moq;
 using Xunit;
@@ -11,7 +10,6 @@ namespace McFly.WinDbg.Test
 {
     public class IndexMethod_Should
     {
-
         [Fact]
         public void Identify_32_And_64_Bit_Arch()
         {
@@ -31,7 +29,7 @@ namespace McFly.WinDbg.Test
             var is32 = indexMethod.Is32Bit();
 
             // Assert
-            AssertionExtensions.Should((bool) is32).BeFalse("00000000003b9000 is 16 characters and thus 64bit");
+            is32.Should().BeFalse("00000000003b9000 is 16 characters and thus 64bit");
         }
 
         [Fact]
@@ -113,7 +111,7 @@ namespace McFly.WinDbg.Test
 
             // act
             // assert
-            AssertionExtensions.Should((object) index.ExtractIndexOptions(args0)).Be(options0);
+            index.ExtractIndexOptions(args0).Should().Be(options0);
         }
 
         [Fact]
@@ -125,12 +123,14 @@ namespace McFly.WinDbg.Test
             {
                 AccessBreakpoints = new[]
                 {
-                    AccessBreakpoint.Parse("r8:100"), AccessBreakpoint.Parse("w8:200"),
+                    AccessBreakpoint.Parse("r8:100"),
+                    AccessBreakpoint.Parse("w8:200"),
                     AccessBreakpoint.Parse("rw4:300")
                 },
                 BreakpointMasks = new[]
                 {
-                    BreakpointMask.Parse("kernel32!createprocess*"), BreakpointMask.Parse("user32!*"),
+                    BreakpointMask.Parse("kernel32!createprocess*"),
+                    BreakpointMask.Parse("user32!*"),
                     BreakpointMask.Parse("mycustommod!myfancyfunction")
                 }
             };
@@ -181,7 +181,8 @@ namespace McFly.WinDbg.Test
                 BreakpointFacade = bpFacade
             };
 
-            indexMethod.ProcessInternal(new Position(0, 0), MockFrames.SingleThreaded0.Max(x => x.Position), new IndexOptions());
+            indexMethod.ProcessInternal(new Position(0, 0), MockFrames.SingleThreaded0.Max(x => x.Position),
+                new IndexOptions());
             sc.Mock.Verify(client =>
                 client.UpsertFrames(
                     It.Is<IEnumerable<Frame>>(frames => frames.SequenceEqual(MockFrames.SingleThreaded0))));

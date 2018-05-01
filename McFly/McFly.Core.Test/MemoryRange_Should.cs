@@ -41,7 +41,7 @@ namespace McFly.Core.Test
             (m4 > m3).Should().BeTrue();
             (m5 >= m4).Should().BeTrue();
             m1.CompareTo((object) m1).Should().Be(0);
-            m1.CompareTo((object)null).Should().Be(1);
+            m1.CompareTo((object) null).Should().Be(1);
             m1.CompareTo(null).Should().Be(1);
             Action a = () => m1.CompareTo(new object());
             a.Should().Throw<ArgumentException>();
@@ -52,12 +52,6 @@ namespace McFly.Core.Test
         {
             new MemoryRange(0x123, 0xabc).ToString().Should().Be("123:ABC");
             new MemoryRange(0x123, 0xabc).DebuggerDisplay.Should().Be("123:ABC");
-        }
-
-        [Fact]
-        public void Return_The_Correct_Length()
-        {
-            new MemoryRange(0x10, 0x50).Length.Should().Be(0x40);
         }
 
         [Fact]
@@ -104,6 +98,12 @@ namespace McFly.Core.Test
             MemoryRange.Parse(s1).Should().Be(new MemoryRange(0xabc, 0xdef));
 
             // todo: make some 32 
+        }
+
+        [Fact]
+        public void Return_The_Correct_Length()
+        {
+            new MemoryRange(0x10, 0x50).Length.Should().Be(0x40);
         }
     }
 }

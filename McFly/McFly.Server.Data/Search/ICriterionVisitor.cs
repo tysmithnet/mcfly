@@ -20,11 +20,15 @@ namespace McFly.Server.Data.Search
     /// </summary>
     public interface ICriterionVisitor
     {
-        /// <summary>
-        ///     Visits the specified criterion.
-        /// </summary>
-        /// <param name="criterion">The criterion.</param>
-        /// <returns>System.Object.</returns>
-        object Visit(ICriterion criterion);
+        object Visit(AndCriterion andCriterion);
+        object Visit(NotCriterion notCriterion);
+        object Visit(TagCreatedAfterCriterion tagCreatedAfterCriterion);
+        object Visit(TagCreatedBeforeCriterion tagCreatedBeforeCriterion);
+        object Visit(TagCreatedBetweenCriterion tagCreatedBetweenCriterion);
+        object Visit(TagTextContainsCriterion tagTextContainsCriterion);
+        object Visit(OrCriterion orCriterion);
+        object Visit(RegisterBetweenCriterion registerBetweenCriterion);
+        object Visit(RegisterEqualsCriterion registerEqualsCriterion);
+        object Visit(RegisterInCriterion registerInCriterion);
     }
 }

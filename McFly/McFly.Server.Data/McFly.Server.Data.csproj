@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>McFly.Server.Data</RootNamespace>
     <AssemblyName>McFly.Server.Data</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -118,18 +119,18 @@
   <ItemGroup>
     <Compile Include="IFrameAccess.cs" />
     <Compile Include="IMemoryAccess.cs" />
-    <Compile Include="INoteAccess.cs" />
+    <Compile Include="ITagAccess.cs" />
     <Compile Include="IProjectsAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search\AndCriterion.cs" />
     <Compile Include="Search\ICriterion.cs" />
     <Compile Include="Search\ICriterionVisitor.cs" />
     <Compile Include="Search\NotCriterion.cs" />
-    <Compile Include="Search\NoteCreatedAfterCriterion.cs" />
-    <Compile Include="Search\NoteCreatedBeforeCriterion.cs" />
-    <Compile Include="Search\NoteCreatedBetweenCriterion.cs" />
-    <Compile Include="Search\NoteCriterion.cs" />
-    <Compile Include="Search\NoteTextContainsCriterion.cs" />
+    <Compile Include="Search\TagCreatedAfterCriterion.cs" />
+    <Compile Include="Search\TagCreatedBeforeCriterion.cs" />
+    <Compile Include="Search\TagCreatedBetweenCriterion.cs" />
+    <Compile Include="Search\TagCriterion.cs" />
+    <Compile Include="Search\TagTextContainsCriterion.cs" />
     <Compile Include="Search\OrCriterion.cs" />
     <Compile Include="Search\RegisterBetweenCriterion.cs" />
     <Compile Include="Search\RegisterCriterion.cs" />

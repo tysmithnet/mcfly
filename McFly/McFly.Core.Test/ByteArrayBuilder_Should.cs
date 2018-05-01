@@ -25,6 +25,15 @@ namespace McFly.Core.Test
         }
 
         [Fact]
+        public void Reverse_Correctly()
+        {
+            var builder = new ByteArrayBuilder();
+
+            builder.AppdendHexString("123456").Reverse().Build().SequenceEqual(new byte[] {0x56, 0x34, 0x12}).Should()
+                .BeTrue();
+        }
+
+        [Fact]
         public void Throw_If_Bad_Input()
         {
             // arrange
@@ -36,14 +45,6 @@ namespace McFly.Core.Test
             // assert
             badInput.Should().Throw<FormatException>("Only hex characters and x are allowed");
             wrongLength.Should().Throw<FormatException>("Bytes must all come in pairs");
-        }
-
-        [Fact]
-        public void Reverse_Correctly()
-        {
-            var builder = new ByteArrayBuilder();
-
-            builder.AppdendHexString("123456").Reverse().Build().SequenceEqual(new byte[] { 0x56, 0x34, 0x12 }).Should().BeTrue();
         }
     }
 }

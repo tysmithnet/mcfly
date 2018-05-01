@@ -32,12 +32,12 @@ namespace McFly.WinDbg
         void AddMemoryRange(MemoryChunk memoryChunk);
 
         /// <summary>
-        ///     Adds a note to the threads provided at the specified position
+        ///     Adds a tag to the threads provided at the specified position
         /// </summary>
         /// <param name="position">The position.</param>
         /// <param name="threadIds">The thread ids.</param>
         /// <param name="text">The text.</param>
-        void AddNote(Position position, IEnumerable<int> threadIds, string text);
+        void AddTag(Position position, IEnumerable<int> threadIds, string text);
 
         /// <summary>
         ///     Initializes the project.

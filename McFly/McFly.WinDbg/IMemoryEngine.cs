@@ -28,6 +28,6 @@ namespace McFly.WinDbg
         /// <param name="high">The high memory address of the range</param>
         /// <param name="dataSpaces">The data spaces COM interface allowing access to the memory</param>
         /// <returns>System.Byte[].</returns>
-        byte[] ReadMemory(ulong low, ulong high, IDebugDataSpaces dataSpaces);
+        byte[] ReadMemory(ulong low, ulong high, IDebugDataSpaces dataSpaces); // todo: should this be something different? How do we know we will always only need IDebugDataSpaces?
     }
 }

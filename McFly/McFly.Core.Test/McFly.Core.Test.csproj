@@ -10,10 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>McFly.Core.Test</RootNamespace>
     <AssemblyName>McFly.Core.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -74,6 +75,7 @@
     <Compile Include="ByteArrayBuilder_Should.cs" />
     <Compile Include="DisassemblyLine_Should.cs" />
     <Compile Include="Frame_Should.cs" />
+    <Compile Include="MemoryChunk_Should.cs" />
     <Compile Include="MemoryRange_Should.cs" />
     <Compile Include="Position_Should.cs" />
     <Compile Include="PrimitiveExtensions_Should.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Register_Should.cs" />
     <Compile Include="StackFrame_Should.cs" />
     <Compile Include="StackTrace_Should.cs" />
+    <Compile Include="Tag_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\McFly.Core\McFly.Core.csproj">

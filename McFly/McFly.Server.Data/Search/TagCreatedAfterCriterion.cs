@@ -6,7 +6,7 @@
 // Last Modified By : @tysmithnet
 // Last Modified On : 04-26-2018
 // ***********************************************************************
-// <copyright file="NoteTextContainsCriterion.cs" company="">
+// <copyright file="TagCreatedAfterCriterion.cs" company="">
 //     Copyright ©  2018
 // </copyright>
 // <summary></summary>
@@ -17,19 +17,18 @@ using System;
 namespace McFly.Server.Data.Search
 {
     /// <summary>
-    ///     Search criterion for notes that contain some substring
+    ///     Search criterion for tags that were created after a certain point in time
     /// </summary>
-    /// <seealso cref="McFly.Server.Data.Search.NoteCriterion" />
-    public sealed class NoteTextContainsCriterion : NoteCriterion
+    /// <seealso cref="TagCriterion" />
+    public sealed class TagCreatedAfterCriterion : TagCriterion
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="NoteTextContainsCriterion" /> class.
+        ///     Initializes a new instance of the <see cref="TagCreatedAfterCriterion" /> class.
         /// </summary>
-        /// <param name="substring">The substring to look for.</param>
-        /// <exception cref="ArgumentNullException">substring</exception>
-        public NoteTextContainsCriterion(string substring)
+        /// <param name="dateTime">The date time.</param>
+        public TagCreatedAfterCriterion(DateTime dateTime)
         {
-            Substring = substring ?? throw new ArgumentNullException(nameof(substring));
+            DateTime = dateTime;
         }
 
         /// <summary>
@@ -43,9 +42,9 @@ namespace McFly.Server.Data.Search
         }
 
         /// <summary>
-        ///     The text to look for
+        ///     Gets the date time.
         /// </summary>
-        /// <value>The substring.</value>
-        public string Substring { get; }
+        /// <value>The date time.</value>
+        public DateTime DateTime { get; }
     }
 }

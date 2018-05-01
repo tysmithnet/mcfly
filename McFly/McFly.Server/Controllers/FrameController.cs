@@ -1,9 +1,9 @@
 ﻿// ***********************************************************************
 // Assembly         : McFly.Server
-// Author           : @tsmithnet
+// Author           : @tysmithnet
 // Created          : 03-03-2018
 //
-// Last Modified By : @tsmithnet
+// Last Modified By : @tysmithnet
 // Last Modified On : 04-26-2018
 // ***********************************************************************
 // <copyright file="FrameController.cs" company="McFly.Server">

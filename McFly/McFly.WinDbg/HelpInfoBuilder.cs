@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -90,6 +91,10 @@ namespace McFly.WinDbg
         /// <returns>HelpInfo.</returns>
         public HelpInfo Build()
         {
+            if(_info.Name == null)
+                throw new NullReferenceException($"HelpInfo requires a Name be provided");
+            if(_info.Description == null)
+                throw new NullReferenceException($"HelpInfo requires a Description be provided");
             return new HelpInfo(_info.Name, _info.Description, _info.Switches, _info.Examples, _info.Subcommands);
         }
 

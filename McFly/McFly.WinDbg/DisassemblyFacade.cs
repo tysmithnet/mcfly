@@ -26,7 +26,7 @@ namespace McFly.WinDbg
     /// </summary>
     /// <seealso cref="IDisassemblyFacade" />
     [Export(typeof(IDisassemblyFacade))]
-    internal class DisassemblyFacade : IDisassemblyFacade
+    internal sealed class DisassemblyFacade : IDisassemblyFacade
     {
         /// <summary>
         ///     Di

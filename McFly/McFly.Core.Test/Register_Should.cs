@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using McFly.Core.Registers;
 using Xunit;
 
@@ -12,9 +7,236 @@ namespace McFly.Core.Test
     public class Register_Should
     {
         [Fact]
-        public void Not_Have_Duplicates()
+        public void Have_Correct_Register_Num_Bits()
         {
-            Register.X64.Should().OnlyHaveUniqueItems();
+            Register.Rax.NumBits.Should().Be(64);
+            Register.Rbx.NumBits.Should().Be(64);
+            Register.Rcx.NumBits.Should().Be(64);
+            Register.Rdx.NumBits.Should().Be(64);
+            Register.Rsi.NumBits.Should().Be(64);
+            Register.Rdi.NumBits.Should().Be(64);
+            Register.Rsp.NumBits.Should().Be(64);
+            Register.Rbp.NumBits.Should().Be(64);
+            Register.Rip.NumBits.Should().Be(64);
+
+            Register.Efl.NumBits.Should().Be(32);
+
+            Register.Cs.NumBits.Should().Be(16);
+            Register.Ds.NumBits.Should().Be(16);
+            Register.Es.NumBits.Should().Be(16);
+            Register.Fs.NumBits.Should().Be(16);
+            Register.Gs.NumBits.Should().Be(16);
+            Register.Ss.NumBits.Should().Be(16);
+
+            Register.R8.NumBits.Should().Be(64);
+            Register.R9.NumBits.Should().Be(64);
+            Register.R10.NumBits.Should().Be(64);
+            Register.R11.NumBits.Should().Be(64);
+            Register.R12.NumBits.Should().Be(64);
+            Register.R13.NumBits.Should().Be(64);
+            Register.R14.NumBits.Should().Be(64);
+            Register.R15.NumBits.Should().Be(64);
+
+            Register.Dr0.NumBits.Should().Be(64);
+            Register.Dr1.NumBits.Should().Be(64);
+            Register.Dr2.NumBits.Should().Be(64);
+            Register.Dr3.NumBits.Should().Be(64);
+            Register.Dr6.NumBits.Should().Be(64);
+            Register.Dr7.NumBits.Should().Be(64);
+
+            Register.Exfrom.NumBits.Should().Be(64);
+            Register.Exto.NumBits.Should().Be(64);
+            Register.Brfrom.NumBits.Should().Be(64);
+            Register.Brto.NumBits.Should().Be(64);
+
+            Register.Eax.NumBits.Should().Be(32);
+            Register.Ecx.NumBits.Should().Be(32);
+            Register.Edx.NumBits.Should().Be(32);
+            Register.Ebx.NumBits.Should().Be(32);
+            Register.Esp.NumBits.Should().Be(32);
+            Register.Ebp.NumBits.Should().Be(32);
+            Register.Esi.NumBits.Should().Be(32);
+            Register.Edi.NumBits.Should().Be(32);
+
+            Register.R8d.NumBits.Should().Be(32);
+            Register.R9d.NumBits.Should().Be(32);
+            Register.R10d.NumBits.Should().Be(32);
+            Register.R11d.NumBits.Should().Be(32);
+            Register.R12d.NumBits.Should().Be(32);
+            Register.R13d.NumBits.Should().Be(32);
+            Register.R14d.NumBits.Should().Be(32);
+            Register.R15d.NumBits.Should().Be(32);
+            Register.Eip.NumBits.Should().Be(32);
+
+            Register.Ax.NumBits.Should().Be(16);
+            Register.Bx.NumBits.Should().Be(16);
+            Register.Cx.NumBits.Should().Be(16);
+            Register.Dx.NumBits.Should().Be(16);
+            Register.Si.NumBits.Should().Be(16);
+            Register.Di.NumBits.Should().Be(16);
+            Register.Sp.NumBits.Should().Be(16);
+            Register.Bp.NumBits.Should().Be(16);
+
+            Register.R8w.NumBits.Should().Be(16);
+            Register.R9w.NumBits.Should().Be(16);
+            Register.R10w.NumBits.Should().Be(16);
+            Register.R11w.NumBits.Should().Be(16);
+            Register.R12w.NumBits.Should().Be(16);
+            Register.R13w.NumBits.Should().Be(16);
+            Register.R14w.NumBits.Should().Be(16);
+            Register.R15w.NumBits.Should().Be(16);
+
+            Register.Ip.NumBits.Should().Be(16);
+            Register.Fl.NumBits.Should().Be(16);
+
+            Register.Al.NumBits.Should().Be(8);
+            Register.Cl.NumBits.Should().Be(8);
+            Register.Dl.NumBits.Should().Be(8);
+            Register.Bl.NumBits.Should().Be(8);
+            Register.Spl.NumBits.Should().Be(8);
+            Register.Bpl.NumBits.Should().Be(8);
+            Register.Sil.NumBits.Should().Be(8);
+            Register.Dil.NumBits.Should().Be(8);
+
+            Register.R8b.NumBits.Should().Be(8);
+            Register.R9b.NumBits.Should().Be(8);
+            Register.R10b.NumBits.Should().Be(8);
+            Register.R11b.NumBits.Should().Be(8);
+            Register.R12b.NumBits.Should().Be(8);
+            Register.R13b.NumBits.Should().Be(8);
+            Register.R14b.NumBits.Should().Be(8);
+            Register.R15b.NumBits.Should().Be(8);
+
+            Register.Ah.NumBits.Should().Be(8);
+            Register.Ch.NumBits.Should().Be(8);
+            Register.Dh.NumBits.Should().Be(8);
+            Register.Bh.NumBits.Should().Be(8);
+
+            Register.Iopl.NumBits.Should().Be(2);
+            Register.Of.NumBits.Should().Be(1);
+            Register.Df.NumBits.Should().Be(1);
+            Register.If.NumBits.Should().Be(1);
+            Register.Tf.NumBits.Should().Be(1);
+            Register.Sf.NumBits.Should().Be(1);
+            Register.Zf.NumBits.Should().Be(1);
+            Register.Af.NumBits.Should().Be(1);
+            Register.Pf.NumBits.Should().Be(1);
+            Register.Cf.NumBits.Should().Be(1);
+            Register.Vip.NumBits.Should().Be(1);
+            Register.Vif.NumBits.Should().Be(1);
+
+            Register.Mm0.NumBits.Should().Be(64);
+            Register.Mm1.NumBits.Should().Be(64);
+            Register.Mm2.NumBits.Should().Be(64);
+            Register.Mm3.NumBits.Should().Be(64);
+            Register.Mm4.NumBits.Should().Be(64);
+            Register.Mm5.NumBits.Should().Be(64);
+            Register.Mm6.NumBits.Should().Be(64);
+            Register.Mm7.NumBits.Should().Be(64);
+
+            Register.Mxcsr.NumBits.Should().Be(32);
+
+            Register.Xmm0.NumBits.Should().Be(128);
+            Register.Xmm1.NumBits.Should().Be(128);
+            Register.Xmm2.NumBits.Should().Be(128);
+            Register.Xmm3.NumBits.Should().Be(128);
+            Register.Xmm4.NumBits.Should().Be(128);
+            Register.Xmm5.NumBits.Should().Be(128);
+            Register.Xmm6.NumBits.Should().Be(128);
+            Register.Xmm7.NumBits.Should().Be(128);
+            Register.Xmm8.NumBits.Should().Be(128);
+            Register.Xmm9.NumBits.Should().Be(128);
+            Register.Xmm10.NumBits.Should().Be(128);
+            Register.Xmm11.NumBits.Should().Be(128);
+            Register.Xmm12.NumBits.Should().Be(128);
+            Register.Xmm13.NumBits.Should().Be(128);
+            Register.Xmm14.NumBits.Should().Be(128);
+            Register.Xmm15.NumBits.Should().Be(128);
+
+            Register.Ymm0.NumBits.Should().Be(256);
+            Register.Ymm1.NumBits.Should().Be(256);
+            Register.Ymm2.NumBits.Should().Be(256);
+            Register.Ymm3.NumBits.Should().Be(256);
+            Register.Ymm4.NumBits.Should().Be(256);
+            Register.Ymm5.NumBits.Should().Be(256);
+            Register.Ymm6.NumBits.Should().Be(256);
+            Register.Ymm7.NumBits.Should().Be(256);
+            Register.Ymm8.NumBits.Should().Be(256);
+            Register.Ymm9.NumBits.Should().Be(256);
+            Register.Ymm10.NumBits.Should().Be(256);
+            Register.Ymm11.NumBits.Should().Be(256);
+            Register.Ymm12.NumBits.Should().Be(256);
+            Register.Ymm13.NumBits.Should().Be(256);
+            Register.Ymm14.NumBits.Should().Be(256);
+            Register.Ymm15.NumBits.Should().Be(256);
+
+            Register.Xmm0l.NumBits.Should().Be(64);
+            Register.Xmm1l.NumBits.Should().Be(64);
+            Register.Xmm2l.NumBits.Should().Be(64);
+            Register.Xmm3l.NumBits.Should().Be(64);
+            Register.Xmm4l.NumBits.Should().Be(64);
+            Register.Xmm5l.NumBits.Should().Be(64);
+            Register.Xmm6l.NumBits.Should().Be(64);
+            Register.Xmm7l.NumBits.Should().Be(64);
+            Register.Xmm8l.NumBits.Should().Be(64);
+            Register.Xmm9l.NumBits.Should().Be(64);
+            Register.Xmm10l.NumBits.Should().Be(64);
+            Register.Xmm11l.NumBits.Should().Be(64);
+            Register.Xmm12l.NumBits.Should().Be(64);
+            Register.Xmm13l.NumBits.Should().Be(64);
+            Register.Xmm14l.NumBits.Should().Be(64);
+            Register.Xmm15l.NumBits.Should().Be(64);
+
+            Register.Ymm0h.NumBits.Should().Be(128);
+            Register.Ymm1h.NumBits.Should().Be(128);
+            Register.Ymm2h.NumBits.Should().Be(128);
+            Register.Ymm3h.NumBits.Should().Be(128);
+            Register.Ymm4h.NumBits.Should().Be(128);
+            Register.Ymm5h.NumBits.Should().Be(128);
+            Register.Ymm6h.NumBits.Should().Be(128);
+            Register.Ymm7h.NumBits.Should().Be(128);
+            Register.Ymm8h.NumBits.Should().Be(128);
+            Register.Ymm9h.NumBits.Should().Be(128);
+            Register.Ymm10h.NumBits.Should().Be(128);
+            Register.Ymm11h.NumBits.Should().Be(128);
+            Register.Ymm12h.NumBits.Should().Be(128);
+            Register.Ymm13h.NumBits.Should().Be(128);
+            Register.Ymm14h.NumBits.Should().Be(128);
+            Register.Ymm15h.NumBits.Should().Be(128);
+
+            Register.Ymm0l.NumBits.Should().Be(128);
+            Register.Ymm1l.NumBits.Should().Be(128);
+            Register.Ymm2l.NumBits.Should().Be(128);
+            Register.Ymm3l.NumBits.Should().Be(128);
+            Register.Ymm4l.NumBits.Should().Be(128);
+            Register.Ymm5l.NumBits.Should().Be(128);
+            Register.Ymm6l.NumBits.Should().Be(128);
+            Register.Ymm7l.NumBits.Should().Be(128);
+            Register.Ymm8l.NumBits.Should().Be(128);
+            Register.Ymm9l.NumBits.Should().Be(128);
+            Register.Ymm10l.NumBits.Should().Be(128);
+            Register.Ymm11l.NumBits.Should().Be(128);
+            Register.Ymm12l.NumBits.Should().Be(128);
+            Register.Ymm13l.NumBits.Should().Be(128);
+            Register.Ymm14l.NumBits.Should().Be(128);
+            Register.Ymm15l.NumBits.Should().Be(128);
+
+            Register.Fpcw.NumBits.Should().Be(16);
+            Register.Fpsw.NumBits.Should().Be(16);
+            Register.Fptw.NumBits.Should().Be(16);
+            Register.Fopcode.NumBits.Should().Be(16);
+            Register.Fpip.NumBits.Should().Be(32);
+            Register.Fpdp.NumBits.Should().Be(32);
+            Register.Fpipsel.NumBits.Should().Be(32);
+            Register.Fpdpsel.NumBits.Should().Be(32);
+            Register.St0.NumBits.Should().Be(80);
+            Register.St1.NumBits.Should().Be(80);
+            Register.St2.NumBits.Should().Be(80);
+            Register.St3.NumBits.Should().Be(80);
+            Register.St4.NumBits.Should().Be(80);
+            Register.St5.NumBits.Should().Be(80);
+            Register.St6.NumBits.Should().Be(80);
+            Register.St7.NumBits.Should().Be(80);
         }
 
         [Fact]
@@ -197,6 +419,23 @@ namespace McFly.Core.Test
             Register.Xmm14l.Name.Should().Be("xmm14l");
             Register.Xmm15l.Name.Should().Be("xmm15l");
 
+            Register.Ymm0h.Name.Should().Be("ymm0h");
+            Register.Ymm1h.Name.Should().Be("ymm1h");
+            Register.Ymm2h.Name.Should().Be("ymm2h");
+            Register.Ymm3h.Name.Should().Be("ymm3h");
+            Register.Ymm4h.Name.Should().Be("ymm4h");
+            Register.Ymm5h.Name.Should().Be("ymm5h");
+            Register.Ymm6h.Name.Should().Be("ymm6h");
+            Register.Ymm7h.Name.Should().Be("ymm7h");
+            Register.Ymm8h.Name.Should().Be("ymm8h");
+            Register.Ymm9h.Name.Should().Be("ymm9h");
+            Register.Ymm10h.Name.Should().Be("ymm10h");
+            Register.Ymm11h.Name.Should().Be("ymm11h");
+            Register.Ymm12h.Name.Should().Be("ymm12h");
+            Register.Ymm13h.Name.Should().Be("ymm13h");
+            Register.Ymm14h.Name.Should().Be("ymm14h");
+            Register.Ymm15h.Name.Should().Be("ymm15h");
+
             Register.Ymm0l.Name.Should().Be("ymm0l");
             Register.Ymm1l.Name.Should().Be("ymm1l");
             Register.Ymm2l.Name.Should().Be("ymm2l");
@@ -228,219 +467,9 @@ namespace McFly.Core.Test
         }
 
         [Fact]
-        public void Have_Correct_Register_Num_Bits()
+        public void Not_Have_Duplicates()
         {
-            Register.Rax.NumBits.Should().Be(64);
-            Register.Rbx.NumBits.Should().Be(64);
-            Register.Rcx.NumBits.Should().Be(64);
-            Register.Rdx.NumBits.Should().Be(64);
-            Register.Rsi.NumBits.Should().Be(64);
-            Register.Rdi.NumBits.Should().Be(64);
-            Register.Rsp.NumBits.Should().Be(64);
-            Register.Rbp.NumBits.Should().Be(64);
-            Register.Rip.NumBits.Should().Be(64);
-
-            Register.Efl.NumBits.Should().Be(32);
-
-            Register.Cs.NumBits.Should().Be(16);
-            Register.Ds.NumBits.Should().Be(16);
-            Register.Es.NumBits.Should().Be(16);
-            Register.Fs.NumBits.Should().Be(16);
-            Register.Gs.NumBits.Should().Be(16);
-            Register.Ss.NumBits.Should().Be(16);
-
-            Register.R8.NumBits.Should().Be(64);
-            Register.R9.NumBits.Should().Be(64);
-            Register.R10.NumBits.Should().Be(64);
-            Register.R11.NumBits.Should().Be(64);
-            Register.R12.NumBits.Should().Be(64);
-            Register.R13.NumBits.Should().Be(64);
-            Register.R14.NumBits.Should().Be(64);
-            Register.R15.NumBits.Should().Be(64);
-
-            Register.Dr0.NumBits.Should().Be(64);
-            Register.Dr1.NumBits.Should().Be(64);
-            Register.Dr2.NumBits.Should().Be(64);
-            Register.Dr3.NumBits.Should().Be(64);
-            Register.Dr6.NumBits.Should().Be(64);
-            Register.Dr7.NumBits.Should().Be(64);
-
-            Register.Exfrom.NumBits.Should().Be(64);
-            Register.Exto.NumBits.Should().Be(64);
-            Register.Brfrom.NumBits.Should().Be(64);
-            Register.Brto.NumBits.Should().Be(64);
-
-            Register.Eax.NumBits.Should().Be(32);
-            Register.Ecx.NumBits.Should().Be(32);
-            Register.Edx.NumBits.Should().Be(32);
-            Register.Ebx.NumBits.Should().Be(32);
-            Register.Esp.NumBits.Should().Be(32);
-            Register.Ebp.NumBits.Should().Be(32);
-            Register.Esi.NumBits.Should().Be(32);
-            Register.Edi.NumBits.Should().Be(32);
-
-            Register.R8d.NumBits.Should().Be(32);
-            Register.R9d.NumBits.Should().Be(32);
-            Register.R10d.NumBits.Should().Be(32);
-            Register.R11d.NumBits.Should().Be(32);
-            Register.R12d.NumBits.Should().Be(32);
-            Register.R13d.NumBits.Should().Be(32);
-            Register.R14d.NumBits.Should().Be(32);
-            Register.R15d.NumBits.Should().Be(32);
-            Register.Eip.NumBits.Should().Be(32);
-
-            Register.Ax.NumBits.Should().Be(16);
-            Register.Bx.NumBits.Should().Be(16);
-            Register.Cx.NumBits.Should().Be(16);
-            Register.Dx.NumBits.Should().Be(16);
-            Register.Si.NumBits.Should().Be(16);
-            Register.Di.NumBits.Should().Be(16);
-            Register.Sp.NumBits.Should().Be(16);
-            Register.Bp.NumBits.Should().Be(16);
-
-            Register.R8w.NumBits.Should().Be(16);
-            Register.R9w.NumBits.Should().Be(16);
-            Register.R10w.NumBits.Should().Be(16);
-            Register.R11w.NumBits.Should().Be(16);
-            Register.R12w.NumBits.Should().Be(16);
-            Register.R13w.NumBits.Should().Be(16);
-            Register.R14w.NumBits.Should().Be(16);
-            Register.R15w.NumBits.Should().Be(16);
-
-            Register.Ip.NumBits.Should().Be(16);
-            Register.Fl.NumBits.Should().Be(16);
-
-            Register.Al.NumBits.Should().Be(8);
-            Register.Cl.NumBits.Should().Be(8);
-            Register.Dl.NumBits.Should().Be(8);
-            Register.Bl.NumBits.Should().Be(8);
-            Register.Spl.NumBits.Should().Be(8);
-            Register.Bpl.NumBits.Should().Be(8);
-            Register.Sil.NumBits.Should().Be(8);
-            Register.Dil.NumBits.Should().Be(8);
-
-            Register.R8b.NumBits.Should().Be(8);
-            Register.R9b.NumBits.Should().Be(8);
-            Register.R10b.NumBits.Should().Be(8);
-            Register.R11b.NumBits.Should().Be(8);
-            Register.R12b.NumBits.Should().Be(8);
-            Register.R13b.NumBits.Should().Be(8);
-            Register.R14b.NumBits.Should().Be(8);
-            Register.R15b.NumBits.Should().Be(8);
-
-            Register.Ah.NumBits.Should().Be(8);
-            Register.Ch.NumBits.Should().Be(8);
-            Register.Dh.NumBits.Should().Be(8);
-            Register.Bh.NumBits.Should().Be(8);
-
-            Register.Iopl.NumBits.Should().Be(2);
-            Register.Of.NumBits.Should().Be(1);
-            Register.Df.NumBits.Should().Be(1);
-            Register.If.NumBits.Should().Be(1);
-            Register.Tf.NumBits.Should().Be(1);
-            Register.Sf.NumBits.Should().Be(1);
-            Register.Zf.NumBits.Should().Be(1);
-            Register.Af.NumBits.Should().Be(1);
-            Register.Pf.NumBits.Should().Be(1);
-            Register.Cf.NumBits.Should().Be(1);
-            Register.Vip.NumBits.Should().Be(1);
-            Register.Vif.NumBits.Should().Be(1);
-
-            Register.Mm0.NumBits.Should().Be(64);
-            Register.Mm1.NumBits.Should().Be(64);
-            Register.Mm2.NumBits.Should().Be(64);
-            Register.Mm3.NumBits.Should().Be(64);
-            Register.Mm4.NumBits.Should().Be(64);
-            Register.Mm5.NumBits.Should().Be(64);
-            Register.Mm6.NumBits.Should().Be(64);
-            Register.Mm7.NumBits.Should().Be(64);
-
-            Register.Mxcsr.NumBits.Should().Be(32);
-
-            Register.Xmm0.NumBits.Should().Be(128);
-            Register.Xmm1.NumBits.Should().Be(128);
-            Register.Xmm2.NumBits.Should().Be(128);
-            Register.Xmm3.NumBits.Should().Be(128);
-            Register.Xmm4.NumBits.Should().Be(128);
-            Register.Xmm5.NumBits.Should().Be(128);
-            Register.Xmm6.NumBits.Should().Be(128);
-            Register.Xmm7.NumBits.Should().Be(128);
-            Register.Xmm8.NumBits.Should().Be(128);
-            Register.Xmm9.NumBits.Should().Be(128);
-            Register.Xmm10.NumBits.Should().Be(128);
-            Register.Xmm11.NumBits.Should().Be(128);
-            Register.Xmm12.NumBits.Should().Be(128);
-            Register.Xmm13.NumBits.Should().Be(128);
-            Register.Xmm14.NumBits.Should().Be(128);
-            Register.Xmm15.NumBits.Should().Be(128);
-
-            Register.Ymm0.NumBits.Should().Be(256);
-            Register.Ymm1.NumBits.Should().Be(256);
-            Register.Ymm2.NumBits.Should().Be(256);
-            Register.Ymm3.NumBits.Should().Be(256);
-            Register.Ymm4.NumBits.Should().Be(256);
-            Register.Ymm5.NumBits.Should().Be(256);
-            Register.Ymm6.NumBits.Should().Be(256);
-            Register.Ymm7.NumBits.Should().Be(256);
-            Register.Ymm8.NumBits.Should().Be(256);
-            Register.Ymm9.NumBits.Should().Be(256);
-            Register.Ymm10.NumBits.Should().Be(256);
-            Register.Ymm11.NumBits.Should().Be(256);
-            Register.Ymm12.NumBits.Should().Be(256);
-            Register.Ymm13.NumBits.Should().Be(256);
-            Register.Ymm14.NumBits.Should().Be(256);
-            Register.Ymm15.NumBits.Should().Be(256);
-
-            Register.Xmm0l.NumBits.Should().Be(64);
-            Register.Xmm1l.NumBits.Should().Be(64);
-            Register.Xmm2l.NumBits.Should().Be(64);
-            Register.Xmm3l.NumBits.Should().Be(64);
-            Register.Xmm4l.NumBits.Should().Be(64);
-            Register.Xmm5l.NumBits.Should().Be(64);
-            Register.Xmm6l.NumBits.Should().Be(64);
-            Register.Xmm7l.NumBits.Should().Be(64);
-            Register.Xmm8l.NumBits.Should().Be(64);
-            Register.Xmm9l.NumBits.Should().Be(64);
-            Register.Xmm10l.NumBits.Should().Be(64);
-            Register.Xmm11l.NumBits.Should().Be(64);
-            Register.Xmm12l.NumBits.Should().Be(64);
-            Register.Xmm13l.NumBits.Should().Be(64);
-            Register.Xmm14l.NumBits.Should().Be(64);
-            Register.Xmm15l.NumBits.Should().Be(64);
-
-            Register.Ymm0l.NumBits.Should().Be(64);
-            Register.Ymm1l.NumBits.Should().Be(64);
-            Register.Ymm2l.NumBits.Should().Be(64);
-            Register.Ymm3l.NumBits.Should().Be(64);
-            Register.Ymm4l.NumBits.Should().Be(64);
-            Register.Ymm5l.NumBits.Should().Be(64);
-            Register.Ymm6l.NumBits.Should().Be(64);
-            Register.Ymm7l.NumBits.Should().Be(64);
-            Register.Ymm8l.NumBits.Should().Be(64);
-            Register.Ymm9l.NumBits.Should().Be(64);
-            Register.Ymm10l.NumBits.Should().Be(64);
-            Register.Ymm11l.NumBits.Should().Be(64);
-            Register.Ymm12l.NumBits.Should().Be(64);
-            Register.Ymm13l.NumBits.Should().Be(64);
-            Register.Ymm14l.NumBits.Should().Be(64);
-            Register.Ymm15l.NumBits.Should().Be(64);
-
-            Register.Fpcw.NumBits.Should().Be(16);
-            Register.Fpsw.NumBits.Should().Be(16);
-            Register.Fptw.NumBits.Should().Be(16);
-            Register.Fopcode.NumBits.Should().Be(16);
-            Register.Fpip.NumBits.Should().Be(32);
-            Register.Fpdp.NumBits.Should().Be(32);
-            Register.Fpipsel.NumBits.Should().Be(32);
-            Register.Fpdpsel.NumBits.Should().Be(32);
-            Register.St0.NumBits.Should().Be(80);
-            Register.St1.NumBits.Should().Be(80);
-            Register.St2.NumBits.Should().Be(80);
-            Register.St3.NumBits.Should().Be(80);
-            Register.St4.NumBits.Should().Be(80);
-            Register.St5.NumBits.Should().Be(80);
-            Register.St6.NumBits.Should().Be(80);
-            Register.St7.NumBits.Should().Be(80);
+            Register.X64.Should().OnlyHaveUniqueItems();
         }
     }
 }

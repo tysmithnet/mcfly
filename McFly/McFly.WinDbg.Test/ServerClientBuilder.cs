@@ -65,17 +65,17 @@ namespace McFly.WinDbg.Test
             return Mock.Object;
         }
 
-        public ServerClientBuilder WithAddNote()
+        public ServerClientBuilder WithAddTag()
         {
             Mock.Setup(client =>
-                client.AddNote(It.IsAny<Position>(), It.IsAny<IEnumerable<int>>(), It.IsAny<string>()));
+                client.AddTag(It.IsAny<Position>(), It.IsAny<IEnumerable<int>>(), It.IsAny<string>()));
             return this;
         }
 
-        public ServerClientBuilder WithAddNote(Position position, IEnumerable<int> threadIds, string text)
+        public ServerClientBuilder WithAddTag(Position position, IEnumerable<int> threadIds, string text)
         {
             var it = It.Is<IEnumerable<int>>(e => e.SequenceEqual(threadIds));
-            Mock.Setup(client => client.AddNote(position, it, text));
+            Mock.Setup(client => client.AddTag(position, it, text));
             return this;
         }
     }
