@@ -27,5 +27,25 @@ namespace McFly.Server.Data.SqlServer.Test
             convertedBack.Body.Should().Be("body");
             convertedBack.CreateDateUtc.Should().Be(DateTime.MinValue);
         }
+
+        [Fact]
+        public void Return_The_Existing_Tag_If_One_Exists()
+        {
+            var id = Guid.NewGuid();
+            var dc = DateTime.UtcNow;
+            var builder = new ContextFactoryBuilder();
+            TagEntity tag = new TagEntity()
+            {
+                Id = id,
+                Body = "body",
+                Title = "title",
+                CreateDateUtc = dc
+            };
+            builder.WithTag(tag);
+            var fac = builder.Build();
+            var context = fac.GetContext("");
+            var converter = new TagDomainEntityConverter();
+            converter.ToEntity(new Tag() {Id = id}, context).Should().BeSameAs(tag);
+        }
     }
 }

@@ -69,5 +69,11 @@ namespace McFly.Server.Data.SqlServer.Test.Builders
             _context.FrameEntities.Add(frame);
             return this;
         }
+
+        public ContextFactoryBuilder WithTag(TagEntity tag)
+        {
+            _context.TagEntities.Add(tag);
+            return this;
+        }
     }
 }
