@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using McFly.Core;
@@ -1663,6 +1664,61 @@ namespace McFly.Server.Data.SqlServer.Test
             entity.Offset.Should().Be("1000000000000000");
             var convertedBack = converter.ExtractStackFrame(entity);
             convertedBack.Equals(original).Should().BeTrue();
+        }
+
+        [Fact]
+        public void Return_The_Existing_Entity_If_One_Exists()
+        {
+            var guid = Guid.NewGuid();
+            FrameEntity existingFrame = new FrameEntity()
+            {
+                Id = guid
+            };
+            var context = new ContextFactoryBuilder()
+                .WithFrame(existingFrame)
+                .Build()
+                .GetContext("");
+            var lookupFrame = new Frame()
+            {
+                Id = guid
+            };
+            var converter = new FrameDomainEntityConverter();
+            converter.ToEntity(lookupFrame, context).Should().BeSameAs(existingFrame);
+        }
+
+        [Fact]
+        public void Convert_The_StackTrace_Along_With_Conversion()
+        {
+            var frameEntity = new FrameEntity()
+            {
+                StackFrames = new List<StackFrameEntity>()
+                {
+                    new StackFrameEntity()
+                    {
+                        StackPointer = Convert.ToUInt64(0x100).ToHexString()
+                    }
+                }
+            };
+            var frame = new Frame()
+            {
+                StackTrace = new StackTrace(new List<StackFrame>()
+                {
+                    new StackFrame(0x100, null, null, null, null)
+                })
+            };
+            var converter = new FrameDomainEntityConverter();
+            var context = new ContextFactoryBuilder()
+                .Build()
+                .GetContext("");
+
+            var fromEntity = converter.ToDomain(frameEntity, context);
+            var fromDomain = converter.ToEntity(frame, context);
+
+            fromEntity.StackTrace.StackFrames.Should().HaveCount(1);
+            fromEntity.StackTrace.StackFrames.Single().StackPointer.Should().Be(0x100);
+
+            fromDomain.StackFrames.Should().HaveCount(1);
+            fromDomain.StackFrames.Single().StackPointer.Should().Be("0001000000000000");
         }
     }
 }

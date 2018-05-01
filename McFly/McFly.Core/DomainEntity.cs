@@ -79,7 +79,7 @@ namespace McFly.Core
         ///     Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        public Guid Id { get; protected internal set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         ///     Gets a value indicating whether this instance is identifier set.
