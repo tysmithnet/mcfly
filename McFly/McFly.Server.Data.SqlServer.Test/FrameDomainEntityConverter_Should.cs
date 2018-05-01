@@ -8,12 +8,12 @@ using Xunit;
 
 namespace McFly.Server.Data.SqlServer.Test
 {
-    public class DomainEntityExtensions_Should
+    public class FrameDomainEntityConverter_Should
     {
         [Fact]
         public void Convert_Between_Frame_And_FrameEntity_Correctly()
         {
-            var frame = new Frame();
+            Frame frame;
             var converter = new FrameDomainEntityConverter();
             var builder = new ContextFactoryBuilder();
             var fac = builder.Build();
@@ -1648,17 +1648,6 @@ namespace McFly.Server.Data.SqlServer.Test
         }
 
         [Fact]
-        public void Convert_Between_MemoryChunk_And_MemoryChunkEntity()
-        {
-            //var memoryChunk = new MemoryChunk();
-            //memoryChunk.Bytes = new byte[] {0x01, 0x02};
-            //memoryChunk.MemoryRange = new MemoryRange(0, 1);
-            //memoryChunk.Position = new Position(1, 2);
-            //var entity = memoryChunk.ToMemoryChunkEntity();
-            //var convertedBack = entity.ToMemoryChunk();
-        }
-
-        [Fact]
         public void Convert_Between_StackFrame_And_StackFrameEntity()
         {
             var converter = new FrameDomainEntityConverter();
@@ -1674,26 +1663,6 @@ namespace McFly.Server.Data.SqlServer.Test
             entity.Offset.Should().Be("1000000000000000");
             var convertedBack = converter.ExtractStackFrame(entity);
             convertedBack.Equals(original).Should().BeTrue();
-        }
-
-        [Fact]
-        public void Convert_Between_Tag_And_TagEntity()
-        {
-            var builder = new ContextFactoryBuilder();
-            var fac = builder.Build();
-            var context = fac.GetContext("");
-            var tag = new Tag();
-            tag.CreateDateUtc = DateTime.MinValue;
-            tag.Title = "hello there";
-            tag.Body = "body";
-            var converter = new TagDomainEntityConverter();
-            var converted = converter.ToEntity(tag, context);
-            converted.Title.Should().Be("hello there");
-            converted.Body.Should().Be("body");
-            var convertedBack = converter.ToDomain(converted, context);
-            convertedBack.Title.Should().Be("hello there");
-            convertedBack.Body.Should().Be("body");
-            convertedBack.CreateDateUtc.Should().Be(DateTime.MinValue);
         }
     }
 }
