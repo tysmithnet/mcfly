@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using McFly.WinDbg;
 using McFly.WinDbg.Test.Builders;
 using Xunit;
 
@@ -8,6 +7,7 @@ namespace McFly.WinDbg.Test
 {
     public class HelpMethod_Should
     {
+        
         [Fact]
         public void Print_Command_Help_If_A_Single_Command_Is_Specified()
         {
@@ -80,6 +80,10 @@ Get extended help:
 
     internal class TestMethod : IMcFlyMethod
     {
+        public void Process(string[] args)
+        {
+        }
+
         public HelpInfo HelpInfo { get; } = new HelpInfo
         (
             "test",
@@ -116,9 +120,5 @@ Get extended help:
                 )
             }
         );
-
-        public void Process(string[] args)
-        {
-        }
     }
 }
