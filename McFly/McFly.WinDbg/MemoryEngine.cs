@@ -21,7 +21,7 @@ using McFly.WinDbg.Debugger;
 namespace McFly.WinDbg
 {
     /// <summary>
-    ///     Class MemoryEngine.
+    ///     Default implementation of <see cref="IMemoryEngine"/>
     /// </summary>
     /// <seealso cref="IMemoryEngine" />
     [Export(typeof(IMemoryEngine))]
@@ -37,7 +37,9 @@ namespace McFly.WinDbg
         /// <exception cref="System.ApplicationException"></exception>
         public byte[] ReadMemory(ulong low, ulong high, IDebugDataSpaces dataSpaces)
         {
-            var length = low < high ? high - low : low - high;
+            if(low >= high)
+                throw new ArgumentOutOfRangeException($"Low must be less than high, but {low} >= {high}");
+            var length = high - low;
             var buffer = new byte[length];
             var hr = dataSpaces.ReadVirtual(low, buffer, buffer.Length.ToUInt(), out var bytesRead);
             if (hr != 0)
