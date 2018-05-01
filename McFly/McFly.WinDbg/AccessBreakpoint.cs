@@ -4,7 +4,7 @@
 // Created          : 03-26-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 05-01-2018
 // ***********************************************************************
 // <copyright file="AccessBreakpoint.cs" company="">
 //     Copyright ©  2018
@@ -21,6 +21,8 @@ namespace McFly.WinDbg
     /// <summary>
     ///     Breakpoint that occurs when a small segment of memory is accessed
     /// </summary>
+    /// <seealso cref="System.IEquatable{McFly.WinDbg.AccessBreakpoint}" />
+    /// <seealso cref="McFly.WinDbg.IBreakpoint" />
     /// <seealso cref="AccessBreakpoint" />
     /// <seealso cref="IBreakpoint" />
     /// <seealso cref="System.IEquatable{AccessBreakpoint}" />
@@ -105,6 +107,9 @@ namespace McFly.WinDbg
         ///     Parses a string input as an access breakpoint
         /// </summary>
         /// <param name="input">The input.</param>
+        /// <returns>AccessBreakpoint.</returns>
+        /// <exception cref="ArgumentNullException">input</exception>
+        /// <exception cref="FormatException">input</exception>
         /// <example>r8:100</example>
         /// <example>w4:abc</example>
         /// <example>wr4:abc123def4567</example>
@@ -112,9 +117,6 @@ namespace McFly.WinDbg
         ///     You can break on both read and write accesses by using rw as the access specifier.
         ///     The format that is expected is as follows: <code>[rw]{1,2}(1|4|8|16)[a-fA-F0-9]{8,16}</code>
         /// </remarks>
-        /// <returns>AccessBreakpoint.</returns>
-        /// <exception cref="ArgumentNullException">input</exception>
-        /// <exception cref="FormatException">input</exception>
         public static AccessBreakpoint Parse(string input)
         {
             if (input == null)
