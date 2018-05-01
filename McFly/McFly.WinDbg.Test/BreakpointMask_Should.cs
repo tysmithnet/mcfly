@@ -1,5 +1,7 @@
 ﻿using System;
 using FluentAssertions;
+using McFly.WinDbg.Test.Builders;
+using Moq;
 using Xunit;
 
 namespace McFly.WinDbg.Test
@@ -41,7 +43,11 @@ namespace McFly.WinDbg.Test
         [Fact]
         public void Set_Breakpoint_Correctly()
         {
-            
+            var builder = new BreakpointFacadeBuilder();
+            builder.WithSetBreakpointByMask();
+            var bp = BreakpointMask.Parse("kernel32!*");
+            bp.SetBreakpoint(builder.Mock.Object);
+            builder.Mock.Verify(facade => facade.SetBreakpointByMask("kernel32", "*"), Times.Once);
         }
     }
 }
