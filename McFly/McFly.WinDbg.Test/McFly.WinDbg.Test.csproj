@@ -83,6 +83,7 @@
     <Compile Include="Builders\BreakpointFacadeBuilder.cs" />
     <Compile Include="BreakpointFacade_Should.cs" />
     <Compile Include="BreakpointMask_Should.cs" />
+    <Compile Include="Builders\DebugDataSpacesBuilder.cs" />
     <Compile Include="Builders\DebugEngineProxyBuilder.cs" />
     <Compile Include="Builders\DisassemblyFacadeBuilder.cs" />
     <Compile Include="DisassemblyFacade_Should.cs" />

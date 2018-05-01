@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using McFly.WinDbg.Debugger;
+using McFly.WinDbg.Test.Builders;
 using Moq;
 using Xunit;
 
@@ -34,9 +35,11 @@ namespace McFly.WinDbg.Test
         [Fact]
         public void Throw_Application_Exception_If_DataSpaces_Fails()
         {
+            var builder = new DebugDataSpacesBuilder();
+            var spaces = builder.WithReadVirtual(0x8000000).Build();
             var memEng = new MemoryEngine();
-            var mock = new Mock<IDebugDataSpaces>();
-            Action a = () => memEng.ReadMemory(1, 1, mock.Object);
+            Action a = () => memEng.ReadMemory(0, 1, spaces);
+            a.Should().Throw<ApplicationException>();
         }
     }
 }
