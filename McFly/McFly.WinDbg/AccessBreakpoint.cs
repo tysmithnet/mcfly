@@ -144,30 +144,6 @@ namespace McFly.WinDbg
         }
 
         /// <summary>
-        ///     Implements the == operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator ==(AccessBreakpoint left, AccessBreakpoint right)
-        {
-            if (ReferenceEquals(left, right)) return true;
-            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) return false;
-            return Equals(left, right);
-        }
-
-        /// <summary>
-        ///     Implements the != operator.
-        /// </summary>
-        /// <param name="left">The left.</param>
-        /// <param name="right">The right.</param>
-        /// <returns>The result of the operator.</returns>
-        public static bool operator !=(AccessBreakpoint left, AccessBreakpoint right)
-        {
-            return !Equals(left, right);
-        }
-
-        /// <summary>
         ///     Gets the memory address this access breakpoint is for
         /// </summary>
         /// <value>The address.</value>
