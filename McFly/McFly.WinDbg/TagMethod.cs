@@ -4,7 +4,7 @@
 // Created          : 03-11-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-29-2018
+// Last Modified On : 05-01-2018
 // ***********************************************************************
 // <copyright file="TagMethod.cs" company="">
 //     Copyright ©  2018
@@ -16,6 +16,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Text;
+using McFly.Core;
 
 namespace McFly.WinDbg
 {
@@ -32,15 +34,18 @@ namespace McFly.WinDbg
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
-        /// <exception cref="NullReferenceException">args</exception>
+        /// <exception cref="ArgumentNullException">args</exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void Process(string[] args)
         {
             if (args == null)
-                throw new NullReferenceException(nameof(args));
+                throw new ArgumentNullException(nameof(args));
             if (!args.Any())
             {
                 // list tags
+                var tags = ServerClient.GetRecentTags(10);
+                var output = FormatTagsForOutput(tags);
+                DebugEngineProxy.WriteLine(output);
             }
             else
             {
@@ -58,7 +63,7 @@ namespace McFly.WinDbg
         }
 
         /// <summary>
-        ///     Adds the tag.
+        ///     Adds a tag.
         /// </summary>
         /// <param name="addOptions">The add options.</param>
         internal void AddTag(AddTagOptions addOptions)
@@ -107,6 +112,27 @@ namespace McFly.WinDbg
             }
 
             return options;
+        }
+
+        /// <summary>
+        ///     Formats the tags for output.
+        /// </summary>
+        /// <param name="tags">The tags.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="ArgumentNullException">tags</exception>
+        internal string FormatTagsForOutput(IEnumerable<Tag> tags)
+        {
+            if (tags == null)
+                throw new ArgumentNullException(nameof(tags));
+            var sb = new StringBuilder();
+            var list = tags.OrderBy(x => x.CreateDateUtc).ToList();
+            for (var i = 0; i < list.Count(); i++)
+            {
+                var tag = list[i];
+                sb.AppendLine($"{i + 1}. {tag.Title} - {tag.Body}");
+            }
+
+            return sb.ToString();
         }
 
         /// <summary>

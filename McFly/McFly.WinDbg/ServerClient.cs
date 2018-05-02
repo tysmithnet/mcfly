@@ -4,7 +4,7 @@
 // Created          : 03-02-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-22-2018
+// Last Modified On : 05-01-2018
 // ***********************************************************************
 // <copyright file="ServerClient.cs" company="">
 //     Copyright ©  2018
@@ -22,8 +22,9 @@ using Newtonsoft.Json;
 namespace McFly.WinDbg
 {
     /// <summary>
-    ///     Class ServerClient.
+    ///     Default implementation of <see cref="IServerClient"/>
     /// </summary>
+    /// <seealso cref="McFly.WinDbg.IServerClient" />
     /// <seealso cref="IServerClient" />
     /// <seealso cref="System.IDisposable" />
     [Export(typeof(IServerClient))]
@@ -56,6 +57,20 @@ namespace McFly.WinDbg
                 ["X-Project-Name"] = Settings.ProjectName
             };
             HttpFacade.PostJsonAsync(ub.Uri, addNoteRequest, headers).GetAwaiter().GetResult();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Tag> GetRecentTags(int numTags)
+        {
+            var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/tag"};
+            var request = new RecentTagsRequest(10);
+            var headers = new HttpHeaders
+            {
+                ["X-Project-Name"] = Settings.ProjectName
+            };
+            var result = HttpFacade.PostJsonAsync(ub.Uri, request, headers).GetAwaiter().GetResult();
+            var json = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JsonConvert.DeserializeObject<IEnumerable<Tag>>(json);
         }
 
         /// <summary>
