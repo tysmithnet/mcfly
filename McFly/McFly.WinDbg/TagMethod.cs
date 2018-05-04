@@ -29,6 +29,9 @@ namespace McFly.WinDbg
     [Export(typeof(IMcFlyMethod))]
     internal sealed class TagMethod : IMcFlyMethod
     {
+        /*
+         * Todo: add ability to tag all frames in a range e.g. thread 1 from a to b or all threads a to b0
+         */
         /// <summary>
         ///     Processes the specified arguments.
         /// </summary>
@@ -42,7 +45,7 @@ namespace McFly.WinDbg
                 throw new ArgumentNullException(nameof(args));
             if (!args.Any())
             {
-                // list tags
+                // list tags at the current position
                 var tags = ServerClient.GetRecentTags(10);
                 var output = FormatTagsForOutput(tags);
                 DebugEngineProxy.WriteLine(output);
@@ -56,6 +59,7 @@ namespace McFly.WinDbg
                         var addOptions = ExtractAddOptions(args.Skip(1));
                         AddTag(addOptions);
                         break;
+                    // todo: edit, delete
                     default:
                         throw new ArgumentOutOfRangeException($"Unknown subcommand {command}");
                 }
@@ -152,7 +156,9 @@ namespace McFly.WinDbg
             .AddSubcommand(new HelpInfoBuilder()
                 .SetName("add")
                 .SetDescription("Add tags")
-                .AddExample("!mf tag add \"Encryption begin\"", "Adds a tag to the current frame")
+                .AddSwitch("-t, --title", "The title of the tag")
+                .AddSwitch("-b, --body", "The body of the tag")
+                .AddExample("!mf tag add -t \"Encryption begin\" -b \"This is where the encryption process begins\"", "Adds a tag to the current frame")
                 .Build())
             .AddExample("!mf tag", "Shows all tags on the current frame")
             .Build();

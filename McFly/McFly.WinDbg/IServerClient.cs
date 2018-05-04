@@ -37,7 +37,7 @@ namespace McFly.WinDbg
         /// <param name="position">The position.</param>
         /// <param name="threadIds">The thread ids.</param>
         /// <param name="text">The text.</param>
-        void AddTag(Position position, IEnumerable<int> threadIds, string text);
+        void AddTag(Position position, IEnumerable<int> threadIds, Tag newTag);
 
         /// <summary>
         ///     Gets the most recent tags.

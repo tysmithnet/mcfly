@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FluentAssertions;
 using McFly.Core;
 using McFly.WinDbg.Test.Builders;
-using Moq;
 using Xunit;
 
 namespace McFly.WinDbg.Test
@@ -11,40 +10,24 @@ namespace McFly.WinDbg.Test
     public class TagMethod_Should
     {
         [Fact]
-        public void Add_Tags_Correctly()
+        public void Add_A_Tag_To_The_Current_Frame_When_Called_With_Title_And_Body()
         {
-            var tagMethod = new TagMethod();
-            var dbg = new DebugEngineProxyBuilder();
-            tagMethod.TimeTravelFacade = new TimeTravelFacadeBuilder(dbg)
-                .WithPositions(new PositionsResult(new[]
-                {
-                    new PositionsRecord(1, new Position(0, 0), true),
-                    new PositionsRecord(2, new Position(0, 0), false)
-                })).Build();
-            var serverClientBuilder = new ServerClientBuilder();
-            tagMethod.ServerClient = serverClientBuilder
-                .WithAddTag(new Position(0, 0), new[] {1}, "This is a tag")
-                .WithAddTag(new Position(0, 0), new[] {1, 2}, "This is a tag")
+            var method = new TagMethod();
+            var engBuilder = new DebugEngineProxyBuilder();
+            var debugEngineProxy = engBuilder
+                .WithThreadId(1).Build();
+            var timeTravelFacade = new TimeTravelFacadeBuilder(engBuilder)
+                .WithGetCurrentPosition(new Position(1, 1))
                 .Build();
-            tagMethod.Settings = new Settings {ProjectName = "test"};
-            var options = new AddTagOptions
-            {
-                Text = "This is a tag",
-                IsAllThreadsAtPosition = false
-            };
+            var serverClientBuilder = new ServerClientBuilder();
+            var serverClient = serverClientBuilder
+                .WithAddTag()
+                .Build();
 
-            var options2 = new AddTagOptions
-            {
-                Text = "This is a tag",
-                IsAllThreadsAtPosition = true
-            };
-
-            tagMethod.AddTag(options);
-            tagMethod.AddTag(options2);
-            serverClientBuilder.Mock.Verify(client => client.AddTag(new Position(0, 0), new[] {1}, "This is a tag"),
-                Times.Once);
-            serverClientBuilder.Mock.Verify(
-                client => client.AddTag(new Position(0, 0), new[] {1, 2}, "This is a tag"), Times.Once);
+            method.DebugEngineProxy = debugEngineProxy;
+            method.TimeTravelFacade = timeTravelFacade;
+            method.ServerClient = serverClient;
+            method.Process(new[] {"-t", "title", "-b", "body"});
         }
 
         [Fact]
@@ -91,51 +74,26 @@ namespace McFly.WinDbg.Test
         public void Throw_If_Asked_To_Format_Null_Tags()
         {
             var method = new TagMethod();
-            Action a  = () => method.FormatTagsForOutput(null);
+            Action a = () => method.FormatTagsForOutput(null);
             a.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
-        public void Not_Allow_Multiple_Tag_Bodies()
+        public void Throw_If_Invalid_Subcommand_Passed()
         {
-            var tagMethod = new TagMethod();
-            Action throw1 = () => tagMethod.Process(new[] {"add", "tag1", "tag2"});
-            Action throw2 = () => tagMethod.Process(new[] {"add", "\"this is a tag\"", "\"this is also a tag\""});
-            Action throw3 = () => tagMethod.Process(new[] {"add", "tag1", "-a", "tag2"});
-            Action throw4 = () => tagMethod.Process(new[] {"add", "tag1", "-a"});
-            Action throw5 = () => tagMethod.Process(new[] {"add", "-a", "tag1"});
-
-            throw1.Should().Throw<ArgumentException>();
-            throw2.Should().Throw<ArgumentException>();
-            throw3.Should().Throw<ArgumentException>();
-            throw4.Should().NotThrow<ArgumentException>();
-            throw5.Should().NotThrow<ArgumentException>();
+            var method = new TagMethod();
+            Action a = () => method.Process(new[] {"gibberish"});
+            a.Should().Throw<ArgumentOutOfRangeException>();
         }
 
         [Fact]
-        public void Parse_Add_Options()
-        {
-            var tagMethod = new TagMethod();
-            var a = tagMethod.ExtractAddOptions(new[] {"tag1", "-a"});
-            var a2 = tagMethod.ExtractAddOptions(new[] {"-a", "tag1"});
-            var n = tagMethod.ExtractAddOptions(new[] {"this is content"});
-
-            a.IsAllThreadsAtPosition.Should().BeTrue();
-            a.Text.Should().Be("tag1");
-
-            a2.IsAllThreadsAtPosition.Should().BeTrue();
-            a2.Text.Should().Be("tag1");
-
-            n.IsAllThreadsAtPosition.Should().BeFalse();
-            n.Text.Should().Be("this is content");
-        }
-
-        [Fact]
-        public void Throw_If_Not_Given_The_Right_Arguments()
+        public void Throw_If_Not_Given_Valid_Arguments()
         {
             var tm = new TagMethod();
             Action a = () => tm.Process(null);
             a.Should().Throw<ArgumentNullException>();
+            a = () => tm.Process(new[] {"gibberish"});
+            a.Should().Throw<ArgumentOutOfRangeException>();
         }
     }
 }

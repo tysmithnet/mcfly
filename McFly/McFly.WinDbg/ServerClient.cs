@@ -42,6 +42,12 @@ namespace McFly.WinDbg
             HttpFacade.PostJsonAsync(ub.Uri, addMemoryRequest, headers).GetAwaiter().GetResult();
         }
 
+        /// <inheritdoc />
+        public void AddTag(Position position, IEnumerable<int> threadIds, Tag newTag)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Adds the tag.
         /// </summary>

@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-18-2018
+// Last Modified On : 05-01-2018
 // ***********************************************************************
 // <copyright file="TimeTravelFacadeBuilder.cs" company="">
 //     Copyright ©  2018
@@ -69,7 +69,7 @@ namespace McFly.WinDbg.Test.Builders
             var first = _frames.OrderBy(x => x.Position).FirstOrDefault(x => x.Position > _currentPosition);
             _currentPosition = first != null ? first.Position : _frames.Max(x => x.Position);
             WithGetCurrentPosition(_currentPosition);
-            WithPositions(Positions());
+            WithPositions(WithPositions());
             return this;
         }
 
@@ -80,29 +80,6 @@ namespace McFly.WinDbg.Test.Builders
         public ITimeTravelFacade Build()
         {
             return Mock.Object;
-        }
-
-        /// <summary>
-        ///     Positionses this instance.
-        /// </summary>
-        /// <returns>PositionsResult.</returns>
-        /// <exception cref="System.InvalidOperationException">
-        ///     There needs to be exactly 1 positions record with the current thread
-        ///     tag at any given position
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        ///     There needs to be exactly 1 positions record with the current thread tag at
-        ///     any given position
-        /// </exception>
-        public PositionsResult Positions()
-        {
-            var thread = _debugEngineProxyBuilder.CurrentThreadId;
-            var positions = _frames.Where(x => x.Position == _currentPosition)
-                .Select(x => new PositionsRecord(x.ThreadId, x.Position, thread == x.ThreadId)).ToList();
-            if (positions.Count(x => x.IsCurrentThread) != 1)
-                throw new InvalidOperationException(
-                    "There needs to be exactly 1 positions record with the current thread tag at any given position");
-            return new PositionsResult(positions);
         }
 
         /// <summary>
@@ -167,6 +144,25 @@ namespace McFly.WinDbg.Test.Builders
         {
             Mock.Setup(facade => facade.GetStartingPosition()).Returns(result);
             return this;
+        }
+
+        /// <summary>
+        ///     Withes the positions.
+        /// </summary>
+        /// <returns>PositionsResult.</returns>
+        /// <exception cref="InvalidOperationException">
+        ///     There needs to be exactly 1 positions record with the current thread tag at
+        ///     any given position
+        /// </exception>
+        public PositionsResult WithPositions()
+        {
+            var thread = _debugEngineProxyBuilder.CurrentThreadId;
+            var positions = _frames.Where(x => x.Position == _currentPosition)
+                .Select(x => new PositionsRecord(x.ThreadId, x.Position, thread == x.ThreadId)).ToList();
+            if (positions.Count(x => x.IsCurrentThread) != 1)
+                throw new InvalidOperationException(
+                    "There needs to be exactly 1 positions record with the current thread tag at any given position");
+            return new PositionsResult(positions);
         }
 
         /// <summary>
