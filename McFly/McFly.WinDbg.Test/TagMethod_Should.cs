@@ -18,6 +18,10 @@ namespace McFly.WinDbg.Test
                 .WithThreadId(1).Build();
             var timeTravelFacade = new TimeTravelFacadeBuilder(engBuilder)
                 .WithGetCurrentPosition(new Position(1, 1))
+                .WithPositions(new PositionsResult(new List<PositionsRecord>()
+                {
+                    new PositionsRecord(1, new Position(1,1), true )
+                }))
                 .Build();
             var serverClientBuilder = new ServerClientBuilder();
             var serverClient = serverClientBuilder
@@ -27,7 +31,7 @@ namespace McFly.WinDbg.Test
             method.DebugEngineProxy = debugEngineProxy;
             method.TimeTravelFacade = timeTravelFacade;
             method.ServerClient = serverClient;
-            method.Process(new[] {"-t", "title", "-b", "body"});
+            method.Process(new[] {"add", "-t", "title", "-b", "body"});
         }
 
         [Fact]

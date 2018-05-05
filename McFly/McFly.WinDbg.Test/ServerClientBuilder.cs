@@ -46,7 +46,7 @@ namespace McFly.WinDbg.Test
         public ServerClientBuilder WithAddTag()
         {
             Mock.Setup(client =>
-                client.AddTag(It.IsAny<Position>(), It.IsAny<IEnumerable<int>>(), It.IsAny<string>()));
+                client.AddTag(It.IsAny<Position>(), It.IsAny<IEnumerable<int>>(), It.IsAny<Tag>()));
             return this;
         }
 
@@ -55,12 +55,12 @@ namespace McFly.WinDbg.Test
         /// </summary>
         /// <param name="position">The position.</param>
         /// <param name="threadIds">The thread ids.</param>
-        /// <param name="text">The text.</param>
+        /// <param name="tag">The tag.</param>
         /// <returns>ServerClientBuilder.</returns>
-        public ServerClientBuilder WithAddTag(Position position, IEnumerable<int> threadIds, string text)
+        public ServerClientBuilder WithAddTag(Position position, IEnumerable<int> threadIds, Tag tag)
         {
             var it = It.Is<IEnumerable<int>>(e => e.SequenceEqual(threadIds));
-            Mock.Setup(client => client.AddTag(position, it, text));
+            Mock.Setup(client => client.AddTag(position, it, tag));
             return this;
         }
 

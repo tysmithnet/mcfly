@@ -74,14 +74,21 @@ namespace McFly.WinDbg
         {
             var positions = TimeTravelFacade.Positions();
             var current = positions.CurrentThreadResult;
+            var tag = new Tag()
+            {
+                Title = addOptions.Title,
+                Body = addOptions.Body,
+                CreateDateUtc = DateTime.UtcNow
+            };
             if (addOptions.IsAllThreadsAtPosition) // todo: extract methods
             {
                 var threadIds = positions.Select(x => x.ThreadId);
-                ServerClient.AddTag(current.Position, threadIds, addOptions.Text);
+
+                ServerClient.AddTag(current.Position, threadIds, tag);
             }
             else
             {
-                ServerClient.AddTag(current.Position, new[] {current.ThreadId}, addOptions.Text);
+                ServerClient.AddTag(current.Position, new[] {current.ThreadId}, tag);
             }
         }
 
@@ -96,7 +103,7 @@ namespace McFly.WinDbg
             var options = new AddTagOptions();
             var arr = args.ToArray();
 
-            for (var i = 0; i < arr.Length; i++)
+            for (var i = 0; i < arr.Length; i++) // todo: support short cut for tagging
             {
                 var ptr = arr[i];
 
@@ -106,11 +113,17 @@ namespace McFly.WinDbg
                     case "--all":
                         options.IsAllThreadsAtPosition = true;
                         break;
-                    default:
-                        if (options.Text == null)
-                            options.Text = ptr;
-                        else
-                            throw new ArgumentException("Found more than 1 tag body");
+                    case "-t":
+                    case "--title":
+                        if(i + 1 >= arr.Length)
+                            throw new ArgumentException(nameof(args), $"Found switch {ptr}, which requires a value, but none was found");
+                        options.Title = arr[i + 1];
+                        break;
+                    case "-b":
+                    case "--body":
+                        if (i + 1 >= arr.Length)
+                            throw new ArgumentException(nameof(args), $"Found switch {ptr}, which requires a value, but none was found");
+                        options.Body = arr[i + 1];
                         break;
                 }
             }
@@ -156,6 +169,7 @@ namespace McFly.WinDbg
             .AddSubcommand(new HelpInfoBuilder()
                 .SetName("add")
                 .SetDescription("Add tags")
+                .AddSwitch("-a, --all", "Tag all threads at the current position")
                 .AddSwitch("-t, --title", "The title of the tag")
                 .AddSwitch("-b, --body", "The body of the tag")
                 .AddExample("!mf tag add -t \"Encryption begin\" -b \"This is where the encryption process begins\"", "Adds a tag to the current frame")
