@@ -178,6 +178,11 @@ namespace McFly.WinDbg
             }
         }
 
+        public void StepInto()
+        {
+            Control.SetExecutionStatus(DEBUG_STATUS.STEP_INTO);
+        }
+
         /// <summary>
         ///     Switches to a thread
         /// </summary>
