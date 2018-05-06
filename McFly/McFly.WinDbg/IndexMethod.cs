@@ -4,7 +4,7 @@
 // Created          : 03-04-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-28-2018
+// Last Modified On : 05-05-2018
 // ***********************************************************************
 // <copyright file="IndexMethod.cs" company="">
 //     Copyright ©  2018
@@ -166,6 +166,7 @@ namespace McFly.WinDbg
                         ExtractAccessBreakpoints(args, i, arg, options);
                         break;
                     case "--step":
+                        ExtractStep(args, ref i, options);
                         break;
                 }
             }
@@ -266,6 +267,39 @@ namespace McFly.WinDbg
             {
                 throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e);
             }
+        }
+
+        /// <summary>
+        ///     Extracts the step.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <param name="i">The i.</param>
+        /// <param name="options">The options.</param>
+        /// <exception cref="ArgumentException">args</exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     args
+        ///     or
+        ///     args
+        /// </exception>
+        internal static void ExtractStep(string[] args, ref int i, IndexOptions options)
+        {
+            if (i + 1 >= args.Length)
+                throw new ArgumentException($"--step requires a positive integer", nameof(args));
+            if (int.TryParse(args[i + 1], out var step))
+            {
+                if (step < 1)
+                    throw new ArgumentOutOfRangeException(nameof(args),
+                        $"--step requires a positive integer, but found {args[i + 1]}");
+
+                options.Step = step;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException(nameof(args),
+                    $"--step requires a positive integer, but found {args[i + 1]}");
+            }
+
+            i++;
         }
 
         /// <summary>
