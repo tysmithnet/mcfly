@@ -49,21 +49,21 @@ namespace McFly.WinDbg
         public void Process(string[] args)
         {
             var options = ExtractIndexOptions(args);
-            var startingPosition = GetStartingPosition(options);
-            var endingPosition = GetEndingPosition(options);
-            ProcessInternal(startingPosition, endingPosition, options);
+            if (options.IsAllPositionsInRange)
+                IndexAllPositionsInRange(options);
+            else
+                IndexBreakpointHits(options);
         }
 
         /// <summary>
         ///     Creates the frames for upsert.
         /// </summary>
         /// <param name="positions">The positions.</param>
-        /// <param name="breakRecord">The break record.</param>
         /// <param name="options">The options.</param>
         /// <returns>List&lt;Frame&gt;.</returns>
-        internal List<Frame> CreateFramesForUpsert(PositionsResult positions,
-            PositionsRecord breakRecord, IndexOptions options)
+        internal List<Frame> CreateFramesForUpsert(PositionsResult positions, IndexOptions options)
         {
+            var breakRecord = positions.CurrentThreadResult;
             var frames = positions
                 .Where(positionRecord => positionRecord.Position == breakRecord.Position)
                 .Select(positionRecord => TimeTravelFacade.GetCurrentFrame(positionRecord.ThreadId))
@@ -163,10 +163,14 @@ namespace McFly.WinDbg
                         ExtractMasks(args, i, arg, options);
                         break;
                     case "--ba":
-                        ExtractAccessBreakpoints(args, i, arg, options);
+                        ExtractAccessBreakpoints(args, i, arg, options); // todo: these all need to be by ref i
                         break;
                     case "--step":
                         ExtractStep(args, ref i, options);
+                        break;
+                    case "-a":
+                    case "--all":
+                        options.IsAllPositionsInRange = true;
                         break;
                 }
             }
@@ -311,7 +315,7 @@ namespace McFly.WinDbg
         internal Position GetEndingPosition(IndexOptions options)
         {
             if (options == null || options.End == null)
-                return TimeTravelFacade.GetEndingPosition();
+                return TimeTravelFacade.LastPosition;
             return options.End;
         }
 
@@ -324,8 +328,55 @@ namespace McFly.WinDbg
         internal Position GetStartingPosition(IndexOptions options)
         {
             if (options == null || options.Start == null)
-                return TimeTravelFacade.GetStartingPosition();
+                return TimeTravelFacade.FirstPosition;
             return options.Start;
+        }
+
+        /// <summary>
+        ///     Indexes all positions in range.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        internal void IndexAllPositionsInRange(IndexOptions options)
+        {
+            var end = options.End ?? TimeTravelFacade.LastPosition;
+            var start = options.Start ?? TimeTravelFacade.FirstPosition;
+            var curPos = TimeTravelFacade.SetPosition(start).ActualPosition;
+            while (curPos <= end)
+            {
+                UpsertCurrentPosition(options);
+                var nextPosition = new Position(curPos.High, curPos.Low + 1);
+                curPos = TimeTravelFacade.SetPosition(nextPosition).ActualPosition;
+            }
+        }
+
+        /// <summary>
+        ///     Indexes the breakpoint hits.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        internal void IndexBreakpointHits(IndexOptions options)
+        {
+            var end = options.End ?? TimeTravelFacade.LastPosition;
+            var start = options.Start ?? TimeTravelFacade.FirstPosition;
+            var curPos = TimeTravelFacade.SetPosition(start).ActualPosition;
+            BreakpointFacade.ClearBreakpoints();
+            SetBreakpoints(options);
+            while (curPos <= end)
+            {
+                DebugEngineProxy.RunUntilBreak();
+                curPos = TimeTravelFacade.GetCurrentPosition();
+                if (curPos <= end) UpsertCurrentPosition(options);
+                for (int i = 0; i < options.Step; i++)
+                {
+                    var newPosition = new Position(curPos.High, curPos.Low + 1);
+                    var posRes = TimeTravelFacade.SetPosition(newPosition);
+                    curPos = posRes.ActualPosition;
+                    if (posRes.BreakpointHit.HasValue)
+                        i = -1;
+                    if (curPos >= end)
+                        return;
+                    UpsertCurrentPosition(options);
+                }
+            }
         }
 
         /// <summary>
@@ -343,67 +394,11 @@ namespace McFly.WinDbg
         }
 
         /// <summary>
-        ///     Processes the internal.
-        /// </summary>
-        /// <param name="startingPosition">The starting position.</param>
-        /// <param name="endingPosition">The ending position.</param>
-        /// <param name="options">The options.</param>
-        internal void ProcessInternal(Position startingPosition, Position endingPosition, IndexOptions options)
-        {
-            SetBreakpoints(options);
-            TimeTravelFacade.SetPosition(startingPosition);
-            // loop through all the set break points and record relevant values
-            var frames = new List<Frame>();
-            Position last = null;
-
-            /*
-             * todo: PRIORITY FIX
-             */
-
-            while (true) // todo: have better abstraction... while(!TimeTravelFacade.RunTo(endingPosition))
-            {
-                DebugEngineProxy.RunUntilBreak();
-                var positions = TimeTravelFacade.Positions();
-                var breakRecord = positions.CurrentThreadResult;
-                if (last == breakRecord.Position)
-                    break;
-
-                var newFrames = CreateFramesForUpsert(positions, breakRecord, options);
-                frames.AddRange(newFrames);
-
-                foreach (var optionsMemoryRange in options?.MemoryRanges ?? new List<MemoryRange>())
-                {
-                    var bytes = DebugEngineProxy.ReadVirtualMemory(optionsMemoryRange); // todo: errors?
-                    ServerClient.AddMemoryRange(new MemoryChunk
-                    {
-                        MemoryRange = optionsMemoryRange,
-                        Bytes = bytes,
-                        Position = breakRecord.Position
-                    });
-                }
-
-                last = breakRecord.Position;
-            }
-
-            try
-            {
-                ServerClient.UpsertFrames(frames);
-            }
-            catch (Exception e)
-            {
-                Log.Error($"Error persisting frames: {e.GetType().FullName} - {e.Message}");
-                DebugEngineProxy.WriteLine($"Error persisting frames: {e.GetType().FullName} - {e.Message}");
-            }
-        }
-
-        /// <summary>
         ///     Sets the breakpoints.
         /// </summary>
         /// <param name="options">The options.</param>
         internal void SetBreakpoints(IndexOptions options)
         {
-            BreakpointFacade.ClearBreakpoints();
-
             if (options.BreakpointMasks != null)
                 foreach (var optionsBreakpointMask in options.BreakpointMasks)
                     optionsBreakpointMask.SetBreakpoint(BreakpointFacade);
@@ -414,15 +409,37 @@ namespace McFly.WinDbg
         }
 
         /// <summary>
+        ///     Upserts the current position.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        internal void UpsertCurrentPosition(IndexOptions options)
+        {
+            var positions = TimeTravelFacade.Positions();
+            var frames = CreateFramesForUpsert(positions, options);
+            ServerClient.UpsertFrames(frames);
+            foreach (var optionsMemoryRange in options?.MemoryRanges ?? new List<MemoryRange>())
+            {
+                var bytes = DebugEngineProxy.ReadVirtualMemory(optionsMemoryRange); // todo: errors?
+                ServerClient.AddMemoryRange(new MemoryChunk
+                {
+                    MemoryRange = optionsMemoryRange,
+                    Bytes = bytes,
+                    Position = positions.CurrentThreadResult.Position
+                });
+            }
+        }
+
+        /// <summary>
         ///     Gets the help information.
         /// </summary>
         /// <value>The help information.</value>
         public HelpInfo HelpInfo { get; } = new HelpInfoBuilder() // todo: add thread specifier
             .SetName("index")
             .SetDescription("Record the state of registers, memory, etc for further analysis")
-            .AddSwitch("-m, --memory range[ range]", "Memory ranges to index")
+            .AddSwitch("-m, --memory range[ range]", "Memory ranges to index") // todo: not supported
             .AddSwitch("-s, --start pos", "Lowest frame to index during the run")
             .AddSwitch("-e, --end pos", "Highest possible frame to index during the run")
+            .AddSwitch("-a, --all", "If specified, all positions between start and end will be indexed")
             .AddSwitch("--bm mask[ mask]", "Breakpoint masks of the form mod!func, wildcards supported")
             .AddSwitch("--ba spec[ spec]", "Memory access breakpoints")
             .AddSwitch("--step n",

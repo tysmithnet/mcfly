@@ -185,13 +185,21 @@ ntdll!NtSetInformationWorkerFactory+0x14:
             var facade = new TimeTravelFacade();
             var position = new Position(0, 0);
             var builder = new DebugEngineProxyBuilder();
+            builder.WithExecuteResult(@"Setting position to the beginning of the trace
+Setting position: E:0
+Breakpoint 0 hit
+Time Travel Position: E:0
+ntdll!NtSetInformationWorkerFactory+0x14:
+00007ffc`f0ee3554 c3              ret");
             facade.DebugEngineProxy = builder.Build();
 
             // act
-            facade.SetPosition(position);
+            var posResult = facade.SetPosition(position);
 
             // assert
             builder.Mock.Verify(proxy => proxy.Execute("!tt 0:0"), Times.Once);
+            posResult.ActualPosition.Should().Be(new Position(0xe, 0));
+            posResult.BreakpointHit.Should().Be(0);
         }
     }
 }

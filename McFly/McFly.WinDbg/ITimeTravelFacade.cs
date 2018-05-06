@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 05-05-2018
 // ***********************************************************************
 // <copyright file="ITimeTravelFacade.cs" company="">
 //     Copyright ©  2018
@@ -19,6 +19,7 @@ namespace McFly.WinDbg
     /// <summary>
     ///     Facade over changing the time travel position of the trace
     /// </summary>
+    /// <seealso cref="McFly.WinDbg.IInjectable" />
     /// <seealso cref="IInjectable" />
     public interface ITimeTravelFacade : IInjectable
     {
@@ -49,27 +50,32 @@ namespace McFly.WinDbg
         Position GetCurrentPosition(int threadId);
 
         /// <summary>
-        ///     Gets the ending position
-        /// </summary>
-        /// <returns>Position.</returns>
-        Position GetEndingPosition();
-
-        /// <summary>
-        ///     Gets the starting position of the trace. Many times this is 35:0
-        /// </summary>
-        /// <returns>Position.</returns>
-        Position GetStartingPosition();
-
-        /// <summary>
         ///     Positionses this instance.
         /// </summary>
         /// <returns>PositionsResult.</returns>
         PositionsResult Positions();
 
         /// <summary>
-        ///     Sets the position.
+        ///     Sets the current position
         /// </summary>
+        /// <remarks>
+        ///     If the provided position does not exists, the largest real position less than the provided position will be
+        ///     set
+        /// </remarks>
         /// <param name="position">The position.</param>
-        void SetPosition(Position position);
+        SetPositionResult SetPosition(Position position);
+
+        /// <summary>
+        ///     Gets the first.
+        /// </summary>
+        /// <value>The first.</value>
+        Position FirstPosition { get; }
+
+        /// <summary>
+        ///     Gets the last.
+        /// </summary>
+        /// <value>The last.</value>
+        Position LastPosition { get; }
+
     }
 }

@@ -14,10 +14,8 @@ namespace McFly.WinDbg.Test
         public void Add_A_Tag_To_The_Current_Frame_When_Called_With_Title_And_Body()
         {
             var method = new TagMethod();
-            var engBuilder = new DebugEngineProxyBuilder();
-            var debugEngineProxy = engBuilder
-                .WithThreadId(1).Build();
-            var timeTravelFacade = new TimeTravelFacadeBuilder(engBuilder)
+
+            var timeTravelFacade = new TimeTravelFacadeBuilder()
                 .WithGetCurrentPosition(new Position(1, 1))
                 .WithPositions(new PositionsResult(new List<PositionsRecord>()
                 {
@@ -29,7 +27,6 @@ namespace McFly.WinDbg.Test
                 .WithAddTag()
                 .Build();
 
-            method.DebugEngineProxy = debugEngineProxy;
             method.TimeTravelFacade = timeTravelFacade;
             method.ServerClient = serverClient;
             method.Process(new[] {"add", "-t", "title", "-b", "body"});
@@ -43,10 +40,8 @@ namespace McFly.WinDbg.Test
         public void Tag_All_Frames_At_The_Same_Position_If_All_Is_Set()
         {
             var method = new TagMethod();
-            var engBuilder = new DebugEngineProxyBuilder();
-            var debugEngineProxy = engBuilder
-                .WithThreadId(1).Build();
-            var timeTravelFacade = new TimeTravelFacadeBuilder(engBuilder)
+            
+            var timeTravelFacade = new TimeTravelFacadeBuilder()
                 .WithGetCurrentPosition(new Position(1, 1))
                 .WithPositions(new PositionsResult(new List<PositionsRecord>()
                 {
@@ -59,7 +54,6 @@ namespace McFly.WinDbg.Test
                 .WithAddTag()
                 .Build();
 
-            method.DebugEngineProxy = debugEngineProxy;
             method.TimeTravelFacade = timeTravelFacade;
             method.ServerClient = serverClient;
             method.Process(new[] { "add", "-t", "title", "-b", "body", "-a" });

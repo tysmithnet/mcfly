@@ -27,7 +27,7 @@ namespace McFly.WinDbg
     /// </summary>
     /// <seealso cref="ITimeTravelFacade" />
     [Export(typeof(ITimeTravelFacade))]
-    public class TimeTravelFacade : ITimeTravelFacade
+    internal class TimeTravelFacade : ITimeTravelFacade
     {
         /// <summary>
         ///     Gets the current frame.
@@ -123,11 +123,32 @@ namespace McFly.WinDbg
         ///     Sets the position.
         /// </summary>
         /// <param name="position">The position.</param>
-        public void SetPosition(Position position)
+        public SetPositionResult SetPosition(Position position)
         {
-            DebugEngineProxy.Execute($"!tt {position}");
+            var result = new SetPositionResult();
+            var output = DebugEngineProxy.Execute($"!tt {position}");
+            var match = Regex.Match(output, "Time Travel Position: (?<pos>[a-f0-9]+:[a-f0-9]+)", RegexOptions.IgnoreCase);
+            if (!match.Success)
+                throw new ApplicationException(
+                    $"Attempted to set position to {position}, but was unable to process the output");
+            result.ActualPosition = Position.Parse(match.Groups["pos"].Value);
+            var breakpointMatch = Regex.Match(output, @"Breakpoint (?<bp>\d+) hit");
+            if (breakpointMatch.Success)
+            {
+                result.BreakpointHit = Convert.ToInt32(breakpointMatch.Groups["bp"].Value);
+            }
+            return result;
         }
 
+        private Position _first;
+        private Position _last;
+
+        /// <inheritdoc />
+        public Position FirstPosition => _first != null ? _first : (_first = GetStartingPosition());
+
+        /// <inheritdoc />
+        public Position LastPosition => _last != null ? _last : (_last = GetEndingPosition());
+        
         /// <summary>
         ///     Parses the positions command text.
         /// </summary>

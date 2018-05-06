@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 05-05-2018
 // ***********************************************************************
 // <copyright file="IndexOptions.cs" company="">
 //     Copyright ©  2018
@@ -22,6 +22,7 @@ namespace McFly.WinDbg
     /// <summary>
     ///     Options for the index method
     /// </summary>
+    /// <seealso cref="System.IEquatable{McFly.WinDbg.IndexOptions}" />
     /// <seealso cref="IndexOptions" />
     /// <seealso cref="IndexOptions" />
     internal class IndexOptions : IEquatable<IndexOptions>
@@ -120,6 +121,12 @@ namespace McFly.WinDbg
         /// </summary>
         /// <value>The end.</value>
         public Position End { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance is all positions in range.
+        /// </summary>
+        /// <value><c>true</c> if this instance is all positions in range; otherwise, <c>false</c>.</value>
+        public bool IsAllPositionsInRange { get; set; }
 
         /// <summary>
         ///     Gets or sets the memory ranges.

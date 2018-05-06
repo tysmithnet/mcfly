@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using McFly.Core;
@@ -21,7 +22,6 @@ namespace McFly.WinDbg.Test
     BeingDebugged:            No
     ...
     ImageBaseAddress:         0000000140000000        _NT_SYMBOL_PATH=SRV*c:\symbols*http://msdl.microsoft.com/download/symbols");
-            var proxy = builder.Build();
 
             // Act
             var indexMethod = new IndexMethod();
@@ -41,11 +41,9 @@ namespace McFly.WinDbg.Test
                 End = new Position(0x35, 0x1)
             };
 
-            var dbg = new DebugEngineProxyBuilder();
             var indexMethod = new IndexMethod();
-            indexMethod.DebugEngineProxy = dbg.Build();
-            var builder = new TimeTravelFacadeBuilder(dbg);
-            builder.WithGetEndingPosition(new Position(0x35, 5));
+            var builder = new TimeTravelFacadeBuilder();
+            builder.WithLastPosition(new Position(0x35, 5));
             indexMethod.TimeTravelFacade = builder.Build();
 
             // Act
@@ -65,11 +63,9 @@ namespace McFly.WinDbg.Test
                 Start = new Position(0x35, 0x1)
             };
 
-            var dbg = new DebugEngineProxyBuilder();
             var indexMethod = new IndexMethod();
-            indexMethod.DebugEngineProxy = dbg.Build();
-            var builder = new TimeTravelFacadeBuilder(dbg);
-            builder.WithGetStartingPosition(new Position(0x35, 0));
+            var builder = new TimeTravelFacadeBuilder();
+            builder.WithFirstPosition(new Position(0x35, 0));
             indexMethod.TimeTravelFacade = builder.Build();
 
             // Act
@@ -154,38 +150,7 @@ namespace McFly.WinDbg.Test
         [Fact]
         public void Upsert_Frames_From_Breaks()
         {
-            var dbg = new DebugEngineProxyBuilder();
-            var tt = new TimeTravelFacadeBuilder(dbg);
-            var sc = new ServerClientBuilder();
-            var bp = new BreakpointFacadeBuilder();
-            dbg.WithRunUntilBreak();
-            var count = 0;
-            dbg.SetRunUntilBreakCallback(() =>
-            {
-                if (count++ > 0)
-                    tt.AdvanceToNextPosition();
-            });
-            var dbgEngProxy = dbg.Build();
-            var timeTravelFacade = tt.Build();
-            var serverClient = sc.Build();
-            var bpFacade = bp.Build();
-            dbg.CurrentThreadId = MockFrames.SingleThreaded0.First().ThreadId;
-            tt.WithFrames(MockFrames.SingleThreaded0);
-            sc.WithUpsertFrames(() => { });
-
-            var indexMethod = new IndexMethod
-            {
-                DebugEngineProxy = dbgEngProxy,
-                TimeTravelFacade = timeTravelFacade,
-                ServerClient = serverClient,
-                BreakpointFacade = bpFacade
-            };
-
-            indexMethod.ProcessInternal(new Position(0, 0), MockFrames.SingleThreaded0.Max(x => x.Position),
-                new IndexOptions());
-            sc.Mock.Verify(client =>
-                client.UpsertFrames(
-                    It.Is<IEnumerable<Frame>>(frames => frames.SequenceEqual(MockFrames.SingleThreaded0))));
+            throw new NotImplementedException();
         }
     }
 }
