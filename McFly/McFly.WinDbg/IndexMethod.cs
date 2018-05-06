@@ -28,7 +28,7 @@ namespace McFly.WinDbg
     /// <seealso cref="IMcFlyMethod" />
     [Export(typeof(IMcFlyMethod))]
     [Export(typeof(IndexMethod))]
-    internal sealed class IndexMethod : IMcFlyMethod
+    internal class IndexMethod : IMcFlyMethod
     {
         /// <summary>
         ///     The is32 bit flag
@@ -59,9 +59,8 @@ namespace McFly.WinDbg
         ///     Creates the frames for upsert.
         /// </summary>
         /// <param name="positions">The positions.</param>
-        /// <param name="options">The options.</param>
         /// <returns>List&lt;Frame&gt;.</returns>
-        internal List<Frame> CreateFramesForUpsert(PositionsResult positions, IndexOptions options)
+        internal virtual List<Frame> CreateFramesForUpsert(PositionsResult positions)
         {
             var breakRecord = positions.CurrentThreadResult;
             var frames = positions
@@ -82,11 +81,12 @@ namespace McFly.WinDbg
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="System.FormatException"></exception>
         /// <exception cref="System.ArgumentException"></exception>
-        internal static void ExtractAccessBreakpoints(string[] args, int startingIndex, string arg,
+        internal virtual int ExtractAccessBreakpoints(string[] args, int startingIndex, string arg,
             IndexOptions options)
         {
             var accessBreakpoints = new List<AccessBreakpoint>();
-            for (var j = startingIndex + 1; j < args.Length; j++)
+            int j;
+            for (j = startingIndex + 1; j < args.Length; j++)
             {
                 var ptr = args[j];
                 if (Switches.Contains(ptr))
@@ -105,30 +105,32 @@ namespace McFly.WinDbg
             if (!accessBreakpoints.Any())
                 throw new ArgumentException($"No memory ranges provided to {arg}");
             options.AccessBreakpoints = accessBreakpoints;
+            return j;
         }
 
         /// <summary>
         ///     Extracts the end.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        /// <param name="i">The i.</param>
+        /// <param name="startIndex">The i.</param>
         /// <param name="arg">The argument.</param>
         /// <param name="options">The options.</param>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="System.FormatException"></exception>
-        internal static void ExtractEnd(string[] args, int i, string arg, IndexOptions options)
+        internal virtual int ExtractEnd(string[] args, int startIndex, string arg, IndexOptions options)
         {
-            if (i + 1 >= args.Length)
+            if (startIndex + 1 >= args.Length)
                 throw new ArgumentException($"No argument passed to {arg}");
             try
             {
-                options.End = Position.Parse(args[i + 1]);
+                options.End = Position.Parse(args[startIndex + 1]);
+                return startIndex + 1;
             }
             catch (Exception e)
             {
-                throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e);
+                throw new FormatException($"Unable to parse {args[startIndex + 1]} as a Position", e);
             }
         }
 
@@ -139,34 +141,34 @@ namespace McFly.WinDbg
         /// <returns>IndexOptions.</returns>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        internal IndexOptions ExtractIndexOptions(string[] args)
+        internal virtual IndexOptions ExtractIndexOptions(string[] args)
         {
             var options = new IndexOptions();
-            for (var i = 0; i < args.Length; i++)
+            for (var index = 0; index < args.Length; index++)
             {
-                var arg = args[i];
+                var arg = args[index];
                 switch (arg)
                 {
                     case "-m":
                     case "--memory":
-                        ExtractMemoryRanges(args, i, arg, options);
+                        index = ExtractMemoryRanges(args, index, arg, options);
                         break;
                     case "-s":
                     case "--start":
-                        ExtractStart(args, i, arg, options);
+                        index = ExtractStart(args, index, arg, options);
                         break;
                     case "-e":
                     case "--end":
-                        ExtractEnd(args, i, arg, options);
+                        index = ExtractEnd(args, index, arg, options);
                         break;
                     case "--bm":
-                        ExtractMasks(args, i, arg, options);
+                        index = ExtractMasks(args, index, arg, options);
                         break;
                     case "--ba":
-                        ExtractAccessBreakpoints(args, i, arg, options); // todo: these all need to be by ref i
+                        index = ExtractAccessBreakpoints(args, index, arg, options); // todo: these all need to be by ref i
                         break;
                     case "--step":
-                        ExtractStep(args, ref i, options);
+                        index = ExtractStep(args, index, options);
                         break;
                     case "-a":
                     case "--all":
@@ -178,21 +180,11 @@ namespace McFly.WinDbg
             return options;
         }
 
-        /// <summary>
-        ///     Extracts the masks.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <param name="i">The i.</param>
-        /// <param name="arg">The argument.</param>
-        /// <param name="options">The options.</param>
-        /// <exception cref="FormatException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="System.FormatException"></exception>
-        /// <exception cref="System.ArgumentException"></exception>
-        internal static void ExtractMasks(string[] args, int i, string arg, IndexOptions options)
+        internal virtual int ExtractMasks(string[] args, int startIndex, string arg, IndexOptions options)
         {
             var breakpointMasks = new List<BreakpointMask>();
-            for (var j = i + 1; j < args.Length; j++)
+            int j;
+            for (j = startIndex + 1; j < args.Length; j++)
             {
                 var ptr = args[j];
                 if (Switches.Contains(ptr))
@@ -211,23 +203,14 @@ namespace McFly.WinDbg
             if (!breakpointMasks.Any())
                 throw new ArgumentException($"No breakpoint masks provided to {arg}");
             options.BreakpointMasks = breakpointMasks;
+            return j;
         }
 
-        /// <summary>
-        ///     Extracts the memory ranges.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <param name="i">The i.</param>
-        /// <param name="arg">The argument.</param>
-        /// <param name="options">The options.</param>
-        /// <exception cref="FormatException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="System.FormatException"></exception>
-        /// <exception cref="System.ArgumentException"></exception>
-        internal void ExtractMemoryRanges(string[] args, int i, string arg, IndexOptions options)
+        internal virtual int ExtractMemoryRanges(string[] args, int startIndex, string arg, IndexOptions options)
         {
             var ranges = new List<MemoryRange>();
-            for (var j = i + 1; j < args.Length; j++)
+            int j;
+            for (j = startIndex + 1; j < args.Length; j++)
             {
                 var ptr = args[j];
                 if (Switches.Contains(ptr))
@@ -246,86 +229,52 @@ namespace McFly.WinDbg
             if (!ranges.Any())
                 throw new ArgumentException($"No memory ranges provided to {arg}");
             options.MemoryRanges = ranges;
+            return j;
         }
 
-        /// <summary>
-        ///     Extracts the start.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <param name="i">The i.</param>
-        /// <param name="arg">The argument.</param>
-        /// <param name="options">The options.</param>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="FormatException"></exception>
-        /// <exception cref="System.ArgumentException"></exception>
-        /// <exception cref="System.FormatException"></exception>
-        internal static void ExtractStart(string[] args, int i, string arg, IndexOptions options)
+        internal virtual int ExtractStart(string[] args, int startindex, string arg, IndexOptions options)
         {
-            if (i + 1 >= args.Length)
+            if (startindex + 1 >= args.Length)
                 throw new ArgumentException($"No argument passed to {arg}");
             try
             {
-                options.Start = Position.Parse(args[i + 1]);
+                options.Start = Position.Parse(args[startindex + 1]);
+                return startindex + 1;
             }
             catch (Exception e)
             {
-                throw new FormatException($"Unable to parse {args[i + 1]} as a Position", e);
+                throw new FormatException($"Unable to parse {args[startindex + 1]} as a Position", e);
             }
         }
 
-        /// <summary>
-        ///     Extracts the step.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <param name="i">The i.</param>
-        /// <param name="options">The options.</param>
-        /// <exception cref="ArgumentException">args</exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        ///     args
-        ///     or
-        ///     args
-        /// </exception>
-        internal static void ExtractStep(string[] args, ref int i, IndexOptions options)
+        internal virtual int ExtractStep(string[] args, int startIndex, IndexOptions options)
         {
-            if (i + 1 >= args.Length)
+            if (startIndex + 1 >= args.Length)
                 throw new ArgumentException($"--step requires a positive integer", nameof(args));
-            if (int.TryParse(args[i + 1], out var step))
+            if (int.TryParse(args[startIndex + 1], out var step))
             {
                 if (step < 1)
                     throw new ArgumentOutOfRangeException(nameof(args),
-                        $"--step requires a positive integer, but found {args[i + 1]}");
+                        $"--step requires a positive integer, but found {args[startIndex + 1]}");
 
                 options.Step = step;
+                return 1;
             }
             else
             {
                 throw new ArgumentOutOfRangeException(nameof(args),
-                    $"--step requires a positive integer, but found {args[i + 1]}");
+                    $"--step requires a positive integer, but found {args[startIndex + 1]}");
             }
-
-            i++;
         }
 
-        /// <summary>
-        ///     Gets the starting position.
-        /// </summary>
-        /// <param name="options">The options.</param>
-        /// <returns>Position.</returns>
-        /// <exception cref="FormatException"></exception>
-        internal Position GetEndingPosition(IndexOptions options)
+        internal virtual Position GetEndingPosition(IndexOptions options)
         {
             if (options == null || options.End == null)
                 return TimeTravelFacade.LastPosition;
             return options.End;
         }
 
-        /// <summary>
-        ///     Gets the starting position.
-        /// </summary>
-        /// <param name="options">The options.</param>
-        /// <returns>Position.</returns>
-        /// <exception cref="FormatException"></exception>
-        internal Position GetStartingPosition(IndexOptions options)
+        internal virtual Position GetStartingPosition(IndexOptions options)
         {
             if (options == null || options.Start == null)
                 return TimeTravelFacade.FirstPosition;
@@ -336,7 +285,7 @@ namespace McFly.WinDbg
         ///     Indexes all positions in range.
         /// </summary>
         /// <param name="options">The options.</param>
-        internal void IndexAllPositionsInRange(IndexOptions options)
+        internal virtual void IndexAllPositionsInRange(IndexOptions options)
         {
             var end = options.End ?? TimeTravelFacade.LastPosition;
             var start = options.Start ?? TimeTravelFacade.FirstPosition;
@@ -353,7 +302,7 @@ namespace McFly.WinDbg
         ///     Indexes the breakpoint hits.
         /// </summary>
         /// <param name="options">The options.</param>
-        internal void IndexBreakpointHits(IndexOptions options)
+        internal virtual void IndexBreakpointHits(IndexOptions options)
         {
             var end = options.End ?? TimeTravelFacade.LastPosition;
             var start = options.Start ?? TimeTravelFacade.FirstPosition;
@@ -380,24 +329,10 @@ namespace McFly.WinDbg
         }
 
         /// <summary>
-        ///     Is32s the bit.
-        /// </summary>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        internal bool Is32Bit()
-        {
-            if (!_is32Bit.HasValue)
-                _is32Bit = Regex.Match(DebugEngineProxy.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"]
-                               .Value
-                               .Length ==
-                           8;
-            return _is32Bit.Value;
-        }
-
-        /// <summary>
         ///     Sets the breakpoints.
         /// </summary>
         /// <param name="options">The options.</param>
-        internal void SetBreakpoints(IndexOptions options)
+        internal virtual void SetBreakpoints(IndexOptions options)
         {
             if (options.BreakpointMasks != null)
                 foreach (var optionsBreakpointMask in options.BreakpointMasks)
@@ -412,10 +347,10 @@ namespace McFly.WinDbg
         ///     Upserts the current position.
         /// </summary>
         /// <param name="options">The options.</param>
-        internal void UpsertCurrentPosition(IndexOptions options)
+        internal virtual void UpsertCurrentPosition(IndexOptions options)
         {
             var positions = TimeTravelFacade.Positions();
-            var frames = CreateFramesForUpsert(positions, options);
+            var frames = CreateFramesForUpsert(positions);
             ServerClient.UpsertFrames(frames);
             foreach (var optionsMemoryRange in options?.MemoryRanges ?? new List<MemoryRange>())
             {
@@ -457,35 +392,35 @@ namespace McFly.WinDbg
         /// </summary>
         /// <value>The breakpoint facade.</value>
         [Import]
-        internal IBreakpointFacade BreakpointFacade { private get; set; }
+        internal virtual IBreakpointFacade BreakpointFacade { private get; set; }
 
         /// <summary>
         ///     Gets or sets the debug eng proxy.
         /// </summary>
         /// <value>The debug eng proxy.</value>
         [Import]
-        internal IDebugEngineProxy DebugEngineProxy { private get; set; }
+        internal virtual IDebugEngineProxy DebugEngineProxy { private get; set; }
 
         /// <summary>
         ///     Gets or sets the server client.
         /// </summary>
         /// <value>The server client.</value>
         [Import]
-        internal IServerClient ServerClient { private get; set; }
+        internal virtual IServerClient ServerClient { private get; set; }
 
         /// <summary>
         ///     Gets or sets the settings.
         /// </summary>
         /// <value>The settings.</value>
         [Import]
-        internal Settings Settings { private get; set; }
+        internal virtual Settings Settings { private get; set; }
 
         /// <summary>
         ///     Gets or sets the time travel facade.
         /// </summary>
         /// <value>The time travel facade.</value>
         [Import]
-        internal ITimeTravelFacade TimeTravelFacade { private get; set; }
+        internal virtual ITimeTravelFacade TimeTravelFacade { private get; set; }
 
         /// <summary>
         ///     Gets or sets the log.

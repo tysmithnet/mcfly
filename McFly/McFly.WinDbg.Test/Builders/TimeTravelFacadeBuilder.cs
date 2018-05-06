@@ -87,6 +87,7 @@ namespace McFly.WinDbg.Test.Builders
             WithLastPosition(_frames.Max(x => x.Position));
             _currentPosition = new Position(0, 0);
             AdvanceToNextPosition();
+            
             return this;
         }
 
@@ -162,5 +163,11 @@ namespace McFly.WinDbg.Test.Builders
         /// </summary>
         /// <value>The current frames.</value>
         public IEnumerable<Frame> CurrentFrames => _frames.Where(x => x.Position == _currentPosition);
+
+        public TimeTravelFacadeBuilder WithGetCurrentFrame(int threadId, Frame frame)
+        {
+            Mock.Setup(facade => facade.GetCurrentFrame(threadId)).Returns(frame);
+            return this;
+        }
     }
 }
