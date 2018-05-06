@@ -70,19 +70,7 @@ namespace McFly.WinDbg
             return frames;
         }
 
-        /// <summary>
-        ///     Extracts the access breakpoints
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <param name="startingIndex">The i.</param>
-        /// <param name="arg">The argument.</param>
-        /// <param name="options">The options.</param>
-        /// <exception cref="FormatException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="System.FormatException"></exception>
-        /// <exception cref="System.ArgumentException"></exception>
-        internal virtual int ExtractAccessBreakpoints(string[] args, int startingIndex, string arg,
-            IndexOptions options)
+        internal virtual int ExtractAccessBreakpoints(string[] args, int startingIndex, string arg, IndexOptions options)
         {
             var accessBreakpoints = new List<AccessBreakpoint>();
             int j;
@@ -91,46 +79,33 @@ namespace McFly.WinDbg
                 var ptr = args[j];
                 if (Switches.Contains(ptr))
                     break;
+                AccessBreakpoint bp;
                 try
                 {
-                    var bp = AccessBreakpoint.Parse(ptr);
-                    accessBreakpoints.Add(bp);
+                    bp = AccessBreakpoint.Parse(ptr);
                 }
-                catch (Exception e)
+                catch (FormatException e)
                 {
-                    throw new FormatException($"Unable to parse {ptr} as an access breakpoint", e);
+                    throw new FormatException($"Cannot parse the argument \"{ptr}\" as an access breakpoint for {arg}", e);
                 }
+                accessBreakpoints.Add(bp);
             }
-
-            if (!accessBreakpoints.Any())
-                throw new ArgumentException($"No memory ranges provided to {arg}");
             options.AccessBreakpoints = accessBreakpoints;
-            return j;
+            return j - 1;
         }
 
-        /// <summary>
-        ///     Extracts the end.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <param name="startIndex">The i.</param>
-        /// <param name="arg">The argument.</param>
-        /// <param name="options">The options.</param>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="FormatException"></exception>
-        /// <exception cref="System.ArgumentException"></exception>
-        /// <exception cref="System.FormatException"></exception>
-        internal virtual int ExtractEnd(string[] args, int startIndex, string arg, IndexOptions options)
+        internal virtual int ExtractEndingPosition(string[] args, int startIndex, string arg, IndexOptions options)
         {
             if (startIndex + 1 >= args.Length)
-                throw new ArgumentException($"No argument passed to {arg}");
+                throw new ArgumentException($"No argument passed to {arg}", nameof(args));
             try
             {
                 options.End = Position.Parse(args[startIndex + 1]);
                 return startIndex + 1;
             }
-            catch (Exception e)
+            catch (FormatException e)
             {
-                throw new FormatException($"Unable to parse {args[startIndex + 1]} as a Position", e);
+                throw new FormatException($"Unable to parse {args[startIndex]} as a Position", e);
             }
         }
 
@@ -155,11 +130,11 @@ namespace McFly.WinDbg
                         break;
                     case "-s":
                     case "--start":
-                        index = ExtractStart(args, index, arg, options);
+                        index = ExtractStartingPosition(args, index, arg, options);
                         break;
                     case "-e":
                     case "--end":
-                        index = ExtractEnd(args, index, arg, options);
+                        index = ExtractEndingPosition(args, index, arg, options);
                         break;
                     case "--bm":
                         index = ExtractMasks(args, index, arg, options);
@@ -232,7 +207,7 @@ namespace McFly.WinDbg
             return j;
         }
 
-        internal virtual int ExtractStart(string[] args, int startindex, string arg, IndexOptions options)
+        internal virtual int ExtractStartingPosition(string[] args, int startindex, string arg, IndexOptions options)
         {
             if (startindex + 1 >= args.Length)
                 throw new ArgumentException($"No argument passed to {arg}");
@@ -253,18 +228,12 @@ namespace McFly.WinDbg
                 throw new ArgumentException($"--step requires a positive integer", nameof(args));
             if (int.TryParse(args[startIndex + 1], out var step))
             {
-                if (step < 1)
-                    throw new ArgumentOutOfRangeException(nameof(args),
-                        $"--step requires a positive integer, but found {args[startIndex + 1]}");
-
                 options.Step = step;
-                return 1;
+                return startIndex + 1;
             }
-            else
-            {
-                throw new ArgumentOutOfRangeException(nameof(args),
-                    $"--step requires a positive integer, but found {args[startIndex + 1]}");
-            }
+
+            throw new FormatException(
+                $"--step requires a positive integer, but found {args[startIndex + 1]}");
         }
 
         internal virtual Position GetEndingPosition(IndexOptions options)
