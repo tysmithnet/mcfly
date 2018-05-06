@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-22-2018
+// Last Modified On : 05-05-2018
 // ***********************************************************************
 // <copyright file="McFly.cs" company="">
 //     Copyright ©  2018
@@ -293,22 +293,6 @@ namespace McFly.WinDbg
         }
 
         /// <summary>
-        ///     Uses the specified client.
-        /// </summary>
-        /// <param name="client">The client.</param>
-        /// <param name="args">The arguments.</param>
-        /// <returns>HRESULT.</returns>
-        [DllExport]
-        public static HRESULT use(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
-        {
-            InitApi();
-
-            Use(args);
-
-            return HRESULT.S_OK;
-        }
-
-        /// <summary>
         ///     Writes the specified message.
         /// </summary>
         /// <param name="Message">The message.</param>
@@ -543,6 +527,11 @@ namespace McFly.WinDbg
             }
         }
 
+        /// <summary>
+        ///     Gets the exception message.
+        /// </summary>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
         private static string GetExceptionMessage(Exception e)
         {
             var sb = new StringBuilder();
@@ -555,27 +544,6 @@ namespace McFly.WinDbg
             }
 
             return sb.ToString();
-        }
-
-        /// <summary>
-        ///     Uses the specified project name.
-        /// </summary>
-        /// <param name="projectName">Name of the project.</param>
-        private static void Use(string projectName)
-        {
-            if (string.IsNullOrWhiteSpace(projectName))
-            {
-                WriteLine("Error: project name was not valid");
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(settings.ConnectionString))
-            {
-                WriteLine("Error: Connection string is not configured yet");
-                return;
-            }
-
-            settings.ProjectName = projectName;
         }
 
         /// <summary>
