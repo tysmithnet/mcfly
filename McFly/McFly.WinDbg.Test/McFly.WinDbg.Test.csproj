@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -97,6 +98,7 @@
     <Compile Include="MemoryEngineBuilder.cs" />
     <Compile Include="MemoryEngine_Should.cs" />
     <Compile Include="MockFrames.cs" />
+    <Compile Include="RegisterEngine_Should.cs" />
     <Compile Include="TagMethod_Should.cs" />
     <Compile Include="PositionsRecord_Should.cs" />
     <Compile Include="PositionsResult_Should.cs" />
