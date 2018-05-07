@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using McFly.Core;
 using McFly.Core.Registers;
 using Moq;
 
@@ -148,6 +149,12 @@ namespace McFly.WinDbg.Test.Builders
         {
             get => Mock.Object.GetCurrentThreadId();
             set { Mock.Setup(proxy => proxy.GetCurrentThreadId()).Returns(value); }
+        }
+
+        public DebugEngineProxyBuilder WithReadVirtualMemory(byte[] bytes)
+        {
+            Mock.Setup(proxy => proxy.ReadVirtualMemory(It.IsAny<MemoryRange>())).Returns(bytes);
+            return this;
         }
     }
 }

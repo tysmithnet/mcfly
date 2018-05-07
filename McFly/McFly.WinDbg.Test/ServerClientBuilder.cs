@@ -99,5 +99,11 @@ namespace McFly.WinDbg.Test
                 client.UpsertFrames(It.Is<IEnumerable<Frame>>(enumerable => enumerable.SequenceEqual(list))));
             return this;
         }
+
+        public ServerClientBuilder WithAddMemoryRange()
+        {
+            Mock.Setup(client => client.AddMemoryRange(It.IsAny<MemoryChunk>()));
+            return this;
+        }
     }
 }

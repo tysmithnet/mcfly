@@ -39,7 +39,7 @@ namespace McFly.WinDbg
         ///     The switches this application can take
         /// </summary>
         private static readonly string[] Switches =
-            {"-m", "--memory", "-s", "--start", "-e", "--end", "--bm", "--ba", "--step"};
+            {"-m", "--memory", "-s", "--start", "-e", "--end", "--bm", "--ba", "--step", "-a", "--all"};
 
         /// <summary>
         ///     Processes the specified arguments.
@@ -137,7 +137,7 @@ namespace McFly.WinDbg
                         index = ExtractEndingPosition(args, index, arg, options);
                         break;
                     case "--bm":
-                        index = ExtractMasks(args, index, arg, options);
+                        index = ExtractBreakpointMasks(args, index, arg, options);
                         break;
                     case "--ba":
                         index = ExtractAccessBreakpoints(args, index, arg, options); // todo: these all need to be by ref i
@@ -155,7 +155,7 @@ namespace McFly.WinDbg
             return options;
         }
 
-        internal virtual int ExtractMasks(string[] args, int startIndex, string arg, IndexOptions options)
+        internal virtual int ExtractBreakpointMasks(string[] args, int startIndex, string arg, IndexOptions options)
         {
             var breakpointMasks = new List<BreakpointMask>();
             int j;
@@ -174,11 +174,9 @@ namespace McFly.WinDbg
                     throw new FormatException($"Unable to parse {ptr} as a BreakpointMask", e);
                 }
             }
-
-            if (!breakpointMasks.Any())
-                throw new ArgumentException($"No breakpoint masks provided to {arg}");
+            
             options.BreakpointMasks = breakpointMasks;
-            return j;
+            return j - 1;
         }
 
         internal virtual int ExtractMemoryRanges(string[] args, int startIndex, string arg, IndexOptions options)
@@ -201,10 +199,8 @@ namespace McFly.WinDbg
                 }
             }
 
-            if (!ranges.Any())
-                throw new ArgumentException($"No memory ranges provided to {arg}");
             options.MemoryRanges = ranges;
-            return j;
+            return j - 1;
         }
 
         internal virtual int ExtractStartingPosition(string[] args, int startindex, string arg, IndexOptions options)
@@ -256,8 +252,8 @@ namespace McFly.WinDbg
         /// <param name="options">The options.</param>
         internal virtual void IndexAllPositionsInRange(IndexOptions options)
         {
-            var end = options.End ?? TimeTravelFacade.LastPosition;
-            var start = options.Start ?? TimeTravelFacade.FirstPosition;
+            var end = GetEndingPosition(options);
+            var start = GetStartingPosition(options);
             var curPos = TimeTravelFacade.SetPosition(start).ActualPosition;
             while (curPos <= end)
             {
@@ -273,8 +269,8 @@ namespace McFly.WinDbg
         /// <param name="options">The options.</param>
         internal virtual void IndexBreakpointHits(IndexOptions options)
         {
-            var end = options.End ?? TimeTravelFacade.LastPosition;
-            var start = options.Start ?? TimeTravelFacade.FirstPosition;
+            var end = GetEndingPosition(options);
+            var start = GetStartingPosition(options);
             var curPos = TimeTravelFacade.SetPosition(start).ActualPosition;
             BreakpointFacade.ClearBreakpoints();
             SetBreakpoints(options);
@@ -282,7 +278,8 @@ namespace McFly.WinDbg
             {
                 DebugEngineProxy.RunUntilBreak();
                 curPos = TimeTravelFacade.GetCurrentPosition();
-                if (curPos <= end) UpsertCurrentPosition(options);
+                if (curPos <= end)
+                    UpsertCurrentPosition(options);
                 for (int i = 0; i < options.Step; i++)
                 {
                     var newPosition = new Position(curPos.High, curPos.Low + 1);
@@ -307,8 +304,7 @@ namespace McFly.WinDbg
                 foreach (var optionsBreakpointMask in options.BreakpointMasks)
                     optionsBreakpointMask.SetBreakpoint(BreakpointFacade);
 
-            if (options.AccessBreakpoints == null) return;
-            foreach (var accessBreakpoint in options.AccessBreakpoints)
+            foreach (var accessBreakpoint in options.AccessBreakpoints ?? new AccessBreakpoint[0])
                 accessBreakpoint.SetBreakpoint(BreakpointFacade);
         }
 

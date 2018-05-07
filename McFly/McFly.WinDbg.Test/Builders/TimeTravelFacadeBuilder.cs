@@ -30,7 +30,7 @@ namespace McFly.WinDbg.Test.Builders
         {
             Mock.Setup(facade => facade.GetCurrentFrame(It.IsAny<int>())).Returns((int i) =>
             {
-                return _frames.Single(x => x.Position == _currentPosition && x.ThreadId == i);
+                return _frames.SingleOrDefault(x => x.Position == _currentPosition && x.ThreadId == i);
             });
         }
 
