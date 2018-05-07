@@ -16,6 +16,7 @@ using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using Common.Logging;
 
 namespace McFly.WinDbg
 {
@@ -76,8 +77,7 @@ namespace McFly.WinDbg
         ///     Gets or sets the log.
         /// </summary>
         /// <value>The log.</value>
-        [Import(typeof(ILog))]
-        private ILog Log { get; set; }
+        private ILog Log = LogManager.GetLogger<StartMethod>();
 
         /// <summary>
         ///     Gets or sets the settings.

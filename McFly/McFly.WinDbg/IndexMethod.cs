@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Common.Logging;
 using McFly.Core;
 
 namespace McFly.WinDbg

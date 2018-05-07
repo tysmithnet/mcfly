@@ -22,6 +22,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
+using Common.Logging;
 using McFly.WinDbg.Debugger;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -75,7 +76,7 @@ namespace McFly.WinDbg
         /// <summary>
         ///     The log
         /// </summary>
-        private static ILog log;
+        private static ILog log = LogManager.GetLogger<McFlyExtension>();
 
         /// <summary>
         ///     The p format
@@ -191,7 +192,6 @@ namespace McFly.WinDbg
                 {
                     var assembly = Assembly.GetExecutingAssembly();
                     var path = Path.Combine(Path.GetDirectoryName(assembly.Location), "mcfly.log");
-                    log = new DefaultLog(path);
                     InitApi(log);
                     var types = assembly.GetTypes().Where(x => typeof(IInjectable).IsAssignableFrom(x));
                     log.Debug($"Injectable types: {string.Join(", ", types.Select(x => x.FullName))}");
@@ -217,8 +217,6 @@ namespace McFly.WinDbg
         [DllExport]
         public static HRESULT DebugExtensionUninitialize()
         {
-            if (log != null)
-                log.Dispose();
             if (currDomain != null)
                 AppDomain.Unload(currDomain);
 
@@ -361,7 +359,7 @@ namespace McFly.WinDbg
         ///     Gets the log path.
         /// </summary>
         /// <returns>System.String.</returns>
-        internal static string GetLogPath()
+        internal static string GetConfigPath()
         {
             var assemblyPath = Assembly.GetExecutingAssembly().Location;
             assemblyPath = Path.GetDirectoryName(assemblyPath);
@@ -400,7 +398,7 @@ namespace McFly.WinDbg
         internal static void PopulateSettings()
         {
             var settingsInstances = compositionContainer.GetExportedValues<ISettings>().ToArray();
-            var filePath = GetLogPath();
+            var filePath = GetConfigPath();
             string json = null;
             try
             {

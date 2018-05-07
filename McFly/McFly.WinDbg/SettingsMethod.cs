@@ -58,7 +58,7 @@ namespace McFly.WinDbg
                     McFlyExtension.PopulateSettings();
                     break;
                 case "open":
-                    var p = System.Diagnostics.Process.Start(McFlyExtension.GetLogPath());
+                    var p = System.Diagnostics.Process.Start(McFlyExtension.GetConfigPath());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(args),

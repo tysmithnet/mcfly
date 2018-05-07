@@ -187,7 +187,6 @@
     <Compile Include="Debugger\IDebugSystemObjects2.cs" />
     <Compile Include="Debugger\IDebugSystemObjects3.cs" />
     <Compile Include="Debugger\Structs.cs" />
-    <Compile Include="DefaultLog.cs" />
     <Compile Include="DisassemblyFacade.cs" />
     <Compile Include="ExecuteWrapper.cs" />
     <Compile Include="Debugger\HRESULT.cs" />
@@ -204,7 +203,6 @@
     <Compile Include="IDisassemblyFacade.cs" />
     <Compile Include="IHttpFacade.cs" />
     <Compile Include="IInjectable.cs" />
-    <Compile Include="ILog.cs" />
     <Compile Include="IMcFlyMethod.cs" />
     <Compile Include="HelpInfo.cs" />
     <Compile Include="IndexMethod.cs" />
