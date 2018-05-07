@@ -452,18 +452,6 @@ namespace McFly.WinDbg
         private static extern IntPtr CommandLineToArgvW(
             [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, out int pNumArgs);
 
-        /// <summary>
-        ///     Get the HRESULT code for the specified int
-        /// </summary>
-        /// <param name="Result">The result.</param>
-        /// <returns>HRESULT.</returns>
-        private static HRESULT ConvertIntToHResult(int Result)
-        {
-            // Convert to Uint
-            var value = BitConverter.ToUInt32(BitConverter.GetBytes(Result), 0);
-
-            return ConvertIntToHResult(value);
-        }
 
         /// <summary>
         ///     Get the HRESULT code for the specified int
@@ -496,7 +484,7 @@ namespace McFly.WinDbg
             if (hr < 0)
             {
                 LastHR = ConvertIntToHResult(hr);
-                WriteLine("SourceFix: Unable to acquire client interface");
+                WriteLine("Error creating IDebugClient interface, ensure you have the correct assemblies installed");
                 return null;
             }
 
@@ -512,18 +500,10 @@ namespace McFly.WinDbg
         private static void CurrDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             InitApi();
-            WriteLine("SourceExt: An unhandled exception happened on the extension");
-            WriteLine("  This error is related to the extension itself not the target.");
-            WriteLine("  The information on the exception is below:\n");
-
-            var ex = e.ExceptionObject as Exception;
-            while (ex != null)
+            if (e.ExceptionObject is Exception exception)
             {
-                WriteLine("{0} - {1} at", ex.GetType().ToString(), ex.Message);
-                WriteLine("{0}", ex.StackTrace);
-                ex = ex.InnerException;
-                if (ex != null)
-                    WriteLine("\n----- Inner Exception -----------");
+                string message = GetExceptionMessage(exception);
+                WriteLine(message);
             }
         }
 
@@ -545,14 +525,5 @@ namespace McFly.WinDbg
 
             return sb.ToString();
         }
-
-        /// <summary>
-        ///     Delegate Ioctl
-        /// </summary>
-        /// <param name="IoctlType">Type of the ioctl.</param>
-        /// <param name="lpvData">The LPV data.</param>
-        /// <param name="cbSizeOfContext">The cb size of context.</param>
-        /// <returns>System.UInt32.</returns>
-        internal delegate uint Ioctl(IG IoctlType, ref WDBGEXTS_CLR_DATA_INTERFACE lpvData, int cbSizeOfContext);
     }
 }
