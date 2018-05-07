@@ -14,6 +14,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 
 namespace McFly.WinDbg
@@ -36,6 +37,7 @@ namespace McFly.WinDbg
         ///     or
         ///     args
         /// </exception>
+        [ExcludeFromCodeCoverage]
         public void Process(string[] args)
         {
             if (args == null) throw new ArgumentNullException(nameof(args));
