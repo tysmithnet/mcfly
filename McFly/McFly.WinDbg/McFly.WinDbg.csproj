@@ -180,6 +180,7 @@
     <Compile Include="IBreakpoint.cs" />
     <Compile Include="IBreakpointFacade.cs" />
     <Compile Include="IDebugEngineProxy.cs" />
+    <Compile Include="IExecuteWrapper.cs" />
     <Compile Include="IMemoryEngine.cs" />
     <Compile Include="IRegisterEngine.cs" />
     <Compile Include="IDisassemblyFacade.cs" />

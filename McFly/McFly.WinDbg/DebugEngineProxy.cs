@@ -15,7 +15,6 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using McFly.Core;
 using McFly.Core.Registers;
@@ -27,10 +26,8 @@ namespace McFly.WinDbg
     ///     Default implementation for interfacing with the debug engine
     /// </summary>
     /// <seealso cref="IDebugEngineProxy" />
-    /// <seealso cref="IDebugEngineProxy" />
-    /// <seealso cref="System.IDisposable" />
     [Export(typeof(IDebugEngineProxy))]
-    internal sealed class DebugEngineProxy : IDebugEngineProxy, IDisposable
+    internal sealed class DebugEngineProxy : IDebugEngineProxy
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="DebugEngineProxy" /> class.
@@ -41,27 +38,19 @@ namespace McFly.WinDbg
         /// <param name="systemObjects">The system objects.</param>
         /// <param name="debugDataSpaces">The debug data spaces.</param>
         public DebugEngineProxy(IDebugControl6 control, IDebugClient5 client, IDebugRegisters2 registers,
-            IDebugSystemObjects systemObjects, IDebugDataSpaces debugDataSpaces)
+            IDebugSystemObjects systemObjects, IDebugDataSpaces debugDataSpaces, IExecuteWrapper executeWrapper)
         {
             Control = control;
             Client = client;
             Registers = registers;
             Dataspaces = debugDataSpaces;
-            ExecuteWrapper = new ExecuteWrapper(Client);
+            ExecuteWrapper = executeWrapper;
             RegisterEngine = new RegisterEngine(); // todo: inject
             MemoryEngine = new MemoryEngine();
             SystemObjects = systemObjects;
             Is32Bit =
                 Regex.Match(ExecuteWrapper.Execute("!peb"), @"PEB at (?<peb>[a-fA-F0-9]+)").Groups["peb"].Value
                     .Length == 8;
-        }
-
-        /// <summary>
-        ///     Disposes this instance.
-        /// </summary>
-        public void Dispose()
-        {
-            ExecuteWrapper?.Dispose();
         }
 
         /// <summary>
@@ -95,36 +84,6 @@ namespace McFly.WinDbg
         {
             SystemObjects.GetCurrentThreadId(out var threadId);
             return Convert.ToInt32(threadId);
-        }
-
-        /// <summary>
-        ///     Gets the last known position in the trace
-        /// </summary>
-        /// <returns>Position.</returns>
-        public Position GetEndingPosition()
-        {
-            var end = Execute("!tt 100"); // todo: get from trace_info
-            var endMatch = Regex.Match(end, "Setting position: (?<pos>[A-F0-9]+:[A-F0-9]+)");
-            return Position.Parse(endMatch.Groups["pos"].Value);
-        }
-
-        /// <summary>
-        ///     Gets the register.
-        /// </summary>
-        /// <param name="reg">The reg.</param>
-        /// <returns>System.Object.</returns>
-        public object GetRegister(uint reg)
-        {
-            Registers.GetNumberRegisters(out var numRegisters);
-            for (var i = 0; i < numRegisters; i++)
-            {
-                var sb = new StringBuilder(1024);
-                Registers.GetDescription(i.ToUInt(), sb, 1024, out var nameLength, out var desc);
-                Registers.GetValue(i.ToUInt(), out var val);
-                WriteLine($"{i}:{sb}:{desc.Type.ToString()}:{desc.Flags}");
-            }
-
-            return null;
         }
 
         /// <summary>
@@ -163,7 +122,8 @@ namespace McFly.WinDbg
                 DEBUG_STATUS.REVERSE_STEP_OVER
             };
             Control.SetExecutionStatus(DEBUG_STATUS.GO);
-            while (true)
+            var breakHasOccurred = false;
+            while (!breakHasOccurred)
             {
                 Control.GetExecutionStatus(out status);
                 if (goStatuses.Contains(status))
@@ -174,7 +134,7 @@ namespace McFly.WinDbg
                 }
 
                 if (status == DEBUG_STATUS.BREAK)
-                    break;
+                    breakHasOccurred = true;
             }
         }
 
@@ -223,40 +183,40 @@ namespace McFly.WinDbg
         public bool Is32Bit { get; }
 
         /// <summary>
-        ///     Gets or sets the registers COM interface
-        /// </summary>
-        /// <value>The registers.</value>
-        internal IDebugRegisters2 Registers { get; }
-
-        /// <summary>
         ///     Gets or sets the client COM interface
         /// </summary>
         /// <value>The client.</value>
-        private IDebugClient5 Client { get; }
+        internal IDebugClient5 Client { get; }
 
         /// <summary>
         ///     Gets or sets the control COM interface
         /// </summary>
         /// <value>The control.</value>
-        private IDebugControl6 Control { get; }
+        internal IDebugControl6 Control { get; }
 
         /// <summary>
         ///     Gets or sets the execute wrapper COM interface
         /// </summary>
         /// <value>The execute wrapper.</value>
-        private ExecuteWrapper ExecuteWrapper { get; }
+        internal IExecuteWrapper ExecuteWrapper { get; }
 
         /// <summary>
         ///     Gets the memory engine.
         /// </summary>
         /// <value>The memory engine.</value>
-        private IMemoryEngine MemoryEngine { get; }
+        internal IMemoryEngine MemoryEngine { get; set; }
 
         /// <summary>
         ///     Gets the register engine.
         /// </summary>
         /// <value>The register engine.</value>
-        private IRegisterEngine RegisterEngine { get; }
+        internal IRegisterEngine RegisterEngine { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the registers COM interface
+        /// </summary>
+        /// <value>The registers.</value>
+        internal IDebugRegisters2 Registers { get; }
 
         /// <summary>
         ///     Gets or sets the system objects COM interface

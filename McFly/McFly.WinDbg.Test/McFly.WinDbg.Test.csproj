@@ -87,6 +87,7 @@
     <Compile Include="Builders\DebugDataSpacesBuilder.cs" />
     <Compile Include="Builders\DebugEngineProxyBuilder.cs" />
     <Compile Include="Builders\DisassemblyFacadeBuilder.cs" />
+    <Compile Include="DebugEngineProxy_Should.cs" />
     <Compile Include="DisassemblyFacade_Should.cs" />
     <Compile Include="HelpInfoBuilder_Should.cs" />
     <Compile Include="HelpMethod_Should.cs" />

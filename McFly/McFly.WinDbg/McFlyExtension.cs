@@ -198,7 +198,7 @@ namespace McFly.WinDbg
                     var typeCatalog = new TypeCatalog(types);
                     compositionContainer = new CompositionContainer(typeCatalog);
                     log.Debug("Creating debug engine proxy");
-                    var dbgEng = new DebugEngineProxy(control, client, registers, systemObjects, debugDataSpaces);
+                    var dbgEng = new DebugEngineProxy(control, client, registers, systemObjects, debugDataSpaces, new ExecuteWrapper(client, control));
 
                     log.Debug("Composing debug engine");
                     compositionContainer.ComposeExportedValue<IDebugEngineProxy>(dbgEng);
