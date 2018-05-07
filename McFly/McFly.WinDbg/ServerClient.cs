@@ -45,19 +45,8 @@ namespace McFly.WinDbg
         /// <inheritdoc />
         public void AddTag(Position position, IEnumerable<int> threadIds, Tag newTag)
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        ///     Adds the tag.
-        /// </summary>
-        /// <param name="position">The position.</param>
-        /// <param name="threadIds">The thread ids.</param>
-        /// <param name="text">The text.</param>
-        public void AddTag(Position position, IEnumerable<int> threadIds, string text)
-        {
-            var ub = new UriBuilder(Settings.ServerUrl) {Path = $"api/tag"};
-            var addNoteRequest = new AddTagRequest(position, threadIds, text);
+            var ub = new UriBuilder(Settings.ServerUrl) { Path = $"api/tag" };
+            var addNoteRequest = new AddTagRequest(position, threadIds, newTag);
             var headers = new HttpHeaders
             {
                 ["X-Project-Name"] = Settings.ProjectName

@@ -26,7 +26,7 @@ namespace McFly.Server.Data.SqlServer.Test
             });
             tagAccess.ContextFactory = builder.Build();
 
-            tagAccess.AddTag("", new Position(0, 0), new[] {1, 2}, "test tag");
+            tagAccess.AddTag("", new Position(0, 0), new[] {1, 2}, new Tag(){Title = "test tag"});
             tagAccess.GetTags("", new Position(0, 0), 1).Single().Title.Should().Be("test tag");
             tagAccess.GetTags("", new Position(0, 0), 2).Single().Title.Should().Be("test tag");
         }

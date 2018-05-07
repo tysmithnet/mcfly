@@ -44,7 +44,7 @@ namespace McFly.Server.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] AddTagRequest request)
         {
-            TagAccess.AddTag(projectName, request.Position, request.ThreadIds, request.Text);
+            TagAccess.AddTag(projectName, request.Position, request.ThreadIds, request.Tag);
             return Ok();
         }
 

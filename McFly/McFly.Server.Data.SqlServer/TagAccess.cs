@@ -42,8 +42,8 @@ namespace McFly.Server.Data.SqlServer
         /// <param name="projectName">Name of the project.</param>
         /// <param name="position">The position.</param>
         /// <param name="threadIds">The thread ids.</param>
-        /// <param name="text">The text.</param>
-        public void AddTag(string projectName, Position position, IEnumerable<int> threadIds, string text)
+        /// <param name="tag">The text.</param>
+        public void AddTag(string projectName, Position position, IEnumerable<int> threadIds, Tag tag)
         {
             threadIds = threadIds.ToList();
             using (var ctx = ContextFactory.GetContext(projectName))
@@ -54,7 +54,8 @@ namespace McFly.Server.Data.SqlServer
                     frameEntity.Tags.Add(new TagEntity
                     {
                         CreateDateUtc = DateTime.UtcNow,
-                        Title = text
+                        Title = tag.Title,
+                        Body = tag.Body,
                     });
                 ctx.SaveChanges();
             }

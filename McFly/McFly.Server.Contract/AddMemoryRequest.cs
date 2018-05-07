@@ -20,7 +20,7 @@ namespace McFly.Server.Contract
     /// <summary>
     ///     Request DTO for adding memory ranges
     /// </summary>
-    public sealed class AddMemoryRequest
+    public sealed class AddMemoryRequest : IEquatable<AddMemoryRequest>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="AddMemoryRequest" /> class.
@@ -44,5 +44,27 @@ namespace McFly.Server.Contract
         /// </summary>
         /// <value>The memory chunk.</value>
         public MemoryChunk MemoryChunk { get; }
+
+        /// <inheritdoc />
+        public bool Equals(AddMemoryRequest other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return MemoryChunk.ValueEquals(other.MemoryChunk);
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj is AddMemoryRequest && Equals((AddMemoryRequest) obj);
+        }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            return (MemoryChunk != null ? MemoryChunk.GetHashCode() : 0);
+        }
     }
 }

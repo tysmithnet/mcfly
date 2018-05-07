@@ -31,13 +31,13 @@ namespace McFly.Server.Contract
         /// </summary>
         /// <param name="position">The position.</param>
         /// <param name="threadIds">The thread ids.</param>
-        /// <param name="text">The text.</param>
+        /// <param name="tag">The text.</param>
         /// <exception cref="ArgumentNullException">threadIds</exception>
-        public AddTagRequest(Position position, IEnumerable<int> threadIds, string text)
+        public AddTagRequest(Position position, IEnumerable<int> threadIds, Tag tag)
         {
             Position = position;
             ThreadIds = threadIds ?? throw new ArgumentNullException(nameof(threadIds));
-            Text = text;
+            Tag = tag;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace McFly.Server.Contract
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
             return Equals(Position, other.Position) && ThreadIds.SequenceEqual(other.ThreadIds) &&
-                   string.Equals(Text, other.Text);
+                   string.Equals(Tag, other.Tag);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace McFly.Server.Contract
             {
                 var hashCode = Position != null ? Position.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ ThreadIds.GetHashCode();
-                hashCode = (hashCode * 397) ^ (Text != null ? Text.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Tag != null ? Tag.GetHashCode() : 0);
                 return hashCode;
             }
         }
@@ -113,7 +113,7 @@ namespace McFly.Server.Contract
         ///     Gets or sets the text.
         /// </summary>
         /// <value>The text.</value>
-        public string Text { get; set; }
+        public Tag Tag { get; set; }
 
         /// <summary>
         ///     Gets or sets the thread ids.
