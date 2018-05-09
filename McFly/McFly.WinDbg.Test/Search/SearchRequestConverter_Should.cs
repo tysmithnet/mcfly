@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using FluentAssertions;
 using McFly.Server.Contract;
 using McFly.WinDbg.Search;
 using Xunit;
 
-namespace McFly.WinDbg.Test
+namespace McFly.WinDbg.Test.Search
 {
     public class SearchRequestConverter_Should
     {

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using FluentAssertions;
 using McFly.WinDbg.Search;
 using Xunit;
 
-namespace McFly.WinDbg.Test
+namespace McFly.WinDbg.Test.Search
 {
     public class SearchRequestFactory_Should
     {

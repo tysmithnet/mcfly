@@ -100,10 +100,11 @@
     <Compile Include="MemoryEngine_Should.cs" />
     <Compile Include="MockFrames.cs" />
     <Compile Include="RegisterEngine_Should.cs" />
-    <Compile Include="SearchIndex_Should.cs" />
-    <Compile Include="SearchRequestConverter_Should.cs" />
-    <Compile Include="SearchRequestFactory_Should.cs" />
-    <Compile Include="SearchRequest_Should.cs" />
+    <Compile Include="Search\SearchIndex_Should.cs" />
+    <Compile Include="Search\SearchMethod_Should.cs" />
+    <Compile Include="Search\SearchRequestConverter_Should.cs" />
+    <Compile Include="Search\SearchRequestFactory_Should.cs" />
+    <Compile Include="Search\SearchRequest_Should.cs" />
     <Compile Include="TagMethod_Should.cs" />
     <Compile Include="PositionsRecord_Should.cs" />
     <Compile Include="PositionsResult_Should.cs" />
