@@ -213,6 +213,7 @@
     <Compile Include="MemoryEngine.cs" />
     <Compile Include="RegisterEngine.cs" />
     <Compile Include="IRegisterFacade.cs" />
+    <Compile Include="Search\FrameIndex.cs" />
     <Compile Include="Search\ISearchRequest.cs" />
     <Compile Include="Search\ISearchRequestConverter.cs" />
     <Compile Include="Search\ISearchRequestFactory.cs" />
