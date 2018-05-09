@@ -15,6 +15,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace McFly.WinDbg
 {
@@ -41,9 +42,9 @@ namespace McFly.WinDbg
         ///     Debugs the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        public void Debug(string message)
+        public void Debug(string message, [CallerMemberName]string callingMember = "")
         {
-            StreamWriter.WriteLine($"[d] {DateTime.Now} {message}");
+            StreamWriter.WriteLine($"[d] [{DateTime.Now}] [{callingMember}]: {message}");
         }
 
         /// <summary>
@@ -58,18 +59,18 @@ namespace McFly.WinDbg
         ///     Errors the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        public void Error(string message)
+        public void Error(string message, [CallerMemberName]string callingMember = "")
         {
-            StreamWriter.WriteLine($"[e] {DateTime.Now} {message}");
+            StreamWriter.WriteLine($"[e] [{DateTime.Now}] [{callingMember}]: {message}");
         }
 
         /// <summary>
         ///     Errors the specified exception.
         /// </summary>
         /// <param name="exception">The exception.</param>
-        public void Error(Exception exception)
+        public void Error(Exception exception, [CallerMemberName]string callingMember = "")
         {
-            StreamWriter.WriteLine($"[e] {DateTime.Now} {exception.Message}");
+            StreamWriter.WriteLine($"[e] [{DateTime.Now}] [{callingMember}]: {exception.Message}");
             do
             {
                 StreamWriter.WriteLine(exception.StackTrace);
@@ -80,18 +81,18 @@ namespace McFly.WinDbg
         ///     Fatals the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        public void Fatal(string message)
+        public void Fatal(string message, [CallerMemberName]string callingMember = "")
         {
-            StreamWriter.WriteLine($"[f] {DateTime.Now} {message}");
+            StreamWriter.WriteLine($"[f] [{DateTime.Now}] [{callingMember}]: {message}");
         }
 
         /// <summary>
         ///     Fatals the specified exception.
         /// </summary>
         /// <param name="exception">The exception.</param>
-        public void Fatal(Exception exception)
+        public void Fatal(Exception exception, [CallerMemberName]string callingMember = "")
         {
-            StreamWriter.WriteLine($"[f] {DateTime.Now} {exception.Message}");
+            StreamWriter.WriteLine($"[f] [{DateTime.Now}] [{callingMember}]: {exception.Message}");
             do
             {
                 StreamWriter.WriteLine(exception.StackTrace);
@@ -102,21 +103,19 @@ namespace McFly.WinDbg
         ///     Informations the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        public void Info(string message)
+        public void Info(string message, [CallerMemberName]string callingMember = "")
         {
-            StreamWriter.WriteLine($"[i] {DateTime.Now} {message}");
+            StreamWriter.WriteLine($"[i] [{DateTime.Now}] [{callingMember}]: {message}");
         }
 
         /// <summary>
         ///     Verboses the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
-        public void Verbose(string message)
+        public void Verbose(string message, [CallerMemberName]string callingMember = "")
         {
-            StreamWriter.WriteLine($"[v] {DateTime.Now} {message}");
+            StreamWriter.WriteLine($"[v] [{DateTime.Now}] [{callingMember}]: {message}");
         }
-
-        // todo: refactor this
 
         /// <summary>
         ///     Gets or sets the stream writer.
