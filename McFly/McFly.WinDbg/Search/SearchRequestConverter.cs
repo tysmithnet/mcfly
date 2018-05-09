@@ -71,7 +71,7 @@ namespace McFly.WinDbg.Search
             else if (op == "OR")
                 crit.Type = "or";
             else
-                throw new Exception("Aasdfj;asldkfmn");
+                throw new ArgumentOutOfRangeException(nameof(op), $"Found boolean operation {op}, which is not a valid operation");
             list.Add(lhs);
             list.Add(ExtractWhere(args, start + 1));
             crit.SubCriteria = list.ToArray();

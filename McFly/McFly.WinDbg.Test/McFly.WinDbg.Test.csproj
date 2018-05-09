@@ -101,6 +101,7 @@
     <Compile Include="MockFrames.cs" />
     <Compile Include="RegisterEngine_Should.cs" />
     <Compile Include="SearchIndex_Should.cs" />
+    <Compile Include="SearchRequestConverter_Should.cs" />
     <Compile Include="SearchRequestFactory_Should.cs" />
     <Compile Include="SearchRequest_Should.cs" />
     <Compile Include="TagMethod_Should.cs" />
