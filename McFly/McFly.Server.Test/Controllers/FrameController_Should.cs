@@ -26,7 +26,7 @@ namespace McFly.Server.Test.Controllers
             frameController.FrameAccess = builder.Build();
 
             // act                                                        
-            var res = frameController.Post("test", frames) as ExceptionResult;
+            var res = frameController.UpsertFrames("test", frames) as ExceptionResult;
 
             // assert
             res.Should().NotBeNull();
@@ -44,7 +44,7 @@ namespace McFly.Server.Test.Controllers
             frameController.FrameAccess = builder.Build();
 
             // act
-            frameController.Post("testing", frames);
+            frameController.UpsertFrames("testing", frames);
 
             // assert
             builder.Mock.Verify(

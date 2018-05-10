@@ -47,6 +47,7 @@
     <Compile Include="AddMemoryRequest.cs" />
     <Compile Include="AddTagRequest.cs" />
     <Compile Include="ISearchRequestVisitor.cs" />
+    <Compile Include="CreateFrameSearchRequest.cs" />
     <Compile Include="RecentTagsRequest.cs" />
     <Compile Include="SearchRequest.cs" />
     <Compile Include="NewProjectRequest.cs" />

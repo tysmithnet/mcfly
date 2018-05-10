@@ -19,6 +19,7 @@ using System.Text;
 using System.Web.Http;
 using Common.Logging;
 using McFly.Core;
+using McFly.Server.Contract;
 using McFly.Server.Data;
 using McFly.Server.Headers;
 
@@ -47,7 +48,7 @@ namespace McFly.Server.Controllers
         /// <param name="frames">The frames.</param>
         /// <returns>ActionResult.</returns>
         [HttpPost]
-        public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] IEnumerable<Frame> frames)
+        public IHttpActionResult UpsertFrames([FromProjectNameHeader] string projectName, [FromBody] IEnumerable<Frame> frames)
         {
             try
             {
@@ -64,6 +65,22 @@ namespace McFly.Server.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("api/frame/query")]
+        public IHttpActionResult CreateSearch([FromProjectNameHeader] string projectName, [FromBody] CreateFrameSearchRequest request)
+        {
+            FrameAccess.CreateSearch(projectName, request);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("api/frame/search/{id:guid}")]
+        public IHttpActionResult GetSearchResults([FromProjectNameHeader] string projectName, Guid searchId)
+        {
+            IEnumerable<Frame> frames = FrameAccess.GetSearchResults(projectName, searchId);
+            return Ok(frames);
         }
 
         /// <summary>
