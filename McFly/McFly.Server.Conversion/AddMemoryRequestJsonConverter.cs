@@ -14,7 +14,7 @@
 
 using System;
 using McFly.Core;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -23,7 +23,7 @@ namespace McFly.Server.Conversion
     /// <summary>
     ///     Json converter for <see cref="AddMemoryRequest"/>
     /// </summary>
-    /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Server.Contract.AddMemoryRequeset}" />
+    /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Server.Core.AddMemoryRequeset}" />
     public class AddMemoryRequestJsonConverter : JsonConverter<AddMemoryRequest>
     {
         /// <summary>

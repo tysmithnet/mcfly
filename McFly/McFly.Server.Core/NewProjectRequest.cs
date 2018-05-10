@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : McFly.Server.Contract
+// Assembly         : McFly.Server.Core
 // Author           : @tysmithnet
 // Created          : 03-25-2018
 //
@@ -15,12 +15,12 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace McFly.Server.Contract
+namespace McFly.Server.Core
 {
     /// <summary>
     ///     Represents a request to create a new project
     /// </summary>
-    /// <seealso cref="System.IEquatable{McFly.Server.Contract.NewProjectRequest}" />
+    /// <seealso cref="System.IEquatable{McFly.Server.Core.NewProjectRequest}" />
     public sealed class NewProjectRequest : IEquatable<NewProjectRequest>
     {
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿using McFly.Core;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using McFly.Server.Controllers;
 using McFly.Server.Test.Builders;
 using Moq;

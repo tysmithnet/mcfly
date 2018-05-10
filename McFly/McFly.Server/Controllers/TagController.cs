@@ -15,7 +15,7 @@
 using System.ComponentModel.Composition;
 using System.Web.Http;
 using Common.Logging;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using McFly.Server.Data;
 using McFly.Server.Headers;
 

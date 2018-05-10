@@ -131,9 +131,9 @@
       <Project>{3243A211-CF4F-4296-BD68-2D4DD5406542}</Project>
       <Name>McFly.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\McFly.Server.Contract\McFly.Server.Contract.csproj">
+    <ProjectReference Include="..\McFly.Server.Core\McFly.Server.Core.csproj">
       <Project>{BCFFB741-26F9-4D12-A152-04CF601D373E}</Project>
-      <Name>McFly.Server.Contract</Name>
+      <Name>McFly.Server.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\McFly.Server.Data.SqlServer.Test\McFly.Server.Data.SqlServer.Test.csproj">
       <Project>{1a1071c3-5f84-4e12-a489-8d781310af46}</Project>

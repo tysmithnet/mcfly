@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : McFly.Server.Contract
+// Assembly         : McFly.Server.Core
 // Author           : @tysmithnet
 // Created          : 03-28-2018
 //
@@ -17,13 +17,13 @@ using System.Collections.Generic;
 using System.Linq;
 using McFly.Core;
 
-namespace McFly.Server.Contract
+namespace McFly.Server.Core
 {
     /// <summary>
     ///     Requests of this type will be considered for adding tags to particular places
     ///     in the trace
     /// </summary>
-    /// <seealso cref="System.IEquatable{McFly.Server.Contract.AddTagRequest}" />
+    /// <seealso cref="System.IEquatable{McFly.Server.Core.AddTagRequest}" />
     public sealed class AddTagRequest : IEquatable<AddTagRequest>
     {
         /// <summary>

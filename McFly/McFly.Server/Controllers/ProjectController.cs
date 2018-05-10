@@ -18,7 +18,7 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using Common.Logging;
 using McFly.Core;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using McFly.Server.Data;
 
 namespace McFly.Server.Controllers

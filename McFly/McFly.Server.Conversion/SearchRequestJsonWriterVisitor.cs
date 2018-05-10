@@ -13,7 +13,7 @@
 // ***********************************************************************
 
 using System.Linq;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -22,7 +22,7 @@ namespace McFly.Server.Conversion
     /// <summary>
     ///     Json converter for search request criterion
     /// </summary>
-    /// <seealso cref="McFly.Server.Contract.ISearchRequestVisitor" />
+    /// <seealso cref="McFly.Server.Core.ISearchRequestVisitor" />
     internal class SearchRequestJsonWriterVisitor : ISearchRequestVisitor
     {
         /// <summary>

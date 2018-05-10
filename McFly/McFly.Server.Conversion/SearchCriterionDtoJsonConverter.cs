@@ -14,7 +14,7 @@
 
 using System;
 using System.Linq;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -23,7 +23,7 @@ namespace McFly.Server.Conversion
     /// <summary>
     ///     Json converter for <see cref="SearchCriterionDto" />
     /// </summary>
-    /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Server.Contract.SearchCriterionDto}" />
+    /// <seealso cref="Newtonsoft.Json.JsonConverter{McFly.Server.Core.SearchCriterionDto}" />
     /// <seealso cref="System.Web.Http.ModelBinding.IModelBinder" />
     public class SearchCriterionDtoJsonConverter : JsonConverter<SearchCriterionDto>
     {

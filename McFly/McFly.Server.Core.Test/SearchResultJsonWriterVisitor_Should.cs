@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace McFly.Server.Contract.Test
+namespace McFly.Server.Core.Test
 {
     public class SearchResultJsonWriterVisitor_Should
     {

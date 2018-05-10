@@ -8,8 +8,8 @@
     <ProjectGuid>{3E825958-D919-4941-BDAA-967836C678D1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>McFly.Server.Contract.Test</RootNamespace>
-    <AssemblyName>McFly.Server.Contract.Test</AssemblyName>
+    <RootNamespace>McFly.Server.Core.Test</RootNamespace>
+    <AssemblyName>McFly.Server.Core.Test</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -91,9 +91,9 @@
       <Project>{3243A211-CF4F-4296-BD68-2D4DD5406542}</Project>
       <Name>McFly.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\McFly.Server.Contract\McFly.Server.Contract.csproj">
+    <ProjectReference Include="..\McFly.Server.Core\McFly.Server.Core.csproj">
       <Project>{BCFFB741-26F9-4D12-A152-04CF601D373E}</Project>
-      <Name>McFly.Server.Contract</Name>
+      <Name>McFly.Server.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

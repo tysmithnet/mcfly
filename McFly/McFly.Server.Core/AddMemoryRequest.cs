@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : McFly.Server.Contract
+// Assembly         : McFly.Server.Core
 // Author           : @tysmithnet
 // Created          : 04-21-2018
 //
@@ -15,7 +15,7 @@
 using System;
 using McFly.Core;
 
-namespace McFly.Server.Contract
+namespace McFly.Server.Core
 {
     /// <summary>
     ///     Request DTO for adding memory ranges

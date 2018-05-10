@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : McFly.Server.Contract
+// Assembly         : McFly.Server.Core
 // Author           : @tysmithnet
 // Created          : 04-03-2018
 //
@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace McFly.Server.Contract
+namespace McFly.Server.Core
 {
     /// <summary>
     ///     Null object pattern for a search criterion

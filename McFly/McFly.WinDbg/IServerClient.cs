@@ -14,7 +14,7 @@
 
 using System.Collections.Generic;
 using McFly.Core;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 
 namespace McFly.WinDbg
 {

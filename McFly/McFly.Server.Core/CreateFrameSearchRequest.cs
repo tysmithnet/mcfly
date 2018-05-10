@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace McFly.Server.Contract
+namespace McFly.Server.Core
 {
     public class CreateFrameSearchRequest // todo: make consistent with other types
     {

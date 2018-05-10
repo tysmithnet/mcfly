@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-using McFly.Server.Contract;
+using McFly.Server.Core;
 
 namespace McFly.WinDbg.Search
 {

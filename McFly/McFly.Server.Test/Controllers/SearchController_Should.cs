@@ -2,7 +2,7 @@
 using FluentAssertions;
 using McFly.Core;
 using McFly.Core.Registers;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using McFly.Server.Controllers;
 using McFly.Server.Data.Search;
 using McFly.Server.Test.Builders;

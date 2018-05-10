@@ -22,6 +22,7 @@ using System.Text;
 using Common.Logging;
 using LinqKit;
 using McFly.Core;
+using McFly.Server.Core;
 using McFly.Server.Data.Search;
 
 namespace McFly.Server.Data.SqlServer
@@ -89,6 +90,12 @@ namespace McFly.Server.Data.SqlServer
             }
         }
 
+        /// <inheritdoc />
+        public Guid CreateSearch(string projectName, CreateFrameSearchRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     Gets the frame.
         /// </summary>
@@ -109,6 +116,12 @@ namespace McFly.Server.Data.SqlServer
                 var converter = new FrameDomainEntityConverter();
                 return converter.ToDomain(first, context);
             }
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Frame> GetSearchResults(string projectName, Guid searchId)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Frame> Search(string projectName, ICriterion criterion)

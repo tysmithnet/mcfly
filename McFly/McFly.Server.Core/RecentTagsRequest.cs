@@ -14,7 +14,7 @@
 
 using System;
 
-namespace McFly.Server.Contract
+namespace McFly.Server.Core
 {
     // todo: add more functionality here.. maybe date override or something
     /// <summary>

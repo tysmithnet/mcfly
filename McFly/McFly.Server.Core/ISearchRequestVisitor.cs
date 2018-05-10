@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : McFly.Server.Contract
+// Assembly         : McFly.Server.Core
 // Author           : @tysmithnet
 // Created          : 04-26-2018
 //
@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace McFly.Server.Contract
+namespace McFly.Server.Core
 {
     /// <summary>
     ///     Represents an object that is capable of processing the various kinds of search request criteria

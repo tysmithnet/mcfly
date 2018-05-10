@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Web.Http;
 using McFly.Core;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using McFly.Server.Data;
 using McFly.Server.Headers;
 using McFly.Server.Search;

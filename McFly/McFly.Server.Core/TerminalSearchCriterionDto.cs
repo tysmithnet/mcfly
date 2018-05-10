@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : McFly.Server.Contract
+// Assembly         : McFly.Server.Core
 // Author           : @tysmithnet
 // Created          : 04-26-2018
 //
@@ -12,12 +12,12 @@
 // <summary></summary>
 // ***********************************************************************
 
-namespace McFly.Server.Contract
+namespace McFly.Server.Core
 {
     /// <summary>
     ///     Represents the most basic of criteria you can issue for a search
     /// </summary>
-    /// <seealso cref="McFly.Server.Contract.SearchCriterionDto" />
+    /// <seealso cref="McFly.Server.Core.SearchCriterionDto" />
     public sealed class TerminalSearchCriterionDto : SearchCriterionDto
     {
         /// <summary>

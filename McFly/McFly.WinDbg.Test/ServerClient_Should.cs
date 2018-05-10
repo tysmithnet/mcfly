@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using FluentAssertions;
 using McFly.Core;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using McFly.WinDbg.Test.Builders;
 using Moq;
 using Newtonsoft.Json;

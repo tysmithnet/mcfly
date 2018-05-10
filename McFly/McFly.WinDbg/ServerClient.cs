@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using McFly.Core;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using Newtonsoft.Json;
 
 namespace McFly.WinDbg

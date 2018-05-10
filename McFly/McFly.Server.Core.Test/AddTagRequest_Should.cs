@@ -2,7 +2,7 @@
 using McFly.Core;
 using Xunit;
 
-namespace McFly.Server.Contract.Test
+namespace McFly.Server.Core.Test
 {
     public class AddTagRequest_Should
     {
