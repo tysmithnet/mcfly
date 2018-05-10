@@ -69,7 +69,7 @@ namespace McFly.Server.Controllers
 
         [HttpPost]
         [Route("api/frame/query")]
-        public IHttpActionResult CreateSearch([FromProjectNameHeader] string projectName, [FromBody] CreateFrameSearchRequest request)
+        public IHttpActionResult CreateSearch([FromProjectNameHeader] string projectName, [FromBody] AddFrameSearchRequest request)
         {
             FrameAccess.CreateSearch(projectName, request);
             return Ok();

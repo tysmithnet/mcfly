@@ -91,7 +91,7 @@ namespace McFly.Server.Data.SqlServer
         }
 
         /// <inheritdoc />
-        public Guid CreateSearch(string projectName, CreateFrameSearchRequest request)
+        public Guid CreateSearch(string projectName, AddFrameSearchRequest request)
         {
             throw new NotImplementedException();
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace McFly.Server.Core
 {
-    public class CreateFrameSearchRequest // todo: make consistent with other types
+    public class AddFrameSearchRequest // todo: make consistent with other types
     {
         public string Name { get; set; }
         public string Description { get; set; }

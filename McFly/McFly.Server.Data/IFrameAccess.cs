@@ -31,7 +31,7 @@ namespace McFly.Server.Data
         /// <param name="projectName">Name of the project.</param>
         /// <param name="request">The request.</param>
         /// <returns>Guid.</returns>
-        Guid CreateSearch(string projectName, CreateFrameSearchRequest request);
+        Guid CreateSearch(string projectName, AddFrameSearchRequest request);
 
         /// <summary>
         ///     Gets the frame.
