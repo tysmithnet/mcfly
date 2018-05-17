@@ -114,7 +114,6 @@
     <Compile Include="Controllers\SearchCriteriaConverterFacadeBuilder.cs" />
     <Compile Include="Headers\FromProjectNameHeaderAttribute_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\SearchController_Should.cs" />
     <Compile Include="Search\RegisterCriterionConverter_Should.cs" />
     <Compile Include="Builders\SearchCriterionConverterBuilder.cs" />
     <Compile Include="Search\SearchCriterionCoversionFacade_Should.cs" />

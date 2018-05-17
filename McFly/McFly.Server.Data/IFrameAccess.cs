@@ -51,14 +51,6 @@ namespace McFly.Server.Data
         IEnumerable<Frame> GetSearchResults(string projectName, Guid searchId);
 
         /// <summary>
-        ///     Searches the specified project name.
-        /// </summary>
-        /// <param name="projectName">Name of the project.</param>
-        /// <param name="criterion">The criterion.</param>
-        /// <returns>IEnumerable&lt;Frame&gt;.</returns>
-        IEnumerable<Frame> Search(string projectName, ICriterion criterion);
-
-        /// <summary>
         ///     Upserts the frame.
         /// </summary>
         /// <param name="projectName">Name of the project.</param>

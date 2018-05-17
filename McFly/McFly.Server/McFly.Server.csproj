@@ -222,7 +222,6 @@
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Search\RegisterCriterionConverter.cs" />
-    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Search\SearchCriterionConversionFacade.cs" />
     <Compile Include="Headers\FromHeaderAttribute.cs" />
     <Compile Include="Headers\FromHeaderAttributeOperationFilter.cs" />
