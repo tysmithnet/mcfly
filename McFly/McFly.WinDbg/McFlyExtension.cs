@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-22-2018
+// Last Modified On : 05-05-2018
 // ***********************************************************************
 // <copyright file="McFly.cs" company="">
 //     Copyright ©  2018
@@ -198,7 +198,7 @@ namespace McFly.WinDbg
                     var typeCatalog = new TypeCatalog(types);
                     compositionContainer = new CompositionContainer(typeCatalog);
                     log.Debug("Creating debug engine proxy");
-                    var dbgEng = new DebugEngineProxy(control, client, registers, systemObjects, debugDataSpaces);
+                    var dbgEng = new DebugEngineProxy(control, client, registers, systemObjects, debugDataSpaces, new ExecuteWrapper(client, control));
 
                     log.Debug("Composing debug engine");
                     compositionContainer.ComposeExportedValue<IDebugEngineProxy>(dbgEng);
@@ -290,22 +290,6 @@ namespace McFly.WinDbg
         public static string pointerFormat(string Message)
         {
             return Message.Replace(":%p", pFormat);
-        }
-
-        /// <summary>
-        ///     Uses the specified client.
-        /// </summary>
-        /// <param name="client">The client.</param>
-        /// <param name="args">The arguments.</param>
-        /// <returns>HRESULT.</returns>
-        [DllExport]
-        public static HRESULT use(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
-        {
-            InitApi();
-
-            Use(args);
-
-            return HRESULT.S_OK;
         }
 
         /// <summary>
@@ -468,18 +452,6 @@ namespace McFly.WinDbg
         private static extern IntPtr CommandLineToArgvW(
             [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, out int pNumArgs);
 
-        /// <summary>
-        ///     Get the HRESULT code for the specified int
-        /// </summary>
-        /// <param name="Result">The result.</param>
-        /// <returns>HRESULT.</returns>
-        private static HRESULT ConvertIntToHResult(int Result)
-        {
-            // Convert to Uint
-            var value = BitConverter.ToUInt32(BitConverter.GetBytes(Result), 0);
-
-            return ConvertIntToHResult(value);
-        }
 
         /// <summary>
         ///     Get the HRESULT code for the specified int
@@ -512,7 +484,7 @@ namespace McFly.WinDbg
             if (hr < 0)
             {
                 LastHR = ConvertIntToHResult(hr);
-                WriteLine("SourceFix: Unable to acquire client interface");
+                WriteLine("Error creating IDebugClient interface, ensure you have the correct assemblies installed");
                 return null;
             }
 
@@ -528,21 +500,18 @@ namespace McFly.WinDbg
         private static void CurrDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             InitApi();
-            WriteLine("SourceExt: An unhandled exception happened on the extension");
-            WriteLine("  This error is related to the extension itself not the target.");
-            WriteLine("  The information on the exception is below:\n");
-
-            var ex = e.ExceptionObject as Exception;
-            while (ex != null)
+            if (e.ExceptionObject is Exception exception)
             {
-                WriteLine("{0} - {1} at", ex.GetType().ToString(), ex.Message);
-                WriteLine("{0}", ex.StackTrace);
-                ex = ex.InnerException;
-                if (ex != null)
-                    WriteLine("\n----- Inner Exception -----------");
+                string message = GetExceptionMessage(exception);
+                WriteLine(message);
             }
         }
 
+        /// <summary>
+        ///     Gets the exception message.
+        /// </summary>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
         private static string GetExceptionMessage(Exception e)
         {
             var sb = new StringBuilder();
@@ -556,35 +525,5 @@ namespace McFly.WinDbg
 
             return sb.ToString();
         }
-
-        /// <summary>
-        ///     Uses the specified project name.
-        /// </summary>
-        /// <param name="projectName">Name of the project.</param>
-        private static void Use(string projectName)
-        {
-            if (string.IsNullOrWhiteSpace(projectName))
-            {
-                WriteLine("Error: project name was not valid");
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(settings.ConnectionString))
-            {
-                WriteLine("Error: Connection string is not configured yet");
-                return;
-            }
-
-            settings.ProjectName = projectName;
-        }
-
-        /// <summary>
-        ///     Delegate Ioctl
-        /// </summary>
-        /// <param name="IoctlType">Type of the ioctl.</param>
-        /// <param name="lpvData">The LPV data.</param>
-        /// <param name="cbSizeOfContext">The cb size of context.</param>
-        /// <returns>System.UInt32.</returns>
-        internal delegate uint Ioctl(IG IoctlType, ref WDBGEXTS_CLR_DATA_INTERFACE lpvData, int cbSizeOfContext);
     }
 }

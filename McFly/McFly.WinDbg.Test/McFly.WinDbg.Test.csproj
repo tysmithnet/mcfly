@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -86,6 +87,7 @@
     <Compile Include="Builders\DebugDataSpacesBuilder.cs" />
     <Compile Include="Builders\DebugEngineProxyBuilder.cs" />
     <Compile Include="Builders\DisassemblyFacadeBuilder.cs" />
+    <Compile Include="DebugEngineProxy_Should.cs" />
     <Compile Include="DisassemblyFacade_Should.cs" />
     <Compile Include="HelpInfoBuilder_Should.cs" />
     <Compile Include="HelpMethod_Should.cs" />
@@ -97,6 +99,12 @@
     <Compile Include="MemoryEngineBuilder.cs" />
     <Compile Include="MemoryEngine_Should.cs" />
     <Compile Include="MockFrames.cs" />
+    <Compile Include="RegisterEngine_Should.cs" />
+    <Compile Include="Search\SearchIndex_Should.cs" />
+    <Compile Include="Search\SearchMethod_Should.cs" />
+    <Compile Include="Search\SearchRequestConverter_Should.cs" />
+    <Compile Include="Search\SearchRequestFactory_Should.cs" />
+    <Compile Include="Search\SearchRequest_Should.cs" />
     <Compile Include="TagMethod_Should.cs" />
     <Compile Include="PositionsRecord_Should.cs" />
     <Compile Include="PositionsResult_Should.cs" />
@@ -122,9 +130,9 @@
       <Project>{3243a211-cf4f-4296-bd68-2d4dd5406542}</Project>
       <Name>McFly.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\McFly.Server.Contract\McFly.Server.Contract.csproj">
+    <ProjectReference Include="..\McFly.Server.Core\McFly.Server.Core.csproj">
       <Project>{BCFFB741-26F9-4D12-A152-04CF601D373E}</Project>
-      <Name>McFly.Server.Contract</Name>
+      <Name>McFly.Server.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\McFly.WinDbg\McFly.WinDbg.csproj">
       <Project>{d7eb4c59-22ef-4020-9850-cbbf6a015f80}</Project>

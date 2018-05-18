@@ -66,6 +66,11 @@ namespace McFly.WinDbg
         void RunUntilBreak();
 
         /// <summary>
+        ///     Performs a step into instruction
+        /// </summary>
+        void StepInto();
+
+        /// <summary>
         ///     Changes the thread context of the debugger
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>

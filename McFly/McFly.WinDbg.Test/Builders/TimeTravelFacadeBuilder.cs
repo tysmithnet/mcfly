@@ -4,7 +4,7 @@
 // Created          : 03-18-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-18-2018
+// Last Modified On : 05-01-2018
 // ***********************************************************************
 // <copyright file="TimeTravelFacadeBuilder.cs" company="">
 //     Copyright ©  2018
@@ -26,16 +26,11 @@ namespace McFly.WinDbg.Test.Builders
     /// </summary>
     internal class TimeTravelFacadeBuilder
     {
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="TimeTravelFacadeBuilder" /> class.
-        /// </summary>
-        /// <param name="debugEngineProxyBuilder">The debug eng proxy builder.</param>
-        public TimeTravelFacadeBuilder(DebugEngineProxyBuilder debugEngineProxyBuilder)
+        public TimeTravelFacadeBuilder()
         {
-            _debugEngineProxyBuilder = debugEngineProxyBuilder;
             Mock.Setup(facade => facade.GetCurrentFrame(It.IsAny<int>())).Returns((int i) =>
             {
-                return _frames.Single(x => x.Position == _currentPosition && x.ThreadId == i);
+                return _frames.SingleOrDefault(x => x.Position == _currentPosition && x.ThreadId == i);
             });
         }
 
@@ -48,11 +43,6 @@ namespace McFly.WinDbg.Test.Builders
         ///     The current position
         /// </summary>
         private Position _currentPosition = new Position(0, 0);
-
-        /// <summary>
-        ///     The debug eng proxy builder
-        /// </summary>
-        private readonly DebugEngineProxyBuilder _debugEngineProxyBuilder;
 
         /// <summary>
         ///     The frames
@@ -69,7 +59,7 @@ namespace McFly.WinDbg.Test.Builders
             var first = _frames.OrderBy(x => x.Position).FirstOrDefault(x => x.Position > _currentPosition);
             _currentPosition = first != null ? first.Position : _frames.Max(x => x.Position);
             WithGetCurrentPosition(_currentPosition);
-            WithPositions(Positions());
+            
             return this;
         }
 
@@ -83,29 +73,6 @@ namespace McFly.WinDbg.Test.Builders
         }
 
         /// <summary>
-        ///     Positionses this instance.
-        /// </summary>
-        /// <returns>PositionsResult.</returns>
-        /// <exception cref="System.InvalidOperationException">
-        ///     There needs to be exactly 1 positions record with the current thread
-        ///     tag at any given position
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        ///     There needs to be exactly 1 positions record with the current thread tag at
-        ///     any given position
-        /// </exception>
-        public PositionsResult Positions()
-        {
-            var thread = _debugEngineProxyBuilder.CurrentThreadId;
-            var positions = _frames.Where(x => x.Position == _currentPosition)
-                .Select(x => new PositionsRecord(x.ThreadId, x.Position, thread == x.ThreadId)).ToList();
-            if (positions.Count(x => x.IsCurrentThread) != 1)
-                throw new InvalidOperationException(
-                    "There needs to be exactly 1 positions record with the current thread tag at any given position");
-            return new PositionsResult(positions);
-        }
-
-        /// <summary>
         ///     Withes the frames.
         /// </summary>
         /// <param name="frames">The frames.</param>
@@ -116,10 +83,11 @@ namespace McFly.WinDbg.Test.Builders
             _frames.Sort();
             if (!_frames.Any())
                 return this;
-            WithGetStartingPosition(_frames.MinBy(x => x.Position).Position);
-            WithGetEndingPosition(_frames.MaxBy(x => x.Position).Position);
+            WithFirstPosition(_frames.Min(x => x.Position));
+            WithLastPosition(_frames.Max(x => x.Position));
             _currentPosition = new Position(0, 0);
             AdvanceToNextPosition();
+            
             return this;
         }
 
@@ -152,9 +120,9 @@ namespace McFly.WinDbg.Test.Builders
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>TimeTravelFacadeBuilder.</returns>
-        public TimeTravelFacadeBuilder WithGetEndingPosition(Position result)
+        public TimeTravelFacadeBuilder WithLastPosition(Position result)
         {
-            Mock.Setup(facade => facade.GetEndingPosition()).Returns(result);
+            Mock.Setup(facade => facade.LastPosition).Returns(result);
             return this;
         }
 
@@ -163,9 +131,9 @@ namespace McFly.WinDbg.Test.Builders
         /// </summary>
         /// <param name="result">The result.</param>
         /// <returns>TimeTravelFacadeBuilder.</returns>
-        public TimeTravelFacadeBuilder WithGetStartingPosition(Position result)
+        public TimeTravelFacadeBuilder WithFirstPosition(Position result)
         {
-            Mock.Setup(facade => facade.GetStartingPosition()).Returns(result);
+            Mock.Setup(facade => facade.FirstPosition).Returns(result);
             return this;
         }
 
@@ -195,5 +163,11 @@ namespace McFly.WinDbg.Test.Builders
         /// </summary>
         /// <value>The current frames.</value>
         public IEnumerable<Frame> CurrentFrames => _frames.Where(x => x.Position == _currentPosition);
+
+        public TimeTravelFacadeBuilder WithGetCurrentFrame(int threadId, Frame frame)
+        {
+            Mock.Setup(facade => facade.GetCurrentFrame(threadId)).Returns(frame);
+            return this;
+        }
     }
 }

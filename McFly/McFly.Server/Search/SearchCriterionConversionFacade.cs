@@ -15,7 +15,7 @@
 using System;
 using System.ComponentModel.Composition;
 using System.Linq;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using McFly.Server.Data.Search;
 
 namespace McFly.Server.Search

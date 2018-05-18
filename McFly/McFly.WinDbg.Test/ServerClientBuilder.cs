@@ -4,7 +4,7 @@
 // Created          : 03-15-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 03-24-2018
+// Last Modified On : 05-01-2018
 // ***********************************************************************
 // <copyright file="ServerClientBuilder.cs" company="">
 //     Copyright ©  2018
@@ -16,20 +16,64 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using McFly.Core;
-using McFly.WinDbg;
 using Moq;
 
 namespace McFly.WinDbg.Test
 {
     /// <summary>
-    ///     Class ServerClientBuilder.
+    ///     Builder clas for <see cref="ServerClient"/>
     /// </summary>
     internal class ServerClientBuilder
     {
         /// <summary>
         ///     The mock
         /// </summary>
-        public Mock<WinDbg.IServerClient> Mock = new Mock<WinDbg.IServerClient>();
+        public Mock<IServerClient> Mock = new Mock<IServerClient>();
+
+        /// <summary>
+        ///     Builds this instance.
+        /// </summary>
+        /// <returns>IServerClient.</returns>
+        public IServerClient Build()
+        {
+            return Mock.Object;
+        }
+
+        /// <summary>
+        ///     Withes the add tag.
+        /// </summary>
+        /// <returns>ServerClientBuilder.</returns>
+        public ServerClientBuilder WithAddTag()
+        {
+            Mock.Setup(client =>
+                client.AddTag(It.IsAny<Position>(), It.IsAny<IEnumerable<int>>(), It.IsAny<Tag>()));
+            return this;
+        }
+
+        /// <summary>
+        ///     Withes the add tag.
+        /// </summary>
+        /// <param name="position">The position.</param>
+        /// <param name="threadIds">The thread ids.</param>
+        /// <param name="tag">The tag.</param>
+        /// <returns>ServerClientBuilder.</returns>
+        public ServerClientBuilder WithAddTag(Position position, IEnumerable<int> threadIds, Tag tag)
+        {
+            var it = It.Is<IEnumerable<int>>(e => e.SequenceEqual(threadIds));
+            Mock.Setup(client => client.AddTag(position, it, tag));
+            return this;
+        }
+
+        /// <summary>
+        ///     Withes the get recent tags.
+        /// </summary>
+        /// <param name="result">The result.</param>
+        /// <returns>ServerClientBuilder.</returns>
+        public ServerClientBuilder WithGetRecentTags(IEnumerable<Tag> result)
+        {
+            Mock.Setup(client => client.GetRecentTags(10)).Returns(result);
+            return this;
+        }
 
         /// <summary>
         ///     Withes the upsert frames.
@@ -56,26 +100,9 @@ namespace McFly.WinDbg.Test
             return this;
         }
 
-        /// <summary>
-        ///     Builds this instance.
-        /// </summary>
-        /// <returns>IServerClient.</returns>
-        public IServerClient Build()
+        public ServerClientBuilder WithAddMemoryRange()
         {
-            return Mock.Object;
-        }
-
-        public ServerClientBuilder WithAddTag()
-        {
-            Mock.Setup(client =>
-                client.AddTag(It.IsAny<Position>(), It.IsAny<IEnumerable<int>>(), It.IsAny<string>()));
-            return this;
-        }
-
-        public ServerClientBuilder WithAddTag(Position position, IEnumerable<int> threadIds, string text)
-        {
-            var it = It.Is<IEnumerable<int>>(e => e.SequenceEqual(threadIds));
-            Mock.Setup(client => client.AddTag(position, it, text));
+            Mock.Setup(client => client.AddMemoryRange(It.IsAny<MemoryChunk>()));
             return this;
         }
     }

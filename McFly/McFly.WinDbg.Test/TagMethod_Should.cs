@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using McFly.Core;
 using McFly.WinDbg.Test.Builders;
@@ -10,75 +11,130 @@ namespace McFly.WinDbg.Test
     public class TagMethod_Should
     {
         [Fact]
-        public void Add_Tags_Correctly()
+        public void Add_A_Tag_To_The_Current_Frame_When_Called_With_Title_And_Body()
         {
-            var tagMethod = new TagMethod();
-            var dbg = new DebugEngineProxyBuilder();
-            tagMethod.TimeTravelFacade = new TimeTravelFacadeBuilder(dbg)
-                .WithPositions(new PositionsResult(new[]
+            var method = new TagMethod();
+
+            var timeTravelFacade = new TimeTravelFacadeBuilder()
+                .WithGetCurrentPosition(new Position(1, 1))
+                .WithPositions(new PositionsResult(new List<PositionsRecord>()
                 {
-                    new PositionsRecord(1, new Position(0, 0), true),
-                    new PositionsRecord(2, new Position(0, 0), false)
-                })).Build();
-            var serverClientBuilder = new ServerClientBuilder();
-            tagMethod.ServerClient = serverClientBuilder
-                .WithAddTag(new Position(0, 0), new[] {1}, "This is a note")
-                .WithAddTag(new Position(0, 0), new[] {1, 2}, "This is a note")
+                    new PositionsRecord(1, new Position(1,1), true )
+                }))
                 .Build();
-            tagMethod.Settings = new Settings {ProjectName = "test"};
-            var options = new AddTagOptions
-            {
-                Text = "This is a note",
-                IsAllThreadsAtPosition = false
-            };
+            var serverClientBuilder = new ServerClientBuilder();
+            var serverClient = serverClientBuilder
+                .WithAddTag()
+                .Build();
 
-            var options2 = new AddTagOptions
-            {
-                Text = "This is a note",
-                IsAllThreadsAtPosition = true
-            };
-
-            tagMethod.AddTag(options);
-            tagMethod.AddTag(options2);
-            serverClientBuilder.Mock.Verify(client => client.AddTag(new Position(0, 0), new[] {1}, "This is a note"),
-                Times.Once);
-            serverClientBuilder.Mock.Verify(
-                client => client.AddTag(new Position(0, 0), new[] {1, 2}, "This is a note"), Times.Once);
+            method.TimeTravelFacade = timeTravelFacade;
+            method.ServerClient = serverClient;
+            method.Process(new[] {"add", "-t", "title", "-b", "body"});
+            method.Process(new[] { "add", "--title", "title", "-b", "body" });
+            method.Process(new[] { "add", "-t", "title", "--body", "body" });
+            method.Process(new[] { "add", "--title", "title", "--body", "body" });
+            serverClientBuilder.Mock.Verify(client => client.AddTag(new Position(1,1), new int[]{1}, It.Is<Tag>(tag => tag.Body == "body" && tag.Title == "title")), Times.Exactly(4));
         }
 
         [Fact]
-        public void Not_Allow_Multiple_Note_Bodies()
+        public void Tag_All_Frames_At_The_Same_Position_If_All_Is_Set()
         {
-            var tagMethod = new TagMethod();
-            Action throw1 = () => tagMethod.Process(new[] {"add", "note1", "note2"});
-            Action throw2 = () => tagMethod.Process(new[] {"add", "\"this is a note\"", "\"this is also a note\""});
-            Action throw3 = () => tagMethod.Process(new[] {"add", "note1", "-a", "note2"});
-            Action throw4 = () => tagMethod.Process(new[] {"add", "note1", "-a"});
-            Action throw5 = () => tagMethod.Process(new[] {"add", "-a", "note1"});
+            var method = new TagMethod();
+            
+            var timeTravelFacade = new TimeTravelFacadeBuilder()
+                .WithGetCurrentPosition(new Position(1, 1))
+                .WithPositions(new PositionsResult(new List<PositionsRecord>()
+                {
+                    new PositionsRecord(1, new Position(1,1), true ),
+                    new PositionsRecord(2, new Position(1,1), false )
+                }))
+                .Build();
+            var serverClientBuilder = new ServerClientBuilder();
+            var serverClient = serverClientBuilder
+                .WithAddTag()
+                .Build();
 
-            throw1.Should().Throw<ArgumentException>();
-            throw2.Should().Throw<ArgumentException>();
-            throw3.Should().Throw<ArgumentException>();
-            throw4.Should().NotThrow<ArgumentException>();
-            throw5.Should().NotThrow<ArgumentException>();
+            method.TimeTravelFacade = timeTravelFacade;
+            method.ServerClient = serverClient;
+            method.Process(new[] { "add", "-t", "title", "-b", "body", "-a" });
+            method.Process(new[] { "add", "--title", "title","--all", "-b", "body" });
+            serverClientBuilder.Mock.Verify(client => client.AddTag(new Position(1, 1), new int[] { 1, 2 }, It.Is<Tag>(tag => tag.Body == "body" && tag.Title == "title")), Times.Exactly(2));
         }
 
         [Fact]
-        public void Parse_Add_Options()
+        public void Throw_If_Given_Bad_Args()
         {
-            var tagMethod = new TagMethod();
-            var a = tagMethod.ExtractAddOptions(new[] {"note1", "-a"});
-            var a2 = tagMethod.ExtractAddOptions(new[] {"-a", "note1"});
-            var n = tagMethod.ExtractAddOptions(new[] {"this is content"});
+            var method = new TagMethod();
+            Action a = () => method.ExtractAddOptions(new[] {"-t", "title", "-b"});
+            Action a2 = () => method.ExtractAddOptions(new[] {"-t"});
+            a.Should().Throw<ArgumentException>();
+            a2.Should().Throw<ArgumentException>();
+        }
 
-            a.IsAllThreadsAtPosition.Should().BeTrue();
-            a.Text.Should().Be("note1");
+        [Fact]
+        public void List_Ten_Most_Recent_Tags_In_Chronological_Order_When_No_Args()
+        {
+            var tm = new TagMethod();
+            tm.ServerClient = new ServerClientBuilder()
+                .WithGetRecentTags(new List<Tag>
+                {
+                    new Tag
+                    {
+                        Id = Guid.NewGuid(),
+                        CreateDateUtc = DateTime.UtcNow,
+                        Title = "title0",
+                        Body = "body0"
+                    },
+                    new Tag
+                    {
+                        Id = Guid.NewGuid(),
+                        CreateDateUtc = DateTime.UtcNow,
+                        Title = "title1",
+                        Body = "body1"
+                    },
+                    new Tag
+                    {
+                        Id = Guid.NewGuid(),
+                        CreateDateUtc = DateTime.UtcNow.Subtract(TimeSpan.FromDays(1)),
+                        Title = "title2",
+                        Body = "body2"
+                    }
+                }).Build();
+            string output = null;
+            tm.DebugEngineProxy = new DebugEngineProxyBuilder()
+                .WithWriteLine(s => output = s)
+                .Build();
+            tm.Process(new string[0]);
+            output.Should().Be(@"1. title2 - body2
+2. title0 - body0
+3. title1 - body1
+");
+        }
 
-            a2.IsAllThreadsAtPosition.Should().BeTrue();
-            a2.Text.Should().Be("note1");
+        [Fact]
+        public void Throw_If_Asked_To_Format_Null_Tags()
+        {
+            var method = new TagMethod();
+            Action a = () => method.FormatTagsForOutput(null);
+            a.Should().Throw<ArgumentNullException>();
+        }
 
-            n.IsAllThreadsAtPosition.Should().BeFalse();
-            n.Text.Should().Be("this is content");
+        [Fact]
+        public void Throw_If_Invalid_Subcommand_Passed()
+        {
+            var method = new TagMethod();
+            Action a = () => method.Process(new[] {"gibberish"});
+            a.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public void Throw_If_Not_Given_Valid_Arguments()
+        {
+            var tm = new TagMethod();
+            Action a = () => tm.Process(null);
+            a.Should().Throw<ArgumentNullException>();
+            a = () => tm.Process(new[] {"gibberish"});
+            a.Should().Throw<ArgumentOutOfRangeException>();
         }
     }
 }

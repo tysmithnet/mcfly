@@ -1,4 +1,4 @@
-﻿using McFly.Server.Contract;
+﻿using McFly.Server.Core;
 using McFly.Server.Data.Search;
 using McFly.Server.Search;
 using Moq;

@@ -1,5 +1,5 @@
 ﻿using McFly.Core;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using McFly.Server.Controllers;
 using McFly.Server.Test.Builders;
 using Moq;
@@ -16,13 +16,13 @@ namespace McFly.Server.Test.Controllers
             var controller = new TagController();
             var builder = new TagAccessBuilder();
             controller.TagAccess = builder.Build();
-            var request = new AddTagRequest(new Position(0, 0), new[] {1}, "hi world");
+            var request = new AddTagRequest(new Position(0, 0), new[] {1}, new Tag());
 
             // act
             // assert
             controller.Post("testing", request);
 
-            builder.Mock.Verify(access => access.AddTag("testing", new Position(0, 0), new[] {1}, "hi world"),
+            builder.Mock.Verify(access => access.AddTag("testing", new Position(0, 0), new[] {1}, new Tag()),
                 Times.Once);
         }
     }

@@ -9,6 +9,10 @@ namespace McFly.WinDbg.Test
 {
     public class DisassemblyFacade_Should
     {
+
+        // todo: add this
+        // ntdll!_LdrpInitialize+0x39:
+        // 00007ffb`98873189 f00fb13527920e00 lock cmpxchg dword ptr[ntdll!LdrpProcessInitialized(00007ffb`9895c3b8)],esi ds:00007ffb`9895c3b8=00000002
         [Fact]
         public void Disassemble_The_Correct_Number_Of_Instructions()
         {

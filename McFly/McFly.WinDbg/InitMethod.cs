@@ -33,8 +33,8 @@ namespace McFly.WinDbg
         public void Process(string[] args)
         {
             var options = ExtractOptions(args);
-            var start = TimeTravelFacade.GetStartingPosition();
-            var end = TimeTravelFacade.GetEndingPosition();
+            var start = TimeTravelFacade.FirstPosition;
+            var end = TimeTravelFacade.LastPosition;
             ServerClient.InitializeProject(options.ProjectName, start, end);
         }
 

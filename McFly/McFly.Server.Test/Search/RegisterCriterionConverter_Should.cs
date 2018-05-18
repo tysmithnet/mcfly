@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using McFly.Server.Search;
 using Xunit;
 

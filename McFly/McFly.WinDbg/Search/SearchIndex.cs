@@ -4,7 +4,7 @@
 // Created          : 04-03-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-25-2018
+// Last Modified On : 05-08-2018
 // ***********************************************************************
 // <copyright file="SearchIndex.cs" company="">
 //     Copyright ©  2018
@@ -20,28 +20,14 @@ namespace McFly.WinDbg.Search
     public abstract class SearchIndex
     {
         /// <summary>
-        ///     The frame index
+        ///     The frame
         /// </summary>
-        public static readonly SearchIndex Frame = new _Frame();
+        public static readonly FrameIndex Frame = new FrameIndex();
 
         /// <summary>
         ///     Gets the short name.
         /// </summary>
         /// <value>The short name.</value>
         public abstract string ShortName { get; }
-
-        /// <summary>
-        ///     The frame index is used when searching for register values, etc
-        /// </summary>
-        /// <seealso cref="SearchIndex" />
-        private class _Frame : SearchIndex
-        {
-            /// <summary>
-            ///     Gets the short name.
-            /// </summary>
-            /// <value>The short name.</value>
-            /// <inheritdoc />
-            public override string ShortName { get; } = "frame";
-        }
     }
 }

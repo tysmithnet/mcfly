@@ -30,9 +30,8 @@ namespace McFly.WinDbg.Test
             var args = new[] {"-n", "test"};
             var initMethod = new InitMethod();
             var clientBuilder = new ServerClientBuilder();
-            var dbg = new DebugEngineProxyBuilder();
-            var builder = new TimeTravelFacadeBuilder(dbg);
-            builder.WithGetStartingPosition(new Position(0, 0)).WithGetEndingPosition(new Position(1, 0));
+            var builder = new TimeTravelFacadeBuilder();
+            builder.WithFirstPosition(new Position(0, 0)).WithLastPosition(new Position(1, 0));
 
             initMethod.TimeTravelFacade = builder.Build();
             initMethod.ServerClient = clientBuilder.Build();

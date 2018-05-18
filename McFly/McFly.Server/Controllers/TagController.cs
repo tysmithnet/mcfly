@@ -15,7 +15,7 @@
 using System.ComponentModel.Composition;
 using System.Web.Http;
 using Common.Logging;
-using McFly.Server.Contract;
+using McFly.Server.Core;
 using McFly.Server.Data;
 using McFly.Server.Headers;
 
@@ -44,7 +44,7 @@ namespace McFly.Server.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromProjectNameHeader] string projectName, [FromBody] AddTagRequest request)
         {
-            TagAccess.AddTag(projectName, request.Position, request.ThreadIds, request.Text);
+            TagAccess.AddTag(projectName, request.Position, request.ThreadIds, request.Tag);
             return Ok();
         }
 

@@ -24,23 +24,19 @@ namespace McFly.WinDbg
     /// </summary>
     /// <seealso cref="IDebugOutputCallbacks" />
     /// <seealso cref="System.IDisposable" />
-    public class ExecuteWrapper : IDebugOutputCallbacks, IDisposable
+    internal class ExecuteWrapper : IDebugOutputCallbacks, IDisposable, IExecuteWrapper
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExecuteWrapper" /> class.
         /// </summary>
         /// <param name="client">The client.</param>
-        public ExecuteWrapper(IDebugClient client)
+        public ExecuteWrapper(IDebugClient client, IDebugControl control)
         {
             _client = client;
-            // ReSharper disable once SuspiciousTypeConversion.Global
-            _control = (IDebugControl) client;
+            _control = control;
 
-            var hr = client.GetOutputCallbacks(out _old);
-            Debug.Assert(hr == 0);
-
-            hr = client.SetOutputCallbacks(this);
-            Debug.Assert(hr == 0);
+            client.GetOutputCallbacks(out _old); // todo: error check
+            client.SetOutputCallbacks(this);
         }
 
         /// <summary>
@@ -90,7 +86,7 @@ namespace McFly.WinDbg
         /// </summary>
         /// <param name="cmd">The command.</param>
         /// <returns>System.String.</returns>
-        public string Execute(string cmd)
+        public virtual string Execute(string cmd)
         {
             lock (_builder)
             {
@@ -98,8 +94,6 @@ namespace McFly.WinDbg
             }
 
             var hr = _control.Execute(DEBUG_OUTCTL.THIS_CLIENT, cmd, DEBUG_EXECUTE.NOT_LOGGED);
-            Debug.Assert(hr == 0);
-            //todo:  Something with hr, it may be an error legitimately.
 
             lock (_builder)
             {

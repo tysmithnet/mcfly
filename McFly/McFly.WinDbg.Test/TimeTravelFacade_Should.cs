@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using McFly.Core;
 using McFly.Core.Registers;
@@ -155,6 +156,7 @@ ntdll!NtTerminateProcess+0x12:
 
             // assert
             position.Should().Be(new Position(0x2D164, 0));
+            facade.LastPosition.Should().Be(new Position(0x2D164, 0));
         }
 
         [Fact]
@@ -176,6 +178,7 @@ ntdll!NtSetInformationWorkerFactory+0x14:
 
             // assert
             position.Should().Be(new Position(0x35, 0));
+            facade.FirstPosition.Should().Be(new Position(0x35, 0));
         }
 
         [Fact]
@@ -185,13 +188,40 @@ ntdll!NtSetInformationWorkerFactory+0x14:
             var facade = new TimeTravelFacade();
             var position = new Position(0, 0);
             var builder = new DebugEngineProxyBuilder();
+            builder.WithExecuteResult(@"Setting position to the beginning of the trace
+Setting position: E:0
+Breakpoint 0 hit
+Time Travel Position: E:0
+ntdll!NtSetInformationWorkerFactory+0x14:
+00007ffc`f0ee3554 c3              ret");
             facade.DebugEngineProxy = builder.Build();
 
             // act
-            facade.SetPosition(position);
+            var posResult = facade.SetPosition(position);
 
             // assert
             builder.Mock.Verify(proxy => proxy.Execute("!tt 0:0"), Times.Once);
+            posResult.ActualPosition.Should().Be(new Position(0xe, 0));
+            posResult.BreakpointHit.Should().Be(0);
         }
+
+        [Fact]
+        public void Throw_If_Time_Travel_Position_Cant_Be_Determined()
+        {
+            var facade = new TimeTravelFacade();
+            var position = new Position(0, 0);
+            var builder = new DebugEngineProxyBuilder();
+            builder.WithExecuteResult(@"Setting position to the beginning of the trace
+Setting position: E:0
+Breakpoint 0 hit
+Time Travel Position E:0
+ntdll!NtSetInformationWorkerFactory+0x14:
+00007ffc`f0ee3554 c3              ret");
+            facade.DebugEngineProxy = builder.Build();
+
+            Action a = () => facade.SetPosition(position);
+            a.Should().Throw<ApplicationException>();
+        }
+
     }
 }

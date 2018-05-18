@@ -49,7 +49,7 @@ namespace McFly.Server.Test.Builders
 
         public FrameAccessBuilder WithSearch(IEnumerable<Frame> frames)
         {
-            Mock.Setup(access => access.Search(It.IsAny<string>(), It.IsAny<ICriterion>())).Returns(frames);
+            //Mock.Setup(access => access.Search(It.IsAny<string>(), It.IsAny<ICriterion>())).Returns(frames);
             return this;
         }
     }

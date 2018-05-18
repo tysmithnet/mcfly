@@ -142,6 +142,10 @@
       <Project>{3243a211-cf4f-4296-bd68-2d4dd5406542}</Project>
       <Name>McFly.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\McFly.Server.Core\McFly.Server.Core.csproj">
+      <Project>{BCFFB741-26F9-4D12-A152-04CF601D373E}</Project>
+      <Name>McFly.Server.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -9,15 +9,16 @@ namespace McFly.WinDbg.Test
         [Fact]
         public void Exhibit_Value_Equality()
         {
-            // arrange
-            var left = new PositionsRecord(1, new Position(0, 0), true);
-            var right = new PositionsRecord(1, new Position(0, 0), true);
+            var r1 = new PositionsRecord(1, new Position(0, 0), true);
+            var r2 = new PositionsRecord(1, new Position(0, 0), true);
 
-            // act 
-            var equal = left.Equals(right);
-
-            // assert
-            equal.Should().BeTrue();
+            r1.Equals(r1).Should().BeTrue();
+            r1.Equals((object)r1).Should().BeTrue();
+            r1.Equals(null).Should().BeFalse();
+            r1.Equals((object)null).Should().BeFalse();
+            r1.Equals(new object()).Should().BeFalse();
+            r1.Equals(r2).Should().BeTrue();
+            r1.GetHashCode().Should().Be(r2.GetHashCode());
         }
     }
 }

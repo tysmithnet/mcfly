@@ -13,6 +13,7 @@
 // ***********************************************************************
 
 using System;
+using System.Runtime.CompilerServices;
 
 namespace McFly.WinDbg
 {
@@ -27,42 +28,42 @@ namespace McFly.WinDbg
         ///     Logs a debug message
         /// </summary>
         /// <param name="message">The message.</param>
-        void Debug(string message);
+        void Debug(string message, [CallerMemberName]string callingMember = "");
 
         /// <summary>
         ///     Logs an error message
         /// </summary>
         /// <param name="message">The message.</param>
-        void Error(string message);
+        void Error(string message, [CallerMemberName]string callingMember = "");
 
         /// <summary>
         ///     Logs an exception to the error log
         /// </summary>
         /// <param name="exception">The exception.</param>
-        void Error(Exception exception);
+        void Error(Exception exception, [CallerMemberName]string callingMember = "");
 
         /// <summary>
         ///     Logs a fatal messasge
         /// </summary>
         /// <param name="message">The message.</param>
-        void Fatal(string message);
+        void Fatal(string message, [CallerMemberName]string callingMember = "");
 
         /// <summary>
         ///     Logs a fatal exception
         /// </summary>
         /// <param name="exception">The exception.</param>
-        void Fatal(Exception exception);
+        void Fatal(Exception exception, [CallerMemberName]string callingMember = "");
 
         /// <summary>
         ///     Logs an informational message
         /// </summary>
         /// <param name="messasge">The messasge.</param>
-        void Info(string messasge);
+        void Info(string messasge, [CallerMemberName]string callingMember = "");
 
         /// <summary>
         ///     Logs a verbose message
         /// </summary>
         /// <param name="message">The message.</param>
-        void Verbose(string message);
+        void Verbose(string message, [CallerMemberName]string callingMember = "");
     }
 }

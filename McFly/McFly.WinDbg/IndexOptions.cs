@@ -4,7 +4,7 @@
 // Created          : 02-19-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-03-2018
+// Last Modified On : 05-05-2018
 // ***********************************************************************
 // <copyright file="IndexOptions.cs" company="">
 //     Copyright ©  2018
@@ -22,6 +22,7 @@ namespace McFly.WinDbg
     /// <summary>
     ///     Options for the index method
     /// </summary>
+    /// <seealso cref="System.IEquatable{McFly.WinDbg.IndexOptions}" />
     /// <seealso cref="IndexOptions" />
     /// <seealso cref="IndexOptions" />
     internal class IndexOptions : IEquatable<IndexOptions>
@@ -65,16 +66,36 @@ namespace McFly.WinDbg
         {
             unchecked
             {
-                var hashCode = MemoryRanges != null ? MemoryRanges.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Start != null ? Start.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (End != null ? End.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (BreakpointMasks != null
-                               ? BreakpointMasks.Select(x => x.GetHashCode()).Aggregate((x, y) => x ^ y)
-                               : 0);
-                hashCode = (hashCode * 397) ^ (AccessBreakpoints != null
-                               ? AccessBreakpoints.Select(x => x.GetHashCode()).Aggregate((x, y) => x ^ y)
-                               : 0);
-                hashCode = (hashCode * 397) ^ Step;
+                var hashCode = 135135;
+                if (Start != null)
+                    hashCode ^= Start.GetHashCode() * 3515;
+                if (End != null)
+                    hashCode = End.GetHashCode() * 34344;
+                if (MemoryRanges != null)
+                {
+                    foreach (var range in MemoryRanges)
+                    {
+                        hashCode ^= range.GetHashCode();
+                    }
+                }
+
+                if (AccessBreakpoints != null)
+                {
+                    foreach (var accessBreakpoint in AccessBreakpoints)
+                    {
+                        hashCode ^= accessBreakpoint.GetHashCode();
+                    }
+                }
+
+                if (BreakpointMasks != null)
+                {
+                    foreach (var breakpointMask in BreakpointMasks)
+                    {
+                        hashCode ^= breakpointMask.GetHashCode();
+                    }
+                }
+
+                hashCode ^= Step * (IsAllPositionsInRange ? 13513 : 55313);
                 return hashCode;
             }
         }
@@ -120,6 +141,12 @@ namespace McFly.WinDbg
         /// </summary>
         /// <value>The end.</value>
         public Position End { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether this instance is all positions in range.
+        /// </summary>
+        /// <value><c>true</c> if this instance is all positions in range; otherwise, <c>false</c>.</value>
+        public bool IsAllPositionsInRange { get; set; }
 
         /// <summary>
         ///     Gets or sets the memory ranges.

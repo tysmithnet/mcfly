@@ -28,7 +28,7 @@ namespace McFly.Server.Data
         /// <param name="projectName">Name of the project.</param>
         /// <param name="position">The position.</param>
         /// <param name="threadIds">The thread ids.</param>
-        /// <param name="text">The text.</param>
-        void AddTag(string projectName, Position position, IEnumerable<int> threadIds, string text); // todo: title
+        /// <param name="tag">The text.</param>
+        void AddTag(string projectName, Position position, IEnumerable<int> threadIds, Tag tag); // todo: title
     }
 }

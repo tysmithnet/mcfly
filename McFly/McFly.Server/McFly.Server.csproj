@@ -222,7 +222,6 @@
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Search\RegisterCriterionConverter.cs" />
-    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Search\SearchCriterionConversionFacade.cs" />
     <Compile Include="Headers\FromHeaderAttribute.cs" />
     <Compile Include="Headers\FromHeaderAttributeOperationFilter.cs" />
@@ -246,9 +245,9 @@
       <Project>{3243a211-cf4f-4296-bd68-2d4dd5406542}</Project>
       <Name>McFly.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\McFly.Server.Contract\McFly.Server.Contract.csproj">
+    <ProjectReference Include="..\McFly.Server.Core\McFly.Server.Core.csproj">
       <Project>{BCFFB741-26F9-4D12-A152-04CF601D373E}</Project>
-      <Name>McFly.Server.Contract</Name>
+      <Name>McFly.Server.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\McFly.Server.Conversion\McFly.Server.Conversion.csproj">
       <Project>{f0e9f834-6a52-4c1c-b956-30deb6fdf11b}</Project>

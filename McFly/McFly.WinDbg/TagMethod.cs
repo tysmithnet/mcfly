@@ -4,7 +4,7 @@
 // Created          : 03-11-2018
 //
 // Last Modified By : @tysmithnet
-// Last Modified On : 04-29-2018
+// Last Modified On : 05-01-2018
 // ***********************************************************************
 // <copyright file="TagMethod.cs" company="">
 //     Copyright ©  2018
@@ -16,6 +16,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Text;
+using McFly.Core;
 
 namespace McFly.WinDbg
 {
@@ -27,20 +29,26 @@ namespace McFly.WinDbg
     [Export(typeof(IMcFlyMethod))]
     internal sealed class TagMethod : IMcFlyMethod
     {
+        /*
+         * Todo: add ability to tag all frames in a range e.g. thread 1 from a to b or all threads a to b0
+         */
         /// <summary>
         ///     Processes the specified arguments.
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>Task.</returns>
-        /// <exception cref="NullReferenceException">args</exception>
+        /// <exception cref="ArgumentNullException">args</exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void Process(string[] args)
         {
             if (args == null)
-                throw new NullReferenceException(nameof(args));
+                throw new ArgumentNullException(nameof(args));
             if (!args.Any())
             {
-                // list tags
+                // list tags at the current position
+                var tags = ServerClient.GetRecentTags(10);
+                var output = FormatTagsForOutput(tags);
+                DebugEngineProxy.WriteLine(output);
             }
             else
             {
@@ -51,6 +59,7 @@ namespace McFly.WinDbg
                         var addOptions = ExtractAddOptions(args.Skip(1));
                         AddTag(addOptions);
                         break;
+                    // todo: edit, delete
                     default:
                         throw new ArgumentOutOfRangeException($"Unknown subcommand {command}");
                 }
@@ -58,21 +67,28 @@ namespace McFly.WinDbg
         }
 
         /// <summary>
-        ///     Adds the tag.
+        ///     Adds a tag.
         /// </summary>
         /// <param name="addOptions">The add options.</param>
         internal void AddTag(AddTagOptions addOptions)
         {
             var positions = TimeTravelFacade.Positions();
             var current = positions.CurrentThreadResult;
+            var tag = new Tag()
+            {
+                Title = addOptions.Title,
+                Body = addOptions.Body,
+                CreateDateUtc = DateTime.UtcNow
+            };
             if (addOptions.IsAllThreadsAtPosition) // todo: extract methods
             {
                 var threadIds = positions.Select(x => x.ThreadId);
-                ServerClient.AddTag(current.Position, threadIds, addOptions.Text);
+
+                ServerClient.AddTag(current.Position, threadIds, tag);
             }
             else
             {
-                ServerClient.AddTag(current.Position, new[] {current.ThreadId}, addOptions.Text);
+                ServerClient.AddTag(current.Position, new[] {current.ThreadId}, tag);
             }
         }
 
@@ -87,7 +103,7 @@ namespace McFly.WinDbg
             var options = new AddTagOptions();
             var arr = args.ToArray();
 
-            for (var i = 0; i < arr.Length; i++)
+            for (var i = 0; i < arr.Length; i++) // todo: support short cut for tagging
             {
                 var ptr = arr[i];
 
@@ -97,16 +113,43 @@ namespace McFly.WinDbg
                     case "--all":
                         options.IsAllThreadsAtPosition = true;
                         break;
-                    default:
-                        if (options.Text == null)
-                            options.Text = ptr;
-                        else
-                            throw new ArgumentException("Found more than 1 tag body");
+                    case "-t":
+                    case "--title":
+                        if(i + 1 >= arr.Length)
+                            throw new ArgumentException(nameof(args), $"Found switch {ptr}, which requires a value, but none was found");
+                        options.Title = arr[i + 1];
+                        break;
+                    case "-b":
+                    case "--body":
+                        if (i + 1 >= arr.Length)
+                            throw new ArgumentException(nameof(args), $"Found switch {ptr}, which requires a value, but none was found");
+                        options.Body = arr[i + 1];
                         break;
                 }
             }
 
             return options;
+        }
+
+        /// <summary>
+        ///     Formats the tags for output.
+        /// </summary>
+        /// <param name="tags">The tags.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="ArgumentNullException">tags</exception>
+        internal string FormatTagsForOutput(IEnumerable<Tag> tags)
+        {
+            if (tags == null)
+                throw new ArgumentNullException(nameof(tags));
+            var sb = new StringBuilder();
+            var list = tags.OrderBy(x => x.CreateDateUtc).ToList();
+            for (var i = 0; i < list.Count(); i++)
+            {
+                var tag = list[i];
+                sb.AppendLine($"{i + 1}. {tag.Title} - {tag.Body}");
+            }
+
+            return sb.ToString();
         }
 
         /// <summary>
@@ -126,7 +169,10 @@ namespace McFly.WinDbg
             .AddSubcommand(new HelpInfoBuilder()
                 .SetName("add")
                 .SetDescription("Add tags")
-                .AddExample("!mf tag add \"Encryption begin\"", "Adds a tag to the current frame")
+                .AddSwitch("-a, --all", "Tag all threads at the current position")
+                .AddSwitch("-t, --title", "The title of the tag")
+                .AddSwitch("-b, --body", "The body of the tag")
+                .AddExample("!mf tag add -t \"Encryption begin\" -b \"This is where the encryption process begins\"", "Adds a tag to the current frame")
                 .Build())
             .AddExample("!mf tag", "Shows all tags on the current frame")
             .Build();

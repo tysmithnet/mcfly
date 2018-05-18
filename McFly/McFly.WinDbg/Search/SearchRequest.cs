@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,8 +32,8 @@ namespace McFly.WinDbg.Search
         /// <param name="searchFilters">The search filters.</param>
         public SearchRequest(string index, IEnumerable<SearchFilter> searchFilters)
         {
-            Index = index;
-            _searchFilters = searchFilters.ToList();
+            Index = index ?? throw new ArgumentNullException(nameof(index));
+            _searchFilters = searchFilters?.ToList() ?? throw new ArgumentNullException(nameof(searchFilters));
         }
 
         /// <summary>
