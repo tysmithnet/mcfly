@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tysmithnet/mcfly/issues"
   },
-  "homepage": "https://github.com/tysmithnet/mcfly#readme"
+  "homepage": "https://github.com/tysmithnet/mcfly#readme",
+  "devDependencies": {
+    "typescript": "^2.8.3"
+  }
 }
