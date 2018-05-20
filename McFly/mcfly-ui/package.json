@@ -1,0 +1,19 @@
+{
+  "name": "mcfly-ui",
+  "version": "0.0.1",
+  "description": "Web ui for the McFly project",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tysmithnet/mcfly.git"
+  },
+  "author": "@tysmithnet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tysmithnet/mcfly/issues"
+  },
+  "homepage": "https://github.com/tysmithnet/mcfly#readme"
+}
