@@ -1,4 +1,5 @@
 .vscode
+.vagrant
 node_modules
 out
 graph.svg
