@@ -27,7 +27,9 @@
     "precommit": "yarn run lint",
     "prepush": "yarn run lint & yarn run tsc & yarn run test",
     "deploy": "echo 'deploy not set!'",
-    "graph": "tsc && madge --image graph.svg out/index.js --warning"
+    "graph": "tsc && madge --image graph.svg out/index.js --warning",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "react": "16.2.0",
@@ -44,6 +46,10 @@
     "utility-types": "1.0.0-rc.2"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^4.0.0-alpha.7",
+    "@storybook/addon-links": "^4.0.0-alpha.7",
+    "@storybook/addons": "^4.0.0-alpha.7",
+    "@storybook/react": "^4.0.0-alpha.7",
     "@types/enzyme": "3.1.6",
     "@types/jest": "22.0.1",
     "@types/react": "16.0.34",
@@ -55,6 +61,8 @@
     "@types/webpack": "3.8.2",
     "@types/webpack-dev-server": "2.9.2",
     "@types/webpack-env": "1.13.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-runtime": "^7.0.0-beta.3",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
     "html-webpack-plugin": "2.30.1",
@@ -67,7 +75,7 @@
     "tslint": "5.9.1",
     "tslint-react": "3.4.0",
     "typescript": "2.6.2",
-    "webpack": "2",
+    "webpack": "^4.8.3",
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "2.11.0"
   }
