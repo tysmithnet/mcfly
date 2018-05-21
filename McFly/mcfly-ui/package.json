@@ -24,8 +24,6 @@
     "test:update": "jest --config jest.json -u",
     "reinstall": "rm -rf node_modules && yarn",
     "reinstall:win": "rd /s /q node_modules && yarn",
-    "precommit": "yarn run lint",
-    "prepush": "yarn run lint & yarn run tsc & yarn run test",
     "deploy": "echo 'deploy not set!'",
     "graph": "tsc && madge --image graph.svg out/index.js --warning",
     "storybook": "start-storybook -p 6006",
