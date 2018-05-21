@@ -13,6 +13,12 @@ interface Props {
   history: History;
 }
 
+/*
+- you should be able to queue up indexings
+- canceling should send an interput to the engine
+- websockets should be used for bidirectional communication
+*/
+
 export class App extends React.Component<Props, {}> {
   render() {
     const { store, history } = this.props;
