@@ -1,0 +1,10 @@
+{
+  "name": "mcfly",
+  "version": "0.0.1",
+  "description": "Web UI for mcfly web app",
+  "main": "index.js",
+  "repository": "http://github.com/tysmithnet/mcfly.git",
+  "author": "@tysmithnet",
+  "license": "MIT",
+  "private": false
+}
