@@ -4,4 +4,6 @@ node_modules
 out
 graph.svg
 *.log
+dist
+
 
