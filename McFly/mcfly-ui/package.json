@@ -1,21 +1,47 @@
 {
-  "name": "mcfly",
-  "version": "0.0.1",
-  "description": "Web UI for mcfly web app",
-  "main": "index.js",
-  "repository": "http://github.com/tysmithnet/mcfly.git",
-  "author": "@tysmithnet",
-  "license": "MIT",
-  "private": false,
-  "dependencies": {
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
-  },
-  "devDependencies": {
-    "@types/react": "^16.3.14",
-    "@types/react-dom": "^16.0.5",
-    "awesome-typescript-loader": "^5.0.0",
-    "source-map-loader": "^0.2.3",
-    "typescript": "^2.8.3"
-  }
+    "name": "mcfly",
+    "version": "0.0.1",
+    "description": "Web UI for mcfly web app",
+    "main": "index.js",
+    "repository": "http://github.com/tysmithnet/mcfly.git",
+    "author": "@tysmithnet",
+    "license": "MIT",
+    "private": false,
+    "scripts": {
+      "test": "webpack && jest"
+    },
+    "dependencies": {
+        "react": "^16.3.2",
+        "react-dom": "^16.3.2"
+    },
+    "devDependencies": {
+        "@types/enzyme": "^3.1.10",
+        "@types/jest": "^22.2.3",
+        "@types/react": "^16.3.14",
+        "@types/react-dom": "^16.0.5",
+        "awesome-typescript-loader": "^5.0.0",
+        "enzyme": "^3.3.0",
+        "enzyme-adapter-react-16": "^1.1.1",
+        "jest": "^22.4.4",
+        "react-test-renderer": "^16.3.2",
+        "source-map-loader": "^0.2.3",
+        "typescript": "^2.8.3"
+    },
+    "jest": {
+        "setupFiles": [
+            "<rootDir>/test-shim.js",
+            "<rootDir>/test-setup.js"
+        ],
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js"
+        ],
+        "transform": {
+            "^.+\\.(ts|tsx)$": "<rootDir>/test-preprocessor.js"
+        },
+        "testMatch": [
+            "**/*.spec.(ts|tsx|js)"
+        ]
+    }
 }
