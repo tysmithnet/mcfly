@@ -8,13 +8,15 @@
     "license": "MIT",
     "private": false,
     "scripts": {
-        "test": "webpack && jest"
+        "test": "webpack && jest",
+        "storybook": "start-storybook -p 9001 -c .storybook"
     },
     "dependencies": {
         "react": "^16.3.2",
         "react-dom": "^16.3.2"
     },
     "devDependencies": {
+        "@storybook/addon-info": "^3.4.5",
         "@storybook/addon-storyshots": "^3.4.5",
         "@storybook/react": "^3.4.5",
         "@types/enzyme": "^3.1.10",
@@ -28,6 +30,7 @@
         "enzyme": "^3.3.0",
         "enzyme-adapter-react-16": "^1.1.1",
         "jest": "^22.4.4",
+        "react-docgen-typescript-webpack-plugin": "^1.1.0",
         "react-test-renderer": "^16.3.2",
         "source-map-loader": "^0.2.3",
         "spdx-license-ids": "^3.0.0",
