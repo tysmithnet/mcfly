@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import {Hello} from "./components/Hello";
+import ForceGraph from "./components/ForceGraph";
 
 ReactDOM.render(
-    <Hello name="world" />,
+    <ForceGraph  />,
     document.getElementById("root")
 );
