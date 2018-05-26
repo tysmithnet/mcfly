@@ -12,7 +12,7 @@ export default class ForceGraphNode extends React.PureComponent<Props, State>
 {
     render() : React.ReactNode {
         return (
-            <h3>ForceGraphNode</h3>
+            <circle r="10" fill="black" cx="50" cy="50"/>
         );
     }
 }

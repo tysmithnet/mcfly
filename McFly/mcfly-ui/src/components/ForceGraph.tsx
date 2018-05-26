@@ -18,10 +18,9 @@ export default class ForceGraph extends React.PureComponent<Props, State>
 
     render() : React.ReactNode {
         return (
-            <div>
-                <h1>ForceGraph</h1>
+            <svg width="300" height="300">
                 {this.props.children}
-            </div>
+            </svg>
         );
     }
 }

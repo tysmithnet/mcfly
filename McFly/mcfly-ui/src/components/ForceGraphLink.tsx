@@ -17,7 +17,7 @@ export default class ForceGraphLink extends React.PureComponent<Props, State>
 
     render() : React.ReactNode {
         return (
-            <h3>ForceGraphLink</h3>
+            <rect width="10" height="20" />
         );
     }
 }
