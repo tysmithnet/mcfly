@@ -4,7 +4,7 @@ import ForceGraphNode from "./ForceGraphNode";
 
 import initStoryshots from '@storybook/addon-storyshots';
 
-it("renders the heading", () => {
+it("ForceGraphNode", () => {
     const result = shallow(<ForceGraphNode />).contains("ForceGraphNode");
     expect(result).toBeTruthy();
 });
