@@ -2,10 +2,11 @@ import * as React from "react";
 
 interface Props {
     id: string;
+    
 }
 
 interface State {
-    
+
 }
 
 export default class ForceGraphNode extends React.PureComponent<Props, State>
