@@ -4,6 +4,6 @@ import * as ReactDOM from "react-dom";
 import ForceGraph from "./components/ForceGraph";
 
 ReactDOM.render(
-    <ForceGraph  />,
+    <h1>hi</h1>,
     document.getElementById("root")
 );

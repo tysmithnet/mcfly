@@ -8,15 +8,15 @@ import ForceGraphNode from "../src/components/ForceGraphNode";
 import ForceGraphLink from "../src/components/ForceGraphLink";
 
 storiesOf('ForceGraph', module)
-    .add('Empty', () => <ForceGraph />)
+    .add('Empty', () => <ForceGraph width={100} height={100}/>)
     .add("Single Node", () => 
-        <ForceGraph>
-            <ForceGraphNode />
+        <ForceGraph width={100} height={100}>
+            <ForceGraphNode id="b" />
         </ForceGraph>
         )
     .add("Node and Link", () => 
-    <ForceGraph>
-        <ForceGraphNode />
-        <ForceGraphLink />
+    <ForceGraph width={100} height={100}>
+        <ForceGraphNode id="b" />
+        <ForceGraphLink x1={0} y1={0} x2={10} y2={10} />
     </ForceGraph>
     )
