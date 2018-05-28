@@ -1,9 +1,17 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { ConnectedRouter } from "react-router-redux";
+import { createBrowserHistory } from "history";
+import App from "./components/App";
 
-import ForceGraph from "./components/ForceGraph";
+const history = createBrowserHistory();
 
 ReactDOM.render(
-    <ForceGraph width={300} height={300} />,
-    document.getElementById("root")
+  <Provider>
+    <ConnectedRouter>
+      <App />
+    </ConnectedRouter>
+  </Provider>,
+  document.getElementById("root")
 );
