@@ -3,6 +3,8 @@
     "rules": {
         "interface-name": [true, "never-prefix"],
         "no-implicit-dependencies": false,
-        "no-empty-interface": false
+        "no-empty-interface": false,
+        "no-submodule-imports": false,
+        "no-var-requires": false
     }
 }
