@@ -11,7 +11,7 @@
     "dev": "webpack-dev-server --config webpack.dev.config.js --hot --inline --host 0.0.0.0",
     "test": "webpack --config webpack.dev.config.js && jest",
     "storybook": "start-storybook -p 80",
-    "pretty": "prettier --write src/*.(ts|tsx|js|jsx|json)",
+    "pretty": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
