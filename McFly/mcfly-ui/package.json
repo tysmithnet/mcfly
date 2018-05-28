@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.dev.config.js --hot --inline",
+    "dev": "webpack-dev-server --config webpack.dev.config.js --hot --inline --host 0.0.0.0",
     "test": "webpack --config webpack.dev.config.js && jest",
     "storybook": "start-storybook -p 80",
     "build-storybook": "build-storybook"
