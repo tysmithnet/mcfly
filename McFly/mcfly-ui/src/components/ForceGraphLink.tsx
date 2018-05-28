@@ -14,7 +14,7 @@ export default class ForceGraphLink extends React.PureComponent<Props, State> {
     super(props, state);
   }
 
-  render(): React.ReactNode {
+  public render(): React.ReactNode {
     return (
       <line
         x1={this.props.x1}

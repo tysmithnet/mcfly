@@ -1,9 +1,9 @@
-import * as React from "react";
+import initStoryshots from "@storybook/addon-storyshots";
 import { shallow } from "enzyme";
+import * as React from "react";
+import { v4 } from "uuid";
 import ForceGraph from "./ForceGraph";
 import ForceGraphNode from "./ForceGraphNode";
-import initStoryshots from "@storybook/addon-storyshots";
-import { v4 } from "uuid";
 
 it("renders the heading", () => {
   const result = shallow(

@@ -13,7 +13,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     super(props, state);
   }
 
-  render(): React.ReactNode {
+  public render(): React.ReactNode {
     return (
       <svg width={this.props.width} height={this.props.height}>
         {this.props.children}

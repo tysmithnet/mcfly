@@ -1,7 +1,7 @@
-import * as React from "react";
-import { shallow } from "enzyme";
-import ForceGraphLink from "./ForceGraphLink";
 import initStoryshots from "@storybook/addon-storyshots";
+import { shallow } from "enzyme";
+import * as React from "react";
+import ForceGraphLink from "./ForceGraphLink";
 
 it("renders the heading", () => {
   const result = shallow(

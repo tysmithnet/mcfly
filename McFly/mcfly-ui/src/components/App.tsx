@@ -11,7 +11,7 @@ export default class App extends React.PureComponent<Props, State> {
     super(props, state);
   }
 
-  render(): React.ReactNode {
+  public render(): React.ReactNode {
     return <ForceGraph width={300} height={300} />;
   }
 }
