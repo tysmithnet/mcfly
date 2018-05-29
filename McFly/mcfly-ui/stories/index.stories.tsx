@@ -28,7 +28,8 @@ storiesOf('ForceGraph', module)
         )
     .add("Node and Link", () => 
     <ForceGraph width={100} height={100}>
+        <ForceGraphNode id="a" />
         <ForceGraphNode id="b" />
-        <ForceGraphLink x1={0} y1={0} x2={10} y2={10} />
+        <ForceGraphLink />
     </ForceGraph>
     )
