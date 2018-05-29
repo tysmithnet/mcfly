@@ -2,11 +2,11 @@ import * as React from "react";
 
 import ForceGraph from "../components/ForceGraph";
 
-interface Props {}
+export interface Props {}
 
-interface State {}
+export interface State {}
 
-export default class App extends React.PureComponent<Props, State> {
+export default class App extends React.Component<Props, State> {
   constructor(props: Props, state: State) {
     super(props, state);
   }

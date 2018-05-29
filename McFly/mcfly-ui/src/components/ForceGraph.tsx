@@ -2,14 +2,14 @@ import * as React from "react";
 import ForceGraphNode from "../components/ForceGraphNode";
 import ForceGraphLink from "./ForceGraphLink";
 
-const workerPath = require("file-loader?name=[name].ts!./simulator");
+import * as workerPath from "file-loader?name=[name].js!./simulator.webworker";
 
-interface Props {
+export interface Props {
   width: number;
   height: number;
 }
 
-interface State {
+export interface State {
   nodes?: ForceGraphNode[],
   links?: ForceGraphLink[];
 }
@@ -22,11 +22,9 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   }
 
   public componentWillMount(): void {
+    this.setState({links: [], nodes:[]});
     this.webWorker = new Worker(workerPath);
-    this.webWorker.postMessage({
-      links: this.state.links,      
-      nodes: this.state.nodes
-    });
+    
 
     // todo: this should be typed
     this.webWorker.onmessage = (event:any):void => { 
@@ -35,6 +33,12 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     };
   }
 
+  public componentDidMount():void {
+    this.webWorker.postMessage({
+      links: this.state.links,      
+      nodes: this.state.nodes
+    });
+  }
   public render(): React.ReactNode {
     return (
       <svg width={this.props.width} height={this.props.height}>

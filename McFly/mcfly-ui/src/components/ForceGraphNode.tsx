@@ -1,10 +1,10 @@
 import * as React from "react";
 
-interface Props {
+export interface Props {
   id: string;
 }
 
-interface State {}
+export interface State {}
 
 export default class ForceGraphNode extends React.PureComponent<Props, State> {
   public render(): React.ReactNode {

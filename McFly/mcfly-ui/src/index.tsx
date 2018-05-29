@@ -11,10 +11,6 @@ const history = createBrowserHistory();
 const store = configureStore(history);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Route exact={true} path="/" render={() => <App />} />
-    </ConnectedRouter>
-  </Provider>,
+  <App />,
   document.getElementById("root")
 );

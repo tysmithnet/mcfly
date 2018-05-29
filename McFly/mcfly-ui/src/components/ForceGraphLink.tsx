@@ -1,13 +1,13 @@
 import * as React from "react";
 
-interface Props {
+export interface Props {
   x1: number;
   y1: number;
   x2: number;
   y2: number;
 }
 
-interface State {}
+export interface State {}
 
 export default class ForceGraphLink extends React.PureComponent<Props, State> {
   constructor(props: Props, state: State) {
