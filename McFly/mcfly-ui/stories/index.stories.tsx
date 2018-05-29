@@ -5,9 +5,9 @@ import { createBrowserHistory } from "history";
 import * as React from 'react';
 import {Provider} from "react-redux";
 import { ConnectedRouter } from "react-router-redux";
-import ForceGraph from "../src/components/ForceGraph";
-import ForceGraphLink from "../src/components/ForceGraphLink";
-import ForceGraphNode from "../src/components/ForceGraphNode";
+import ForceGraph from "../src/features/force-graph/ForceGraph";
+import ForceGraphLink from "../src/features/force-graph/ForceGraphLink";
+import ForceGraphNode from "../src/features/force-graph/ForceGraphNode";
 import {configureStore, RootState} from "../src/renameme";
 
 const history = createBrowserHistory({});

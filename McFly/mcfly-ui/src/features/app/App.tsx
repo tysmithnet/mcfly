@@ -1,6 +1,5 @@
 import * as React from "react";
-
-import ForceGraph from "../components/ForceGraph";
+import ForceGraph from "../force-graph/ForceGraph";
 
 export interface Props {}
 

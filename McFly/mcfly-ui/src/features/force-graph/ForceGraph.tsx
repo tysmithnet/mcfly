@@ -1,7 +1,7 @@
 import * as React from "react";
 // import Worker from "worker-loader!./simulator.webworker";
-import ForceGraphNode from "../components/ForceGraphNode";
 import ForceGraphLink from "./ForceGraphLink";
+import ForceGraphNode from "./ForceGraphNode";
 
 import Worker = require("worker-loader?name=dist/[name].js!./simulator.webworker");
 
