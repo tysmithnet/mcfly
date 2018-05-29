@@ -1,7 +1,8 @@
-// tslint:disable-next-line:no-console
-console.log("hello from a webworker");
+const ctx: Worker = self as any;
 
-addEventListener("message", message => {
-  // tslint:disable-next-line:no-console
-  console.log("in webworker", message);
-});
+// Post data to parent thread
+ctx.postMessage({ foo: "foo" });
+
+// Respond to message from parent thread
+// tslint:disable-next-line:no-console
+ctx.addEventListener("message", (event) => console.log(event));

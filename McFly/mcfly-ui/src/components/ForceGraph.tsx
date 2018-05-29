@@ -1,8 +1,9 @@
 import * as React from "react";
+// import Worker from "worker-loader!./simulator.webworker";
 import ForceGraphNode from "../components/ForceGraphNode";
 import ForceGraphLink from "./ForceGraphLink";
 
-import * as workerPath from "file-loader?name=[name].js!./simulator.webworker";
+import Worker = require("worker-loader?name=dist/[name].js!./simulator.webworker");
 
 export interface Props {
   width: number;
@@ -23,13 +24,16 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
   public componentWillMount(): void {
     this.setState({ links: [], nodes: [] });
-    this.webWorker = new Worker(workerPath);
-
-    // todo: this should be typed
-    this.webWorker.onmessage = (event: any): void => {
+    this.webWorker = new Worker();
+    this.webWorker.postMessage({ a: 1 });
+    this.webWorker.onmessage = (event) => {
       // tslint:disable-next-line:no-console
-      console.log(event);
+      console.log("this.webWorker.onmessage = (event) =>");
     };
+    this.webWorker.addEventListener("message", (event) => {
+      // tslint:disable-next-line:no-console
+      console.log("this.webWorker.addEventListener(\"message\", (event) =>");
+    });  
   }
 
   public componentDidMount(): void {
