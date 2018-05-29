@@ -26,14 +26,14 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.setState({ links: [], nodes: [] });
     this.webWorker = new Worker();
     this.webWorker.postMessage({ a: 1 });
-    this.webWorker.onmessage = (event) => {
+    this.webWorker.onmessage = event => {
       // tslint:disable-next-line:no-console
       console.log("this.webWorker.onmessage = (event) =>");
     };
-    this.webWorker.addEventListener("message", (event) => {
+    this.webWorker.addEventListener("message", event => {
       // tslint:disable-next-line:no-console
-      console.log("this.webWorker.addEventListener(\"message\", (event) =>");
-    });  
+      console.log('this.webWorker.addEventListener("message", (event) =>');
+    });
   }
 
   public componentDidMount(): void {

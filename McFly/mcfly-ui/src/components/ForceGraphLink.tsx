@@ -1,8 +1,6 @@
 import * as React from "react";
 
-export interface Props {
-  
-}
+export interface Props {}
 
 export interface State {
   x1: number;
