@@ -18,6 +18,13 @@ export default (
 ): ForceGraphState => {
   switch (action.type) {
     case getType(ForceGraphActions.moveNode):
+      const clone = { ...state, elements: [...state.elements] };
+      const first = clone.elements.find(e => e.id === action.payload.id);
+      if (first) {
+        const node = first as ForceGraphNodeState;
+        node.cx = action.payload.cx;
+        node.cy = action.payload.cy;
+      }
       break;
   }
 
