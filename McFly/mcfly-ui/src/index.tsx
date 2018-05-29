@@ -10,7 +10,4 @@ import { configureStore } from "./renameme";
 const history = createBrowserHistory();
 const store = configureStore(history);
 
-ReactDOM.render(
-  <App />,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));

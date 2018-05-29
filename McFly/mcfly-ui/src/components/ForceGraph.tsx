@@ -10,7 +10,7 @@ export interface Props {
 }
 
 export interface State {
-  nodes?: ForceGraphNode[],
+  nodes?: ForceGraphNode[];
   links?: ForceGraphLink[];
 }
 
@@ -22,20 +22,19 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   }
 
   public componentWillMount(): void {
-    this.setState({links: [], nodes:[]});
+    this.setState({ links: [], nodes: [] });
     this.webWorker = new Worker(workerPath);
-    
 
     // todo: this should be typed
-    this.webWorker.onmessage = (event:any):void => { 
+    this.webWorker.onmessage = (event: any): void => {
       // tslint:disable-next-line:no-console
       console.log(event);
     };
   }
 
-  public componentDidMount():void {
+  public componentDidMount(): void {
     this.webWorker.postMessage({
-      links: this.state.links,      
+      links: this.state.links,
       nodes: this.state.nodes
     });
   }
