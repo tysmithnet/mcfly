@@ -36,7 +36,7 @@
     "@storybook/addon-links": "3.4.5",
     "@storybook/addon-storyshots": "3.4.5",
     "@storybook/addons": "3.4.5",
-    "@storybook/react": "3.4.5",
+    "@storybook/react": "^4.0.0-alpha.8",
     "@types/d3-force": "1.1.1",
     "@types/enzyme": "3.1.10",
     "@types/jest": "22.2.3",

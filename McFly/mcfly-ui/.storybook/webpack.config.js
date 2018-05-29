@@ -1,19 +1,15 @@
 const path = require("path");
-const include = path.resolve(__dirname, '../');
-
-module.exports = {
-  // Add '.ts' and '.tsx' as resolvable extensions.
-  resolve: {
-    extensions: [".ts", ".tsx", ".js"]
-  },
-  module: {
-      rules: [
-          {
-            test: /\.tsx/,
-            loader: 'babel-loader!ts-loader',
-            exclude: /node_modules/,
-            include
-          }
-      ]
-  }
+module.exports = (baseConfig, env, config) => {
+  config.output.globalObject = "this";
+  console.dir(config);
+  config.module.rules.push({
+    test: /\.webworker\.(ts|tsx)$/,
+    loader: require.resolve("worker-loader")
+  });
+  config.module.rules.push({
+    test: /\.(ts|tsx)$/,
+    loader: require.resolve("awesome-typescript-loader")
+  });
+  config.resolve.extensions.push(".ts", ".tsx");
+  return config;
 };
