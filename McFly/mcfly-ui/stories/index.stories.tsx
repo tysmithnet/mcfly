@@ -11,6 +11,8 @@ import ForceGraphNode from "../src/features/force-graph/ForceGraphNode";
 
 import configureStore from "../src/store";
 
+import {moveNode} from "../src/features/force-graph/actions";
+
 const store = configureStore();
 
 const decorator : StoryDecorator = getStory => (
@@ -25,8 +27,13 @@ storiesOf('ForceGraph', module)
     .add("Single Node", () => 
         <React.Fragment>
             <ForceGraph width={100} height={100}>
-                <ForceGraphNode id="b"/>
+                <ForceGraphNode id="a"/>
             </ForceGraph>
+            <button onClick={() => store.dispatch(moveNode({
+                cx: 10,
+                cy: 10,
+                id: "a"                
+            }))}>Move to 10, 10</button>
         </React.Fragment>
     )
     .add("Node and Link", () => 

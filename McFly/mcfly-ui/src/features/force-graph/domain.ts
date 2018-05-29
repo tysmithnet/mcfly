@@ -2,7 +2,7 @@ export type ForceGraphElement = ForceGraphNodeState | ForceGraphLinkState;
 
 export class ForceGraphState {
   public id: string;
-  public elements: ForceGraphElement[];
+  public elements: ForceGraphElement[] = [];
 }
 
 export class ForceGraphNodeState {

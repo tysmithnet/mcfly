@@ -22,7 +22,7 @@ export default (
       const clone = { ...state, elements: [...state.elements] };
       const idx = clone.elements.findIndex(e => e.id === action.payload.id);
       if (idx > -1 && clone.elements[idx] instanceof ForceGraphNodeState) {
-        const node = {...clone.elements[idx]} as ForceGraphNodeState;
+        const node = { ...clone.elements[idx] } as ForceGraphNodeState;
         node.cx = action.payload.cx;
         node.cy = action.payload.cy;
         clone.elements[idx] = node;
