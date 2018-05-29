@@ -1,35 +1,25 @@
-import { Reducer } from "redux";
+import { ActionType, getType } from "typesafe-actions";
+
+import { v4 } from "uuid";
+
+import * as ForceGraphActions from "./actions";
 import {
-    ForceGraphActions,
   ForceGraphLinkState,
   ForceGraphNodeState,
   ForceGraphState,
-} from "./types";
-import ForceGraph from "./ForceGraph";
+  NODE_POSITION_CHANGED
+} from "./domain";
 
-// Type-safe initialState!
-export const initialState: ForceGraphState = {
-    elements: []
-};
+export type ForceGraphAction = ActionType<typeof ForceGraphActions>;
 
-// Unfortunately, typing of the `action` parameter seems to be broken at the moment.
-// This should be fixed in Redux 4.x, but for now, just augment your types.
-
-const reducer: Reducer<ForceGraphState> = (
-  state: ForceGraphState = initialState,
-  action
-) => {
-  // We'll augment the action type on the switch case to make sure we have
-  // all the cases handled.
-  switch ((action as ForceGraphActions).type) {
-    case "force-graph/NODE_POSITION_CHANGED":
-        const clone = { ...state };
-        const element = clone.elements.find((x) => x.id === action.payload.id) as ForceGraphNodeState;
-        
-      return { ...state, username: action.payload.username };
-    default:
-      return state;
+export default (
+  state: ForceGraphState,
+  action: ForceGraphAction
+): ForceGraphState => {
+  switch (action.type) {
+    case getType(ForceGraphActions.moveNode):
+      break;
   }
-};
 
-export default reducer;
+  return { ...state };
+};
