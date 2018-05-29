@@ -6,13 +6,9 @@ import { Route } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
 import ForceGraph from "./features/force-graph/ForceGraph";
 
-import { applyMiddleware, compose, createStore } from "redux";
+import configureStore from "./store";
 
-import rootReducer from "./features/force-graph/reducers";
-
-import { ForceGraphState } from "./features/force-graph/domain";
-
-const store = createStore(rootReducer);
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
