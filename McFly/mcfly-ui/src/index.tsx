@@ -4,15 +4,19 @@ import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Route } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
-import App from "./features/app/App";
-import { configureStore } from "./renameme";
+import ForceGraph from "./features/force-graph/ForceGraph";
 
-const history = createBrowserHistory();
-const store = configureStore(history);
+import { applyMiddleware, compose, createStore } from "redux";
+
+import rootReducer from "./features/force-graph/reducers";
+
+import { ForceGraphState } from "./features/force-graph/domain";
+
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ForceGraph width={300} height={300} />
   </Provider>,
   document.getElementById("root")
 );

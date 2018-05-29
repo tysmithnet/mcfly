@@ -17,7 +17,7 @@ export default (
   action: ForceGraphAction
 ): ForceGraphState => {
   switch (action.type) {
-    case getType(ForceGraphActions.moveNode):
+    case NODE_POSITION_CHANGED:
       const clone = { ...state, elements: [...state.elements] };
       const first = clone.elements.find(e => e.id === action.payload.id);
       if (first) {

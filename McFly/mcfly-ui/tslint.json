@@ -5,6 +5,7 @@
         "no-implicit-dependencies": false,
         "no-empty-interface": false,
         "no-submodule-imports": false,
-        "no-var-requires": false
+        "no-var-requires": false,
+        "no-object-literal-type-assertion": false
     }
 }
