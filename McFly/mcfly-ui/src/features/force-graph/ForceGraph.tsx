@@ -3,6 +3,8 @@ import * as React from "react";
 import ForceGraphLink from "./ForceGraphLink";
 import ForceGraphNode from "./ForceGraphNode";
 
+import {Simulation} from "d3-force-3d";
+
 import Worker = require("worker-loader?name=dist/[name].js!./simulator.webworker");
 
 export interface Props {
