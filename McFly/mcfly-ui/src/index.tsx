@@ -12,7 +12,7 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <ForceGraph width={300} height={300} />
+    <ForceGraph id="root" width={300} height={300} />
   </Provider>,
   document.getElementById("root")
 );

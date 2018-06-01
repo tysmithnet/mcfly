@@ -1,20 +1,13 @@
-export type ForceGraphElement = ForceGraphNodeState | ForceGraphLinkState;
+export type ForceGraphElement = ForceGraphNode | ForceGraphLink;
 
-export class ForceGraphState {
+export class ForceGraphNode {
   public id: string;
-  public elements: ForceGraphElement[] = [];
+  public title: string;
 }
 
-export class ForceGraphNodeState {
-  public id: string;
-  public cx: number;
-  public cy: number;
-}
-
-export class ForceGraphLinkState {
-  public id: string;
-  public from: ForceGraphNodeState;
-  public to: ForceGraphNodeState;
+export class ForceGraphLink {
+  public from: string;
+  public to: string;
 }
 
 export const NODE_POSITION_CHANGED = "force-graph/NODE_POSITION_CHANGED";
