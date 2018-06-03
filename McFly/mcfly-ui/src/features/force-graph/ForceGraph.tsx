@@ -96,17 +96,10 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     const linksData: ForceGraphLink[] = [];
     const newState: State = { nodes: nodesData, links: linksData };
     this.setState(newState);
-    const nodes: SimulationNodeDatum[] = newState.nodes.map(n => {
-      return { id: n.id } as any;
-    });
-    const links: Array<
-      SimulationLinkDatum<SimulationNodeDatum>
-    > = newState.links.map(l => {
-      return { source: l.from, target: l.to } as any;
-    });
-    this.simulation = forceSimulation(nodes)
+
+    this.simulation = forceSimulation(newState.nodes, 3)
       .force("charge", forceManyBody())
-      .force("link", forceLink(links))
+      .force("link", forceLink(newState.links))
       .force("center", forceCenter());
   }
 
@@ -166,7 +159,6 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     helper.material.opacity = 0.25;
     helper.material.transparent = true;
     this.scene.add(helper);
-
 
     this.spheres = {};
     this.state.nodes.forEach((e, i) => {

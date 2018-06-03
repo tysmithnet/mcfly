@@ -48,6 +48,7 @@ export interface Simulation<NodeDatum extends SimulationNodeDatum, LinkDatum ext
     alphaDecay(decay: number): Simulation<NodeDatum, LinkDatum>;
     alphaTarget(): number;
     alphaTarget(target: number): Simulation<NodeDatum, LinkDatum>;
+    numDimensions(num?:number): Simulation<NodeDatum, LinkDatum>;
     velocityDecay(): number;
     velocityDecay(decay: number): Simulation<NodeDatum, LinkDatum>;
     force(name: string): Force<NodeDatum, LinkDatum>; // force names are arbitrary, so return type inference is not possible
@@ -59,7 +60,7 @@ export interface Simulation<NodeDatum extends SimulationNodeDatum, LinkDatum ext
     on(typenames: 'tick' | 'end' | string, listener: (this: this) => void): Simulation<NodeDatum, LinkDatum>;
 }
 
-export function forceSimulation<NodeDatum extends SimulationNodeDatum>(nodesData?: Array<NodeDatum>): Simulation<NodeDatum, undefined>;
+export function forceSimulation<NodeDatum extends SimulationNodeDatum>(nodesData?: Array<NodeDatum>, numDimensions?:number): Simulation<NodeDatum, undefined>;
 export function forceSimulation<NodeDatum extends SimulationNodeDatum, LinkDatum extends SimulationLinkDatum<NodeDatum>>(nodesData?: Array<NodeDatum>): Simulation<NodeDatum, LinkDatum>;
 
 // ----------------------------------------------------------------------
