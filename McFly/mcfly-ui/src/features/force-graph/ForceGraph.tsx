@@ -31,7 +31,7 @@ export interface State {
 
 export default class ForceGraph extends React.PureComponent<Props, State> {
   private webWorker: Worker;
-  private canvasRef: React.RefObject<HTMLDivElement>;
+  private containerDiv: HTMLDivElement;
   private simulation: Simulation<
     SimulationNodeDatum,
     SimulationLinkDatum<SimulationNodeDatum>
@@ -76,10 +76,10 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.renderer.setClearColor("#000000");
     this.renderer.setSize(this.props.width, this.props.height);
 
-    this.canvasRef.current.appendChild(this.renderer.domElement);
+    this.containerDiv.appendChild(this.renderer.domElement);
   }
 
   public render(): React.ReactNode {
-    return <div ref={this.canvasRef} />;
+    return <div ref={node => (this.containerDiv = node)} />;
   }
 }
