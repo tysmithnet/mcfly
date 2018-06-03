@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ForceGraphLink, ForceGraphNode } from "../force-graph/domain";
 import ForceGraph from "../force-graph/ForceGraph";
 
 export interface Props {}
@@ -11,6 +12,12 @@ export default class App extends React.Component<Props, State> {
   }
 
   public render(): React.ReactNode {
-    return <ForceGraph id="test" width={300} height={300} />;
+    return (
+      <ForceGraph
+        id="test"
+        width={window.innerWidth}
+        height={window.innerHeight}
+      />
+    );
   }
 }

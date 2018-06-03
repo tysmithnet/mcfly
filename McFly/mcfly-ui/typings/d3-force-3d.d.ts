@@ -12,7 +12,7 @@ declare module "d3-force-3d"{
 // TODO: Review below: fx and fy should be optional as a matter of principle. The other properties, are optional prior to initialization, but once the
 // the nodes array is passed into the simulation, will be initialized.
 export interface SimulationNodeDatum {
-    // NB: index is assigned internally by simulation, once initialized it is defined
+    id: string;
     index?: number;
     x?: number;
     y?: number;

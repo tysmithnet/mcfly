@@ -9,13 +9,18 @@ import {
 } from "d3-force-3d";
 import * as React from "react";
 import {
+  AmbientLight,
   BoxGeometry,
   Camera,
   Mesh,
   MeshBasicMaterial,
+  MeshPhongMaterial,
   PerspectiveCamera,
   Renderer,
   Scene,
+  Sphere,
+  SphereGeometry,
+  TrackballControls,
   WebGLRenderer
 } from "three";
 import { ForceGraphElement, ForceGraphLink, ForceGraphNode } from "./domain";
@@ -40,16 +45,44 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     SimulationLinkDatum<SimulationNodeDatum>
   >;
   private scene: Scene;
-  private camera: Camera;
+  private camera: PerspectiveCamera;
   private renderer: WebGLRenderer;
-  private cube: Mesh;
+  private spheres: { [id: string]: Mesh };
+  private trackballControls: TrackballControls;
   constructor(props: Props, state: State) {
     super(props, state);
     const ref = React.createRef();
   }
 
   public componentWillMount(): void {
-    const newState: State = { nodes: [], links: [] };
+    const nodesData: ForceGraphNode[] = [
+      {
+        id: "a",
+        title: "The letter a"
+      },
+      {
+        id: "b",
+        title: "The letter b"
+      },
+      {
+        id: "c",
+        title: "The letter c"
+      },
+      {
+        id: "d",
+        title: "The letter d"
+      },
+      {
+        id: "e",
+        title: "The letter e"
+      },
+      {
+        id: "f",
+        title: "The letter f"
+      }
+    ];
+    const linksData: ForceGraphLink[] = [];
+    const newState: State = { nodes: nodesData, links: linksData };
     this.setState(newState);
     const nodes: SimulationNodeDatum[] = newState.nodes.map(n => {
       return { id: n.id } as any;
@@ -68,22 +101,28 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   public componentDidMount(): void {
     this.scene = new Scene();
     this.camera = new PerspectiveCamera(
-      75,
+      45,
       this.props.width / this.props.height,
       0.1,
-      1000
+      10000
     );
-    this.camera.position.z = 4;
+    this.camera.updateProjectionMatrix();
+    this.camera.position.z = -300;
     this.renderer = new WebGLRenderer({
       antialias: true
     });
     this.renderer.setClearColor("#000000");
     this.renderer.setSize(this.props.width, this.props.height);
     this.containerDiv.appendChild(this.renderer.domElement);
-    const geometry = new BoxGeometry(1,1,1);
-    const material = new MeshBasicMaterial({ color: "#433F81"});
-    this.cube = new Mesh(geometry, material);
-    this.scene.add(this.cube);
+    const geometry = new SphereGeometry(10);
+    const material = new MeshPhongMaterial({ color: "#433F81" });
+    this.scene.add(new AmbientLight(0xbbbbbb));
+    this.spheres = {};
+    this.state.nodes.forEach((e, i) => {
+      this.spheres[e.id] = new Mesh(geometry, material);
+      this.scene.add(this.spheres[e.id]);
+    });
+    (window as any).scene = this.scene;
     this.renderFrame();
   }
 
@@ -93,9 +132,9 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
   private renderFrame = () => {
     requestAnimationFrame(this.renderFrame);
-    this.cube.rotateX(.15);
-    this.cube.rotateY(.15);
-    this.cube.rotateZ(.15);
+    this.simulation.nodes().forEach((e, i) => {
+      this.spheres[e.id].position.set(e.x, e.y, e.z);
+    });
     this.renderer.render(this.scene, this.camera);
-  }
+  };
 }
