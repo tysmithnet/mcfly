@@ -9,13 +9,14 @@ import {
 } from "d3-force-3d";
 import * as React from "react";
 import {
-  PerspectiveCamera,
-  Scene,
-  WebGLRenderer,
   Camera,
-  Renderer
+  PerspectiveCamera,
+  Renderer,
+  Scene,
+  WebGLRenderer
 } from "three";
 import { ForceGraphElement, ForceGraphLink, ForceGraphNode } from "./domain";
+import "./styles.scss";
 
 export interface Props {
   id: string;
@@ -44,13 +45,14 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   }
 
   public componentWillMount(): void {
-    this.setState({ nodes: [], links: [] });
-    const nodes: SimulationNodeDatum[] = this.state.nodes.map(n => {
+    const newState: State = { nodes: [], links: [] };
+    this.setState(newState);
+    const nodes: SimulationNodeDatum[] = newState.nodes.map(n => {
       return { id: n.id } as any;
     });
     const links: Array<
       SimulationLinkDatum<SimulationNodeDatum>
-    > = this.state.links.map(l => {
+    > = newState.links.map(l => {
       return { source: l.from, target: l.to } as any;
     });
     this.simulation = forceSimulation(nodes)

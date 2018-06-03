@@ -11,6 +11,6 @@ export default class App extends React.Component<Props, State> {
   }
 
   public render(): React.ReactNode {
-    return <ForceGraph width={300} height={300} />;
+    return <ForceGraph id="test" width={300} height={300} />;
   }
 }
