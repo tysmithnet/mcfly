@@ -505,6 +505,12 @@
     "@types/react" "*"
     "@types/webpack-env" "*"
 
+"@types/three@^0.92.3":
+  version "0.92.3"
+  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.92.3.tgz#31f34041d4bacd9b6a0ca0e946aa416d643f3747"
+  dependencies:
+    "@types/webvr-api" "*"
+
 "@types/uuid@3.4.3":
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-3.4.3.tgz#121ace265f5569ce40f4f6d0ff78a338c732a754"
@@ -514,6 +520,10 @@
 "@types/webpack-env@*":
   version "1.13.6"
   resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.13.6.tgz#128d1685a7c34d31ed17010fc87d6a12c1de6976"
+
+"@types/webvr-api@*":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@types/webvr-api/-/webvr-api-0.0.34.tgz#8fa49028de925c7b8bce3d559d3374ce2c89ee28"
 
 "@webassemblyjs/ast@1.4.3":
   version "1.4.3"
@@ -8732,6 +8742,10 @@ text-table@0.2.0, text-table@^0.2.0:
 textextensions@2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/textextensions/-/textextensions-2.2.0.tgz#38ac676151285b658654581987a0ce1a4490d286"
+
+three@^0.93.0:
+  version "0.93.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.93.0.tgz#3fd6c367ef4554abbb6e16ad69936283e895c123"
 
 throat@^4.0.0:
   version "4.1.0"

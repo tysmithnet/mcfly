@@ -1,6 +1,3 @@
-import * as React from "react";
-// import Worker from "worker-loader!./simulator.webworker";
-
 import {
   forceCenter,
   forceLink,
@@ -10,8 +7,7 @@ import {
   SimulationLinkDatum,
   SimulationNodeDatum
 } from "d3-force-3d";
-
-import Worker = require("worker-loader?name=dist/[name].js!./simulator.webworker");
+import * as React from "react";
 import { ForceGraphElement, ForceGraphLink, ForceGraphNode } from "./domain";
 
 export interface Props {
