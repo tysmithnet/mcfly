@@ -93,7 +93,22 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
         title: "The letter f"
       }
     ];
-    const linksData: ForceGraphLink[] = [];
+    const linksData: ForceGraphLink[] = [{
+      source: nodesData[0],
+      target: nodesData[1]
+    },{
+      source: nodesData[0],
+      target: nodesData[2]
+    },{
+      source: nodesData[0],
+      target: nodesData[3]
+    },{
+      source: nodesData[1],
+      target: nodesData[2]
+    },{
+      source: nodesData[2],
+      target: nodesData[3]
+    }];
     const newState: State = { nodes: nodesData, links: linksData };
     this.setState(newState);
 

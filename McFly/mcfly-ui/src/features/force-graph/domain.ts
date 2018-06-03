@@ -12,8 +12,8 @@ export interface ForceGraphNode {
 }
 
 export interface ForceGraphLink {
-  source: string;
-  target: string;
+  source: ForceGraphNode | string;
+  target: ForceGraphNode | string;
 }
 
 export const NODE_POSITION_CHANGED = "force-graph/NODE_POSITION_CHANGED";
