@@ -14,7 +14,8 @@
     "test": "webpack --config webpack.dev.config.js && jest",
     "storybook": "start-storybook -p 80",
     "pretty": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "watch": "webpack --config webpack.dev.config.js --watch --watch-poll"
   },
   "dependencies": {
     "d3-force": "1.1.0",
