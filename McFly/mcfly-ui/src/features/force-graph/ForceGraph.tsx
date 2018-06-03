@@ -9,7 +9,10 @@ import {
 } from "d3-force-3d";
 import * as React from "react";
 import {
+  BoxGeometry,
   Camera,
+  Mesh,
+  MeshBasicMaterial,
   PerspectiveCamera,
   Renderer,
   Scene,
@@ -39,6 +42,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   private scene: Scene;
   private camera: Camera;
   private renderer: WebGLRenderer;
+  private cube: Mesh;
   constructor(props: Props, state: State) {
     super(props, state);
     const ref = React.createRef();
@@ -75,11 +79,23 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     });
     this.renderer.setClearColor("#000000");
     this.renderer.setSize(this.props.width, this.props.height);
-
     this.containerDiv.appendChild(this.renderer.domElement);
+    const geometry = new BoxGeometry(1,1,1);
+    const material = new MeshBasicMaterial({ color: "#433F81"});
+    this.cube = new Mesh(geometry, material);
+    this.scene.add(this.cube);
+    this.renderFrame();
   }
 
   public render(): React.ReactNode {
     return <div ref={node => (this.containerDiv = node)} />;
+  }
+
+  private renderFrame = () => {
+    requestAnimationFrame(this.renderFrame);
+    this.cube.rotateX(.15);
+    this.cube.rotateY(.15);
+    this.cube.rotateZ(.15);
+    this.renderer.render(this.scene, this.camera);
   }
 }
