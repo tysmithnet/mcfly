@@ -28,6 +28,7 @@ import {
   Scene,
   ShadowMaterial,
   Sphere,
+  SphereBufferGeometry,
   SphereGeometry,
   SpotLight,
   SpotLightShadow,
@@ -36,7 +37,7 @@ import {
   VRControls,
   WebGLRenderer
 } from "three";
-
+import DragControls from "three-dragcontrols";
 import { ForceGraphElement, ForceGraphLink, ForceGraphNode } from "./domain";
 import "./styles.scss";
 
@@ -69,6 +70,8 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   private spheres: { [id: string]: Mesh };
   private lines: { [id: string]: Line };
   private trackballControls: TrackballControlsType;
+  private dragControls:DragControls;
+  private hasEnded = false;
   constructor(props: Props, state: State) {
     super(props, state);
     const ref = React.createRef();
@@ -172,7 +175,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.renderer.setSize(this.props.width, this.props.height);
     this.renderer.shadowMap.enabled = true;
     this.containerDiv.appendChild(this.renderer.domElement);
-    const geometry = new SphereGeometry(10);
+    const geometry = new SphereBufferGeometry(10);
     const material = new MeshPhongMaterial({ color: "#433F81" });
     this.scene.add(new AmbientLight(0xbbbbbb));
 
@@ -198,13 +201,16 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     helper.material.opacity = 0.25;
     helper.material.transparent = true;
     this.scene.add(helper);
+    const objects: Mesh[] = [];
 
     this.spheres = {};
     this.state.nodes.forEach((e, i) => {
       this.spheres[e.id] = new Mesh(geometry, material);
       this.scene.add(this.spheres[e.id]);
+      objects.push(this.spheres[e.id]);
     });
 
+    
     const lineMaterial = new LineBasicMaterial({
       color: 0x0000ff,
       linewidth: 10
@@ -219,6 +225,11 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       this.lines[e.id] = new Line(lineGeometry, lineMaterial);
       this.scene.add(this.lines[e.id]);
     });
+
+    this.dragControls = new DragControls(objects, this.camera, this.renderer.domElement);
+    this.dragControls.addEventListener("dragstart", e => this.trackballControls.enabled = false);
+    this.dragControls.addEventListener("dragend", e => this.trackballControls.enabled = true);
+
     (window as any).scene = this.scene;
     this.animate();
     this.renderFrame();
@@ -230,9 +241,12 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
   private animate = () => {
     requestAnimationFrame(this.animate);
-    this.simulation.nodes().forEach((e, i) => {
-      this.spheres[e.id].position.set(e.x || 0, e.y || 0, e.z || 0);
-    });
+    if(!this.hasEnded)
+    {
+      this.simulation.nodes().forEach((e, i) => {
+        this.spheres[e.id].position.set(e.x || 0, e.y || 0, e.z || 0);
+      });
+    }
     this.state.links.forEach((e, i) => {
       const line = this.lines[e.id];
       line.geometry.setFromPoints([
