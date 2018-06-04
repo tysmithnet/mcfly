@@ -11,9 +11,13 @@ import * as React from "react";
 import {
   AmbientLight,
   BoxGeometry,
+  BufferGeometry,
   Camera,
+  Geometry,
   GridHelper,
   LightShadow,
+  Line,
+  LineBasicMaterial,
   Mesh,
   MeshBasicMaterial,
   MeshPhongMaterial,
@@ -28,6 +32,7 @@ import {
   SpotLight,
   SpotLightShadow,
   TrackballControls as TrackballControlsType,
+  Vector3,
   VRControls,
   WebGLRenderer
 } from "three";
@@ -35,7 +40,7 @@ import {
 import { ForceGraphElement, ForceGraphLink, ForceGraphNode } from "./domain";
 import "./styles.scss";
 
-const TrackballControls:any = require("three-trackballcontrols");
+const TrackballControls: any = require("three-trackballcontrols");
 
 export interface Props {
   id: string;
@@ -47,6 +52,8 @@ export interface State {
   nodes: ForceGraphNode[];
   links: ForceGraphLink[];
 }
+
+type NodePair = [ForceGraphNode, ForceGraphNode];
 
 export default class ForceGraph extends React.PureComponent<Props, State> {
   private spotlight: SpotLight;
@@ -60,6 +67,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   private camera: PerspectiveCamera;
   private renderer: WebGLRenderer;
   private spheres: { [id: string]: Mesh };
+  private lines: { [id: string]: Line };
   private trackballControls: TrackballControlsType;
   constructor(props: Props, state: State) {
     super(props, state);
@@ -93,22 +101,38 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
         title: "The letter f"
       }
     ];
-    const linksData: ForceGraphLink[] = [{
-      source: nodesData[0],
-      target: nodesData[1]
-    },{
-      source: nodesData[0],
-      target: nodesData[2]
-    },{
-      source: nodesData[0],
-      target: nodesData[3]
-    },{
-      source: nodesData[1],
-      target: nodesData[2]
-    },{
-      source: nodesData[2],
-      target: nodesData[3]
-    }];
+    const linksData: ForceGraphLink[] = [
+      {
+        id: "a",
+        source: nodesData[0],
+        target: nodesData[1]
+      },
+      {
+        id: "b",
+        source: nodesData[0],
+        target: nodesData[2]
+      },
+      {
+        id: "c",
+        source: nodesData[0],
+        target: nodesData[3]
+      },
+      {
+        id: "d",
+        source: nodesData[1],
+        target: nodesData[2]
+      },
+      {
+        id: "e",
+        source: nodesData[2],
+        target: nodesData[3]
+      },
+      {
+        id: "f",
+        source: nodesData[4],
+        target: nodesData[5]
+      }
+    ];
     const newState: State = { nodes: nodesData, links: linksData };
     this.setState(newState);
 
@@ -134,14 +158,14 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.trackballControls = new TrackballControls(this.camera);
     this.trackballControls.rotateSpeed = 1.0;
     this.trackballControls.zoomSpeed = 1.2;
-    this.trackballControls.panSpeed = .8;
+    this.trackballControls.panSpeed = 0.8;
     this.trackballControls.noZoom = false;
     this.trackballControls.noPan = false;
     this.trackballControls.noRotate = false;
     this.trackballControls.staticMoving = true;
-    this.trackballControls.dynamicDampingFactor = .3;
+    this.trackballControls.dynamicDampingFactor = 0.3;
     this.trackballControls.keys = [65, 83, 68];
-    this.trackballControls.addEventListener('change', this.renderFrame);
+    this.trackballControls.addEventListener("change", this.renderFrame);
 
     this.renderer.setClearColor(0xf0f0f0);
     this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -180,8 +204,23 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       this.spheres[e.id] = new Mesh(geometry, material);
       this.scene.add(this.spheres[e.id]);
     });
+
+    const lineMaterial = new LineBasicMaterial({
+      color: 0x0000ff,
+      linewidth: 10
+    });
+    this.lines = {};
+    this.state.links.forEach((e, i) => {
+      const lineGeometry = new BufferGeometry();
+      lineGeometry.setFromPoints([
+        new Vector3(e.source.x, e.source.y, e.source.z),
+        new Vector3(e.target.x, e.target.y, e.target.z)
+      ]);
+      this.lines[e.id] = new Line(lineGeometry, lineMaterial);
+      this.scene.add(this.lines[e.id]);
+    });
     (window as any).scene = this.scene;
-    this.animate();    
+    this.animate();
     this.renderFrame();
   }
 
@@ -194,9 +233,17 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.simulation.nodes().forEach((e, i) => {
       this.spheres[e.id].position.set(e.x || 0, e.y || 0, e.z || 0);
     });
-    this.trackballControls.update();  
-    this.renderFrame();  
-  }
+    this.state.links.forEach((e, i) => {
+      const line = this.lines[e.id];
+      line.geometry.setFromPoints([
+        new Vector3(e.source.x, e.source.y, e.source.z),
+        new Vector3(e.target.x, e.target.y, e.target.z)
+      ]);
+    });
+
+    this.trackballControls.update();
+    this.renderFrame();
+  };
 
   private renderFrame = () => {
     this.renderer.render(this.scene, this.camera);
