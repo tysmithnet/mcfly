@@ -72,6 +72,8 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   private trackballControls: TrackballControlsType;
   private dragControls:DragControls;
   private hasEnded = false;
+  private numTicks = 180;
+  private count = 0;  
   constructor(props: Props, state: State) {
     super(props, state);
     const ref = React.createRef();
@@ -218,9 +220,13 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.lines = {};
     this.state.links.forEach((e, i) => {
       const lineGeometry = new BufferGeometry();
-      lineGeometry.setFromPoints([
-        new Vector3(e.source.x, e.source.y, e.source.z),
-        new Vector3(e.target.x, e.target.y, e.target.z)
+      const sourceId = e.source.id;
+      const targetId = e.target.id;
+      const sourceObj = this.spheres[sourceId];
+      const targetObj = this.spheres[targetId];
+      lineGeometry.setFromPoints([ 
+        new Vector3(sourceObj.position.x, sourceObj.position.y, sourceObj.position.z),
+        new Vector3(targetObj.position.x, targetObj.position.y, targetObj.position.z)
       ]);
       this.lines[e.id] = new Line(lineGeometry, lineMaterial);
       this.scene.add(this.lines[e.id]);
@@ -238,20 +244,28 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   public render(): React.ReactNode {
     return <div ref={node => (this.containerDiv = node)} />;
   }
-
   private animate = () => {
+    
     requestAnimationFrame(this.animate);
-    if(!this.hasEnded)
+    if(this.count++ > this.numTicks)
     {
+      this.hasEnded = true;
+    }
+    if(!this.hasEnded) {    
       this.simulation.nodes().forEach((e, i) => {
         this.spheres[e.id].position.set(e.x || 0, e.y || 0, e.z || 0);
       });
     }
+    
     this.state.links.forEach((e, i) => {
       const line = this.lines[e.id];
+      const sourceId = e.source.id;
+      const targetId = e.target.id;
+      const sourceObj = this.spheres[sourceId];
+      const targetObj = this.spheres[targetId];
       line.geometry.setFromPoints([
-        new Vector3(e.source.x, e.source.y, e.source.z),
-        new Vector3(e.target.x, e.target.y, e.target.z)
+        new Vector3(sourceObj.position.x, sourceObj.position.y, sourceObj.position.z),
+        new Vector3(targetObj.position.x, targetObj.position.y, targetObj.position.z)
       ]);
     });
 
