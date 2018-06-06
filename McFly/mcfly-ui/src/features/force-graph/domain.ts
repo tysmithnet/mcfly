@@ -2,7 +2,7 @@ export type ForceGraphElement = ForceGraphNode | ForceGraphLink;
 
 export interface ForceGraphNode {
   id: string;
-  title: string;
+  title?: string;
   x?: number;
   y?: number;
   z?: number;
