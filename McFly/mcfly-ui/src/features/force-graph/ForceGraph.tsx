@@ -7,6 +7,7 @@ import {
   SimulationLinkDatum,
   SimulationNodeDatum
 } from "d3-force-3d";
+import {throttle} from "lodash";
 import * as React from "react";
 import {
   AmbientLight,
@@ -20,6 +21,7 @@ import {
   LineBasicMaterial,
   Mesh,
   MeshBasicMaterial,
+  MeshLambertMaterial,
   MeshPhongMaterial,
   OrbitControls,
   PerspectiveCamera,
@@ -40,7 +42,6 @@ import {
 import DragControls from "three-dragcontrols";
 import { ForceGraphElement, ForceGraphLink, ForceGraphNode } from "./domain";
 import "./styles.scss";
-
 const TrackballControls: any = require("three-trackballcontrols");
 
 export interface Props {
@@ -76,6 +77,10 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   private hasEnded = false;
   private numTicks = 180;
   private count = 0;  
+  private vector1:Vector3 = new Vector3(0,0,0);
+  private vector2:Vector3 = new Vector3(0,0,0);
+  private debouncedUpdateControls: () => void;
+
   constructor(props: Props, state: State) {
     super(props, state);
     const ref = React.createRef();
@@ -90,6 +95,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       .force("charge", forceManyBody())
       .force("link", forceLink(newState.links))
       .force("center", forceCenter());
+    this.simulation.stop();
   }
 
   public componentDidMount(): void {
@@ -115,7 +121,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.trackballControls.staticMoving = true;
     this.trackballControls.dynamicDampingFactor = 0.3;
     this.trackballControls.keys = [65, 83, 68];
-    this.trackballControls.addEventListener("change", this.renderFrame);
+    this.debouncedUpdateControls = throttle(this.trackballControls.update, 100)
 
     this.renderer.setClearColor(0xf0f0f0);
     this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -123,7 +129,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.renderer.shadowMap.enabled = true;
     this.containerDiv.appendChild(this.renderer.domElement);
     const geometry = new SphereBufferGeometry(10);
-    const material = new MeshPhongMaterial({ color: "#433F81" });
+    const material = new MeshBasicMaterial({ color: "#433F81" });
     this.scene.add(new AmbientLight(0xbbbbbb));
 
     const light = new SpotLight(0xffffff, 1.5);
@@ -189,6 +195,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   public render(): React.ReactNode {
     return <div ref={node => (this.containerDiv = node)} />;
   }
+
   private animate = () => {
     
     requestAnimationFrame(this.animate);
@@ -197,6 +204,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       this.hasEnded = true;
     }
     if(!this.hasEnded) {    
+    this.simulation.tick();      
       this.simulation.nodes().forEach((e, i) => {
         this.spheres[e.id].position.set(e.x || 0, e.y || 0, e.z || 0);
       });
@@ -208,13 +216,19 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       const targetId = e.target.id;
       const sourceObj = this.spheres[sourceId];
       const targetObj = this.spheres[targetId];
+      this.vector1.x = sourceObj.position.x;
+      this.vector2.x = targetObj.position.x;
+      this.vector1.y = sourceObj.position.y;
+      this.vector2.y = targetObj.position.y;
+      this.vector1.z = sourceObj.position.z;
+      this.vector2.z = targetObj.position.z;
       line.geometry.setFromPoints([
-        new Vector3(sourceObj.position.x, sourceObj.position.y, sourceObj.position.z),
-        new Vector3(targetObj.position.x, targetObj.position.y, targetObj.position.z)
+        this.vector1,
+        this.vector2
       ]);
     });
 
-    this.trackballControls.update();
+    this.debouncedUpdateControls();
     this.renderFrame();
   };
 
