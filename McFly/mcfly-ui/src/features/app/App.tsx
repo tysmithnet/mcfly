@@ -17,6 +17,8 @@ export default class App extends React.Component<Props, State> {
         id="test"
         width={window.innerWidth}
         height={window.innerHeight}
+        nodes={[]}
+        links={[]}
       />
     );
   }

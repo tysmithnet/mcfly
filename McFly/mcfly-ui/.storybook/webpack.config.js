@@ -3,6 +3,9 @@ module.exports = (baseConfig, env, config) => {
   config.output.globalObject = "this";
   console.dir(config);
   config.module.rules.push({
+    test: /\.(s*)css$/,
+    use: ['style-loader', 'css-loader', 'sass-loader']
+  }, {
     test: /\.webworker\.(ts|tsx)$/,
     loader: require.resolve("worker-loader")
   });

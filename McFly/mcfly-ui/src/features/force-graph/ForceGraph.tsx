@@ -47,6 +47,8 @@ export interface Props {
   id: string;
   width: number;
   height: number;
+  nodes: ForceGraphNode[];
+  links: ForceGraphLink[];
 }
 
 export interface State {
@@ -80,65 +82,8 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   }
 
   public componentWillMount(): void {
-    const nodesData: ForceGraphNode[] = [
-      {
-        id: "a",
-        title: "The letter a"
-      },
-      {
-        id: "b",
-        title: "The letter b"
-      },
-      {
-        id: "c",
-        title: "The letter c"
-      },
-      {
-        id: "d",
-        title: "The letter d"
-      },
-      {
-        id: "e",
-        title: "The letter e"
-      },
-      {
-        id: "f",
-        title: "The letter f"
-      }
-    ];
-    const linksData: ForceGraphLink[] = [
-      {
-        id: "a",
-        source: nodesData[0],
-        target: nodesData[1]
-      },
-      {
-        id: "b",
-        source: nodesData[0],
-        target: nodesData[2]
-      },
-      {
-        id: "c",
-        source: nodesData[0],
-        target: nodesData[3]
-      },
-      {
-        id: "d",
-        source: nodesData[1],
-        target: nodesData[2]
-      },
-      {
-        id: "e",
-        source: nodesData[2],
-        target: nodesData[3]
-      },
-      {
-        id: "f",
-        source: nodesData[4],
-        target: nodesData[5]
-      }
-    ];
-    const newState: State = { nodes: nodesData, links: linksData };
+
+    const newState: State = { nodes: this.props.nodes, links: this.props.links };
     this.setState(newState);
 
     this.simulation = forceSimulation(newState.nodes, 3)
