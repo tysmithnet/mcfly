@@ -11,6 +11,7 @@ import {throttle} from "lodash";
 import * as React from "react";
 import {
   AmbientLight,
+  BoxBufferGeometry,
   BoxGeometry,
   BufferAttribute,
   BufferGeometry,
@@ -24,6 +25,7 @@ import {
   Mesh,
   MeshBasicMaterial,
   MeshLambertMaterial,
+  MeshNormalMaterial,
   MeshPhongMaterial,
   OrbitControls,
   PerspectiveCamera,
@@ -159,11 +161,10 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
     this.spheres = {};
     this.state.nodes.forEach((e, i) => {
-      const geometry = new SphereBufferGeometry(50, 16, 16);
-      const material = new MeshBasicMaterial({color: "0xffff00"});
+      const geometry = new SphereGeometry(10);
+      const material = new MeshLambertMaterial({color: 0xff00ff});
       const buffer = new Float32Array(3);
       const bufferAttribute = new Float32BufferAttribute(buffer, 3);
-      geometry.addAttribute("position", bufferAttribute);
       this.buffers[e.id] = bufferAttribute;
       const sphere = new Mesh(geometry, material);
       this.spheres[e.id] = sphere;
@@ -198,7 +199,6 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     (window as any).scene = this.scene;
     (window as any).THREE = require("three");
     this.animate();
-    this.renderFrame();
   }
 
   public render(): React.ReactNode {
@@ -218,24 +218,35 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       const x = e.x || 0;
       const y = e.y || 0;
       const z = e.z || 0;
-      const buffer = this.buffers[e.id];
-      (buffer.array as Float32Array)[0] = x;
-      (buffer.array as Float32Array)[1] = y;
-      (buffer.array as Float32Array)[2] = z;
-      buffer.needsUpdate = true;
+      const sphere = this.spheres[e.id];
+      
+      // const buffer = this.buffers[e.id];
+      // (buffer.array as Float32Array)[0] = x;
+      // (buffer.array as Float32Array)[1] = y;
+      // (buffer.array as Float32Array)[2] = z;
+      // buffer.needsUpdate = true;
+      sphere.position.set(x, y, z);
     });
     }
     
     this.state.links.forEach((e, i) => {
-      const sourceBuffer = this.buffers[e.source.id];
-      const targetBuffer = this.buffers[e.target.id];
+      // const sourceBuffer = this.buffers[e.source.id];
+      // const targetBuffer = this.buffers[e.target.id];
       const buffer = this.buffers[e.id];
-      (buffer.array as Float32Array)[0] = (sourceBuffer.array as Float32Array)[0];
-      (buffer.array as Float32Array)[1] = (sourceBuffer.array as Float32Array)[1];
-      (buffer.array as Float32Array)[2] = (sourceBuffer.array as Float32Array)[2];
-      (buffer.array as Float32Array)[3] = (targetBuffer.array as Float32Array)[0];
-      (buffer.array as Float32Array)[4] = (targetBuffer.array as Float32Array)[1];
-      (buffer.array as Float32Array)[5] = (targetBuffer.array as Float32Array)[2];
+      const source = this.spheres[e.source.id];
+      const target = this.spheres[e.target.id];
+      (buffer.array as Float32Array)[0] = source.position.x || 0;
+      (buffer.array as Float32Array)[1] = source.position.y || 0;
+      (buffer.array as Float32Array)[2] = source.position.z || 0;
+      (buffer.array as Float32Array)[3] = target.position.x || 0;
+      (buffer.array as Float32Array)[4] = target.position.y || 0;
+      (buffer.array as Float32Array)[5] = target.position.z || 0;
+      // (buffer.array as Float32Array)[0] = (sourceBuffer.array as Float32Array)[0];
+      // (buffer.array as Float32Array)[1] = (sourceBuffer.array as Float32Array)[1];
+      // (buffer.array as Float32Array)[2] = (sourceBuffer.array as Float32Array)[2];
+      // (buffer.array as Float32Array)[3] = (targetBuffer.array as Float32Array)[0];
+      // (buffer.array as Float32Array)[4] = (targetBuffer.array as Float32Array)[1];
+      // (buffer.array as Float32Array)[5] = (targetBuffer.array as Float32Array)[2];
       buffer.needsUpdate = true;
     });
 
