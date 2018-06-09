@@ -15,6 +15,7 @@ import {
   BufferAttribute,
   BufferGeometry,
   Camera,
+  Float32BufferAttribute,
   Geometry,
   GridHelper,
   LightShadow,
@@ -158,15 +159,16 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
     this.spheres = {};
     this.state.nodes.forEach((e, i) => {
-      const material = new MeshLambertMaterial({ color: "#433F81" });
-      const geometry = new SphereBufferGeometry(10);
+      const geometry = new SphereBufferGeometry(50, 16, 16);
+      const material = new MeshBasicMaterial({color: "0xffff00"});
       const buffer = new Float32Array(3);
-      const sphereBuffer = new BufferAttribute(buffer, 3);
-      this.buffers[e.id] = sphereBuffer;
-      geometry.addAttribute("position", sphereBuffer);
-      this.spheres[e.id] = new Mesh(geometry, material);
-      this.scene.add(this.spheres[e.id]);
-      objects.push(this.spheres[e.id]);
+      const bufferAttribute = new Float32BufferAttribute(buffer, 3);
+      geometry.addAttribute("position", bufferAttribute);
+      this.buffers[e.id] = bufferAttribute;
+      const sphere = new Mesh(geometry, material);
+      this.spheres[e.id] = sphere;
+      this.scene.add(sphere);
+      objects.push(sphere);
     });
 
     const lineMaterial = new LineBasicMaterial({
@@ -181,7 +183,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       const sourceObj = this.spheres[sourceId];
       const targetObj = this.spheres[targetId];
       const floatArray = new Float32Array(2 * 3);
-      const buffer = new BufferAttribute(floatArray, 3);
+      const buffer = new Float32BufferAttribute(floatArray, 3);
       this.buffers[e.id] = buffer;
       lineGeometry.addAttribute("position", buffer);
       const line = new Line(lineGeometry, lineMaterial);      
@@ -194,6 +196,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.dragControls.addEventListener("dragend", e => this.trackballControls.enabled = true);
 
     (window as any).scene = this.scene;
+    (window as any).THREE = require("three");
     this.animate();
     this.renderFrame();
   }
@@ -211,16 +214,16 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     }
     if(!this.hasEnded) {    
     this.simulation.tick();      
-      this.simulation.nodes().forEach((e, i) => {
-        const x = e.x || 0;
-        const y = e.y || 0;
-        const z = e.z || 0;
-        const buffer = this.buffers[e.id];
-        (buffer.array as Float32Array)[0] = x;
-        (buffer.array as Float32Array)[1] = y;
-        (buffer.array as Float32Array)[2] = z;
-        buffer.needsUpdate = true;
-      });
+    this.simulation.nodes().forEach((e, i) => {
+      const x = e.x || 0;
+      const y = e.y || 0;
+      const z = e.z || 0;
+      const buffer = this.buffers[e.id];
+      (buffer.array as Float32Array)[0] = x;
+      (buffer.array as Float32Array)[1] = y;
+      (buffer.array as Float32Array)[2] = z;
+      buffer.needsUpdate = true;
+    });
     }
     
     this.state.links.forEach((e, i) => {
