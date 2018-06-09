@@ -80,7 +80,7 @@ storiesOf('ForceGraph', module)
     const nodes:ForceGraphNode[] = [];
     const links:ForceGraphLink[] = [];
 
-    const numNodes = 1000;
+    const numNodes = 4000;
     for(let i = 0; i < numNodes; i++){
         const node:ForceGraphNode = {
             id: v4()
@@ -88,7 +88,7 @@ storiesOf('ForceGraph', module)
         nodes.push(node);
     }
 
-    for(let i = 0; i < numNodes; i++)
+    for(let i = 0; i < 200; i++)
     {
         const lhs = Math.floor(Math.random() * numNodes);
         const rhs = Math.floor(Math.random() * numNodes);

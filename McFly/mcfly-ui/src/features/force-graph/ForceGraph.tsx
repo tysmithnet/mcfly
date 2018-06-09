@@ -12,6 +12,7 @@ import * as React from "react";
 import {
   AmbientLight,
   BoxGeometry,
+  BufferAttribute,
   BufferGeometry,
   Camera,
   Geometry,
@@ -72,18 +73,18 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   private renderer: WebGLRenderer;
   private spheres: { [id: string]: Mesh };
   private lines: { [id: string]: Line };
+  private buffers: { [id: string]: BufferAttribute};
   private trackballControls: TrackballControlsType;
   private dragControls:DragControls;
   private hasEnded = false;
   private numTicks = 180;
   private count = 0;  
-  private vector1:Vector3 = new Vector3(0,0,0);
-  private vector2:Vector3 = new Vector3(0,0,0);
   private debouncedUpdateControls: () => void;
 
   constructor(props: Props, state: State) {
     super(props, state);
     const ref = React.createRef();
+    this.buffers = {};
   }
 
   public componentWillMount(): void {
@@ -128,8 +129,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.renderer.setSize(this.props.width, this.props.height);
     this.renderer.shadowMap.enabled = true;
     this.containerDiv.appendChild(this.renderer.domElement);
-    const geometry = new SphereBufferGeometry(10);
-    const material = new MeshBasicMaterial({ color: "#433F81" });
+
     this.scene.add(new AmbientLight(0xbbbbbb));
 
     const light = new SpotLight(0xffffff, 1.5);
@@ -158,12 +158,17 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
     this.spheres = {};
     this.state.nodes.forEach((e, i) => {
+      const material = new MeshLambertMaterial({ color: "#433F81" });
+      const geometry = new SphereBufferGeometry(10);
+      const buffer = new Float32Array(3);
+      const sphereBuffer = new BufferAttribute(buffer, 3);
+      this.buffers[e.id] = sphereBuffer;
+      geometry.addAttribute("position", sphereBuffer);
       this.spheres[e.id] = new Mesh(geometry, material);
       this.scene.add(this.spheres[e.id]);
       objects.push(this.spheres[e.id]);
     });
 
-    
     const lineMaterial = new LineBasicMaterial({
       color: 0x0000ff,
       linewidth: 10
@@ -175,11 +180,12 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       const targetId = e.target.id;
       const sourceObj = this.spheres[sourceId];
       const targetObj = this.spheres[targetId];
-      lineGeometry.setFromPoints([ 
-        new Vector3(sourceObj.position.x, sourceObj.position.y, sourceObj.position.z),
-        new Vector3(targetObj.position.x, targetObj.position.y, targetObj.position.z)
-      ]);
-      this.lines[e.id] = new Line(lineGeometry, lineMaterial);
+      const floatArray = new Float32Array(2 * 3);
+      const buffer = new BufferAttribute(floatArray, 3);
+      this.buffers[e.id] = buffer;
+      lineGeometry.addAttribute("position", buffer);
+      const line = new Line(lineGeometry, lineMaterial);      
+      this.lines[e.id] = line;
       this.scene.add(this.lines[e.id]);
     });
 
@@ -206,29 +212,31 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     if(!this.hasEnded) {    
     this.simulation.tick();      
       this.simulation.nodes().forEach((e, i) => {
-        this.spheres[e.id].position.set(e.x || 0, e.y || 0, e.z || 0);
+        const x = e.x || 0;
+        const y = e.y || 0;
+        const z = e.z || 0;
+        const buffer = this.buffers[e.id];
+        (buffer.array as Float32Array)[0] = x;
+        (buffer.array as Float32Array)[1] = y;
+        (buffer.array as Float32Array)[2] = z;
+        buffer.needsUpdate = true;
       });
     }
     
     this.state.links.forEach((e, i) => {
-      const line = this.lines[e.id];
-      const sourceId = e.source.id;
-      const targetId = e.target.id;
-      const sourceObj = this.spheres[sourceId];
-      const targetObj = this.spheres[targetId];
-      this.vector1.x = sourceObj.position.x;
-      this.vector2.x = targetObj.position.x;
-      this.vector1.y = sourceObj.position.y;
-      this.vector2.y = targetObj.position.y;
-      this.vector1.z = sourceObj.position.z;
-      this.vector2.z = targetObj.position.z;
-      line.geometry.setFromPoints([
-        this.vector1,
-        this.vector2
-      ]);
+      const sourceBuffer = this.buffers[e.source.id];
+      const targetBuffer = this.buffers[e.target.id];
+      const buffer = this.buffers[e.id];
+      (buffer.array as Float32Array)[0] = (sourceBuffer.array as Float32Array)[0];
+      (buffer.array as Float32Array)[1] = (sourceBuffer.array as Float32Array)[1];
+      (buffer.array as Float32Array)[2] = (sourceBuffer.array as Float32Array)[2];
+      (buffer.array as Float32Array)[3] = (targetBuffer.array as Float32Array)[0];
+      (buffer.array as Float32Array)[4] = (targetBuffer.array as Float32Array)[1];
+      (buffer.array as Float32Array)[5] = (targetBuffer.array as Float32Array)[2];
+      buffer.needsUpdate = true;
     });
 
-    this.debouncedUpdateControls();
+    this.trackballControls.update();
     this.renderFrame();
   };
 
