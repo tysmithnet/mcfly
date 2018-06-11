@@ -219,19 +219,11 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       const y = e.y || 0;
       const z = e.z || 0;
       const sphere = this.spheres[e.id];
-      
-      // const buffer = this.buffers[e.id];
-      // (buffer.array as Float32Array)[0] = x;
-      // (buffer.array as Float32Array)[1] = y;
-      // (buffer.array as Float32Array)[2] = z;
-      // buffer.needsUpdate = true;
       sphere.position.set(x, y, z);
     });
     }
     
     this.state.links.forEach((e, i) => {
-      // const sourceBuffer = this.buffers[e.source.id];
-      // const targetBuffer = this.buffers[e.target.id];
       const buffer = this.buffers[e.id];
       const source = this.spheres[e.source.id];
       const target = this.spheres[e.target.id];
@@ -241,12 +233,6 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       (buffer.array as Float32Array)[3] = target.position.x || 0;
       (buffer.array as Float32Array)[4] = target.position.y || 0;
       (buffer.array as Float32Array)[5] = target.position.z || 0;
-      // (buffer.array as Float32Array)[0] = (sourceBuffer.array as Float32Array)[0];
-      // (buffer.array as Float32Array)[1] = (sourceBuffer.array as Float32Array)[1];
-      // (buffer.array as Float32Array)[2] = (sourceBuffer.array as Float32Array)[2];
-      // (buffer.array as Float32Array)[3] = (targetBuffer.array as Float32Array)[0];
-      // (buffer.array as Float32Array)[4] = (targetBuffer.array as Float32Array)[1];
-      // (buffer.array as Float32Array)[5] = (targetBuffer.array as Float32Array)[2];
       buffer.needsUpdate = true;
     });
 
@@ -256,5 +242,5 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
   private renderFrame = () => {
     this.renderer.render(this.scene, this.camera);
-  };
+  }; 
 }

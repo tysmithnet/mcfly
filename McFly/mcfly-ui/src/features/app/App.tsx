@@ -17,6 +17,7 @@ export default class App extends React.Component<Props, State> {
     const links = [];
 
   const numNodes = 4000;
+  const numLinks = 4000;
   for(let i = 0; i < numNodes; i++){
       const node = {
           id: v4()
@@ -24,7 +25,7 @@ export default class App extends React.Component<Props, State> {
       nodes.push(node);
   }
 
-  for(let i = 0; i < 1000; i++)
+  for(let i = 0; i < numLinks; i++)
   {
       const lhs = Math.floor(Math.random() * numNodes);
       const rhs = Math.floor(Math.random() * numNodes);
