@@ -40,6 +40,8 @@ import {
   SpotLightShadow,
   TrackballControls as TrackballControlsType,
   Vector3,
+  VectorKeyframeTrack,
+  VertexColors,
   VRControls,
   WebGLRenderer
 } from "three";
@@ -161,20 +163,15 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
     this.spheres = {};
     this.state.nodes.forEach((e, i) => {
-      const geometry = new SphereGeometry(10);
+      const geometry = new SphereBufferGeometry(10);
       const material = new MeshLambertMaterial({color: 0xff00ff});
-      const buffer = new Float32Array(3);
-      const bufferAttribute = new Float32BufferAttribute(buffer, 3);
-      this.buffers[e.id] = bufferAttribute;
-      const sphere = new Mesh(geometry, material);
-      this.spheres[e.id] = sphere;
-      this.scene.add(sphere);
-      objects.push(sphere);
+      const mesh = new Mesh(geometry, material);
+      this.spheres[e.id] = mesh;
+      this.scene.add(mesh);
     });
 
     const lineMaterial = new LineBasicMaterial({
-      color: 0x0000ff,
-      linewidth: 10
+      color: 0x00ff00
     });
     this.lines = {};
     this.state.links.forEach((e, i) => {
@@ -189,7 +186,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       lineGeometry.addAttribute("position", buffer);
       const line = new Line(lineGeometry, lineMaterial);      
       this.lines[e.id] = line;
-      this.scene.add(this.lines[e.id]);
+      this.scene.add(line);
     });
 
     this.dragControls = new DragControls(objects, this.camera, this.renderer.domElement);
@@ -198,6 +195,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
     (window as any).scene = this.scene;
     (window as any).THREE = require("three");
+    this.renderFrame();
     this.animate();
   }
 
@@ -215,24 +213,47 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     if(!this.hasEnded) {    
     this.simulation.tick();      
     this.simulation.nodes().forEach((e, i) => {
-      const x = e.x || 0;
-      const y = e.y || 0;
-      const z = e.z || 0;
-      const sphere = this.spheres[e.id];
-      sphere.position.set(x, y, z);
+      const sphere = this.spheres[e.id];      
+      const geometry = sphere.geometry as SphereBufferGeometry;
+      const fx = e.vx || 0;
+      const fy = e.vy || 0;
+      const fz = e.vz || 0;
+      const position = geometry.getAttribute("position");
+      const arr = position.array as Float32Array;
+      for(let i2 = 0; i2 < arr.length; i2++) {
+        const mod = i2 % 3;
+        switch(mod) {
+          case 0:
+            arr[i2] += fx;
+            break;
+          case 1:
+            arr[i2] += fy;
+            break;
+          case 2:
+            arr[i2] += fz;
+            break;
+        }
+      }
+      (position as BufferAttribute).needsUpdate = true;
     });
     }
-    
+    const sourceVector = new Vector3();
+    const targetVector = new Vector3();
     this.state.links.forEach((e, i) => {
-      const buffer = this.buffers[e.id];
+      const geometry = this.lines[e.id].geometry as BufferGeometry;
+      const buffer = geometry.getAttribute("position") as Float32BufferAttribute;
       const source = this.spheres[e.source.id];
       const target = this.spheres[e.target.id];
-      (buffer.array as Float32Array)[0] = source.position.x || 0;
-      (buffer.array as Float32Array)[1] = source.position.y || 0;
-      (buffer.array as Float32Array)[2] = source.position.z || 0;
-      (buffer.array as Float32Array)[3] = target.position.x || 0;
-      (buffer.array as Float32Array)[4] = target.position.y || 0;
-      (buffer.array as Float32Array)[5] = target.position.z || 0;
+      source.geometry.computeBoundingBox();
+      target.geometry.computeBoundingBox();
+      const sourcePosition = source.geometry.boundingBox.getCenter(sourceVector);
+      const targetPosition = target.geometry.boundingBox.getCenter(targetVector);
+      (buffer.array as Float32Array)[0] = sourceVector.x || 0;
+      (buffer.array as Float32Array)[1] = sourceVector.y || 0;
+      (buffer.array as Float32Array)[2] = sourceVector.z || 0;
+      (buffer.array as Float32Array)[3] = targetVector.x || 0;
+      (buffer.array as Float32Array)[4] = targetVector.y || 0;
+      (buffer.array as Float32Array)[5] = targetVector.z || 0;
       buffer.needsUpdate = true;
     });
 
