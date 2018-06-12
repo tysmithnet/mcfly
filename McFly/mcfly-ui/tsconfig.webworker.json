@@ -1,10 +1,10 @@
 {
     "extends": "./tsconfig.base.json",
+    
     "include": [
-        "./src/**/*",
-        "./typings/**/*.ts"
-    ],
-    "exclude": [
         "./src/**/*.webworker.ts"
-    ]
+    ],
+    "compilerOptions": {
+        "module": "es6"
+    }
 }
