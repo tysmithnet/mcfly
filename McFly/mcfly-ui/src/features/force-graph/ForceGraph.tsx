@@ -7,7 +7,8 @@ import {
   SimulationLinkDatum,
   SimulationNodeDatum
 } from "d3-force-3d";
-import {throttle} from "lodash";
+import * as workerPath from "file-loader?name=[name].js!./simulator.webworker";
+import { throttle } from "lodash";
 import * as React from "react";
 import {
   AmbientLight,
@@ -47,10 +48,16 @@ import {
 } from "three";
 import DragControls from "three-dragcontrols";
 import { ForceGraphElement, ForceGraphLink, ForceGraphNode } from "./domain";
+import {
+  EventData,
+  NEW_SIMULATION_REQUEST,
+  NODE_POSITIONS_UPDATED,
+  NodePositionsUpdated,
+  PositionsArrayIndices,
+  TICK_REQUEST
+} from "./simulator.webworker";
 import "./styles.scss";
-
 const TrackballControls: any = require("three-trackballcontrols");
-import * as workerPath from "file-loader?name=[name].js!./simulator.webworker";
 
 export interface Props {
   id: string;
@@ -71,21 +78,18 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   private spotlight: SpotLight;
   private webWorker: Worker;
   private containerDiv: HTMLDivElement;
-  private simulation: Simulation<
-    SimulationNodeDatum,
-    SimulationLinkDatum<SimulationNodeDatum>
-  >;
+  private currentNodePositions: NodePositionsUpdated;
   private scene: Scene;
   private camera: PerspectiveCamera;
   private renderer: WebGLRenderer;
   private spheres: { [id: string]: Mesh };
   private lines: { [id: string]: Line };
-  private buffers: { [id: string]: BufferAttribute};
+  private buffers: { [id: string]: BufferAttribute };
   private trackballControls: TrackballControlsType;
-  private dragControls:DragControls;
+  private dragControls: DragControls;
   private hasEnded = false;
   private numTicks = 180;
-  private count = 0;  
+  private count = 0;
   private debouncedUpdateControls: () => void;
 
   constructor(props: Props, state: State) {
@@ -96,19 +100,26 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
   public componentWillMount(): void {
     this.webWorker = new Worker(workerPath);
-    const newState: State = { nodes: this.props.nodes, links: this.props.links };
-    this.webWorker.postMessage(newState);
-    this.webWorker.onmessage = (event:any):void => {
-      // tslint:disable-next-line:no-console
-      console.log(event);
+    const newState: State = {
+      links: this.props.links,
+      nodes: this.props.nodes
     };
+    this.webWorker.postMessage({type: NEW_SIMULATION_REQUEST, payload: newState});
+    this.webWorker.onmessage = (event: MessageEvent): void => {
+      const data = event.data as EventData;
+      switch (event.data.type) {
+        case NODE_POSITIONS_UPDATED:
+          this.currentNodePositions = data.payload as NodePositionsUpdated;
+          break;
+      }
+    };
+    this.webWorker.postMessage({type: TICK_REQUEST});
     this.setState(newState);
+  }
 
-    this.simulation = forceSimulation(newState.nodes, 3)
-      .force("charge", forceManyBody())
-      .force("link", forceLink(newState.links))
-      .force("center", forceCenter());
-    this.simulation.stop();
+  public componentWillUnmount(): void {
+    this.webWorker.terminate();
+    this.webWorker = null;
   }
 
   public componentDidMount(): void {
@@ -134,7 +145,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.trackballControls.staticMoving = true;
     this.trackballControls.dynamicDampingFactor = 0.3;
     this.trackballControls.keys = [65, 83, 68];
-    this.debouncedUpdateControls = throttle(this.trackballControls.update, 100)
+    this.debouncedUpdateControls = throttle(this.trackballControls.update, 100);
 
     this.renderer.setClearColor(0xf0f0f0);
     this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -171,7 +182,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.spheres = {};
     this.state.nodes.forEach((e, i) => {
       const geometry = new SphereBufferGeometry(10);
-      const material = new MeshLambertMaterial({color: 0xff00ff});
+      const material = new MeshLambertMaterial({ color: 0xff00ff });
       const mesh = new Mesh(geometry, material);
       this.spheres[e.id] = mesh;
       this.scene.add(mesh);
@@ -191,14 +202,24 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       const buffer = new Float32BufferAttribute(floatArray, 3);
       this.buffers[e.id] = buffer;
       lineGeometry.addAttribute("position", buffer);
-      const line = new Line(lineGeometry, lineMaterial);      
+      const line = new Line(lineGeometry, lineMaterial);
       this.lines[e.id] = line;
       this.scene.add(line);
     });
 
-    this.dragControls = new DragControls(objects, this.camera, this.renderer.domElement);
-    this.dragControls.addEventListener("dragstart", e => this.trackballControls.enabled = false);
-    this.dragControls.addEventListener("dragend", e => this.trackballControls.enabled = true);
+    this.dragControls = new DragControls(
+      objects,
+      this.camera,
+      this.renderer.domElement
+    );
+    this.dragControls.addEventListener(
+      "dragstart",
+      e => (this.trackballControls.enabled = false)
+    );
+    this.dragControls.addEventListener(
+      "dragend",
+      e => (this.trackballControls.enabled = true)
+    );
 
     (window as any).scene = this.scene;
     (window as any).THREE = require("three");
@@ -211,50 +232,55 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   }
 
   private animate = () => {
-    
     requestAnimationFrame(this.animate);
-    if(this.count++ > this.numTicks)
-    {
+    if (this.count++ > this.numTicks) {
       this.hasEnded = true;
     }
-    if(!this.hasEnded) {    
-    this.simulation.tick();      
-    this.simulation.nodes().forEach((e, i) => {
-      const sphere = this.spheres[e.id];      
-      const geometry = sphere.geometry as SphereBufferGeometry;
-      const fx = e.vx || 0;
-      const fy = e.vy || 0;
-      const fz = e.vz || 0;
-      const position = geometry.getAttribute("position");
-      const arr = position.array as Float32Array;
-      for(let i2 = 0; i2 < arr.length; i2++) {
-        const mod = i2 % 3;
-        switch(mod) {
-          case 0:
-            arr[i2] += fx;
-            break;
-          case 1:
-            arr[i2] += fy;
-            break;
-          case 2:
-            arr[i2] += fz;
-            break;
+    if (!this.hasEnded) {
+      this.webWorker.postMessage({ type: TICK_REQUEST });
+      Object.keys(this.currentNodePositions).forEach((id, i) => {
+        const data = this.currentNodePositions.get(id);
+        const sphere = this.spheres[id];
+        const geometry = sphere.geometry as SphereBufferGeometry;
+        const vx = data[PositionsArrayIndices.vx] || 0;
+        const vy = data[PositionsArrayIndices.vy] || 0;
+        const vz = data[PositionsArrayIndices.vz] || 0;
+        const position = geometry.getAttribute("position");
+        const arr = position.array as Float32Array;
+        for (let i2 = 0; i2 < arr.length; i2++) {
+          const mod = i2 % 3;
+          switch (mod) {
+            case 0:
+              arr[i2] += vx;
+              break;
+            case 1:
+              arr[i2] += vy;
+              break;
+            case 2:
+              arr[i2] += vz;
+              break;
+          }
         }
-      }
-      (position as BufferAttribute).needsUpdate = true;
-    });
+        (position as BufferAttribute).needsUpdate = true;
+      });
     }
     const sourceVector = new Vector3();
     const targetVector = new Vector3();
     this.state.links.forEach((e, i) => {
       const geometry = this.lines[e.id].geometry as BufferGeometry;
-      const buffer = geometry.getAttribute("position") as Float32BufferAttribute;
+      const buffer = geometry.getAttribute(
+        "position"
+      ) as Float32BufferAttribute;
       const source = this.spheres[e.source.id];
       const target = this.spheres[e.target.id];
       source.geometry.computeBoundingBox();
       target.geometry.computeBoundingBox();
-      const sourcePosition = source.geometry.boundingBox.getCenter(sourceVector);
-      const targetPosition = target.geometry.boundingBox.getCenter(targetVector);
+      const sourcePosition = source.geometry.boundingBox.getCenter(
+        sourceVector
+      );
+      const targetPosition = target.geometry.boundingBox.getCenter(
+        targetVector
+      );
       (buffer.array as Float32Array)[0] = sourceVector.x || 0;
       (buffer.array as Float32Array)[1] = sourceVector.y || 0;
       (buffer.array as Float32Array)[2] = sourceVector.z || 0;
@@ -270,5 +296,5 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
   private renderFrame = () => {
     this.renderer.render(this.scene, this.camera);
-  }; 
+  };
 }
