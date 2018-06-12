@@ -50,7 +50,7 @@ import { ForceGraphElement, ForceGraphLink, ForceGraphNode } from "./domain";
 import "./styles.scss";
 
 const TrackballControls: any = require("three-trackballcontrols");
-const workerPath = require("file-loader?name=[name].ts!./simulator.webworker");
+import * as workerPath from "file-loader?name=[name].js!./simulator.webworker";
 
 export interface Props {
   id: string;
@@ -99,6 +99,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     const newState: State = { nodes: this.props.nodes, links: this.props.links };
     this.webWorker.postMessage(newState);
     this.webWorker.onmessage = (event:any):void => {
+      // tslint:disable-next-line:no-console
       console.log(event);
     };
     this.setState(newState);
