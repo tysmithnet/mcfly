@@ -12,7 +12,7 @@
     "build": "webpack --config webpack.dev.config.js",
     "dev": "webpack-dev-server --config webpack.dev.config.js --hot --inline --host 0.0.0.0",
     "test": "webpack --config webpack.dev.config.js && jest",
-    "storybook": "start-storybook -p 80",
+    "storybook": "start-storybook -p 8080",
     "pretty": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "build-storybook": "build-storybook",
     "watch": "webpack --config webpack.dev.config.js --watch --watch-poll"

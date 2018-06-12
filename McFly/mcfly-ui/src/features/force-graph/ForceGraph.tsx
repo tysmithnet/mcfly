@@ -48,7 +48,9 @@ import {
 import DragControls from "three-dragcontrols";
 import { ForceGraphElement, ForceGraphLink, ForceGraphNode } from "./domain";
 import "./styles.scss";
+
 const TrackballControls: any = require("three-trackballcontrols");
+const workerPath = require("file-loader?name=[name].ts!./simulator.webworker");
 
 export interface Props {
   id: string;
@@ -93,8 +95,12 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   }
 
   public componentWillMount(): void {
-
+    this.webWorker = new Worker(workerPath);
     const newState: State = { nodes: this.props.nodes, links: this.props.links };
+    this.webWorker.postMessage(newState);
+    this.webWorker.onmessage = (event:any):void => {
+      console.log(event);
+    };
     this.setState(newState);
 
     this.simulation = forceSimulation(newState.nodes, 3)

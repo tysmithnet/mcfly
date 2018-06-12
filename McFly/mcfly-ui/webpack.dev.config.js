@@ -43,21 +43,6 @@ module.exports = {
                 test: /\.js$/,
                 loader: "source-map-loader"
             },
-
-            // {
-            //     test: /\.webworker\.tsx?$/,
-            //     use: [
-            //         {
-            //             loader: "awesome-typescript-loader"
-            //         },
-            //         {
-            //             loader: "worker-loader",
-            //             options: {
-            //                 publicPath: "./dist"
-            //             }
-            //         }
-            //     ]
-            // }
         ]
     },
 
