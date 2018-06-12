@@ -1,10 +1,10 @@
 {
     "extends": "./tsconfig.base.json",
-    
     "include": [
         "./src/**/*.webworker.ts"
     ],
     "compilerOptions": {
-        "module": "es6"
+        "module": "es6",
+        "outFile": "webworker.js"
     }
 }

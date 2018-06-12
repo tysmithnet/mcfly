@@ -7,7 +7,10 @@ import {
   SimulationLinkDatum,
   SimulationNodeDatum
 } from "d3-force-3d";
-import * as workerPath from "file-loader?name=[name].js!./simulator.webworker";
+import Worker = require('worker-loader!./simulator.webworker');
+// import Worker from "worker-loader!./simulator.webworker"
+// import * as workerPath from "file-loader?name=[name].js!./simulator.webworker";
+
 import { throttle } from "lodash";
 import * as React from "react";
 import {
@@ -96,10 +99,11 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     super(props, state);
     const ref = React.createRef();
     this.buffers = {};
+    this.currentNodePositions = {} as Map<string, ArrayLike<number>>;
   }
 
   public componentWillMount(): void {
-    this.webWorker = new Worker(workerPath);
+    this.webWorker = new (Worker as any)();
     const newState: State = {
       links: this.props.links,
       nodes: this.props.nodes

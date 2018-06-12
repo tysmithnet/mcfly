@@ -15,10 +15,9 @@ let simulator: Simulator = null;
 ctx.addEventListener("message", event => {
   console.log(event);
   if (!event.data || !event.data.type) {
-    console.error(`Unrecognized object format, requires a type`);
-    return;
+      return;
   }
-
+  
   const eventData = event.data as EventData;
   switch (eventData.type) {
     case NEW_SIMULATION_REQUEST:
@@ -85,6 +84,10 @@ class Simulator {
 
   public tick(): void {
     this.simulation.tick();
+    const data = this.simulation.nodes().map((e, i) => {
+        return [e.x, e.y, e.z, e.vx, e.vy, e.vz]
+    });
+    ctx.postMessage({type: NODE_POSITIONS_UPDATED, payload: data});
   }
 
   public stop(): void {

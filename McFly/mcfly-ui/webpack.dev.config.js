@@ -32,6 +32,14 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'sass-loader']
             },
 
+
+            {
+                test: /\.webworker\.ts$/,
+                use: {
+                    loader: 'worker-loader'
+                }
+            },
+
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
             {
                 test: /\.tsx?$/,

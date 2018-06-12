@@ -5,6 +5,6 @@
         "./typings/**/*.ts"
     ],
     "exclude": [
-        "./src/**/*.webworker.ts"
+        //"./src/**/*.webworker.ts"
     ]
 }
