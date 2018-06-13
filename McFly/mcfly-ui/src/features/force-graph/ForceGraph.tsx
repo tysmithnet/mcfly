@@ -7,9 +7,6 @@ import {
   SimulationLinkDatum,
   SimulationNodeDatum
 } from "d3-force-3d";
-import Worker = require('worker-loader!./simulator.webworker');
-// import Worker from "worker-loader!./simulator.webworker"
-// import * as workerPath from "file-loader?name=[name].js!./simulator.webworker";
 
 import { throttle } from "lodash";
 import * as React from "react";
@@ -51,15 +48,15 @@ import {
 } from "three";
 import DragControls from "three-dragcontrols";
 import { ForceGraphElement, ForceGraphLink, ForceGraphNode } from "./domain";
-import {
-  EventData,
-  NEW_SIMULATION_REQUEST,
-  NODE_POSITIONS_UPDATED,
-  NodePositionsUpdated,
-  PositionsArrayIndices,
-  TICK_REQUEST
-} from "./simulator.webworker";
 import "./styles.scss";
+import MyWorker from "./webworker";
+import {
+  EVENT_TYPE,
+  EventData,
+  NodePositionsUpdated,
+  POSITIONS_ARRAY_INDICES
+} from "./webworker/types";
+
 const TrackballControls: any = require("three-trackballcontrols");
 
 export interface Props {
@@ -103,21 +100,24 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   }
 
   public componentWillMount(): void {
-    this.webWorker = new (Worker as any)();
+    this.webWorker = new (MyWorker as any)();
     const newState: State = {
       links: this.props.links,
       nodes: this.props.nodes
     };
-    this.webWorker.postMessage({type: NEW_SIMULATION_REQUEST, payload: newState});
+    this.webWorker.postMessage({
+      payload: newState,
+      type: EVENT_TYPE.NEW_SIMULATION_REQUEST
+    });
     this.webWorker.onmessage = (event: MessageEvent): void => {
       const data = event.data as EventData;
       switch (event.data.type) {
-        case NODE_POSITIONS_UPDATED:
+        case EVENT_TYPE.NODE_POSITIONS_UPDATED:
           this.currentNodePositions = data.payload as NodePositionsUpdated;
           break;
       }
     };
-    this.webWorker.postMessage({type: TICK_REQUEST});
+    this.webWorker.postMessage({ type: EVENT_TYPE.TICK_REQUEST });
     this.setState(newState);
   }
 
@@ -237,18 +237,20 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
   private animate = () => {
     requestAnimationFrame(this.animate);
+    if (!this.currentNodePositions || !this.currentNodePositions.size) {
+      return;
+    }
     if (this.count++ > this.numTicks) {
       this.hasEnded = true;
     }
     if (!this.hasEnded) {
-      this.webWorker.postMessage({ type: TICK_REQUEST });
-      Object.keys(this.currentNodePositions).forEach((id, i) => {
-        const data = this.currentNodePositions.get(id);
-        const sphere = this.spheres[id];
+      this.currentNodePositions.forEach((v, k) => {
+        const data = v;
+        const sphere = this.spheres[k];
         const geometry = sphere.geometry as SphereBufferGeometry;
-        const vx = data[PositionsArrayIndices.vx] || 0;
-        const vy = data[PositionsArrayIndices.vy] || 0;
-        const vz = data[PositionsArrayIndices.vz] || 0;
+        const vx = data[POSITIONS_ARRAY_INDICES.VX] || 0;
+        const vy = data[POSITIONS_ARRAY_INDICES.VY] || 0;
+        const vz = data[POSITIONS_ARRAY_INDICES.VZ] || 0;
         const position = geometry.getAttribute("position");
         const arr = position.array as Float32Array;
         for (let i2 = 0; i2 < arr.length; i2++) {
@@ -296,6 +298,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
     this.trackballControls.update();
     this.renderFrame();
+    this.webWorker.postMessage({ type: EVENT_TYPE.TICK_REQUEST });
   };
 
   private renderFrame = () => {
