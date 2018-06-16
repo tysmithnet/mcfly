@@ -5,13 +5,14 @@ module.exports = (baseConfig, env, config) => {
   config.module.rules.push({
     test: /\.(s*)css$/,
     use: ['style-loader', 'css-loader', 'sass-loader']
-  }, {
-    test: /\.webworker\.(ts|tsx)$/,
-    loader: require.resolve("worker-loader")
   });
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
     loader: require.resolve("awesome-typescript-loader")
+  }, {
+    enforce: "pre",
+    test: /\.js$/,
+    loader: "source-map-loader"
   });
   config.resolve.extensions.push(".ts", ".tsx");
   return config;
