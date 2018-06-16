@@ -75,6 +75,12 @@ export interface State {
 type NodePair = [ForceGraphNode, ForceGraphNode];
 
 export default class ForceGraph extends React.PureComponent<Props, State> {
+  
+  public static getDerivedStateFromProps(nextProps: Props, prevState:State): State {
+    return {nodes: nextProps.nodes, links: nextProps.links};
+  }
+  public state:State = {nodes: [], links:[]}
+
   private spotlight: SpotLight;
   private webWorker: Worker;
   private containerDiv: HTMLDivElement;
@@ -91,22 +97,19 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   private numTicks = 180;
   private count = 0;
   private debouncedUpdateControls: () => void;
-
+  
   constructor(props: Props, state: State) {
     super(props, state);
-    const ref = React.createRef();
-    this.buffers = {};
-    this.currentNodePositions = {} as Map<string, ArrayLike<number>>;
-  }
-
-  public componentWillMount(): void {
-    this.webWorker = new (MyWorker as any)();
-    const newState: State = {
+    this.state = {
       links: this.props.links,
       nodes: this.props.nodes
     };
+    const ref = React.createRef();
+    this.buffers = {};
+    this.currentNodePositions = {} as Map<string, ArrayLike<number>>;
+    this.webWorker = new (MyWorker as any)();
     this.webWorker.postMessage({
-      payload: newState,
+      payload: this.state,
       type: EVENT_TYPE.NEW_SIMULATION_REQUEST
     });
     this.webWorker.onmessage = (event: MessageEvent): void => {
@@ -118,7 +121,6 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       }
     };
     this.webWorker.postMessage({ type: EVENT_TYPE.TICK_REQUEST });
-    this.setState(newState);
   }
 
   public componentWillUnmount(): void {
@@ -127,6 +129,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   }
 
   public componentDidMount(): void {
+    
     this.scene = new Scene();
     this.camera = new PerspectiveCamera(
       70,
