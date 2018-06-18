@@ -57,7 +57,7 @@ export class Simulator {
     this.nodes = this.nodes.filter((e, i) => {
       return !removedNodes.has(e.id);
     });
-    addedNodes.forEach((e,i) => {
+    addedNodes.forEach((e, i) => {
       e.vx = Math.random() * 50;
       e.vy = Math.random() * 50;
       e.vz = Math.random() * 50;

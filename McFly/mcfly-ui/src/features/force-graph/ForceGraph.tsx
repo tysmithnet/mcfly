@@ -82,7 +82,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     return {
       links: nextProps.links,
       needsUpdate: true,
-      nodes: nextProps.nodes,
+      nodes: nextProps.nodes
     };
   }
   public state: State = { needsUpdate: false, nodes: [], links: [] };
@@ -335,7 +335,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     if (!this.currentNodePositions || !this.currentNodePositions.size) {
       return;
     }
-    
+
     this.currentNodePositions.forEach((id, buffer) => {
       this.updateSpherePosition(id, buffer);
     });
