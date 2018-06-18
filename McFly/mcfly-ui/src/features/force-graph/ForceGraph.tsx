@@ -7,7 +7,6 @@ import {
   SimulationLinkDatum,
   SimulationNodeDatum
 } from "d3-force-3d";
-
 import { throttle } from "lodash";
 import * as React from "react";
 import {
@@ -59,6 +58,7 @@ import {
 
 const TrackballControls: any = require("three-trackballcontrols");
 
+
 export interface Props {
   id: string;
   width: number;
@@ -68,6 +68,7 @@ export interface Props {
 }
 
 export interface State {
+  needsUpdate: boolean;
   nodes: ForceGraphNode[];
   links: ForceGraphLink[];
 }
@@ -77,15 +78,15 @@ type NodePair = [ForceGraphNode, ForceGraphNode];
 export default class ForceGraph extends React.PureComponent<Props, State> {
   
   public static getDerivedStateFromProps(nextProps: Props, prevState:State): State {
-    console.log("getDerivedStateFromProps")
-    return {nodes: nextProps.nodes, links: nextProps.links};
+    return {needsUpdate: true, nodes: nextProps.nodes, links: nextProps.links};
   }
-  public state:State = {nodes: [], links:[]}
+  public state:State = {needsUpdate: false, nodes: [], links:[]}
 
   private spotlight: SpotLight;
   private webWorker: Worker;
   private containerDiv: HTMLDivElement;
   private currentNodePositions: NodePositionsUpdated;
+  private currentLinks: Map<string, ForceGraphLink> = new Map<string, ForceGraphLink>();
   private scene: Scene;
   private camera: PerspectiveCamera;
   private renderer: WebGLRenderer;
@@ -102,11 +103,14 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   
   constructor(props: Props, state: State) {
     super(props, state);
-    console.log("constructor");
     this.state = {
       links: this.props.links,
+      needsUpdate: false,
       nodes: this.props.nodes
     };
+    state.links.forEach((e, i) => {
+      this.currentLinks.set(e.id, e);
+    });
     const ref = React.createRef();
     this.buffers = {};
     this.currentNodePositions = {} as Map<string, ArrayLike<number>>;
@@ -239,6 +243,48 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
 
 
   public render(): React.ReactNode {
+    if(this.state.needsUpdate) {
+      const addedNodes:ForceGraphNode[] = [];
+      const addedLinks:ForceGraphLink[] = [];
+      const removedNodes:Set<string> = new Set<string>();
+      const removedLinks:Set<string> = new Set<string>();
+      const processed:Set<string> = new Set<string>();;
+      this.state.nodes.forEach((e,i) => {
+        processed.add(e.id);
+        if(this.currentNodePositions.has(e.id)) {
+          return;
+        }
+        addedNodes.push(e);
+      });
+      this.currentNodePositions.forEach((e, i) => {
+        if(!processed.has(i)){
+          removedNodes.add(i);
+        }
+      });
+      processed.clear();
+      this.state.links.forEach((e, i) => {
+        processed.add(e.id);
+        if(this.currentLinks.has(e.id)){
+          return;
+        }
+        addedLinks.push(e);
+      });
+      this.currentLinks.forEach((e, i) => {
+        if(!processed.has(i)) {
+          removedLinks.add(i);
+        }
+      });
+      this.webWorker.postMessage({payload: {
+        addedLinks,
+        addedNodes,
+        removedLinks,
+        removedNodes        
+      }, type: EVENT_TYPE.UPDATE_GRAPH_DATA_REQUEST})
+      this.setState((state, props) => {
+        this.state.needsUpdate = false;
+        return null; // don't trigger re-render
+      });
+    }
     if(!this.renderedNode) {
       this.renderedNode = <div ref={node => (this.containerDiv = node)} />;
     }

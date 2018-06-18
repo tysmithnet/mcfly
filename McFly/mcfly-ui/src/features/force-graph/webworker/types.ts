@@ -12,7 +12,8 @@ import { ForceGraphLink, ForceGraphNode } from "../domain";
 export type WorkerMessage =
   | NewSimulationRequest
   | RemoveNodeRequest
-  | NodePositionsUpdated;
+  | NodePositionsUpdated
+  | UpdateGraphDataRequest;
 export interface EventData {
   type: string;
   payload?: WorkerMessage;
@@ -23,6 +24,13 @@ export interface NewSimulationRequest {
   links: ForceGraphLink[];
 }
 
+export interface UpdateGraphDataRequest {
+  addedNodes: ForceGraphNode[];
+  removedNodes: ForceGraphNode[];
+  addedLinks: ForceGraphNode[];
+  removedLinks: ForceGraphLink[];
+}
+
 export interface RemoveNodeRequest {
   target: string | ForceGraphNode;
 }
@@ -31,6 +39,7 @@ export type NodePositionsUpdated = Map<string, ArrayLike<number>>;
 
 export enum EVENT_TYPE {
   TICK_REQUEST = "TICK_REQUEST",
+  UPDATE_GRAPH_DATA_REQUEST = "UPDATE_GRAPH_DATA_REQUEST",
   NEW_SIMULATION_REQUEST = "NEW_SIMULATION_REQUEST",
   NODE_POSITIONS_UPDATED = "NODE_POSITIONS_UPDATED",
   REMOVE_NODE_REQUEST = "REMOVE_NODE_REQUEST"

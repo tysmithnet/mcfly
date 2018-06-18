@@ -43,4 +43,8 @@ export class Simulator {
   public stop(): void {
     this.simulation.stop();
   }
+
+  public updateNodes(nodes:ForceGraphNode[]): void {
+    this.simulation.nodes(nodes);
+  }
 }
