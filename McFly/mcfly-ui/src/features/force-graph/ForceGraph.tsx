@@ -77,6 +77,7 @@ type NodePair = [ForceGraphNode, ForceGraphNode];
 export default class ForceGraph extends React.PureComponent<Props, State> {
   
   public static getDerivedStateFromProps(nextProps: Props, prevState:State): State {
+    console.log("getDerivedStateFromProps")
     return {nodes: nextProps.nodes, links: nextProps.links};
   }
   public state:State = {nodes: [], links:[]}
@@ -97,9 +98,11 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   private numTicks = 180;
   private count = 0;
   private debouncedUpdateControls: () => void;
+  private renderedNode: React.ReactNode = null;
   
   constructor(props: Props, state: State) {
     super(props, state);
+    console.log("constructor");
     this.state = {
       links: this.props.links,
       nodes: this.props.nodes
@@ -234,8 +237,12 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.animate();
   }
 
+
   public render(): React.ReactNode {
-    return <div ref={node => (this.containerDiv = node)} />;
+    if(!this.renderedNode) {
+      this.renderedNode = <div ref={node => (this.containerDiv = node)} />;
+    }
+    return this.renderedNode;
   }
 
   private animate = () => {
