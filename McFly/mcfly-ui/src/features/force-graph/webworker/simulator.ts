@@ -16,12 +16,16 @@ export class Simulator {
     SimulationLinkDatum<SimulationNodeDatum>
   >;
   private worker: IMyWorker;
+  private nodes: ForceGraphNode[];
+  private links: ForceGraphLink[];
 
   constructor(
     nodes: ForceGraphNode[],
     links: ForceGraphLink[],
     worker: IMyWorker
   ) {
+    this.nodes = nodes;
+    this.links = links;
     this.worker = worker;
     this.simulation = forceSimulation(nodes, 3)
       .force("charge", forceManyBody())
@@ -44,7 +48,28 @@ export class Simulator {
     this.simulation.stop();
   }
 
-  public updateNodes(nodes:ForceGraphNode[]): void {
-    this.simulation.nodes(nodes);
+  public updateGraph(
+    addedNodes: ForceGraphNode[],
+    removedNodes: Set<string>,
+    addedLinks: ForceGraphLink[],
+    removedLinks: Set<string>
+  ): void {
+    this.nodes = this.nodes.filter((e, i) => {
+      return !removedNodes.has(e.id);
+    });
+    addedNodes.forEach((e,i) => {
+      e.vx = Math.random() * 50;
+      e.vy = Math.random() * 50;
+      e.vz = Math.random() * 50;
+    });
+    this.nodes = [...this.nodes, ...addedNodes];
+    this.links = this.links.filter((e, i) => {
+      return !removedLinks.has(e.id);
+    });
+    this.links = [...this.links, ...addedLinks];
+    this.simulation = forceSimulation(this.nodes, 3)
+      .force("charge", forceManyBody())
+      .force("link", forceLink(this.links))
+      .force("center", forceCenter());
   }
 }

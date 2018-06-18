@@ -14,7 +14,8 @@ import {
   EventData,
   IMyWorker,
   NewSimulationRequest,
-  RemoveNodeRequest
+  RemoveNodeRequest,
+  UpdateGraphDataRequest
 } from "./types";
 
 const ctx: IMyWorker = self as any;
@@ -40,5 +41,17 @@ ctx.onmessage = event => {
     case EVENT_TYPE.TICK_REQUEST:
       console.log("Tick requested");
       simulator.tick();
+      break;
+    case EVENT_TYPE.UPDATE_GRAPH_DATA_REQUEST:
+      console.log("Update Graph Data");
+      const updateGraphDataRequest = eventData.payload as UpdateGraphDataRequest;
+      simulator.updateGraph(
+        updateGraphDataRequest.addedNodes,
+        updateGraphDataRequest.removedNodes,
+        updateGraphDataRequest.addedLinks,
+        updateGraphDataRequest.removedLinks
+      );
+      simulator.tick();
+      break;
   }
 };

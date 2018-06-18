@@ -26,9 +26,9 @@ export interface NewSimulationRequest {
 
 export interface UpdateGraphDataRequest {
   addedNodes: ForceGraphNode[];
-  removedNodes: ForceGraphNode[];
-  addedLinks: ForceGraphNode[];
-  removedLinks: ForceGraphLink[];
+  removedNodes: Set<string>;
+  addedLinks: ForceGraphLink[];
+  removedLinks: Set<string>;
 }
 
 export interface RemoveNodeRequest {
