@@ -30,18 +30,28 @@ function addNodesReducer(
       const node = { id: v4() };
       const newNodes = [...state.nodes, node];
       return { links: state.links, nodes: newNodes };
+    case "ADD_LINK":
+      const lhs = Math.floor(Math.random() * state.nodes.length);
+      const rhs = Math.floor(Math.random() * state.nodes.length);
+      const link = {
+        id: v4(),
+        source: state.nodes[lhs],
+        target: state.nodes[rhs]
+      };
+      const newLinks = [...state.links, link];
+      return { links: newLinks, nodes: state.nodes };
   }
   return { ...state };
 }
-const addNodesStore = createStore(addNodesReducer);
+const store = createStore(addNodesReducer);
 
-export function AddNodesProvider(story: { story: any }) {
-  return <Provider store={addNodesStore}>{story.story}</Provider>;
+export function AddRemoveGraphElementsProvider(story: { story: any }) {
+  return <Provider store={store}>{story.story}</Provider>;
 }
 
-class AddNodesImpl extends Component<{}, {}> {
+class Implementation extends Component<{}, {}> {
   public render() {
-    const state = addNodesStore.getState() as State;
+    const state = store.getState() as State;
     return (
       <div>
         <ForceGraph
@@ -52,13 +62,18 @@ class AddNodesImpl extends Component<{}, {}> {
           links={state.links}
         />
         <button onClick={this.addNode}>Add Node</button>
+        <button onClick={this.addLink}>Add Link</button>
       </div>
     );
   }
 
   private addNode() {
-    addNodesStore.dispatch({ type: "ADD_NODE" });
+    store.dispatch({ type: "ADD_NODE" });
+  }
+
+  private addLink() {
+    store.dispatch({type: "ADD_LINK"});
   }
 }
 
-export const AddNodes = connect(mapStateToProps)(AddNodesImpl);
+export const AddRemoveGraphElements = connect(mapStateToProps)(Implementation);

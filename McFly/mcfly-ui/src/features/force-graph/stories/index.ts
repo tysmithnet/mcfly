@@ -1,7 +1,6 @@
 import { v4 } from "uuid";
 import { ForceGraphLink, ForceGraphNode } from "../domain";
-export * from "./add-links";
-export * from "./add-nodes";
+export * from "./add-remove-graph-elements";
 export * from "./empty";
 export * from "./extra-large-graph";
 export * from "./large-graph";
