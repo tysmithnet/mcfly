@@ -11,15 +11,10 @@ import { throttle } from "lodash";
 import * as React from "react";
 import {
   AmbientLight,
-  BoxBufferGeometry,
-  BoxGeometry,
   BufferAttribute,
   BufferGeometry,
-  Camera,
   Float32BufferAttribute,
-  Geometry,
   GridHelper,
-  LightShadow,
   Line,
   LineBasicMaterial,
   Mesh,

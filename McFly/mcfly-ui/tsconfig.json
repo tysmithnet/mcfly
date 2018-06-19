@@ -1,5 +1,14 @@
 {
-    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "declaration": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es5",
+        "lib": ["webworker", "es5", "es6", "dom"],
+        "jsx": "react"
+    },
     "files": [
         "./src/features/force-graph/webworker/types.d.ts"
     ],
@@ -8,6 +17,5 @@
         "./typings/**/*.ts"
     ],
     "exclude": [
-        //"./src/**/*.webworker.ts"
     ]
 }
