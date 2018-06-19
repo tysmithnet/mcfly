@@ -1,3 +1,5 @@
+import { v4 } from "uuid";
+
 export type ForceGraphElement = ForceGraphNode | ForceGraphLink;
 
 export interface ForceGraphNode {
@@ -21,3 +23,26 @@ export interface ForceGraphLink {
 }
 
 export const NODE_POSITION_CHANGED = "force-graph/NODE_POSITION_CHANGED";
+
+export function generateRandomGraph(
+  numNodes: number,
+  numLinks: number
+): { nodes: ForceGraphNode[]; links: ForceGraphLink[] } {
+  const nodes: ForceGraphNode[] = [];
+  const links: ForceGraphLink[] = [];
+
+  for (let i = 0; i < numNodes; i++) {
+    nodes.push({ id: v4() });
+  }
+
+  while (links.length < numLinks) {
+    const lhs = Math.floor(Math.random() * numNodes);
+    const rhs = Math.floor(Math.random() * numNodes);
+    if (lhs === rhs) {
+      continue;
+    }
+    links.push({ id: v4(), source: nodes[lhs], target: nodes[rhs] });
+  }
+
+  return { nodes, links };
+}

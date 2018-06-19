@@ -1,7 +1,7 @@
 import { Component } from "react";
 import React = require("react");
+import { generateRandomGraph } from "../domain";
 import ForceGraph from "../ForceGraph";
-import { generateRandomGraph } from "./index";
 
 export class MediumGraph extends Component<{}, {}> {
   public render() {

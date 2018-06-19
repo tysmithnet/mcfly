@@ -33,7 +33,7 @@ function addNodesReducer(
   }
   return { ...state };
 }
-export const addNodesStore = createStore(addNodesReducer);
+const addNodesStore = createStore(addNodesReducer);
 
 export function AddNodesProvider(story: { story: any }) {
   return <Provider store={addNodesStore}>{story.story}</Provider>;

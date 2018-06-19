@@ -319,8 +319,6 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       color: 0x00ff00
     });
     const lineGeometry = new BufferGeometry();
-    const sourceId = e.source.id;
-    const targetId = e.target.id;
     const floatArray = new Float32Array(2 * 3);
     const buffer = new Float32BufferAttribute(floatArray, 3);
     this.buffers[e.id] = buffer;
@@ -359,6 +357,9 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     sourceVector: Vector3,
     targetVector: Vector3
   ) {
+    if (!this.lines.has(e.id)) {
+      this.addSphereLink(e);
+    }
     const geometry = this.lines.get(e.id).geometry as BufferGeometry;
     const buffer = geometry.getAttribute("position") as Float32BufferAttribute;
     const source = this.spheres.get(e.source.id);
