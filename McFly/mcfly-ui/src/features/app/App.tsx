@@ -13,7 +13,6 @@ export default class App extends React.Component<Props, State> {
   }
 
   public render(): React.ReactNode {
-
     return (
       <div>
         <div>
@@ -22,13 +21,14 @@ export default class App extends React.Component<Props, State> {
         <div>
           <div>
             <ForceGraph
-            id="test"
-            width={window.innerWidth}
-            height={window.innerHeight}
-            nodes={[]}
-            links={[]} />
+              id="test"
+              width={window.innerWidth}
+              height={window.innerHeight}
+              nodes={[]}
+              links={[]}
+            />
           </div>
-          <div></div>
+          <div />
         </div>
       </div>
     );

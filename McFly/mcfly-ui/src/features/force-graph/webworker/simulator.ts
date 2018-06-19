@@ -54,22 +54,43 @@ export class Simulator {
     addedLinks: ForceGraphLink[],
     removedLinks: Set<string>
   ): void {
-    this.nodes = this.nodes.filter((e, i) => {
-      return !removedNodes.has(e.id);
+    const removedNodesReply: ForceGraphNode[] = [];
+    const remainingNodes: ForceGraphNode[] = [];
+    this.nodes.forEach((e, i) => {
+      if (removedNodes.has(e.id)) {
+        removedNodesReply.push(e);
+      } else {
+        remainingNodes.push(e);
+      }
     });
     addedNodes.forEach((e, i) => {
       e.vx = Math.random() * 50;
       e.vy = Math.random() * 50;
       e.vz = Math.random() * 50;
     });
-    this.nodes = [...this.nodes, ...addedNodes];
-    this.links = this.links.filter((e, i) => {
-      return !removedLinks.has(e.id);
+    this.nodes = [...remainingNodes, ...addedNodes];
+    const removedLinksReply: ForceGraphLink[] = [];
+    const remainingLinks: ForceGraphLink[] = [];
+    this.links.forEach((e, i) => {
+      if (removedLinks.has(e.id)) {
+        removedLinksReply.push(e);
+      } else {
+        remainingLinks.push(e);
+      }
     });
-    this.links = [...this.links, ...addedLinks];
+    this.links = [...remainingLinks, ...addedLinks];
     this.simulation = forceSimulation(this.nodes, 3)
       .force("charge", forceManyBody())
       .force("link", forceLink(this.links))
       .force("center", forceCenter());
+    this.worker.postMessage({
+      payload: {
+        addedLinks: [...addedLinks],
+        addedNodes: [...addedNodes],
+        removedLinks: [...removedLinksReply],
+        removedNodes: [...removedNodesReply]
+      },
+      type: EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_RESPONSE
+    });
   }
 }

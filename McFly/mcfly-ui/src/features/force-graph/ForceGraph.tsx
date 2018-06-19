@@ -48,7 +48,8 @@ import {
   EVENT_TYPE,
   EventData,
   NodePositionsUpdated,
-  POSITIONS_ARRAY_INDICES
+  POSITIONS_ARRAY_INDICES,
+  UpdateGraphDataResponse
 } from "./webworker/types";
 
 const TrackballControls: any = require("three-trackballcontrols");
@@ -127,6 +128,19 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       switch (event.data.type) {
         case EVENT_TYPE.NODE_POSITIONS_UPDATED:
           this.currentNodePositions = data.payload as NodePositionsUpdated;
+          break;
+        case EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_RESPONSE:
+          const updateGraphDataResponse = data.payload as UpdateGraphDataResponse;
+          updateGraphDataResponse.removedLinks.forEach((e, i) => {
+            this.removeLine(e.id);
+          });
+          updateGraphDataResponse.removedNodes.forEach((e, i) => {
+            this.removeSphere(e.id);
+            const linksToRemove = this.state.links.filter((link) => {
+              return link.source.id === e.id || link.target.id === e.id;
+            });
+            linksToRemove.forEach(link => this.removeLine(link.id)); // todo: figure out whos responsibility it is to remove lines connected to nodes
+          });
           break;
       }
     };
@@ -215,12 +229,12 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     const removedNodes: Set<string> = new Set<string>();
     const removedLinks: Set<string> = new Set<string>();
     const processed: Set<string> = new Set<string>();
-    this.state.nodes.forEach((e, i) => {
-      processed.add(e.id);
-      if (this.currentNodePositions.has(e.id)) {
+    this.currentNodePositions.forEach((e, i) => {
+      processed.add(i);
+      if (this.currentNodePositions.has(i)) {
         return;
       }
-      addedNodes.push(e);
+      addedNodes.push();
     });
     this.currentNodePositions.forEach((e, i) => {
       if (!processed.has(i)) {
@@ -240,18 +254,39 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
         removedLinks.add(i);
       }
     });
+    const payload = {
+      addedLinks,
+      addedNodes,
+      removedLinks,
+      removedNodes
+    };
+    console.dir(payload);
     this.webWorker.postMessage({
-      payload: {
-        addedLinks,
-        addedNodes,
-        removedLinks,
-        removedNodes
-      },
-      type: EVENT_TYPE.UPDATE_GRAPH_DATA_REQUEST
+      payload,
+      type: EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_REQUEST
     });
   }
 
-  private addSphere(node: ForceGraphNode) {
+  private removeSphere(id: string): void {
+    const sphere = this.spheres.get(id);
+    if (sphere == null) {
+      return;
+    }
+    this.scene.remove(sphere);
+    sphere.geometry.dispose();
+  }
+
+  private removeLine(linkId: string): void {
+    const line = this.lines.get(linkId);
+    if (line == null) {
+      return;
+    }
+    this.scene.remove(line);
+    line.geometry.dispose();
+    line.material.dispose();
+  }
+
+  private addSphere(node: ForceGraphNode): void {
     const geometry = new SphereBufferGeometry(10);
     const material = new MeshLambertMaterial({ color: 0xff00ff });
     const mesh = new Mesh(geometry, material);
@@ -259,7 +294,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.scene.add(mesh);
   }
 
-  private setupHelperPlane() {
+  private setupHelperPlane(): void {
     const planeGeometry = new PlaneBufferGeometry(2000, 2000);
     planeGeometry.rotateX(-Math.PI / 2);
     const planeMaterial = new ShadowMaterial({ opacity: 0.2 });
