@@ -99,12 +99,8 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   private buffers: { [id: string]: BufferAttribute };
   private trackballControls: TrackballControlsType;
   private dragControls: DragControls;
-  private hasEnded = false;
-  private numTicks = 180;
-  private count = 0;
-  private debouncedUpdateControls: () => void;
   private renderedNode: React.ReactNode = null;
-
+  private debouncedUpdateControls: () => void;
   constructor(props: Props, state: State) {
     super(props, state);
     this.state = {
@@ -118,33 +114,19 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     const ref = React.createRef();
     this.buffers = {};
     this.currentNodePositions = new Map<string, ArrayLike<number>>();
-    this.webWorker = new (MyWorker as any)();
-    this.webWorker.postMessage({
-      payload: this.state,
-      type: EVENT_TYPE.NEW_SIMULATION_REQUEST
-    });
+    this.webWorker = new (MyWorker as any)(); // todo: this shares the worker and means only 1 graph at a time -need to fix to create new https://github.com/webpack-contrib/worker-loader/issues/118
     this.webWorker.onmessage = (event: MessageEvent): void => {
-      const data = event.data as EventData;
-      switch (event.data.type) {
-        case EVENT_TYPE.NODE_POSITIONS_UPDATED:
-          this.currentNodePositions = data.payload as NodePositionsUpdated;
+      switch (event.type) {
+        case EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_RESPONSE: {
+          const payload = event.data as UpdateGraphDataResponse;
+          payload.removedNodes.forEach(this.removeSphere);
+          payload.removedLinks.forEach(this.removeSphereLink);
+          payload.addedNodes.forEach(this.addSphere);
+          payload.addedLinks.forEach(this.addSphereLink);
           break;
-        case EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_RESPONSE:
-          const updateGraphDataResponse = data.payload as UpdateGraphDataResponse;
-          updateGraphDataResponse.removedLinks.forEach((e, i) => {
-            this.removeLine(e.id);
-          });
-          updateGraphDataResponse.removedNodes.forEach((e, i) => {
-            this.removeSphere(e.id);
-            const linksToRemove = this.state.links.filter((link) => {
-              return link.source.id === e.id || link.target.id === e.id;
-            });
-            linksToRemove.forEach(link => this.removeLine(link.id)); // todo: figure out whos responsibility it is to remove lines connected to nodes
-          });
-          break;
+        }
       }
     };
-    this.webWorker.postMessage({ type: EVENT_TYPE.TICK_REQUEST });
   }
 
   public componentWillUnmount(): void {
@@ -170,16 +152,6 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.setupLight();
     this.setupHelperPlane();
     const objects: Mesh[] = [];
-    this.spheres = new Map<string, Mesh>();
-    this.state.nodes.forEach((e, i) => {
-      this.addSphere(e);
-    });
-
-    this.lines = new Map<string, Line>();
-    this.state.links.forEach((e, i) => {
-      this.addSphereLink(e);
-    });
-
     this.dragControls = new DragControls(
       objects,
       this.camera,
@@ -206,14 +178,8 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     }
     if (this.state.needsUpdate) {
       this.updateGraphData();
-      this.resetRenderGuard();
     }
     return this.renderedNode;
-  }
-
-  public resetRenderGuard(): void {
-    this.numTicks = 0;
-    this.hasEnded = false;
   }
 
   public componentDidUpdate() {
@@ -260,10 +226,9 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       removedLinks,
       removedNodes
     };
-    console.dir(payload);
     this.webWorker.postMessage({
       payload,
-      type: EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_REQUEST
+      type: EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_RESPONSE
     });
   }
 
@@ -276,7 +241,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     sphere.geometry.dispose();
   }
 
-  private removeLine(linkId: string): void {
+  private removeSphereLink(linkId: string): void {
     const line = this.lines.get(linkId);
     if (line == null) {
       return;
@@ -286,11 +251,11 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     line.material.dispose();
   }
 
-  private addSphere(node: ForceGraphNode): void {
+  private addSphere(id: string): void {
     const geometry = new SphereBufferGeometry(10);
     const material = new MeshLambertMaterial({ color: 0xff00ff });
     const mesh = new Mesh(geometry, material);
-    this.spheres.set(node.id, mesh);
+    this.spheres.set(id, mesh);
     this.scene.add(mesh);
   }
 
@@ -344,17 +309,17 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.debouncedUpdateControls = throttle(this.trackballControls.update, 100);
   }
 
-  private addSphereLink(e: ForceGraphLink) {
+  private addSphereLink(id: string) {
     const lineMaterial = new LineBasicMaterial({
       color: 0x00ff00
     });
     const lineGeometry = new BufferGeometry();
     const floatArray = new Float32Array(2 * 3);
     const buffer = new Float32BufferAttribute(floatArray, 3);
-    this.buffers[e.id] = buffer;
+    this.buffers[id] = buffer;
     lineGeometry.addAttribute("position", buffer);
     const line = new Line(lineGeometry, lineMaterial);
-    this.lines.set(e.id, line);
+    this.lines.set(id, line);
     this.scene.add(line);
   }
 
@@ -373,9 +338,8 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       this.updateLinkPosition(link, sourceVector, targetVector);
     });
 
-    this.trackballControls.update();
+    this.debouncedUpdateControls();
     this.renderFrame();
-    this.webWorker.postMessage({ type: EVENT_TYPE.TICK_REQUEST });
   };
 
   private renderFrame = () => {
@@ -387,13 +351,15 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     sourceVector: Vector3,
     targetVector: Vector3
   ) {
-    if (!this.lines.has(e.id)) {
-      this.addSphereLink(e);
+    const line = this.lines.get(e.id);
+    if (!line) {
+      console.error(`Could not find sphere link with id "${e.id}"`);
+      return;
     }
     const geometry = this.lines.get(e.id).geometry as BufferGeometry;
     const buffer = geometry.getAttribute("position") as Float32BufferAttribute;
-    const source = this.spheres.get(e.source.id);
-    const target = this.spheres.get(e.target.id);
+    const source = this.spheres.get(e.source);
+    const target = this.spheres.get(e.target);
     source.geometry.computeBoundingBox();
     target.geometry.computeBoundingBox();
     const sourcePosition = source.geometry.boundingBox.getCenter(sourceVector);
@@ -408,23 +374,15 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   }
 
   private updateSpherePosition(positions: ArrayLike<number>, id: string) {
-    const data = positions;
-    if (!this.spheres.has(id)) {
-      const node = this.state.nodes.find(e => {
-        return e.id === id;
-      });
-      if (!node) {
-        throw new Error(
-          "Got sphere position from simulation, but cannot find corresponding node to create new sphere"
-        );
-      }
-      this.addSphere(node);
-    }
     const sphere = this.spheres.get(id);
+    if (!sphere) {
+      console.error(`Sphere with id "${id}" could not be found`);
+      return;
+    }
     const geometry = sphere.geometry as SphereBufferGeometry;
-    const vx = data[POSITIONS_ARRAY_INDICES.VX] || 0;
-    const vy = data[POSITIONS_ARRAY_INDICES.VY] || 0;
-    const vz = data[POSITIONS_ARRAY_INDICES.VZ] || 0;
+    const vx = positions[POSITIONS_ARRAY_INDICES.VX] || 0;
+    const vy = positions[POSITIONS_ARRAY_INDICES.VY] || 0;
+    const vz = positions[POSITIONS_ARRAY_INDICES.VZ] || 0;
     const position = geometry.getAttribute("position");
     const arr = position.array as Float32Array;
     for (let i2 = 0; i2 < arr.length; i2++) {

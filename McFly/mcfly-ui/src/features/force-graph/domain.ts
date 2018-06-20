@@ -18,8 +18,8 @@ export interface ForceGraphNode {
 
 export interface ForceGraphLink {
   id: string;
-  source: ForceGraphNode;
-  target: ForceGraphNode;
+  source: string;
+  target: string;
 }
 
 export const NODE_POSITION_CHANGED = "force-graph/NODE_POSITION_CHANGED";
@@ -41,7 +41,7 @@ export function generateRandomGraph(
     if (lhs === rhs) {
       continue;
     }
-    links.push({ id: v4(), source: nodes[lhs], target: nodes[rhs] });
+    links.push({ id: v4(), source: nodes[lhs].id, target: nodes[rhs].id });
   }
 
   return { nodes, links };

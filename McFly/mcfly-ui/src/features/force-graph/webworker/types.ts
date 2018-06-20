@@ -25,17 +25,17 @@ export interface NewSimulationRequest {
 }
 
 export interface UpdateGraphDataRequest {
-  addedNodes: ForceGraphNode[];
-  removedNodes: Set<string>;
-  addedLinks: ForceGraphLink[];
-  removedLinks: Set<string>;
+  addNodes: ForceGraphNode[];
+  removeNodes: Set<string>;
+  addLinks: ForceGraphLink[];
+  removeLinks: Set<string>;
 }
 
 export interface UpdateGraphDataResponse {
-  addedNodes: ForceGraphNode[];
-  removedNodes: ForceGraphNode[];
-  addedLinks: ForceGraphLink[];
-  removedLinks: ForceGraphNode[];
+  addedNodes: Set<string>;
+  removedNodes: Set<string>;
+  addedLinks: Set<string>;
+  removedLinks: Set<string>;
 }
 
 export type NodePositionsUpdated = Map<string, ArrayLike<number>>;

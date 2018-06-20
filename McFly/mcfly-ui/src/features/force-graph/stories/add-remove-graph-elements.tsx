@@ -34,14 +34,14 @@ function addNodesReducer(
     case "ADD_LINK": {
       let lhs = Math.floor(Math.random() * state.nodes.length);
       let rhs = Math.floor(Math.random() * state.nodes.length);
-      while(lhs === rhs) {
+      while (lhs === rhs) {
         lhs = Math.floor(Math.random() * state.nodes.length);
         rhs = Math.floor(Math.random() * state.nodes.length);
       }
       const link = {
         id: v4(),
-        source: state.nodes[lhs],
-        target: state.nodes[rhs]
+        source: state.nodes[lhs].id,
+        target: state.nodes[rhs].id
       };
       const newLinks = [...state.links, link];
       return { links: newLinks, nodes: state.nodes };
@@ -51,14 +51,14 @@ function addNodesReducer(
         break;
       }
       const nodes = state.nodes.filter((e, i) => i > 0);
-      return {links: state.links, nodes};
+      return { links: state.links, nodes };
     }
     case "REMOVE_LINK": {
       if (!state.links.length) {
         break;
       }
       const links = state.links.filter((e, i) => i > 0);
-      return {links, nodes:state.nodes};
+      return { links, nodes: state.nodes };
     }
   }
   return { ...state };

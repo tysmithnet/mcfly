@@ -41,10 +41,10 @@ ctx.onmessage = event => {
       console.log("Update Graph Data");
       const updateGraphDataRequest = eventData.payload as UpdateGraphDataRequest;
       simulator.updateGraph(
-        updateGraphDataRequest.addedNodes,
-        updateGraphDataRequest.removedNodes,
-        updateGraphDataRequest.addedLinks,
-        updateGraphDataRequest.removedLinks
+        updateGraphDataRequest.addNodes,
+        updateGraphDataRequest.removeNodes,
+        updateGraphDataRequest.addLinks,
+        updateGraphDataRequest.removeLinks
       );
       simulator.tick();
       break;
