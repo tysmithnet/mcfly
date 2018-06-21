@@ -21,6 +21,7 @@ const ctx: IMyWorker = self as any;
 
 let simulator: Simulator = null;
 
+
 ctx.onmessage = event => {
   const eventData = event.data;
   switch (eventData.type) {

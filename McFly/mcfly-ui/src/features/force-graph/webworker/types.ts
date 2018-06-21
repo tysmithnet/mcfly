@@ -26,8 +26,8 @@ export interface NewSimulationRequest {
 }
 
 export interface NewSimulationResponse {
-  addedNodes: Map<string, ForceGraphNode>;
-  addedLinks: Map<string, ForceGraphLink>;
+  addedNodes: Map<string,ForceGraphNode>;
+  addedLinks: Map<string,ForceGraphLink>;
 }
 
 export interface UpdateGraphDataRequest {

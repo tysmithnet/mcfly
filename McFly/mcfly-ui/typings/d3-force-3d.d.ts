@@ -121,7 +121,7 @@ export interface ForceLink<NodeDatum extends SimulationNodeDatum, LinkDatum exte
 }
 
 export function forceLink<NodeDatum extends SimulationNodeDatum, LinksDatum extends SimulationLinkDatum<NodeDatum>>(): ForceLink<NodeDatum, LinksDatum>;
-export function forceLink<NodeDatum extends SimulationNodeDatum, LinksDatum extends SimulationLinkDatum<NodeDatum>>(links: Array<LinksDatum>): ForceLink<NodeDatum, LinksDatum>;
+export function forceLink<NodeDatum extends SimulationNodeDatum, LinksDatum extends SimulationLinkDatum<NodeDatum>>(links: Array<LinksDatum> | object): ForceLink<NodeDatum, LinksDatum>;
 
 // Many Body ----------------------------------------------------------------
 

@@ -154,10 +154,6 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   private webWorker: Worker;
   private containerDiv: HTMLDivElement;
   private currentNodePositions: NodePositionsUpdated;
-  private currentLinks: Map<string, ForceGraphLink> = new Map<
-    string,
-    ForceGraphLink
-  >();
   private scene: Scene = new Scene();
   private camera: PerspectiveCamera;
   private renderer: WebGLRenderer;
@@ -180,6 +176,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
           const payload = event.data.payload as NewSimulationResponse;
           this.state.nodes = payload.addedNodes;
           this.state.links = payload.addedLinks;
+          break;
         }
         case EVENT_TYPE.NODE_POSITIONS_UPDATED: {
           console.log("[cr] NODE_POSITIONS_UPDATED");
@@ -360,19 +357,19 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   };
 
   private updateLinkPosition(
-    e: ForceGraphLink,
+    link: ForceGraphLink,
     sourceVector: Vector3,
     targetVector: Vector3
   ) {
-    const line = this.lines.get(e.id);
+    const line = this.lines.get(link.id);
     if (!line) {
-      console.error(`Could not find sphere link with id "${e.id}"`);
+      console.error(`Could not find sphere link with id "${link.id}"`);
       return;
     }
-    const geometry = this.lines.get(e.id).geometry as BufferGeometry;
+    const geometry = this.lines.get(link.id).geometry as BufferGeometry;
     const buffer = geometry.getAttribute("position") as Float32BufferAttribute;
-    const source = this.spheres.get(e.source);
-    const target = this.spheres.get(e.target);
+    const source = this.spheres.get(link.source);
+    const target = this.spheres.get(link.target);
     source.geometry.computeBoundingBox();
     target.geometry.computeBoundingBox();
     const sourcePosition = source.geometry.boundingBox.getCenter(sourceVector);
