@@ -47,6 +47,7 @@ import MyWorker from "./webworker";
 import {
   EVENT_TYPE,
   EventData,
+  NewSimulationResponse,
   NodePositionsUpdated,
   POSITIONS_ARRAY_INDICES,
   UpdateGraphDataResponse
@@ -64,8 +65,12 @@ export interface Props {
 
 export interface State {
   needsUpdate: boolean;
-  nodes: ForceGraphNode[];
-  links: ForceGraphLink[];
+  nodes: Map<string, ForceGraphNode>;
+  links: Map<string, ForceGraphLink>;
+  addedNodes: Map<string, ForceGraphNode>;
+  addedLinks: Map<string, ForceGraphLink>;
+  removedNodes: Set<string>;
+  removedLinks: Set<string>;
 }
 
 type NodePair = [ForceGraphNode, ForceGraphNode];
@@ -75,14 +80,76 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     nextProps: Props,
     prevState: State
   ): State {
+    const nodes = new Map<string, ForceGraphNode>(
+      nextProps.nodes.map(n => [n.id, n] as [string, ForceGraphNode])
+    );
+    const links = new Map<string, ForceGraphLink>(
+      nextProps.links.map(l => [l.id, l] as [string, ForceGraphLink])
+    );
+    return ForceGraph.calculateStateFromPropChanges(prevState, nodes, links);
+  }
+  private static calculateStateFromPropChanges(
+    prev: State,
+    nodes: Map<string, ForceGraphNode>,
+    links: Map<string, ForceGraphLink>
+  ): State {
+    const addedNodes = new Map<string, ForceGraphNode>();
+    const addedLinks = new Map<string, ForceGraphLink>();
+    const removedNodes: Set<string> = new Set<string>();
+    const removedLinks: Set<string> = new Set<string>();
+    const nextNodes = new Map<string, ForceGraphNode>();
+    const nextLinks = new Map<string, ForceGraphLink>();
+    nodes.forEach(e => {
+      // node not in prev.nodes -> added
+      if (!prev.nodes.has(e.id)) {
+        addedNodes.set(e.id, e);
+        nextNodes.set(e.id, e);
+        return;
+      }
+      // node in prev.nodes -> existing
+      nextNodes.set(e.id, e);
+    });
+    prev.nodes.forEach((e, i) => {
+      if (!nodes.has(e.id)) {
+        removedNodes.add(e.id);
+      }
+    });
+
+    links.forEach(e => {
+      // node not in prev.nodes -> added
+      if (!prev.links.has(e.id)) {
+        addedLinks.set(e.id, e);
+        nextLinks.set(e.id, e);
+        return;
+      }
+      // node in prev.nodes -> existing
+      nextLinks.set(e.id, e);
+    });
+    prev.links.forEach((e, i) => {
+      if (!links.has(e.id)) {
+        removedNodes.add(e.id);
+      }
+    });
+
     return {
-      links: nextProps.links,
+      addedLinks,
+      addedNodes,
+      links: nextLinks,
       needsUpdate: true,
-      nodes: nextProps.nodes
+      nodes: nextNodes,
+      removedLinks,
+      removedNodes
     };
   }
-  public state: State = { needsUpdate: false, nodes: [], links: [] };
-
+  public state: State = {
+    addedLinks: new Map<string, ForceGraphLink>(),
+    addedNodes: new Map<string, ForceGraphNode>(),
+    links: new Map<string, ForceGraphLink>(),
+    needsUpdate: true,
+    nodes: new Map<string, ForceGraphNode>(),
+    removedLinks: new Set<string>(),
+    removedNodes: new Set<string>()
+  };
   private spotlight: SpotLight;
   private webWorker: Worker;
   private containerDiv: HTMLDivElement;
@@ -91,34 +158,38 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     string,
     ForceGraphLink
   >();
-  private scene: Scene;
+  private scene: Scene = new Scene();
   private camera: PerspectiveCamera;
   private renderer: WebGLRenderer;
-  private spheres: Map<string, Mesh>;
-  private lines: Map<string, Line>;
-  private buffers: { [id: string]: BufferAttribute };
+  private spheres = new Map<string, Mesh>();
+  private lines = new Map<string, Line>();
   private trackballControls: TrackballControlsType;
   private dragControls: DragControls;
   private renderedNode: React.ReactNode = null;
   private debouncedUpdateControls: () => void;
+
   constructor(props: Props, state: State) {
     super(props, state);
-    this.state = {
-      links: this.props.links || [],
-      needsUpdate: false,
-      nodes: this.props.nodes || []
-    };
-    this.state.links.forEach((e, i) => {
-      this.currentLinks.set(e.id, e);
-    });
-    const ref = React.createRef();
-    this.buffers = {};
+    this.setupSceneBasicRigging();
     this.currentNodePositions = new Map<string, ArrayLike<number>>();
     this.webWorker = new (MyWorker as any)(); // todo: this shares the worker and means only 1 graph at a time -need to fix to create new https://github.com/webpack-contrib/worker-loader/issues/118
     this.webWorker.onmessage = (event: MessageEvent): void => {
-      switch (event.type) {
+      switch (event.data.type) {
+        case EVENT_TYPE.NEW_SIMULATION_RESPONSE: {
+          console.log("[cr] NEW_SIMULATION_RESPONSE");
+          const payload = event.data.payload as NewSimulationResponse;
+          this.state.nodes = payload.addedNodes;
+          this.state.links = payload.addedLinks;
+        }
+        case EVENT_TYPE.NODE_POSITIONS_UPDATED: {
+          console.log("[cr] NODE_POSITIONS_UPDATED");
+          this.currentNodePositions = event.data
+            .payload as NodePositionsUpdated;
+          break;
+        }
         case EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_RESPONSE: {
-          const payload = event.data as UpdateGraphDataResponse;
+          console.log("[cr] UPDATE_GRAPH_ELEMENTS_RESPONSE");
+          const payload = event.data.payload as UpdateGraphDataResponse;
           payload.removedNodes.forEach(this.removeSphere);
           payload.removedLinks.forEach(this.removeSphereLink);
           payload.addedNodes.forEach(this.addSphere);
@@ -127,6 +198,15 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
         }
       }
     };
+    console.log("[cs] NEW_SIMULATION_REQUEST")
+    this.webWorker.postMessage({
+      payload: {
+        links: this.props.links,
+        nodes: this.props.nodes
+      },
+      type: EVENT_TYPE.NEW_SIMULATION_REQUEST
+    });
+    this.webWorker.postMessage({ type: EVENT_TYPE.TICK_REQUEST });
   }
 
   public componentWillUnmount(): void {
@@ -135,39 +215,7 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   }
 
   public componentDidMount(): void {
-    this.scene = new Scene();
-    this.camera = new PerspectiveCamera(
-      70,
-      this.props.width / this.props.height,
-      1,
-      10000
-    );
-    this.camera.position.set(0, 250, 1000);
-    this.renderer = new WebGLRenderer({
-      antialias: true
-    });
-
-    this.setupTrackballControls();
-    this.setupRenderer();
-    this.setupLight();
-    this.setupHelperPlane();
-    const objects: Mesh[] = [];
-    this.dragControls = new DragControls(
-      objects,
-      this.camera,
-      this.renderer.domElement
-    );
-    this.dragControls.addEventListener(
-      "dragstart",
-      e => (this.trackballControls.enabled = false)
-    );
-    this.dragControls.addEventListener(
-      "dragend",
-      e => (this.trackballControls.enabled = true)
-    );
-
-    (window as any).scene = this.scene;
-    (window as any).THREE = require("three");
+    this.containerDiv.appendChild(this.renderer.domElement);
     this.renderFrame();
     this.animate();
   }
@@ -190,46 +238,12 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
   }
 
   private updateGraphData() {
-    const addedNodes: ForceGraphNode[] = [];
-    const addedLinks: ForceGraphLink[] = [];
-    const removedNodes: Set<string> = new Set<string>();
-    const removedLinks: Set<string> = new Set<string>();
-    const processed: Set<string> = new Set<string>();
-    this.currentNodePositions.forEach((e, i) => {
-      processed.add(i);
-      if (this.currentNodePositions.has(i)) {
-        return;
-      }
-      addedNodes.push();
-    });
-    this.currentNodePositions.forEach((e, i) => {
-      if (!processed.has(i)) {
-        removedNodes.add(i);
-      }
-    });
-    processed.clear();
-    this.state.links.forEach((e, i) => {
-      processed.add(e.id);
-      if (this.currentLinks.has(e.id)) {
-        return;
-      }
-      addedLinks.push(e);
-    });
-    this.currentLinks.forEach((e, i) => {
-      if (!processed.has(i)) {
-        removedLinks.add(i);
-      }
-    });
-    const payload = {
-      addedLinks,
-      addedNodes,
-      removedLinks,
-      removedNodes
-    };
-    this.webWorker.postMessage({
-      payload,
-      type: EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_RESPONSE
-    });
+    // verify needs update
+    // create request for simulation
+    this.state.removedNodes.forEach(this.removeSphere);
+    this.state.removedLinks.forEach(this.removeSphereLink);
+    this.state.addedNodes.forEach(e => this.addSphere(e.id));
+    this.state.addedLinks.forEach(e => this.addSphereLink(e.id));
   }
 
   private removeSphere(id: string): void {
@@ -292,7 +306,6 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(this.props.width, this.props.height);
     this.renderer.shadowMap.enabled = true;
-    this.containerDiv.appendChild(this.renderer.domElement);
   }
 
   private setupTrackballControls() {
@@ -316,7 +329,6 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     const lineGeometry = new BufferGeometry();
     const floatArray = new Float32Array(2 * 3);
     const buffer = new Float32BufferAttribute(floatArray, 3);
-    this.buffers[id] = buffer;
     lineGeometry.addAttribute("position", buffer);
     const line = new Line(lineGeometry, lineMaterial);
     this.lines.set(id, line);
@@ -328,7 +340,8 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
     if (!this.currentNodePositions || !this.currentNodePositions.size) {
       return;
     }
-
+    console.log("[cs] TICK_REQUEST")
+    this.webWorker.postMessage({ type: EVENT_TYPE.TICK_REQUEST });
     this.currentNodePositions.forEach((id, buffer) => {
       this.updateSpherePosition(id, buffer);
     });
@@ -400,5 +413,36 @@ export default class ForceGraph extends React.PureComponent<Props, State> {
       }
     }
     (position as BufferAttribute).needsUpdate = true;
+  }
+
+  private setupSceneBasicRigging() {
+    this.camera = new PerspectiveCamera(
+      70,
+      this.props.width / this.props.height,
+      1,
+      10000
+    );
+    this.camera.position.set(0, 250, 1000);
+    this.renderer = new WebGLRenderer({
+      antialias: true
+    });
+    this.setupTrackballControls();
+    this.setupRenderer();
+    this.setupLight();
+    this.setupHelperPlane();
+    const objects: Mesh[] = [];
+    this.dragControls = new DragControls(
+      objects,
+      this.camera,
+      this.renderer.domElement
+    );
+    this.dragControls.addEventListener(
+      "dragstart",
+      e => (this.trackballControls.enabled = false)
+    );
+    this.dragControls.addEventListener(
+      "dragend",
+      e => (this.trackballControls.enabled = true)
+    );
   }
 }

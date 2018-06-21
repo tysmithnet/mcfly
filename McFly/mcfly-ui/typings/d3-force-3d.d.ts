@@ -60,7 +60,7 @@ export interface Simulation<NodeDatum extends SimulationNodeDatum, LinkDatum ext
     on(typenames: 'tick' | 'end' | string, listener: (this: this) => void): Simulation<NodeDatum, LinkDatum>;
 }
 
-export function forceSimulation<NodeDatum extends SimulationNodeDatum>(nodesData?: Array<NodeDatum>, numDimensions?:number): Simulation<NodeDatum, undefined>;
+export function forceSimulation<NodeDatum extends SimulationNodeDatum>(nodesData?: Array<NodeDatum> | object, numDimensions?:number): Simulation<NodeDatum, undefined>;
 export function forceSimulation<NodeDatum extends SimulationNodeDatum, LinkDatum extends SimulationLinkDatum<NodeDatum>>(nodesData?: Array<NodeDatum>): Simulation<NodeDatum, LinkDatum>;
 
 // ----------------------------------------------------------------------

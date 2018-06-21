@@ -25,7 +25,7 @@ ctx.onmessage = event => {
   const eventData = event.data;
   switch (eventData.type) {
     case EVENT_TYPE.NEW_SIMULATION_REQUEST:
-      console.log("New simulation requested");
+      console.log("[wr] NEW_SIMULATION_REQUEST");
       const newSimulationRequest = eventData.payload as NewSimulationRequest;
       simulator = new Simulator(
         newSimulationRequest.nodes,
@@ -34,11 +34,11 @@ ctx.onmessage = event => {
       );
       break;
     case EVENT_TYPE.TICK_REQUEST:
-      console.log("Tick requested");
+      console.log("[wr] TICK_REQUEST");
       simulator.tick();
       break;
     case EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_REQUEST:
-      console.log("Update Graph Data");
+      console.log("[wr] UPDATE_GRAPH_ELEMENTS_REQUEST");
       const updateGraphDataRequest = eventData.payload as UpdateGraphDataRequest;
       simulator.updateGraph(
         updateGraphDataRequest.addNodes,

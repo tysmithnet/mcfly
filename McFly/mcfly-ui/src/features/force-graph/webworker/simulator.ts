@@ -1,3 +1,4 @@
+import { map, Map as D3Map } from "d3-collection";
 import {
   forceCenter,
   forceLink,
@@ -25,8 +26,8 @@ export class Simulator {
     SimulationLinkDatum<SimulationNodeDatum>
   >;
   private worker: IMyWorker;
-  private nodes: NodeMap = new Map<string, ForceGraphNode>();
-  private links: LinkMap = new Map<string, ForceGraphLink>();
+  private nodes: D3Map<ForceGraphNode>;
+  private links: D3Map<ForceGraphLink>;
   private nodeToLinkMapping = new Map<string, Set<string>>();
 
   constructor(
@@ -34,20 +35,24 @@ export class Simulator {
     links: ForceGraphLink[],
     worker: IMyWorker
   ) {
+    const addedNodes = new Map<string, ForceGraphNode>();
+    const addedLinks = new Map<string, ForceGraphLink>();
     this.nodes = reduceRight(
       nodes,
       (agg, itr) => {
         // 1. Set the node in the aggregate collection
         agg.set(itr.id, itr);
+        addedNodes.set(itr.id, itr);
         return agg;
       },
-      new Map<string, ForceGraphNode>()
+      map<ForceGraphNode>()
     );
     this.links = reduceRight(
       links,
       (agg, itr) => {
         // 1. Set the link in the aggregate collection
         agg.set(itr.id, itr);
+        addedLinks.set(itr.id, itr);
 
         // 2. Add the link to both of the endpoints' link collection
         // this will be used for fast lookup when modifying the graph
@@ -59,33 +64,31 @@ export class Simulator {
         cur.add(itr.target);
         return agg;
       },
-      new Map<string, ForceGraphLink>()
+      map<ForceGraphLink>()
     );
 
     this.worker = worker;
-    this.simulation = forceSimulation(nodes, 3)
+    this.simulation = forceSimulation(this.nodes, 3)
       .force("charge", forceManyBody())
       .force("link", forceLink(links))
       .force("center", forceCenter());
     this.simulation.stop();
+    console.log("[ws] NEW_SIMULATION_RESPONSE");
     this.worker.postMessage({
       payload: {
-        addedLinks: new Set<string>(this.links.keys()),
-        addedNodes: new Set<string>(this.nodes.keys()),
-        removedLinks: new Set<string>(),
-        removedNodes: new Set<string>()
+        addedLinks,
+        addedNodes
       },
-      type: EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_RESPONSE
+      type: EVENT_TYPE.NEW_SIMULATION_RESPONSE
     });
   }
 
   public tick(): void {
     this.simulation.tick();
     const data: NodePositionsUpdated = new Map<string, ArrayLike<number>>();
-    this.simulation
-      .nodes()
-      .forEach(e => data.set(e.id, [e.x, e.y, e.z, e.vx, e.vy, e.vz]));
+    this.nodes.each((e, i) => data.set(i, [e.x, e.y, e.z, e.vx, e.vy, e.vz]));
     const message = { type: EVENT_TYPE.NODE_POSITIONS_UPDATED, payload: data };
+    console.log("[ws] NODE_POSITIONS_UPDATED");
     this.worker.postMessage(message);
   }
 
@@ -159,6 +162,7 @@ export class Simulator {
       removedLinks,
       removedNodes
     };
+    console.log("[ws] UPDATE_GRAPH_ELEMENTS_RESPONSE");
     this.worker.postMessage({
       payload,
       type: EVENT_TYPE.UPDATE_GRAPH_ELEMENTS_RESPONSE
@@ -199,7 +203,7 @@ export class Simulator {
     }
     const links = this.nodeToLinkMapping.get(id);
     links.forEach(e => this.removeLink(e));
-    this.nodes.delete(id);
+    this.nodes.remove(id);
     return true;
   }
 
@@ -219,7 +223,7 @@ export class Simulator {
       set.delete(link.id);
     }
 
-    this.links.delete(id);
+    this.links.remove(id);
     return true;
   }
 }

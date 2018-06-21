@@ -11,6 +11,7 @@ import { ForceGraphLink, ForceGraphNode } from "../domain";
 
 export type WorkerMessage =
   | NewSimulationRequest
+  | NewSimulationResponse
   | NodePositionsUpdated
   | UpdateGraphDataRequest
   | UpdateGraphDataResponse;
@@ -22,6 +23,11 @@ export interface EventData {
 export interface NewSimulationRequest {
   nodes: ForceGraphNode[];
   links: ForceGraphLink[];
+}
+
+export interface NewSimulationResponse {
+  addedNodes: Map<string, ForceGraphNode>;
+  addedLinks: Map<string, ForceGraphLink>;
 }
 
 export interface UpdateGraphDataRequest {
@@ -45,6 +51,7 @@ export enum EVENT_TYPE {
   UPDATE_GRAPH_ELEMENTS_REQUEST = "UPDATE_GRAPH_DATA_REQUEST",
   UPDATE_GRAPH_ELEMENTS_RESPONSE = "UPDATE_GRAPH_DATA_RESPONSE",
   NEW_SIMULATION_REQUEST = "NEW_SIMULATION_REQUEST",
+  NEW_SIMULATION_RESPONSE = "NEW_SIMULATION_RESPONSE",
   // todo: other request/response pairs
   NODE_POSITIONS_UPDATED = "NODE_POSITIONS_UPDATED"
 }
