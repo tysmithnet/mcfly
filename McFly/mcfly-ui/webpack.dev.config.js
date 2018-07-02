@@ -1,4 +1,5 @@
 const path = require("path");
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = {
     mode: "development",
@@ -10,6 +11,9 @@ module.exports = {
         globalObject: "this"
     },
 
+    plugins: [
+        new HardSourceWebpackPlugin()
+    ],
 
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
