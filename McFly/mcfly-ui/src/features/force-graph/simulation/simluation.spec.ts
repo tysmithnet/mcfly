@@ -34,3 +34,13 @@ it("should reject numDimensions not in (1,2,3)", () => {
     expect(throws2).toThrow();
     expect(throws3).toThrow();
 });
+
+it("pass a basic 1D test with 2 nodes", () => {
+    const masses = Float32Array.from([1,1]);
+    const positions = Float32Array.from([1,5]);
+    const links = new Float32Array(0);
+    const simulation = new SimulationEngine(masses, positions, links, 1);
+    simulation.tick();
+    const result = simulation.getPositions();
+    expect(result).toEqual(Float32Array.from([1.0625, 4.9375]));
+});
