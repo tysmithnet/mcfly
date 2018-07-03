@@ -55,6 +55,16 @@ describe("1D", () => {
         const simulation = new SimulationEngine(masses, positions, links, 1);
         simulation.tick();
         const result = simulation.getPositions();
-        expect(result).toEqual(Float32Array.from([1.0625, 4.9375]));
+        expect(result).toEqual(Float32Array.from( [0.9375, 5.0625]));
+    });
+
+    it("should calculate forces for 3 nodes", () => {
+        const masses = Float32Array.from([1,1,1]);
+        const positions = Float32Array.from([1,5,6]);
+        const links = new Float32Array(0);
+        const simulation = new SimulationEngine(masses, positions, links, 1);
+        simulation.tick();
+        const result = simulation.getPositions();
+        expect(result).toEqual(Float32Array.from([0.898481547832489, 4.013829708099365, 7.08768892288208]));
     });
 });

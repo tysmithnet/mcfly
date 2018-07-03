@@ -98,8 +98,8 @@ export class SimulationEngine implements Simulation
                     }
                     const dx = x1 - x2;
                     const forceMagnitude = (m1 * m2 * 1.0) / (dx ** 2);
-                    this.positions[first] += forceMagnitude;
-                    this.positions[second] -= forceMagnitude;
+                    this.positions[first] -= forceMagnitude;
+                    this.positions[second] += forceMagnitude;
                 }
         }
     }
