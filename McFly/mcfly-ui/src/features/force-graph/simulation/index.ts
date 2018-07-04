@@ -24,7 +24,7 @@ export class SimulationEngine implements Simulation
     private links : Float32Array;
     private n : number;
     private numDimensions : number;
-
+    private nodeLinkMap : Map<number, Set<number>> = new Map<number,Set<number>>();
     constructor(masses : Float32Array, positions : Float32Array, links : Float32Array, numDimensions : number) {
         if (masses == null || positions == null || links == null || numDimensions == null) {
             throw new Error("All parameters are required")
@@ -40,6 +40,26 @@ export class SimulationEngine implements Simulation
         this.links = links;
         this.n = masses.length;
         this.numDimensions = numDimensions;
+
+        for(let i = 0; i < links.length; i += 3) {
+            const source = links[i];
+            const target = links[i + 1];
+            const sourceArr = this.nodeLinkMap.get(source);
+            const targetArr = this.nodeLinkMap.get(target);
+            if(sourceArr) {
+                sourceArr.add(i);
+            }
+            else
+            {
+                this.nodeLinkMap.set(source, new Set<number>([i]));
+            }
+            if(targetArr){
+                targetArr.add(i);
+            }
+            else {
+                this.nodeLinkMap.set(target, new Set<number>([i]));
+            }
+        }
     }
 
     public tick() : void {
@@ -99,7 +119,17 @@ export class SimulationEngine implements Simulation
                         return;
                     }
                     const dx = x1 - x2;
-                    const forceMagnitude = (m1 * m2 * 1.0) / (dx ** 2);
+                    let forceMagnitude = (m1 * m2 * 1.0) / (dx ** 2);
+                    const sourceLinks = this.nodeLinkMap.get(first);
+                    const targetLinks = this.nodeLinkMap.get(second);
+                    if(sourceLinks && targetLinks) {
+                        const commonLinks = new Set([...sourceLinks].filter(x => targetLinks.has(x)));
+                        for(const linkIndex of commonLinks) {
+                            const linkForce = this.links[linkIndex + 2];
+                            forceMagnitude *= linkForce; // todo: do we think we will have additional strategies for link calculation
+                        }
+                    }
+
                     buffer[first] -= forceMagnitude;
                     buffer[second] += forceMagnitude;
                 }
