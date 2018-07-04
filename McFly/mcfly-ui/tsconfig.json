@@ -2,7 +2,6 @@
     "compilerOptions": {
         "outDir": "./dist/",
         "sourceMap": true,
-        "inlineSourceMap": true,
         "declaration": true,
         "noImplicitAny": true,
         "module": "commonjs",

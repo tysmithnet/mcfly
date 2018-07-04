@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-apt-get update && install -y apache2 curl git
+apt-get update && install -y apache2 curl git build-essential
 
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 apt-get install -y nodejs

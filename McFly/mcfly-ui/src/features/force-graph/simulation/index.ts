@@ -43,18 +43,20 @@ export class SimulationEngine implements Simulation
     }
 
     public tick() : void {
+        const buffer = new Float32Array(this.positions);
         for(let i = 0; i < this.n; i++) {
             for(let j = i + 1; j < this.n; j++) {
-                this.applyForces(i, j);
+                this.applyForces(i, j, buffer);
             }
         }
+        this.positions = buffer;
     }
 
     public getPositions() : Float32Array {
         return Float32Array.from(this.positions);
     }
 
-    private applyForces(first : number, second : number): void {
+    private applyForces(first : number, second : number, buffer:Float32Array): void {
         const m1 = this.masses[first];
         const m2 = this.masses[second];
         switch (this.numDimensions) {
@@ -98,8 +100,8 @@ export class SimulationEngine implements Simulation
                     }
                     const dx = x1 - x2;
                     const forceMagnitude = (m1 * m2 * 1.0) / (dx ** 2);
-                    this.positions[first] -= forceMagnitude;
-                    this.positions[second] += forceMagnitude;
+                    buffer[first] -= forceMagnitude;
+                    buffer[second] += forceMagnitude;
                 }
         }
     }
