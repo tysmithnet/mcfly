@@ -32,7 +32,7 @@ export class SimulationEngine implements Simulation
         if (numDimensions !== 1 && numDimensions !== 2 && numDimensions !== 3) {
             throw new Error("numDimensions must be 1,2, or 3");
         }
-        if (masses.length !== positions.length * numDimensions) {
+        if (masses.length !== positions.length / numDimensions) {
             throw new Error("The number of elements in positions should be numDimensions * masses.length");
         }
         this.masses = masses;
@@ -94,6 +94,7 @@ export class SimulationEngine implements Simulation
                     const forceMagnitude = (m1 * m2) / (dx ** 2 + dy ** 2 + dz ** 2);
                     // todo: finish
                 }
+                break;
             case 2:
                 {
                     const x1 = this.positions[first * 2];
@@ -106,11 +107,25 @@ export class SimulationEngine implements Simulation
                     const alphaXY = Math.atan(dy /dx);
                     const i = forceMagnitude * Math.cos(alphaXY);
                     const j = forceMagnitude * Math.sin(alphaXY);
-                    this.positions[first * 2] += i;
-                    this.positions[(first * 2) + 1] += j;
-                    this.positions[second * 2] -= i;
-                    this.positions[(second * 2) + 1] -= j;
+                    if(x1 < x2) {
+                        buffer[first * 2] -= i;
+                        buffer[second * 2] += i;
+                    }
+                    else {
+                        buffer[first * 2] += i;
+                        buffer[second * 2] -= i;
+                    }
+
+                    if(y1 < y2) {
+                        buffer[(first * 2) + 1] -= j;    
+                        buffer[(second * 2) + 1] += j;
+                    }
+                    else {
+                        buffer[(first * 2) + 1] += j;    
+                        buffer[(second * 2) + 1] -= j;
+                    }
                 }
+                break;
             case 1:
                 {
                     const x1 = this.positions[first];
