@@ -274,73 +274,129 @@ describe("2D", () => {
     describe("links", () => {
         it("should force 2 nodes together", () => {
             const masses = new Float32Array([1, 1]);
-                const positions = new Float32Array([1, 5, 5, 1]);
-                const links = new Float32Array([0,1,.5]);
-                const simulation = new SimulationEngine(masses, positions, links, 2);
-                simulation.tick();
-                const result = simulation.getPositions();
-                const a = Math.atan(1);
-                const i = 1.0 / 32 * Math.abs(Math.cos(a)) || 0;
-                const j = 1.0 / 32 * Math.abs(Math.sin(a)) || 0;
-                expect(result).toEqual(new Float32Array([
-                    1 - i * .5,
-                    5 + j * .5,
-                    5 + i * .5,
-                    1 - j * .5
-                ]));
+            const positions = new Float32Array([1, 5, 5, 1]);
+            const links = new Float32Array([0, 1, .5]);
+            const simulation = new SimulationEngine(masses, positions, links, 2);
+            simulation.tick();
+            const result = simulation.getPositions();
+            const a = Math.atan(1);
+            const i = 1.0 / 32 * Math.abs(Math.cos(a)) || 0;
+            const j = 1.0 / 32 * Math.abs(Math.sin(a)) || 0;
+            expect(result).toEqual(new Float32Array([
+                1 - i * .5,
+                5 + j * .5,
+                5 + i * .5,
+                1 - j * .5
+            ]));
         });
 
         it("should work together if there are multiple", () => {
             const masses = new Float32Array([1, 1, 1]);
-                const positions = new Float32Array([1, 5, 5, 1, 2, 2]);
-                const links = new Float32Array([0,1,.5,0,2,.3]);
-                const simulation = new SimulationEngine(masses, positions, links, 2);
-                simulation.tick();
-                const result = simulation.getPositions();
-                const ax = 1;
-                const ay = 5;
-                
-                const bx = 5;
-                const by = 1;
-                const cx = 2;
-                const cy = 2;
-                const dxab = ax - bx;
-                const dxac = ax - cx;
-                const dyab = ay - by;
-                const dyac = ay - cy;
-                const dxbc = bx - cx;
-                const dybc = by - cy;
-                const alphaab = Math.atan(dyab * 1.0 / dxab);
-                const alphaac = Math.atan(dyac * 1.0 / dxac);
-                const alphabc  = Math.atan(dybc * 1.0 / dxbc);
-                const ab2 = dxab ** 2 + dyab ** 2;
-                const ac2 = dxac ** 2 + dyac ** 2;
-                const bc2 = dxbc ** 2 + dybc ** 2;
-                const fab = 1.0 / ab2 * .5;
-                const fac = 1.0 / ac2 * .3;
-                const fbc = 1.0 / bc2;
-                const fabi = fab * Math.abs(Math.cos(alphaab));
-                const fabj = fab * Math.abs(Math.sin(alphaab));
-                const faci = fac * Math.abs(Math.cos(alphaac));
-                const facj = fac * Math.abs(Math.sin(alphaac));
-                const fbci = fbc * Math.abs(Math.cos(alphabc));
-                const fbcj = fbc * Math.abs(Math.sin(alphabc));
-                const expected = new Float32Array([
-                    (ax - fabi - faci),    
-                    (ay + fabj + facj),    
-                    (bx + fabi + fbci),    
-                    (by - fabj - fbcj),    
-                    (cx + faci - fbci),    
-                    (cy - facj + fbcj),    
-                ]);              
+            const positions = new Float32Array([
+                1,
+                5,
+                5,
+                1,
+                2,
+                2
+            ]);
+            const links = new Float32Array([
+                0,
+                1,
+                .5,
+                0,
+                2,
+                .3
+            ]);
+            const simulation = new SimulationEngine(masses, positions, links, 2);
+            simulation.tick();
+            const result = simulation.getPositions();
+            const ax = 1;
+            const ay = 5;
 
-                expect(result.length).toBe(expected.length);
-                for(let i = 0; i < expected.length; i++) {
-                    expect(result[i]).toBeCloseTo(expected[i], 5);
-                }
+            const bx = 5;
+            const by = 1;
+            const cx = 2;
+            const cy = 2;
+            const dxab = ax - bx;
+            const dxac = ax - cx;
+            const dyab = ay - by;
+            const dyac = ay - cy;
+            const dxbc = bx - cx;
+            const dybc = by - cy;
+            const alphaab = Math.atan(dyab * 1.0 / dxab);
+            const alphaac = Math.atan(dyac * 1.0 / dxac);
+            const alphabc = Math.atan(dybc * 1.0 / dxbc);
+            const ab2 = dxab ** 2 + dyab ** 2;
+            const ac2 = dxac ** 2 + dyac ** 2;
+            const bc2 = dxbc ** 2 + dybc ** 2;
+            const fab = 1.0 / ab2 * .5;
+            const fac = 1.0 / ac2 * .3;
+            const fbc = 1.0 / bc2;
+            const fabi = fab * Math.abs(Math.cos(alphaab));
+            const fabj = fab * Math.abs(Math.sin(alphaab));
+            const faci = fac * Math.abs(Math.cos(alphaac));
+            const facj = fac * Math.abs(Math.sin(alphaac));
+            const fbci = fbc * Math.abs(Math.cos(alphabc));
+            const fbcj = fbc * Math.abs(Math.sin(alphabc));
+            const expected = new Float32Array([
+                (ax - fabi - faci),
+                (ay + fabj + facj),
+                (bx + fabi + fbci),
+                (by - fabj - fbcj),
+                (cx + faci - fbci),
+                (cy - facj + fbcj)
+            ]);
+
+            expect(result.length).toBe(expected.length);
+            for (let i = 0; i < expected.length; i++) {
+                expect(result[i]).toBeCloseTo(expected[i], 5);
+            }
         });
     });
 });
 
-// 2d note: alphaXY = Math.atan(dy/dx); i = forceMag * Math.cos(alphaXY) j =
-// forceMag * Math.sin(alphaXY)
+describe("3D", () => {
+    describe("nodes only", () => {
+        it("should force 2 nodes together", () => {
+            {
+                debugger;
+                const masses = new Float32Array([1, 1]);
+                const positions = new Float32Array([
+                    1,
+                    1,
+                    1,
+                    5,
+                    5,
+                    5
+                ]);
+                const links = new Float32Array(0);
+                const simulation = new SimulationEngine(masses, positions, links, 3);
+                simulation.tick();
+                const results = simulation.getPositions();
+                const x1 = positions[0];
+                const y1 = positions[1];
+                const z1 = positions[2];
+                const x2 = positions[3];
+                const y2 = positions[4];
+                const z2 = positions[5];
+                const dx = x1 - x2;
+                const dy = y1 - y2;
+                const dz = z1 - z2;
+                const fi = Math.abs(Math.atan2(Math.sqrt(dy ** 2 + dz ** 2), dx));
+                const fj = Math.abs(Math.atan2(Math.sqrt(dx ** 2 + dz ** 2), dy));
+                const fh = Math.abs(Math.atan2(Math.sqrt(dx ** 2 + dy ** 2), dz));
+
+                const expected = new Float32Array([
+                    (x1 - fi),
+                    (y1 - fj),
+                    (z1 - fh),
+                    (x2 + fi),
+                    (y2 + fj),
+                    (z2 + fh)
+                ]);
+                expect(results).toEqual(expected);
+            }
+        });
+    });
+});

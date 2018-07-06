@@ -12,7 +12,7 @@
     "build": "webpack --config webpack.dev.config.js",
     "dev": "webpack-dev-server --config webpack.dev.config.js --hot --inline --host 0.0.0.0",
     "test": "jest",
-    "testd": "node --inspect-brk=0.0.0.0:9229 ./node_modules/jest/bin/jest.js --verbose",
+    "testd": "node --inspect=0.0.0.0:9229 ./node_modules/jest/bin/jest.js --verbose",
     "storybook": "start-storybook -p 8080",
     "pretty": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "build-storybook": "build-storybook",

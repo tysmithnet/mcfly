@@ -88,19 +88,61 @@ export class SimulationEngine implements Simulation
         const m2 = this.masses[second];
         switch (this.numDimensions) {
             case 3:
-                {
-                    const x1 = this.positions[first * 3];
-                    const y1 = this.positions[(first * 3) + 1];
-                    const z1 = this.positions[(first * 3) + 2];
-                    const x2 = this.positions[second * 3];
-                    const y2 = this.positions[(second * 3) + 1];
-                    const z2 = this.positions[(second * 3) + 2];
-                    const dx = x1 - x2;
-                    const dy = y1 - y2;
-                    const dz = z1 - z2;
-                    const forceMagnitude = (m1 * m2) / (dx ** 2 + dy ** 2 + dz ** 2);
-                    // todo: finish
+            {
+                const x1 = this.positions[first * 3];
+                const y1 = this.positions[(first * 3) + 1];
+                const z1 = this.positions[(first * 3) + 2];
+                const x2 = this.positions[second * 3];
+                const y2 = this.positions[(second * 3) + 1];
+                const z2 = this.positions[(second * 3) + 2];
+                const dx = x1 - x2;
+                const dy = y1 - y2;
+                const dz = z1 - z2;
+                const sourceLinks = this
+                    .nodeLinkMap
+                    .get(first);
+                const targetLinks = this
+                    .nodeLinkMap
+                    .get(second);
+                
+                let fi = Math.abs(Math.atan2(Math.sqrt(dy ** 2 + dz ** 2), dx)) || 0;
+                let fj = Math.abs(Math.atan2(Math.sqrt(dx ** 2 + dz ** 2), dy)) || 0;
+                let fh = Math.abs(Math.atan2(Math.sqrt(dx ** 2 + dy ** 2), dz)) || 0;
+                
+                if (sourceLinks && targetLinks) {
+                    const commonLinks = new Set([...sourceLinks].filter(x => targetLinks.has(x)));
+                    for (const linkIndex of commonLinks) {
+                        const linkForce = this.links[linkIndex + 2];
+                        fi *= linkForce; // todo: do we think we will have additional strategies for link calculation
+                        fj *= linkForce;
+                        fh *= linkForce;
+                    }
                 }
+
+                if (x1 < x2) {
+                    buffer[first * 3] -= fi;
+                    buffer[second * 3] += fi;
+                } else {
+                    buffer[first * 3] += fi;
+                    buffer[second * 3] -= fi;
+                }
+
+                if (y1 < y2) {
+                    buffer[(first * 3) + 1] -= fj;
+                    buffer[(second * 3) + 1] += fj;
+                } else {
+                    buffer[(first * 3) + 1] += fj;
+                    buffer[(second * 3) + 1] -= fj;
+                }
+
+                if (z1 < z2) {
+                    buffer[(first * 3) + 2] -= fh;
+                    buffer[(second * 3) + 2] += fh;
+                } else {
+                    buffer[(first * 3) + 2] += fh;
+                    buffer[(second * 3) + 2] -= fh;
+                }
+            }
                 break;
             case 2:
                 {
