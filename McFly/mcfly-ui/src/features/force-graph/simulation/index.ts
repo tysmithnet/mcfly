@@ -143,7 +143,7 @@ export class SimulationEngine implements Simulation
                     buffer[(second * 3) + 2] -= fh;
                 }
             }
-                break;
+            break;
             case 2:
                 {
                     const x1 = this.positions[first * 2];

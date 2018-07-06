@@ -358,9 +358,8 @@ describe("2D", () => {
 
 describe("3D", () => {
     describe("nodes only", () => {
-        it("should force 2 nodes together", () => {
+        it("should force 2 nodes apart", () => {
             {
-                debugger;
                 const masses = new Float32Array([1, 1]);
                 const positions = new Float32Array([
                     1,
@@ -388,12 +387,91 @@ describe("3D", () => {
                 const fh = Math.abs(Math.atan2(Math.sqrt(dx ** 2 + dy ** 2), dz));
 
                 const expected = new Float32Array([
-                    (x1 - fi),
-                    (y1 - fj),
-                    (z1 - fh),
-                    (x2 + fi),
-                    (y2 + fj),
-                    (z2 + fh)
+                    (x1 + (fi * Math.sign(dx))),
+                    (y1 + (fj * Math.sign(dy))),
+                    (z1 + (fh * Math.sign(dz))),
+                    (x2 + (fi * -Math.sign(dx))),
+                    (y2 + (fj * -Math.sign(dy))),
+                    (z2 + (fh * -Math.sign(dz)))
+                ]);
+                expect(results).toEqual(expected);
+            }
+            {
+                const masses = new Float32Array([1, 1]);
+                const positions = new Float32Array([
+                    1,
+                    3,
+                    2,
+                    7,
+                    8,
+                    1
+                ]);
+                const links = new Float32Array(0);
+                const simulation = new SimulationEngine(masses, positions, links, 3);
+                simulation.tick();
+                const results = simulation.getPositions();
+                const x1 = positions[0];
+                const y1 = positions[1];
+                const z1 = positions[2];
+                const x2 = positions[3];
+                const y2 = positions[4];
+                const z2 = positions[5];
+                const dx = x1 - x2;
+                const dy = y1 - y2;
+                const dz = z1 - z2;
+                const fi = Math.abs(Math.atan2(Math.sqrt(dy ** 2 + dz ** 2), dx));
+                const fj = Math.abs(Math.atan2(Math.sqrt(dx ** 2 + dz ** 2), dy));
+                const fh = Math.abs(Math.atan2(Math.sqrt(dx ** 2 + dy ** 2), dz));
+
+                const expected = new Float32Array([
+                    (x1 + (fi * Math.sign(dx))),
+                    (y1 + (fj * Math.sign(dy))),
+                    (z1 + (fh * Math.sign(dz))),
+                    (x2 + (fi * -Math.sign(dx))),
+                    (y2 + (fj * -Math.sign(dy))),
+                    (z2 + (fh * -Math.sign(dz)))
+                ]);
+                expect(results).toEqual(expected);
+            }
+        });
+    });
+
+    describe("links", () => {
+        it("should force 2 nodes together", () => {
+            {
+                const masses = new Float32Array([1, 1]);
+                const positions = new Float32Array([
+                    1,
+                    1,
+                    1,
+                    5,
+                    5,
+                    5
+                ]);
+                const links = new Float32Array([0,1,.5]);
+                const simulation = new SimulationEngine(masses, positions, links, 3);
+                simulation.tick();
+                const results = simulation.getPositions();
+                const x1 = positions[0];
+                const y1 = positions[1];
+                const z1 = positions[2];
+                const x2 = positions[3];
+                const y2 = positions[4];
+                const z2 = positions[5];
+                const dx = x1 - x2;
+                const dy = y1 - y2;
+                const dz = z1 - z2;
+                const fi = Math.abs(Math.atan2(Math.sqrt(dy ** 2 + dz ** 2), dx));
+                const fj = Math.abs(Math.atan2(Math.sqrt(dx ** 2 + dz ** 2), dy));
+                const fh = Math.abs(Math.atan2(Math.sqrt(dx ** 2 + dy ** 2), dz));
+
+                const expected = new Float32Array([
+                    (x1 + (fi * .5 * Math.sign(dx))),
+                    (y1 + (fj * .5 * Math.sign(dy))),
+                    (z1 + (fh * .5 * Math.sign(dz))),
+                    (x2 + (fi * .5 * -Math.sign(dx))),
+                    (y2 + (fj * .5 * -Math.sign(dy))),
+                    (z2 + (fh * .5 * -Math.sign(dz)))
                 ]);
                 expect(results).toEqual(expected);
             }
