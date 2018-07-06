@@ -110,10 +110,24 @@ export class SimulationEngine implements Simulation
                     const y2 = this.positions[(second * 2) + 1];
                     const dx = x1 - x2;
                     const dy = y1 - y2;
-                    const forceMagnitude = (m1 * m2) / (dx ** 2 + dy ** 2);
+                    let forceMagnitude = (m1 * m2) / (dx ** 2 + dy ** 2);
+                    const sourceLinks = this
+                        .nodeLinkMap
+                        .get(first);
+                    const targetLinks = this
+                        .nodeLinkMap
+                        .get(second);
+                    if (sourceLinks && targetLinks) {
+                        const commonLinks = new Set([...sourceLinks].filter(x => targetLinks.has(x)));
+                        for (const linkIndex of commonLinks) {
+                            const linkForce = this.links[linkIndex + 2];
+                            forceMagnitude *= linkForce; // todo: do we think we will have additional strategies for link calculation
+                        }
+                    }
                     const alphaXY = Math.atan(dy / dx);
                     const i = forceMagnitude * Math.abs(Math.cos(alphaXY)) || 0;
                     const j = forceMagnitude * Math.abs(Math.sin(alphaXY)) || 0;
+
                     if (x1 < x2) {
                         buffer[first * 2] -= i;
                         buffer[second * 2] += i;

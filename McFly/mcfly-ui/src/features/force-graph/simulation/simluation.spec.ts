@@ -274,15 +274,20 @@ describe("2D", () => {
     describe("links", () => {
         it("should force 2 nodes together", () => {
             const masses = new Float32Array([1, 1]);
-            const positions = new Float32Array([1, 5]);
-            const links = new Float32Array([0, 1, .5]);
-            const simulation = new SimulationEngine(masses, positions, links, 1);
-            simulation.tick();
-            const result = simulation.getPositions();
-            expect(result).toEqual(new Float32Array([
-                (1 - 1.0 * .5 / 16),
-                (5 + 1.0 * .5 / 16)
-            ]));
+                const positions = new Float32Array([1, 5, 5, 1]);
+                const links = new Float32Array([0,1,.5]);
+                const simulation = new SimulationEngine(masses, positions, links, 2);
+                simulation.tick();
+                const result = simulation.getPositions();
+                const a = Math.atan(1);
+                const i = 1.0 / 32 * Math.abs(Math.cos(a)) || 0;
+                const j = 1.0 / 32 * Math.abs(Math.sin(a)) || 0;
+                expect(result).toEqual(new Float32Array([
+                    1 - i * .5,
+                    5 + j * .5,
+                    5 + i * .5,
+                    1 - j * .5
+                ]));
         });
 
         it("should work together if there are multiple", () => {
