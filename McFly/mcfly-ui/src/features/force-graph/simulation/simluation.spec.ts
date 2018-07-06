@@ -291,24 +291,53 @@ describe("2D", () => {
         });
 
         it("should work together if there are multiple", () => {
-            const masses = new Float32Array([1, 3, 2]);
-            const positions = new Float32Array([1, 5, 6]);
-            const links = new Float32Array([
-                0,
-                1,
-                .5,
-                0,
-                2,
-                .3
-            ]);
-            const simulation = new SimulationEngine(masses, positions, links, 1);
-            simulation.tick();
-            const result = simulation.getPositions();
-            expect(result).toEqual(new Float32Array([
-                (1 - 3.0 * .5 / 16 - 2.0 * .3 / 25),
-                (5 + 3.0 * .5 / 16 - 6),
-                (6 + 2.0 * .3 / 25 + 6)
-            ]));
+            const masses = new Float32Array([1, 1, 1]);
+                const positions = new Float32Array([1, 5, 5, 1, 2, 2]);
+                const links = new Float32Array([0,1,.5,0,2,.3]);
+                const simulation = new SimulationEngine(masses, positions, links, 2);
+                simulation.tick();
+                const result = simulation.getPositions();
+                const ax = 1;
+                const ay = 5;
+                
+                const bx = 5;
+                const by = 1;
+                const cx = 2;
+                const cy = 2;
+                const dxab = ax - bx;
+                const dxac = ax - cx;
+                const dyab = ay - by;
+                const dyac = ay - cy;
+                const dxbc = bx - cx;
+                const dybc = by - cy;
+                const alphaab = Math.atan(dyab * 1.0 / dxab);
+                const alphaac = Math.atan(dyac * 1.0 / dxac);
+                const alphabc  = Math.atan(dybc * 1.0 / dxbc);
+                const ab2 = dxab ** 2 + dyab ** 2;
+                const ac2 = dxac ** 2 + dyac ** 2;
+                const bc2 = dxbc ** 2 + dybc ** 2;
+                const fab = 1.0 / ab2 * .5;
+                const fac = 1.0 / ac2 * .3;
+                const fbc = 1.0 / bc2;
+                const fabi = fab * Math.abs(Math.cos(alphaab));
+                const fabj = fab * Math.abs(Math.sin(alphaab));
+                const faci = fac * Math.abs(Math.cos(alphaac));
+                const facj = fac * Math.abs(Math.sin(alphaac));
+                const fbci = fbc * Math.abs(Math.cos(alphabc));
+                const fbcj = fbc * Math.abs(Math.sin(alphabc));
+                const expected = new Float32Array([
+                    (ax - fabi - faci),    
+                    (ay + fabj + facj),    
+                    (bx + fabi + fbci),    
+                    (by - fabj - fbcj),    
+                    (cx + faci - fbci),    
+                    (cy - facj + fbcj),    
+                ]);              
+
+                expect(result.length).toBe(expected.length);
+                for(let i = 0; i < expected.length; i++) {
+                    expect(result[i]).toBeCloseTo(expected[i], 5);
+                }
         });
     });
 });
