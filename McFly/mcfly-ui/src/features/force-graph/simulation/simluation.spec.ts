@@ -183,9 +183,9 @@ describe("2D", () => {
                 const simulation = new SimulationEngine(masses, positions, links, 2);
                 simulation.tick();
                 const result = simulation.getPositions();
-                const a = Math.atan(-1);
-                const i = 1.0 / 32 * Math.cos(a);
-                const j = 1.0 / 32 * Math.sin(a);
+                const a = Math.atan(1);
+                const i = 1.0 / 32 * Math.abs(Math.cos(a)) || 0;
+                const j = 1.0 / 32 * Math.abs(Math.sin(a)) || 0;
                 expect(result).toEqual(new Float32Array([
                     1 - i,
                     5 + j,
@@ -200,7 +200,7 @@ describe("2D", () => {
                 const simulation = new SimulationEngine(masses, positions, links, 2);
                 simulation.tick();
                 const result = simulation.getPositions();
-                const a = Math.atan(-1);
+                const a = Math.atan(1);
                 const i = 1.0 / 32 * Math.cos(a);
                 const j = 1.0 / 32 * Math.sin(a);
                 expect(result).toEqual(new Float32Array([
@@ -236,15 +236,38 @@ describe("2D", () => {
                 const result = simulation.getPositions();
                 const f = 15.0 / 25;
                 expect(result).toEqual(new Float32Array([
-                    1 + f, -1,
+                    1 + f,
+                    -1,
                     -4 - f,
                     -1
                 ]));
             }
         });
 
-        it("should calculate forces for 4 nodes", () => {
-            ;
+        it("should calculate forces for 3 nodes", () => {
+            const masses = new Float32Array([5, 10, 1]);
+            const positions = new Float32Array([
+                2,
+                3,
+                5,
+                8,
+                5,
+                2
+            ]);
+            const links = new Float32Array(0);
+            const simulation = new SimulationEngine(masses, positions, links, 2);
+            simulation.tick();
+            const result = simulation.getPositions();
+            expect(result.length).toBe(6);
+            const expected = new Float32Array([
+                0.7690470218658447,
+                1.8970948457717896,
+                5.756611347198486,
+                9.538796424865723,
+                5.474341869354248,
+                1.5641083717346191
+            ]);
+            expect(result).toEqual(expected);
         });
     });
 
