@@ -40,9 +40,19 @@ export class Menu extends React.Component<IProps, IState> {
     public render() {
         return (
             <div className="menu-container">
-                <div className="title-container">
+                <div className="logo-container">
                     <Logo />
                 </div>
+                <div className="search-container">
+                    <input type="text"/>
+                </div>
+                <nav>
+                    <ul>
+                        {this.props.links.map(l => (
+                           <li>{l}</li>
+                        ))}
+                    </ul>
+                </nav>
             </div>
         )
     }
