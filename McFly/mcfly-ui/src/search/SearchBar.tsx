@@ -7,6 +7,6 @@ export class SearchBar extends React.Component<{}, {}> {
                 <input type="text"/>
                 <button>go</button>
             </div>
-        )
+        );
     }
 }

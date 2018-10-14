@@ -1,9 +1,18 @@
 svg.logo {
-    .wings, .clockface {
-        * {
-            stroke: black;
-            fill: white;
-            stroke-width: 2;
+    * {
+        stroke: white;
+        fill: #00ACC1;
+        stroke-width: 2;
+    }
+    
+    .clockface {
+        fill: white;
+    }
+
+    .text {
+        *{
+            fill: #FC9209;
+            stroke: #00ACC1;
         }
     }
 }
