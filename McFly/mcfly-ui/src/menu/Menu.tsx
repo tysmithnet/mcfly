@@ -40,7 +40,7 @@ export class Menu extends React.Component<IProps, IState> {
      */
     public render() {
         return (
-            <div className="menu-container">
+            <div className="menu">
                 <div className="logo-container">
                     <Logo />
                 </div>
@@ -55,7 +55,7 @@ export class Menu extends React.Component<IProps, IState> {
                     </ul>
                 </nav>
             </div>
-        )
+        );
     }
 
     /**
