@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "declarationDir": "../declarations",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "jsx": "react",
+        "listFiles": true,
+        "listEmittedFiles": true,
+        "baseUrl": "../",
+        "paths": {
+            "*": ["typings/*"]
+         },
+        "lib": [
+            "webworker", "es6", "dom"
+        ],
+        "typeRoots": [
+            "typings",
+        ],
+        "types": [
+            "node"
+        ]
+    },
+    "files": [
+        "src/index.ts",
+    ],
+    "exclude": [
+        "node_modules"
+    ],
+    "awesomeTypescriptLoaderOptions": {
+        
+    }
+}

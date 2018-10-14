@@ -1,27 +1,23 @@
-import {storiesOf, Story, StoryDecorator} from "@storybook/react";
+import { storiesOf } from "@storybook/react";
 import * as React from "react";
-import {AddRemoveGraphElements, AddRemoveGraphElementsProvider, Empty, ExtraLargeGraph, LargeGraph, MediumGraph, SingleNode, SmallGraph} from "../src/features/force-graph/stories";
+import { Provider } from "react-redux";
+import App from "../src/app/App";
+import store from "../src/root.store";
+import { Home } from "../src/home/Home";
+import "../src/root";
 
-storiesOf("ForceGraph/Static", module)
-    .add("Empty", () => {
-        return <Empty />;
-    })
-    .add("Single Node", () => {
-      return <SingleNode />;  
-    })
-    .add("Small Graph", () => {
-        return <SmallGraph />;
-    }).add("Medium Graph", () => {
-        return <MediumGraph />;
-    }).add("Large Graph", () => {
-        return <LargeGraph />;
-    })
-    .add("Extra Large Graph", () => {
-        return <ExtraLargeGraph />;
-    });
+/**
+ * Provide the store to components
+ * @param story Storybook factory method
+ */
+const ProviderDecorator = (story: any) => (
+  <Provider store={store}>{story()}</Provider>
+);
 
-storiesOf("ForceGraph/Dynamic", module)
-    .addDecorator(story => <AddRemoveGraphElementsProvider story={story()} />)
-    .add("Add or Remove Graph Elements", () => {
-        return <AddRemoveGraphElements />;
-    });
+storiesOf("App", module)
+  .addDecorator(ProviderDecorator)
+  .add("Ask you to log in", () => <App />);
+
+storiesOf("Home", module)
+  .addDecorator(ProviderDecorator)
+  .add("Animate", () => <Home dispatch={store.dispatch} />)

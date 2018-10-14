@@ -1,10 +1,9 @@
 .vscode
-.vagrant
 node_modules
-out
-graph.svg
-*.log
 dist
-.awcache
-
-
+publish
+.cache
+*.log
+coverage
+storybook-static
+colony
