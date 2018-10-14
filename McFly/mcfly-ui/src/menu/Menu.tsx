@@ -1,6 +1,6 @@
 import * as React from "react";
 import { loginRequestFactory } from "../auth";
-import {Logo} from "./Logo";
+import { Logo } from "./Logo";
 import { IProps, IState } from "./menu.domain";
 
 /**
@@ -41,7 +41,7 @@ export class Menu extends React.Component<IProps, IState> {
         return (
             <div className="menu-container">
                 <div className="title-container">
-                   <Logo />
+                    <Logo />
                 </div>
             </div>
         )
