@@ -1,16 +1,16 @@
 import { ConnectedRouter } from "connected-react-router";
 import * as React from "react";
 import { hot } from "react-hot-loader";
+import { observe } from "react-performance-observer";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
 import { Link } from "react-router-dom";
+import { isTest } from "../globals";
 import { Menu } from "../menu/Menu";
 import { getHistory, IRootState } from "../root";
 import { IProps } from "./app.domain";
 import "./app.styles";
 import { routes } from "./routes";
-import { observe } from "react-performance-observer";
-import { isTest } from "../globals";
 
 // register a metric tracking routine
 if (!isTest) {
@@ -27,7 +27,6 @@ if (!isTest) {
         }
     });
 }
-
 
 /**
  * 404 Page
@@ -78,21 +77,23 @@ export class App extends React.Component<IProps> {
                 };
             });
         return (
-            <div>
-                <ConnectedRouter history={getHistory()}>
-                    <div>
+            <ConnectedRouter history={getHistory()}>
+                <div className="app-container">
+                    <div className="menu-container">
                         <Menu
                             links={toAdd.map(x => x.link as any)}
                             user={this.props.user}
                             dispatch={this.props.dispatch}
                         />
+                    </div>
+                    <div className="route-container">
                         <Switch>
                             {toAdd.map(x => x.route)}
                             <Route render={fourOhFour} />
                         </Switch>
                     </div>
-                </ConnectedRouter>
-            </div>
+                </div>
+            </ConnectedRouter>
         );
     }
 }

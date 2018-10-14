@@ -4,7 +4,8 @@ import { AppContainer } from "react-hot-loader";
 import { Provider } from "react-redux";
 import App from "../app/App";
 import { rootSaga } from "./root.saga";
-import { store, sagaMiddleware } from "./root.store";
+import { sagaMiddleware, store } from "./root.store";
+import "./root.styles";
 
 /**
  * Render a component and connect the root store to it

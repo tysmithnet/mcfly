@@ -1,3 +1,14 @@
-html {
-    background-color: lightgray;
+.app-container {
+    height: 100%;
+    display: flex;
+
+    .menu-container {
+        flex-grow: 0;
+        min-width: 10em;
+        background-color: darkgray;
+    }
+
+    .route-container {
+        flex-grow: 1;
+    }
 }

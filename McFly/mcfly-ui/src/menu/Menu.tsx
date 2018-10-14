@@ -1,6 +1,6 @@
 import * as React from "react";
-import posed, { PoseGroup } from "react-pose";
 import { loginRequestFactory } from "../auth";
+import {Logo} from "./Logo";
 import { IProps, IState } from "./menu.domain";
 
 /**
@@ -38,42 +38,13 @@ export class Menu extends React.Component<IProps, IState> {
      * @memberof Menu
      */
     public render() {
-        let form = null;
-        if (!this.props.user) {
-            form = (
-                <form onSubmit={this.handleFormSubmitted}>
-                    <input
-                        type="text"
-                        value={this.state.id}
-                        onChange={this.handleIdChanged}
-                    />
-                    <input
-                        type="password"
-                        value={this.state.password}
-                        onChange={this.handlePasswordChanged}
-                    />
-                    <input type="submit" value="Submit" />
-                </form>
-            );
-        } else {
-            form = <span>Welcome, {this.props.user.name}</span>;
-        }
-        const LinkItem = posed.span({
-            enter: { opacity: 1 },
-            exit: { opacity: 0 },
-        });
         return (
-            <div ref={this.rootRef}>
-                <nav>
-                    <PoseGroup animateOnMount={true}>
-                        {this.props.links.map(l => (
-                            <LinkItem key={Math.random().toString()}>{l}</LinkItem>
-                        ))}
-                    </PoseGroup>
-                </nav>
-                {form}
+            <div className="menu-container">
+                <div className="title-container">
+                   <Logo />
+                </div>
             </div>
-        );
+        )
     }
 
     /**
