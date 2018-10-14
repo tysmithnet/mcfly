@@ -1,5 +1,6 @@
 import * as React from "react";
 import { loginRequestFactory } from "../auth";
+import {SearchBar} from "../search/SearchBar";
 import { Logo } from "./Logo";
 import { IProps, IState } from "./menu.domain";
 
@@ -44,7 +45,7 @@ export class Menu extends React.Component<IProps, IState> {
                     <Logo />
                 </div>
                 <div className="search-container">
-                    <input type="text"/>
+                    <SearchBar />
                 </div>
                 <nav>
                     <ul>
