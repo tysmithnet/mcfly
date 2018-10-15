@@ -5,5 +5,4 @@ publish
 .cache
 *.log
 coverage
-storybook-static
 colony
