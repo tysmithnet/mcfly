@@ -2,9 +2,9 @@ import { storiesOf } from "@storybook/react";
 import * as React from "react";
 import { Provider } from "react-redux";
 import App from "../src/app/App";
-import store from "../src/root.store";
 import { Home } from "../src/home/Home";
 import "../src/root";
+import store from "../src/root.store";
 
 /**
  * Provide the store to components

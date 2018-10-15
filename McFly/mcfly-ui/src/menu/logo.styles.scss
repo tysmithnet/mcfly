@@ -1,7 +1,9 @@
+@import "../colors";
+
 svg.logo {
     * {
         stroke: white;
-        fill: #00ACC1;
+        fill: $blue;
         stroke-width: 2;
     }
     
@@ -11,8 +13,8 @@ svg.logo {
 
     .text {
         *{
-            fill: #FC9209;
-            stroke: #00ACC1;
+            fill: $orange;
+            stroke: $blue;
         }
     }
 }
