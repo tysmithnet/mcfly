@@ -5,7 +5,9 @@
     display: inline-block;
     box-sizing: border-box;
     height: 1.5em;
-    color: $black;
+    * {
+        color: $black;
+    }
 
     > input {
         padding-left: 1em;
@@ -14,83 +16,47 @@
         outline: none;
         border: none;
         height: 100%;
+        border-bottom: .05em $black solid;
     }
 
     > .border {
         position: absolute;
         background-color: $black;
         transition: all .3s linear;
-
-        &.top {
-            transform-origin: right center;
-            transform: scaleX(0);
-            top: 0;
-            left: 0;
-            right: 0;
-            height: .1em;
-        }
-    
-        &.right {
-            transform-origin: center top;
-            transform: scaleY(0);
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: .1em;
-        }
     
         &.bot {
-            transform-origin: left center;
+            transform-origin: 50% 0;
             left: 0;
             right: 0;
             bottom: 0;
             height: .1em;
+            transform: scaleX(0);
             background-color: $black;
         }
+    }
+}
+
+.input.dark {
+    * {
+        color: $white;
+    }
+
+    > input {
+        border-bottom: .05em $white solid;
+    }
+
+    > .border {
     
-        &.left {
-            transform-origin: center bottom;
-            transform: scaleY(0);
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: .1em;
+        &.bot {
+            background-color: $blue;
         }
     }
 }
 
 .input > input:focus, .input > input:active {
 
-    ~ .border{
-        background-color: $blue;
-    }
-    ~ .top {
-        transform: scaleX(1);
-    }
-
-    ~ .right {
-        transform: scaleY(1);
-    }
-
     ~ .bot {
         transform: scaleX(1);
         background-color: $blue;
-    }
-
-    ~ .left {
-        transform: scaleY(1);
-    }
-}
-
-.input.dark {
-    > input {
-        color: $blue;
-    }
-
-    > .border {
-            
-        &.bot {
-            background-color: $blue;
-        }
     }
 }
