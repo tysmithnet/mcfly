@@ -137,7 +137,14 @@ const common = {
 }
 
 module.exports = (env, argv) => {
-    if (env.mode == "development") {
+    if (env.mode == "production") {
+        return {
+            name: "prod",
+            mode: "production",
+            ...common
+        };
+    }
+    else{
         return {
             name: "dev",
             mode: "development",
@@ -154,12 +161,5 @@ module.exports = (env, argv) => {
             ],
             ...common
         };
-    } else if (env.mode == "production") {
-        return {
-            name: "prod",
-            mode: "production",
-            ...common
-        };
     }
-    return common;
 }
