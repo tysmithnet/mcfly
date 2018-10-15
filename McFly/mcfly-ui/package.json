@@ -7,13 +7,12 @@
     "author": "@tysmithnet",
     "license": "GPL-3.0-or-later",
     "private": false,
-    "keywords": [
-        
-    ],
+    "keywords": [],
     "scripts": {
         "build": "webpack --mode production --config ./config/webpack.config.js",
         "build:dev": "webpack --mode development --config ./config/webpack.config.js",
         "clean": "rimraf dist",
+        "cosmos": "cosmos",
         "doc": "typedoc --tsconfig config/tsconfig.json --out docs/ --ignoreCompilerErrors src/",
         "e2e": "cypress open",
         "graph": "dependency-cruise -x \"^node_modules\" -T dot src | dot -T svg > dependencies.svg",
@@ -75,6 +74,7 @@
         "pre-commit": "1.2.2",
         "prettier": "1.13.7",
         "prettier-tslint": "0.4.0",
+        "react-cosmos": "^4.6.4",
         "react-performance-observer": "1.0.0",
         "react-test-renderer": "16.4.1",
         "redux-devtools": "3.4.1",
